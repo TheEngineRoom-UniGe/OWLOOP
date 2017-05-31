@@ -1,5 +1,5 @@
 # From https://github.com/github/gitignore/blob/master/Gradle.gitignore
-#.gradle
+.gradle
 /build/
 
 # Ignore Gradle GUI config
