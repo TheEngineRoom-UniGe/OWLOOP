@@ -122,7 +122,7 @@ Follow a list of "base" implemented *Descriptor* interfaces, divided for the typ
 ##### Unchecked Warning
 
 You may experience unchecked conversion warning during compilation. 
-Those are due to generic *grounding* and *building*, correctly wrapped inside the architecture.
+Those are due to generic *grounding* and *building*, correctly wrapped inside the architecture and checked by the compiler in other methods.
 
 
 
