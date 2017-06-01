@@ -1,6 +1,6 @@
 # OWLOOP
 
-an **O**bject **O**riented **P**rogramming interface for using **O**ntology **W**eb **L**anguages within real architecting paradigms.
+An **O**bject **O**riented **P**rogramming interface for using **O**ntology **W**eb **L**anguages within real architecting paradigms.
 
 
 >The design of ontologies does not follow OOP paradigms since properties and hierarchy are dynamically inferred by the reasoner; see [this W3C](https://www.w3.org/2001/sw/BestPractices/SE/ODSD/) publication for more details about their differences. 
@@ -8,7 +8,9 @@ an **O**bject **O**riented **P**rogramming interface for using **O**ntology **W*
 > 
 >From now on you do not have to deal with `String` or `IRI` anymore, instead, let's directly rely and extend your objects with real semantics !!!
 
+
 # 
+
 
 
 ### Dependences
@@ -48,6 +50,10 @@ OWLOOP is organized (in the [src](https://github.com/EmaroLab/owloop/tree/master
 
 
 
+# 
+
+
+
 ### OWLOOP features
 
 #### Main components
@@ -64,11 +70,11 @@ More in details, the main ability of a *Descriptor* (or combination of those) ar
  - **write** : it modify the state of the ontology to be equal to the its described state (due to the reasoner conclusions this may require a further reading state). Also this returns the changes and do not call the reasoning tasks (as *read*).
  - **getting** : it gets the described semantic, updated to the last read or write operation (it does not query the ontology).
  - **query** : it gets the ontological state of the described semantic, without modify any states.
- - **build** : it returns all the `Descriptor` based on *get* and *read* operations, which have a *Ground* equal to the type of *Axioms*. This indeed is how you can have an OOP paradigms from OWLOOP. For instance, a *Descriptor* that cares about a the individuals in an `OWLClass` (the *Ground*) can *build* a set of other *Descriptors*, all grounding individuals, from which you may want to *get* the data properties values.
+ - **build** : it returns all the `Descriptor` based on *get* and *read* operations, which have a *Ground* equal to the type of *Axioms*. This indeed is how you can have an OOP paradigms from OWLOOP. For instance, a *Descriptor* that cares about a the individuals in an `OWLClass` (the *Ground*) can *build* a set of other *Descriptors*, all grounding individuals, from which you may want to *get* the data properties values. Noteworthy, that each `Descriptor` sets the type of `Descriptor` should be *built*, only limitation is that the type of `Descriptor` has to be coherent.
 
 #### Developer Point of view
 
-Form the OWLOOP usage point of view, all the interesting *Axioms* and *Ground* have been implemented and their classes are ready to be used. On the other hand, the *Descriptiors* have been encapsulated as interfaces almost integrally, but final classes should be implemented in order to use them efficiently, via the combination of more of them. Noteworthy, all the *Descriptor* are always based on the same patter of basic Java operations, as you can see from the [utility](https://github.com/EmaroLab/owloop/tree/master/src/main/java/it/emarolab/owloop/aMORDescriptor/utility) sub directories. Basically you can use the "full" descriptor as template and remove the semantics that you do not want to synchronize. Note also that you can decide the type of `Descriptor` returned by each *build* operators freely, as long as the correct Ground is used.
+Form the OWLOOP usage point of view, all the interesting *Axioms* and *Ground* have been implemented and their classes are ready to be used. On the other hand, the *Descriptors* have been encapsulated as interfaces almost integrally, but final classes should be implemented in order to use them efficiently, via the combination of them. Noteworthy, all the *Descriptor* are always based on the same patter of basic Java operations, as you can see from the [utility](https://github.com/EmaroLab/owloop/tree/master/src/main/java/it/emarolab/owloop/aMORDescriptor/utility) sub directories. Basically you can use the "full" descriptor as template and remove the semantics that you do not want to synchronize. Note also that you can decide the type of `Descriptor` returned by each *build* operators freely, as long as the correct Ground is used.
 
 When the most efficient descriptor for an application have been implemented you can just use it by instantiate their ground and ontology, as it is possible to see from the [tests](https://github.com/EmaroLab/owloop/tree/master/src/test/java/it/emarolab/owloop/aMORDescriptor/utility) examples.
 
@@ -118,6 +124,12 @@ Follow a list of "base" implemented *Descriptor* interfaces, divided for the typ
 |      Super | OWLDataProperty |                                                 all the super data properties of the ground |
 |      Range | MORRestriction  | all the data type (Integer, Boolean, String, Double, Float) restrictions of the ground range |
 |     Domain | MORRestriction  | all the classes and the data/object properties cardinality restrictions (min, max, exact, some, any) of the ground domain |
+
+
+
+# 
+
+
 
 ##### Unchecked Warning
 
