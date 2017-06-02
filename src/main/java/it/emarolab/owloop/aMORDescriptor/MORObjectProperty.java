@@ -185,6 +185,8 @@ public interface MORObjectProperty
             return getInverseObjectProperty().remove( property);
         }
 
+        @Override
+        MORAxioms.ObjectLinks getInverseObjectProperty();
 
         @Override // see super class for documentation
         default MORAxioms.ObjectLinks queryInverseObjectProperty(){
@@ -275,6 +277,9 @@ public interface MORObjectProperty
         default boolean removeDisjointObjectProperty( OWLObjectProperty property){
             return getDisjointObjectProperty().remove( property);
         }
+
+        @Override
+        MORAxioms.ObjectLinks getDisjointObjectProperty();
 
         @Override // see super class for documentation
         default MORAxioms.ObjectLinks queryDisjointObjectProperty(){
@@ -375,6 +380,9 @@ public interface MORObjectProperty
             return getEquivalentObjectProperty().remove( property);
         }
 
+        @Override
+        MORAxioms.ObjectLinks getEquivalentObjectProperty();
+
         @Override // see super class for documentation
         default MORAxioms.ObjectLinks queryEquivalentObjectProperty(){
             MORAxioms.ObjectLinks set = new MORAxioms.ObjectLinks(getOntology().getEquivalentObjectProperty(getInstance()));
@@ -474,6 +482,9 @@ public interface MORObjectProperty
             return getSubObjectProperty().remove( property);
         }
 
+        @Override
+        MORAxioms.ObjectLinks getSubObjectProperty();
+
         @Override // see super class for documentation
         default MORAxioms.ObjectLinks querySubObjectProperty(){
             MORAxioms.ObjectLinks set = new MORAxioms.ObjectLinks(getOntology().getSubObjectPropertyOf(getInstance()));
@@ -564,6 +575,9 @@ public interface MORObjectProperty
         default boolean removeSuperObjectProperty( OWLObjectProperty property){
             return getSuperObjectProperty().remove( property);
         }
+
+        @Override
+        MORAxioms.ObjectLinks getSuperObjectProperty();
 
         @Override // see super class for documentation
         default MORAxioms.ObjectLinks querySuperObjectProperty(){
@@ -1394,6 +1408,9 @@ public interface MORObjectProperty
             return getDomainObjectProperty().remove( domainClassRestriction( cl));
         }
 
+
+        @Override
+        MORAxioms.Restrictions getDomainObjectProperty();
 
         @Override // see super class for documentation
         default MORAxioms.Restrictions queryDomainObjectProperty(){
@@ -2227,6 +2244,8 @@ public interface MORObjectProperty
             return getRangeObjectProperty().remove( rangeClassRestriction( className));
         }
 
+        @Override
+        MORAxioms.Restrictions getRangeObjectProperty();
 
         @Override // see super class for documentation
         default MORAxioms.Restrictions queryRangeObjectProperty(){

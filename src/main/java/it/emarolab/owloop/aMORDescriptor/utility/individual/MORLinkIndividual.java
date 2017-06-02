@@ -108,7 +108,7 @@ public class MORLinkIndividual
     }
 
     @Override
-    public MORAxioms.ObjectSemantics getObjectIndividual() {
+    public MORAxioms.ObjectSemantics getObjectSemantics() {
         return objectLinks;
     }
 
@@ -128,7 +128,7 @@ public class MORLinkIndividual
     }
 
     @Override
-    public MORAxioms.DataSemantics getDataIndividual() {
+    public MORAxioms.DataSemantics getDataSemantics() {
         return dataLinks;
     }
 

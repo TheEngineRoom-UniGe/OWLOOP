@@ -2,7 +2,6 @@ package it.emarolab.owloop.aMORDescriptor.utility.dataProperty;
 
 
 import it.emarolab.amor.owlInterface.OWLReferences;
-import it.emarolab.amor.owlInterface.SemanticRestriction;
 import it.emarolab.owloop.aMORDescriptor.MORAxioms;
 import it.emarolab.owloop.aMORDescriptor.MORDataProperty;
 import it.emarolab.owloop.aMORDescriptor.utility.MORDataPropertyBase;
@@ -94,7 +93,7 @@ public class MORDomainDataProperty
 
     // implementations for MORDataProperty.Domain
     @Override
-    public Axioms<SemanticRestriction> getDomainDataProperty() {
+    public MORAxioms.Restrictions getDomainDataProperty() {
         return domainRestriction;
     }
 

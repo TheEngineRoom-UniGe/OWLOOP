@@ -127,6 +127,8 @@ public class MORFullIndividualTest {
 
         individual.writeSemanticInconsistencySafe(); // reasoner infers shape properties
         System.out.println( "described individual, multi object test: " + individual.buildObjectIndividual());
+
+        System.out.println( "synchronised object properties: " + individual.getObjects( "isRightOf"));
     }
 
     @Test
@@ -143,7 +145,7 @@ public class MORFullIndividualTest {
         //assertSemantic();
         individual.addObject( "isRightOf", "Individual-B", true);
         individual.addObject( "isRightOf", "Individual-D",true);
-        for(MORAxioms.ObjectSemantic i : individual.getObjectIndividual())
+        for(MORAxioms.ObjectSemantic i : individual.getObjectSemantics())
             assertEquals( i.getValues().size(), 1);
         individual.writeSemanticInconsistencySafe(); // reasoner infers shape properties
         assertSemantic();
@@ -159,11 +161,8 @@ public class MORFullIndividualTest {
         individual.writeSemanticInconsistencySafe(); // reasoner infers shape properties
         System.out.println( "described individual, multi object test: " + individual.buildObjectIndividual());
 
-        /* // to access the synchronised individual values for object properties:
-        for( MORAxioms.ObjectSemantic o : individual.getObjectIndividual())
-            for ( OWLNamedIndividual i : o.getValues())
-                System.out.println( " individual for " + o.getSemantic() + " property : " + i);
-         */
+        System.out.println( "synchronised object properties: " + individual.getObject( "isRightOf"));
+
     }
 
     @Test
@@ -194,12 +193,7 @@ public class MORFullIndividualTest {
         individual.writeSemanticInconsistencySafe(); // reasoner infers shape properties
         System.out.println( "described individual, multi object test: " + individual.buildDataIndividual());
 
-
-        /*// to access the synchronised literals values for data properties:
-        for( MORAxioms.DataSemantic d : individual.getDataIndividual())
-            for ( OWLLiteral l : d.getValues())
-                System.out.println( " literal for " + d.getSemantic() + " property : " + l);
-        */
+        System.out.println( "synchronised object properties: " + individual.getLiterals( "has-cone_height"));
     }
 
     @Test
@@ -216,7 +210,7 @@ public class MORFullIndividualTest {
         //assertSemantic();
         individual.addData( "hasProp", 2.3, true);
         individual.addData( "hasProp", 5.7, true);
-        for(MORAxioms.DataSemantic i : individual.getDataIndividual())
+        for(MORAxioms.DataSemantic i : individual.getDataSemantics())
             assertEquals( i.getValues().size(), 1);
         individual.writeSemanticInconsistencySafe(); // reasoner infers shape properties
         assertSemantic();
@@ -232,6 +226,8 @@ public class MORFullIndividualTest {
         individual.addData( "has-geometric_height");
         individual.writeSemanticInconsistencySafe(); // reasoner infers shape properties
         System.out.println( "described individual, multi object test: " + individual.buildDataIndividual());
+
+        System.out.println( "synchronised object properties: " + individual.getLiteral( "has-cone_height"));
     }
 
 
@@ -239,7 +235,7 @@ public class MORFullIndividualTest {
         assertEquals( individual.getDisjointIndividual(), individual.queryDisjointIndividual());
         assertEquals( individual.getEquivalentIndividual(), individual.queryEquivalentIndividual());
         assertEquals( individual.getTypeIndividual(), individual.queryTypeIndividual());
-        assertEquals( individual.getObjectIndividual(), individual.queryObjectIndividual());
-        assertEquals( individual.getDataIndividual(), individual.queryDataIndividual());
+        assertEquals( individual.getObjectSemantics(), individual.queryObject());
+        assertEquals( individual.getDataSemantics(), individual.queryDataIndividual());
     }
 }

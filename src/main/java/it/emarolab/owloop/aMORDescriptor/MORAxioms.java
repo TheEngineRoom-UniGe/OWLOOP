@@ -6,7 +6,10 @@ import it.emarolab.amor.owlInterface.SemanticRestriction;
 import it.emarolab.owloop.core.*;
 import org.semanticweb.owlapi.model.*;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 /**
  * The main interface for {@link Semantic.Axioms} implemented in the <a href="https://github.com/EmaroLab/multi_ontology_reference">aMOR</a> API.
@@ -829,6 +832,41 @@ public interface MORAxioms extends Semantic{
             super(initialCapacity);
         }
 
+        /**
+         * Searches in the {@link SemanticAxiom} for the given property and
+         * returns all its values.
+         * @param semantic the properties to look for.
+         * @return all the synchronised values of the given property.
+         * An {@code empty} {@link HashSet} if the values is not available.
+         */
+        public Set<OWLLiteral> getLiterals(OWLDataProperty semantic){
+            for ( DataSemantic s : set){
+                if ( semantic.equals( s.getSemantic()))
+                    return s.getValues().set;
+            }
+            return new HashSet<>();
+        }
+
+        /**
+         * Searches in the {@link SemanticAxiom} for the given property and
+         * returns one of its values. If {@link Axioms#isSingleton()},
+         * other values are ignored.
+         * @param semantic the properties to look for.
+         * @return one of the synchronised values of the given property.
+         * An {@code null} if the values is not available.
+         */
+        public OWLLiteral getLiteral( OWLDataProperty semantic){
+            for ( DataSemantic s : set){
+                if ( semantic.equals( s.getSemantic())) {
+                    if ( ! s.getValues().isSingleton())
+                        System.out.println( " !! search for only one literal in a not singleton object property: " + s);
+                    for (OWLLiteral l : s.getValues())
+                        return l;
+                }
+            }
+            return null;
+        }
+
         @Override
         public String toString() {
             String out = set.toString();
@@ -869,6 +907,42 @@ public interface MORAxioms extends Semantic{
         }
         public ObjectSemantics(int initialCapacity) {
             super(initialCapacity);
+        }
+
+
+        /**
+         * Searches in the {@link SemanticAxiom} for the given property and
+         * returns all its values.
+         * @param semantic the properties to look for.
+         * @return all the synchronised values of the given property.
+         * An {@code empty} {@link HashSet} if the values is not available.
+         */
+        public Set<OWLNamedIndividual> getLinks(OWLObjectProperty semantic){
+            for ( ObjectSemantic s : set){
+                if ( semantic.equals( s.getSemantic()))
+                    return s.getValues().set;
+            }
+            return new HashSet<>();
+        }
+
+        /**
+         * Searches in the {@link SemanticAxiom} for the given properties and
+         * returns one of its values. If {@link Axioms#isSingleton()},
+         * other values are ignored.
+         * @param semantic the properties to look for.
+         * @return one of the synchronised values of the given property.
+         * An {@code null} if the values is not available.
+         */
+        public OWLNamedIndividual getLink( OWLObjectProperty semantic){
+            for ( ObjectSemantic s : set){
+                if ( semantic.equals( s.getSemantic())) {
+                    if ( ! s.getValues().isSingleton())
+                        System.out.println( " !! search for only one individual in a not singleton data property: " + s);
+                    for (OWLNamedIndividual l : s.getValues())
+                        return l;
+                }
+            }
+            return null;
         }
 
         @Override

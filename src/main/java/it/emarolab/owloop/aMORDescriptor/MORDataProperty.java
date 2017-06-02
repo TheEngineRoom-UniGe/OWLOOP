@@ -133,6 +133,8 @@ public interface MORDataProperty
             return getDisjointDataProperty().remove( property);
         }
 
+        @Override
+        MORAxioms.DataLinks getDisjointDataProperty();
 
         @Override // see super class for documentation
         default MORAxioms.DataLinks queryDisjointDataProperty(){
@@ -233,6 +235,9 @@ public interface MORDataProperty
             return getEquivalentDataProperty().remove( property);
         }
 
+        @Override
+        MORAxioms.DataLinks getEquivalentDataProperty();
+
         @Override // see super class for documentation
         default MORAxioms.DataLinks queryEquivalentDataProperty(){
             MORAxioms.DataLinks set = new MORAxioms.DataLinks(getOntology().getEquivalentDataProperty(getInstance()));
@@ -332,6 +337,8 @@ public interface MORDataProperty
             return getSubDataProperty().remove( property);
         }
 
+        @Override
+        MORAxioms.DataLinks getSubDataProperty();
 
         @Override // see super class for documentation
         default MORAxioms.DataLinks querySubDataProperty(){
@@ -422,6 +429,9 @@ public interface MORDataProperty
         default boolean removeSuperDataProperty( OWLDataProperty property){
             return getSuperDataProperty().remove( property);
         }
+
+        @Override
+        MORAxioms.DataLinks getSuperDataProperty();
 
         @Override // see super class for documentation
         default MORAxioms.DataLinks querySuperDataProperty(){
@@ -1256,6 +1266,9 @@ public interface MORDataProperty
             return getDomainDataProperty().remove( domainClassRestriction( cl));
         }
 
+        @Override
+        MORAxioms.Restrictions getDomainDataProperty();
+
         @Override // see super class for documentation
         default MORAxioms.Restrictions queryDomainDataProperty(){
             MORAxioms.Restrictions set = new MORAxioms.Restrictions(getOntology().getDomainRestriction(getInstance()));
@@ -1331,6 +1344,9 @@ public interface MORDataProperty
         default boolean removeRangeDataRestriction(Class dataType){
             return getRangeDataProperty().remove( rangeDataRestriction( dataType));
         }
+
+        @Override
+        MORAxioms.Restrictions getRangeDataProperty();
 
         @Override // see super class for documentation
         default MORAxioms.Restrictions queryRangeDataProperty(){

@@ -101,7 +101,7 @@ public class MORTypeIndividual
     }
 
     @Override
-    public Axioms<OWLClass> getTypeIndividual() {
+    public MORAxioms.Concepts getTypeIndividual() {
         return individualTypes;
     }
 

@@ -167,7 +167,7 @@ public class MORFullIndividual
     }
 
     @Override
-    public Axioms<OWLClass> getTypeIndividual() {
+    public MORAxioms.Concepts getTypeIndividual() {
         return individualTypes;
     }
 
@@ -187,7 +187,7 @@ public class MORFullIndividual
     }
 
     @Override
-    public MORAxioms.ObjectSemantics getObjectIndividual() {
+    public MORAxioms.ObjectSemantics getObjectSemantics() {
         return objectLinks;
     }
 
@@ -206,7 +206,7 @@ public class MORFullIndividual
     }
 
     @Override
-    public MORAxioms.DataSemantics getDataIndividual() {
+    public MORAxioms.DataSemantics getDataSemantics() {
         return dataLinks;
     }
 

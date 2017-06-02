@@ -398,7 +398,7 @@ public interface Individual<O,J>
      *     relative values for an ontological individual (i.e.: the {@link Ground#getGroundInstance()}).
      *     <br>
      *     By default, the synchronisation occurs only for the proprieties which semantics
-     *     have been initialised in the {@link SemanticAxioms} ({@link #getDataIndividual()} ()}),
+     *     have been initialised in the {@link SemanticAxioms} ({@link #getDataSemantics()} ()}),
      *     not for all relations in the OWL representation.
      *     Note that a {@link #readSemantic()}  procedure may remove this value if there is no such entities in the ontology.
      * </p>
@@ -425,8 +425,8 @@ public interface Individual<O,J>
             try {
                 Axioms.SynchronisationIntent<Y> from = synchroniseDataIndividualFromSemantic();
                 if (from != null) {
-                    getDataIndividual().addAll(from.getToAdd());
-                    getDataIndividual().removeAll(from.getToRemove());
+                    getDataSemantics().addAll(from.getToAdd());
+                    getDataSemantics().removeAll(from.getToRemove());
                 }
                 return getIntent(from);
             }catch (Exception e){
@@ -440,13 +440,13 @@ public interface Individual<O,J>
          * represents the specified data properties applied to this {@code this} description.
          * Each of {@link DataProperty}s are instantiated
          * through the method {@link #getNewDataIndividual(SemanticAxiom, Object)};
-         * this is called for all {@link #getDataIndividual()}.
+         * this is called for all {@link #getDataSemantics()}.
          * @return the set of {@link DataProperty}s that describes the
          * entities that are applied to {@code this} described ontological individual.
          */
         default Set<D> buildDataIndividual(){
             Set<D> out = new HashSet<>();
-            for( Y cl : getDataIndividual()){
+            for( Y cl : getDataSemantics()){
                 D built = getNewDataIndividual( cl, getOntology());
                 built.readSemantic();
                 out.add( built);
@@ -470,7 +470,7 @@ public interface Individual<O,J>
          * {@code this} {@link Individual}; from a no OOP point of view.
          * @return the entities describing the data properties of {@code this} individual.
          */
-        Axioms<Y> getDataIndividual();
+        Axioms<Y> getDataSemantics();
 
         /**
          * Queries to the OWL representation for the data properties applied to {@code this} {@link Descriptor}.
@@ -482,14 +482,14 @@ public interface Individual<O,J>
         /**
          * It calls {@link SemanticAxioms#synchroniseTo(Axioms)} with {@link #queryDataIndividual()}
          * as input parameter. This computes the changes to be performed in the OWL representation
-         * for synchronise it with respect to {@link #getDataIndividual()}. This should
+         * for synchronise it with respect to {@link #getDataSemantics()}. This should
          * be done by {@link #writeSemantic()}.
          * @return the changes to be done to synchronise {@code this} structure with
          * the data properties applied on {@link #getInstance()}; to the OWL representation.
          */
         default Axioms.SynchronisationIntent<Y> synchroniseDataIndividualToSemantic(){
             try {
-                return getDataIndividual().synchroniseTo( queryDataIndividual());
+                return getDataSemantics().synchroniseTo( queryDataIndividual());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -498,7 +498,7 @@ public interface Individual<O,J>
 
         /**
          * It calls {@link SemanticAxioms#synchroniseFrom(Axioms)} with {@link #queryDataIndividual()}
-         * as input parameter. This computes the changes to be performed into the {@link #getDataIndividual()}
+         * as input parameter. This computes the changes to be performed into the {@link #getDataSemantics()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readSemantic()}.
          * @return the changes to be done to synchronise the data properties applied on {@link #getInstance()};
@@ -506,7 +506,7 @@ public interface Individual<O,J>
          */
         default Axioms.SynchronisationIntent<Y> synchroniseDataIndividualFromSemantic(){
             try{
-                return getDataIndividual().synchroniseFrom( queryDataIndividual());
+                return getDataSemantics().synchroniseFrom( queryDataIndividual());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -521,7 +521,7 @@ public interface Individual<O,J>
      *     relative values for an ontological individual (i.e.: the {@link Ground#getGroundInstance()}).
      *     <br>
      *     By default, the synchronisation occurs only for the proprieties which semantics
-     *     have been initialised in the {@link SemanticAxioms} ({@link #getObjectIndividual()}),
+     *     have been initialised in the {@link SemanticAxioms} ({@link #getObjectSemantics()}),
      *     not for all relations in the OWL representation.
      *     Note that {@link #readSemantic()} may remove this value if there is no such entities in the ontology.
      * </p>
@@ -548,8 +548,8 @@ public interface Individual<O,J>
             try{
                 Axioms.SynchronisationIntent<Y> from = synchroniseObjectIndividualFromSemantic();
                 if (from != null) {
-                    getObjectIndividual().addAll(from.getToAdd());
-                    getObjectIndividual().removeAll(from.getToRemove());
+                    getObjectSemantics().addAll(from.getToAdd());
+                    getObjectSemantics().removeAll(from.getToRemove());
                 }
                 return getIntent( from);
             }catch (Exception e){
@@ -563,13 +563,13 @@ public interface Individual<O,J>
          * represents the specified object properties applied to this {@code this} description.
          * Each of {@link ObjectProperty}s are instantiated
          * through the method {@link #getNewObjectIndividual(SemanticAxiom, Object)};
-         * this is called for all {@link #getObjectIndividual()}.
+         * this is called for all {@link #getObjectSemantics()}.
          * @return the set of {@link ObjectProperty}s that describes the
          * entities that are applied to {@code this} described ontological individual.
          */
         default Set< D> buildObjectIndividual(){
             Set<D> out = new HashSet<>();
-            for( Y cl : getObjectIndividual()){
+            for( Y cl : getObjectSemantics()){
                 D built = getNewObjectIndividual( cl, getOntology());
                 built.readSemantic();
                 out.add( built);
@@ -593,26 +593,26 @@ public interface Individual<O,J>
          * {@code this} {@link Individual}; from a no OOP point of view.
          * @return the entities describing the object properties of {@code this} individual.
          */
-        Axioms<Y> getObjectIndividual();
+        Axioms<Y> getObjectSemantics();
 
         /**
          * Queries to the OWL representation for the data properties applied to {@code this} {@link Descriptor}.
          * @return a new {@link SemanticAxioms} contained the object properties of {@link #getInstance()};
          * into the OWL structure.
          */
-        Axioms<Y> queryObjectIndividual();
+        Axioms<Y> queryObject();
 
         /**
-         * It calls {@link SemanticAxioms#synchroniseTo(Axioms)} with {@link #queryObjectIndividual()}
+         * It calls {@link SemanticAxioms#synchroniseTo(Axioms)} with {@link #queryObject()}
          * as input parameter. This computes the changes to be performed in the OWL representation
-         * for synchronise it with respect to {@link #getObjectIndividual()}. This should
+         * for synchronise it with respect to {@link #getObjectSemantics()}. This should
          * be done by {@link #writeSemantic()}.
          * @return the changes to be done to synchronise {@code this} structure with
          * the object properties applied on {@link #getInstance()}; to the OWL representation.
          */
         default Axioms.SynchronisationIntent<Y> synchroniseObjectIndividualToSemantic(){
             try {
-                return getObjectIndividual().synchroniseTo( queryObjectIndividual());
+                return getObjectSemantics().synchroniseTo( queryObject());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -620,8 +620,8 @@ public interface Individual<O,J>
         }
 
         /**
-         * It calls {@link SemanticAxioms#synchroniseFrom(Axioms)} with {@link #queryObjectIndividual()}
-         * as input parameter. This computes the changes to be performed into the {@link #getObjectIndividual()}
+         * It calls {@link SemanticAxioms#synchroniseFrom(Axioms)} with {@link #queryObject()}
+         * as input parameter. This computes the changes to be performed into the {@link #getObjectSemantics()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readSemantic()}.
          * @return the changes to be done to synchronise the object properties applied on {@link #getInstance()};
@@ -629,7 +629,7 @@ public interface Individual<O,J>
          */
         default Axioms.SynchronisationIntent<Y> synchroniseObjectIndividualFromSemantic(){
             try{
-                return getObjectIndividual().synchroniseFrom( queryObjectIndividual());
+                return getObjectSemantics().synchroniseFrom( queryObject());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;

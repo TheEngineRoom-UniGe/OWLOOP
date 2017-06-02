@@ -119,6 +119,9 @@ public interface MORIndividual
             return getTypeIndividual().remove( cl);
         }
 
+        @Override
+        MORAxioms.Concepts getTypeIndividual();
+
         @Override // see super classes for documentation
         default MORAxioms.Concepts queryTypeIndividual(){
             MORAxioms.Concepts set = new MORAxioms.Concepts(getOntology().getIndividualClasses(getInstance()));
@@ -207,6 +210,9 @@ public interface MORIndividual
         default boolean removeDisjointIndividual( OWLNamedIndividual individual){
             return getDisjointIndividual().remove( individual);
         }
+
+        @Override
+        MORAxioms.Individuals getDisjointIndividual();
 
         @Override // see super classes for documentation
         default MORAxioms.Individuals queryDisjointIndividual(){
@@ -306,6 +312,9 @@ public interface MORIndividual
             return getEquivalentIndividual().remove( individual);
         }
 
+        @Override
+        MORAxioms.Individuals getEquivalentIndividual();
+
         @Override // see super classes for documentation
         default MORAxioms.Individuals queryEquivalentIndividual(){
             MORAxioms.Individuals set = new MORAxioms.Individuals(getOntology().getEquivalentIndividuals(getInstance()));
@@ -376,7 +385,7 @@ public interface MORIndividual
          * Remove the {@link SemanticAxiom} of the given semantic ({@link MORAxioms.DataSemantic#getSemantic()})
          * from the {@link Descriptor}. This call may remove multiple value attached to that
          * semantic. It will no longer be used during {@link #readSemantic()} and {@link #writeSemantic()}.
-         * @param property a data property name contained in an element of {@link #getDataIndividual()} to be removed.
+         * @param property a data property name contained in an element of {@link #getDataSemantics()} to be removed.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeData( String property){
@@ -386,13 +395,13 @@ public interface MORIndividual
          * Remove the {@link SemanticAxiom} of the given semantic ({@link MORAxioms.DataSemantic#getSemantic()})
          * from the {@link Descriptor}. This call may remove multiple value attached to that
          * semantic. It will no longer be used during {@link #readSemantic()} and {@link #writeSemantic()}.
-         * @param property a data property contained in an element of {@link #getDataIndividual()} to be removed.
+         * @param property a data property contained in an element of {@link #getDataSemantics()} to be removed.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeData( OWLDataProperty property){
-            for (MORAxioms.DataSemantic d : getDataIndividual())
+            for (MORAxioms.DataSemantic d : getDataSemantics())
                 if( d.getSemantic().equals( property))
-                    return getDataIndividual().remove( d);
+                    return getDataSemantics().remove( d);
             return false;
         }
 
@@ -402,7 +411,7 @@ public interface MORIndividual
          * repopulate (or completely removed) by calling: {@link #readSemantic()}.
          * The class of the specified value represents its data type, supported {@link OWLLiteral} are:
          * {@link Integer}, {@link Boolean}, {@link Double}, {@link Float} and {@link Long} (see {@link #getOWLLiteral(Object)}).
-         * @param property the name of the data property which value, contained in {@link #getDataIndividual()}, will be removed.
+         * @param property the name of the data property which value, contained in {@link #getDataSemantics()}, will be removed.
          * @param value the property value to be removed from the {@link MORAxioms.DataSemantic#getValues()} set.
          * @return {@code true} if an element was removed as a result of this call.
          */
@@ -413,12 +422,12 @@ public interface MORIndividual
          * Remove the {@link SemanticAxiom#getSemantic()} of the given property, with a specific value, from {@code this}
          * {@link Descriptor}. This call does not remove the semantic from this object, and it may be
          * repopulate (or completely removed) by calling: {@link #readSemantic()}.
-         * @param property the data property which value, contained in {@link #getDataIndividual()}, will be removed.
+         * @param property the data property which value, contained in {@link #getDataSemantics()}, will be removed.
          * @param value the specific property literal to be removed from the {@link MORAxioms.DataSemantic#getValues()} set.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeData( OWLDataProperty property, OWLLiteral value){
-            for (MORAxioms.DataSemantic d : getDataIndividual())
+            for (MORAxioms.DataSemantic d : getDataSemantics())
                 if ( d.getSemantic().equals( property))
                     return d.getValues().remove(value);
             return false;
@@ -486,7 +495,7 @@ public interface MORIndividual
          * (a change of singleton value is not considered).
          */
         default boolean addData( OWLDataProperty property, boolean singleton){
-            for (MORAxioms.DataSemantic d : getDataIndividual()) {
+            for (MORAxioms.DataSemantic d : getDataSemantics()) {
                 if (d.getSemantic().equals(property)) {
                     d.getValues().setSingleton( singleton);
                     return false;
@@ -495,7 +504,7 @@ public interface MORIndividual
 
             MORAxioms.DataSemantic data = new MORAxioms.DataSemantic(property);
             data.getValues().setSingleton( singleton);
-            return getDataIndividual().add(data);
+            return getDataSemantics().add(data);
         }
 
         /**
@@ -551,7 +560,7 @@ public interface MORIndividual
          * value to specified boolean anyway.
          * This value can be removed from the {@link Descriptor} during {@link #readSemantic()}
          * if this property is not applied to the {@link Individual}.
-         * If {@link #getDataIndividual()} represents a singleton set this call clear the
+         * If {@link #getDataSemantics()} represents a singleton set this call clear the
          * previous contents.
          * @param property the data property to synchronise.
          * @param value the specific property literal to be added to the {@link MORAxioms.DataSemantic#getValues()} set.
@@ -560,7 +569,7 @@ public interface MORIndividual
          * (a change of singleton value is not considered).
          */
         default boolean addData( OWLDataProperty property, OWLLiteral value, boolean singleton){
-            for (MORAxioms.DataSemantic d : getDataIndividual())
+            for (MORAxioms.DataSemantic d : getDataSemantics())
                 if( d.getSemantic().equals( property)){
                     if ( singleton)
                         d.getValues().clear();
@@ -571,17 +580,57 @@ public interface MORIndividual
             MORAxioms.DataSemantic data = new MORAxioms.DataSemantic(property);
             data.getValues().add(value);
             data.getValues().setSingleton( singleton);
-            return getDataIndividual().add(data);
+            return getDataSemantics().add(data);
         }
+
+
+        @Override
+        MORAxioms.DataSemantics getDataSemantics();
+
+        /**
+         * A shortcut for {@link MORAxioms.DataSemantics#getLiteral(OWLDataProperty)}
+         * @param semantic the data property to look for its values.
+         * @return a value of the given data property. {@code Null} if is not available.
+         */
+        default OWLLiteral getLiteral( OWLDataProperty semantic){
+            return getDataSemantics().getLiteral( semantic);
+        }
+        /**
+         * A shortcut for {@link MORAxioms.DataSemantics#getLiteral(OWLDataProperty)}
+         * @param semanticName the name of the data property to look for its values.
+         * @return a value of the given data property. {@code Null} if is not available.
+         */
+        default OWLLiteral getLiteral( String semanticName){
+            return getDataSemantics().getLiteral( getOntology().getOWLDataProperty( semanticName));
+        }
+
+        /**
+         * A shortcut for {@link MORAxioms.DataSemantics#getLiterals(OWLDataProperty)}
+         * @param semantic the data property to look for its values.
+         * @return all the values of the given data property. An {@code empty} {@link HashSet} if is not available.
+         */
+        default Set<OWLLiteral> getLiterals( OWLDataProperty semantic){
+            return getDataSemantics().getLiterals( semantic);
+        }
+        /**
+         * A shortcut for {@link MORAxioms.DataSemantics#getLiterals(OWLDataProperty)}
+         * @param semanticName the name of the data property to look for its values.
+         * @return all the values of the given data property. An {@code empty} {@link HashSet} if is not available.
+         */
+        default Set<OWLLiteral> getLiterals( String semanticName){
+            return getDataSemantics().getLiterals( getOntology().getOWLDataProperty( semanticName));
+        }
+
+
 
         @Override // see super classes for documentation
         default MORAxioms.DataSemantics queryDataIndividual(){
             MORAxioms.DataSemantics dataSet = new MORAxioms.DataSemantics();
-            dataSet.setSingleton( getDataIndividual().isSingleton());
+            dataSet.setSingleton( getDataSemantics().isSingleton());
             for (DataPropertyRelations r :  getOntology().getDataPropertyB2Individual(getInstance())){
                 MORAxioms.DataSemantic data = new MORAxioms.DataSemantic( r.getProperty());
                 data.getValues().addAll( r.getValues());
-                for (MORAxioms.DataSemantic w : getDataIndividual())
+                for (MORAxioms.DataSemantic w : getDataSemantics())
                     if ( data.equals( w)){
                         data.getValues().setSingleton( w.getValues().isSingleton());
                         break;
@@ -615,7 +664,7 @@ public interface MORIndividual
     /**
      * The {@link Individual.ObjectLink} {@link Descriptor} implementation for {@link OWLNamedIndividual}.
      * <p>
-     *     It specify how to {@link #queryObjectIndividual()} and {@link #writeSemantic()} for the
+     *     It specify how to {@link #queryObject()} and {@link #writeSemantic()} for the
      *     object properties applied to {@link #getInstance()} (i.e.: {@code this individual}).
      *     It also implements common function to populate the {@link SemanticAxioms}
      *     (of type {@link MORAxioms.ObjectSemantic}) that specify the object properties of this individual
@@ -647,7 +696,7 @@ public interface MORIndividual
          * Remove the {@link SemanticAxiom} of the given semantic ({@link MORAxioms.ObjectSemantic#getSemantic()})
          * from the {@link Descriptor}. This call may remove multiple value attached to that
          * semantic. It will no longer be used during {@link #readSemantic()} and {@link #writeSemantic()}.
-         * @param property an object property name contained in an element of {@link #getObjectIndividual()} to be removed.
+         * @param property an object property name contained in an element of {@link #getObjectSemantics()} to be removed.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeObject( String property){
@@ -657,13 +706,13 @@ public interface MORIndividual
          * Remove the {@link SemanticAxiom} of the given semantic ({@link MORAxioms.ObjectSemantic#getSemantic()})
          * from the {@link Descriptor}. This call may remove multiple value attached to that
          * semantic. It will no longer be used during {@link #readSemantic()} and {@link #writeSemantic()}.
-         * @param property an object property contained in an element of {@link #getObjectIndividual()} to be removed.
+         * @param property an object property contained in an element of {@link #getObjectSemantics()} to be removed.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeObject( OWLObjectProperty property){
-            for (MORAxioms.ObjectSemantic d : getObjectIndividual())
+            for (MORAxioms.ObjectSemantic d : getObjectSemantics())
                 if( d.getSemantic().equals( property))
-                    return getObjectIndividual().remove( d);
+                    return getObjectSemantics().remove( d);
             return false;
         }
 
@@ -671,7 +720,7 @@ public interface MORIndividual
          * Remove the {@link SemanticAxiom#getSemantic()} of the given property, with a specific value, from {@code this}
          * {@link Descriptor}. This call does not remove the semantic from this object, and it may be
          * repopulate (or completely removed) by calling: {@link #readSemantic()}.
-         * @param property the name of the object property which value, contained in {@link #getObjectIndividual()}, will be removed.
+         * @param property the name of the object property which value, contained in {@link #getObjectSemantics()}, will be removed.
          * @param value the property value to be removed from the {@link MORAxioms.ObjectSemantic#getValues()} set.
          * @return {@code true} if an element was removed as a result of this call.
          */
@@ -682,12 +731,12 @@ public interface MORIndividual
          * Remove the {@link SemanticAxiom#getSemantic()} of the given property, with a specific value, from {@code this}
          * {@link Descriptor}. This call does not remove the semantic from this object, and it may be
          * repopulate (or completely removed) by calling: {@link #readSemantic()}.
-         * @param property the object property which value, contained in {@link #getObjectIndividual()}, will be removed.
+         * @param property the object property which value, contained in {@link #getObjectSemantics()}, will be removed.
          * @param value the specific property literal to be removed from the {@link MORAxioms.ObjectSemantic#getValues()} set.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeObject( OWLObjectProperty property, OWLNamedIndividual value){
-            for (MORAxioms.ObjectSemantic d : getObjectIndividual())
+            for (MORAxioms.ObjectSemantic d : getObjectSemantics())
                 if ( d.getSemantic().equals( property))
                     return d.getValues().remove(value);
             return false;
@@ -755,7 +804,7 @@ public interface MORIndividual
          * (a change of singleton value is not considered).
          */
         default boolean addObject( OWLObjectProperty property, boolean singleton){
-            for (MORAxioms.ObjectSemantic d : getObjectIndividual()) {
+            for (MORAxioms.ObjectSemantic d : getObjectSemantics()) {
                 if (d.getSemantic().equals(property)) {
                     d.getValues().setSingleton( singleton);
                     return false;
@@ -764,7 +813,7 @@ public interface MORIndividual
 
             MORAxioms.ObjectSemantic object = new MORAxioms.ObjectSemantic(property);
             object.getValues().setSingleton( singleton);
-            return getObjectIndividual().add(object);
+            return getObjectSemantics().add(object);
         }
 
         /**
@@ -818,7 +867,7 @@ public interface MORIndividual
          * value to specified boolean anyway.
          * This value can be removed from the {@link Descriptor} during {@link #readSemantic()}
          * if this property is not applied to the {@link Individual}.
-         * If {@link #getObjectIndividual()} represents a singleton set this call clear the
+         * If {@link #getObjectSemantics()} represents a singleton set this call clear the
          * previous contents.
          * @param property the object property to synchronise.
          * @param value the specific property literal to be added to the {@link MORAxioms.ObjectSemantic#getValues()} set.
@@ -827,7 +876,7 @@ public interface MORIndividual
          * (a change of singleton value is not considered).
          */
         default boolean addObject( OWLObjectProperty property, OWLNamedIndividual value, boolean singleton){
-            for (MORAxioms.ObjectSemantic d : getObjectIndividual())
+            for (MORAxioms.ObjectSemantic d : getObjectSemantics())
                 if( d.getSemantic().equals( property)){
                     if ( singleton)
                         d.getValues().clear();
@@ -838,18 +887,55 @@ public interface MORIndividual
             MORAxioms.ObjectSemantic object = new MORAxioms.ObjectSemantic(property);
             object.getValues().add(value);
             object.getValues().setSingleton( singleton);
-            return getObjectIndividual().add(object);
+            return getObjectSemantics().add(object);
         }
 
 
+        @Override
+        MORAxioms.ObjectSemantics getObjectSemantics();
+
+        /**
+         * A shortcut for {@link MORAxioms.ObjectSemantics#getLink(OWLObjectProperty)}
+         * @param semantic the object property to look for its values.
+         * @return a value of the given object property. {@code Null} if is not available.
+         */
+        default OWLNamedIndividual getObject( OWLObjectProperty semantic){
+            return getObjectSemantics().getLink( semantic);
+        }
+        /**
+         * A shortcut for {@link MORAxioms.ObjectSemantics#getLink(OWLObjectProperty)}
+         * @param semanticName the name of the object property to look for its values.
+         * @return a value of the given object property. {@code Null} if is not available.
+         */
+        default OWLNamedIndividual getObject( String semanticName){
+            return getObjectSemantics().getLink( getOntology().getOWLObjectProperty( semanticName));
+        }
+
+        /**
+         * A shortcut for {@link MORAxioms.ObjectSemantics#getLinks(OWLObjectProperty)}
+         * @param semantic the object property to look for its values.
+         * @return all the values of the given object property. An {@code empty} {@link HashSet} if is not available.
+         */
+        default Set<OWLNamedIndividual> getObjects( OWLObjectProperty semantic){
+            return getObjectSemantics().getLinks( semantic);
+        }
+        /**
+         * A shortcut for {@link MORAxioms.ObjectSemantics#getLink(OWLObjectProperty)}
+         * @param semanticName the name of the object property to look for its values.
+         * @return all the values of the given object property. {@code Null} if is not available.
+         */
+        default Set<OWLNamedIndividual> getObjects( String semanticName){
+            return getObjectSemantics().getLinks( getOntology().getOWLObjectProperty( semanticName));
+        }
+
         @Override // see super classes for documentation
-        default MORAxioms.ObjectSemantics queryObjectIndividual(){
+        default MORAxioms.ObjectSemantics queryObject(){
             MORAxioms.ObjectSemantics objectSet = new MORAxioms.ObjectSemantics();
-            objectSet.setSingleton( getObjectIndividual().isSingleton());
+            objectSet.setSingleton( getObjectSemantics().isSingleton());
             for (ObjectPropertyRelations r :  getOntology().getObjectPropertyB2Individual(getInstance())){
                 MORAxioms.ObjectSemantic object = new MORAxioms.ObjectSemantic( r.getProperty());
                 object.getValues().addAll( r.getValues());
-                for (MORAxioms.ObjectSemantic w : getObjectIndividual())
+                for (MORAxioms.ObjectSemantic w : getObjectSemantics())
                     if ( object.equals( w)){
                         object.getValues().setSingleton( w.getValues().isSingleton());
                         break;
