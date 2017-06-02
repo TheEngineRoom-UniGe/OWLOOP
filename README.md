@@ -18,7 +18,7 @@ An **O**bject **O**riented **P**rogramming interface for using the **O**ntology 
 OWLOOP as been developed on top of the [aMOR](https://github.com/EmaroLab/multi_ontology_reference), which is a collection of helpers methods based on [OWL API](https://github.com/owlcs/owlapi). Those are still completely accessible through OWLOOP and allow to work with many reasoners, we test this software with [Pellet](https://github.com/Galigator/openllet). 
 Finally, the runnable examples are based on [JUnit](http://junit.org/junit4/) within the [Intellij IDEA](https://www.jetbrains.com/idea/) IDE. The compilation is based on [Gradle](https://gradle.org/) and you can find a detailed list of the dependences versions in the [build.gradle](https://github.com/EmaroLab/owloop/blob/master/build.gradle) file. 
 
-In the [lib](https://github.com/EmaroLab/owloop/tree/master/lib) folder you can find OWLOOP as a jar archive without its dependences, as well as the compatible aMOR archive.
+In the [lib](https://github.com/EmaroLab/owloop/tree/master/lib) folder you can find OWLOOP as a jar archive without and without its dependencies, as well as the compatible aMOR archive.
 
 
 
