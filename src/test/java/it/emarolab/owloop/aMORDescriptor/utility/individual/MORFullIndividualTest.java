@@ -5,7 +5,7 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class MORFullIndividualTest {
 
@@ -158,6 +158,12 @@ public class MORFullIndividualTest {
         individual.addObject( "isLeftOf", "Individual-B", true);
         individual.writeSemanticInconsistencySafe(); // reasoner infers shape properties
         System.out.println( "described individual, multi object test: " + individual.buildObjectIndividual());
+
+        /* // to access the synchronised individual values for object properties:
+        for( MORAxioms.ObjectSemantic o : individual.getObjectIndividual())
+            for ( OWLNamedIndividual i : o.getValues())
+                System.out.println( " individual for " + o.getSemantic() + " property : " + i);
+         */
     }
 
     @Test
@@ -187,6 +193,13 @@ public class MORFullIndividualTest {
         individual.addData( "has-geometric_height");
         individual.writeSemanticInconsistencySafe(); // reasoner infers shape properties
         System.out.println( "described individual, multi object test: " + individual.buildDataIndividual());
+
+
+        /*// to access the synchronised literals values for data properties:
+        for( MORAxioms.DataSemantic d : individual.getDataIndividual())
+            for ( OWLLiteral l : d.getValues())
+                System.out.println( " literal for " + d.getSemantic() + " property : " + l);
+        */
     }
 
     @Test
