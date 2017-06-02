@@ -36,7 +36,7 @@ import java.util.Set;
  *     reasoning calls) use this object only if it is necessary.
  *     Otherwise is recommended to use an had hoc {@link Descriptor}.
  *     You may want to use this class, see also {@link MORDefinitionIndividual},
- *     {@link MORLinkIndividual} and {@link MORTypeIndinvidual}
+ *     {@link MORLinkIndividual} and {@link MORTypeIndividual}
  *     (generally, all the classes in the {@link it.emarolab.owloop.aMORDescriptor.utility} package)
  *     as templates for doing that.
  *
@@ -50,8 +50,11 @@ import java.util.Set;
  */
 public class MORFullIndividual
         extends MORIndividualBase
-        implements MORIndividual.Disjoint, MORIndividual.Equivalent,
-        MORIndividual.Type, MORIndividual.ObjectLink, MORIndividual.DataLink {
+        implements MORIndividual.Disjoint<MORFullIndividual>,
+        MORIndividual.Equivalent<MORFullIndividual>,
+        MORIndividual.Type<MORFullConcept>,
+        MORIndividual.ObjectLink<MORFullObjectProperty>,
+        MORIndividual.DataLink<MORFullDataProperty> {
 
     private MORAxioms.Individuals disjointIndividual = new MORAxioms.Individuals();
     private MORAxioms.Individuals equivalentIndividual = new MORAxioms.Individuals();
@@ -114,12 +117,12 @@ public class MORFullIndividual
 
     // implementations for MORIndividual.Disjoint
 
-    @Override @SuppressWarnings("unchecked")// returns a set with elements of the same type of getNewDisjointIndividual()
+    @Override // returns a set with elements of the same type of getNewDisjointIndividual()
     public Set<MORFullIndividual> buildDisjointIndividual() {
         return MORIndividual.Disjoint.super.buildDisjointIndividual();
     }
 
-    @Override @SuppressWarnings("unchecked")// you can change the returning type to any implementations of MORIndividual
+    @Override // you can change the returning type to any implementations of MORIndividual
     public MORFullIndividual getNewDisjointIndividual(OWLNamedIndividual instance, OWLReferences ontology) {
         return new MORFullIndividual( instance, ontology);
     }
@@ -133,12 +136,12 @@ public class MORFullIndividual
 
     // implementations for MORIndividual.Equivalent
 
-    @Override @SuppressWarnings("unchecked")// returns a set with elements of the same type of getNewEquivalentIndividual()
+    @Override // returns a set with elements of the same type of getNewEquivalentIndividual()
     public Set<MORFullIndividual> buildEquivalentIndividual() {
         return MORIndividual.Equivalent.super.buildEquivalentIndividual();
     }
 
-    @Override @SuppressWarnings("unchecked")// you can change the returning type to any implementations of MORIndividual
+    @Override // you can change the returning type to any implementations of MORIndividual
     public MORFullIndividual getNewEquivalentIndividual(OWLNamedIndividual instance, OWLReferences ontology) {
         return new MORFullIndividual( instance, ontology);
     }
@@ -153,12 +156,12 @@ public class MORFullIndividual
 
     // implementations for MORIndividual.Type
 
-    @Override @SuppressWarnings("unchecked")// returns a set with elements of the same type of getNewTypeIndividual()
+    @Override // returns a set with elements of the same type of getNewTypeIndividual()
     public Set<MORFullConcept> buildTypeIndividual() {
         return MORIndividual.Type.super.buildTypeIndividual();
     }
 
-    @Override @SuppressWarnings("unchecked")// you can change the returning type to any implementations of MORConcept
+    @Override // you can change the returning type to any implementations of MORConcept
     public MORFullConcept getNewTypeIndividual(OWLClass instance, OWLReferences ontology) {
         return new MORFullConcept( instance, ontology);
     }
@@ -173,17 +176,17 @@ public class MORFullIndividual
 
     // implementations for MORIndividual.ObjectLink
 
-    @Override @SuppressWarnings("unchecked")// returns a set with elements of the same type of getNewObjectIndividual()
+    @Override // returns a set with elements of the same type of getNewObjectIndividual()
     public Set<MORFullObjectProperty> buildObjectIndividual() {
         return MORIndividual.ObjectLink.super.buildObjectIndividual();
     }
 
-    @Override @SuppressWarnings("unchecked")// you can change the returning type to any implementations of MORObjectProperty
+    @Override // you can change the returning type to any implementations of MORObjectProperty
     public MORFullObjectProperty getNewObjectIndividual(MORAxioms.ObjectSemantic instance, OWLReferences ontology) {
         return new MORFullObjectProperty( instance.getSemantic(), ontology);
     }
 
-    @Override @SuppressWarnings("unchecked")
+    @Override
     public MORAxioms.ObjectSemantics getObjectIndividual() {
         return objectLinks;
     }
@@ -192,17 +195,17 @@ public class MORFullIndividual
 
     // implementations for MORIndividual.DataLink
 
-    @Override @SuppressWarnings("unchecked")// returns a set with elements of the same type of getNewDataIndividual()
+    @Override // returns a set with elements of the same type of getNewDataIndividual()
     public Set<MORFullDataProperty> buildDataIndividual() {
         return MORIndividual.DataLink.super.buildDataIndividual();
     }
 
-    @Override @SuppressWarnings("unchecked")// you can change the returning type to any implementations of MORDataProperty
+    @Override // you can change the returning type to any implementations of MORDataProperty
     public MORFullDataProperty getNewDataIndividual(MORAxioms.DataSemantic instance, OWLReferences ontology) {
         return new MORFullDataProperty( instance.getSemantic(), ontology);
     }
 
-    @Override @SuppressWarnings("unchecked")
+    @Override
     public MORAxioms.DataSemantics getDataIndividual() {
         return dataLinks;
     }

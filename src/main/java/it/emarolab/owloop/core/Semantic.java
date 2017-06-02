@@ -56,7 +56,7 @@ import java.util.*;
  * <b>date</b>:        21/05/17 <br>
  * </small></div>
  */
-public interface Semantic { // todo check warning !!!!!
+public interface Semantic {
 
     /**
      * The object for grounding each {@link Axioms} through a specific {@link Descriptor}.
@@ -217,8 +217,7 @@ public interface Semantic { // todo check warning !!!!!
                 sync( copySet( a1), copySet( a2));
             }
             // copyGround this instance, used in: MappingIntent.
-            @SuppressWarnings("unchecked")
-            private SynchronisationIntent(SynchronisationIntent copy){
+            private SynchronisationIntent(SynchronisationIntent<E> copy){
                 this.toAdd = new HashSet<>( copy.toAdd);
                 this.toRemove = new HashSet<>( copy.toRemove);
                 this.unchanged = new HashSet<>( copy.unchanged);
@@ -467,7 +466,8 @@ public interface Semantic { // todo check warning !!!!!
                     for (F b1 : a1) {
                         boolean matched = false;
                         for (F b2 : a2) {
-                            if (b1.getSemantic().equals(b2.getSemantic())) { // todo make something to sync all
+                            // you may want to add here something to sync all properties
+                            if (b1.getSemantic().equals(b2.getSemantic())) {
                                 sync.addSynchronised(new SynchronisationIntent<>(b1.getValues(), b2.getValues()), b1);
                                 matched = true;
                             }
@@ -576,13 +576,11 @@ public interface Semantic { // todo check warning !!!!!
 
         /**
          * Returns the grounding element for {@code this} descriptor.
-         * @param <I> the type of {@link Ground} managed by the descriptor.
          * @return the instances using during {@link #writeSemantic()} and
          * {@link #readSemantic()} to synchronise the described {@link Axioms}
          * (or {@link SemanticAxioms}).
          */
-        @SuppressWarnings("unchecked")
-        <I extends Ground<O,J>> I getGround();
+        Ground<O,J> getGround();
 
         /**
          * Returns the ontology in which the description is operating

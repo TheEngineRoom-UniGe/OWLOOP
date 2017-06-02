@@ -4,7 +4,7 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class MORFullObjectPropertyTest {
 
@@ -27,7 +27,7 @@ public class MORFullObjectPropertyTest {
 
 
     @Test
-    public void subTest() throws Exception { // todo test signleton
+    public void subTest() throws Exception {
         objectProperty.readSemantic();
         assertSemantic();
         objectProperty.addSubObjectProperty( "hasSubProperty");

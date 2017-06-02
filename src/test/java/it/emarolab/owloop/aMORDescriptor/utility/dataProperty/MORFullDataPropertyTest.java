@@ -4,7 +4,7 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 
 public class MORFullDataPropertyTest {
@@ -28,7 +28,7 @@ public class MORFullDataPropertyTest {
 
 
     @Test
-    public void subTest() throws Exception { // todo test singleton
+    public void subTest() throws Exception {
         dataProperty.readSemantic();
         assertSemantic();
         dataProperty.addSubDataProperty( "hasSubProperty");
@@ -235,7 +235,7 @@ public class MORFullDataPropertyTest {
 
     public void assertSemantic(){ // asserts that the state of the java representation is equal to the state of the ontology
         assertEquals( dataProperty.getSubDataProperty(), dataProperty.querySubDataProperty());
-        assertEquals( dataProperty.getSuperDataProperty(), dataProperty.querySuperDataProperty()); // todo semplify names
+        assertEquals( dataProperty.getSuperDataProperty(), dataProperty.querySuperDataProperty());
         assertEquals( dataProperty.getDisjointDataProperty(), dataProperty.queryDisjointDataProperty());
         assertEquals( dataProperty.getEquivalentDataProperty(), dataProperty.queryEquivalentDataProperty());
         assertEquals( dataProperty.getDomainDataProperty(), dataProperty.queryDomainDataProperty());

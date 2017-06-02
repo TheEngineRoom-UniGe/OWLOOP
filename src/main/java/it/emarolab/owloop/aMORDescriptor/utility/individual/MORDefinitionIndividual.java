@@ -24,7 +24,7 @@ import java.util.Set;
  *     All its constructions are based on {@link MORIndividualBase} in order
  *     to automatically manage a grounding {@link IndividualInstance}.
  *     <br>
- *     You may want to use this class (see also {@link MORTypeIndinvidual}
+ *     You may want to use this class (see also {@link MORTypeIndividual}
  *     and {@link MORLinkIndividual}, as well as other classes in the
  *     {@link it.emarolab.owloop.aMORDescriptor.utility} package) as templates to build a specific
  *     {@link MORIndividual} descriptor that fits your needs and maximises the
@@ -40,7 +40,8 @@ import java.util.Set;
  */
 public class MORDefinitionIndividual
         extends MORIndividualBase
-        implements MORIndividual.Disjoint, MORIndividual.Equivalent{
+        implements MORIndividual.Disjoint<MORDefinitionIndividual>,
+        MORIndividual.Equivalent<MORDefinitionIndividual>{
 
     private MORAxioms.Individuals disjointIndividual = new MORAxioms.Individuals();
     private MORAxioms.Individuals equivalentIndividual = new MORAxioms.Individuals();
@@ -93,12 +94,12 @@ public class MORDefinitionIndividual
 
     // implementations for MORIndividual.Disjoint
 
-    @Override @SuppressWarnings("unchecked")// returns a set with elements of the same type of getNewDisjointIndividual()
+    @Override // returns a set with elements of the same type of getNewDisjointIndividual()
     public Set<MORDefinitionIndividual> buildDisjointIndividual() {
         return MORIndividual.Disjoint.super.buildDisjointIndividual();
     }
 
-    @Override @SuppressWarnings("unchecked")// you can change the returning type to any implementations of MORIndividual
+    @Override // you can change the returning type to any implementations of MORIndividual
     public MORDefinitionIndividual getNewDisjointIndividual(OWLNamedIndividual instance, OWLReferences ontology) {
         return new MORDefinitionIndividual( instance, ontology);
     }
@@ -112,12 +113,12 @@ public class MORDefinitionIndividual
 
     // implementations for MORIndividual.Equivalent
 
-    @Override @SuppressWarnings("unchecked")// returns a set with elements of the same type of getNewEquivalentIndividual()
+    @Override // returns a set with elements of the same type of getNewEquivalentIndividual()
     public Set<MORDefinitionIndividual> buildEquivalentIndividual() {
         return MORIndividual.Equivalent.super.buildEquivalentIndividual();
     }
 
-    @Override @SuppressWarnings("unchecked")// you can change the returning type to any implementations of MORIndividual
+    @Override // you can change the returning type to any implementations of MORIndividual
     public MORDefinitionIndividual getNewEquivalentIndividual(OWLNamedIndividual instance, OWLReferences ontology) {
         return new MORDefinitionIndividual( instance, ontology);
     }

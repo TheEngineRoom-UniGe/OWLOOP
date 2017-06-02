@@ -69,9 +69,12 @@ public interface MORIndividual
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
      * <b>date</b>:        21/05/17 <br>
      * </small></div>
+     *
+     * @param <D> the type of the {@link MORConcept} descriptors instantiated during
+     *           {@link #buildTypeIndividual()} through {@link #getNewTypeIndividual(Object, Object)}.
      */
-    interface Type
-            extends Individual.Type<OWLReferences, OWLNamedIndividual, OWLClass>,
+    interface Type<D extends MORConcept>
+            extends Individual.Type<OWLReferences, OWLNamedIndividual, OWLClass,D>,
                     MORIndividual{
 
         /**
@@ -155,9 +158,12 @@ public interface MORIndividual
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
      * <b>date</b>:        21/05/17 <br>
      * </small></div>
+     *
+     * @param <D> the type of the {@link MORIndividual} descriptors instantiated during
+     *           {@link #buildDisjointIndividual()}  through {@link #getNewDisjointIndividual(Object, Object)}.
      */
-    interface Disjoint
-            extends Individual.Disjoint<OWLReferences, OWLNamedIndividual>,
+    interface Disjoint<D extends MORIndividual>
+            extends Individual.Disjoint<OWLReferences, OWLNamedIndividual,D>,
                     MORIndividual {
 
         /**
@@ -250,9 +256,12 @@ public interface MORIndividual
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
      * <b>date</b>:        21/05/17 <br>
      * </small></div>
+     *
+     * @param <D> the type of the {@link MORIndividual} descriptors instantiated during
+     *           {@link #buildEquivalentIndividual()} through {@link #getNewEquivalentIndividual(Object, Object)}.
      */
-    interface Equivalent
-            extends Individual.Equivalent<OWLReferences, OWLNamedIndividual>,
+    interface Equivalent<D extends MORIndividual>
+            extends Individual.Equivalent<OWLReferences, OWLNamedIndividual,D>,
                     MORIndividual{
 
         /**
@@ -355,9 +364,12 @@ public interface MORIndividual
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
      * <b>date</b>:        21/05/17 <br>
      * </small></div>
+     *
+     * @param <D> the type of the {@link MORDataProperty} descriptors instantiated during
+     *           {@link #buildDataIndividual()} through {@link #getNewDataIndividual(SemanticAxiom, Object)}.
      */
-    interface DataLink
-            extends Individual.DataLink<OWLReferences, OWLNamedIndividual, MORAxioms.DataSemantic>,
+    interface DataLink<D extends MORDataProperty>
+            extends Individual.DataLink<OWLReferences, OWLNamedIndividual, MORAxioms.DataSemantic, OWLDataProperty, D>,
                     MORIndividual{
 
         /**
@@ -562,7 +574,7 @@ public interface MORIndividual
             return getDataIndividual().add(data);
         }
 
-        @Override @SuppressWarnings("unchecked") // see super classes for documentation
+        @Override // see super classes for documentation
         default MORAxioms.DataSemantics queryDataIndividual(){
             MORAxioms.DataSemantics dataSet = new MORAxioms.DataSemantics();
             dataSet.setSingleton( getDataIndividual().isSingleton());
@@ -623,9 +635,12 @@ public interface MORIndividual
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
      * <b>date</b>:        21/05/17 <br>
      * </small></div>
+     *
+     * @param <D> the type of the {@link MORDataProperty} descriptors instantiated during
+     *           {@link #buildObjectIndividual()} through {@link #getNewObjectIndividual(SemanticAxiom, Object)}.
      */
-    interface ObjectLink
-            extends Individual.ObjectLink<OWLReferences, OWLNamedIndividual, MORAxioms.ObjectSemantic>,
+    interface ObjectLink<D extends MORObjectProperty>
+            extends Individual.ObjectLink<OWLReferences, OWLNamedIndividual, MORAxioms.ObjectSemantic, OWLObjectProperty, D>,
                     MORIndividual{
 
         /**
@@ -827,7 +842,7 @@ public interface MORIndividual
         }
 
 
-        @Override @SuppressWarnings("unchecked")// see super classes for documentation
+        @Override // see super classes for documentation
         default MORAxioms.ObjectSemantics queryObjectIndividual(){
             MORAxioms.ObjectSemantics objectSet = new MORAxioms.ObjectSemantics();
             objectSet.setSingleton( getObjectIndividual().isSingleton());

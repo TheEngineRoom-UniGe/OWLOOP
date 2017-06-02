@@ -59,7 +59,7 @@ abstract public class MORDataPropertyBase
         return new DataInstance( ontology, ontology.getOWLDataProperty( instance));
     }
 
-    @Override @SuppressWarnings("unchecked")
+    @Override
     public DataInstance getGround() {
         return (DataInstance) super.getGround();
     }

@@ -60,8 +60,10 @@ public interface Concept<O,J>
      * @param <J> the type of the described class.
      * @param <Y> the type of individuals belonging to the class
      *           (it represents the of {@link Semantic.Axioms} managed by this {@link Descriptor}.
+     * @param <D> the type of the {@link Individual} descriptor instantiated during
+     *           {@link #buildIndividualClassified()}  through {@link #getNewIndividualClassified(Object, Object)}.
      */
-    interface Classify<O,J,Y>
+    interface Classify<O,J,Y,D extends Individual<O,Y>>
             extends Concept<O,J> {
 
         @Override // see documentation on Semantic.Descriptor.readSemantic
@@ -85,14 +87,13 @@ public interface Concept<O,J>
          * Each of {@link Individual}s are instantiated
          * through the method {@link #getNewIndividualClassified(Object, Object)};
          * this is called for all {@link #getIndividualClassified()}.
-         * @param <C> the type of the {@link Individual} returned.
          * @return the set of {@link Individual}s that describes the
          * entities belonging to {@code this} described ontological class.
          */
-        default <C extends Individual> Set< C> buildIndividualClassified(){
-            Set<C> out = new HashSet<>();
+        default Set<D> buildIndividualClassified(){
+            Set<D> out = new HashSet<>();
             for( Y cl : getIndividualClassified()){
-                C built = getNewIndividualClassified( cl, getOntology());
+                D built = getNewIndividualClassified( cl, getOntology());
                 built.readSemantic();
                 out.add( built);
             }
@@ -105,11 +106,10 @@ public interface Concept<O,J>
          * an individual classified in {@code this} {@link Concept} {@link Descriptor}.
          * @param instance the instance to ground the new {@link Individual}.
          * @param ontology the ontology in which ground the new {@link Individual}.
-         * @param <C> the type of the {@link Individual} instantiated.
          * @return a new {@link Semantic.Descriptor} for all the individuals
          * classified by {@code this} descriptor.
          */
-        <C extends Individual> C getNewIndividualClassified(Y instance, O ontology);
+        D getNewIndividualClassified(Y instance, O ontology);
 
         /**
          * Returns the {@link Semantic.Axioms} that describes all the individual classified
@@ -177,8 +177,10 @@ public interface Concept<O,J>
      * @param <O> the type of ontology in which the axioms for classes will be applied.
      * @param <J> the type of the described class.
      *           (it represents also the of {@link Semantic.Axioms} managed by this {@link Descriptor}.
+     * @param <D> the type of the {@link Concept} descriptor instantiated during
+     *           {@link #buildDisjointConcept()} through {@link #getNewDisjointConcept(Object, Object)}.
      */
-    interface Disjoint<O,J>
+    interface Disjoint<O,J,D extends Concept<O,J>>
             extends Concept<O,J> {
 
         @Override // see documentation on Semantic.Descriptor.readSemantic
@@ -203,14 +205,13 @@ public interface Concept<O,J>
          * Each of those {@link Concept}s are instantiated
          * through the method {@link #getNewDisjointConcept(Object, Object)};
          * this is called for all {@link #getDisjointConcept()}.
-         * @param <C> the type of the {@link Concept} returned.
          * @return the set of {@link Concept}s that describes the
          * entities disjointed to {@code this} described ontological class.
          */
-        default <C extends Concept> Set< C> buildDisjointConcept(){
-            Set<C> out = new HashSet<>();
+        default Set<D> buildDisjointConcept(){
+            Set<D> out = new HashSet<>();
             for( J cl : getDisjointConcept()){
-                C built = getNewDisjointConcept( cl, getOntology());
+                D built = getNewDisjointConcept( cl, getOntology());
                 built.readSemantic();
                 out.add( built);
             }
@@ -223,11 +224,10 @@ public interface Concept<O,J>
          * an class disjointed from {@code this} {@link Concept} {@link Descriptor}.
          * @param instance the instance to ground the new {@link Concept}.
          * @param ontology the ontology in which ground the new {@link Concept}.
-         * @param <C> the type of the {@link Concept} instantiated.
          * @return a new {@link Semantic.Descriptor} for all the classes
          * disjointed to {@code this} descriptor.
          */
-        <C extends Concept> C getNewDisjointConcept(J instance, O ontology);
+        D getNewDisjointConcept(J instance, O ontology);
 
         /**
          * Returns the {@link Semantic.Axioms} that describes all the disjointed classes of
@@ -295,8 +295,10 @@ public interface Concept<O,J>
      * @param <O> the type of ontology in which the axioms for classes will be applied.
      * @param <J> the type of the described class.
      *           (it represents also the of {@link Semantic.Axioms} managed by this {@link Descriptor}.
+     * @param <D> the type of the {@link Concept} descriptor instantiated during
+     *           {@link #buildEquivalentConcept()} through {@link #getNewEquivalentConcept(Object, Object)}.
      */
-    interface Equivalent<O,J>
+    interface Equivalent<O,J,D extends Concept<O,J>>
             extends Concept<O,J> {
 
         @Override  // see documentation on Semantic.Descriptor.readSemantic
@@ -320,14 +322,13 @@ public interface Concept<O,J>
          * Each of those {@link Concept}s are instantiated
          * through the method {@link #getNewEquivalentConcept(Object, Object)};
          * this is called for all {@link #getEquivalentConcept()}.
-         * @param <C> the type of the {@link Concept} returned.
          * @return the set of {@link Concept}s that describes the
          * entities equivalent to {@code this} described ontological class.
          */
-        default <C extends Concept> Set< C> buildEquivalentConcept(){
-            Set<C> out = new HashSet<>();
+        default Set<D> buildEquivalentConcept(){
+            Set<D> out = new HashSet<>();
             for( J cl : getEquivalentConcept()){
-                C built = getNewEquivalentConcept( cl, getOntology());
+                D built = getNewEquivalentConcept( cl, getOntology());
                 built.readSemantic();
                 out.add( built);
             }
@@ -340,11 +341,10 @@ public interface Concept<O,J>
          * an class equivalent from {@code this} {@link Concept} {@link Descriptor}.
          * @param instance the instance to ground the new {@link Concept}.
          * @param ontology the ontology in which ground the new {@link Concept}.
-         * @param <C> the type of the {@link Concept} instantiated.
          * @return a new {@link Semantic.Descriptor} for all the classes
          * equivalent to {@code this} descriptor.
          */
-        <C extends Concept> C getNewEquivalentConcept(J instance, O ontology);
+        D getNewEquivalentConcept(J instance, O ontology);
 
         /**
          * Returns the {@link Semantic.Axioms} that describes all the equivalent classes of
@@ -412,8 +412,10 @@ public interface Concept<O,J>
      * @param <O> the type of ontology in which the axioms for classes will be applied.
      * @param <J> the type of the described class.
      *           (it represents also the of {@link Semantic.Axioms} managed by this {@link Descriptor}.
+     * @param <D> the type of the {@link Concept} descriptor instantiated during
+     *           {@link #buildSubConcept()}  through {@link #getNewSubConcept(Object, Object)}.
      */
-    interface Sub<O,J>
+    interface Sub<O,J,D extends Concept<O,J>>
             extends Concept<O,J> {
 
         @Override // see documentation on Semantic.Descriptor.readSemantic
@@ -437,14 +439,13 @@ public interface Concept<O,J>
          * Each of those {@link Concept}s are instantiated
          * through the method {@link #getNewSubConcept(Object, Object)};
          * this is called for all {@link #getSubConcept()}.
-         * @param <C> the type of the {@link Concept} returned.
          * @return the set of {@link Concept}s that describes the
          * sub entities of {@code this} described ontological class.
          */
-        default <C extends Concept> Set< C> buildSubConcept(){
-            Set<C> out = new HashSet<>();
+        default Set<D> buildSubConcept(){
+            Set<D> out = new HashSet<>();
             for( J cl : getSubConcept()){
-                C built = getNewSubConcept( cl, getOntology());
+                D built = getNewSubConcept( cl, getOntology());
                 built.readSemantic();
                 out.add( built);
             }
@@ -457,11 +458,10 @@ public interface Concept<O,J>
          * an sub class of {@code this} {@link Concept} {@link Descriptor}.
          * @param instance the instance to ground the new {@link Concept}.
          * @param ontology the ontology in which ground the new {@link Concept}.
-         * @param <C> the type of the {@link Concept} instantiated.
          * @return a new {@link Semantic.Descriptor} for all the sub classes
          * of {@code this} descriptor.
          */
-        <C extends Concept> C getNewSubConcept(J instance, O ontology);
+        D getNewSubConcept(J instance, O ontology);
 
         /**
          * Returns the {@link Semantic.Axioms} that describes all the sub classes of
@@ -529,8 +529,10 @@ public interface Concept<O,J>
      * @param <O> the type of ontology in which the axioms for classes will be applied.
      * @param <J> the type of the described class.
      *           (it represents also the of {@link Semantic.Axioms} managed by this {@link Descriptor}.
+     * @param <D> the type of the {@link Concept} descriptor instantiated during
+     *           {@link #buildSuperConcept()} through {@link #getNewSuperConcept(Object, Object)}.
      */
-    interface Super<O,J>
+    interface Super<O,J,D extends Concept<O,J>>
             extends Concept<O,J> {
 
         @Override // see documentation on Semantic.Descriptor.readSemantic
@@ -554,14 +556,13 @@ public interface Concept<O,J>
          * Each of those {@link Concept}s are instantiated
          * through the method {@link #getNewSuperConcept(Object, Object)};
          * this is called for all {@link #getSuperConcept()}.
-         * @param <C> the type of the {@link Concept} returned.
          * @return the set of {@link Concept}s that describes the
          * super entities of {@code this} described ontological class.
          */
-        default <C extends Concept> Set< C> buildSuperConcept(){
-            Set<C> out = new HashSet<>();
+        default Set<D> buildSuperConcept(){
+            Set<D> out = new HashSet<>();
             for( J cl : getSuperConcept()){
-                C built = getNewSuperConcept( cl, getOntology());
+                D built = getNewSuperConcept( cl, getOntology());
                 built.readSemantic();
                 out.add( built);
             }
@@ -574,11 +575,10 @@ public interface Concept<O,J>
          * an super class of {@code this} {@link Concept} {@link Descriptor}.
          * @param instance the instance to ground the new {@link Concept}.
          * @param ontology the ontology in which ground the new {@link Concept}.
-         * @param <C> the type of the {@link Concept} instantiated.
          * @return a new {@link Semantic.Descriptor} for all the super classes
          * of {@code this} descriptor.
          */
-        <C extends Concept> C getNewSuperConcept(J instance, O ontology);
+        D getNewSuperConcept(J instance, O ontology);
 
         /**
          * Returns the {@link Semantic.Axioms} that describes all the super classes of
@@ -661,7 +661,6 @@ public interface Concept<O,J>
      * @param <J> the type of the described class.
      * @param <Y> the type of restriction that define the class.
      *           (it represents the of {@link Semantic.Axioms} managed by this {@link Descriptor}.
-     *
      */
     interface Define<O,J,Y>
             extends Concept<O,J> {

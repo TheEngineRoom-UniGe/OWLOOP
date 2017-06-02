@@ -28,15 +28,10 @@ repositories {
     }
 }
 
-
-/*compileJava {
-    options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
-}*/
-
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
 
-    compile 'it.emarolab.amor:amor:0.1.1'
+    compile 'it.emarolab.amor:amor:1.0'
     compile group: 'com.github.galigator.openllet', name: 'openllet-owlapi', version: '2.5.1'
     compile group: 'net.sourceforge.owlapi', name: 'owlapi-distribution', version: '5.0.2'
 }

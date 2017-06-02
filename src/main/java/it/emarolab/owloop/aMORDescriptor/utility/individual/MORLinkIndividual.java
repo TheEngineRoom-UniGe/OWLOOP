@@ -28,7 +28,7 @@ import java.util.Set;
  *     and {@link MORFullDataProperty}, be aware that this may be not efficient and
  *     perhaps a less complete descriptor is enough for your case.
  *     <br>
- *     You may want to use this class (see also {@link MORDefinitionIndividual} and {@link MORTypeIndinvidual},
+ *     You may want to use this class (see also {@link MORDefinitionIndividual} and {@link MORTypeIndividual},
  *     as well as other classes in the {@link it.emarolab.owloop.aMORDescriptor.utility} package)
  *     as templates to build a specific {@link MORIndividual} descriptor that fits your needs
  *     and maximises the OWL synchronisation efficiency.
@@ -43,7 +43,8 @@ import java.util.Set;
  */
 public class MORLinkIndividual
         extends MORIndividualBase
-        implements MORIndividual.ObjectLink, MORIndividual.DataLink {
+        implements MORIndividual.ObjectLink<MORFullObjectProperty>,
+        MORIndividual.DataLink<MORFullDataProperty> {
 
     private MORAxioms.ObjectSemantics objectLinks = new MORAxioms.ObjectSemantics();
     private MORAxioms.DataSemantics dataLinks = new MORAxioms.DataSemantics();
@@ -96,17 +97,17 @@ public class MORLinkIndividual
 
     // implementations for MORIndividual.ObjectLink
 
-    @Override @SuppressWarnings("unchecked") // returns a set with elements of the same type of getNewObjectIndividual()
+    @Override  // returns a set with elements of the same type of getNewObjectIndividual()
     public Set<MORFullObjectProperty> buildObjectIndividual() {
         return MORIndividual.ObjectLink.super.buildObjectIndividual();
     }
 
-    @Override @SuppressWarnings("unchecked") // you can change the returning type to any implementations of MORObjectProperty
+    @Override  // you can change the returning type to any implementations of MORObjectProperty
     public MORFullObjectProperty getNewObjectIndividual(MORAxioms.ObjectSemantic instance, OWLReferences ontology) {
         return new MORFullObjectProperty( instance.getSemantic(), ontology);
     }
 
-    @Override @SuppressWarnings("unchecked")
+    @Override
     public MORAxioms.ObjectSemantics getObjectIndividual() {
         return objectLinks;
     }
@@ -115,18 +116,18 @@ public class MORLinkIndividual
 
     // implementations for MORIndividual.DataLink
 
-    @Override @SuppressWarnings("unchecked") // returns a set with elements of the same type of getNewDataIndividual()
+    @Override  // returns a set with elements of the same type of getNewDataIndividual()
     public Set<MORFullDataProperty> buildDataIndividual() {
         return MORIndividual.DataLink.super.buildDataIndividual();
     }
 
 
-    @Override @SuppressWarnings("unchecked") // you can change the returning type to any implementations of MORDataProperty
+    @Override  // you can change the returning type to any implementations of MORDataProperty
     public MORFullDataProperty getNewDataIndividual(MORAxioms.DataSemantic instance, OWLReferences ontology) {
         return new MORFullDataProperty( instance.getSemantic(), ontology);
     }
 
-    @Override @SuppressWarnings("unchecked")
+    @Override
     public MORAxioms.DataSemantics getDataIndividual() {
         return dataLinks;
     }

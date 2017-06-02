@@ -59,7 +59,7 @@ abstract public class MORObjectPropertyBase
         return new ObjectInstance( ontology, ontology.getOWLObjectProperty( instance));
     }
 
-    @Override @SuppressWarnings("unchecked")
+    @Override
     public ObjectInstance getGround() {
         return (ObjectInstance) super.getGround();
     }

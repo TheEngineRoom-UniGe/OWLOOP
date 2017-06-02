@@ -71,8 +71,10 @@ public interface DataProperty<O,J>
      * @param <O> the type of ontology in which the axioms for classes will be applied.
      * @param <J> the type of the described data property
      *           (it also represents the type of {@link Semantic.Axioms} managed by this {@link Descriptor}.
+     * @param <D> the type of the {@link DataProperty} descriptor instantiated during
+     *           {@link #buildDisjointDataProperty()} through {@link #getNewDisjointDataProperty(Object, Object)}.
      */
-    interface Disjoint<O,J>
+    interface Disjoint<O,J,D extends DataProperty<O,J>>
             extends DataProperty<O,J>{
 
         @Override
@@ -89,14 +91,13 @@ public interface DataProperty<O,J>
          * Each of {@link DataProperty}s are instantiated
          * through the method {@link #getNewDisjointDataProperty(Object, Object)};
          * this is called for all {@link #getDisjointDataProperty()}.
-         * @param <C> the type of {@link DataProperty} returned.
          * @return the set of {@link DataProperty}s that describes the
          * disjoint relations of {@code this} described ontological property.
          */
-        default <C extends DataProperty> Set< C> buildDisjointDataProperty(){
-            Set<C> out = new HashSet<>();
+        default Set< D> buildDisjointDataProperty(){
+            Set<D> out = new HashSet<>();
             for( J cl : getDisjointDataProperty()){
-                C built = getNewDisjointDataProperty( cl, getOntology());
+                D built = getNewDisjointDataProperty( cl, getOntology());
                 built.readSemantic();
                 out.add( built);
             }
@@ -109,11 +110,10 @@ public interface DataProperty<O,J>
          * a disjointed property of {@code this} {@link DataProperty} {@link Descriptor}.
          * @param instance the instance to ground the new disjoint {@link DataProperty}.
          * @param ontology the ontology in which ground the new {@link DataProperty}.
-         * @param <C> the type of the {@link DataProperty} instantiated.
          * @return a new {@link Semantic.Descriptor} for all the disjointed properties
          * of the one described by {@code this} interface.
          */
-        <C extends DataProperty> C getNewDisjointDataProperty(J instance, O ontology);
+        D getNewDisjointDataProperty(J instance, O ontology);
 
         /**
          * Returns the {@link Semantic.Axioms} that describes all the disjoint data properties of
@@ -181,8 +181,10 @@ public interface DataProperty<O,J>
      * @param <O> the type of ontology in which the axioms for classes will be applied.
      * @param <J> the type of the described data property
      *           (it also represents the type of {@link Semantic.Axioms} managed by this {@link Descriptor}.
+     * @param <D> the type of the {@link DataProperty} descriptor instantiated during
+     *           {@link #buildEquivalentDataProperty()} through {@link #getNewEquivalentDataProperty(Object, Object)}.
      */
-    interface Equivalent<O,J>
+    interface Equivalent<O,J,D extends DataProperty<O,J>>
             extends DataProperty<O,J>{
 
         @Override
@@ -206,14 +208,13 @@ public interface DataProperty<O,J>
          * Each of {@link DataProperty}s are instantiated
          * through the method {@link #getNewEquivalentDataProperty(Object, Object)};
          * this is called for all {@link #getEquivalentDataProperty()}.
-         * @param <C> the type of {@link DataProperty} returned.
          * @return the set of {@link DataProperty}s that describes the
          * equivalent relations of {@code this} described ontological property.
          */
-        default <C extends DataProperty> Set< C> buildEquivalentDataProperty(){
-            Set<C> out = new HashSet<>();
+        default Set<D> buildEquivalentDataProperty(){
+            Set<D> out = new HashSet<>();
             for( J cl : getEquivalentDataProperty()){
-                C built = getNewEquivalentDataProperty( cl, getOntology());
+                D built = getNewEquivalentDataProperty( cl, getOntology());
                 built.readSemantic();
                 out.add( built);
             }
@@ -226,11 +227,10 @@ public interface DataProperty<O,J>
          * an equivalent property of {@code this} {@link DataProperty} {@link Descriptor}.
          * @param instance the instance to ground the new equivalent {@link DataProperty}.
          * @param ontology the ontology in which ground the new {@link DataProperty}.
-         * @param <C> the type of the {@link DataProperty} instantiated.
          * @return a new {@link Semantic.Descriptor} for all the equivalent properties
          * of the one described by {@code this} interface.
          */
-        <C extends DataProperty> C getNewEquivalentDataProperty(J instance, O ontology);
+        D getNewEquivalentDataProperty(J instance, O ontology);
 
         /**
          * Returns the {@link Semantic.Axioms} that describes all the equivalent data properties of
@@ -298,8 +298,10 @@ public interface DataProperty<O,J>
      * @param <O> the type of ontology in which the axioms for classes will be applied.
      * @param <J> the type of the described data property
      *           (it also represents the type of {@link Semantic.Axioms} managed by this {@link Descriptor}.
+     * @param <D> the type of the {@link DataProperty} descriptor instantiated during
+     *           {@link #buildSubDataProperty()} through {@link #getNewSubDataProperty(Object, Object)}.
      */
-    interface Sub<O,J>
+    interface Sub<O,J,D extends DataProperty<O,J>>
             extends DataProperty<O,J>{
 
         @Override
@@ -323,14 +325,13 @@ public interface DataProperty<O,J>
          * Each of {@link DataProperty}s are instantiated
          * through the method {@link #getNewSubDataProperty(Object, Object)};
          * this is called for all {@link #getSubDataProperty()}.
-         * @param <C> the type of {@link DataProperty} returned.
          * @return the set of {@link DataProperty}s that describes the
          * sub relations of {@code this} described ontological property.
          */
-        default <C extends DataProperty> Set< C> buildSubDataProperty(){
-            Set<C> out = new HashSet<>();
+        default Set< D> buildSubDataProperty(){
+            Set<D> out = new HashSet<>();
             for( J cl : getSubDataProperty()){
-                C built = getNewSubDataProperty( cl, getOntology());
+                D built = getNewSubDataProperty( cl, getOntology());
                 built.readSemantic();
                 out.add( built);
             }
@@ -343,11 +344,10 @@ public interface DataProperty<O,J>
          * a sub property of {@code this} {@link DataProperty} {@link Descriptor}.
          * @param instance the instance to ground the new sub {@link DataProperty}.
          * @param ontology the ontology in which ground the new {@link DataProperty}.
-         * @param <C> the type of the {@link DataProperty} instantiated.
          * @return a new {@link Semantic.Descriptor} for all the sub properties
          * of the one described by {@code this} interface.
          */
-        <C extends DataProperty> C getNewSubDataProperty( J instance, O ontology);
+        D getNewSubDataProperty( J instance, O ontology);
 
         /**
          * Returns the {@link Semantic.Axioms} that describes all the sub data properties of
@@ -415,8 +415,10 @@ public interface DataProperty<O,J>
      * @param <O> the type of ontology in which the axioms for classes will be applied.
      * @param <J> the type of the described data property
      *           (it also represents the type of {@link Semantic.Axioms} managed by this {@link Descriptor}.
+     * @param <D> the type of the {@link DataProperty} descriptor instantiated during
+     *           {@link #buildSuperDataProperty()} through {@link #getNewSuperDataProperty(Object, Object)}.
      */
-    interface Super<O,J>
+    interface Super<O,J,D extends DataProperty<O,J>>
             extends DataProperty<O,J>{
 
         @Override
@@ -438,14 +440,13 @@ public interface DataProperty<O,J>
          * Each of {@link DataProperty}s are instantiated
          * through the method {@link #getNewSuperDataProperty(Object, Object)};
          * this is called for all {@link #getSuperDataProperty()}.
-         * @param <C> the type of {@link DataProperty} returned.
          * @return the set of {@link DataProperty}s that describes the
          * super relations of {@code this} described ontological property.
          */
-        default <C extends DataProperty> Set< C> buildSuperDataProperty(){
-            Set<C> out = new HashSet<>();
+        default Set< D> buildSuperDataProperty(){
+            Set<D> out = new HashSet<>();
             for( J cl : getSuperDataProperty()){
-                C built = getNewSuperDataProperty( cl, getOntology());
+                D built = getNewSuperDataProperty( cl, getOntology());
                 built.readSemantic();
                 out.add( built);
             }
@@ -458,11 +459,10 @@ public interface DataProperty<O,J>
          * a super property of {@code this} {@link DataProperty} {@link Descriptor}.
          * @param instance the instance to ground the new super {@link DataProperty}.
          * @param ontology the ontology in which ground the new {@link DataProperty}.
-         * @param <C> the type of the {@link DataProperty} instantiated.
          * @return a new {@link Semantic.Descriptor} for all the super properties
          * of the one described by {@code this} interface.
          */
-        <C extends DataProperty> C getNewSuperDataProperty(J instance, O ontology);
+        D getNewSuperDataProperty(J instance, O ontology);
 
         /**
          * Returns the {@link Semantic.Axioms} that describes all the super data properties of
@@ -546,7 +546,6 @@ public interface DataProperty<O,J>
      * @param <J> the type of the described class.
      * @param <Y> the type of restriction of the domain of the defined property.
      *           (it represents the of {@link Semantic.Axioms} managed by this {@link Descriptor}.
-     *
      */
     interface Domain<O,J,Y>
             extends DataProperty<O,J>{

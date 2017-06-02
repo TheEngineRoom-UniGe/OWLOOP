@@ -39,7 +39,8 @@ import java.util.Set;
  */
 public class MORHierarchicalConcept
         extends MORConceptBase
-        implements MORConcept.Sub, MORConcept.Super{
+        implements MORConcept.Sub<MORHierarchicalConcept>,
+        MORConcept.Super<MORHierarchicalConcept>{
 
     private MORAxioms.Concepts subConcept = new MORAxioms.Concepts();
     private MORAxioms.Concepts superConcept = new MORAxioms.Concepts();
@@ -93,12 +94,12 @@ public class MORHierarchicalConcept
 
     // implementations for MORConcept.Super
 
-    @Override @SuppressWarnings("unchecked")// returns a set with elements  of the same type of getNewSubConcept()
+    @Override // returns a set with elements  of the same type of getNewSubConcept()
     public Set<MORHierarchicalConcept> buildSubConcept() {
         return MORConcept.Sub.super.buildSubConcept();
     }
 
-    @Override @SuppressWarnings("unchecked")// you can change the returning type to any implementations of MORConcept
+    @Override // you can change the returning type to any implementations of MORConcept
     public MORHierarchicalConcept getNewSubConcept(OWLClass instance, OWLReferences ontology) {
         return new MORHierarchicalConcept( instance, ontology);
     }
@@ -112,12 +113,12 @@ public class MORHierarchicalConcept
 
     // implementations for MORConcept.Sub
 
-    @Override @SuppressWarnings("unchecked")// returns a set with elements of the same type of getNewSuperConcept()
+    @Override // returns a set with elements of the same type of getNewSuperConcept()
     public Set<MORHierarchicalConcept> buildSuperConcept() {
         return MORConcept.Super.super.buildSuperConcept();
     }
 
-    @Override @SuppressWarnings("unchecked")// you can change the returning type to any implementations of MORConcept
+    @Override // you can change the returning type to any implementations of MORConcept
     public MORHierarchicalConcept getNewSuperConcept(OWLClass instance, OWLReferences ontology) {
         return new MORHierarchicalConcept( instance, ontology);
     }

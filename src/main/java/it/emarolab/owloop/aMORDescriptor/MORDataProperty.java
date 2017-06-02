@@ -83,9 +83,12 @@ public interface MORDataProperty
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
      * <b>date</b>:        21/05/17 <br>
      * </small></div>
+     *
+     * @param <D> the type of the {@link MORDataProperty} descriptor instantiated during
+     *           {@link #buildDisjointDataProperty()} through {@link #getNewDisjointDataProperty(Object, Object)}.
      */
-    interface Disjoint
-            extends DataProperty.Disjoint<OWLReferences, OWLDataProperty>,
+    interface Disjoint<D extends MORDataProperty>
+            extends DataProperty.Disjoint<OWLReferences, OWLDataProperty,D>,
                     MORDataProperty {
 
         /**
@@ -180,9 +183,12 @@ public interface MORDataProperty
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
      * <b>date</b>:        21/05/17 <br>
      * </small></div>
+     *
+     * @param <D> the type of the {@link MORDataProperty} descriptor instantiated during
+     *           {@link #buildEquivalentDataProperty()} through {@link #getNewEquivalentDataProperty(Object, Object)}.
      */
-    interface Equivalent
-            extends DataProperty.Equivalent<OWLReferences, OWLDataProperty>,
+    interface Equivalent<D extends MORDataProperty>
+            extends DataProperty.Equivalent<OWLReferences, OWLDataProperty,D>,
                     MORDataProperty{
 
         /**
@@ -276,9 +282,12 @@ public interface MORDataProperty
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
      * <b>date</b>:        21/05/17 <br>
      * </small></div>
+     *
+     * @param <D> the type of the {@link MORDataProperty} descriptor instantiated during
+     *           {@link #buildSubDataProperty()}  through {@link #getNewSubDataProperty(Object, Object)}.
      */
-    interface Sub
-            extends DataProperty.Sub<OWLReferences, OWLDataProperty>,
+    interface Sub<D extends MORDataProperty>
+            extends DataProperty.Sub<OWLReferences, OWLDataProperty,D>,
                     MORDataProperty{
 
         /**
@@ -364,9 +373,12 @@ public interface MORDataProperty
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
      * <b>date</b>:        21/05/17 <br>
      * </small></div>
+     *
+     * @param <D> the type of the {@link MORDataProperty} descriptor instantiated during
+     *           {@link #buildSuperDataProperty()} through {@link #getNewSuperDataProperty(Object, Object)}.
      */
-    interface Super
-            extends DataProperty.Super<OWLReferences, OWLDataProperty>,
+    interface Super<D extends MORDataProperty>
+            extends DataProperty.Super<OWLReferences, OWLDataProperty,D>,
                     MORDataProperty{
 
         /**

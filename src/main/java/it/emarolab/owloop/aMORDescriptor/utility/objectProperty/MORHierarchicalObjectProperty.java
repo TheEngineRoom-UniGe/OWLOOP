@@ -37,7 +37,8 @@ import java.util.Set;
  */
 public class MORHierarchicalObjectProperty
         extends MORObjectPropertyBase
-        implements MORObjectProperty.Sub, MORObjectProperty.Super{
+        implements MORObjectProperty.Sub<MORHierarchicalObjectProperty>,
+        MORObjectProperty.Super<MORHierarchicalObjectProperty>{
 
     private MORAxioms.ObjectLinks subProperties = new MORAxioms.ObjectLinks();
     private MORAxioms.ObjectLinks superProperties = new MORAxioms.ObjectLinks();
@@ -91,12 +92,12 @@ public class MORHierarchicalObjectProperty
 
     // implementations for MORObjectProperty.Super
 
-    @Override @SuppressWarnings("unchecked")// returns a set with elements  of the same type of getNewSubObjectProperty()
+    @Override // returns a set with elements  of the same type of getNewSubObjectProperty()
     public Set<MORHierarchicalObjectProperty> buildSubObjectProperty() {
         return Sub.super.buildSubObjectProperty();
     }
 
-    @Override @SuppressWarnings("unchecked")// you can change the returning type to any implementations of MORObjectProperty
+    @Override // you can change the returning type to any implementations of MORObjectProperty
     public MORHierarchicalObjectProperty getNewSubObjectProperty(OWLObjectProperty instance, OWLReferences ontology) {
         return new MORHierarchicalObjectProperty( instance, ontology);
     }
@@ -110,12 +111,12 @@ public class MORHierarchicalObjectProperty
 
     // implementations for MORObjectProperty.Super
 
-    @Override @SuppressWarnings("unchecked") // returns a set with elements of the same type of getNewSuperObjectProperty()
+    @Override  // returns a set with elements of the same type of getNewSuperObjectProperty()
     public Set<MORHierarchicalObjectProperty> buildSuperObjectProperty() {
         return Super.super.buildSuperObjectProperty();
     }
 
-    @Override @SuppressWarnings("unchecked") // you can change the returning type to any implementations of MORObjectProperty
+    @Override  // you can change the returning type to any implementations of MORObjectProperty
     public MORHierarchicalObjectProperty getNewSuperObjectProperty(OWLObjectProperty instance, OWLReferences ontology) {
         return new MORHierarchicalObjectProperty( instance, ontology);
     }

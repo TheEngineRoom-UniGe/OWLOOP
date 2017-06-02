@@ -127,8 +127,10 @@ public interface ObjectProperty<O,J>
      * @param <O> the type of ontology in which the axioms for classes will be applied.
      * @param <J> the type of the described object property
      *           (it also represents the type of {@link Semantic.Axioms} managed by this {@link Descriptor}.
+     * @param <D> the type of the {@link ObjectProperty} descriptor instantiated during
+     *           {@link #buildInverseObjectProperty()} through {@link #getNewInverseObjectProperty(Object, Object)}.
      */
-    interface Inverse<O,J> // Y = J
+    interface Inverse<O,J,D extends ObjectProperty<O,J>>
             extends ObjectProperty<O,J>{
 
         @Override // see documentation on Semantic.Descriptor.readSemantic
@@ -152,14 +154,13 @@ public interface ObjectProperty<O,J>
          * Each of {@link ObjectProperty}s are instantiated
          * through the method {@link #getNewInverseObjectProperty(Object, Object)};
          * this is called for all {@link #getInverseObjectProperty()}.
-         * @param <C> the type of {@link ObjectProperty} returned.
          * @return the set of {@link ObjectProperty}s that describes the
          * inverse relations of {@code this} described ontological property.
          */
-        default <C extends ObjectProperty> Set< C> buildInverseObjectProperty(){
-            Set<C> out = new HashSet<>();
+        default Set<D> buildInverseObjectProperty(){
+            Set<D> out = new HashSet<>();
             for( J cl : getInverseObjectProperty()){
-                C built = getNewInverseObjectProperty( cl, getOntology());
+                D built = getNewInverseObjectProperty( cl, getOntology());
                 built.readSemantic();
                 out.add( built);
             }
@@ -172,11 +173,10 @@ public interface ObjectProperty<O,J>
          * an inverse property of {@code this} {@link ObjectProperty} {@link Descriptor}.
          * @param instance the instance to ground the new inverse {@link ObjectProperty}.
          * @param ontology the ontology in which ground the new {@link ObjectProperty}.
-         * @param <C> the type of the {@link ObjectProperty} instantiated.
          * @return a new {@link Semantic.Descriptor} for all the inverse properties
          * of the one described by {@code this} interface.
          */
-        <C extends ObjectProperty> C getNewInverseObjectProperty(J instance, O ontology);
+        D getNewInverseObjectProperty(J instance, O ontology);
 
         /**
          * Returns the {@link Semantic.Axioms} that describes all the inverse object properties of
@@ -244,8 +244,10 @@ public interface ObjectProperty<O,J>
      * @param <O> the type of ontology in which the axioms for classes will be applied.
      * @param <J> the type of the described object property
      *           (it also represents the type of {@link Semantic.Axioms} managed by this {@link Descriptor}.
+     * @param <D> the type of the {@link ObjectProperty} descriptor instantiated during
+     *           {@link #buildDisjointObjectProperty()}  through {@link #getNewDisjointObjectProperty(Object, Object)}.
      */
-    interface Disjoint<O,J>
+    interface Disjoint<O,J,D extends ObjectProperty<O,J>>
             extends ObjectProperty<O,J>{
 
         @Override // see documentation on Semantic.Descriptor.readSemantic
@@ -269,14 +271,13 @@ public interface ObjectProperty<O,J>
          * Each of {@link ObjectProperty}s are instantiated
          * through the method {@link #getNewDisjointObjectProperty(Object, Object)};
          * this is called for all {@link #getDisjointObjectProperty()}.
-         * @param <C> the type of {@link ObjectProperty} returned.
          * @return the set of {@link ObjectProperty}s that describes the
          * disjoint relations of {@code this} described ontological property.
          */
-        default <C extends ObjectProperty> Set< C> buildDisjointObjectProperty(){
-            Set<C> out = new HashSet<>();
+        default Set< D> buildDisjointObjectProperty(){
+            Set<D> out = new HashSet<>();
             for( J cl : getDisjointObjectProperty()){
-                C built = getNewDisjointObjectProperty( cl, getOntology());
+                D built = getNewDisjointObjectProperty( cl, getOntology());
                 built.readSemantic();
                 out.add( built);
             }
@@ -289,11 +290,10 @@ public interface ObjectProperty<O,J>
          * a disjointed property of {@code this} {@link ObjectProperty} {@link Descriptor}.
          * @param instance the instance to ground the new disjoint {@link ObjectProperty}.
          * @param ontology the ontology in which ground the new {@link ObjectProperty}.
-         * @param <C> the type of the {@link ObjectProperty} instantiated.
          * @return a new {@link Semantic.Descriptor} for all the disjointed properties
          * of the one described by {@code this} interface.
          */
-        <C extends ObjectProperty> C getNewDisjointObjectProperty(J instance, O ontology);
+        D getNewDisjointObjectProperty(J instance, O ontology);
 
         /**
          * Returns the {@link Semantic.Axioms} that describes all the disjoint object properties of
@@ -361,8 +361,10 @@ public interface ObjectProperty<O,J>
      * @param <O> the type of ontology in which the axioms for classes will be applied.
      * @param <J> the type of the described object property
      *           (it also represents the type of {@link Semantic.Axioms} managed by this {@link Descriptor}.
+     * @param <D> the type of the {@link ObjectProperty} descriptor instantiated during
+     *           {@link #buildEquivalentObjectProperty()}   through {@link #getNewEquivalentObjectProperty(Object, Object)}.
      */
-    interface Equivalent<O,J>
+    interface Equivalent<O,J,D extends ObjectProperty<O,J>>
             extends ObjectProperty<O,J>{
 
         @Override // see documentation on Semantic.Descriptor.readSemantic
@@ -386,14 +388,13 @@ public interface ObjectProperty<O,J>
          * Each of {@link ObjectProperty}s are instantiated
          * through the method {@link #getNewEquivalentObjectProperty(Object, Object)};
          * this is called for all {@link #getEquivalentObjectProperty()}.
-         * @param <C> the type of {@link ObjectProperty} returned.
          * @return the set of {@link ObjectProperty}s that describes the
          * equivalent relations of {@code this} described ontological property.
          */
-        default <C extends ObjectProperty> Set< C> buildEquivalentObjectProperty(){
-            Set<C> out = new HashSet<>();
+        default Set<D> buildEquivalentObjectProperty(){
+            Set<D> out = new HashSet<>();
             for( J cl : getEquivalentObjectProperty()){
-                C built = getNewEquivalentObjectProperty( cl, getOntology());
+                D built = getNewEquivalentObjectProperty( cl, getOntology());
                 built.readSemantic();
                 out.add( built);
             }
@@ -406,11 +407,10 @@ public interface ObjectProperty<O,J>
          * an equivalent property of {@code this} {@link ObjectProperty} {@link Descriptor}.
          * @param instance the instance to ground the new equivalent {@link ObjectProperty}.
          * @param ontology the ontology in which ground the new {@link ObjectProperty}.
-         * @param <C> the type of the {@link ObjectProperty} instantiated.
          * @return a new {@link Semantic.Descriptor} for all the equivalent properties
          * of the one described by {@code this} interface.
          */
-        <C extends ObjectProperty> C getNewEquivalentObjectProperty(J instance, O ontology);
+        D getNewEquivalentObjectProperty(J instance, O ontology);
 
         /**
          * Returns the {@link Semantic.Axioms} that describes all the equivalent object properties of
@@ -478,8 +478,10 @@ public interface ObjectProperty<O,J>
      * @param <O> the type of ontology in which the axioms for classes will be applied.
      * @param <J> the type of the described object property
      *           (it also represents the type of {@link Semantic.Axioms} managed by this {@link Descriptor}.
+     * @param <D> the type of the {@link ObjectProperty} descriptor instantiated during
+     *           {@link #buildSubObjectProperty()} through {@link #getNewSubObjectProperty(Object, Object)}.
      */
-    interface Sub<O,J>
+    interface Sub<O,J,D extends ObjectProperty<O,J>>
             extends ObjectProperty<O,J>{
 
         @Override // see documentation on Semantic.Descriptor.readSemantic
@@ -503,14 +505,13 @@ public interface ObjectProperty<O,J>
          * Each of {@link ObjectProperty}s are instantiated
          * through the method {@link #getNewSubObjectProperty(Object, Object)};
          * this is called for all {@link #getSubObjectProperty()}.
-         * @param <C> the type of {@link ObjectProperty} returned.
          * @return the set of {@link ObjectProperty}s that describes the
          * sub relations of {@code this} described ontological property.
          */
-        default <C extends ObjectProperty> Set< C> buildSubObjectProperty(){
-            Set<C> out = new HashSet<>();
+        default Set<D> buildSubObjectProperty(){
+            Set<D> out = new HashSet<>();
             for( J cl : getSubObjectProperty()){
-                C built = getNewSubObjectProperty( cl, getOntology());
+                D built = getNewSubObjectProperty( cl, getOntology());
                 built.readSemantic();
                 out.add( built);
             }
@@ -523,11 +524,10 @@ public interface ObjectProperty<O,J>
          * a sub property of {@code this} {@link ObjectProperty} {@link Descriptor}.
          * @param instance the instance to ground the new sub {@link ObjectProperty}.
          * @param ontology the ontology in which ground the new {@link ObjectProperty}.
-         * @param <C> the type of the {@link ObjectProperty} instantiated.
          * @return a new {@link Semantic.Descriptor} for all the sub properties
          * of the one described by {@code this} interface.
          */
-        <C extends ObjectProperty> C getNewSubObjectProperty( J instance, O ontology);
+        D getNewSubObjectProperty( J instance, O ontology);
 
         /**
          * Returns the {@link Semantic.Axioms} that describes all the sub object properties of
@@ -595,8 +595,10 @@ public interface ObjectProperty<O,J>
      * @param <O> the type of ontology in which the axioms for classes will be applied.
      * @param <J> the type of the described object property
      *           (it also represents the type of {@link Semantic.Axioms} managed by this {@link Descriptor}.
+     * @param <D> the type of the {@link ObjectProperty} descriptor instantiated during
+     *           {@link #buildSuperObjectProperty()} through {@link #getNewSuperObjectProperty(Object, Object)}.
      */
-    interface Super<O,J>
+    interface Super<O,J,D extends ObjectProperty<O,J>>
             extends ObjectProperty<O,J>{
 
         @Override // see documentation on Semantic.Descriptor.readSemantic
@@ -620,14 +622,13 @@ public interface ObjectProperty<O,J>
          * Each of {@link ObjectProperty}s are instantiated
          * through the method {@link #getNewSuperObjectProperty(Object, Object)};
          * this is called for all {@link #getSuperObjectProperty()}.
-         * @param <C> the type of {@link ObjectProperty} returned.
          * @return the set of {@link ObjectProperty}s that describes the
          * super relations of {@code this} described ontological property.
          */
-        default <C extends ObjectProperty> Set< C> buildSuperObjectProperty(){
-            Set<C> out = new HashSet<>();
+        default Set<D> buildSuperObjectProperty(){
+            Set<D> out = new HashSet<>();
             for( J cl : getSuperObjectProperty()){
-                C built = getNewSuperObjectProperty( cl, getOntology());
+                D built = getNewSuperObjectProperty( cl, getOntology());
                 built.readSemantic();
                 out.add( built);
             }
@@ -640,11 +641,10 @@ public interface ObjectProperty<O,J>
          * a super property of {@code this} {@link ObjectProperty} {@link Descriptor}.
          * @param instance the instance to ground the new super {@link ObjectProperty}.
          * @param ontology the ontology in which ground the new {@link ObjectProperty}.
-         * @param <C> the type of the {@link ObjectProperty} instantiated.
          * @return a new {@link Semantic.Descriptor} for all the super properties
          * of the one described by {@code this} interface.
          */
-        <C extends ObjectProperty> C getNewSuperObjectProperty(J instance, O ontology);
+        D getNewSuperObjectProperty(J instance, O ontology);
 
         /**
          * Returns the {@link Semantic.Axioms} that describes all the super object properties of
@@ -727,7 +727,6 @@ public interface ObjectProperty<O,J>
      * @param <J> the type of the described class.
      * @param <Y> the type of restriction of the domain of the defined property.
      *           (it represents the of {@link Semantic.Axioms} managed by this {@link Descriptor}.
-     *
      */
     interface Domain<O,J,Y>
             extends ObjectProperty<O,J>{

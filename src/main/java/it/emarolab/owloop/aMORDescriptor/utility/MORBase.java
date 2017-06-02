@@ -145,7 +145,7 @@ abstract public class MORBase<J extends OWLObject>
      */
     abstract protected GroundBase<J> getNewGround(OWLReferences ontology, String instance);
 
-    @Override @SuppressWarnings("unchecked") // see super class for documentation
+    @Override // see super class for documentation
     public GroundBase<J> getGround() {
         return ground;
     }

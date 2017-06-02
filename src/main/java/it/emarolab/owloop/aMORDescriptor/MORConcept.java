@@ -69,9 +69,12 @@ public interface MORConcept
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
      * <b>date</b>:        21/05/17 <br>
      * </small></div>
+     *
+     * @param <D> the type of the {@link MORIndividual} descriptor instantiated during
+     *           {@link #buildIndividualClassified()} through {@link #getNewIndividualClassified(Object, Object)}.
      */
-    interface Classify
-            extends Concept.Classify<OWLReferences, OWLClass, OWLNamedIndividual>,
+    interface Classify<D extends MORIndividual>
+            extends Concept.Classify<OWLReferences, OWLClass, OWLNamedIndividual,D>,
                     MORConcept{
 
         /**
@@ -156,9 +159,12 @@ public interface MORConcept
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
      * <b>date</b>:        21/05/17 <br>
      * </small></div>
+     *
+     * @param <D> the type of the {@link MORConcept} descriptor instantiated during
+     *           {@link #buildDisjointConcept()} through {@link #getNewDisjointConcept(Object, Object)}.
      */
-    interface Disjoint
-            extends Concept.Disjoint<OWLReferences, OWLClass>,
+    interface Disjoint<D extends MORConcept>
+            extends Concept.Disjoint<OWLReferences, OWLClass, D>,
                     MORConcept{
 
         /**
@@ -261,9 +267,12 @@ public interface MORConcept
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
      * <b>date</b>:        21/05/17 <br>
      * </small></div>
+     *
+     * @param <D> the type of the {@link MORConcept} descriptor instantiated during
+     *           {@link #buildEquivalentConcept()} through {@link #getNewEquivalentConcept(Object, Object)}.
      */
-    interface Equivalent
-            extends Concept.Equivalent<OWLReferences, OWLClass>,
+    interface Equivalent<D extends MORConcept>
+            extends Concept.Equivalent<OWLReferences, OWLClass, D>,
                     MORConcept{
 
         /**
@@ -357,9 +366,12 @@ public interface MORConcept
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
      * <b>date</b>:        21/05/17 <br>
      * </small></div>
+     *
+     * @param <D> the type of the {@link MORConcept} descriptor instantiated during
+     *           {@link #buildSubConcept()} through {@link #getNewSubConcept(Object, Object)}.
      */
-    interface Sub
-            extends Concept.Sub<OWLReferences, OWLClass>,
+    interface Sub< D extends MORConcept>
+            extends Concept.Sub<OWLReferences, OWLClass, D>,
                     MORConcept{
 
         /**
@@ -444,9 +456,12 @@ public interface MORConcept
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
      * <b>date</b>:        21/05/17 <br>
      * </small></div>
+     *
+     * @param <D> the type of the {@link MORConcept} descriptor instantiated during
+     *           {@link #buildSuperConcept()} through {@link #getNewSuperConcept(Object, Object)}.
      */
-    interface Super
-            extends Concept.Super<OWLReferences, OWLClass>,
+    interface Super<D extends MORConcept>
+            extends Concept.Super<OWLReferences, OWLClass, D>,
                     MORConcept{
 
         /**

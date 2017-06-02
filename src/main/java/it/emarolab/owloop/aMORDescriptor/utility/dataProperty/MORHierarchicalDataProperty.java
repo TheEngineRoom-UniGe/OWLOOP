@@ -5,7 +5,7 @@ import it.emarolab.owloop.aMORDescriptor.MORAxioms;
 import it.emarolab.owloop.aMORDescriptor.MORDataProperty;
 import it.emarolab.owloop.aMORDescriptor.utility.MORDataPropertyBase;
 import it.emarolab.owloop.core.Semantic;
-import org.semanticweb.owlapi.model.*;
+import org.semanticweb.owlapi.model.OWLDataProperty;
 
 import java.util.List;
 import java.util.Set;
@@ -38,7 +38,8 @@ import java.util.Set;
  */
 public class MORHierarchicalDataProperty
         extends MORDataPropertyBase
-        implements MORDataProperty.Sub, MORDataProperty.Super{
+        implements MORDataProperty.Sub<MORHierarchicalDataProperty>,
+        MORDataProperty.Super<MORHierarchicalDataProperty>{
 
     private MORAxioms.DataLinks subProperties = new MORAxioms.DataLinks();
     private MORAxioms.DataLinks superProperties = new MORAxioms.DataLinks();
@@ -92,12 +93,12 @@ public class MORHierarchicalDataProperty
 
     // implementations for MORDataProperty.Super
 
-    @Override @SuppressWarnings("unchecked")// returns a set with elements  of the same type of getNewSubDataProperty()
+    @Override // returns a set with elements  of the same type of getNewSubDataProperty()
     public Set<MORHierarchicalDataProperty> buildSubDataProperty() {
         return MORDataProperty.Sub.super.buildSubDataProperty();
     }
 
-    @Override @SuppressWarnings("unchecked")// you can change the returning type to any implementations of MORDataProperty
+    @Override // you can change the returning type to any implementations of MORDataProperty
     public MORHierarchicalDataProperty getNewSubDataProperty(OWLDataProperty instance, OWLReferences ontology) {
         return new MORHierarchicalDataProperty( instance, ontology);
     }
@@ -111,12 +112,12 @@ public class MORHierarchicalDataProperty
 
     // implementations for MORDataProperty.Super
 
-    @Override @SuppressWarnings("unchecked")// returns a set with elements of the same type of getNewSuperDataProperty()
+    @Override // returns a set with elements of the same type of getNewSuperDataProperty()
     public Set<MORHierarchicalDataProperty> buildSuperDataProperty() {
         return MORDataProperty.Super.super.buildSuperDataProperty();
     }
 
-    @Override @SuppressWarnings("unchecked")// you can change the returning type to any implementations of MORDataProperty
+    @Override // you can change the returning type to any implementations of MORDataProperty
     public MORHierarchicalDataProperty getNewSuperDataProperty(OWLDataProperty instance, OWLReferences ontology) {
         return new MORHierarchicalDataProperty( instance, ontology);
     }

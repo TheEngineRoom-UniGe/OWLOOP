@@ -43,9 +43,12 @@ import java.util.Set;
  */
 public class MORFullDataProperty
         extends MORDataPropertyBase
-        implements MORDataProperty.Disjoint, MORDataProperty.Equivalent,
-        MORDataProperty.Domain, MORDataProperty.Range,
-        MORDataProperty.Sub, MORDataProperty.Super{
+        implements MORDataProperty.Disjoint<MORFullDataProperty>,
+        MORDataProperty.Equivalent<MORFullDataProperty>,
+        MORDataProperty.Sub<MORFullDataProperty>,
+        MORDataProperty.Super<MORFullDataProperty>,
+        MORDataProperty.Domain,
+        MORDataProperty.Range{
 
     private MORAxioms.DataLinks disjointProperties = new MORAxioms.DataLinks();
     private MORAxioms.DataLinks equivalentProperties = new MORAxioms.DataLinks();
@@ -112,12 +115,8 @@ public class MORFullDataProperty
 
     // implementations for MORDataProperty.Disjoint
 
-    @Override @SuppressWarnings("unchecked")// returns a set with elements of the same type of getNewDisjointDataProperty()
-    public Set<MORFullDataProperty> buildDisjointDataProperty() {
-        return MORDataProperty.Disjoint.super.buildDisjointDataProperty();
-    }
 
-    @Override @SuppressWarnings("unchecked")// you can change the returning type to any implementations of MORDataProperty
+    @Override // you can change the returning type to any implementations of MORDataProperty
     public MORFullDataProperty getNewDisjointDataProperty(OWLDataProperty instance, OWLReferences ontology) {
         return new MORFullDataProperty( instance, ontology);
     }
@@ -131,12 +130,12 @@ public class MORFullDataProperty
 
     // implementations for MORDataProperty.Equivalent
 
-    @Override @SuppressWarnings("unchecked")// returns a set with elements of the same type of getNewDisjointDataProperty()
+    @Override // returns a set with elements of the same type of getNewDisjointDataProperty()
     public Set<MORFullDataProperty> buildEquivalentDataProperty() {
         return MORDataProperty.Equivalent.super.buildEquivalentDataProperty();
     }
 
-    @Override @SuppressWarnings("unchecked")// you can change the returning type to any implementations of MORDataProperty
+    @Override // you can change the returning type to any implementations of MORDataProperty
     public MORFullDataProperty getNewEquivalentDataProperty(OWLDataProperty instance, OWLReferences ontology) {
         return new MORFullDataProperty( instance, ontology);
     }
@@ -168,12 +167,12 @@ public class MORFullDataProperty
 
     // implementations for MORDataProperty.Super
 
-    @Override @SuppressWarnings("unchecked")// returns a set with elements  of the same type of getNewSubDataProperty()
+    @Override // returns a set with elements  of the same type of getNewSubDataProperty()
     public Set<MORFullDataProperty> buildSubDataProperty() {
         return MORDataProperty.Sub.super.buildSubDataProperty();
     }
 
-    @Override @SuppressWarnings("unchecked")// you can change the returning type to any implementations of MORDataProperty
+    @Override // you can change the returning type to any implementations of MORDataProperty
     public MORFullDataProperty getNewSubDataProperty(OWLDataProperty instance, OWLReferences ontology) {
         return new MORFullDataProperty( instance, ontology);
     }
@@ -187,12 +186,12 @@ public class MORFullDataProperty
 
     // implementations for MORDataProperty.Super
 
-    @Override @SuppressWarnings("unchecked")// returns a set with elements of the same type of getNewSuperDataProperty()
+    @Override // returns a set with elements of the same type of getNewSuperDataProperty()
     public Set<MORFullDataProperty> buildSuperDataProperty() {
         return MORDataProperty.Super.super.buildSuperDataProperty();
     }
 
-    @Override @SuppressWarnings("unchecked")// you can change the returning type to any implementations of MORDataProperty
+    @Override // you can change the returning type to any implementations of MORDataProperty
     public MORFullDataProperty getNewSuperDataProperty(OWLDataProperty instance, OWLReferences ontology) {
         return new MORFullDataProperty( instance, ontology);
     }

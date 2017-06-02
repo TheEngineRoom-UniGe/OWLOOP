@@ -6,9 +6,6 @@ import it.emarolab.amor.owlInterface.SemanticRestriction;
 import it.emarolab.owloop.aMORDescriptor.MORAxioms;
 import it.emarolab.owloop.aMORDescriptor.MORObjectProperty;
 import it.emarolab.owloop.aMORDescriptor.utility.MORObjectPropertyBase;
-import it.emarolab.owloop.aMORDescriptor.utility.objectProperty.MORDefinitionObjectProperty;
-import it.emarolab.owloop.aMORDescriptor.utility.objectProperty.MORDomainObjectProperty;
-import it.emarolab.owloop.aMORDescriptor.utility.objectProperty.MORHierarchicalObjectProperty;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
 
 import java.util.List;
@@ -45,9 +42,13 @@ import java.util.Set;
  */
 public class MORFullObjectProperty
         extends MORObjectPropertyBase
-        implements MORObjectProperty.Disjoint, MORObjectProperty.Equivalent, MORObjectProperty.Inverse,
-        MORObjectProperty.Domain, MORObjectProperty.Range,
-        MORObjectProperty.Sub, MORObjectProperty.Super{
+        implements MORObjectProperty.Disjoint<MORFullObjectProperty>,
+        MORObjectProperty.Equivalent<MORFullObjectProperty>,
+        MORObjectProperty.Inverse<MORFullObjectProperty>,
+        MORObjectProperty.Sub<MORFullObjectProperty>,
+        MORObjectProperty.Super<MORFullObjectProperty>,
+        MORObjectProperty.Domain,
+        MORObjectProperty.Range{
 
     private MORAxioms.ObjectLinks disjointProperties = new MORAxioms.ObjectLinks();
     private MORAxioms.ObjectLinks equivalentProperties = new MORAxioms.ObjectLinks();
@@ -117,12 +118,12 @@ public class MORFullObjectProperty
 
     // implementations for MORObjectProperty.Disjoint
 
-    @Override @SuppressWarnings("unchecked")// returns a set with elements of the same type of getNewDisjointObjectProperty()
+    @Override // returns a set with elements of the same type of getNewDisjointObjectProperty()
     public Set<MORFullObjectProperty> buildDisjointObjectProperty() {
         return Disjoint.super.buildDisjointObjectProperty();
     }
 
-    @Override @SuppressWarnings("unchecked")// you can change the returning type to any implementations of MORObjectProperty
+    @Override // you can change the returning type to any implementations of MORObjectProperty
     public MORFullObjectProperty getNewDisjointObjectProperty(OWLObjectProperty instance, OWLReferences ontology) {
         return new MORFullObjectProperty( instance, ontology);
     }
@@ -136,12 +137,12 @@ public class MORFullObjectProperty
 
     // implementations for MORObjectProperty.Equivalent
 
-    @Override @SuppressWarnings("unchecked")// returns a set with elements of the same type of getNewDisjointObjectProperty()
+    @Override // returns a set with elements of the same type of getNewDisjointObjectProperty()
     public Set<MORFullObjectProperty> buildEquivalentObjectProperty() {
         return Equivalent.super.buildEquivalentObjectProperty();
     }
 
-    @Override @SuppressWarnings("unchecked")// you can change the returning type to any implementations of MORObjectProperty
+    @Override // you can change the returning type to any implementations of MORObjectProperty
     public MORFullObjectProperty getNewEquivalentObjectProperty(OWLObjectProperty instance, OWLReferences ontology) {
         return new MORFullObjectProperty( instance, ontology);
     }
@@ -173,12 +174,12 @@ public class MORFullObjectProperty
 
     // implementations for MORObjectProperty.Super
 
-    @Override @SuppressWarnings("unchecked")// returns a set with elements  of the same type of getNewSubObjectProperty()
+    @Override // returns a set with elements  of the same type of getNewSubObjectProperty()
     public Set<MORFullObjectProperty> buildSubObjectProperty() {
         return Sub.super.buildSubObjectProperty();
     }
 
-    @Override @SuppressWarnings("unchecked")// you can change the returning type to any implementations of MORObjectProperty
+    @Override // you can change the returning type to any implementations of MORObjectProperty
     public MORFullObjectProperty getNewSubObjectProperty(OWLObjectProperty instance, OWLReferences ontology) {
         return new MORFullObjectProperty( instance, ontology);
     }
@@ -192,12 +193,12 @@ public class MORFullObjectProperty
 
     // implementations for MORObjectProperty.Super
 
-    @Override @SuppressWarnings("unchecked")// returns a set with elements of the same type of getNewSuperObjectProperty()
+    @Override // returns a set with elements of the same type of getNewSuperObjectProperty()
     public Set<MORFullObjectProperty> buildSuperObjectProperty() {
         return Super.super.buildSuperObjectProperty();
     }
 
-    @Override @SuppressWarnings("unchecked")// you can change the returning type to any implementations of MORObjectProperty
+    @Override // you can change the returning type to any implementations of MORObjectProperty
     public MORFullObjectProperty getNewSuperObjectProperty(OWLObjectProperty instance, OWLReferences ontology) {
         return new MORFullObjectProperty( instance, ontology);
     }
@@ -212,12 +213,12 @@ public class MORFullObjectProperty
 
     // implementations for MORObjectProperty.Inverse
 
-    @Override @SuppressWarnings("unchecked")// returns a set with elements of the same type of getNewInverseObjectProperty()
+    @Override // returns a set with elements of the same type of getNewInverseObjectProperty()
     public Set<MORFullObjectProperty> buildInverseObjectProperty() {
         return Inverse.super.buildInverseObjectProperty();
     }
 
-    @Override @SuppressWarnings("unchecked")// you can change the returning type to any implementations of MORObjectProperty
+    @Override // you can change the returning type to any implementations of MORObjectProperty
     public MORFullObjectProperty getNewInverseObjectProperty(OWLObjectProperty instance, OWLReferences ontology) {
         return new MORFullObjectProperty( instance, ontology);
     }

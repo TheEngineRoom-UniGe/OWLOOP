@@ -40,36 +40,36 @@ import java.util.Set;
  * <b>date</b>:        21/05/17 <br>
  * </small></div>
  */
-public class MORTypeIndinvidual
+public class MORTypeIndividual
         extends MORIndividualBase
-        implements MORIndividual.Type{
+        implements MORIndividual.Type<MORHierarchicalConcept>{
 
     private MORAxioms.Concepts individualTypes = new MORAxioms.Concepts();
 
     // constructors for MORIndividualBase
 
-    public MORTypeIndinvidual(OWLNamedIndividual instance, OWLReferences onto) {
+    public MORTypeIndividual(OWLNamedIndividual instance, OWLReferences onto) {
         super(instance, onto);
     }
-    public MORTypeIndinvidual(String instanceName, OWLReferences onto) {
+    public MORTypeIndividual(String instanceName, OWLReferences onto) {
         super(instanceName, onto);
     }
-    public MORTypeIndinvidual(OWLNamedIndividual instance, String ontoName) {
+    public MORTypeIndividual(OWLNamedIndividual instance, String ontoName) {
         super(instance, ontoName);
     }
-    public MORTypeIndinvidual(OWLNamedIndividual instance, String ontoName, String filePath, String iriPath) {
+    public MORTypeIndividual(OWLNamedIndividual instance, String ontoName, String filePath, String iriPath) {
         super(instance, ontoName, filePath, iriPath);
     }
-    public MORTypeIndinvidual(OWLNamedIndividual instance, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
+    public MORTypeIndividual(OWLNamedIndividual instance, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
         super(instance, ontoName, filePath, iriPath, bufferingChanges);
     }
-    public MORTypeIndinvidual(String instanceName, String ontoName) {
+    public MORTypeIndividual(String instanceName, String ontoName) {
         super(instanceName, ontoName);
     }
-    public MORTypeIndinvidual(String instanceName, String ontoName, String filePath, String iriPath) {
+    public MORTypeIndividual(String instanceName, String ontoName, String filePath, String iriPath) {
         super(instanceName, ontoName, filePath, iriPath);
     }
-    public MORTypeIndinvidual(String instanceName, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
+    public MORTypeIndividual(String instanceName, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
         super(instanceName, ontoName, filePath, iriPath, bufferingChanges);
     }
 
@@ -90,13 +90,13 @@ public class MORTypeIndinvidual
 
     // implementations for MORIndividual.Type
 
-    @Override @SuppressWarnings("unchecked") // returns a set with elements of the same type of getNewTypeIndividual()
+    @Override  // returns a set with elements of the same type of getNewTypeIndividual()
     public Set<MORHierarchicalConcept> buildTypeIndividual() {
         return MORIndividual.Type.super.buildTypeIndividual();
     }
 
-    @Override @SuppressWarnings("unchecked")// you can change the returning type to any implementations of MORConcept
-    public MORHierarchicalConcept getNewTypeIndividual(OWLClass instance, OWLReferences ontology) {
+    @Override // you can change the returning type to any implementations of MORConcept
+    public MORHierarchicalConcept  getNewTypeIndividual(OWLClass instance, OWLReferences ontology) {
         return new MORHierarchicalConcept( instance, ontology);
     }
 

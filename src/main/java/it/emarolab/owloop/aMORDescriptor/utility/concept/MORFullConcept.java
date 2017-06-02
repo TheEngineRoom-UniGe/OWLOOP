@@ -43,8 +43,12 @@ import java.util.Set;
  */
 public class MORFullConcept
         extends MORConceptBase
-        implements MORConcept.Define, MORConcept.Disjoint, MORConcept.Equivalent,
-        MORConcept.Sub, MORConcept.Super, MORConcept.Classify {
+        implements MORConcept.Define,
+        MORConcept.Disjoint<MORFullConcept>,
+        MORConcept.Equivalent<MORFullConcept>,
+        MORConcept.Sub<MORFullConcept>,
+        MORConcept.Super<MORFullConcept>,
+        MORConcept.Classify<MORLinkIndividual> {
 
     private MORAxioms.Concepts disjointConcept = new MORAxioms.Concepts();
     private MORAxioms.Concepts equivalentConcept = new MORAxioms.Concepts();
@@ -112,12 +116,12 @@ public class MORFullConcept
 
     // implementations for MORConcept.Disjoint
 
-    @Override @SuppressWarnings("unchecked") // returns a set with elements of the same type of getNewDisjointConcept()
+    @Override  // returns a set with elements of the same type of getNewDisjointConcept()
     public Set<MORFullConcept> buildDisjointConcept() {
         return MORConcept.Disjoint.super.buildDisjointConcept();
     }
 
-    @Override @SuppressWarnings("unchecked")// you can change the returning type to any implementations of MORConcept
+    @Override // you can change the returning type to any implementations of MORConcept
     public MORFullConcept getNewDisjointConcept(OWLClass instance, OWLReferences ontology) {
         return new MORFullConcept( instance, ontology);
     }
@@ -131,12 +135,12 @@ public class MORFullConcept
 
     // implementations for MORConcept.Equivalent
 
-    @Override @SuppressWarnings("unchecked")// returns a set with elements of the same type of getNewDisjointConcept()
+    @Override // returns a set with elements of the same type of getNewDisjointConcept()
     public Set<MORFullConcept> buildEquivalentConcept() {
         return MORConcept.Equivalent.super.buildEquivalentConcept();
     }
 
-    @Override @SuppressWarnings("unchecked")// you can change the returning type to any implementations of MORConcept
+    @Override // you can change the returning type to any implementations of MORConcept
     public MORFullConcept getNewEquivalentConcept(OWLClass instance, OWLReferences ontology) {
         return new MORFullConcept( instance, ontology);
     }
@@ -159,12 +163,12 @@ public class MORFullConcept
 
     // implementations for MORConcept.Super
 
-    @Override @SuppressWarnings("unchecked")// returns a set with elements  of the same type of getNewSubConcept()
+    @Override // returns a set with elements  of the same type of getNewSubConcept()
     public Set<MORFullConcept> buildSubConcept() {
         return MORConcept.Sub.super.buildSubConcept();
     }
 
-    @Override @SuppressWarnings("unchecked")// you can change the returning type to any implementations of MORConcept
+    @Override // you can change the returning type to any implementations of MORConcept
     public MORFullConcept getNewSubConcept(OWLClass instance, OWLReferences ontology) {
         return new MORFullConcept( instance, ontology);
     }
@@ -178,12 +182,12 @@ public class MORFullConcept
 
     // implementations for MORConcept.Super
 
-    @Override @SuppressWarnings("unchecked")// returns a set with elements of the same type of getNewSuperConcept()
+    @Override // returns a set with elements of the same type of getNewSuperConcept()
     public Set<MORFullConcept> buildSuperConcept() {
         return MORConcept.Super.super.buildSuperConcept();
     }
 
-    @Override @SuppressWarnings("unchecked")// you can change the returning type to any implementations of MORConcept
+    @Override // you can change the returning type to any implementations of MORConcept
     public MORFullConcept getNewSuperConcept(OWLClass instance, OWLReferences ontology) {
         return new MORFullConcept( instance, ontology);
     }
@@ -196,12 +200,12 @@ public class MORFullConcept
 
     // implementations for MORConcept.Classifier
 
-    @Override @SuppressWarnings("unchecked")// returns a set with elements of the same type of getNewIndividualClassified()
+    @Override // returns a set with elements of the same type of getNewIndividualClassified()
     public Set<MORLinkIndividual> buildIndividualClassified() {
         return MORConcept.Classify.super.buildIndividualClassified();
     }
 
-    @Override @SuppressWarnings("unchecked")// you can change the returning type to any implementations of MORConcept
+    @Override // you can change the returning type to any implementations of MORConcept
     public MORLinkIndividual getNewIndividualClassified(OWLNamedIndividual instance, OWLReferences ontology) {
         return new MORLinkIndividual( instance, ontology);
     }

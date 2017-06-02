@@ -60,7 +60,7 @@ abstract public class MORConceptBase
             return new ConceptInstance( ontology, ontology.getOWLClass( instance));
     }
 
-    @Override @SuppressWarnings("unchecked")
+    @Override
     public ConceptInstance getGround() {
         return (ConceptInstance) super.getGround();
     }

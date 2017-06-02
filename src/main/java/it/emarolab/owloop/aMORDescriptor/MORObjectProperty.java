@@ -4,7 +4,10 @@ import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.amor.owlInterface.SemanticRestriction;
 import it.emarolab.amor.owlInterface.SemanticRestriction.*;
 import it.emarolab.owloop.core.ObjectProperty;
-import org.semanticweb.owlapi.model.*;
+import org.semanticweb.owlapi.model.OWLClass;
+import org.semanticweb.owlapi.model.OWLDataProperty;
+import org.semanticweb.owlapi.model.OWLObjectProperty;
+import org.semanticweb.owlapi.model.OWLOntologyChange;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -132,9 +135,12 @@ public interface MORObjectProperty
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
      * <b>date</b>:        21/05/17 <br>
      * </small></div>
+     *
+     * @param <D> the type of the {@link MORObjectProperty} descriptor instantiated during
+     *           {@link #buildInverseObjectProperty()} through {@link #getNewInverseObjectProperty(Object, Object)}.
      */
-    interface Inverse
-            extends ObjectProperty.Inverse<OWLReferences, OWLObjectProperty>,
+    interface Inverse<D extends MORObjectProperty>
+            extends ObjectProperty.Inverse<OWLReferences, OWLObjectProperty,D>,
             MORObjectProperty {
 
         /**
@@ -220,9 +226,12 @@ public interface MORObjectProperty
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
      * <b>date</b>:        21/05/17 <br>
      * </small></div>
+     *
+     * @param <D> the type of the {@link MORObjectProperty} descriptor instantiated during
+     *           {@link #buildDisjointObjectProperty()} through {@link #getNewDisjointObjectProperty(Object, Object)}.
      */
-    interface Disjoint
-            extends ObjectProperty.Disjoint<OWLReferences, OWLObjectProperty>,
+    interface Disjoint<D extends MORObjectProperty>
+            extends ObjectProperty.Disjoint<OWLReferences, OWLObjectProperty,D>,
             MORObjectProperty {
 
         /**
@@ -316,9 +325,12 @@ public interface MORObjectProperty
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
      * <b>date</b>:        21/05/17 <br>
      * </small></div>
+     *
+     * @param <D> the type of the {@link MORObjectProperty} descriptor instantiated during
+     *           {@link #buildEquivalentObjectProperty()} through {@link #getNewEquivalentObjectProperty(Object, Object)}.
      */
-    interface Equivalent
-            extends ObjectProperty.Equivalent<OWLReferences, OWLObjectProperty>,
+    interface Equivalent<D extends MORObjectProperty>
+            extends ObjectProperty.Equivalent<OWLReferences, OWLObjectProperty,D>,
             MORObjectProperty {
 
         /**
@@ -412,9 +424,12 @@ public interface MORObjectProperty
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
      * <b>date</b>:        21/05/17 <br>
      * </small></div>
+     *
+     * @param <D> the type of the {@link MORObjectProperty} descriptor instantiated during
+     *           {@link #buildSubObjectProperty()}  through {@link #getSubObjectProperty()}.
      */
-    interface Sub
-            extends ObjectProperty.Sub<OWLReferences, OWLObjectProperty>,
+    interface Sub<D extends MORObjectProperty>
+            extends ObjectProperty.Sub<OWLReferences, OWLObjectProperty,D>,
             MORObjectProperty {
 
         /**
@@ -499,9 +514,12 @@ public interface MORObjectProperty
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
      * <b>date</b>:        21/05/17 <br>
      * </small></div>
+     *
+     * @param <D> the type of the {@link MORObjectProperty} descriptor instantiated during
+     *           {@link #buildSuperObjectProperty()}  through {@link #getSuperObjectProperty()}.
      */
-    interface Super
-            extends ObjectProperty.Super<OWLReferences, OWLObjectProperty>,
+    interface Super<D extends MORObjectProperty>
+            extends ObjectProperty.Super<OWLReferences, OWLObjectProperty, D>,
             MORObjectProperty {
 
 

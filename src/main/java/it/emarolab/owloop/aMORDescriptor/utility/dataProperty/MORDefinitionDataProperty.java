@@ -39,7 +39,8 @@ import java.util.Set;
  */
 public class MORDefinitionDataProperty
         extends MORDataPropertyBase
-        implements MORDataProperty.Disjoint, MORDataProperty.Equivalent {
+        implements MORDataProperty.Disjoint<MORDefinitionDataProperty>,
+        MORDataProperty.Equivalent<MORDefinitionDataProperty> {
 
     private MORAxioms.DataLinks disjointProperties = new MORAxioms.DataLinks();
     private MORAxioms.DataLinks equivalentProperties = new MORAxioms.DataLinks();
@@ -93,12 +94,12 @@ public class MORDefinitionDataProperty
 
     // implementations for MORDataProperty.Disjoint
 
-    @Override @SuppressWarnings("unchecked")// returns a set with elements of the same type of getNewDisjointDataProperty()
+    @Override // returns a set with elements of the same type of getNewDisjointDataProperty()
     public Set<MORDefinitionDataProperty> buildDisjointDataProperty() {
         return MORDataProperty.Disjoint.super.buildDisjointDataProperty();
     }
 
-    @Override @SuppressWarnings("unchecked")// you can change the returning type to any implementations of MORDataProperty
+    @Override  // you can change the returning type to any implementations of MORDataProperty
     public MORDefinitionDataProperty getNewDisjointDataProperty(OWLDataProperty instance, OWLReferences ontology) {
         return new MORDefinitionDataProperty( instance, ontology);
     }
@@ -112,12 +113,12 @@ public class MORDefinitionDataProperty
 
     // implementations for MORDataProperty.Equivalent
 
-    @Override @SuppressWarnings("unchecked")// returns a set with elements of the same type of getNewDisjointDataProperty()
+    @Override // returns a set with elements of the same type of getNewDisjointDataProperty()
     public Set<MORDefinitionDataProperty> buildEquivalentDataProperty() {
         return MORDataProperty.Equivalent.super.buildEquivalentDataProperty();
     }
 
-    @Override @SuppressWarnings("unchecked")// you can change the returning type to any implementations of MORDataProperty
+    @Override // you can change the returning type to any implementations of MORDataProperty
     public MORDefinitionDataProperty getNewEquivalentDataProperty(OWLDataProperty instance, OWLReferences ontology) {
         return new MORDefinitionDataProperty( instance, ontology);
     }

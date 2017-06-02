@@ -58,8 +58,10 @@ public interface Individual<O,J>
      * @param <J> the type of the described individual.
      * @param <Y> the type of classes describing the individual
      *           (it represents the type of {@link Semantic.Axioms} managed by this {@link Descriptor}.
+     * @param <D> the type of the {@link Concept} descriptors instantiated during
+     *           {@link #buildTypeIndividual()} through {@link #getNewTypeIndividual(Object, Object)}.
      */
-    interface Type<O,J,Y>
+    interface Type<O,J,Y,D extends Concept<O,Y>>
             extends Individual<O,J>{
 
         @Override // see documentation on Semantic.Descriptor.readSemantic
@@ -83,15 +85,14 @@ public interface Individual<O,J>
          * Each of {@link Concept}s are instantiated
          * through the method {@link #getNewTypeIndividual(Object, Object)};
          * this is called for all {@link #getTypeIndividual()}.
-         * @param <C> the type of {@link Concept} returned.
          * @return the set of {@link Concept}s that describes the
          * entities in which {@code this} described ontological individual
          * is belonging to.
          */
-        default <C extends Concept> Set< C> buildTypeIndividual(){
-            Set<C> out = new HashSet<>();
+        default Set<D> buildTypeIndividual(){
+            Set<D> out = new HashSet<>();
             for( Y cl : getTypeIndividual()){
-                C built = getNewTypeIndividual( cl, getOntology());
+                D built = getNewTypeIndividual( cl, getOntology());
                 built.readSemantic();
                 out.add( built);
             }
@@ -104,11 +105,10 @@ public interface Individual<O,J>
          * the types of {@code this} {@link Individual} {@link Descriptor}.
          * @param instance the instance to ground the new {@link Concept}.
          * @param ontology the ontology in which ground the new {@link Concept}.
-         * @param <C> the type of the {@link Concept} instantiated.
          * @return a new {@link Semantic.Descriptor} for all the classes
          * in which {@code this} individual is belonging to.
          */
-        <C extends Concept> C getNewTypeIndividual(Y instance, O ontology);
+        D getNewTypeIndividual(Y instance, O ontology);
 
         /**
          * Returns the {@link Semantic.Axioms} that describes all the classes in which
@@ -176,8 +176,10 @@ public interface Individual<O,J>
      * @param <O> the type of ontology in which the axioms for classes will be applied.
      * @param <J> the type of the described individual.
      *           (it also represents the type of {@link Semantic.Axioms} managed by this {@link Descriptor}.
+     * @param <D> the type of the {@link Individual} descriptors instantiated during
+     *           {@link #buildDisjointIndividual()} through {@link #getNewDisjointIndividual(Object, Object)}.
      */
-    interface Disjoint<O,J>
+    interface Disjoint<O,J,D extends Individual<O,J>>
             extends Individual<O,J>{
 
         @Override // see documentation on Semantic.Descriptor.readSemantic
@@ -201,14 +203,13 @@ public interface Individual<O,J>
          * Each of {@link Individual}s are instantiated
          * through the method {@link #getNewDisjointIndividual(Object, Object)};
          * this is called for all {@link #getDisjointIndividual()}.
-         * @param <C> the type of {@link Individual} returned.
          * @return the set of {@link Individual}s that describes the
          * entities that are different from {@code this} described ontological individual.
          */
-        default <C extends Individual> Set< C> buildDisjointIndividual(){
-            Set<C> out = new HashSet<>();
+        default Set<D> buildDisjointIndividual(){
+            Set<D> out = new HashSet<>();
             for( J cl : getDisjointIndividual()){
-                C built = getNewDisjointIndividual( cl, getOntology());
+                D built = getNewDisjointIndividual( cl, getOntology());
                 built.readSemantic();
                 out.add( built);
             }
@@ -221,11 +222,10 @@ public interface Individual<O,J>
          * an equivalent individual from {@code this} {@link Individual} {@link Descriptor}.
          * @param instance the instance to ground the new {@link Individual}.
          * @param ontology the ontology in which ground the new {@link Individual}.
-         * @param <C> the type of the {@link Individual} instantiated.
          * @return a new {@link Semantic.Descriptor} for all the individuals
          * that are equivalent from the one described by {@code this} interface.
          */
-        <C extends Individual> C getNewDisjointIndividual(J instance, O ontology);
+        D getNewDisjointIndividual(J instance, O ontology);
 
         /**
          * Returns the {@link Semantic.Axioms} that describes all the different individual from
@@ -293,8 +293,10 @@ public interface Individual<O,J>
      * @param <O> the type of ontology in which the axioms for classes will be applied.
      * @param <J> the type of the described individual.
      *           (it also represents the type of {@link Semantic.Axioms} managed by this {@link Descriptor}.
+     * @param <D> the type of the {@link Individual} descriptors instantiated during
+     *           {@link #buildEquivalentIndividual()} through {@link #getNewEquivalentIndividual(Object, Object)}.
      */
-    interface Equivalent<O,J>
+    interface Equivalent<O,J,D extends Individual<O,J>>
             extends Individual<O,J>{
 
         @Override // see documentation on Semantic.Descriptor.readSemantic
@@ -316,14 +318,13 @@ public interface Individual<O,J>
          * Each of {@link Individual}s are instantiated
          * through the method {@link #getNewEquivalentIndividual(Object, Object)};
          * this is called for all {@link #getEquivalentIndividual()}.
-         * @param <C> the type of {@link Individual} returned.
          * @return the set of {@link Individual}s that describes the
          * entities that are equivalent from {@code this} described ontological individual.
          */
-        default <C extends Individual> Set< C> buildEquivalentIndividual(){
-            Set<C> out = new HashSet<>();
+        default Set<D> buildEquivalentIndividual(){
+            Set<D> out = new HashSet<>();
             for( J cl : getEquivalentIndividual()){
-                C built = getNewEquivalentIndividual( cl, getOntology());
+                D built = getNewEquivalentIndividual( cl, getOntology());
                 built.readSemantic();
                 out.add( built);
             }
@@ -336,11 +337,10 @@ public interface Individual<O,J>
          * a different individual from {@code this} {@link Individual} {@link Descriptor}.
          * @param instance the instance to ground the new {@link Individual}.
          * @param ontology the ontology in which ground the new {@link Individual}.
-         * @param <C> the type of the {@link Individual} instantiated.
          * @return a new {@link Semantic.Descriptor} for all the individuals
          * that are different from the one described by {@code this} interface.
          */
-        <C extends Individual> C getNewEquivalentIndividual(J instance, O ontology);
+        D getNewEquivalentIndividual(J instance, O ontology);
 
         /**
          * Returns the {@link Semantic.Axioms} that describes all the equivalent individual from
@@ -412,9 +412,12 @@ public interface Individual<O,J>
      *
      * @param <O> the type of ontology in which the axioms for classes will be applied.
      * @param <J> the type of the described individual.
-     * @param <Y> the type of {@link SemanticAxioms} synchronised by this descriptor (i.e.: data properties)
+     * @param <Y> the type of {@link SemanticAxiom} synchronised by this descriptor
+     * @param <S> the type of semantic described by this class (i.e.: {@code OWLDataProperty})
+     * @param <D> the type of the {@link DataProperty} descriptors instantiated during
+     *           {@link #buildDataIndividual()} through {@link #getNewDataIndividual(SemanticAxiom, Object)}.
      */
-    interface DataLink<O,J,Y>
+    interface DataLink<O,J,Y extends SemanticAxiom<S,?>, S,D extends DataProperty<O, S>>
             extends Individual<O,J>{
 
         @Override // see documentation on Semantic.Descriptor.readSemantic
@@ -436,16 +439,15 @@ public interface Individual<O,J>
          * Create an {@link Semantic.Descriptor} set where each element
          * represents the specified data properties applied to this {@code this} description.
          * Each of {@link DataProperty}s are instantiated
-         * through the method {@link #getNewDataIndividual(Object, Object)};
+         * through the method {@link #getNewDataIndividual(SemanticAxiom, Object)};
          * this is called for all {@link #getDataIndividual()}.
-         * @param <C> the type of {@link DataProperty} returned.
          * @return the set of {@link DataProperty}s that describes the
          * entities that are applied to {@code this} described ontological individual.
          */
-        default <C extends DataProperty> Set< C> buildDataIndividual(){
-            Set<C> out = new HashSet<>();
+        default Set<D> buildDataIndividual(){
+            Set<D> out = new HashSet<>();
             for( Y cl : getDataIndividual()){
-                C built = getNewDataIndividual( cl, getOntology());
+                D built = getNewDataIndividual( cl, getOntology());
                 built.readSemantic();
                 out.add( built);
             }
@@ -458,27 +460,24 @@ public interface Individual<O,J>
          * a data value applied to {@code this} {@link Individual} {@link Descriptor}.
          * @param instance the instance to ground the new {@link DataLink}.
          * @param ontology the ontology in which ground the new {@link DataProperty}.
-         * @param <C> the type of the {@link DataProperty} instantiated.
          * @return a new {@link Semantic.Descriptor} for all the data properties
          * that are applied to {@code this} interface.
          */
-        <C extends DataProperty> C getNewDataIndividual(Y instance, O ontology);
+        D getNewDataIndividual(Y instance, O ontology);
 
         /**
          * Returns the {@link Semantic.Axioms} that describes the specified data properties applied to
          * {@code this} {@link Individual}; from a no OOP point of view.
-         * @param <W> the type of {@link SemanticAxioms} returned.
          * @return the entities describing the data properties of {@code this} individual.
          */
-        <W extends Axioms<Y>> W getDataIndividual();
+        Axioms<Y> getDataIndividual();
 
         /**
          * Queries to the OWL representation for the data properties applied to {@code this} {@link Descriptor}.
-         * @param <W> the type of {@link SemanticAxioms} returned.
          * @return a new {@link SemanticAxioms} contained the data properties of {@link #getInstance()};
          * into the OWL structure.
          */
-        <W extends Axioms<Y>> W queryDataIndividual();
+        Axioms<Y> queryDataIndividual();
 
         /**
          * It calls {@link SemanticAxioms#synchroniseTo(Axioms)} with {@link #queryDataIndividual()}
@@ -536,9 +535,12 @@ public interface Individual<O,J>
      *
      * @param <O> the type of ontology in which the axioms for classes will be applied.
      * @param <J> the type of the described individual.
-     * @param <Y> the type of {@link SemanticAxiom} synchronised by this descriptor (i.e.: object properties).
+     * @param <Y> the type of {@link SemanticAxiom} synchronised by this descriptor
+     * @param <S> the type of semantic described by this class (i.e.: {@code OWLObjectProperty})
+     * @param <D> the type of the {@link DataProperty} descriptors instantiated during
+     *           {@link #buildObjectIndividual()} through {@link #getNewObjectIndividual(SemanticAxiom, Object)}.
      */
-    interface ObjectLink<O,J,Y>
+    interface ObjectLink<O,J,Y extends SemanticAxiom<S,?>, S,D extends ObjectProperty<O, S>>
             extends Individual<O,J>{
 
         @Override // see documentation on Semantic.Descriptor.readSemantic
@@ -560,16 +562,15 @@ public interface Individual<O,J>
          * Create an {@link Semantic.Descriptor} set where each element
          * represents the specified object properties applied to this {@code this} description.
          * Each of {@link ObjectProperty}s are instantiated
-         * through the method {@link #getNewObjectIndividual(Object, Object)};
+         * through the method {@link #getNewObjectIndividual(SemanticAxiom, Object)};
          * this is called for all {@link #getObjectIndividual()}.
-         * @param <C> the type of {@link ObjectProperty} returned.
          * @return the set of {@link ObjectProperty}s that describes the
          * entities that are applied to {@code this} described ontological individual.
          */
-        default <C extends ObjectProperty> Set< C> buildObjectIndividual(){
-            Set<C> out = new HashSet<>();
+        default Set< D> buildObjectIndividual(){
+            Set<D> out = new HashSet<>();
             for( Y cl : getObjectIndividual()){
-                C built = getNewObjectIndividual( cl, getOntology());
+                D built = getNewObjectIndividual( cl, getOntology());
                 built.readSemantic();
                 out.add( built);
             }
@@ -582,27 +583,24 @@ public interface Individual<O,J>
          * an object value applied to {@code this} {@link Individual} {@link Descriptor}.
          * @param instance the instance to ground the new {@link ObjectProperty}.
          * @param ontology the ontology in which ground the new {@link ObjectProperty}.
-         * @param <C> the type of the {@link ObjectProperty} instantiated.
          * @return a new {@link Semantic.Descriptor} for all the object properties
          * that are applied to {@code this} interface.
          */
-        <C extends ObjectProperty> C getNewObjectIndividual(Y instance, O ontology);
+        D getNewObjectIndividual(Y instance, O ontology);
 
         /**
          * Returns the {@link Semantic.Axioms} that describes the specified object properties applied to
          * {@code this} {@link Individual}; from a no OOP point of view.
-         * @param <W> the type of {@link SemanticAxioms} returned.
          * @return the entities describing the object properties of {@code this} individual.
          */
-        <W extends Axioms<Y>> W getObjectIndividual();
+        Axioms<Y> getObjectIndividual();
 
         /**
          * Queries to the OWL representation for the data properties applied to {@code this} {@link Descriptor}.
          * @return a new {@link SemanticAxioms} contained the object properties of {@link #getInstance()};
-         * @param <W> the type of {@link SemanticAxioms} returned.
          * into the OWL structure.
          */
-        <W extends Axioms<Y>> W queryObjectIndividual();
+        Axioms<Y> queryObjectIndividual();
 
         /**
          * It calls {@link SemanticAxioms#synchroniseTo(Axioms)} with {@link #queryObjectIndividual()}

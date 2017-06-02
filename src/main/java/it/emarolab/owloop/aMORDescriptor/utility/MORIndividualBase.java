@@ -50,7 +50,7 @@ abstract public class MORIndividualBase
             return new IndividualInstance( ontology, ontology.getOWLIndividual( instance));
     }
 
-    @Override @SuppressWarnings("unchecked")
+    @Override
     public IndividualInstance getGround() {
         return (IndividualInstance) super.getGround();
     }
