@@ -9,7 +9,6 @@ import it.emarolab.owloop.core.Semantic;
 import org.semanticweb.owlapi.model.OWLClass;
 
 import java.util.List;
-import java.util.Set;
 
 
 /**
@@ -94,12 +93,7 @@ public class MORHierarchicalConcept
 
     // implementations for MORConcept.Super
 
-    @Override // returns a set with elements  of the same type of getNewSubConcept()
-    public Set<MORHierarchicalConcept> buildSubConcept() {
-        return MORConcept.Sub.super.buildSubConcept();
-    }
-
-    @Override // you can change the returning type to any implementations of MORConcept
+    @Override //called during build...() you can change the returning type to any implementations of MORConcept
     public MORHierarchicalConcept getNewSubConcept(OWLClass instance, OWLReferences ontology) {
         return new MORHierarchicalConcept( instance, ontology);
     }
@@ -113,12 +107,7 @@ public class MORHierarchicalConcept
 
     // implementations for MORConcept.Sub
 
-    @Override // returns a set with elements of the same type of getNewSuperConcept()
-    public Set<MORHierarchicalConcept> buildSuperConcept() {
-        return MORConcept.Super.super.buildSuperConcept();
-    }
-
-    @Override // you can change the returning type to any implementations of MORConcept
+    @Override // called during build...() you can change the returning type to any implementations of MORConcept
     public MORHierarchicalConcept getNewSuperConcept(OWLClass instance, OWLReferences ontology) {
         return new MORHierarchicalConcept( instance, ontology);
     }

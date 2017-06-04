@@ -11,7 +11,6 @@ import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 
 import java.util.List;
-import java.util.Set;
 
 
 /**
@@ -107,12 +106,7 @@ public class MORDefinitionConcept
 
     // implementations for MORConcept.Disjoint
 
-    @Override  // returns a set with elements of the same type of getNewDisjointConcept()
-    public Set<MORDefinitionConcept> buildDisjointConcept() {
-        return MORConcept.Disjoint.super.buildDisjointConcept();
-    }
-
-    @Override  // you can change the returning type to any implementations of MORConcept
+    @Override  // called during build...() you can change the returning type to any implementations of MORConcept
     public MORDefinitionConcept getNewDisjointConcept(OWLClass instance, OWLReferences ontology) {
         return new MORDefinitionConcept( instance, ontology);
     }
@@ -126,12 +120,7 @@ public class MORDefinitionConcept
 
     // implementations for MORConcept.Equivalent
 
-    @Override // returns a set with elements of the same type of getNewEquivalentConcept()
-    public Set<MORDefinitionConcept> buildEquivalentConcept() {
-        return MORConcept.Equivalent.super.buildEquivalentConcept();
-    }
-
-    @Override // you can change the returning type to any implementations of MORConcept
+    @Override // called during build...() you can change the returning type to any implementations of MORConcept
     public MORDefinitionConcept getNewEquivalentConcept(OWLClass instance, OWLReferences ontology) {
         return new MORDefinitionConcept( instance, ontology);
     }
@@ -153,12 +142,7 @@ public class MORDefinitionConcept
 
     // implementations for MORConcept.Classifier
 
-    @Override  // returns a set with elements of the same type of getNewIndividualClassified()
-    public Set<MORLinkIndividual> buildIndividualClassified() {
-        return MORConcept.Classify.super.buildIndividualClassified();
-    }
-
-    @Override  // you can change the returning type to any implementations of MORConcept
+    @Override  // called during build...() you can change the returning type to any implementations of MORConcept
     public MORLinkIndividual getNewIndividualClassified(OWLNamedIndividual instance, OWLReferences ontology) {
         return new MORLinkIndividual( instance, ontology);
     }

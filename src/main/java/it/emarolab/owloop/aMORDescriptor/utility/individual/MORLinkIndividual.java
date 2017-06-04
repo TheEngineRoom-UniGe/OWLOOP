@@ -10,7 +10,6 @@ import it.emarolab.owloop.core.Semantic;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * A basic implementation for an individual that has data and object property values.
@@ -97,12 +96,7 @@ public class MORLinkIndividual
 
     // implementations for MORIndividual.ObjectLink
 
-    @Override  // returns a set with elements of the same type of getNewObjectIndividual()
-    public Set<MORFullObjectProperty> buildObjectIndividual() {
-        return MORIndividual.ObjectLink.super.buildObjectIndividual();
-    }
-
-    @Override  // you can change the returning type to any implementations of MORObjectProperty
+    @Override  //called during build...() you can change the returning type to any implementations of MORObjectProperty
     public MORFullObjectProperty getNewObjectIndividual(MORAxioms.ObjectSemantic instance, OWLReferences ontology) {
         return new MORFullObjectProperty( instance.getSemantic(), ontology);
     }
@@ -116,13 +110,7 @@ public class MORLinkIndividual
 
     // implementations for MORIndividual.DataLink
 
-    @Override  // returns a set with elements of the same type of getNewDataIndividual()
-    public Set<MORFullDataProperty> buildDataIndividual() {
-        return MORIndividual.DataLink.super.buildDataIndividual();
-    }
-
-
-    @Override  // you can change the returning type to any implementations of MORDataProperty
+    @Override  //called during build...() you can change the returning type to any implementations of MORDataProperty
     public MORFullDataProperty getNewDataIndividual(MORAxioms.DataSemantic instance, OWLReferences ontology) {
         return new MORFullDataProperty( instance.getSemantic(), ontology);
     }

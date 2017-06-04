@@ -13,7 +13,6 @@ import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 
 import java.util.List;
-import java.util.Set;
 
 
 /**
@@ -117,12 +116,7 @@ public class MORFullIndividual
 
     // implementations for MORIndividual.Disjoint
 
-    @Override // returns a set with elements of the same type of getNewDisjointIndividual()
-    public Set<MORFullIndividual> buildDisjointIndividual() {
-        return MORIndividual.Disjoint.super.buildDisjointIndividual();
-    }
-
-    @Override // you can change the returning type to any implementations of MORIndividual
+    @Override //called during build...() you can change the returning type to any implementations of MORIndividual
     public MORFullIndividual getNewDisjointIndividual(OWLNamedIndividual instance, OWLReferences ontology) {
         return new MORFullIndividual( instance, ontology);
     }
@@ -136,12 +130,7 @@ public class MORFullIndividual
 
     // implementations for MORIndividual.Equivalent
 
-    @Override // returns a set with elements of the same type of getNewEquivalentIndividual()
-    public Set<MORFullIndividual> buildEquivalentIndividual() {
-        return MORIndividual.Equivalent.super.buildEquivalentIndividual();
-    }
-
-    @Override // you can change the returning type to any implementations of MORIndividual
+    @Override //called during build...() you can change the returning type to any implementations of MORIndividual
     public MORFullIndividual getNewEquivalentIndividual(OWLNamedIndividual instance, OWLReferences ontology) {
         return new MORFullIndividual( instance, ontology);
     }
@@ -156,12 +145,7 @@ public class MORFullIndividual
 
     // implementations for MORIndividual.Type
 
-    @Override // returns a set with elements of the same type of getNewTypeIndividual()
-    public Set<MORFullConcept> buildTypeIndividual() {
-        return MORIndividual.Type.super.buildTypeIndividual();
-    }
-
-    @Override // you can change the returning type to any implementations of MORConcept
+    @Override //called during build...() you can change the returning type to any implementations of MORConcept
     public MORFullConcept getNewTypeIndividual(OWLClass instance, OWLReferences ontology) {
         return new MORFullConcept( instance, ontology);
     }
@@ -176,12 +160,7 @@ public class MORFullIndividual
 
     // implementations for MORIndividual.ObjectLink
 
-    @Override // returns a set with elements of the same type of getNewObjectIndividual()
-    public Set<MORFullObjectProperty> buildObjectIndividual() {
-        return MORIndividual.ObjectLink.super.buildObjectIndividual();
-    }
-
-    @Override // you can change the returning type to any implementations of MORObjectProperty
+    @Override //called during build...() you can change the returning type to any implementations of MORObjectProperty
     public MORFullObjectProperty getNewObjectIndividual(MORAxioms.ObjectSemantic instance, OWLReferences ontology) {
         return new MORFullObjectProperty( instance.getSemantic(), ontology);
     }
@@ -195,12 +174,7 @@ public class MORFullIndividual
 
     // implementations for MORIndividual.DataLink
 
-    @Override // returns a set with elements of the same type of getNewDataIndividual()
-    public Set<MORFullDataProperty> buildDataIndividual() {
-        return MORIndividual.DataLink.super.buildDataIndividual();
-    }
-
-    @Override // you can change the returning type to any implementations of MORDataProperty
+    @Override //called during build...() you can change the returning type to any implementations of MORDataProperty
     public MORFullDataProperty getNewDataIndividual(MORAxioms.DataSemantic instance, OWLReferences ontology) {
         return new MORFullDataProperty( instance.getSemantic(), ontology);
     }

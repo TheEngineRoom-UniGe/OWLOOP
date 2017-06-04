@@ -7,7 +7,6 @@ import it.emarolab.owloop.aMORDescriptor.utility.MORObjectPropertyBase;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * A basic implementation for an object property with sub and super properties.
@@ -92,12 +91,7 @@ public class MORHierarchicalObjectProperty
 
     // implementations for MORObjectProperty.Super
 
-    @Override // returns a set with elements  of the same type of getNewSubObjectProperty()
-    public Set<MORHierarchicalObjectProperty> buildSubObjectProperty() {
-        return Sub.super.buildSubObjectProperty();
-    }
-
-    @Override // you can change the returning type to any implementations of MORObjectProperty
+    @Override //called during build...() you can change the returning type to any implementations of MORObjectProperty
     public MORHierarchicalObjectProperty getNewSubObjectProperty(OWLObjectProperty instance, OWLReferences ontology) {
         return new MORHierarchicalObjectProperty( instance, ontology);
     }
@@ -111,12 +105,7 @@ public class MORHierarchicalObjectProperty
 
     // implementations for MORObjectProperty.Super
 
-    @Override  // returns a set with elements of the same type of getNewSuperObjectProperty()
-    public Set<MORHierarchicalObjectProperty> buildSuperObjectProperty() {
-        return Super.super.buildSuperObjectProperty();
-    }
-
-    @Override  // you can change the returning type to any implementations of MORObjectProperty
+    @Override  //called during build...() you can change the returning type to any implementations of MORObjectProperty
     public MORHierarchicalObjectProperty getNewSuperObjectProperty(OWLObjectProperty instance, OWLReferences ontology) {
         return new MORHierarchicalObjectProperty( instance, ontology);
     }

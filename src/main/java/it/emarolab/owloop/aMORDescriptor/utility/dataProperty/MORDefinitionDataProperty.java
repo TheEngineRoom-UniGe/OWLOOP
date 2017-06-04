@@ -8,7 +8,6 @@ import it.emarolab.owloop.core.Semantic;
 import org.semanticweb.owlapi.model.OWLDataProperty;
 
 import java.util.List;
-import java.util.Set;
 
 
 /**
@@ -94,12 +93,7 @@ public class MORDefinitionDataProperty
 
     // implementations for MORDataProperty.Disjoint
 
-    @Override // returns a set with elements of the same type of getNewDisjointDataProperty()
-    public Set<MORDefinitionDataProperty> buildDisjointDataProperty() {
-        return MORDataProperty.Disjoint.super.buildDisjointDataProperty();
-    }
-
-    @Override  // you can change the returning type to any implementations of MORDataProperty
+    @Override  // called during build...()you can change the returning type to any implementations of MORDataProperty
     public MORDefinitionDataProperty getNewDisjointDataProperty(OWLDataProperty instance, OWLReferences ontology) {
         return new MORDefinitionDataProperty( instance, ontology);
     }
@@ -113,12 +107,7 @@ public class MORDefinitionDataProperty
 
     // implementations for MORDataProperty.Equivalent
 
-    @Override // returns a set with elements of the same type of getNewDisjointDataProperty()
-    public Set<MORDefinitionDataProperty> buildEquivalentDataProperty() {
-        return MORDataProperty.Equivalent.super.buildEquivalentDataProperty();
-    }
-
-    @Override // you can change the returning type to any implementations of MORDataProperty
+    @Override // called during build...() you can change the returning type to any implementations of MORDataProperty
     public MORDefinitionDataProperty getNewEquivalentDataProperty(OWLDataProperty instance, OWLReferences ontology) {
         return new MORDefinitionDataProperty( instance, ontology);
     }

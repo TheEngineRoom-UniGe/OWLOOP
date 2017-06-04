@@ -8,7 +8,6 @@ import it.emarolab.owloop.core.Semantic;
 import org.semanticweb.owlapi.model.OWLDataProperty;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * A basic implementation for a data property with sub and super properties.
@@ -93,12 +92,7 @@ public class MORHierarchicalDataProperty
 
     // implementations for MORDataProperty.Super
 
-    @Override // returns a set with elements  of the same type of getNewSubDataProperty()
-    public Set<MORHierarchicalDataProperty> buildSubDataProperty() {
-        return MORDataProperty.Sub.super.buildSubDataProperty();
-    }
-
-    @Override // you can change the returning type to any implementations of MORDataProperty
+    @Override //called during build...() you can change the returning type to any implementations of MORDataProperty
     public MORHierarchicalDataProperty getNewSubDataProperty(OWLDataProperty instance, OWLReferences ontology) {
         return new MORHierarchicalDataProperty( instance, ontology);
     }
@@ -112,12 +106,7 @@ public class MORHierarchicalDataProperty
 
     // implementations for MORDataProperty.Super
 
-    @Override // returns a set with elements of the same type of getNewSuperDataProperty()
-    public Set<MORHierarchicalDataProperty> buildSuperDataProperty() {
-        return MORDataProperty.Super.super.buildSuperDataProperty();
-    }
-
-    @Override // you can change the returning type to any implementations of MORDataProperty
+    @Override //called during build...() you can change the returning type to any implementations of MORDataProperty
     public MORHierarchicalDataProperty getNewSuperDataProperty(OWLDataProperty instance, OWLReferences ontology) {
         return new MORHierarchicalDataProperty( instance, ontology);
     }

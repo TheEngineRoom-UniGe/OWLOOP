@@ -8,7 +8,6 @@ import it.emarolab.owloop.core.Semantic;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 
 import java.util.List;
-import java.util.Set;
 
 
 /**
@@ -94,12 +93,7 @@ public class MORDefinitionIndividual
 
     // implementations for MORIndividual.Disjoint
 
-    @Override // returns a set with elements of the same type of getNewDisjointIndividual()
-    public Set<MORDefinitionIndividual> buildDisjointIndividual() {
-        return MORIndividual.Disjoint.super.buildDisjointIndividual();
-    }
-
-    @Override // you can change the returning type to any implementations of MORIndividual
+    @Override //called during build...() you can change the returning type to any implementations of MORIndividual
     public MORDefinitionIndividual getNewDisjointIndividual(OWLNamedIndividual instance, OWLReferences ontology) {
         return new MORDefinitionIndividual( instance, ontology);
     }
@@ -113,12 +107,7 @@ public class MORDefinitionIndividual
 
     // implementations for MORIndividual.Equivalent
 
-    @Override // returns a set with elements of the same type of getNewEquivalentIndividual()
-    public Set<MORDefinitionIndividual> buildEquivalentIndividual() {
-        return MORIndividual.Equivalent.super.buildEquivalentIndividual();
-    }
-
-    @Override // you can change the returning type to any implementations of MORIndividual
+    @Override //called during build...() you can change the returning type to any implementations of MORIndividual
     public MORDefinitionIndividual getNewEquivalentIndividual(OWLNamedIndividual instance, OWLReferences ontology) {
         return new MORDefinitionIndividual( instance, ontology);
     }

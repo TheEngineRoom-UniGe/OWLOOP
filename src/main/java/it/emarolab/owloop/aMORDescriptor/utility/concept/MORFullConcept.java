@@ -11,7 +11,6 @@ import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * The implementation of all the semantic features of a class.
@@ -116,12 +115,7 @@ public class MORFullConcept
 
     // implementations for MORConcept.Disjoint
 
-    @Override  // returns a set with elements of the same type of getNewDisjointConcept()
-    public Set<MORFullConcept> buildDisjointConcept() {
-        return MORConcept.Disjoint.super.buildDisjointConcept();
-    }
-
-    @Override // you can change the returning type to any implementations of MORConcept
+    @Override // called during build...() you can change the returning type to any implementations of MORConcept
     public MORFullConcept getNewDisjointConcept(OWLClass instance, OWLReferences ontology) {
         return new MORFullConcept( instance, ontology);
     }
@@ -135,12 +129,7 @@ public class MORFullConcept
 
     // implementations for MORConcept.Equivalent
 
-    @Override // returns a set with elements of the same type of getNewDisjointConcept()
-    public Set<MORFullConcept> buildEquivalentConcept() {
-        return MORConcept.Equivalent.super.buildEquivalentConcept();
-    }
-
-    @Override // you can change the returning type to any implementations of MORConcept
+    @Override // called during build...() you can change the returning type to any implementations of MORConcept
     public MORFullConcept getNewEquivalentConcept(OWLClass instance, OWLReferences ontology) {
         return new MORFullConcept( instance, ontology);
     }
@@ -163,12 +152,7 @@ public class MORFullConcept
 
     // implementations for MORConcept.Super
 
-    @Override // returns a set with elements  of the same type of getNewSubConcept()
-    public Set<MORFullConcept> buildSubConcept() {
-        return MORConcept.Sub.super.buildSubConcept();
-    }
-
-    @Override // you can change the returning type to any implementations of MORConcept
+    @Override // called during build...() you can change the returning type to any implementations of MORConcept
     public MORFullConcept getNewSubConcept(OWLClass instance, OWLReferences ontology) {
         return new MORFullConcept( instance, ontology);
     }
@@ -182,12 +166,7 @@ public class MORFullConcept
 
     // implementations for MORConcept.Super
 
-    @Override // returns a set with elements of the same type of getNewSuperConcept()
-    public Set<MORFullConcept> buildSuperConcept() {
-        return MORConcept.Super.super.buildSuperConcept();
-    }
-
-    @Override // you can change the returning type to any implementations of MORConcept
+    @Override // called during build...() you can change the returning type to any implementations of MORConcept
     public MORFullConcept getNewSuperConcept(OWLClass instance, OWLReferences ontology) {
         return new MORFullConcept( instance, ontology);
     }
@@ -200,12 +179,7 @@ public class MORFullConcept
 
     // implementations for MORConcept.Classifier
 
-    @Override // returns a set with elements of the same type of getNewIndividualClassified()
-    public Set<MORLinkIndividual> buildIndividualClassified() {
-        return MORConcept.Classify.super.buildIndividualClassified();
-    }
-
-    @Override // you can change the returning type to any implementations of MORConcept
+    @Override // called during build...() you can change the returning type to any implementations of MORConcept
     public MORLinkIndividual getNewIndividualClassified(OWLNamedIndividual instance, OWLReferences ontology) {
         return new MORLinkIndividual( instance, ontology);
     }

@@ -10,7 +10,6 @@ import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 
 import java.util.List;
-import java.util.Set;
 
 
 /**
@@ -90,12 +89,7 @@ public class MORTypeIndividual
 
     // implementations for MORIndividual.Type
 
-    @Override  // returns a set with elements of the same type of getNewTypeIndividual()
-    public Set<MORHierarchicalConcept> buildTypeIndividual() {
-        return MORIndividual.Type.super.buildTypeIndividual();
-    }
-
-    @Override // you can change the returning type to any implementations of MORConcept
+    @Override //called during build...() you can change the returning type to any implementations of MORConcept
     public MORHierarchicalConcept  getNewTypeIndividual(OWLClass instance, OWLReferences ontology) {
         return new MORHierarchicalConcept( instance, ontology);
     }

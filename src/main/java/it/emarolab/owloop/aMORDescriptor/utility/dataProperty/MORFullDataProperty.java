@@ -166,12 +166,7 @@ public class MORFullDataProperty
 
     // implementations for MORDataProperty.Super
 
-    @Override // returns a set with elements  of the same type of getNewSubDataProperty()
-    public Set<MORFullDataProperty> buildSubDataProperty() {
-        return MORDataProperty.Sub.super.buildSubDataProperty();
-    }
-
-    @Override // you can change the returning type to any implementations of MORDataProperty
+    @Override //called during build...() you can change the returning type to any implementations of MORDataProperty
     public MORFullDataProperty getNewSubDataProperty(OWLDataProperty instance, OWLReferences ontology) {
         return new MORFullDataProperty( instance, ontology);
     }
@@ -185,12 +180,7 @@ public class MORFullDataProperty
 
     // implementations for MORDataProperty.Super
 
-    @Override // returns a set with elements of the same type of getNewSuperDataProperty()
-    public Set<MORFullDataProperty> buildSuperDataProperty() {
-        return MORDataProperty.Super.super.buildSuperDataProperty();
-    }
-
-    @Override // you can change the returning type to any implementations of MORDataProperty
+    @Override //called during build...() you can change the returning type to any implementations of MORDataProperty
     public MORFullDataProperty getNewSuperDataProperty(OWLDataProperty instance, OWLReferences ontology) {
         return new MORFullDataProperty( instance, ontology);
     }

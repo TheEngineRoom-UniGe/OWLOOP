@@ -60,7 +60,7 @@ hs_err_pid*
 ## File-based project format:
 *.iws
 
-.idea/*
+.idea/
 
 ## Plugin-specific files:
 
@@ -114,6 +114,6 @@ Temporary Items
 !owloop-1.0.jar
 !owloop-1.0-with-dependecies.jar
 
-
+!build.gradle
 
 

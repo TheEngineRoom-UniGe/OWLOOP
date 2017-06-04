@@ -8,7 +8,6 @@ import it.emarolab.owloop.aMORDescriptor.utility.MORObjectPropertyBase;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * The implementation of all the semantic features of an object property.
@@ -117,12 +116,7 @@ public class MORFullObjectProperty
 
     // implementations for MORObjectProperty.Disjoint
 
-    @Override // returns a set with elements of the same type of getNewDisjointObjectProperty()
-    public Set<MORFullObjectProperty> buildDisjointObjectProperty() {
-        return Disjoint.super.buildDisjointObjectProperty();
-    }
-
-    @Override // you can change the returning type to any implementations of MORObjectProperty
+    @Override //called during build...() you can change the returning type to any implementations of MORObjectProperty
     public MORFullObjectProperty getNewDisjointObjectProperty(OWLObjectProperty instance, OWLReferences ontology) {
         return new MORFullObjectProperty( instance, ontology);
     }
@@ -136,12 +130,7 @@ public class MORFullObjectProperty
 
     // implementations for MORObjectProperty.Equivalent
 
-    @Override // returns a set with elements of the same type of getNewDisjointObjectProperty()
-    public Set<MORFullObjectProperty> buildEquivalentObjectProperty() {
-        return Equivalent.super.buildEquivalentObjectProperty();
-    }
-
-    @Override // you can change the returning type to any implementations of MORObjectProperty
+    @Override //called during build...() you can change the returning type to any implementations of MORObjectProperty
     public MORFullObjectProperty getNewEquivalentObjectProperty(OWLObjectProperty instance, OWLReferences ontology) {
         return new MORFullObjectProperty( instance, ontology);
     }
@@ -173,12 +162,7 @@ public class MORFullObjectProperty
 
     // implementations for MORObjectProperty.Super
 
-    @Override // returns a set with elements  of the same type of getNewSubObjectProperty()
-    public Set<MORFullObjectProperty> buildSubObjectProperty() {
-        return Sub.super.buildSubObjectProperty();
-    }
-
-    @Override // you can change the returning type to any implementations of MORObjectProperty
+    @Override //called during build...() you can change the returning type to any implementations of MORObjectProperty
     public MORFullObjectProperty getNewSubObjectProperty(OWLObjectProperty instance, OWLReferences ontology) {
         return new MORFullObjectProperty( instance, ontology);
     }
@@ -192,12 +176,7 @@ public class MORFullObjectProperty
 
     // implementations for MORObjectProperty.Super
 
-    @Override // returns a set with elements of the same type of getNewSuperObjectProperty()
-    public Set<MORFullObjectProperty> buildSuperObjectProperty() {
-        return Super.super.buildSuperObjectProperty();
-    }
-
-    @Override // you can change the returning type to any implementations of MORObjectProperty
+    @Override //called during build...() you can change the returning type to any implementations of MORObjectProperty
     public MORFullObjectProperty getNewSuperObjectProperty(OWLObjectProperty instance, OWLReferences ontology) {
         return new MORFullObjectProperty( instance, ontology);
     }
@@ -212,12 +191,7 @@ public class MORFullObjectProperty
 
     // implementations for MORObjectProperty.Inverse
 
-    @Override // returns a set with elements of the same type of getNewInverseObjectProperty()
-    public Set<MORFullObjectProperty> buildInverseObjectProperty() {
-        return Inverse.super.buildInverseObjectProperty();
-    }
-
-    @Override // you can change the returning type to any implementations of MORObjectProperty
+    @Override //called during build...() you can change the returning type to any implementations of MORObjectProperty
     public MORFullObjectProperty getNewInverseObjectProperty(OWLObjectProperty instance, OWLReferences ontology) {
         return new MORFullObjectProperty( instance, ontology);
     }

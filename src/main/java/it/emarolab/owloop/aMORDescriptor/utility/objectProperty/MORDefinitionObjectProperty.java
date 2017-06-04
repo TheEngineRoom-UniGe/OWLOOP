@@ -7,7 +7,6 @@ import it.emarolab.owloop.aMORDescriptor.utility.MORObjectPropertyBase;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
 
 import java.util.List;
-import java.util.Set;
 
 
 /**
@@ -98,12 +97,7 @@ public class MORDefinitionObjectProperty
 
     // implementations for MORObjectProperty.Disjoint
 
-    @Override // returns a set with elements of the same type of getNewDisjointObjectProperty()
-    public Set<MORDefinitionObjectProperty> buildDisjointObjectProperty() {
-        return Disjoint.super.buildDisjointObjectProperty();
-    }
-
-    @Override // you can change the returning type to any implementations of MORObjectProperty
+    @Override //called during build...() you can change the returning type to any implementations of MORObjectProperty
     public MORDefinitionObjectProperty getNewDisjointObjectProperty(OWLObjectProperty instance, OWLReferences ontology) {
         return new MORDefinitionObjectProperty( instance, ontology);
     }
@@ -117,12 +111,7 @@ public class MORDefinitionObjectProperty
 
     // implementations for MORObjectProperty.Equivalent
 
-    @Override // returns a set with elements of the same type of getNewDisjointObjectProperty()
-    public Set<MORDefinitionObjectProperty> buildEquivalentObjectProperty() {
-        return Equivalent.super.buildEquivalentObjectProperty();
-    }
-
-    @Override // you can change the returning type to any implementations of MORObjectProperty
+    @Override //called during build...() you can change the returning type to any implementations of MORObjectProperty
     public MORDefinitionObjectProperty getNewEquivalentObjectProperty(OWLObjectProperty instance, OWLReferences ontology) {
         return new MORDefinitionObjectProperty( instance, ontology);
     }
@@ -136,12 +125,7 @@ public class MORDefinitionObjectProperty
 
     // implementations for MORObjectProperty.Inverse
 
-    @Override // returns a set with elements of the same type of getNewInverseObjectProperty()
-    public Set<MORDefinitionObjectProperty> buildInverseObjectProperty() {
-        return Inverse.super.buildInverseObjectProperty();
-    }
-
-    @Override // you can change the returning type to any implementations of MORObjectProperty
+    @Override //called during build...() you can change the returning type to any implementations of MORObjectProperty
     public MORDefinitionObjectProperty getNewInverseObjectProperty(OWLObjectProperty instance, OWLReferences ontology) {
         return new MORDefinitionObjectProperty( instance, ontology);
     }
