@@ -1,7 +1,6 @@
 package it.emarolab.owloop.aMORDescriptor.utility.concept;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
-import it.emarolab.amor.owlInterface.SemanticRestriction;
 import it.emarolab.owloop.aMORDescriptor.MORAxioms;
 import it.emarolab.owloop.aMORDescriptor.MORConcept;
 import it.emarolab.owloop.aMORDescriptor.utility.MORConceptBase;
@@ -94,7 +93,7 @@ public class MORFullConcept
     public List<MappingIntent> readSemantic() {
         List<MappingIntent> r = MORConcept.Disjoint.super.readSemantic();
         r.addAll( MORConcept.Equivalent.super.readSemantic());
-        r.addAll( MORConcept.Define.super.readSemantic());
+        r.addAll( MORConcept.Define.super.readSemantic()); // call this before Sub or Super !!!
         r.addAll( MORConcept.Sub.super.readSemantic());
         r.addAll( MORConcept.Super.super.readSemantic());
         r.addAll( MORConcept.Classify.super.readSemantic());
@@ -105,7 +104,7 @@ public class MORFullConcept
     public List<MappingIntent> writeSemantic() {
         List<MappingIntent> r = MORConcept.Disjoint.super.writeSemantic();
         r.addAll( MORConcept.Equivalent.super.writeSemantic());
-        r.addAll( MORConcept.Define.super.readSemantic());
+        r.addAll( MORConcept.Define.super.readSemantic()); // call this before Sub or Super !!!
         r.addAll( MORConcept.Sub.super.writeSemantic());
         r.addAll( MORConcept.Super.super.writeSemantic());
         r.addAll( MORConcept.Classify.super.writeSemantic());
@@ -144,7 +143,7 @@ public class MORFullConcept
     // implementations for MORConcept.Define
 
     @Override
-    public Axioms<SemanticRestriction> getDefinitionConcept() {
+    public MORAxioms.Restrictions getDefinitionConcept() {
         return restrictions;
     }
 

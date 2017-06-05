@@ -160,7 +160,7 @@ public class MORFullObjectProperty
 
 
 
-    // implementations for MORObjectProperty.Super
+    // implementations for MORObjectProperty.Sub
 
     @Override //called during build...() you can change the returning type to any implementations of MORObjectProperty
     public MORFullObjectProperty getNewSubObjectProperty(OWLObjectProperty instance, OWLReferences ontology) {

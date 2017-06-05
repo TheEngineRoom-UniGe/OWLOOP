@@ -547,6 +547,11 @@ public interface MORConcept
      *     It specify how to {@link #queryDefinitionConcept()} and {@link #writeSemantic()} for 
      *     definition (i.e.: {@link SemanticRestriction}) applied to the described one 
      *     (i.e.: {@link #getInstance()}).
+     *     <br>
+     *     <b>ATTENTION</b>: the {@link #writeSemantic()} method implemented by
+     *     this constructor uses {@link org.semanticweb.owlapi.change.ConvertSuperClassesToEquivalentClass}
+     *     and it may affect {@link MORConcept.Super} or {@link MORConcept.Sub} descriptors. Call
+     *     always this first.
      * </p>
      * <div style="text-align:center;"><small>
      * <b>File</b>:        it.emarolab.owloop.aMORDescriptor.MORConcept <br>
@@ -1281,6 +1286,9 @@ public interface MORConcept
             return getDefinitionConcept().remove( createClassRestriction( cl));
         }
 
+        @Override
+        MORAxioms.Restrictions getDefinitionConcept();
+
         @Override // see super classes for documentation
         default MORAxioms.Restrictions queryDefinitionConcept(){
             MORAxioms.Restrictions set = new MORAxioms.Restrictions(getOntology().getRestrictions(getInstance()));
@@ -1299,6 +1307,8 @@ public interface MORConcept
                     changes.add(getOntology().addRestriction(a));
                 for (SemanticRestriction r : to.getToRemove())
                     changes.add(getOntology().removeRestriction(r));
+
+
                 changes.addAll(getOntology().convertSuperClassesToEquivalentClass(getInstance()));
                 return getChangingIntent(to, changes);
             } catch (Exception e){

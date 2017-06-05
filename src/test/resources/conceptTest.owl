@@ -956,7 +956,6 @@
 
 
     <owl:Class rdf:about="http://www.semanticweb.org/emaroLab/luca-buoncompagni/sit#Orientable">
-        <owl:equivalentClass rdf:resource="http://www.semanticweb.org/emaroLab/luca-buoncompagni/sit#Scene"/>
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
@@ -1046,15 +1045,6 @@
         </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/emaroLab/luca-buoncompagni/sit#GeometricPrimitive"/>
     </owl:Class>
-    
-
-
-    <!-- http://www.w3.org/2002/07/owl#Nothing -->
-
-
-    <rdf:Description rdf:about="http://www.w3.org/2002/07/owl#Nothing">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/emaroLab/luca-buoncompagni/sit#Orientable"/>
-    </rdf:Description>
     
 
 
