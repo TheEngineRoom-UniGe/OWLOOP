@@ -359,12 +359,10 @@ public interface MORIndividual
      *     (of type {@link MORAxioms.DataSemantic}) that specify the data properties of this individual
      *     that are synchronised with this {@link Descriptor}. For efficiency purposes,
      *     this descriptor does not map all the property of an individual but only the one which
-     *     {@code semantic} have been initialised in the {@link SemanticAxiom}. Note that a
-     *     {@link #readSemantic()} call may delete some of those elements if they do not apply, during reading,
-     *     to the {@code this} individual. For query all the data properties applied to an
-     *     individual you may what to check out: {@link OWLReferences#getDataPropertyB2Individual(OWLNamedIndividual)}
-     *     or similar functions of the <a href="https://github.com/EmaroLab/multi_ontology_reference">aMOR</a> API,
-     *     accessible from {@link #getOntology()}.
+     *     {@code semantic} have been initialised in the {@link SemanticAxiom}.
+     *     On the other hand, if the set of {@link SemanticAxioms} is leaved empty during
+     *     {@link #readSemantic()}, it maps all the object properties applied to the described
+     *     individual
      * </p>
      * <div style="text-align:center;"><small>
      * <b>File</b>:        it.emarolab.owloop.aMORDescriptor.MORIndividual <br>
@@ -432,13 +430,16 @@ public interface MORIndividual
                     return d.getValues().remove(value);
             return false;
         }
+        default boolean removeObject( OWLDataProperty property, Set<OWLLiteral> values){
+            MORAxioms.DataSemantic objectSemantic = new MORAxioms.DataSemantic(property);
+            objectSemantic.getValues().addAll( values);
+            return getDataSemantics().remove( objectSemantic);
+        }
 
         /**
          * Add a new semantic (i.e.: data property) to this {@link Descriptor}.
          * In case it already exists, this will set the {@link MORAxioms.Literals#isSingleton()}
          * value to {@code false} anyway.
-         * This value can be removed from the {@link Descriptor} during {@link #readSemantic()}
-         * if this property is not applied to the {@link Individual}. 
          * On the other hand, it does not assign any value to the properties that are automatically
          * queried during {@link #readSemantic()}.
          * @param property the name of the data property to synchronise.
@@ -452,8 +453,6 @@ public interface MORIndividual
          * Add a new semantic (i.e.: data property) to this {@link Descriptor}.
          * In case it already exists, this will set the {@link MORAxioms.Literals#isSingleton()}
          * value to {@code false} anyway.
-         * This value can be removed from the {@link Descriptor} during {@link #readSemantic()}
-         * if this property is not applied to the {@link Individual}.
          * On the other hand, it does not assign any value to the properties that are automatically
          * queried during {@link #readSemantic()}.
          * @param property the data property to synchronise.
@@ -467,8 +466,6 @@ public interface MORIndividual
          * Add a new semantic (i.e.: data property) to this {@link Descriptor}.
          * In case it already exists, this will set the {@link MORAxioms.Literals#isSingleton()}
          * to the specified value anyway.
-         * This value can be removed from the {@link Descriptor} during {@link #readSemantic()}
-         * if this property is not applied to the {@link Individual}.
          * On the other hand, it does not assign any value to the properties that are automatically
          * queried during {@link #readSemantic()}.
          * @param property the name of the data property to synchronise.
@@ -484,8 +481,6 @@ public interface MORIndividual
          * Add a new semantic (i.e.: data property) to this {@link Descriptor}.
          * In case it already exists, this will set the {@link MORAxioms.Literals#isSingleton()}
          * to the specified value anyway.
-         * This value can be removed from the {@link Descriptor} during {@link #readSemantic()}
-         * if this property is not applied to the {@link Individual}.
          * On the other hand, it does not assign any value to the properties that are automatically
          * queried during {@link #readSemantic()}.
          * @param property the data property to synchronise.
@@ -511,8 +506,6 @@ public interface MORIndividual
          * Add a new semantic (i.e.: data property) to this {@link Descriptor} with a particular value.
          * In case it already exists, this will set the {@link MORAxioms.Literals#isSingleton()}
          * value to {@code false} anyway.
-         * This value can be removed from the {@link Descriptor} during {@link #readSemantic()}
-         * if this property is not applied to the {@link Individual}.
          * The class of the specified value represents its data type, supported {@link OWLLiteral} are:
          * {@link Integer}, {@link Boolean}, {@link Double}, {@link Float} and {@link Long} (see {@link #getOWLLiteral(Object)}).
          * @param property the name of the data property to synchronise.
@@ -527,8 +520,6 @@ public interface MORIndividual
          * Add a new semantic (i.e.: data property) to this {@link Descriptor} with a particular value.
          * In case it already exists, this will set the {@link MORAxioms.Literals#isSingleton()}
          * value to {@code false} anyway.
-         * This value can be removed from the {@link Descriptor} during {@link #readSemantic()}
-         * if this property is not applied to the {@link Individual}.
          * @param property the data property to synchronise.
          * @param value the literal to be added to the {@link MORAxioms.DataSemantic#getValues()} set.
          * @return {@code true} if an element was added as a result of this call
@@ -541,8 +532,6 @@ public interface MORIndividual
          * Add a new semantic (i.e.: data property) to this {@link Descriptor} with a particular value.
          * In case it already exists, this will set the {@link MORAxioms.Literals#isSingleton()}
          * value to specified boolean anyway.
-         * This value can be removed from the {@link Descriptor} during {@link #readSemantic()}
-         * if this property is not applied to the {@link Individual}.
          * The class of the specified value represents its data type, supported {@link OWLLiteral} are:
          * {@link Integer}, {@link Boolean}, {@link Double}, {@link Float} and {@link Long} (see {@link #getOWLLiteral(Object)}).
          * @param property the name of the data property to synchronise.
@@ -558,8 +547,6 @@ public interface MORIndividual
          * Add a new semantic (i.e.: data property) to this {@link Descriptor} with a particular value.
          * In case it already exists, this will set the {@link MORAxioms.Literals#isSingleton()}
          * value to specified boolean anyway.
-         * This value can be removed from the {@link Descriptor} during {@link #readSemantic()}
-         * if this property is not applied to the {@link Individual}.
          * If {@link #getDataSemantics()} represents a singleton set this call clear the
          * previous contents.
          * @param property the data property to synchronise.
@@ -581,6 +568,39 @@ public interface MORIndividual
             data.getValues().add(value);
             data.getValues().setSingleton( singleton);
             return getDataSemantics().add(data);
+        }
+        /**
+         * Add a new semantic (i.e.: data property) to this {@link Descriptor} with a particular set of values.
+         * In case it already exists, this will set the {@link MORAxioms.Literals#isSingleton()}
+         * value to specified boolean anyway.
+         * If {@link #getDataSemantics()} represents a singleton set this call clear the
+         * previous contents.
+         * @param property the data property to synchronise.
+         * @param values the specific set of property literal to be added to the {@link MORAxioms.DataSemantic#getValues()} set.
+         * @param singleton the flag specifying if the new {@link MORAxioms.Literals} should contains only one element.
+         * @return {@code true} if an element was added as a result of this call
+         * (a change of singleton value is not considered).
+         */
+        default boolean addObject( OWLDataProperty property, Set<OWLLiteral> values, boolean singleton){
+            MORAxioms.DataSemantic objectSemantic = new MORAxioms.DataSemantic(property);
+            objectSemantic.getValues().addAll( values);
+            objectSemantic.getValues().setSingleton( singleton);
+            return getDataSemantics().add( objectSemantic);
+        }
+        /**
+         * Add a new semantic (i.e.: data property) to this {@link Descriptor} with a particular set of values.
+         * In case it already exists, this will set the {@link MORAxioms.Literals#isSingleton()}
+         * value to specified boolean anyway.
+         * If {@link #getDataSemantics()} represents a singleton set this call clear the
+         * previous contents.
+         * This call, automatically sets the {@code singleton} flag to false.
+         * @param property the data property to synchronise.
+         * @param values the specific set of property literal to be added to the {@link MORAxioms.DataSemantic#getValues()} set.
+         * @return {@code true} if an element was added as a result of this call
+         * (a change of singleton value is not considered).
+         */
+        default boolean addObject( OWLDataProperty property, Set<OWLLiteral> values){
+            return addObject( property, values, false);
         }
 
 
@@ -670,12 +690,10 @@ public interface MORIndividual
      *     (of type {@link MORAxioms.ObjectSemantic}) that specify the object properties of this individual
      *     that are synchronised with this {@link Descriptor}. For efficiency purposes,
      *     this descriptor does not map all the property of an individual but only the one which
-     *     {@code semantic} have been initialised in the {@link SemanticAxiom}. Note that a
-     *     {@link #readSemantic()} call may delete some of those elements if they do not apply, during reading,
-     *     to the {@code this} individual. For query all the object properties applied to an
-     *     individual you may what to check out: {@link OWLReferences#getObjectPropertyB2Individual(OWLNamedIndividual)}
-     *     or similar functions of the <a href="https://github.com/EmaroLab/multi_ontology_reference">aMOR</a> API,
-     *     accessible from {@link #getOntology()}.
+     *     {@code semantic} have been initialised in the {@link SemanticAxiom}.
+     *     On the other hand, if the set of {@link SemanticAxioms} is leaved empty during
+     *     {@link #readSemantic()}, it maps all the object properties applied to the described
+     *     individual.
      * </p>
      * <div style="text-align:center;"><small>
      * <b>File</b>:        it.emarolab.owloop.aMORDescriptor.MORIndividual <br>
@@ -710,10 +728,7 @@ public interface MORIndividual
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeObject( OWLObjectProperty property){
-            for (MORAxioms.ObjectSemantic d : getObjectSemantics())
-                if( d.getSemantic().equals( property))
-                    return getObjectSemantics().remove( d);
-            return false;
+            return getObjectSemantics().remove( property);
         }
 
         /**
@@ -736,18 +751,29 @@ public interface MORIndividual
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeObject( OWLObjectProperty property, OWLNamedIndividual value){
-            for (MORAxioms.ObjectSemantic d : getObjectSemantics())
-                if ( d.getSemantic().equals( property))
-                    return d.getValues().remove(value);
-            return false;
+            MORAxioms.ObjectSemantic objectSemantic = new MORAxioms.ObjectSemantic(property);
+            objectSemantic.getValues().add( value);
+            return getObjectSemantics().remove( objectSemantic);
         }
+        /**
+         * Remove the {@link SemanticAxiom#getSemantic()} of the given property, with specific values, from {@code this}
+         * {@link Descriptor}. This call does not remove the semantic from this object, and it may be
+         * repopulate (or completely removed) by calling: {@link #readSemantic()}.
+         * @param property the object property which value, contained in {@link #getObjectSemantics()}, will be removed.
+         * @param values the specific set of property literal to be removed from the {@link MORAxioms.ObjectSemantic#getValues()} set.
+         * @return {@code true} if an element was removed as a result of this call.
+         */
+        default boolean removeObject( OWLObjectProperty property, Set<OWLNamedIndividual> values){
+            MORAxioms.ObjectSemantic objectSemantic = new MORAxioms.ObjectSemantic(property);
+            objectSemantic.getValues().addAll( values);
+            return getObjectSemantics().remove( objectSemantic);
+        }
+
 
         /**
          * Add a new semantic (i.e.: object property) to this {@link Descriptor}.
          * In case it already exists, this will set the {@link MORAxioms.Literals#isSingleton()}
          * value to {@code false} anyway.
-         * This value can be removed from the {@link Descriptor} during {@link #readSemantic()}
-         * if this property is not applied to the {@link Individual}.
          * On the other hand, it does not assign any value to the properties that are automatically
          * queried during {@link #readSemantic()}.
          * @param property the name of the object property to synchronise.
@@ -761,8 +787,6 @@ public interface MORIndividual
          * Add a new semantic (i.e.: object property) to this {@link Descriptor}.
          * In case it already exists, this will set the {@link MORAxioms.Literals#isSingleton()}
          * value to {@code false} anyway.
-         * This value can be removed from the {@link Descriptor} during {@link #readSemantic()}
-         * if this property is not applied to the {@link Individual}.
          * On the other hand, it does not assign any value to the properties that are automatically
          * queried during {@link #readSemantic()}.
          * @param property the object property to synchronise.
@@ -776,8 +800,6 @@ public interface MORIndividual
          * Add a new semantic (i.e.: object property) to this {@link Descriptor}.
          * In case it already exists, this will set the {@link MORAxioms.Literals#isSingleton()}
          * to the specified value anyway.
-         * This value can be removed from the {@link Descriptor} during {@link #readSemantic()}
-         * if this property is not applied to the {@link Individual}.
          * On the other hand, it does not assign any value to the properties that are automatically
          * queried during {@link #readSemantic()}.
          * @param property the name of the object property to synchronise.
@@ -793,8 +815,6 @@ public interface MORIndividual
          * Add a new semantic (i.e.: object property) to this {@link Descriptor}.
          * In case it already exists, this will set the {@link MORAxioms.Literals#isSingleton()}
          * to the specified value anyway.
-         * This value can be removed from the {@link Descriptor} during {@link #readSemantic()}
-         * if this property is not applied to the {@link Individual}.
          * On the other hand, it does not assign any value to the properties that are automatically
          * queried during {@link #readSemantic()}.
          * @param property the object property to synchronise.
@@ -804,24 +824,15 @@ public interface MORIndividual
          * (a change of singleton value is not considered).
          */
         default boolean addObject( OWLObjectProperty property, boolean singleton){
-            for (MORAxioms.ObjectSemantic d : getObjectSemantics()) {
-                if (d.getSemantic().equals(property)) {
-                    d.getValues().setSingleton( singleton);
-                    return false;
-                }
-            }
-
-            MORAxioms.ObjectSemantic object = new MORAxioms.ObjectSemantic(property);
-            object.getValues().setSingleton( singleton);
-            return getObjectSemantics().add(object);
+            MORAxioms.ObjectSemantic objectSemantic = new MORAxioms.ObjectSemantic(property);
+            objectSemantic.getValues().setSingleton( singleton);
+            return getObjectSemantics().add( objectSemantic);
         }
 
         /**
          * Add a new semantic (i.e.: object property) to this {@link Descriptor} with a particular value.
          * In case it already exists, this will set the {@link MORAxioms.Literals#isSingleton()}
          * value to {@code false} anyway.
-         * This value can be removed from the {@link Descriptor} during {@link #readSemantic()}
-         * if this property is not applied to the {@link Individual}.
          * The class of the specified value represents its object type, supported {@link OWLLiteral} are:
          * {@link Integer}, {@link Boolean}, {@link Double}, {@link Float} and {@link Long} (see {@link #getOWLLiteral(Object)}).
          * @param property the name of the object property to synchronise.
@@ -836,8 +847,6 @@ public interface MORIndividual
          * Add a new semantic (i.e.: object property) to this {@link Descriptor} with a particular value.
          * In case it already exists, this will set the {@link MORAxioms.Literals#isSingleton()}
          * value to {@code false} anyway.
-         * This value can be removed from the {@link Descriptor} during {@link #readSemantic()}
-         * if this property is not applied to the {@link Individual}.
          * @param property the object property to synchronise.
          * @param value the literal to be added to the {@link MORAxioms.ObjectSemantic#getValues()} set.
          * @return {@code true} if an element was added as a result of this call
@@ -850,8 +859,6 @@ public interface MORIndividual
          * Add a new semantic (i.e.: object property) to this {@link Descriptor} with a particular value.
          * In case it already exists, this will set the {@link MORAxioms.Literals#isSingleton()}
          * value to specified boolean anyway.
-         * This value can be removed from the {@link Descriptor} during {@link #readSemantic()}
-         * if this property is not applied to the {@link Individual}.
          * @param property the name of the object property to synchronise.
          * @param value the specific object to be added to the {@link MORAxioms.ObjectSemantic#getValues()} set.
          * @param singleton the flag specifying if the new {@link MORAxioms.Literals} should contains only one element.
@@ -865,8 +872,6 @@ public interface MORIndividual
          * Add a new semantic (i.e.: object property) to this {@link Descriptor} with a particular value.
          * In case it already exists, this will set the {@link MORAxioms.Literals#isSingleton()}
          * value to specified boolean anyway.
-         * This value can be removed from the {@link Descriptor} during {@link #readSemantic()}
-         * if this property is not applied to the {@link Individual}.
          * If {@link #getObjectSemantics()} represents a singleton set this call clear the
          * previous contents.
          * @param property the object property to synchronise.
@@ -876,20 +881,44 @@ public interface MORIndividual
          * (a change of singleton value is not considered).
          */
         default boolean addObject( OWLObjectProperty property, OWLNamedIndividual value, boolean singleton){
-            for (MORAxioms.ObjectSemantic d : getObjectSemantics())
-                if( d.getSemantic().equals( property)){
-                    if ( singleton)
-                        d.getValues().clear();
-                    d.getValues().setSingleton( singleton);
-                    return d.getValues().add( value);
-                }
-
-            MORAxioms.ObjectSemantic object = new MORAxioms.ObjectSemantic(property);
-            object.getValues().add(value);
-            object.getValues().setSingleton( singleton);
-            return getObjectSemantics().add(object);
+            MORAxioms.ObjectSemantic objectSemantic = new MORAxioms.ObjectSemantic(property);
+            objectSemantic.getValues().add( value);
+            objectSemantic.getValues().setSingleton( singleton);
+            return getObjectSemantics().add( objectSemantic);
         }
-
+        /**
+         * Add a new semantic (i.e.: object property) to this {@link Descriptor} with a particular set of values.
+         * In case it already exists, this will set the {@link MORAxioms.Literals#isSingleton()}
+         * value to specified boolean anyway.
+         * If {@link #getObjectSemantics()} represents a singleton set this call clear the
+         * previous contents.
+         * @param property the object property to synchronise.
+         * @param values the specific set of property literal to be added to the {@link MORAxioms.ObjectSemantic#getValues()} set.
+         * @param singleton the flag specifying if the new {@link MORAxioms.Literals} should contains only one element.
+         * @return {@code true} if an element was added as a result of this call
+         * (a change of singleton value is not considered).
+         */
+        default boolean addObject( OWLObjectProperty property, Set<OWLNamedIndividual> values, boolean singleton){
+            MORAxioms.ObjectSemantic objectSemantic = new MORAxioms.ObjectSemantic(property);
+            objectSemantic.getValues().addAll( values);
+            objectSemantic.getValues().setSingleton( singleton);
+            return getObjectSemantics().add( objectSemantic);
+        }
+        /**
+         * Add a new semantic (i.e.: object property) to this {@link Descriptor} with a particular set of values.
+         * In case it already exists, this will set the {@link MORAxioms.Literals#isSingleton()}
+         * value to specified boolean anyway.
+         * If {@link #getObjectSemantics()} represents a singleton set this call clear the
+         * previous contents.
+         * This call, automatically sets the {@code singleton} flag to false.
+         * @param property the object property to synchronise.
+         * @param values the specific set of property literal to be added to the {@link MORAxioms.ObjectSemantic#getValues()} set.
+         * @return {@code true} if an element was added as a result of this call
+         * (a change of singleton value is not considered).
+         */
+        default boolean addObject( OWLObjectProperty property, Set<OWLNamedIndividual> values){
+            return addObject( property, values, false);
+        }
 
         @Override
         MORAxioms.ObjectSemantics getObjectSemantics();

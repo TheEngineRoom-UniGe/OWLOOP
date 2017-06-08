@@ -867,6 +867,34 @@ public interface MORAxioms extends Semantic{
             return null;
         }
 
+
+        @Override
+        public boolean add(DataSemantic dataSemantic) {
+            for ( DataSemantic d : this.set)
+                if( d.getSemantic().equals( dataSemantic.getSemantic())){
+                    if ( dataSemantic.getValues().isSingleton())
+                        d.getValues().clear();
+                    d.getValues().setSingleton( dataSemantic.getValues().isSingleton());
+                    return d.getValues().addAll( dataSemantic.getValues());
+                }
+
+            MORAxioms.DataSemantic data = new MORAxioms.DataSemantic( dataSemantic.getSemantic());
+            data.getValues().addAll( dataSemantic.getValues());
+            data.getValues().setSingleton( dataSemantic.getValues().isSingleton());
+            return this.set.add(data);
+        }
+
+        @Override
+        public boolean remove(Object o) {
+            for (DataSemantic d : this.set) {
+                if (d.equals(o))
+                    return this.set.remove(d);
+                if (d.getSemantic().equals(o))
+                    return this.set.remove(d);
+            }
+            return false;
+        }
+
         @Override
         public String toString() {
             String out = set.toString();
@@ -943,6 +971,34 @@ public interface MORAxioms extends Semantic{
                 }
             }
             return null;
+        }
+
+
+        @Override
+        public boolean add(ObjectSemantic objectSemantic) {
+            for ( ObjectSemantic d : this.set)
+                if( d.getSemantic().equals( objectSemantic.getSemantic())){
+                    if ( objectSemantic.getValues().isSingleton())
+                        d.getValues().clear();
+                    d.getValues().setSingleton( objectSemantic.getValues().isSingleton());
+                    return d.getValues().addAll( objectSemantic.getValues());
+                }
+
+            MORAxioms.ObjectSemantic data = new MORAxioms.ObjectSemantic( objectSemantic.getSemantic());
+            data.getValues().addAll( objectSemantic.getValues());
+            data.getValues().setSingleton( objectSemantic.getValues().isSingleton());
+            return this.set.add(data);
+        }
+
+        @Override
+        public boolean remove(Object o) {
+            for (ObjectSemantic d : this.set) {
+                if (d.equals(o))
+                    return this.set.remove(d);
+                if (d.getSemantic().equals(o))
+                    return this.set.remove(d);
+            }
+            return false;
         }
 
         @Override

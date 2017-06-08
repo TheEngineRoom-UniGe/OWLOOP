@@ -398,9 +398,9 @@ public interface Individual<O,J>
      *     relative values for an ontological individual (i.e.: the {@link Ground#getGroundInstance()}).
      *     <br>
      *     By default, the synchronisation occurs only for the proprieties which semantics
-     *     have been initialised in the {@link SemanticAxioms} ({@link #getDataSemantics()} ()}),
-     *     not for all relations in the OWL representation.
-     *     Note that a {@link #readSemantic()}  procedure may remove this value if there is no such entities in the ontology.
+     *     have been initialised in the {@link SemanticAxioms} ({@link #getDataSemantics()}.
+     *     Anyway if the {@link SemanticAxioms} is leaved empty during {@link #readSemantic()}
+     *     it maps all the data properties applied to the described individual.
      * </p>
      * <div style="text-align:center;"><small>
      * <b>File</b>:        it.emarolab.owloop.core.Individual <br>
@@ -523,7 +523,8 @@ public interface Individual<O,J>
      *     By default, the synchronisation occurs only for the proprieties which semantics
      *     have been initialised in the {@link SemanticAxioms} ({@link #getObjectSemantics()}),
      *     not for all relations in the OWL representation.
-     *     Note that {@link #readSemantic()} may remove this value if there is no such entities in the ontology.
+     *     Anyway if the {@link SemanticAxioms} is leaved empty during {@link #readSemantic()}
+     *     it maps all the object properties applied to the described individual.
      * </p>
      * <div style="text-align:center;"><small>
      * <b>File</b>:        it.emarolab.owloop.core.Individual <br>
