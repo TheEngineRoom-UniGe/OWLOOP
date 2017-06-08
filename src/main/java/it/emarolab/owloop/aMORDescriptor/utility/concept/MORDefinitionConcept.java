@@ -97,7 +97,7 @@ public class MORDefinitionConcept
     public List<MappingIntent> writeSemantic() {
         List<MappingIntent> r = MORConcept.Disjoint.super.writeSemantic();
         r.addAll( MORConcept.Equivalent.super.writeSemantic());
-        r.addAll( MORConcept.Define.super.readSemantic());
+        r.addAll( MORConcept.Define.super.writeSemantic());
         r.addAll( MORConcept.Classify.super.writeSemantic());
         return r;
     }

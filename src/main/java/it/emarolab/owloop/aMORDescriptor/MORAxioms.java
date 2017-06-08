@@ -8,7 +8,6 @@ import org.semanticweb.owlapi.model.*;
 
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -69,23 +68,20 @@ public interface MORAxioms extends Semantic{
      * @param <T> the type of the axiom to collect.
      */
     class AxiomsBase<T>
+            extends HashSet<T>
             implements Axioms<T>{
 
         /**
          * the actual singleton flagging value. Constructing value is set to {@code false}.
          */
         protected boolean singleton = false;
-        /**
-         * the actual set collecting the axioms.
-         */
-        protected Set<T> set;
 
         /**
          * Instanciate this {@link Axioms} as an empty {@link HashSet}.
          * It is not set to be a {@code singleton}.
          */
         public AxiomsBase() {
-            this.set = new HashSet<>();
+           super();
         }
         /**
          * Instanciate this {@link Axioms} as a {@link HashSet} containing the given value.
@@ -93,7 +89,7 @@ public interface MORAxioms extends Semantic{
          * @param c the element with wich setGround the set of {@link Axioms}.
          */
         public AxiomsBase(Collection<? extends T> c) {
-            this.set = new HashSet<>(c);
+            super(c);
         }
         /**
          * Instanciate this {@link Axioms} as a {@link HashSet} with a given initial size and load factor.
@@ -102,7 +98,7 @@ public interface MORAxioms extends Semantic{
          * @param loadFactor the load factor of the axioms {@link HashSet}
          */
         public AxiomsBase(int initialCapacity, float loadFactor) {
-            this.set = new HashSet<>(initialCapacity, loadFactor);
+            super( initialCapacity, loadFactor);
         }
         /**
          * Instanciate this {@link Axioms} as a {@link HashSet} with a given initial size.
@@ -110,7 +106,7 @@ public interface MORAxioms extends Semantic{
          * @param initialCapacity the initial capacity of the axioms {@link HashSet}.
          */
         public AxiomsBase(int initialCapacity) {
-            this.set = new HashSet<>(initialCapacity);
+            super( initialCapacity);
         }
 
         @Override // see Semantic.Axioms for documentation
@@ -123,110 +119,12 @@ public interface MORAxioms extends Semantic{
             this.singleton = singleton;
         }
 
-        @Override // see Collection for documentation
-        public int size() {
-            return set.size();
-        }
-
-        @Override // see Collection for documentation
-        public boolean isEmpty() {
-            return set.isEmpty();
-        }
-
-        @Override // see Collection for documentation
-        public boolean contains(Object o) {
-            return set.contains( o);
-        }
-
-        @Override // see Collection for documentation
-        public Iterator<T> iterator() {
-            return set.iterator();
-        }
-
-        @Override // see Collection for documentation
-        public Object[] toArray() {
-            return set.toArray();
-        }
-
-        @Override // see Collection for documentation
-        public <U> U[] toArray(U[] a) {
-            return set.toArray( a);
-        }
-
-        @Override // see Collection for documentation
-        public boolean add(T t) {
-            return set.add( t);
-        }
-
-        @Override // see Collection for documentation
-        public boolean remove(Object o) {
-            return set.remove( o);
-        }
-
-        @Override // see Collection for documentation
-        public boolean containsAll(Collection<?> c) {
-            return set.containsAll( c);
-        }
-        public boolean containsAll(AxiomsBase<T> axioms) {
-            return set.containsAll( axioms.set);
-        }
-
-        @Override // see Collection for documentation
-        public boolean addAll(Collection<? extends T> c) {
-            return set.addAll( c);
-        }
-        public boolean addAll(AxiomsBase<T> owlClasses) {
-            return set.addAll( owlClasses.set);
-        }
-
-        @Override // see Collection for documentation
-        public boolean removeAll(Collection<?> c) {
-            return set.removeAll( c);
-        }
-
-        public boolean removeAll(AxiomsBase<T> axioms) {
-            return set.removeAll( axioms.set);
-        }
-
-        @Override // see Collection for documentation
-        public boolean retainAll(Collection<?> c) {
-            return set.retainAll( c);
-        }
-        public boolean retainAll(AxiomsBase<T> axioms) {
-            return set.retainAll( axioms.set);
-        }
-
-        @Override // see Collection for documentation
-        public void clear() {
-            set.clear();
-        }
-
-        /**
-         * This method considers only the {@link Axioms} {@link HashSet}, no the value of {@link #isSingleton()}.
-         * @param o the object to test for equality
-         * @return {@code true} if o is an derived class of {@link AxiomsBase} with the same set of {@link Axioms}.
-         */
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (!(o instanceof AxiomsBase)) return false;
-            AxiomsBase that = (AxiomsBase) o;
-            return Objects.equal(set, that.set);
-        }
-        /**
-         * This method considers only the {@link Axioms} {@link HashSet}, no the value of {@link #isSingleton()}.
-         * @return the has code for this set of {@link Semantic.Axioms}.
-         */
-        @Override
-        public int hashCode() {
-            return Objects.hashCode(set);
-        }
 
         @Override
         public String toString() {
             String out = "{";
-            int cnt = set.size();
-            for ( T l : set) {
+            int cnt = size();
+            for ( T l : this) {
                 out += l;
                 if ( cnt-- > 1)
                     out += ", ";
@@ -236,7 +134,6 @@ public interface MORAxioms extends Semantic{
                 out += "(singleton)";
             return out;
         }
-
     }
 
     /**
@@ -272,45 +169,10 @@ public interface MORAxioms extends Semantic{
         }
 
         @Override
-        public boolean contains(Object o) {
-            return super.contains(o);
-        }
-
-        @Override
-        public boolean add(T t) {
-            return super.add(t);
-        }
-
-        @Override
-        public boolean remove(Object o) {
-            return super.remove(o);
-        }
-
-        @Override
-        public boolean containsAll(Collection<?> c) {
-            return super.containsAll(c);
-        }
-
-        @Override
-        public boolean addAll(Collection<? extends T> c) {
-            return super.addAll(c);
-        }
-
-        @Override
-        public boolean removeAll(Collection<?> c) {
-            return super.removeAll(c);
-        }
-
-        @Override
-        public boolean retainAll(Collection<?> c) {
-            return super.retainAll(c);
-        }
-
-        @Override
         public String toString() {
             String out = "{";
-            int cnt = set.size();
-            for ( T l : set) {
+            int cnt = size();
+            for ( T l : this) {
                 out += OWLReferencesInterface.getOWLName( l);
                 if ( cnt-- > 1)
                     out += ", ";
@@ -797,7 +659,130 @@ public interface MORAxioms extends Semantic{
         }
     }
 
+    /**
+     * The base implementation for the {@link SemanticAxioms}.
+     * <p>
+     *     It implements common methods to be used to manage a set of Axioms.
+     *     In particular, it define the method of adding and removing set of
+     *     data or object properties values with the same semantic. Also,
+     *     it implements helping way to obtain the actual value of a property.
+     *     Constructors, and common way to manage an {@link HashSet} are based
+     *     on {@link AxiomsBase}.
+     * </p>
+     * <div style="text-align:center;"><small>
+     * <b>File</b>:        it.emarolab.owloop.aMORDescriptor.SemanticAxiomsBase <br>
+     * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
+     * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
+     * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
+     * <b>date</b>:        21/05/17 <br>
+     * </small></div>
+     */
+    abstract class SemanticAxiomsBase<X extends SemanticAxiom<S,A>,S extends OWLProperty,A>
+            extends AxiomsBase<X>
+            implements SemanticAxioms<X,A>{
 
+        public SemanticAxiomsBase() {
+        }
+        public SemanticAxiomsBase(Collection<? extends X> c) {
+            super(c);
+        }
+        public SemanticAxiomsBase(int initialCapacity, float loadFactor) {
+            super(initialCapacity, loadFactor);
+        }
+        public SemanticAxiomsBase(int initialCapacity) {
+            super(initialCapacity);
+        }
+
+        /**
+         * Searches in the {@link SemanticAxiom} for the given property and
+         * returns all its values.
+         * @param semantic the properties to look for.
+         * @return all the synchronised values of the given property.
+         * An {@code empty} {@link HashSet} if the values is not available.
+         */
+        public Axioms<A> getLinks(S semantic){
+            for ( X s : this){
+                if ( semantic.equals( s.getSemantic()))
+                    return s.getValues();
+            }
+            return new AxiomsBase<>();
+        }
+
+        /**
+         * Searches in the {@link SemanticAxiom} for the given property and
+         * returns one of its values. It should be used with a {@link Axioms#isSingleton()}
+         * axioms, since other values are ignored.
+         * @param semantic the properties to look for.
+         * @return one of the synchronised values of the given property.
+         * An {@code null} if the values is not available.
+         */
+        public A getLink(S semantic){
+            for ( X s : this){
+                if ( semantic.equals( s.getSemantic())) {
+                    if ( ! s.getValues().isSingleton())
+                        System.out.println( " !! search for only one literal in a not singleton object property: " + s);
+                    for (A l : s.getValues())
+                        return l;
+                }
+            }
+            return null;
+        }
+
+
+        /**
+         * This method modifies the standard adding procedure to a set
+         * by looking if the {@link SemanticAxioms} already contains
+         * the semantic (i.e.: data or object property) specified in the
+         * input parameter. If this is true the given value are added
+         * to the related {@link  SemanticAxiom#getValues()}. Otherwise
+         * the given object is added as a new element.
+         * Note that if the input parameter describes a {@code singleton}
+         * object all the previous contents related to that semantic
+         * are deleted.
+         * @param dataSemantic the new semantic to add.
+         * @return {@code true} if this collection changed as a result of the call.
+         */
+        @Override
+        public boolean add(X dataSemantic) {
+            for ( X d : this)//.set)
+                if( d.getSemantic().equals( dataSemantic.getSemantic())){
+                    if ( dataSemantic.getValues().isSingleton())
+                        d.getValues().clear();
+                    d.getValues().setSingleton( dataSemantic.getValues().isSingleton());
+                    return d.getValues().addAll( dataSemantic.getValues());
+                }
+
+            return super.add( dataSemantic);
+        }
+
+        /**
+         * It removes an entri from the {@link SemanticAxioms}.
+         * The input parameter cna be ether the object describing the
+         * {@link SemanticAxiom} with a specific semantic and values
+         * to be removed. Or it can a property. For the latter,
+         * all the values are deleted.
+         * @param o the object to be removed.
+         * @return {@code true} if the set contained the specified element.
+         */
+        @Override
+        public boolean remove(Object o) {
+            for (X d : this){//.set) {
+                if (d.equals(o))
+                    return super.remove(d);
+                if (d.getSemantic().equals(o))
+                    return super.remove(d);
+            }
+            return false;
+        }
+
+        @Override
+        public String toString() {
+            String out = super.toString();
+            if ( isSingleton())
+                out += "(singleton)";
+            return out;
+        }
+    }
 
     /**
      * An extension of {@link AxiomsBase} for {@link SemanticAxioms} for data properties.
@@ -817,7 +802,7 @@ public interface MORAxioms extends Semantic{
      * </small></div>
      */
     class DataSemantics
-            extends AxiomsBase<DataSemantic>
+            extends SemanticAxiomsBase<DataSemantic,OWLDataProperty,OWLLiteral>
             implements SemanticAxioms<DataSemantic,OWLLiteral> {
 
         public DataSemantics() {
@@ -832,76 +817,6 @@ public interface MORAxioms extends Semantic{
             super(initialCapacity);
         }
 
-        /**
-         * Searches in the {@link SemanticAxiom} for the given property and
-         * returns all its values.
-         * @param semantic the properties to look for.
-         * @return all the synchronised values of the given property.
-         * An {@code empty} {@link HashSet} if the values is not available.
-         */
-        public Set<OWLLiteral> getLiterals(OWLDataProperty semantic){
-            for ( DataSemantic s : set){
-                if ( semantic.equals( s.getSemantic()))
-                    return s.getValues().set;
-            }
-            return new HashSet<>();
-        }
-
-        /**
-         * Searches in the {@link SemanticAxiom} for the given property and
-         * returns one of its values. If {@link Axioms#isSingleton()},
-         * other values are ignored.
-         * @param semantic the properties to look for.
-         * @return one of the synchronised values of the given property.
-         * An {@code null} if the values is not available.
-         */
-        public OWLLiteral getLiteral( OWLDataProperty semantic){
-            for ( DataSemantic s : set){
-                if ( semantic.equals( s.getSemantic())) {
-                    if ( ! s.getValues().isSingleton())
-                        System.out.println( " !! search for only one literal in a not singleton object property: " + s);
-                    for (OWLLiteral l : s.getValues())
-                        return l;
-                }
-            }
-            return null;
-        }
-
-
-        @Override
-        public boolean add(DataSemantic dataSemantic) {
-            for ( DataSemantic d : this.set)
-                if( d.getSemantic().equals( dataSemantic.getSemantic())){
-                    if ( dataSemantic.getValues().isSingleton())
-                        d.getValues().clear();
-                    d.getValues().setSingleton( dataSemantic.getValues().isSingleton());
-                    return d.getValues().addAll( dataSemantic.getValues());
-                }
-
-            MORAxioms.DataSemantic data = new MORAxioms.DataSemantic( dataSemantic.getSemantic());
-            data.getValues().addAll( dataSemantic.getValues());
-            data.getValues().setSingleton( dataSemantic.getValues().isSingleton());
-            return this.set.add(data);
-        }
-
-        @Override
-        public boolean remove(Object o) {
-            for (DataSemantic d : this.set) {
-                if (d.equals(o))
-                    return this.set.remove(d);
-                if (d.getSemantic().equals(o))
-                    return this.set.remove(d);
-            }
-            return false;
-        }
-
-        @Override
-        public String toString() {
-            String out = set.toString();
-            if ( isSingleton())
-                out += "(singleton)";
-            return out;
-        }
     }
 
     /**
@@ -922,7 +837,7 @@ public interface MORAxioms extends Semantic{
      * </small></div>
      */
     class ObjectSemantics
-            extends AxiomsBase<ObjectSemantic>
+            extends SemanticAxiomsBase<ObjectSemantic,OWLObjectProperty,OWLNamedIndividual>
             implements SemanticAxioms<ObjectSemantic,OWLNamedIndividual> {
 
         public ObjectSemantics() {
@@ -937,77 +852,6 @@ public interface MORAxioms extends Semantic{
             super(initialCapacity);
         }
 
-
-        /**
-         * Searches in the {@link SemanticAxiom} for the given property and
-         * returns all its values.
-         * @param semantic the properties to look for.
-         * @return all the synchronised values of the given property.
-         * An {@code empty} {@link HashSet} if the values is not available.
-         */
-        public Set<OWLNamedIndividual> getLinks(OWLObjectProperty semantic){
-            for ( ObjectSemantic s : set){
-                if ( semantic.equals( s.getSemantic()))
-                    return s.getValues().set;
-            }
-            return new HashSet<>();
-        }
-
-        /**
-         * Searches in the {@link SemanticAxiom} for the given properties and
-         * returns one of its values. If {@link Axioms#isSingleton()},
-         * other values are ignored.
-         * @param semantic the properties to look for.
-         * @return one of the synchronised values of the given property.
-         * An {@code null} if the values is not available.
-         */
-        public OWLNamedIndividual getLink( OWLObjectProperty semantic){
-            for ( ObjectSemantic s : set){
-                if ( semantic.equals( s.getSemantic())) {
-                    if ( ! s.getValues().isSingleton())
-                        System.out.println( " !! search for only one individual in a not singleton data property: " + s);
-                    for (OWLNamedIndividual l : s.getValues())
-                        return l;
-                }
-            }
-            return null;
-        }
-
-
-        @Override
-        public boolean add(ObjectSemantic objectSemantic) {
-            for ( ObjectSemantic d : this.set)
-                if( d.getSemantic().equals( objectSemantic.getSemantic())){
-                    if ( objectSemantic.getValues().isSingleton())
-                        d.getValues().clear();
-                    d.getValues().setSingleton( objectSemantic.getValues().isSingleton());
-                    return d.getValues().addAll( objectSemantic.getValues());
-                }
-
-            MORAxioms.ObjectSemantic data = new MORAxioms.ObjectSemantic( objectSemantic.getSemantic());
-            data.getValues().addAll( objectSemantic.getValues());
-            data.getValues().setSingleton( objectSemantic.getValues().isSingleton());
-            return this.set.add(data);
-        }
-
-        @Override
-        public boolean remove(Object o) {
-            for (ObjectSemantic d : this.set) {
-                if (d.equals(o))
-                    return this.set.remove(d);
-                if (d.getSemantic().equals(o))
-                    return this.set.remove(d);
-            }
-            return false;
-        }
-
-        @Override
-        public String toString() {
-            String out = set.toString();
-            if ( isSingleton())
-                out += "(singleton)";
-            return out;
-        }
     }
 
 

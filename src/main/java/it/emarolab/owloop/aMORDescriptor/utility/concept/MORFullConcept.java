@@ -104,9 +104,9 @@ public class MORFullConcept
     public List<MappingIntent> writeSemantic() {
         List<MappingIntent> r = MORConcept.Disjoint.super.writeSemantic();
         r.addAll( MORConcept.Equivalent.super.writeSemantic());
-        r.addAll( MORConcept.Define.super.readSemantic()); // call this before Sub or Super !!!
         r.addAll( MORConcept.Sub.super.writeSemantic());
         r.addAll( MORConcept.Super.super.writeSemantic());
+        r.addAll( MORConcept.Define.super.writeSemantic()); // call this before Sub or Super !!!
         r.addAll( MORConcept.Classify.super.writeSemantic());
         return r;
     }

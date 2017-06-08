@@ -82,7 +82,9 @@ When the most efficient descriptors for an application have been implemented you
 
 #### OWL extension
 
-Noteworthy, each `Descriptor` has methods to interact with the instantiated ontology through standard [aMOR](https://github.com/EmaroLab/multi_ontology_reference) helping functions, as well as lower layer [OWL API](https://github.com/owlcs/owlapi). From here you can not only call the reasoning task, but also get the `OWLManager`, `OWLDataFactory`, `OWLOntology` and `OWLReferences`. So, other manipulations and queries are possible without further dependences or bridges.
+Noteworthy, each `Descriptor` has methods to interact with the instantiated ontology through standard [aMOR](https://github.com/EmaroLab/multi_ontology_reference) helping functions, as well as lower layer [OWL API](https://github.com/owlcs/owlapi). From here you can not only call the reasoning task, but also get the `OWLManager`, `OWLDataFactory`, `OWLOntology` and `OWLReferences`. So, other manipulations and queries are possible without further dependencies or bridges.
+
+OWLOOP maps most of the features of OWL but not all. We try to implement the most useful once, as well as the part of the representation that are more lucky to be changed at run time. Nevertheless, this architecture is designed to accommodate all the OWL abilities, it is only matter of time for adding them. As an hint, you may want to use [Protege](http://protege.stanford.edu/) for more sophysticated manipulation that do not change at run time and load such ontology as a starting point for your systems.  
 
 #### API Capability
 
@@ -98,7 +100,7 @@ Remember that the type of *built descriptors* have always *Ground* consistent to
 |        `Sub` | `OWLClass`           |                 all the sub classes of the ground |
 |      `Super` | `OWLClass`           |               all the super classes of the ground |
 |   `Classify` | `OWLNamedIndividual` |       all the individuals belonging to the ground |
-| `Definition` | `MORRestriction`     | all the classes and the data/object properties cardinality restrictions (`min`, `max`, `exact`, `some`, `any`) that define the ground  |
+| `Definition` | `MORRestriction`     | all the classes and the data/object properties cardinality restrictions (`min`, `max`, `exact`, `some`, `any`) that define the ground. Considered as a unique intersection |
 
 ###### The `MORIndividual` interface collects all the semantic descriptions grounded on ontological individuals (i.e.: `MORGrounding<OWLNamedIndividual>`). Those are divided in:
 | Descriptor   | Axioms of                                        |                                                           Semantic |
@@ -116,8 +118,8 @@ Remember that the type of *built descriptors* have always *Ground* consistent to
 | `Equivalent` | `OWLObjectProperty` |      all the equivalent object properties to the ground |
 |        `Sub` | `OWLObjectProperty` |             all the sub object properties of the ground |
 |      `Super` | `OWLObjectProperty` |            all the object data properties of the ground |
-|      `Range` | `MORRestriction`    | all the classes and the data/object properties cardinality restrictions (`min`, `max`, `exact`, `some`, `any`) of the ground range |
-|     `Domain` | `MORRestriction`    | all the classes and the data/object properties cardinality restrictions (`min`, `max`, `exact`, `some`, `any`) of the ground domain |
+|      `Range` | `MORRestriction`    | all the classes and the data/object properties cardinality restrictions (`min`, `max`, `exact`, `some`, `any`) of the ground range. Considered as separate restrictions. |
+|     `Domain` | `MORRestriction`    | all the classes and the data/object properties cardinality restrictions (`min`, `max`, `exact`, `some`, `any`) of the ground domain. Considered as separate restrictions. |
 
 ###### The `MORDataProperty` interface collects all the semantic descriptions grounded on ontological data property (i.e.: `MORGrounding<OWLDataProperty>`). Those are divided in:
 | Descriptor   | Axioms of         |                                               Semantic |
@@ -127,7 +129,7 @@ Remember that the type of *built descriptors* have always *Ground* consistent to
 |        `Sub` | `OWLDataProperty` |              all the sub data properties of the ground |
 |      `Super` | `OWLDataProperty` |            all the super data properties of the ground |
 |      `Range` | `MORRestriction`  | all the data type (`Integer`, `Boolean`, `String`, `Double`, `Float` and `Long`) restrictions of the ground range |
-|     `Domain` | `MORRestriction`  | all the classes and the data/object properties cardinality restrictions (`min`, `max`, `exact`, `some`, `any`) of the ground domain |
+|     `Domain` | `MORRestriction`  | all the classes and the data/object properties cardinality restrictions (`min`, `max`, `exact`, `some`, `any`) of the ground domain. Considered as separate restrictions |
 
 
 

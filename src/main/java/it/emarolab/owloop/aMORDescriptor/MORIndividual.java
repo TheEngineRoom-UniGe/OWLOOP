@@ -608,37 +608,37 @@ public interface MORIndividual
         MORAxioms.DataSemantics getDataSemantics();
 
         /**
-         * A shortcut for {@link MORAxioms.DataSemantics#getLiteral(OWLDataProperty)}
+         * A shortcut for {@link MORAxioms.DataSemantics#getLink(OWLProperty)}
          * @param semantic the data property to look for its values.
          * @return a value of the given data property. {@code Null} if is not available.
          */
         default OWLLiteral getLiteral( OWLDataProperty semantic){
-            return getDataSemantics().getLiteral( semantic);
+            return getDataSemantics().getLink( semantic);
         }
         /**
-         * A shortcut for {@link MORAxioms.DataSemantics#getLiteral(OWLDataProperty)}
+         * A shortcut for {@link MORAxioms.DataSemantics#getLink(OWLProperty)}
          * @param semanticName the name of the data property to look for its values.
          * @return a value of the given data property. {@code Null} if is not available.
          */
         default OWLLiteral getLiteral( String semanticName){
-            return getDataSemantics().getLiteral( getOntology().getOWLDataProperty( semanticName));
+            return getDataSemantics().getLink( getOntology().getOWLDataProperty( semanticName));
         }
 
         /**
-         * A shortcut for {@link MORAxioms.DataSemantics#getLiterals(OWLDataProperty)}
+         * A shortcut for {@link MORAxioms.DataSemantics#getLinks(OWLProperty)}
          * @param semantic the data property to look for its values.
          * @return all the values of the given data property. An {@code empty} {@link HashSet} if is not available.
          */
-        default Set<OWLLiteral> getLiterals( OWLDataProperty semantic){
-            return getDataSemantics().getLiterals( semantic);
+        default Axioms<OWLLiteral> getLiterals( OWLDataProperty semantic){
+            return getDataSemantics().getLinks( semantic);
         }
         /**
-         * A shortcut for {@link MORAxioms.DataSemantics#getLiterals(OWLDataProperty)}
+         * A shortcut for {@link MORAxioms.DataSemantics#getLinks(OWLProperty)}
          * @param semanticName the name of the data property to look for its values.
          * @return all the values of the given data property. An {@code empty} {@link HashSet} if is not available.
          */
-        default Set<OWLLiteral> getLiterals( String semanticName){
-            return getDataSemantics().getLiterals( getOntology().getOWLDataProperty( semanticName));
+        default Axioms<OWLLiteral> getLiterals( String semanticName){
+            return getDataSemantics().getLinks( getOntology().getOWLDataProperty( semanticName));
         }
 
 
@@ -924,7 +924,7 @@ public interface MORIndividual
         MORAxioms.ObjectSemantics getObjectSemantics();
 
         /**
-         * A shortcut for {@link MORAxioms.ObjectSemantics#getLink(OWLObjectProperty)}
+         * A shortcut for {@link MORAxioms.ObjectSemantics#getLink(OWLProperty)}
          * @param semantic the object property to look for its values.
          * @return a value of the given object property. {@code Null} if is not available.
          */
@@ -932,7 +932,7 @@ public interface MORIndividual
             return getObjectSemantics().getLink( semantic);
         }
         /**
-         * A shortcut for {@link MORAxioms.ObjectSemantics#getLink(OWLObjectProperty)}
+         * A shortcut for {@link MORAxioms.ObjectSemantics#getLink(OWLProperty)}
          * @param semanticName the name of the object property to look for its values.
          * @return a value of the given object property. {@code Null} if is not available.
          */
@@ -941,19 +941,19 @@ public interface MORIndividual
         }
 
         /**
-         * A shortcut for {@link MORAxioms.ObjectSemantics#getLinks(OWLObjectProperty)}
+         * A shortcut for {@link MORAxioms.ObjectSemantics#getLinks(OWLProperty)}
          * @param semantic the object property to look for its values.
          * @return all the values of the given object property. An {@code empty} {@link HashSet} if is not available.
          */
-        default Set<OWLNamedIndividual> getObjects( OWLObjectProperty semantic){
+        default Axioms<OWLNamedIndividual> getObjects( OWLObjectProperty semantic){
             return getObjectSemantics().getLinks( semantic);
         }
         /**
-         * A shortcut for {@link MORAxioms.ObjectSemantics#getLink(OWLObjectProperty)}
+         * A shortcut for {@link MORAxioms.ObjectSemantics#getLinks(OWLProperty)}
          * @param semanticName the name of the object property to look for its values.
          * @return all the values of the given object property. {@code Null} if is not available.
          */
-        default Set<OWLNamedIndividual> getObjects( String semanticName){
+        default Axioms<OWLNamedIndividual> getObjects( String semanticName){
             return getObjectSemantics().getLinks( getOntology().getOWLObjectProperty( semanticName));
         }
 

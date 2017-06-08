@@ -547,10 +547,13 @@ public interface MORConcept
      *     It specify how to {@link #queryDefinitionConcept()} and {@link #writeSemantic()} for 
      *     definition (i.e.: {@link SemanticRestriction}) applied to the described one 
      *     (i.e.: {@link #getInstance()}).
+     *     All the restriction managed by this class are considered as a unique class definition
+     *     made by their intersection.
      *     <br>
      *     <b>ATTENTION</b>: the {@link #writeSemantic()} method implemented by
      *     this constructor uses {@link org.semanticweb.owlapi.change.ConvertSuperClassesToEquivalentClass}
-     *     and it may affect {@link MORConcept.Super} or {@link MORConcept.Sub} descriptors. Call
+     *     and {@link org.semanticweb.owlapi.change.ConvertEquivalentClassesToSuperClasses}.
+     *     It may affect {@link MORConcept.Super} or {@link MORConcept.Sub} descriptors. Call
      *     always this first.
      * </p>
      * <div style="text-align:center;"><small>
@@ -564,6 +567,9 @@ public interface MORConcept
     interface Define
             extends Concept.Define<OWLReferences, OWLClass, SemanticRestriction>,
                     MORConcept{
+
+        // todo make manipulating a Set<SemanticRestriction> to manage with restrictions that are
+        // in intersection or in conjunctions
 
         /**
          * Creates a new class equivalence restriction (to be in conjunction with the others in the specific {@link Axioms})
@@ -1291,7 +1297,14 @@ public interface MORConcept
 
         @Override // see super classes for documentation
         default MORAxioms.Restrictions queryDefinitionConcept(){
-            MORAxioms.Restrictions set = new MORAxioms.Restrictions(getOntology().getRestrictions(getInstance()));
+            Set<ApplyingRestriction> restrictions = getOntology().getRestrictions(getInstance());
+            for ( ApplyingRestriction a : restrictions)
+                if ( a.getRestrictionType().isRestrictionOnClass())
+                    if ( a.getValue().equals( getInstance())){
+                        restrictions.remove( a);
+                        break;
+                    }
+            MORAxioms.Restrictions set = new MORAxioms.Restrictions( restrictions);
             set.setSingleton( getDefinitionConcept().isSingleton());
             return set;
         }
@@ -1303,13 +1316,19 @@ public interface MORConcept
                 if ( to == null)
                     return getIntent( null);
                 List<OWLOntologyChange> changes = new ArrayList<>();
-                for (SemanticRestriction a : to.getToAdd())
-                    changes.add(getOntology().addRestriction(a));
-                for (SemanticRestriction r : to.getToRemove())
-                    changes.add(getOntology().removeRestriction(r));
 
+                if ( to.getToAdd().size() > 0 | to.getToRemove().size() > 0){
+                    //noinspection unchecked
+                    changes.addAll( getOntology().convertEquivalentClassesToSuperClasses( getInstance()));
+                    for (SemanticRestriction r : to.getToRemove())
+                        changes.add( getOntology().removeRestriction( r));
 
-                changes.addAll(getOntology().convertSuperClassesToEquivalentClass(getInstance()));
+                    for (SemanticRestriction a : to.getToAdd())
+                        changes.add(getOntology().addRestriction(a));
+
+                    changes.addAll(getOntology().convertSuperClassesToEquivalentClass(getInstance(),
+                            getDefinitionConcept()));
+                }
                 return getChangingIntent(to, changes);
             } catch (Exception e){
                 e.printStackTrace();

@@ -915,6 +915,13 @@
     
 
 
+    <!-- http://www.semanticweb.org/emaroLab/luca-buoncompagni/sit#DisjointClass -->
+
+
+    <owl:Class rdf:about="http://www.semanticweb.org/emaroLab/luca-buoncompagni/sit#DisjointClass"/>
+    
+
+
     <!-- http://www.semanticweb.org/emaroLab/luca-buoncompagni/sit#GeometricPrimitive -->
 
 
@@ -945,13 +952,6 @@
     
 
 
-    <!-- http://www.semanticweb.org/emaroLab/luca-buoncompagni/sit#Object -->
-
-
-    <owl:Class rdf:about="http://www.semanticweb.org/emaroLab/luca-buoncompagni/sit#Object"/>
-    
-
-
     <!-- http://www.semanticweb.org/emaroLab/luca-buoncompagni/sit#Orientable -->
 
 
@@ -979,7 +979,6 @@
             </owl:Class>
         </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/emaroLab/luca-buoncompagni/sit#GeometricPrimitive"/>
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/emaroLab/luca-buoncompagni/sit#Object"/>
         <owl:disjointWith rdf:resource="http://www.semanticweb.org/emaroLab/luca-buoncompagni/sit#Sphere"/>
     </owl:Class>
     
@@ -1009,6 +1008,7 @@
             </owl:Class>
         </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/emaroLab/luca-buoncompagni/sit#Orientable"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/emaroLab/luca-buoncompagni/sit#Sphere"/>
     </owl:Class>
     
 
@@ -1034,7 +1034,13 @@
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/emaroLab/luca-buoncompagni/sit#Cone"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/emaroLab/luca-buoncompagni/sit#Cylinder"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/emaroLab/luca-buoncompagni/sit#DisjointClass"/>
                     <rdf:Description rdf:about="http://www.semanticweb.org/emaroLab/luca-buoncompagni/sit#GeometricPrimitive"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/emaroLab/luca-buoncompagni/sit#Orientable"/>
+                    <rdf:Description rdf:about="http://www.semanticweb.org/emaroLab/luca-buoncompagni/sit#Plane"/>
+                    <rdf:Description rdf:about="http://www.w3.org/2002/07/owl#Nothing"/>
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="http://www.semanticweb.org/emaroLab/luca-buoncompagni/sit#has-sphere_radius"/>
                         <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
@@ -1043,7 +1049,6 @@
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/emaroLab/luca-buoncompagni/sit#GeometricPrimitive"/>
     </owl:Class>
     
 
@@ -1080,6 +1085,15 @@
         <defines-th_coaxiality rdf:datatype="http://www.w3.org/2001/XMLSchema#float">0.05</defines-th_coaxiality>
         <defines-th_parallelism rdf:datatype="http://www.w3.org/2001/XMLSchema#float">0.7</defines-th_parallelism>
         <defines-th_perpendicularity rdf:datatype="http://www.w3.org/2001/XMLSchema#float">0.7</defines-th_perpendicularity>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/emaroLab/luca-buoncompagni/sit#Individual-A -->
+
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/emaroLab/luca-buoncompagni/sit#Individual-A">
+        <rdf:type rdf:resource="http://www.semanticweb.org/emaroLab/luca-buoncompagni/sit#Sphere"/>
     </owl:NamedIndividual>
     
 
