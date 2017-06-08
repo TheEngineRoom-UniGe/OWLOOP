@@ -106,8 +106,8 @@ Remember that the type of *built descriptors* have always *Ground* consistent to
 |   `Disjoint` | `OWLNamedIndividual`                             |                      all the different individuals from the ground |
 | `Equivalent` | `OWLNamedIndividual`                             |                             all the same individuals as the ground |
 |       `Type` | `OWLClass`                                       |                        all the classes in which the ground belongs |
-| `ObjectLink` | `OWLObjectProperty` sets of `OWLNamedIndividual` | the specified object properties (and all their values) applied to the ground |
-|   `DataLink` | `OWLDataProperty` sets of `OWLLiteral`           |   the specified data properties (and all their values) applied to the ground |
+| `ObjectLink` | `OWLObjectProperty` sets of `OWLNamedIndividual` | all (or the specified) object properties (and all their values) applied to the ground |
+|   `DataLink` | `OWLDataProperty` sets of `OWLLiteral`           |   all (or the specified) data properties (and all their values) applied to the ground |
 
 ###### The `MORObjectProperty` interface collects all the semantic descriptions grounded on ontological object property (i.e.: `MORGrounding<OWLObjectProperty>`). Those are divided in:
 | Descriptor   | Axioms of           |                                                Semantic |
