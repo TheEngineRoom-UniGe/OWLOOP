@@ -132,6 +132,13 @@ Remember that the type of *built descriptors* have always *Ground* consistent to
 |     `Domain` | `MORRestriction`  | all the classes and the data/object properties cardinality restrictions (`min`, `max`, `exact`, `some`, `any`) of the ground domain. Considered as separate restrictions |
 
 
+##### Known Problem
+
+We are currently working in a known issue about the manipulation of a class definition (especially on removing restrictions). 
+This step depends on the super and sub classes of the class to be manipulated. In order to go around it,
+for the moment you may want to be very careful about the hierarchy of the class to manipulate (this strongly depends on the shape of your ontology) or clear its
+definition and regenerate it from scratch, instead of updating. 
+
 
 # 
 
