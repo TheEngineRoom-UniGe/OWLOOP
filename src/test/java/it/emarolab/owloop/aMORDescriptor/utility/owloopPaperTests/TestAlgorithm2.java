@@ -13,8 +13,6 @@ import org.semanticweb.owlapi.model.OWLNamedIndividual;
 
 import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
-
 public class TestAlgorithm2 {
 
     private static ObjLinkIndividualDesc individual;
@@ -44,7 +42,7 @@ public class TestAlgorithm2 {
     }
 
     @Test
-    public void Algorithm2() {
+    public void algorithm2() {
 
         //          p: ObjLinkIndividualDesc -> ground: individual, expression: objectProperty (build: ??ObjectProperty).
         // R=[r,r,..]: TypeIndividualDesc    -> ground: individual, expression: classOf        (build: DefSubClassDesc),

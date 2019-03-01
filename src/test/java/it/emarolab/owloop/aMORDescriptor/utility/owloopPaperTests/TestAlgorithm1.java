@@ -30,7 +30,7 @@ public class TestAlgorithm1 {
     }
 
     @Test
-    public void Algorithm1() {
+    public void algorithm1() {
 
         String pose = "Corridor1";
 
