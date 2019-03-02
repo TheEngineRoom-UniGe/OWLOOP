@@ -601,6 +601,9 @@ public interface Semantic {
             return getGround().getGroundInstance();
         }
 
+        /** Added by Yusha*/
+        String getInstanceName();
+
         /**
          * This method synchronise the reasoner among all the ontology of {@code this}
          * description.

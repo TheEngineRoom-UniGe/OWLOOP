@@ -145,6 +145,11 @@ abstract public class MORBase<J extends OWLObject>
      */
     abstract protected GroundBase<J> getNewGround(OWLReferences ontology, String instance);
 
+    /** Returns the Ground instance's name as a String*/
+    public String getInstanceName() {
+        return getOntology().getOWLObjectName(getGroundInstance());
+    }
+
     @Override // see super class for documentation
     public GroundBase<J> getGround() {
         return ground;

@@ -36,27 +36,16 @@ public class TestAlgorithm1 {
 
         MORFullIndividual d = individual;
         d.readSemantic();
-
         d.addTypeIndividual("Robot");
         d.addObject("isIn",pose);
         d.writeSemantic();
+
         assertSemantic();
     }
 
     private void assertSemantic(){//         asserts that the state of the java representation is equal to the state of the ontology
 
-        assertEquals( individual.getDisjointIndividual(), individual.queryDisjointIndividual());
-        assertEquals( individual.getEquivalentIndividual(), individual.queryEquivalentIndividual());
-
         assertEquals( individual.getTypeIndividual(), individual.queryTypeIndividual());
-        System.out.println(individual.getTypeIndividual());
-        System.out.println(individual.queryTypeIndividual());
-
         assertEquals( individual.getObjectSemantics(), individual.queryObject());
-        System.out.println("==========");
-        System.out.println(individual.getObjectSemantics());
-        System.out.println(individual.queryObject());
-
-        assertEquals( individual.getDataSemantics(), individual.queryDataIndividual());
     }
 }

@@ -5,7 +5,6 @@ import it.emarolab.amor.owlInterface.OWLReferencesInterface;
 import it.emarolab.amor.owlInterface.SemanticRestriction;
 import it.emarolab.owloop.aMORDescriptor.MORAxioms;
 import it.emarolab.owloop.aMORDescriptor.utility.concept.MORFullConcept;
-import it.emarolab.owloop.aMORDescriptor.utility.individual.MORFullIndividual;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,7 +16,7 @@ import static org.junit.Assert.assertEquals;
 
 public class TestAlgorithm2 {
 
-    private static ObjLinkIndividualDesc individual;
+    private static ObjLinkIndividualDesc d;
 
     private OWLReferences ontoref;
 
@@ -34,43 +33,44 @@ public class TestAlgorithm2 {
                 true
         );
 
-        individual = new ObjLinkIndividualDesc("Robot1", ontoref);
+        d = new ObjLinkIndividualDesc("Robot1", ontoref);
     }
 
     @AfterClass // called after all @Test-s
     public static void save() {
 
-        // individual.saveOntology( "src/test/resources/owloopTestOntology.owl");
+        // d.saveOntology( "src/test/resources/owloopTestOntology.owl");
     }
 
     @Test
     public void Algorithm2() {
 
-        //          p: ObjLinkIndividualDesc -> ground: individual, expression: objectProperty (build: ??ObjectProperty).
-        // R=[r,r,..]: TypeIndividualDesc    -> ground: individual, expression: classOf        (build: DefSubClassDesc),
+        //          p: ObjLinkIndividualDesc -> ground: d, expression: objectProperty (build: ??ObjectProperty).
+        // R=[r,r,..]: TypeIndividualDesc    -> ground: d, expression: classOf        (build: DefSubClassDesc),
         // T=[t,t,..]: DefSubClassDesc       -> ground: class,      expression: subclass       (build: ??ClassDescr).
         //                                                                      definition     (build: CANNOT).
 
         // setting the knowledge in the ontology
-        String ISIN_PROPERTY = "isIn";
-        ObjLinkIndividualDesc d = individual;
-        d.addObject( ISIN_PROPERTY, "Room1"); // just care this object property from the individual d while readSematic
+        d.addObject( "isIn", "Room1"); // just care this object property from the d d while readSematic
         d.writeSemantic();
 
         // get knowledge form the ontology
-        OWLNamedIndividual robotPlace = d.getObject(ISIN_PROPERTY); // ...
+        OWLNamedIndividual robotPlace = d.getObject("isIn"); // ...
         TypeIndividualDesc p = new TypeIndividualDesc(robotPlace, ontoref); // ... manually "build"
         p.readSemantic();
         Set<DefSubClassDesc> R = p.buildTypeIndividual();
-        for( DefSubClassDesc r : R){
-            Set<MORFullConcept> T = r.buildSubConcept();
-            if( T.size() <= 1) { // owl:Nothing is always there
-                System.out.print("'" + ontoref.getOWLObjectName(p.getInstance()) + "'" + " is of Type " + "'" + ontoref.getOWLObjectName(r.getInstance()) + "'");
+        for( DefSubClassDesc r : R ){
 
+            Set<MORFullConcept> T = r.buildSubConcept();
+            if( T.size() <= 1 ) { // owl:Nothing is always there
+
+                System.out.print("'" + p.getInstanceName() + "'" + " is of Type " + "'" + r.getInstanceName() + "'");
                 MORAxioms.Restrictions restrictions = r.getDefinitionConcept();
-                for( SemanticRestriction rest : restrictions){
-                    if( rest instanceof SemanticRestriction.ClassRestrictedOnExactObject){
-                        System.out.println( "\n" + "'" + ontoref.getOWLObjectName(r.getInstance()) + "'" + " is defined with Exact Cardinality Restriction " + "'" + rest + "'");
+                for( SemanticRestriction rest : restrictions ){
+
+                    if( rest instanceof SemanticRestriction.ClassRestrictedOnExactObject ){
+
+                        System.out.println( "\n" + "'" + r.getInstanceName() + "'" + " is defined with Exact Cardinality Restriction " + "'" + rest + "'");
                     }
                 }
             }
