@@ -50,24 +50,26 @@ public class TestAlgorithm2 {
         //                                                                      definition     (build: CANNOT).
 
         // setting the knowledge in the ontology
-        String ISIN_PROPERTY = "isIn";
         ObjLinkIndividualDesc d = individual;
-        d.addObject( ISIN_PROPERTY, "Room1"); // just care this object property from the individual d while readSematic
+        d.addObject( "isIn", "Room1"); // just care this object property from the individual d while readSematic
         d.writeSemantic();
 
         // get knowledge form the ontology
-        OWLNamedIndividual robotPlace = d.getObject(ISIN_PROPERTY); // ...
+        OWLNamedIndividual robotPlace = d.getObject("isIn");
         TypeIndividualDesc p = new TypeIndividualDesc(robotPlace, ontoref); // ... manually "build"
         p.readSemantic();
         Set<DefSubClassDesc> R = p.buildTypeIndividual();
         for( DefSubClassDesc r : R){
+
             Set<MORFullConcept> T = r.buildSubConcept();
             if( T.size() <= 1) { // owl:Nothing is always there
-                System.out.print("'" + ontoref.getOWLObjectName(p.getInstance()) + "'" + " is of Type " + "'" + ontoref.getOWLObjectName(r.getInstance()) + "'");
 
+                System.out.print("'" + ontoref.getOWLObjectName(p.getInstance()) + "'" + " is of Type " + "'" + ontoref.getOWLObjectName(r.getInstance()) + "'");
                 MORAxioms.Restrictions restrictions = r.getDefinitionConcept();
                 for( SemanticRestriction rest : restrictions){
+
                     if( rest instanceof SemanticRestriction.ClassRestrictedOnExactObject){
+
                         System.out.println( "\n" + "'" + ontoref.getOWLObjectName(r.getInstance()) + "'" + " is defined with Exact Cardinality Restriction " + "'" + rest + "'");
                     }
                 }
