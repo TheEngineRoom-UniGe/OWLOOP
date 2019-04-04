@@ -5,6 +5,7 @@ import it.emarolab.amor.owlInterface.OWLReferencesInterface;
 import it.emarolab.amor.owlInterface.SemanticRestriction;
 import it.emarolab.owloop.aMORDescriptor.MORAxioms;
 import it.emarolab.owloop.aMORDescriptor.utility.concept.MORFullConcept;
+import it.emarolab.owloop.aMORDescriptor.utility.individual.MORFullIndividual;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
@@ -86,12 +87,12 @@ public class TestAlgorithm2 {
         d.writeSemantic();
 
         MORFullIndividual d1 = new MORFullIndividual("Robot1", ontoref);
-        d1.readSemantic();
+        d1.readSemantic();          //at this point the descriptor reads all knowledge
         System.out.println( " 11 " + d1);
 
         MORFullIndividual d2 = new MORFullIndividual("Robot1", ontoref);
         d2.addObject( "hasProp1");
         d2.addObject( "hasProp2");
-        d2.readSemantic();
+        d2.readSemantic();          //at this point the descriptor reads only particular knowledge
         System.out.println( " 22 " + d2);
 */

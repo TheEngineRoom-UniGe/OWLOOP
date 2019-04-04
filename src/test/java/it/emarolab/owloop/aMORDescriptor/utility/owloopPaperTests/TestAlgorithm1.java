@@ -38,13 +38,12 @@ public class TestAlgorithm1 {
         d.readSemantic();
         d.addObject("isIn",pose,true); //singleton True means with replacement
         d.writeSemantic();
-
         assertSemantic();
     }
 
     private void assertSemantic(){//         asserts that the state of the java representation is equal to the state of the ontology
 
-        assertEquals( individual.getTypeIndividual(), individual.queryTypeIndividual());
+        assertEquals( individual.getTypeIndividual(), individual.queryTypeIndividual()); //checks whether readSemantic() works properly
         assertEquals( individual.getObjectSemantics(), individual.queryObject());
     }
 }
