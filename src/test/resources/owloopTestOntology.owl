@@ -115,13 +115,6 @@
     
 
 
-    <!-- http://www.semanticweb.org/yusha_temporary/owloopTestOntology#Robot -->
-
-
-    <owl:Class rdf:about="http://www.semanticweb.org/yusha_temporary/owloopTestOntology#Robot"/>
-    
-
-
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
@@ -150,7 +143,6 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/yusha_temporary/owloopTestOntology#Robot1">
         <rdf:type rdf:resource="http://www.semanticweb.org/yusha_temporary/owloopTestOntology#ROBOT"/>
-        <rdf:type rdf:resource="http://www.semanticweb.org/yusha_temporary/owloopTestOntology#Robot"/>
         <isIn rdf:resource="http://www.semanticweb.org/yusha_temporary/owloopTestOntology#Corridor1"/>
     </owl:NamedIndividual>
     

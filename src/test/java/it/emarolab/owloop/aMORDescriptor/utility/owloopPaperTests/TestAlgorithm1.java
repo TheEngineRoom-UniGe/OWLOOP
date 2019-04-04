@@ -36,8 +36,7 @@ public class TestAlgorithm1 {
 
         MORFullIndividual d = individual;
         d.readSemantic();
-        d.addTypeIndividual("Robot");
-        d.addObject("isIn",pose);
+        d.addObject("isIn",pose,true); //singleton True means with replacement
         d.writeSemantic();
 
         assertSemantic();
