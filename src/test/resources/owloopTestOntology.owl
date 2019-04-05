@@ -29,6 +29,20 @@
     
 
 
+    <!-- http://www.semanticweb.org/yusha_temporary/owloopTestOntology#hasProp1 -->
+
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/yusha_temporary/owloopTestOntology#hasProp1"/>
+    
+
+
+    <!-- http://www.semanticweb.org/yusha_temporary/owloopTestOntology#hasProp2 -->
+
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/yusha_temporary/owloopTestOntology#hasProp2"/>
+    
+
+
     <!-- http://www.semanticweb.org/yusha_temporary/owloopTestOntology#isIn -->
 
 
@@ -142,6 +156,8 @@
 
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/yusha_temporary/owloopTestOntology#Robot1">
+        <hasProp1 rdf:resource="http://www.semanticweb.org/yusha_temporary/owloopTestOntology#Y"/>
+        <hasProp2 rdf:resource="http://www.semanticweb.org/yusha_temporary/owloopTestOntology#Y"/>
         <isIn rdf:resource="http://www.semanticweb.org/yusha_temporary/owloopTestOntology#Corridor1"/>
     </owl:NamedIndividual>
     
@@ -162,6 +178,13 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/yusha_temporary/owloopTestOntology#Room2">
         <rdf:type rdf:resource="http://www.semanticweb.org/yusha_temporary/owloopTestOntology#ROOM"/>
     </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/yusha_temporary/owloopTestOntology#Y -->
+
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/yusha_temporary/owloopTestOntology#Y"/>
     
 
 
