@@ -5,7 +5,6 @@ import it.emarolab.amor.owlInterface.OWLReferencesInterface;
 import it.emarolab.amor.owlInterface.SemanticRestriction;
 import it.emarolab.owloop.aMORDescriptor.MORAxioms;
 import it.emarolab.owloop.aMORDescriptor.utility.concept.MORFullConcept;
-import it.emarolab.owloop.aMORDescriptor.utility.individual.MORFullIndividual;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,7 +16,7 @@ import static org.junit.Assert.assertEquals;
 
 public class TestAlgorithm2 {
 
-    private static ObjLinkIndividualDesc d;
+    private static ObjLinkIndividualDesc d1;
 
     private OWLReferences ontoref;
 
@@ -34,47 +33,48 @@ public class TestAlgorithm2 {
                 true
         );
 
-    d = new ObjLinkIndividualDesc("Robot1", ontoref);           // Initialize a DESC with ground as Robot1
+    d1 = new ObjLinkIndividualDesc("Robot1", ontoref);           // Initialize a DESC with ground as Robot1
     }
 
     @AfterClass // called after all @Test-s
     public static void save() {
 
-        // d.saveOntology( "src/test/resources/owloopTestOntology.owl");
+        // d1.saveOntology( "src/test/resources/owloopTestOntology.owl");
     }
 
     @Test
     public void Algorithm2() {
 
-        //          p: ObjLinkIndividualDesc -> ground: d,          expression: objectProperty (build: ??ObjectProperty).
-        // R=[r,r,..]: TypeIndividualDesc    -> ground: d,          expression: classOf        (build: DefSubClassDesc).
+        //          p: ObjLinkIndividualDesc -> ground: d1,          expression: objectProperty (build: ??ObjectProperty).
+        // R=[r,r,..]: TypeIndividualDesc    -> ground: d1,          expression: classOf        (build: DefSubClassDesc).
         // T=[t,t,..]: DefSubClassDesc       -> ground: class,      expression: subclass       (build: ??ClassDescr).
         //                                                                      definition     (build: CANNOT).
 
         // Assuming that knowledge of the Robot's position is saved in the ontology after running Algo.1
         // Get knowledge form the ontology
-        d.readSemantic();                                                   // READ
-        OWLNamedIndividual robotPlace = d.getObject("isIn");    // getObject("isIn")
+        d1.addObject("isIn");                                        // To read knowledge specific to the property "isIn"
+        d1.readSemantic();                                                   // READ
+        OWLNamedIndividual robotPlace = d1.getObject("isIn");    // getObject("isIn")
 
-        TypeIndividualDesc p = new TypeIndividualDesc(robotPlace, ontoref); // Initialize a DESC with ground as Corridor1
-        p.readSemantic();                                                   // READ
-        Set<DefSubClassDesc> R = p.buildTypeIndividual();                   // BUILD Type of an Individual --> CORRIDOR,LOCATION,Top
-        for( DefSubClassDesc r : R ){
+        TypeIndividualDesc d2 = new TypeIndividualDesc(robotPlace, ontoref); // Initialize a DESC with ground as Corridor1
+        d2.readSemantic();                                                   // READ
+        Set<DefSubClassDesc> DT = d2.buildTypeIndividual();                   // BUILD Type of an Individual --> CORRIDOR,LOCATION,Top
+        for( DefSubClassDesc d3 : DT ){
 
-            Set<MORFullConcept> T = r.buildSubConcept();                    // BUILD Sub of a Concept --> we have the sub-classes of all the 3 above
-            if( T.size() <= 1 ) { // owl:Nothing is always there            // If less than or equal to 1
+            Set<MORFullConcept> DS = d3.buildSubConcept();                    // BUILD Sub of a Concept --> we have the sub-classes of all the 3 above
+            if( DS.size() <= 1 ) { // owl:Nothing is always there            // If less than or equal to 1
 
-                System.out.print("'" + p.getInstanceName() + "'" + " is of Type " + "'" + r.getInstanceName() + "'"); // PRINT
-                MORAxioms.Restrictions restrictions = r.getDefinitionConcept(); //GET DEFINITION
+                System.out.print("'" + d2.getInstanceName() + "'" + " is of Type " + "'" + d3.getInstanceName() + "'"); // PRINT
+                MORAxioms.Restrictions restrictions = d3.getDefinitionConcept(); //GET DEFINITION
                 for( SemanticRestriction rest : restrictions ){
 
                     if( rest instanceof SemanticRestriction.ClassRestrictedOnExactObject ){
 
-                        System.out.println( "\n" + "'" + r.getInstanceName() + "'" + " is defined with Exact Cardinality Restriction " + "'" + rest + "'"); //PRINT
+                        System.out.println( "\n" + "'" + d3.getInstanceName() + "'" + " is defined with Exact Cardinality Restriction " + "'" + rest + "'"); //PRINT
                     }
                     else if( rest instanceof SemanticRestriction.ClassRestrictedOnMinObject ){
 
-                        System.out.println( "\n" + "'" + r.getInstanceName() + "'" + " is defined with Min Cardinality Restriction " + "'" + rest + "'"); //PRINT
+                        System.out.println( "\n" + "'" + d3.getInstanceName() + "'" + " is defined with Min Cardinality Restriction " + "'" + rest + "'"); //PRINT
                     }
                 }
             }
@@ -85,9 +85,9 @@ public class TestAlgorithm2 {
 /*
 //      Regarding the use of readSemantic()
 
-        d.addObject( "hasProp1", "X");
-        d.addObject( "hasProp2", "X");
-        d.writeSemantic();
+        d1.addObject( "hasProp1", "X");
+        d1.addObject( "hasProp2", "X");
+        d1.writeSemantic();
 
         MORFullIndividual d1 = new MORFullIndividual("Robot1", ontoref);
         d1.readSemantic();          //at this point the descriptor reads all knowledge
