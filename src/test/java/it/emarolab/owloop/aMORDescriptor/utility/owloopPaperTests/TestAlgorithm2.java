@@ -34,7 +34,7 @@ public class TestAlgorithm2 {
                 true
         );
 
-        d = new ObjLinkIndividualDesc("Robot1", ontoref);
+    d = new ObjLinkIndividualDesc("Robot1", ontoref);           // Initialize a DESC with ground as Robot1
     }
 
     @AfterClass // called after all @Test-s
@@ -53,27 +53,28 @@ public class TestAlgorithm2 {
 
         // Assuming that knowledge of the Robot's position is saved in the ontology after running Algo.1
         // Get knowledge form the ontology
-        d.readSemantic();
-        OWLNamedIndividual robotPlace = d.getObject("isIn"); // ...
-        TypeIndividualDesc p = new TypeIndividualDesc(robotPlace, ontoref); // ... manually "build"
-        p.readSemantic();
-        Set<DefSubClassDesc> R = p.buildTypeIndividual();
+        d.readSemantic();                                                   // READ
+        OWLNamedIndividual robotPlace = d.getObject("isIn");    // getObject("isIn")
+
+        TypeIndividualDesc p = new TypeIndividualDesc(robotPlace, ontoref); // Initialize a DESC with ground as Corridor1
+        p.readSemantic();                                                   // READ
+        Set<DefSubClassDesc> R = p.buildTypeIndividual();                   // BUILD Type of an Individual --> CORRIDOR,LOCATION,Top
         for( DefSubClassDesc r : R ){
 
-            Set<MORFullConcept> T = r.buildSubConcept();
-            if( T.size() <= 1 ) { // owl:Nothing is always there
+            Set<MORFullConcept> T = r.buildSubConcept();                    // BUILD Sub of a Concept --> we have the sub-classes of all the 3 above
+            if( T.size() <= 1 ) { // owl:Nothing is always there            // If less than or equal to 1
 
-                System.out.print("'" + p.getInstanceName() + "'" + " is of Type " + "'" + r.getInstanceName() + "'");
-                MORAxioms.Restrictions restrictions = r.getDefinitionConcept();
+                System.out.print("'" + p.getInstanceName() + "'" + " is of Type " + "'" + r.getInstanceName() + "'"); // PRINT
+                MORAxioms.Restrictions restrictions = r.getDefinitionConcept(); //GET DEFINITION
                 for( SemanticRestriction rest : restrictions ){
 
                     if( rest instanceof SemanticRestriction.ClassRestrictedOnExactObject ){
 
-                        System.out.println( "\n" + "'" + r.getInstanceName() + "'" + " is defined with Exact Cardinality Restriction " + "'" + rest + "'");
+                        System.out.println( "\n" + "'" + r.getInstanceName() + "'" + " is defined with Exact Cardinality Restriction " + "'" + rest + "'"); //PRINT
                     }
                     else if( rest instanceof SemanticRestriction.ClassRestrictedOnMinObject ){
 
-                        System.out.println( "\n" + "'" + r.getInstanceName() + "'" + " is defined with Min Cardinality Restriction " + "'" + rest + "'");
+                        System.out.println( "\n" + "'" + r.getInstanceName() + "'" + " is defined with Min Cardinality Restriction " + "'" + rest + "'"); //PRINT
                     }
                 }
             }
