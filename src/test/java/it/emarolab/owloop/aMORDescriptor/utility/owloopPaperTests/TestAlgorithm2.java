@@ -47,7 +47,7 @@ public class TestAlgorithm2 {
     public void Algorithm2() {
 
         //          p: ObjLinkIndividualDesc -> ground: d,          expression: objectProperty (build: ??ObjectProperty).
-        // R=[r,r,..]: TypeIndividualDesc    -> ground: d,          expression: classOf        (build: DefSubClassDesc),
+        // R=[r,r,..]: TypeIndividualDesc    -> ground: d,          expression: classOf        (build: DefSubClassDesc).
         // T=[t,t,..]: DefSubClassDesc       -> ground: class,      expression: subclass       (build: ??ClassDescr).
         //                                                                      definition     (build: CANNOT).
 
