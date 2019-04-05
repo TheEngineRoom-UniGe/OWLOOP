@@ -46,16 +46,14 @@ public class TestAlgorithm2 {
     @Test
     public void Algorithm2() {
 
-        //          p: ObjLinkIndividualDesc -> ground: d, expression: objectProperty (build: ??ObjectProperty).
-        // R=[r,r,..]: TypeIndividualDesc    -> ground: d, expression: classOf        (build: DefSubClassDesc),
+        //          p: ObjLinkIndividualDesc -> ground: d,          expression: objectProperty (build: ??ObjectProperty).
+        // R=[r,r,..]: TypeIndividualDesc    -> ground: d,          expression: classOf        (build: DefSubClassDesc),
         // T=[t,t,..]: DefSubClassDesc       -> ground: class,      expression: subclass       (build: ??ClassDescr).
         //                                                                      definition     (build: CANNOT).
 
-        // setting the knowledge in the ontology
-        d.addObject( "isIn", "Room1"); // just care this object property from the d d while readSematic
-        d.writeSemantic();
-
-        // get knowledge form the ontology
+        // Assuming that knowledge of the Robot's position is saved in the ontology after running Algo.1
+        // Get knowledge form the ontology
+        d.readSemantic();
         OWLNamedIndividual robotPlace = d.getObject("isIn"); // ...
         TypeIndividualDesc p = new TypeIndividualDesc(robotPlace, ontoref); // ... manually "build"
         p.readSemantic();
@@ -72,6 +70,10 @@ public class TestAlgorithm2 {
                     if( rest instanceof SemanticRestriction.ClassRestrictedOnExactObject ){
 
                         System.out.println( "\n" + "'" + r.getInstanceName() + "'" + " is defined with Exact Cardinality Restriction " + "'" + rest + "'");
+                    }
+                    else if( rest instanceof SemanticRestriction.ClassRestrictedOnMinObject ){
+
+                        System.out.println( "\n" + "'" + r.getInstanceName() + "'" + " is defined with Min Cardinality Restriction " + "'" + rest + "'");
                     }
                 }
             }
