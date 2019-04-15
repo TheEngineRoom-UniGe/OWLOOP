@@ -133,7 +133,7 @@ public interface ObjectProperty<O,J>
     interface Inverse<O,J,D extends ObjectProperty<O,J>>
             extends ObjectProperty<O,J>{
 
-        @Override // see documentation on Semantic.Descriptor.readSemantic
+        @Override // see documentation on Semantic.descriptor.readSemantic
         default List<MappingIntent> readSemantic(){
             try {
                 Axioms.SynchronisationIntent<J> from = synchroniseInverseObjectPropertyFromSemantic();
@@ -250,7 +250,7 @@ public interface ObjectProperty<O,J>
     interface Disjoint<O,J,D extends ObjectProperty<O,J>>
             extends ObjectProperty<O,J>{
 
-        @Override // see documentation on Semantic.Descriptor.readSemantic
+        @Override // see documentation on Semantic.descriptor.readSemantic
         default List<MappingIntent> readSemantic(){
             try {
                 Axioms.SynchronisationIntent<J> from = synchroniseDisjointObjectPropertyFromSemantic();
@@ -367,7 +367,7 @@ public interface ObjectProperty<O,J>
     interface Equivalent<O,J,D extends ObjectProperty<O,J>>
             extends ObjectProperty<O,J>{
 
-        @Override // see documentation on Semantic.Descriptor.readSemantic
+        @Override // see documentation on Semantic.descriptor.readSemantic
         default List<MappingIntent> readSemantic(){
             try {
                 Axioms.SynchronisationIntent<J> from = synchroniseEquivalentObjectPropertyFromSemantic();
@@ -484,7 +484,7 @@ public interface ObjectProperty<O,J>
     interface Sub<O,J,D extends ObjectProperty<O,J>>
             extends ObjectProperty<O,J>{
 
-        @Override // see documentation on Semantic.Descriptor.readSemantic
+        @Override // see documentation on Semantic.descriptor.readSemantic
         default List<MappingIntent> readSemantic(){
             try {
                 Axioms.SynchronisationIntent<J> from = synchroniseSubObjectPropertyFromSemantic();
@@ -601,7 +601,7 @@ public interface ObjectProperty<O,J>
     interface Super<O,J,D extends ObjectProperty<O,J>>
             extends ObjectProperty<O,J>{
 
-        @Override // see documentation on Semantic.Descriptor.readSemantic
+        @Override // see documentation on Semantic.descriptor.readSemantic
         default List<MappingIntent> readSemantic(){
             try {
                 Axioms.SynchronisationIntent<J> from = synchroniseSuperObjectPropertyFromSemantic();
@@ -731,7 +731,7 @@ public interface ObjectProperty<O,J>
     interface Domain<O,J,Y>
             extends ObjectProperty<O,J>{
 
-        @Override // see documentation on Semantic.Descriptor.readSemantic
+        @Override // see documentation on Semantic.descriptor.readSemantic
         default List<MappingIntent> readSemantic(){
             try {
                 Axioms.SynchronisationIntent<Y> from = synchroniseDomainObjectPropertyFromSemantic();

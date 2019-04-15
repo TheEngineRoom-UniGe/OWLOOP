@@ -64,7 +64,7 @@ public interface Individual<O,J>
     interface Type<O,J,Y,D extends Concept<O,Y>>
             extends Individual<O,J>{
 
-        @Override // see documentation on Semantic.Descriptor.readSemantic
+        @Override // see documentation on Semantic.descriptor.readSemantic
         default List<MappingIntent> readSemantic(){
             try {
                 Axioms.SynchronisationIntent<Y> from = synchroniseTypeIndividualFromSemantic();
@@ -182,7 +182,7 @@ public interface Individual<O,J>
     interface Disjoint<O,J,D extends Individual<O,J>>
             extends Individual<O,J>{
 
-        @Override // see documentation on Semantic.Descriptor.readSemantic
+        @Override // see documentation on Semantic.descriptor.readSemantic
         default List<MappingIntent> readSemantic(){
             try {
                 Axioms.SynchronisationIntent<J> from = synchroniseDisjointIndividualFromSemantic();
@@ -299,7 +299,7 @@ public interface Individual<O,J>
     interface Equivalent<O,J,D extends Individual<O,J>>
             extends Individual<O,J>{
 
-        @Override // see documentation on Semantic.Descriptor.readSemantic
+        @Override // see documentation on Semantic.descriptor.readSemantic
         default List<MappingIntent> readSemantic(){
             try {
                 Axioms.SynchronisationIntent<J> from = synchroniseEquivalentIndividualFromSemantic();
@@ -420,7 +420,7 @@ public interface Individual<O,J>
     interface DataLink<O,J,Y extends SemanticAxiom<S,?>, S,D extends DataProperty<O, S>>
             extends Individual<O,J>{
 
-        @Override // see documentation on Semantic.Descriptor.readSemantic
+        @Override // see documentation on Semantic.descriptor.readSemantic
         default List<MappingIntent> readSemantic(){
             try {
                 Axioms.SynchronisationIntent<Y> from = synchroniseDataIndividualFromSemantic();
@@ -544,7 +544,7 @@ public interface Individual<O,J>
     interface ObjectLink<O,J,Y extends SemanticAxiom<S,?>, S,D extends ObjectProperty<O, S>>
             extends Individual<O,J>{
 
-        @Override // see documentation on Semantic.Descriptor.readSemantic
+        @Override // see documentation on Semantic.descriptor.readSemantic
         default List<MappingIntent> readSemantic(){
             try{
                 Axioms.SynchronisationIntent<Y> from = synchroniseObjectIndividualFromSemantic();

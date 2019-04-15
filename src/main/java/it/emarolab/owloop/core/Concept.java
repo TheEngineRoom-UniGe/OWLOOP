@@ -66,7 +66,7 @@ public interface Concept<O,J>
     interface Classify<O,J,Y,D extends Individual<O,Y>>
             extends Concept<O,J> {
 
-        @Override // see documentation on Semantic.Descriptor.readSemantic
+        @Override // see documentation on Semantic.descriptor.readSemantic
         default List<MappingIntent> readSemantic(){
             try {
                 Axioms.SynchronisationIntent<Y> from = synchroniseIndividualClassifiedFromSemantic();
@@ -183,7 +183,7 @@ public interface Concept<O,J>
     interface Disjoint<O,J,D extends Concept<O,J>>
             extends Concept<O,J> {
 
-        @Override // see documentation on Semantic.Descriptor.readSemantic
+        @Override // see documentation on Semantic.descriptor.readSemantic
         default List<MappingIntent> readSemantic(){
             try {
                 Axioms.SynchronisationIntent<J> from = synchroniseDisjointConceptFromSemantic();
@@ -301,7 +301,7 @@ public interface Concept<O,J>
     interface Equivalent<O,J,D extends Concept<O,J>>
             extends Concept<O,J> {
 
-        @Override  // see documentation on Semantic.Descriptor.readSemantic
+        @Override  // see documentation on Semantic.descriptor.readSemantic
         default List<MappingIntent> readSemantic(){
             try {
                 Axioms.SynchronisationIntent<J> from = synchroniseEquivalentConceptFromSemantic();
@@ -418,7 +418,7 @@ public interface Concept<O,J>
     interface Sub<O,J,D extends Concept<O,J>>
             extends Concept<O,J> {
 
-        @Override // see documentation on Semantic.Descriptor.readSemantic
+        @Override // see documentation on Semantic.descriptor.readSemantic
         default List<MappingIntent> readSemantic(){
             try {
                 Axioms.SynchronisationIntent<J> from = synchroniseSubConceptFromSemantic();
@@ -535,7 +535,7 @@ public interface Concept<O,J>
     interface Super<O,J,D extends Concept<O,J>>
             extends Concept<O,J> {
 
-        @Override // see documentation on Semantic.Descriptor.readSemantic
+        @Override // see documentation on Semantic.descriptor.readSemantic
         default List<MappingIntent> readSemantic(){
             try {
                 Axioms.SynchronisationIntent<J> from = synchroniseSuperConceptFromSemantic();
@@ -665,7 +665,7 @@ public interface Concept<O,J>
     interface Define<O,J,Y>
             extends Concept<O,J> {
 
-        @Override // see documentation on Semantic.Descriptor.readSemantic
+        @Override // see documentation on Semantic.descriptor.readSemantic
         default List<MappingIntent> readSemantic(){
             try {
                 Axioms.SynchronisationIntent<Y> from = synchroniseDefinitionConceptFromSemantic();
