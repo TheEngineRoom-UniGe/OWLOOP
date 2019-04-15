@@ -35,19 +35,6 @@ public class TestAlgorithm2 {
         );
 
     d1 = new ObjLinkIndividualDesc("Robot1", ontoref);           // Initialize a DESC with ground as Robot1
-        d1.addObject( "hasProp1", "Y");
-        d1.addObject( "hasProp2", "Y");
-        d1.writeSemantic();
-
-        MORFullIndividual d11 = new MORFullIndividual("Robot1", ontoref);
-        d11.readSemantic();          //at this point the descriptor reads all knowledge
-        System.out.println( " 11 " + d11);
-
-        MORFullIndividual d22 = new MORFullIndividual("Robot1", ontoref);
-        d22.addObject( "hasProp1");
-        d22.addObject( "hasProp2");
-        d22.readSemantic();          //at this point the descriptor reads only particular knowledge
-        System.out.println( " 22 " + d22);
     }
 
     @AfterClass // called after all @Test-s
@@ -72,10 +59,12 @@ public class TestAlgorithm2 {
 
         TypeIndividualDesc d2 = new TypeIndividualDesc(robotPlace, ontoref); // Initialize a DESC with ground as Corridor1
         d2.readSemantic();                                                   // READ
+
         Set<DefSubClassDesc> setOneD = d2.buildTypeIndividual();                   // BUILD Type of an Individual --> CORRIDOR,LOCATION,Top
         for( DefSubClassDesc d3 : setOneD ){
 
             Set<MORFullConcept> setTwoD = d3.buildSubConcept();                    // BUILD Sub of a Concept --> we have the sub-classes of all the 3 above
+
             if( setTwoD.size() <= 1 ) { // owl:Nothing is always there            // If less than or equal to 1
 
                 System.out.print("'" + d2.getInstanceName() + "'" + " is of Type " + "'" + d3.getInstanceName() + "'"); // PRINT
