@@ -5,16 +5,16 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * The main interface for ontological individual {@link Semantic.Descriptor}.
+ * The main interface for ontological individual_compoundDescriptor {@link Semantic.Descriptor}.
  * <p>
  *     This interface contains all the {@link Semantic.Descriptor} that
- *     can be applied to an ontological individual (e.g.: {@link org.semanticweb.owlapi.model.OWLNamedIndividual})
+ *     can be applied to an ontological individual_compoundDescriptor (e.g.: {@link org.semanticweb.owlapi.model.OWLNamedIndividual})
  *     in any arbitrary combination since all of them should rely on the same {@link Semantic.Ground}
  *     type.
  *     <br>
  *     More in particular, for the {@link #getInstance()} entities in the {@link #getOntology()}, those are:
  *     <ul>
- *     <li><b>{@link Type}</b>: for describing the classes of an individual.</li>
+ *     <li><b>{@link Type}</b>: for describing the classes of an individual_compoundDescriptor.</li>
  *     <li><b>{@link Disjoint}</b>: for describing disjointed individuals for the one grounded
  *                                         in a specific {@link Individual}.</li>
  *     <li><b>{@link Equivalent}</b>: for describing equivalent individuals for the one grounded
@@ -35,15 +35,15 @@ import java.util.Set;
  * </small></div>
  *
  * @param <O> the type of ontology in which the axioms for classes will be applied.
- * @param <J> the type of instance (i.e.: individual) for the axioms.
+ * @param <J> the type of instance (i.e.: individual_compoundDescriptor) for the axioms.
  */
 public interface Individual<O,J>
         extends Semantic.Descriptor<O,J>{
 
     /**
-     * The {@link Semantic.Descriptor} for classes (e.g.: types) that describes an ontological individual.
+     * The {@link Semantic.Descriptor} for classes (e.g.: types) that describes an ontological individual_compoundDescriptor.
      * <p>
-     *     This {@link Semantic.Descriptor} synchronises the types in which the specific individual
+     *     This {@link Semantic.Descriptor} synchronises the types in which the specific individual_compoundDescriptor
      *     (i.e.: the {@link Ground#getGroundInstance()}) is classified.
      * </p>
      * <div style="text-align:center;"><small>
@@ -55,8 +55,8 @@ public interface Individual<O,J>
      * </small></div>
      *
      * @param <O> the type of ontology in which the axioms for classes will be applied.
-     * @param <J> the type of the described individual.
-     * @param <Y> the type of classes describing the individual
+     * @param <J> the type of the described individual_compoundDescriptor.
+     * @param <Y> the type of classes describing the individual_compoundDescriptor
      *           (it represents the type of {@link Semantic.Axioms} managed by this {@link Descriptor}.
      * @param <D> the type of the {@link Concept} descriptors instantiated during
      *           {@link #buildTypeIndividual()} through {@link #getNewTypeIndividual(Object, Object)}.
@@ -81,12 +81,12 @@ public interface Individual<O,J>
 
         /**
          * Create an {@link Semantic.Descriptor} set where each element
-         * represents the classes in which {@code this} individual is belonging to.
+         * represents the classes in which {@code this} individual_compoundDescriptor is belonging to.
          * Each of {@link Concept}s are instantiated
          * through the method {@link #getNewTypeIndividual(Object, Object)};
          * this is called for all {@link #getTypeIndividual()}.
          * @return the set of {@link Concept}s that describes the
-         * entities in which {@code this} described ontological individual
+         * entities in which {@code this} described ontological individual_compoundDescriptor
          * is belonging to.
          */
         default Set<D> buildTypeIndividual(){
@@ -106,19 +106,19 @@ public interface Individual<O,J>
          * @param instance the instance to ground the new {@link Concept}.
          * @param ontology the ontology in which ground the new {@link Concept}.
          * @return a new {@link Semantic.Descriptor} for all the classes
-         * in which {@code this} individual is belonging to.
+         * in which {@code this} individual_compoundDescriptor is belonging to.
          */
         D getNewTypeIndividual(Y instance, O ontology);
 
         /**
          * Returns the {@link Semantic.Axioms} that describes all the classes in which
          * {@code this} {@link Individual} is belonging to, from a no OOP point of view.
-         * @return the entities describing the types of {@code this} individual.
+         * @return the entities describing the types of {@code this} individual_compoundDescriptor.
          */
         Axioms<Y> getTypeIndividual();
 
         /**
-         * Queries to the OWL representation for the types of {@code this} individual.
+         * Queries to the OWL representation for the types of {@code this} individual_compoundDescriptor.
          * @return a new {@link Semantic.Axioms} contained the classes in which {@link #getInstance()}
          * is belonging to, into the OWL structure.
          */
@@ -147,7 +147,7 @@ public interface Individual<O,J>
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readSemantic()}.
          * @return the changes to be done to synchronise the classes in which the {@link #getInstance()}
-         * individual is belonging to, from an OWL representation to {@code this} descriptor.
+         * individual_compoundDescriptor is belonging to, from an OWL representation to {@code this} descriptor.
          */
         default Axioms.SynchronisationIntent<Y> synchroniseTypeIndividualFromSemantic(){
             try{
@@ -174,7 +174,7 @@ public interface Individual<O,J>
      * </small></div>
      *
      * @param <O> the type of ontology in which the axioms for classes will be applied.
-     * @param <J> the type of the described individual.
+     * @param <J> the type of the described individual_compoundDescriptor.
      *           (it also represents the type of {@link Semantic.Axioms} managed by this {@link Descriptor}.
      * @param <D> the type of the {@link Individual} descriptors instantiated during
      *           {@link #buildDisjointIndividual()} through {@link #getNewDisjointIndividual(Object, Object)}.
@@ -204,7 +204,7 @@ public interface Individual<O,J>
          * through the method {@link #getNewDisjointIndividual(Object, Object)};
          * this is called for all {@link #getDisjointIndividual()}.
          * @return the set of {@link Individual}s that describes the
-         * entities that are different from {@code this} described ontological individual.
+         * entities that are different from {@code this} described ontological individual_compoundDescriptor.
          */
         default Set<D> buildDisjointIndividual(){
             Set<D> out = new HashSet<>();
@@ -219,7 +219,7 @@ public interface Individual<O,J>
         /**
          * This method is called by {@link #buildDisjointIndividual()} and
          * its purpose is to instantiate a new {@link Individual} to represent
-         * an equivalent individual from {@code this} {@link Individual} {@link Descriptor}.
+         * an equivalent individual_compoundDescriptor from {@code this} {@link Individual} {@link Descriptor}.
          * @param instance the instance to ground the new {@link Individual}.
          * @param ontology the ontology in which ground the new {@link Individual}.
          * @return a new {@link Semantic.Descriptor} for all the individuals
@@ -228,9 +228,9 @@ public interface Individual<O,J>
         D getNewDisjointIndividual(J instance, O ontology);
 
         /**
-         * Returns the {@link Semantic.Axioms} that describes all the different individual from
+         * Returns the {@link Semantic.Axioms} that describes all the different individual_compoundDescriptor from
          * {@code this} {@link Individual}; from a no OOP point of view.
-         * @return the entities describing the different individual of {@code this} individual.
+         * @return the entities describing the different individual_compoundDescriptor of {@code this} individual_compoundDescriptor.
          */
         Axioms<J> getDisjointIndividual();
 
@@ -291,7 +291,7 @@ public interface Individual<O,J>
      * </small></div>
      *
      * @param <O> the type of ontology in which the axioms for classes will be applied.
-     * @param <J> the type of the described individual.
+     * @param <J> the type of the described individual_compoundDescriptor.
      *           (it also represents the type of {@link Semantic.Axioms} managed by this {@link Descriptor}.
      * @param <D> the type of the {@link Individual} descriptors instantiated during
      *           {@link #buildEquivalentIndividual()} through {@link #getNewEquivalentIndividual(Object, Object)}.
@@ -319,7 +319,7 @@ public interface Individual<O,J>
          * through the method {@link #getNewEquivalentIndividual(Object, Object)};
          * this is called for all {@link #getEquivalentIndividual()}.
          * @return the set of {@link Individual}s that describes the
-         * entities that are equivalent from {@code this} described ontological individual.
+         * entities that are equivalent from {@code this} described ontological individual_compoundDescriptor.
          */
         default Set<D> buildEquivalentIndividual(){
             Set<D> out = new HashSet<>();
@@ -334,7 +334,7 @@ public interface Individual<O,J>
         /**
          * This method is called by {@link #buildEquivalentIndividual()} and
          * its purpose is to instantiate a new {@link Individual} to represent
-         * a different individual from {@code this} {@link Individual} {@link Descriptor}.
+         * a different individual_compoundDescriptor from {@code this} {@link Individual} {@link Descriptor}.
          * @param instance the instance to ground the new {@link Individual}.
          * @param ontology the ontology in which ground the new {@link Individual}.
          * @return a new {@link Semantic.Descriptor} for all the individuals
@@ -343,9 +343,9 @@ public interface Individual<O,J>
         D getNewEquivalentIndividual(J instance, O ontology);
 
         /**
-         * Returns the {@link Semantic.Axioms} that describes all the equivalent individual from
+         * Returns the {@link Semantic.Axioms} that describes all the equivalent individual_compoundDescriptor from
          * {@code this} {@link Individual}; from a no OOP point of view.
-         * @return the entities describing the equivalent individual of {@code this} individual.
+         * @return the entities describing the equivalent individual_compoundDescriptor of {@code this} individual_compoundDescriptor.
          */
         Axioms<J> getEquivalentIndividual();
 
@@ -395,12 +395,12 @@ public interface Individual<O,J>
      * The {@link Semantic.Descriptor} for the data properties applied to the described individuals.
      * <p>
      *     This {@link Semantic.Descriptor} synchronises only the specified data property and
-     *     relative values for an ontological individual (i.e.: the {@link Ground#getGroundInstance()}).
+     *     relative values for an ontological individual_compoundDescriptor (i.e.: the {@link Ground#getGroundInstance()}).
      *     <br>
      *     By default, the synchronisation occurs only for the proprieties which semantics
      *     have been initialised in the {@link SemanticAxioms} ({@link #getDataSemantics()}.
      *     Anyway if the {@link SemanticAxioms} is leaved empty during {@link #readSemantic()}
-     *     it maps all the data properties applied to the described individual.
+     *     it maps all the data properties applied to the described individual_compoundDescriptor.
      * </p>
      * <div style="text-align:center;"><small>
      * <b>File</b>:        it.emarolab.owloop.core.Individual <br>
@@ -411,7 +411,7 @@ public interface Individual<O,J>
      * </small></div>
      *
      * @param <O> the type of ontology in which the axioms for classes will be applied.
-     * @param <J> the type of the described individual.
+     * @param <J> the type of the described individual_compoundDescriptor.
      * @param <Y> the type of {@link SemanticAxiom} synchronised by this descriptor
      * @param <S> the type of semantic described by this class (i.e.: {@code OWLDataProperty})
      * @param <D> the type of the {@link DataProperty} descriptors instantiated during
@@ -442,7 +442,7 @@ public interface Individual<O,J>
          * through the method {@link #getNewDataIndividual(SemanticAxiom, Object)};
          * this is called for all {@link #getDataSemantics()}.
          * @return the set of {@link DataProperty}s that describes the
-         * entities that are applied to {@code this} described ontological individual.
+         * entities that are applied to {@code this} described ontological individual_compoundDescriptor.
          */
         default Set<D> buildDataIndividual(){
             Set<D> out = new HashSet<>();
@@ -468,7 +468,7 @@ public interface Individual<O,J>
         /**
          * Returns the {@link Semantic.Axioms} that describes the specified data properties applied to
          * {@code this} {@link Individual}; from a no OOP point of view.
-         * @return the entities describing the data properties of {@code this} individual.
+         * @return the entities describing the data properties of {@code this} individual_compoundDescriptor.
          */
         Axioms<Y> getDataSemantics();
 
@@ -518,13 +518,13 @@ public interface Individual<O,J>
      * The {@link Semantic.Descriptor} for the object properties applied to the described individuals.
      * <p>
      *     This {@link Semantic.Descriptor} synchronises only the specified object property and
-     *     relative values for an ontological individual (i.e.: the {@link Ground#getGroundInstance()}).
+     *     relative values for an ontological individual_compoundDescriptor (i.e.: the {@link Ground#getGroundInstance()}).
      *     <br>
      *     By default, the synchronisation occurs only for the proprieties which semantics
      *     have been initialised in the {@link SemanticAxioms} ({@link #getObjectSemantics()}),
      *     not for all relations in the OWL representation.
      *     Anyway if the {@link SemanticAxioms} is leaved empty during {@link #readSemantic()}
-     *     it maps all the object properties applied to the described individual.
+     *     it maps all the object properties applied to the described individual_compoundDescriptor.
      * </p>
      * <div style="text-align:center;"><small>
      * <b>File</b>:        it.emarolab.owloop.core.Individual <br>
@@ -535,7 +535,7 @@ public interface Individual<O,J>
      * </small></div>
      *
      * @param <O> the type of ontology in which the axioms for classes will be applied.
-     * @param <J> the type of the described individual.
+     * @param <J> the type of the described individual_compoundDescriptor.
      * @param <Y> the type of {@link SemanticAxiom} synchronised by this descriptor
      * @param <S> the type of semantic described by this class (i.e.: {@code OWLObjectProperty})
      * @param <D> the type of the {@link DataProperty} descriptors instantiated during
@@ -566,7 +566,7 @@ public interface Individual<O,J>
          * through the method {@link #getNewObjectIndividual(SemanticAxiom, Object)};
          * this is called for all {@link #getObjectSemantics()}.
          * @return the set of {@link ObjectProperty}s that describes the
-         * entities that are applied to {@code this} described ontological individual.
+         * entities that are applied to {@code this} described ontological individual_compoundDescriptor.
          */
         default Set< D> buildObjectIndividual(){
             Set<D> out = new HashSet<>();
@@ -592,7 +592,7 @@ public interface Individual<O,J>
         /**
          * Returns the {@link Semantic.Axioms} that describes the specified object properties applied to
          * {@code this} {@link Individual}; from a no OOP point of view.
-         * @return the entities describing the object properties of {@code this} individual.
+         * @return the entities describing the object properties of {@code this} individual_compoundDescriptor.
          */
         Axioms<Y> getObjectSemantics();
 

@@ -83,7 +83,7 @@ public interface Concept<O,J>
 
         /**
          * Create an {@link Semantic.Descriptor} set where each element
-         * represents the individual classified to belonging to this {@link Concept}.
+         * represents the individual_compoundDescriptor classified to belonging to this {@link Concept}.
          * Each of {@link Individual}s are instantiated
          * through the method {@link #getNewIndividualClassified(Object, Object)};
          * this is called for all {@link #getIndividualClassified()}.
@@ -103,7 +103,7 @@ public interface Concept<O,J>
         /**
          * This method is called by {@link #buildIndividualClassified()} and
          * its purpose is to instantiate a new {@link Individual} to represent
-         * an individual classified in {@code this} {@link Concept} {@link Descriptor}.
+         * an individual_compoundDescriptor classified in {@code this} {@link Concept} {@link Descriptor}.
          * @param instance the instance to ground the new {@link Individual}.
          * @param ontology the ontology in which ground the new {@link Individual}.
          * @return a new {@link Semantic.Descriptor} for all the individuals
@@ -112,15 +112,15 @@ public interface Concept<O,J>
         D getNewIndividualClassified(Y instance, O ontology);
 
         /**
-         * Returns the {@link Semantic.Axioms} that describes all the individual classified
+         * Returns the {@link Semantic.Axioms} that describes all the individual_compoundDescriptor classified
          * in {@code this} {@link Concept} from a no OOP point of view.
          * @return the entities describing the individuals classified in {@code this} object
          */
         Axioms<Y> getIndividualClassified();
 
         /**
-         * Queries to the OWL representation of the individual that are classified in {@code this} class.
-         * @return a new {@link Semantic.Axioms} contained the individual classified by
+         * Queries to the OWL representation of the individual_compoundDescriptor that are classified in {@code this} class.
+         * @return a new {@link Semantic.Axioms} contained the individual_compoundDescriptor classified by
          * the OWL structure of {@link #getInstance()}.
          */
         Axioms<Y> queryIndividualClassified();
@@ -131,7 +131,7 @@ public interface Concept<O,J>
          * for synchronise it with respect to {@link #getIndividualClassified()}. This should
          * be done by {@link #writeSemantic()}.
          * @return the changes to be done to synchronise {@code this} structure with
-         * the individual classified in an OWL class.
+         * the individual_compoundDescriptor classified in an OWL class.
          */
         default Axioms.SynchronisationIntent<Y> synchroniseIndividualClassifiedToSemantic(){
             try {
@@ -147,7 +147,7 @@ public interface Concept<O,J>
          * as input parameter. This computes the changes to be performed into the {@link #getIndividualClassified()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readSemantic()}.
-         * @return the changes to be done to synchronise the individual of an OWL class
+         * @return the changes to be done to synchronise the individual_compoundDescriptor of an OWL class
          * with {@code this} structure.
          */
         default Axioms.SynchronisationIntent<Y> synchroniseIndividualClassifiedFromSemantic(){

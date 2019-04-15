@@ -3,8 +3,8 @@ package it.emarolab.owloop.descriptor.utility.owloopPaperTests;
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.amor.owlInterface.OWLReferencesInterface;
 import it.emarolab.amor.owlInterface.SemanticRestriction;
-import it.emarolab.owloop.descriptor.construction.descriptorInterface.MORAxioms;
-import it.emarolab.owloop.descriptor.utility.conceptCompoundDescriptor.MORFullConcept;
+import it.emarolab.owloop.descriptor.construction.descriptorInterface.DescriptorAxioms;
+import it.emarolab.owloop.descriptor.utility.concept_compoundDescriptor.FullConceptDesc;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
@@ -45,7 +45,7 @@ public class TestAlgorithm2 {
     @Test
     public void Algorithm2() {
 
-        //          p: ObjLinkIndividualDesc -> ground: d1,          expression: objectProperty (build: ??ObjectProperty).
+        //          p: ObjLinkIndividualDesc -> ground: d1,          expression: objectProperty_compoundDescriptor (build: ??ObjectProperty).
         // R=[r,r,..]: TypeIndividualDesc    -> ground: d1,          expression: classOf        (build: DefSubClassDesc).
         // T=[t,t,..]: DefSubClassDesc       -> ground: class,      expression: subclass       (build: ??ClassDescr).
         //                                                                      definition     (build: CANNOT).
@@ -62,12 +62,12 @@ public class TestAlgorithm2 {
         Set<DefSubClassDesc> setOneD = d2.buildTypeIndividual();                   // BUILD Type of an Individual --> CORRIDOR,LOCATION,Top
         for( DefSubClassDesc d3 : setOneD ){
 
-            Set<MORFullConcept> setTwoD = d3.buildSubConcept();                    // BUILD Sub of a Concept --> we have the sub-classes of all the 3 above
+            Set<FullConceptDesc> setTwoD = d3.buildSubConcept();                    // BUILD Sub of a Concept --> we have the sub-classes of all the 3 above
 
             if( setTwoD.size() <= 1 ) { // owl:Nothing is always there            // If less than or equal to 1
 
                 System.out.print("'" + d2.getInstanceName() + "'" + " is of Type " + "'" + d3.getInstanceName() + "'"); // PRINT
-                MORAxioms.Restrictions restrictions = d3.getDefinitionConcept(); //GET DEFINITION
+                DescriptorAxioms.Restrictions restrictions = d3.getDefinitionConcept(); //GET DEFINITION
                 for( SemanticRestriction rest : restrictions ){
 
                     if( rest instanceof SemanticRestriction.ClassRestrictedOnExactObject ){
@@ -91,11 +91,11 @@ public class TestAlgorithm2 {
         d1.addObject( "hasProp2", "X");
         d1.writeSemantic();
 
-        MORFullIndividual d1 = new MORFullIndividual("Robot1", ontoref);
+        FullIndividualDesc d1 = new FullIndividualDesc("Robot1", ontoref);
         d1.readSemantic();          //at this point the descriptor reads all knowledge
         System.out.println( " 11 " + d1);
 
-        MORFullIndividual d2 = new MORFullIndividual("Robot1", ontoref);
+        FullIndividualDesc d2 = new FullIndividualDesc("Robot1", ontoref);
         d2.addObject( "hasProp1");
         d2.addObject( "hasProp2");
         d2.readSemantic();          //at this point the descriptor reads only particular knowledge

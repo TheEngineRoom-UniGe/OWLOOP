@@ -1,20 +1,20 @@
 package it.emarolab.owloop.descriptor.utility.owloopPaperTests;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
-import it.emarolab.owloop.descriptor.construction.descriptorInterface.MORAxioms;
-import it.emarolab.owloop.descriptor.construction.descriptorInterface.MORIndividual;
-import it.emarolab.owloop.descriptor.construction.descriptorBase.MORIndividualBase;
-import it.emarolab.owloop.descriptor.utility.objectProperty.MORFullObjectProperty;
+import it.emarolab.owloop.descriptor.construction.descriptorBase.IndividualDescriptorBase;
+import it.emarolab.owloop.descriptor.construction.descriptorInterface.DescriptorAxioms;
+import it.emarolab.owloop.descriptor.construction.descriptorInterface.IndividualExpression;
+import it.emarolab.owloop.descriptor.utility.objectProperty_compoundDescriptor.FullObjectPropertyDesc;
 
 import java.util.List;
 
 public class ObjLinkIndividualDesc
-        extends MORIndividualBase
-        implements MORIndividual.ObjectLink<MORFullObjectProperty> {
+        extends IndividualDescriptorBase
+        implements IndividualExpression.ObjectLink<FullObjectPropertyDesc> {
 
-    private MORAxioms.ObjectSemantics objectLinks = new MORAxioms.ObjectSemantics();
+    private DescriptorAxioms.ObjectSemantics objectLinks = new DescriptorAxioms.ObjectSemantics();
 
-    // constructors for MORIndividualBase
+    // constructors for IndividualDescriptorBase
     public ObjLinkIndividualDesc(String instanceName, OWLReferences onto) {
         super(instanceName, onto);
     }
@@ -33,21 +33,21 @@ public class ObjLinkIndividualDesc
     }
 
 
-    // implementations for MORIndividual.ObjectLink
-    @Override //called during build...() you can change the returning type to any implementations of MORObjectProperty
-    public MORFullObjectProperty getNewObjectIndividual(MORAxioms.ObjectSemantic instance, OWLReferences ontology) {
-        return new MORFullObjectProperty( instance.getSemantic(), ontology);
+    // implementations for IndividualExpression.ObjectLink
+    @Override //called during build...() you can change the returning type to any implementations of ObjectPropertyExpression
+    public FullObjectPropertyDesc getNewObjectIndividual(DescriptorAxioms.ObjectSemantic instance, OWLReferences ontology) {
+        return new FullObjectPropertyDesc( instance.getSemantic(), ontology);
     }
 
     @Override
-    public MORAxioms.ObjectSemantics getObjectSemantics() {
+    public DescriptorAxioms.ObjectSemantics getObjectSemantics() {
         return objectLinks;
     }
 
 
 
     // implementation for standard object interface
-    // equals() and hashCode() is based on MORBase<?> which considers only the ground
+    // equals() and hashCode() is based on DescriptorBase<?> which considers only the ground
     @Override
     public String toString() {
         return getClass().getSimpleName() + "{" +

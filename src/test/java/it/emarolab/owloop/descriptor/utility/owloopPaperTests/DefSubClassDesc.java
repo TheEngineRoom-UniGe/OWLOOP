@@ -1,22 +1,22 @@
 package it.emarolab.owloop.descriptor.utility.owloopPaperTests;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
-import it.emarolab.owloop.descriptor.construction.descriptorInterface.MORAxioms;
-import it.emarolab.owloop.descriptor.construction.descriptorInterface.MORConcept;
-import it.emarolab.owloop.descriptor.construction.descriptorBase.MORConceptBase;
-import it.emarolab.owloop.descriptor.utility.conceptCompoundDescriptor.MORFullConcept;
+import it.emarolab.owloop.descriptor.construction.descriptorInterface.ConceptExpression;
+import it.emarolab.owloop.descriptor.construction.descriptorInterface.DescriptorAxioms;
+import it.emarolab.owloop.descriptor.construction.descriptorBase.ConceptDescriptorBase;
+import it.emarolab.owloop.descriptor.utility.concept_compoundDescriptor.FullConceptDesc;
 import org.semanticweb.owlapi.model.OWLClass;
 
 import java.util.List;
 
 public class DefSubClassDesc
-        extends MORConceptBase
-        implements MORConcept.Define, MORConcept.Sub<MORFullConcept>{
+        extends ConceptDescriptorBase
+        implements ConceptExpression.Define, ConceptExpression.Sub<FullConceptDesc>{
 
-    private MORAxioms.Restrictions restrictions = new MORAxioms.Restrictions();
-    private MORAxioms.Concepts subConcept = new MORAxioms.Concepts();
+    private DescriptorAxioms.Restrictions restrictions = new DescriptorAxioms.Restrictions();
+    private DescriptorAxioms.Concepts subConcept = new DescriptorAxioms.Concepts();
 
-    // constructors for MORConceptBase
+    // constructors for ConceptDescriptorBase
     public DefSubClassDesc(OWLClass instance, OWLReferences onto) {
         super(instance, onto);
     }
@@ -36,29 +36,29 @@ public class DefSubClassDesc
         return r;
     }
 
-    // implementations for MORConcept.Define
+    // implementations for ConceptExpression.Define
     @Override
-    public MORAxioms.Restrictions getDefinitionConcept() {
+    public DescriptorAxioms.Restrictions getDefinitionConcept() {
         return restrictions;
     }
 
     // you cannot build Define (based on Restrictions)
 
 
-    // implementations for MORConcept.Super
-    @Override // called during build...() you can change the returning type to any implementations of MORConcept
-    public MORFullConcept getNewSubConcept(OWLClass instance, OWLReferences ontology) {
-        return new MORFullConcept( instance, ontology);
+    // implementations for ConceptExpression.Super
+    @Override // called during build...() you can change the returning type to any implementations of ConceptExpression
+    public FullConceptDesc getNewSubConcept(OWLClass instance, OWLReferences ontology) {
+        return new FullConceptDesc( instance, ontology);
     }
 
     @Override
-    public MORAxioms.Concepts getSubConcept() {
+    public DescriptorAxioms.Concepts getSubConcept() {
         return subConcept;
     }
 
 
     // implementation for standard object interface
-    // equals() and hashCode() is based on MORBase<?> which considers only the ground
+    // equals() and hashCode() is based on DescriptorBase<?> which considers only the ground
     @Override
     public String toString() {
         return getClass().getSimpleName() + "{" +

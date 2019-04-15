@@ -1,6 +1,6 @@
 package it.emarolab.owloop.descriptor.utility.owloopPaperTests;
 
-import it.emarolab.owloop.descriptor.utility.individual.MORFullIndividual;
+import it.emarolab.owloop.descriptor.utility.individual_compoundDescriptor.FullIndividualDesc;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,12 +9,12 @@ import static org.junit.Assert.assertEquals;
 
 public class TestAlgorithm1 {
 
-    private static MORFullIndividual individual;
+    private static FullIndividualDesc individual;
 
     @Before // called a before every @Test
     public void setUp() {
 
-        individual = new MORFullIndividual(
+        individual = new FullIndividualDesc(
 
                 "Robot1", // the ground instance name
                 "owloopTest", // ontology reference name
@@ -34,7 +34,7 @@ public class TestAlgorithm1 {
 
         String pos = getRobotPosition();
 
-        MORFullIndividual d = individual;
+        FullIndividualDesc d = individual;
         d.addObject("isIn",pos,true); //singleton True means with replacement
         d.writeSemantic();
     }
