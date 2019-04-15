@@ -108,8 +108,6 @@ public interface Semantic {
         Ground<O,J> copyGround();
     }
 
-
-
     /**
      * The object that describe a generic set of axioms managed by a specific {@link Descriptor}.
      * <p>

@@ -853,6 +853,4 @@ public interface DescriptorAxioms extends Semantic{
         }
 
     }
-
-
 }
