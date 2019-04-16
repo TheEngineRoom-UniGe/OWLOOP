@@ -3,7 +3,7 @@ package it.emarolab.owloop.descriptor.utility.owloopPaperTests;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.descriptor.construction.descriptorBase.IndividualDescriptorBase;
-import it.emarolab.owloop.descriptor.construction.descriptorInterface.DescriptorAxioms;
+import it.emarolab.owloop.descriptor.construction.descriptorInterface.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorInterface.IndividualExpression;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
@@ -14,14 +14,14 @@ public class TypeIndividualDesc
         extends IndividualDescriptorBase
         implements IndividualExpression.Type<DefSubClassDesc> {
 
-    private DescriptorAxioms.Concepts individualTypes = new DescriptorAxioms.Concepts();
+    private DescriptorEntitySet.Concepts individualTypes = new DescriptorEntitySet.Concepts();
 
     // constructors for IndividualDescriptorBase
     public TypeIndividualDesc(OWLNamedIndividual instance, OWLReferences onto) {
         super(instance, onto);
     }
 
-    // implementations for Semantic.descriptor
+    // implementations for Axiom.descriptor
     @Override
     public List<MappingIntent> readSemantic() {
         List<MappingIntent> r = Type.super.readSemantic();
@@ -42,7 +42,7 @@ public class TypeIndividualDesc
     }
 
     @Override
-    public DescriptorAxioms.Concepts getTypeIndividual() {
+    public DescriptorEntitySet.Concepts getTypeIndividual() {
         return individualTypes;
     }
 

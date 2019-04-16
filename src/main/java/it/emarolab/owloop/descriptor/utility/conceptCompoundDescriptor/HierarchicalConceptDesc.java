@@ -1,23 +1,23 @@
-package it.emarolab.owloop.descriptor.utility.concept_compoundDescriptor;
+package it.emarolab.owloop.descriptor.utility.conceptCompoundDescriptor;
 
 
 import it.emarolab.amor.owlInterface.OWLReferences;
+import it.emarolab.owloop.core.Axiom;
 import it.emarolab.owloop.descriptor.construction.descriptorInterface.ConceptExpression;
-import it.emarolab.owloop.descriptor.construction.descriptorInterface.DescriptorAxioms;
+import it.emarolab.owloop.descriptor.construction.descriptorInterface.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorBase.ConceptDescriptorBase;
-import it.emarolab.owloop.core.Semantic;
 import org.semanticweb.owlapi.model.OWLClass;
 
 import java.util.List;
 
 
 /**
- * A basic implementation for a concept_compoundDescriptor with sub and super concepts.
+ * A basic implementation for a conceptCompoundDescriptor with sub and super concepts.
  * <p>
- *     This is an example of how use the {@link Semantic.Descriptor}s for implement
- *     a concept_compoundDescriptor that is synchronised w.r.t. its {@link Sub} and {@link Super} concepts.
+ *     This is an example of how use the {@link Axiom.Descriptor}s for implement
+ *     a conceptCompoundDescriptor that is synchronised w.r.t. its {@link Sub} and {@link Super} concepts.
  *     <br>
- *     Its purpose is only to instanciate the {@link DescriptorAxioms.Concepts} for the
+ *     Its purpose is only to instanciate the {@link DescriptorEntitySet.Concepts} for the
  *     respective descriptions, as well as call both interfaces in the
  *     {@link #readSemantic()} and {@link #writeSemantic()} methods.
  *     All its constructions are based on {@link ConceptDescriptorBase} in order
@@ -29,7 +29,7 @@ import java.util.List;
  *     and maximises the OWL synchronisation efficiency.
  *
  * <div style="text-align:center;"><small>
- * <b>File</b>:        it.emarolab.owloop.descriptor.utility.concept_compoundDescriptor.HierarchicalConceptDesc <br>
+ * <b>File</b>:        it.emarolab.owloop.descriptor.utility.conceptCompoundDescriptor.HierarchicalConceptDesc <br>
  * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
  * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
  * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -41,8 +41,8 @@ public class HierarchicalConceptDesc
         implements ConceptExpression.Sub<HierarchicalConceptDesc>,
         ConceptExpression.Super<HierarchicalConceptDesc>{
 
-    private DescriptorAxioms.Concepts subConcept = new DescriptorAxioms.Concepts();
-    private DescriptorAxioms.Concepts superConcept = new DescriptorAxioms.Concepts();
+    private DescriptorEntitySet.Concepts subConcept = new DescriptorEntitySet.Concepts();
+    private DescriptorEntitySet.Concepts superConcept = new DescriptorEntitySet.Concepts();
 
     // constructors for ConceptDescriptorBase
 
@@ -73,7 +73,7 @@ public class HierarchicalConceptDesc
 
 
 
-    // implementations for Semantic.descriptor
+    // implementations for Axiom.descriptor
 
     @Override
     public List<MappingIntent> readSemantic() {
@@ -99,7 +99,7 @@ public class HierarchicalConceptDesc
     }
 
     @Override
-    public DescriptorAxioms.Concepts getSubConcept() {
+    public DescriptorEntitySet.Concepts getSubConcept() {
         return subConcept;
     }
 
@@ -113,7 +113,7 @@ public class HierarchicalConceptDesc
     }
 
     @Override
-    public DescriptorAxioms.Concepts getSuperConcept() {
+    public DescriptorEntitySet.Concepts getSuperConcept() {
         return superConcept;
     }
 

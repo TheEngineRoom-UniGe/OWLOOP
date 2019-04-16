@@ -5,11 +5,11 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * The main interface for ontological data property {@link Semantic.Descriptor}.
+ * The main interface for ontological data property {@link Axiom.Descriptor}.
  * <p>
- *     This interface contains all the {@link Semantic.Descriptor} that
+ *     This interface contains all the {@link Axiom.Descriptor} that
  *     can be applied to an ontological data property (e.g.: {@link org.semanticweb.owlapi.model.OWLDataProperty})
- *     in any arbitrary combination since all of them should rely on the same {@link Semantic.Ground}
+ *     in any arbitrary combination since all of them should rely on the same {@link Axiom.Ground}
  *     type.
  *     <br>
  *     More in particular, for the {@link #getInstance()} entities in the {@link #getOntology()}, those are:
@@ -42,7 +42,7 @@ import java.util.Set;
  * @param <J> the type of instance (i.e.: data properties) for the axioms.
  */
 public interface DataProperty<O,J>
-        extends Semantic.Descriptor<O,J>{
+        extends Axiom.Descriptor<O,J>{
 
     // those could return ontology changes
     /**
@@ -55,9 +55,9 @@ public interface DataProperty<O,J>
     void setNotFunctional();
 
     /**
-     * The {@link Semantic.Descriptor} for disjointed data properties.
+     * The {@link Axiom.Descriptor} for disjointed data properties.
      * <p>
-     *     This {@link Semantic.Descriptor} synchronises the disjointed data properties of {@code this}
+     *     This {@link Axiom.Descriptor} synchronises the disjointed data properties of {@code this}
      *     property (i.e.: the {@link Ground#getGroundInstance()}).
      * </p>
      * <div style="text-align:center;"><small>
@@ -70,7 +70,7 @@ public interface DataProperty<O,J>
      *
      * @param <O> the type of ontology in which the axioms for classes will be applied.
      * @param <J> the type of the described data property
-     *           (it also represents the type of {@link Semantic.Axioms} managed by this {@link Descriptor}.
+     *           (it also represents the type of {@link EntitySet} managed by this {@link Descriptor}.
      * @param <D> the type of the {@link DataProperty} descriptor instantiated during
      *           {@link #buildDisjointDataProperty()} through {@link #getNewDisjointDataProperty(Object, Object)}.
      */
@@ -79,14 +79,14 @@ public interface DataProperty<O,J>
 
         @Override
         default List<MappingIntent> readSemantic(){
-            Axioms.SynchronisationIntent<J> from = synchroniseDisjointDataPropertyFromSemantic();
+            EntitySet.SynchronisationIntent<J> from = synchroniseDisjointDataPropertyFromSemantic();
             getDisjointDataProperty().addAll( from.getToAdd());
             getDisjointDataProperty().removeAll( from.getToRemove());
             return getIntent( from);
         }
 
         /**
-         * Create an {@link Semantic.Descriptor} set where each element
+         * Create an {@link Axiom.Descriptor} set where each element
          * represents the disjointed data property of {@code this} property.
          * Each of {@link DataProperty}s are instantiated
          * through the method {@link #getNewDisjointDataProperty(Object, Object)};
@@ -110,34 +110,34 @@ public interface DataProperty<O,J>
          * a disjointed property of {@code this} {@link DataProperty} {@link Descriptor}.
          * @param instance the instance to ground the new disjoint {@link DataProperty}.
          * @param ontology the ontology in which ground the new {@link DataProperty}.
-         * @return a new {@link Semantic.Descriptor} for all the disjointed properties
+         * @return a new {@link Axiom.Descriptor} for all the disjointed properties
          * of the one described by {@code this} interface.
          */
         D getNewDisjointDataProperty(J instance, O ontology);
 
         /**
-         * Returns the {@link Semantic.Axioms} that describes all the disjoint data properties of
+         * Returns the {@link EntitySet} that describes all the disjoint data properties of
          * {@code this} grounded {@link DataProperty}; from a no OOP point of view.
          * @return the entities describing the disjoint data properties of {@code this} described property.
          */
-        Axioms<J> getDisjointDataProperty();
+        EntitySet<J> getDisjointDataProperty();
 
         /**
          * Queries to the OWL representation for the disjoint properties of {@code this} data property.
-         * @return a new {@link Semantic.Axioms} contained the disjoint properties of {@link #getInstance()},
+         * @return a new {@link EntitySet} contained the disjoint properties of {@link #getInstance()},
          * into the OWL structure.
          */
-        Axioms<J> queryDisjointDataProperty();
+        EntitySet<J> queryDisjointDataProperty();
 
         /**
-         * It calls {@link Semantic.Axioms#synchroniseTo(Axioms)} with {@link #queryDisjointDataProperty()}
+         * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryDisjointDataProperty()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getDisjointDataProperty()}. This should
          * be done by {@link #writeSemantic()}.
          * @return the changes to be done to synchronise {@code this} structure with
          * the disjoint properties of {@link #getInstance()}; to the OWL representation.
          */
-        default Axioms.SynchronisationIntent<J> synchroniseDisjointDataPropertyToSemantic(){
+        default EntitySet.SynchronisationIntent<J> synchroniseDisjointDataPropertyToSemantic(){
             try {
                 return getDisjointDataProperty().synchroniseTo( queryDisjointDataProperty());
             } catch ( Exception e){
@@ -147,14 +147,14 @@ public interface DataProperty<O,J>
         }
 
         /**
-         * It calls {@link SemanticAxioms#synchroniseFrom(Axioms)} with {@link #queryDisjointDataProperty()}
+         * It calls {@link SemanticEntitySet#synchroniseFrom(EntitySet)} with {@link #queryDisjointDataProperty()}
          * as input parameter. This computes the changes to be performed into the {@link #getDisjointDataProperty()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readSemantic()}.
          * @return the changes to be done to synchronise the disjoint data properties of {@link #getInstance()};
          * from an OWL representation to {@code this} {@link Descriptor}.
          */
-        default Axioms.SynchronisationIntent<J> synchroniseDisjointDataPropertyFromSemantic(){
+        default EntitySet.SynchronisationIntent<J> synchroniseDisjointDataPropertyFromSemantic(){
             try{
                 return getDisjointDataProperty().synchroniseFrom( queryDisjointDataProperty());
             } catch ( Exception e){
@@ -165,9 +165,9 @@ public interface DataProperty<O,J>
     }
 
     /**
-     * The {@link Semantic.Descriptor} for equivalent data properties.
+     * The {@link Axiom.Descriptor} for equivalent data properties.
      * <p>
-     *     This {@link Semantic.Descriptor} synchronises the equivalent data properties of {@code this}
+     *     This {@link Axiom.Descriptor} synchronises the equivalent data properties of {@code this}
      *     property (i.e.: the {@link Ground#getGroundInstance()}).
      * </p>
      * <div style="text-align:center;"><small>
@@ -180,7 +180,7 @@ public interface DataProperty<O,J>
      *
      * @param <O> the type of ontology in which the axioms for classes will be applied.
      * @param <J> the type of the described data property
-     *           (it also represents the type of {@link Semantic.Axioms} managed by this {@link Descriptor}.
+     *           (it also represents the type of {@link EntitySet} managed by this {@link Descriptor}.
      * @param <D> the type of the {@link DataProperty} descriptor instantiated during
      *           {@link #buildEquivalentDataProperty()} through {@link #getNewEquivalentDataProperty(Object, Object)}.
      */
@@ -190,7 +190,7 @@ public interface DataProperty<O,J>
         @Override
         default List<MappingIntent> readSemantic(){
             try {
-                Axioms.SynchronisationIntent<J> from = synchroniseEquivalentDataPropertyFromSemantic();
+                EntitySet.SynchronisationIntent<J> from = synchroniseEquivalentDataPropertyFromSemantic();
                 if (from != null) {
                     getEquivalentDataProperty().addAll(from.getToAdd());
                     getEquivalentDataProperty().removeAll(from.getToRemove());
@@ -203,7 +203,7 @@ public interface DataProperty<O,J>
         }
 
         /**
-         * Create an {@link Semantic.Descriptor} set where each element
+         * Create an {@link Axiom.Descriptor} set where each element
          * represents the disjointed data property of {@code this} property.
          * Each of {@link DataProperty}s are instantiated
          * through the method {@link #getNewEquivalentDataProperty(Object, Object)};
@@ -227,34 +227,34 @@ public interface DataProperty<O,J>
          * an equivalent property of {@code this} {@link DataProperty} {@link Descriptor}.
          * @param instance the instance to ground the new equivalent {@link DataProperty}.
          * @param ontology the ontology in which ground the new {@link DataProperty}.
-         * @return a new {@link Semantic.Descriptor} for all the equivalent properties
+         * @return a new {@link Axiom.Descriptor} for all the equivalent properties
          * of the one described by {@code this} interface.
          */
         D getNewEquivalentDataProperty(J instance, O ontology);
 
         /**
-         * Returns the {@link Semantic.Axioms} that describes all the equivalent data properties of
+         * Returns the {@link EntitySet} that describes all the equivalent data properties of
          * {@code this} grounded {@link DataProperty}; from a no OOP point of view.
          * @return the entities describing the equivalent data properties of {@code this} described property.
          */
-        Axioms<J> getEquivalentDataProperty();
+        EntitySet<J> getEquivalentDataProperty();
 
         /**
          * Queries to the OWL representation for the equivalent properties of {@code this} data property.
-         * @return a new {@link Semantic.Axioms} contained the equivalent properties of {@link #getInstance()},
+         * @return a new {@link EntitySet} contained the equivalent properties of {@link #getInstance()},
          * into the OWL structure.
          */
-        Axioms<J> queryEquivalentDataProperty();
+        EntitySet<J> queryEquivalentDataProperty();
 
         /**
-         * It calls {@link Semantic.Axioms#synchroniseTo(Axioms)} with {@link #queryEquivalentDataProperty()}
+         * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryEquivalentDataProperty()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getEquivalentDataProperty()}. This should
          * be done by {@link #writeSemantic()}.
          * @return the changes to be done to synchronise {@code this} structure with
          * the equivalent properties of {@link #getInstance()}; to the OWL representation.
          */
-        default Axioms.SynchronisationIntent<J> synchroniseEquivalentDataPropertyToSemantic(){
+        default EntitySet.SynchronisationIntent<J> synchroniseEquivalentDataPropertyToSemantic(){
             try {
                 return getEquivalentDataProperty().synchroniseTo( queryEquivalentDataProperty());
             } catch ( Exception e){
@@ -264,14 +264,14 @@ public interface DataProperty<O,J>
         }
 
         /**
-         * It calls {@link SemanticAxioms#synchroniseFrom(Axioms)} with {@link #queryEquivalentDataProperty()}
+         * It calls {@link SemanticEntitySet#synchroniseFrom(EntitySet)} with {@link #queryEquivalentDataProperty()}
          * as input parameter. This computes the changes to be performed into the {@link #getEquivalentDataProperty()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readSemantic()}.
          * @return the changes to be done to synchronise the equivalent data properties of {@link #getInstance()};
          * from an OWL representation to {@code this} {@link Descriptor}.
          */
-        default Axioms.SynchronisationIntent<J> synchroniseEquivalentDataPropertyFromSemantic(){
+        default EntitySet.SynchronisationIntent<J> synchroniseEquivalentDataPropertyFromSemantic(){
             try{
                 return getEquivalentDataProperty().synchroniseFrom( queryEquivalentDataProperty());
             } catch ( Exception e){
@@ -282,9 +282,9 @@ public interface DataProperty<O,J>
     }
 
     /**
-     * The {@link Semantic.Descriptor} for sub data properties.
+     * The {@link Axiom.Descriptor} for sub data properties.
      * <p>
-     *     This {@link Semantic.Descriptor} synchronises the sub data properties of {@code this}
+     *     This {@link Axiom.Descriptor} synchronises the sub data properties of {@code this}
      *     property (i.e.: the {@link Ground#getGroundInstance()}).
      * </p>
      * <div style="text-align:center;"><small>
@@ -297,7 +297,7 @@ public interface DataProperty<O,J>
      *
      * @param <O> the type of ontology in which the axioms for classes will be applied.
      * @param <J> the type of the described data property
-     *           (it also represents the type of {@link Semantic.Axioms} managed by this {@link Descriptor}.
+     *           (it also represents the type of {@link EntitySet} managed by this {@link Descriptor}.
      * @param <D> the type of the {@link DataProperty} descriptor instantiated during
      *           {@link #buildSubDataProperty()} through {@link #getNewSubDataProperty(Object, Object)}.
      */
@@ -307,7 +307,7 @@ public interface DataProperty<O,J>
         @Override
         default List<MappingIntent> readSemantic(){
             try {
-                Axioms.SynchronisationIntent<J> from = synchroniseSubDataPropertyFromSemantic();
+                EntitySet.SynchronisationIntent<J> from = synchroniseSubDataPropertyFromSemantic();
                 if (from != null) {
                     getSubDataProperty().addAll(from.getToAdd());
                     getSubDataProperty().removeAll(from.getToRemove());
@@ -320,7 +320,7 @@ public interface DataProperty<O,J>
         }
 
         /**
-         * Create an {@link Semantic.Descriptor} set where each element
+         * Create an {@link Axiom.Descriptor} set where each element
          * represents the sub data property of {@code this} property.
          * Each of {@link DataProperty}s are instantiated
          * through the method {@link #getNewSubDataProperty(Object, Object)};
@@ -344,34 +344,34 @@ public interface DataProperty<O,J>
          * a sub property of {@code this} {@link DataProperty} {@link Descriptor}.
          * @param instance the instance to ground the new sub {@link DataProperty}.
          * @param ontology the ontology in which ground the new {@link DataProperty}.
-         * @return a new {@link Semantic.Descriptor} for all the sub properties
+         * @return a new {@link Axiom.Descriptor} for all the sub properties
          * of the one described by {@code this} interface.
          */
         D getNewSubDataProperty( J instance, O ontology);
 
         /**
-         * Returns the {@link Semantic.Axioms} that describes all the sub data properties of
+         * Returns the {@link EntitySet} that describes all the sub data properties of
          * {@code this} grounded {@link DataProperty}; from a no OOP point of view.
          * @return the entities describing the sub data properties of {@code this} described property.
          */
-        Axioms<J> getSubDataProperty();
+        EntitySet<J> getSubDataProperty();
 
         /**
          * Queries to the OWL representation for the sub properties of {@code this} data property.
-         * @return a new {@link Semantic.Axioms} contained the sub properties of {@link #getInstance()},
+         * @return a new {@link EntitySet} contained the sub properties of {@link #getInstance()},
          * into the OWL structure.
          */
-        Axioms<J> querySubDataProperty();
+        EntitySet<J> querySubDataProperty();
 
         /**
-         * It calls {@link Semantic.Axioms#synchroniseTo(Axioms)} with {@link #querySubDataProperty()}
+         * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #querySubDataProperty()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getSubDataProperty()}. This should
          * be done by {@link #writeSemantic()}.
          * @return the changes to be done to synchronise {@code this} structure with
          * the sub properties of {@link #getInstance()}; to the OWL representation.
          */
-        default Axioms.SynchronisationIntent<J> synchroniseSubDataPropertyToSemantic(){
+        default EntitySet.SynchronisationIntent<J> synchroniseSubDataPropertyToSemantic(){
             try {
                 return getSubDataProperty().synchroniseTo( querySubDataProperty());
             } catch ( Exception e){
@@ -381,14 +381,14 @@ public interface DataProperty<O,J>
         }
 
         /**
-         * It calls {@link SemanticAxioms#synchroniseFrom(Axioms)} with {@link #querySubDataProperty()}
+         * It calls {@link SemanticEntitySet#synchroniseFrom(EntitySet)} with {@link #querySubDataProperty()}
          * as input parameter. This computes the changes to be performed into the {@link #getSubDataProperty()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readSemantic()}.
          * @return the changes to be done to synchronise the sub data properties of {@link #getInstance()};
          * from an OWL representation to {@code this} {@link Descriptor}.
          */
-        default Axioms.SynchronisationIntent<J> synchroniseSubDataPropertyFromSemantic(){
+        default EntitySet.SynchronisationIntent<J> synchroniseSubDataPropertyFromSemantic(){
             try{
                 return getSubDataProperty().synchroniseFrom( querySubDataProperty());
             } catch ( Exception e){
@@ -399,9 +399,9 @@ public interface DataProperty<O,J>
     }
 
     /**
-     * The {@link Semantic.Descriptor} for super data properties.
+     * The {@link Axiom.Descriptor} for super data properties.
      * <p>
-     *     This {@link Semantic.Descriptor} synchronises the super data properties of {@code this}
+     *     This {@link Axiom.Descriptor} synchronises the super data properties of {@code this}
      *     property (i.e.: the {@link Ground#getGroundInstance()}).
      * </p>
      * <div style="text-align:center;"><small>
@@ -414,7 +414,7 @@ public interface DataProperty<O,J>
      *
      * @param <O> the type of ontology in which the axioms for classes will be applied.
      * @param <J> the type of the described data property
-     *           (it also represents the type of {@link Semantic.Axioms} managed by this {@link Descriptor}.
+     *           (it also represents the type of {@link EntitySet} managed by this {@link Descriptor}.
      * @param <D> the type of the {@link DataProperty} descriptor instantiated during
      *           {@link #buildSuperDataProperty()} through {@link #getNewSuperDataProperty(Object, Object)}.
      */
@@ -424,7 +424,7 @@ public interface DataProperty<O,J>
         @Override
         default List<MappingIntent> readSemantic(){
             try {
-                Axioms.SynchronisationIntent<J> from = synchroniseSuperDataPropertyFromSemantic();
+                EntitySet.SynchronisationIntent<J> from = synchroniseSuperDataPropertyFromSemantic();
                 getSuperDataProperty().addAll(from.getToAdd());
                 getSuperDataProperty().removeAll(from.getToRemove());
                 return getIntent(from);
@@ -435,7 +435,7 @@ public interface DataProperty<O,J>
         }
 
         /**
-         * Create an {@link Semantic.Descriptor} set where each element
+         * Create an {@link Axiom.Descriptor} set where each element
          * represents the super data property of {@code this} property.
          * Each of {@link DataProperty}s are instantiated
          * through the method {@link #getNewSuperDataProperty(Object, Object)};
@@ -459,34 +459,34 @@ public interface DataProperty<O,J>
          * a super property of {@code this} {@link DataProperty} {@link Descriptor}.
          * @param instance the instance to ground the new super {@link DataProperty}.
          * @param ontology the ontology in which ground the new {@link DataProperty}.
-         * @return a new {@link Semantic.Descriptor} for all the super properties
+         * @return a new {@link Axiom.Descriptor} for all the super properties
          * of the one described by {@code this} interface.
          */
         D getNewSuperDataProperty(J instance, O ontology);
 
         /**
-         * Returns the {@link Semantic.Axioms} that describes all the super data properties of
+         * Returns the {@link EntitySet} that describes all the super data properties of
          * {@code this} grounded {@link DataProperty}; from a no OOP point of view.
          * @return the entities describing the super data properties of {@code this} described property.
          */
-        Axioms<J> getSuperDataProperty();
+        EntitySet<J> getSuperDataProperty();
 
         /**
          * Queries to the OWL representation for the super properties of {@code this} data property.
-         * @return a new {@link Semantic.Axioms} contained the super properties of {@link #getInstance()},
+         * @return a new {@link EntitySet} contained the super properties of {@link #getInstance()},
          * into the OWL structure.
          */
-        Axioms<J> querySuperDataProperty();
+        EntitySet<J> querySuperDataProperty();
 
         /**
-         * It calls {@link Semantic.Axioms#synchroniseTo(Axioms)} with {@link #querySuperDataProperty()}
+         * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #querySuperDataProperty()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getSuperDataProperty()}. This should
          * be done by {@link #writeSemantic()}.
          * @return the changes to be done to synchronise {@code this} structure with
          * the super properties of {@link #getInstance()}; to the OWL representation.
          */
-        default Axioms.SynchronisationIntent<J> synchroniseSuperDataPropertyToSemantic(){
+        default EntitySet.SynchronisationIntent<J> synchroniseSuperDataPropertyToSemantic(){
             try {
                 return getSuperDataProperty().synchroniseTo( querySuperDataProperty());
             } catch ( Exception e){
@@ -496,14 +496,14 @@ public interface DataProperty<O,J>
         }
 
         /**
-         * It calls {@link SemanticAxioms#synchroniseFrom(Axioms)} with {@link #querySuperDataProperty()}
+         * It calls {@link SemanticEntitySet#synchroniseFrom(EntitySet)} with {@link #querySuperDataProperty()}
          * as input parameter. This computes the changes to be performed into the {@link #getSuperDataProperty()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readSemantic()}.
          * @return the changes to be done to synchronise the super data properties of {@link #getInstance()};
          * from an OWL representation to {@code this} {@link Descriptor}.
          */
-        default Axioms.SynchronisationIntent<J> synchroniseSuperDataPropertyFromSemantic(){
+        default EntitySet.SynchronisationIntent<J> synchroniseSuperDataPropertyFromSemantic(){
             try{
                 return getSuperDataProperty().synchroniseFrom( querySuperDataProperty());
             } catch ( Exception e){
@@ -514,9 +514,9 @@ public interface DataProperty<O,J>
     }
 
     /**
-     * The {@link Semantic.Descriptor} for the definition of an ontological data property domain.
+     * The {@link Axiom.Descriptor} for the definition of an ontological data property domain.
      * <p>
-     *     This {@link Semantic.Descriptor} synchronises the definition of a specific data property domain
+     *     This {@link Axiom.Descriptor} synchronises the definition of a specific data property domain
      *     (i.e.: the {@link Ground#getGroundInstance()}).
      *     Definition is defined as conjunction of restriction properties that
      *     creates classes in the domain of the described property.
@@ -531,7 +531,7 @@ public interface DataProperty<O,J>
      *                       existential ({@code some}), universal ({@code all}), minimal, maximal and exact.</li>
      *     </ul>
      *     This description is not considered from an OOP point of view (it is not possible
-     *     to {@code build} them) since their are not entities that fall back in the {@link Semantic}
+     *     to {@code build} them) since their are not entities that fall back in the {@link Axiom}
      *     representations.
      *
      * <div style="text-align:center;"><small>
@@ -545,7 +545,7 @@ public interface DataProperty<O,J>
      * @param <O> the type of ontology in which the axioms for classes will be applied.
      * @param <J> the type of the described class.
      * @param <Y> the type of restriction of the domain of the defined property.
-     *           (it represents the of {@link Semantic.Axioms} managed by this {@link Descriptor}.
+     *           (it represents the of {@link EntitySet} managed by this {@link Descriptor}.
      */
     interface Domain<O,J,Y>
             extends DataProperty<O,J>{
@@ -553,7 +553,7 @@ public interface DataProperty<O,J>
         @Override
         default List<MappingIntent> readSemantic(){
             try {
-                Axioms.SynchronisationIntent<Y> from = synchroniseDomainDataPropertyFromSemantic();
+                EntitySet.SynchronisationIntent<Y> from = synchroniseDomainDataPropertyFromSemantic();
                 if ( from != null) {
                     getDomainDataProperty().addAll(from.getToAdd());
                     getDomainDataProperty().removeAll(from.getToRemove());
@@ -566,28 +566,28 @@ public interface DataProperty<O,J>
         }
 
         /**
-         * Returns the {@link Semantic.Axioms} that describes all the restrictions of the
+         * Returns the {@link EntitySet} that describes all the restrictions of the
          * domain of the described property; from a no OOP point of view.
          * @return the restrictions describing the domain of {@code this} grounded the data property.
          */
-        Axioms<Y> getDomainDataProperty();
+        EntitySet<Y> getDomainDataProperty();
 
         /**
          * Queries to the OWL representation for the domain restrictions of {@code this} data property.
-         * @return a new {@link Semantic.Axioms} contained the domain restrictions of {@link #getInstance()},
+         * @return a new {@link EntitySet} contained the domain restrictions of {@link #getInstance()},
          * into the OWL structure.
          */
-        Axioms<Y> queryDomainDataProperty();
+        EntitySet<Y> queryDomainDataProperty();
 
         /**
-         * It calls {@link Semantic.Axioms#synchroniseTo(Axioms)} with {@link #queryDomainDataProperty()}
+         * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryDomainDataProperty()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getDomainDataProperty()}. This should
          * be done by {@link #writeSemantic()}.
          * @return the changes to be done to synchronise {@code this} structure with
          * the domain restriction of {@link #getInstance()}; to the OWL representation.
          */
-        default Axioms.SynchronisationIntent<Y> synchroniseDomainDataPropertyToSemantic(){
+        default EntitySet.SynchronisationIntent<Y> synchroniseDomainDataPropertyToSemantic(){
             try {
                 return getDomainDataProperty().synchroniseTo( queryDomainDataProperty());
             } catch ( Exception e){
@@ -597,14 +597,14 @@ public interface DataProperty<O,J>
         }
 
         /**
-         * It calls {@link SemanticAxioms#synchroniseFrom(Axioms)} with {@link #queryDomainDataProperty()}
+         * It calls {@link SemanticEntitySet#synchroniseFrom(EntitySet)} with {@link #queryDomainDataProperty()}
          * as input parameter. This computes the changes to be performed into the {@link #getDomainDataProperty()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readSemantic()}.
          * @return the changes to be done to synchronise the domain restrictions of {@link #getInstance()};
          * from an OWL representation to {@code this} {@link Descriptor}.
          */
-        default Axioms.SynchronisationIntent<Y> synchroniseDomainDataPropertyFromSemantic(){
+        default EntitySet.SynchronisationIntent<Y> synchroniseDomainDataPropertyFromSemantic(){
             try{
                 return getDomainDataProperty().synchroniseFrom( queryDomainDataProperty());
             } catch ( Exception e){
@@ -615,9 +615,9 @@ public interface DataProperty<O,J>
     }
 
     /**
-     * The {@link Semantic.Descriptor} for the definition of an ontological data property range.
+     * The {@link Axiom.Descriptor} for the definition of an ontological data property range.
      * <p>
-     *     This {@link Semantic.Descriptor} synchronises the definition of a specific data property range
+     *     This {@link Axiom.Descriptor} synchronises the definition of a specific data property range
      *     (i.e.: the {@link Ground#getGroundInstance()}).
      *     Definition is defined as conjunction of restriction properties that
      *     creates classes in the range of the described property.
@@ -632,7 +632,7 @@ public interface DataProperty<O,J>
      *                       existential ({@code some}), universal ({@code all}), minimal, maximal and exact.</li>
      *     </ul>
      *     This description is not considered from an OOP point of view (it is not possible
-     *     to {@code build} them) since their are not entities that fall back in the {@link Semantic}
+     *     to {@code build} them) since their are not entities that fall back in the {@link Axiom}
      *     representations.
      *
      * <div style="text-align:center;"><small>
@@ -646,7 +646,7 @@ public interface DataProperty<O,J>
      * @param <O> the type of ontology in which the axioms for classes will be applied.
      * @param <J> the type of the described class.
      * @param <Y> the type of restriction of the range of the defined property.
-     *           (it represents the of {@link Semantic.Axioms} managed by this {@link Descriptor}.
+     *           (it represents the of {@link EntitySet} managed by this {@link Descriptor}.
      *
      */
     interface Range<O,J,Y>
@@ -655,7 +655,7 @@ public interface DataProperty<O,J>
         @Override
         default List<MappingIntent> readSemantic(){
             try {
-                Axioms.SynchronisationIntent<Y> from = synchroniseRangeDataPropertyFromSemantic();
+                EntitySet.SynchronisationIntent<Y> from = synchroniseRangeDataPropertyFromSemantic();
                 if (from != null) {
                     getRangeDataProperty().addAll(from.getToAdd());
                     getRangeDataProperty().removeAll(from.getToRemove());
@@ -668,28 +668,28 @@ public interface DataProperty<O,J>
         }
 
         /**
-         * Returns the {@link Semantic.Axioms} that describes all the restrictions of the
+         * Returns the {@link EntitySet} that describes all the restrictions of the
          * range of the described property; from a no OOP point of view.
          * @return the restrictions describing the range of {@code this} grounded the data property.
          */
-        Axioms<Y> getRangeDataProperty();
+        EntitySet<Y> getRangeDataProperty();
 
         /**
          * Queries to the OWL representation for the range restrictions of {@code this} data property.
-         * @return a new {@link Semantic.Axioms} contained the range restrictions of {@link #getInstance()},
+         * @return a new {@link EntitySet} contained the range restrictions of {@link #getInstance()},
          * into the OWL structure.
          */
-        Axioms<Y> queryRangeDataProperty();
+        EntitySet<Y> queryRangeDataProperty();
 
         /**
-         * It calls {@link Semantic.Axioms#synchroniseTo(Axioms)} with {@link #queryRangeDataProperty()}
+         * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryRangeDataProperty()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getRangeDataProperty()}. This should
          * be done by {@link #writeSemantic()}.
          * @return the changes to be done to synchronise {@code this} structure with
          * the range restriction of {@link #getInstance()}; to the OWL representation.
          */
-        default Axioms.SynchronisationIntent<Y> synchroniseRangeDataPropertyToSemantic(){
+        default EntitySet.SynchronisationIntent<Y> synchroniseRangeDataPropertyToSemantic(){
             try {
                 return getRangeDataProperty().synchroniseTo( queryRangeDataProperty());
             } catch ( Exception e){
@@ -699,14 +699,14 @@ public interface DataProperty<O,J>
         }
 
         /**
-         * It calls {@link SemanticAxioms#synchroniseFrom(Axioms)} with {@link #queryRangeDataProperty()}
+         * It calls {@link SemanticEntitySet#synchroniseFrom(EntitySet)} with {@link #queryRangeDataProperty()}
          * as input parameter. This computes the changes to be performed into the {@link #getRangeDataProperty()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readSemantic()}.
          * @return the changes to be done to synchronise the range restrictions of {@link #getInstance()};
          * from an OWL representation to {@code this} {@link Descriptor}.
          */
-        default Axioms.SynchronisationIntent<Y> synchroniseRangeDataPropertyFromSemantic(){
+        default EntitySet.SynchronisationIntent<Y> synchroniseRangeDataPropertyFromSemantic(){
             try{
                 return getRangeDataProperty().synchroniseFrom( queryRangeDataProperty());
             } catch ( Exception e){

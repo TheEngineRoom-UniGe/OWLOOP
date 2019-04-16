@@ -1,23 +1,23 @@
-package it.emarolab.owloop.descriptor.utility.individual_compoundDescriptor;
+package it.emarolab.owloop.descriptor.utility.individualCompoundDescriptor;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
-import it.emarolab.owloop.descriptor.construction.descriptorInterface.DescriptorAxioms;
+import it.emarolab.owloop.core.Axiom;
+import it.emarolab.owloop.descriptor.construction.descriptorInterface.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorInterface.IndividualExpression;
 import it.emarolab.owloop.descriptor.construction.descriptorBase.IndividualDescriptorBase;
-import it.emarolab.owloop.core.Semantic;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 
 import java.util.List;
 
 
 /**
- * A basic implementation for an individual_compoundDescriptor with 'same as' and 'different from' individual_compoundDescriptor description.
+ * A basic implementation for an individualCompoundDescriptor with 'same as' and 'different from' individualCompoundDescriptor description.
  * <p>
- *     This is an example of how use the {@link Semantic.Descriptor}s for implement
- *     am individual_compoundDescriptor that is synchronised w.r.t. to {@link Equivalent}
+ *     This is an example of how use the {@link Axiom.Descriptor}s for implement
+ *     am individualCompoundDescriptor that is synchronised w.r.t. to {@link Equivalent}
  *     and {@link Disjoint} instances.
  *     <br>
- *     Its purpose is only to instanciate the {@link DescriptorAxioms.Individuals} for the
+ *     Its purpose is only to instanciate the {@link DescriptorEntitySet.Individuals} for the
  *     respective descriptions, as well as call both interfaces in the
  *     {@link #readSemantic()} and {@link #writeSemantic()} methods.
  *     All its constructions are based on {@link IndividualDescriptorBase} in order
@@ -30,7 +30,7 @@ import java.util.List;
  *     OWL synchronisation efficiency for data properties.
  *
  * <div style="text-align:center;"><small>
- * <b>File</b>:        it.emarolab.owloop.descriptor.utility.individual_compoundDescriptor.DefinitionIndividualDesc <br>
+ * <b>File</b>:        it.emarolab.owloop.descriptor.utility.individualCompoundDescriptor.DefinitionIndividualDesc <br>
  * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
  * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
  * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -42,8 +42,8 @@ public class DefinitionIndividualDesc
         implements IndividualExpression.Disjoint<DefinitionIndividualDesc>,
         IndividualExpression.Equivalent<DefinitionIndividualDesc>{
 
-    private DescriptorAxioms.Individuals disjointIndividual = new DescriptorAxioms.Individuals();
-    private DescriptorAxioms.Individuals equivalentIndividual = new DescriptorAxioms.Individuals();
+    private DescriptorEntitySet.Individuals disjointIndividual = new DescriptorEntitySet.Individuals();
+    private DescriptorEntitySet.Individuals equivalentIndividual = new DescriptorEntitySet.Individuals();
 
     // constructors for IndividualDescriptorBase
 
@@ -74,7 +74,7 @@ public class DefinitionIndividualDesc
 
 
 
-    // implementations for Semantic.descriptor
+    // implementations for Axiom.descriptor
 
     @Override
     public List<MappingIntent> readSemantic() {
@@ -99,7 +99,7 @@ public class DefinitionIndividualDesc
     }
 
     @Override
-    public DescriptorAxioms.Individuals getDisjointIndividual() {
+    public DescriptorEntitySet.Individuals getDisjointIndividual() {
         return disjointIndividual;
     }
 
@@ -113,7 +113,7 @@ public class DefinitionIndividualDesc
     }
 
     @Override
-    public DescriptorAxioms.Individuals getEquivalentIndividual() {
+    public DescriptorEntitySet.Individuals getEquivalentIndividual() {
         return equivalentIndividual;
     }
 

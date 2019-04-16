@@ -1,8 +1,8 @@
-package it.emarolab.owloop.descriptor.utility.objectProperty_compoundDescriptor;
+package it.emarolab.owloop.descriptor.utility.objectPropertyCompoundDescriptor;
 
 
 import it.emarolab.amor.owlInterface.OWLReferences;
-import it.emarolab.owloop.descriptor.construction.descriptorInterface.DescriptorAxioms;
+import it.emarolab.owloop.descriptor.construction.descriptorInterface.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorInterface.ObjectPropertyExpression;
 import it.emarolab.owloop.descriptor.construction.descriptorBase.ObjectPropertyDescriptorBase;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
@@ -15,7 +15,7 @@ import java.util.List;
  *     This is an example of how use the {@link Descriptor}s for implement
  *     an object property that is synchronised w.r.t. its {@link Domain} and {@link Range} restrictions.
  *     <br>
- *     Its purpose is only to instanciate the {@link DescriptorAxioms.Restrictions} for the
+ *     Its purpose is only to instanciate the {@link DescriptorEntitySet.Restrictions} for the
  *     respective descriptions, as well as call both interfaces in the
  *     {@link #readSemantic()} and {@link #writeSemantic()} methods.
  *     All its constructions are based on {@link ObjectPropertyDescriptorBase} in order
@@ -28,7 +28,7 @@ import java.util.List;
  *     OWL synchronisation efficiency for object properties.
  *
  * <div style="text-align:center;"><small>
- * <b>File</b>:        it.emarolab.owloop.descriptor.utility.objectProperty_compoundDescriptor.DomainObjectPropertyDesc <br>
+ * <b>File</b>:        it.emarolab.owloop.descriptor.utility.objectPropertyCompoundDescriptor.DomainObjectPropertyDesc <br>
  * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
  * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
  * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -39,8 +39,8 @@ public class DomainObjectPropertyDesc
         extends ObjectPropertyDescriptorBase
         implements ObjectPropertyExpression.Domain, ObjectPropertyExpression.Range {
 
-    private DescriptorAxioms.Restrictions domainRestriction = new DescriptorAxioms.Restrictions();
-    private DescriptorAxioms.Restrictions rangeRestriction = new DescriptorAxioms.Restrictions();
+    private DescriptorEntitySet.Restrictions domainRestriction = new DescriptorEntitySet.Restrictions();
+    private DescriptorEntitySet.Restrictions rangeRestriction = new DescriptorEntitySet.Restrictions();
 
 
     // constructors for ObjectPropertyDescriptorBase
@@ -72,7 +72,7 @@ public class DomainObjectPropertyDesc
 
 
 
-    // implementations for Semantic.descriptor
+    // implementations for Axiom.descriptor
 
     @Override
     public List<MappingIntent> readSemantic() {
@@ -92,7 +92,7 @@ public class DomainObjectPropertyDesc
 
     // implementations for ObjectPropertyExpression.Domain
     @Override
-    public DescriptorAxioms.Restrictions getDomainObjectProperty() {
+    public DescriptorEntitySet.Restrictions getDomainObjectProperty() {
         return domainRestriction;
     }
 
@@ -100,7 +100,7 @@ public class DomainObjectPropertyDesc
 
     // implementations for ObjectPropertyExpression.Range
     @Override
-    public DescriptorAxioms.Restrictions getRangeObjectProperty() {
+    public DescriptorEntitySet.Restrictions getRangeObjectProperty() {
         return rangeRestriction;
     }
 

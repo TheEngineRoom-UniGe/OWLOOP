@@ -2,9 +2,9 @@ package it.emarolab.owloop.descriptor.utility.owloopPaperTests;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.descriptor.construction.descriptorBase.IndividualDescriptorBase;
-import it.emarolab.owloop.descriptor.construction.descriptorInterface.DescriptorAxioms;
+import it.emarolab.owloop.descriptor.construction.descriptorInterface.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorInterface.IndividualExpression;
-import it.emarolab.owloop.descriptor.utility.objectProperty_compoundDescriptor.FullObjectPropertyDesc;
+import it.emarolab.owloop.descriptor.utility.objectPropertyCompoundDescriptor.FullObjectPropertyDesc;
 
 import java.util.List;
 
@@ -12,14 +12,14 @@ public class ObjLinkIndividualDesc
         extends IndividualDescriptorBase
         implements IndividualExpression.ObjectLink<FullObjectPropertyDesc> {
 
-    private DescriptorAxioms.ObjectSemantics objectLinks = new DescriptorAxioms.ObjectSemantics();
+    private DescriptorEntitySet.ObjectSemantics objectLinks = new DescriptorEntitySet.ObjectSemantics();
 
     // constructors for IndividualDescriptorBase
     public ObjLinkIndividualDesc(String instanceName, OWLReferences onto) {
         super(instanceName, onto);
     }
 
-    // implementations for Semantic.descriptor
+    // implementations for Axiom.descriptor
     @Override
     public List<MappingIntent> readSemantic() {
         List<MappingIntent> r = ObjectLink.super.readSemantic();
@@ -35,12 +35,12 @@ public class ObjLinkIndividualDesc
 
     // implementations for IndividualExpression.ObjectLink
     @Override //called during build...() you can change the returning type to any implementations of ObjectPropertyExpression
-    public FullObjectPropertyDesc getNewObjectIndividual(DescriptorAxioms.ObjectSemantic instance, OWLReferences ontology) {
+    public FullObjectPropertyDesc getNewObjectIndividual(DescriptorEntitySet.ObjectSemantic instance, OWLReferences ontology) {
         return new FullObjectPropertyDesc( instance.getSemantic(), ontology);
     }
 
     @Override
-    public DescriptorAxioms.ObjectSemantics getObjectSemantics() {
+    public DescriptorEntitySet.ObjectSemantics getObjectSemantics() {
         return objectLinks;
     }
 

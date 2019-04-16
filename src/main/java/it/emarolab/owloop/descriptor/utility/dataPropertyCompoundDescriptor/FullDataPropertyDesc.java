@@ -1,11 +1,11 @@
-package it.emarolab.owloop.descriptor.utility.dataProperty_compoundDescriptor;
+package it.emarolab.owloop.descriptor.utility.dataPropertyCompoundDescriptor;
 
 
 import it.emarolab.amor.owlInterface.OWLReferences;
+import it.emarolab.owloop.core.Axiom;
 import it.emarolab.owloop.descriptor.construction.descriptorInterface.DataPropertyExpression;
-import it.emarolab.owloop.descriptor.construction.descriptorInterface.DescriptorAxioms;
+import it.emarolab.owloop.descriptor.construction.descriptorInterface.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorBase.DataPropertyDescriptorBase;
-import it.emarolab.owloop.core.Semantic;
 import org.semanticweb.owlapi.model.OWLDataProperty;
 
 import java.util.List;
@@ -14,11 +14,11 @@ import java.util.Set;
 /**
  * The implementation of all the semantic features of a data property.
  * <p>
- *     This is an example of how use the {@link Semantic.Descriptor}s for implement
+ *     This is an example of how use the {@link Axiom.Descriptor}s for implement
  *     a data property that is synchronised w.r.t. all interfaces of {@link DataPropertyExpression}.
  *     <br>
- *     Its purpose is only to instanciate the {@link DescriptorAxioms.DataLinks}
- *     and {@link DescriptorAxioms.Restrictions} for the
+ *     Its purpose is only to instanciate the {@link DescriptorEntitySet.DataLinks}
+ *     and {@link DescriptorEntitySet.Restrictions} for the
  *     respective descriptions, as well as call all interfaces in the
  *     {@link #readSemantic()} and {@link #writeSemantic()} methods.
  *     All its constructions are based on {@link DataPropertyDescriptorBase} in order
@@ -33,7 +33,7 @@ import java.util.Set;
  *     as templates for doing that.
  *
  * <div style="text-align:center;"><small>
- * <b>File</b>:        it.emarolab.owloop.descriptor.utility.dataProperty_compoundDescriptor.FullDataPropertyDesc <br>
+ * <b>File</b>:        it.emarolab.owloop.descriptor.utility.dataPropertyCompoundDescriptor.FullDataPropertyDesc <br>
  * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
  * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
  * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -49,13 +49,12 @@ public class FullDataPropertyDesc
         DataPropertyExpression.Domain,
         DataPropertyExpression.Range{
 
-    private DescriptorAxioms.DataLinks disjointProperties = new DescriptorAxioms.DataLinks();
-    private DescriptorAxioms.DataLinks equivalentProperties = new DescriptorAxioms.DataLinks();
-    private DescriptorAxioms.Restrictions domainRestriction = new DescriptorAxioms.Restrictions();
-    private DescriptorAxioms.Restrictions rangeRestriction = new DescriptorAxioms.Restrictions();
-    private DescriptorAxioms.DataLinks subProperties = new DescriptorAxioms.DataLinks();
-    private DescriptorAxioms.DataLinks superProperties = new DescriptorAxioms.DataLinks();
-
+    private DescriptorEntitySet.DataLinks disjointProperties = new DescriptorEntitySet.DataLinks();
+    private DescriptorEntitySet.DataLinks equivalentProperties = new DescriptorEntitySet.DataLinks();
+    private DescriptorEntitySet.DataLinks subProperties = new DescriptorEntitySet.DataLinks();
+    private DescriptorEntitySet.DataLinks superProperties = new DescriptorEntitySet.DataLinks();
+    private DescriptorEntitySet.Restrictions domainRestriction = new DescriptorEntitySet.Restrictions();
+    private DescriptorEntitySet.Restrictions rangeRestriction = new DescriptorEntitySet.Restrictions();
 
     // constructors for DataPropertyDescriptorBase
 
@@ -84,10 +83,7 @@ public class FullDataPropertyDesc
         super(instanceName, ontoName, filePath, iriPath, bufferingChanges);
     }
 
-
-
-
-    // implementations for Semantic.descriptor
+    // implementations for Axiom.descriptor
 
     @Override
     public List<MappingIntent> readSemantic() {
@@ -111,7 +107,6 @@ public class FullDataPropertyDesc
         return r;
     }
 
-
     // implementations for DataPropertyExpression.Disjoint
 
 
@@ -121,11 +116,9 @@ public class FullDataPropertyDesc
     }
 
     @Override
-    public DescriptorAxioms.DataLinks getDisjointDataProperty() {
+    public DescriptorEntitySet.DataLinks getDisjointDataProperty() {
         return disjointProperties;
     }
-
-
 
     // implementations for DataPropertyExpression.Equivalent
 
@@ -140,29 +133,21 @@ public class FullDataPropertyDesc
     }
 
     @Override
-    public DescriptorAxioms.DataLinks getEquivalentDataProperty() {
+    public DescriptorEntitySet.DataLinks getEquivalentDataProperty() {
         return equivalentProperties;
     }
 
-
-
-
     // implementations for DataPropertyExpression.Domain
     @Override
-    public DescriptorAxioms.Restrictions getDomainDataProperty() {
+    public DescriptorEntitySet.Restrictions getDomainDataProperty() {
         return domainRestriction;
     }
 
-
-
     // implementations for DataPropertyExpression.Range
     @Override
-    public DescriptorAxioms.Restrictions getRangeDataProperty() {
+    public DescriptorEntitySet.Restrictions getRangeDataProperty() {
         return rangeRestriction;
     }
-
-
-
 
     // implementations for DataPropertyExpression.Super
 
@@ -172,11 +157,9 @@ public class FullDataPropertyDesc
     }
 
     @Override
-    public DescriptorAxioms.DataLinks getSubDataProperty() {
+    public DescriptorEntitySet.DataLinks getSubDataProperty() {
         return subProperties;
     }
-
-
 
     // implementations for DataPropertyExpression.Super
 
@@ -186,11 +169,9 @@ public class FullDataPropertyDesc
     }
 
     @Override
-    public DescriptorAxioms.DataLinks getSuperDataProperty() {
+    public DescriptorEntitySet.DataLinks getSuperDataProperty() {
         return superProperties;
     }
-
-
 
     // implementation for standard object interface
     // equals() and hashCode() is based on DescriptorBase<?> which considers only the ground

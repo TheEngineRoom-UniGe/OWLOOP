@@ -1,9 +1,9 @@
-package it.emarolab.owloop.descriptor.utility.objectProperty_compoundDescriptor;
+package it.emarolab.owloop.descriptor.utility.objectPropertyCompoundDescriptor;
 
 
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.descriptor.construction.descriptorBase.ObjectPropertyDescriptorBase;
-import it.emarolab.owloop.descriptor.construction.descriptorInterface.DescriptorAxioms;
+import it.emarolab.owloop.descriptor.construction.descriptorInterface.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorInterface.ObjectPropertyExpression;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
 
@@ -15,8 +15,8 @@ import java.util.List;
  *     This is an example of how use the {@link Descriptor}s for implement
  *     an object property that is synchronised w.r.t. all interfaces of {@link ObjectPropertyExpression}.
  *     <br>
- *     Its purpose is only to instanciate the {@link DescriptorAxioms.ObjectLinks}
- *     and {@link DescriptorAxioms.Restrictions} for the
+ *     Its purpose is only to instanciate the {@link DescriptorEntitySet.ObjectLinks}
+ *     and {@link DescriptorEntitySet.Restrictions} for the
  *     respective descriptions, as well as call all interfaces in the
  *     {@link #readSemantic()} and {@link #writeSemantic()} methods.
  *     All its constructions are based on {@link ObjectPropertyDescriptorBase} in order
@@ -31,7 +31,7 @@ import java.util.List;
  *     as templates for doing that.
  *
  * <div style="text-align:center;"><small>
- * <b>File</b>:        it.emarolab.owloop.descriptor.utility.objectProperty_compoundDescriptor.FullObjectPropertyDesc <br>
+ * <b>File</b>:        it.emarolab.owloop.descriptor.utility.objectPropertyCompoundDescriptor.FullObjectPropertyDesc <br>
  * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
  * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
  * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -48,14 +48,13 @@ public class FullObjectPropertyDesc
         ObjectPropertyExpression.Domain,
         ObjectPropertyExpression.Range{
 
-    private DescriptorAxioms.ObjectLinks disjointProperties = new DescriptorAxioms.ObjectLinks();
-    private DescriptorAxioms.ObjectLinks equivalentProperties = new DescriptorAxioms.ObjectLinks();
-    private DescriptorAxioms.Restrictions domainRestriction = new DescriptorAxioms.Restrictions();
-    private DescriptorAxioms.Restrictions rangeRestriction = new DescriptorAxioms.Restrictions();
-    private DescriptorAxioms.ObjectLinks subProperties = new DescriptorAxioms.ObjectLinks();
-    private DescriptorAxioms.ObjectLinks superProperties = new DescriptorAxioms.ObjectLinks();
-    private DescriptorAxioms.ObjectLinks inverseProperties = new DescriptorAxioms.ObjectLinks();
-
+    private DescriptorEntitySet.ObjectLinks disjointProperties = new DescriptorEntitySet.ObjectLinks();
+    private DescriptorEntitySet.ObjectLinks equivalentProperties = new DescriptorEntitySet.ObjectLinks();
+    private DescriptorEntitySet.ObjectLinks inverseProperties = new DescriptorEntitySet.ObjectLinks();
+    private DescriptorEntitySet.ObjectLinks subProperties = new DescriptorEntitySet.ObjectLinks();
+    private DescriptorEntitySet.ObjectLinks superProperties = new DescriptorEntitySet.ObjectLinks();
+    private DescriptorEntitySet.Restrictions domainRestriction = new DescriptorEntitySet.Restrictions();
+    private DescriptorEntitySet.Restrictions rangeRestriction = new DescriptorEntitySet.Restrictions();
 
     // constructors for DataPropertyDescriptorBase
 
@@ -84,10 +83,7 @@ public class FullObjectPropertyDesc
         super(instanceName, ontoName, filePath, iriPath, bufferingChanges);
     }
 
-
-
-
-    // implementations for Semantic.descriptor
+    // implementations for Axiom.descriptor
 
     @Override
     public List<MappingIntent> readSemantic() {
@@ -113,7 +109,6 @@ public class FullObjectPropertyDesc
         return r;
     }
 
-
     // implementations for ObjectPropertyExpression.Disjoint
 
     @Override //called during build...() you can change the returning type to any implementations of ObjectPropertyExpression
@@ -122,11 +117,9 @@ public class FullObjectPropertyDesc
     }
 
     @Override
-    public DescriptorAxioms.ObjectLinks getDisjointObjectProperty() {
+    public DescriptorEntitySet.ObjectLinks getDisjointObjectProperty() {
         return disjointProperties;
     }
-
-
 
     // implementations for ObjectPropertyExpression.Equivalent
 
@@ -136,29 +129,21 @@ public class FullObjectPropertyDesc
     }
 
     @Override
-    public DescriptorAxioms.ObjectLinks getEquivalentObjectProperty() {
+    public DescriptorEntitySet.ObjectLinks getEquivalentObjectProperty() {
         return equivalentProperties;
     }
 
-
-
-
     // implementations for ObjectPropertyExpression.Domain
     @Override
-    public DescriptorAxioms.Restrictions getDomainObjectProperty() {
+    public DescriptorEntitySet.Restrictions getDomainObjectProperty() {
         return domainRestriction;
     }
 
-
-
     // implementations for ObjectPropertyExpression.Range
     @Override
-    public DescriptorAxioms.Restrictions getRangeObjectProperty() {
+    public DescriptorEntitySet.Restrictions getRangeObjectProperty() {
         return rangeRestriction;
     }
-
-
-
 
     // implementations for ObjectPropertyExpression.Sub
 
@@ -168,11 +153,9 @@ public class FullObjectPropertyDesc
     }
 
     @Override
-    public DescriptorAxioms.ObjectLinks getSubObjectProperty() {
+    public DescriptorEntitySet.ObjectLinks getSubObjectProperty() {
         return subProperties;
     }
-
-
 
     // implementations for ObjectPropertyExpression.Super
 
@@ -182,12 +165,9 @@ public class FullObjectPropertyDesc
     }
 
     @Override
-    public DescriptorAxioms.ObjectLinks getSuperObjectProperty() {
+    public DescriptorEntitySet.ObjectLinks getSuperObjectProperty() {
         return superProperties;
     }
-
-
-
 
     // implementations for ObjectPropertyExpression.Inverse
 
@@ -197,11 +177,9 @@ public class FullObjectPropertyDesc
     }
 
     @Override
-    public DescriptorAxioms.ObjectLinks getInverseObjectProperty() {
+    public DescriptorEntitySet.ObjectLinks getInverseObjectProperty() {
         return inverseProperties;
     }
-
-
 
     // implementation for standard object interface
     // equals() and hashCode() is based on DescriptorBase<?> which considers only the ground

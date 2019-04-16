@@ -1,11 +1,11 @@
-package it.emarolab.owloop.descriptor.utility.concept_compoundDescriptor;
+package it.emarolab.owloop.descriptor.utility.conceptCompoundDescriptor;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
+import it.emarolab.owloop.core.Axiom;
 import it.emarolab.owloop.descriptor.construction.descriptorBase.ConceptDescriptorBase;
 import it.emarolab.owloop.descriptor.construction.descriptorInterface.ConceptExpression;
-import it.emarolab.owloop.descriptor.construction.descriptorInterface.DescriptorAxioms;
-import it.emarolab.owloop.descriptor.utility.individual_compoundDescriptor.LinkIndividualDesc;
-import it.emarolab.owloop.core.Semantic;
+import it.emarolab.owloop.descriptor.construction.descriptorInterface.DescriptorEntitySet;
+import it.emarolab.owloop.descriptor.utility.individualCompoundDescriptor.LinkIndividualDesc;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 
@@ -13,12 +13,12 @@ import java.util.List;
 
 
 /**
- * A basic implementation for a concept_compoundDescriptor that classify individuals.
+ * A basic implementation for a conceptCompoundDescriptor that classify individuals.
  * <p>
- *     This is an example of how use the {@link Semantic.Descriptor}s for implement
- *     a concept_compoundDescriptor that is synchronised only w.r.t. {@link Classify}ed individuals.
+ *     This is an example of how use the {@link Axiom.Descriptor}s for implement
+ *     a conceptCompoundDescriptor that is synchronised only w.r.t. {@link Classify}ed individuals.
  *     <br>
- *     Its purpose is only to instanciate the {@link DescriptorAxioms.Concepts} for the
+ *     Its purpose is only to instanciate the {@link DescriptorEntitySet.Concepts} for the
  *     respective descriptions, as well as call the derived interfaces in the
  *     {@link #readSemantic()} and {@link #writeSemantic()} methods.
  *     All its constructions are based on {@link ConceptDescriptorBase} in order
@@ -30,7 +30,7 @@ import java.util.List;
  *     and maximises the OWL synchronisation efficiency.
  *
  * <div style="text-align:center;"><small>
- * <b>File</b>:        it.emarolab.owloop.descriptor.utility.concept_compoundDescriptor.ClassifyConceptDesc <br>
+ * <b>File</b>:        it.emarolab.owloop.descriptor.utility.conceptCompoundDescriptor.ClassifyConceptDesc <br>
  * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
  * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
  * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -41,7 +41,7 @@ public class ClassifyConceptDesc
         extends ConceptDescriptorBase
         implements ConceptExpression.Classify<LinkIndividualDesc> {
 
-    private DescriptorAxioms.Individuals classifiedIndividual = new DescriptorAxioms.Individuals();
+    private DescriptorEntitySet.Individuals classifiedIndividual = new DescriptorEntitySet.Individuals();
 
 
     // constructors for ConceptDescriptorBase
@@ -75,7 +75,7 @@ public class ClassifyConceptDesc
 
 
 
-    // implementations for Semantic.descriptor
+    // implementations for Axiom.descriptor
 
     @Override
     public List<MappingIntent> readSemantic() {
@@ -96,7 +96,7 @@ public class ClassifyConceptDesc
     }
 
     @Override
-    public DescriptorAxioms.Individuals getIndividualClassified() {
+    public DescriptorEntitySet.Individuals getIndividualClassified() {
         return classifiedIndividual;
     }
 

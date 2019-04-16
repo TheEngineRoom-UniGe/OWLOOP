@@ -59,7 +59,7 @@ public interface IndividualExpression
      * The {@link Individual.Type} {@link Descriptor} implementation for {@link OWLNamedIndividual}.
      * <p>
      *     It specify how to {@link #queryTypeIndividual()} and {@link #writeSemantic()} for the
-     *     types (i.e.: {@link OWLClass}) in which the described individual_compoundDescriptor (i.e.: {@link #getInstance()})
+     *     types (i.e.: {@link OWLClass}) in which the described individualCompoundDescriptor (i.e.: {@link #getInstance()})
      *     in belonging to.
      * </p>
      * <div style="text-align:center;"><small>
@@ -80,7 +80,7 @@ public interface IndividualExpression
         /**
          * It is an helper that just calls:
          * {@code {@link #getTypeIndividual()}.add( {@link #getOntology()}.getOWLClass( className))}
-         * in order to add a new class (given by name) in the {@link Axioms} list.
+         * in order to add a new class (given by name) in the {@link EntitySet} list.
          * @param className the class name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
@@ -90,7 +90,7 @@ public interface IndividualExpression
         /**
          * It is an helper that just calls:
          * {@code {@link #getTypeIndividual()}.add( cl)}
-         * in order to add a new class in the {@link Axioms} list.
+         * in order to add a new class in the {@link EntitySet} list.
          * @param cl the class to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
@@ -101,7 +101,7 @@ public interface IndividualExpression
         /**
          * It is an helper that just calls:
          * {@code {@link #getTypeIndividual()}.remove( {@link #getOntology()}.getOWLClass( className))}
-         * in order to remove a class (given by name) from the {@link Axioms} list.
+         * in order to remove a class (given by name) from the {@link EntitySet} list.
          * @param className the class name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
@@ -110,8 +110,8 @@ public interface IndividualExpression
         }
         /**
          * It is an helper that just calls:
-         * {@code {@link #getTypeIndividual()}.remove( individual_compoundDescriptor)}
-         * in order to remove a class in the {@link Axioms} list.
+         * {@code {@link #getTypeIndividual()}.remove( individualCompoundDescriptor)}
+         * in order to remove a class in the {@link EntitySet} list.
          * @param cl the class to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
@@ -120,11 +120,11 @@ public interface IndividualExpression
         }
 
         @Override
-        DescriptorAxioms.Concepts getTypeIndividual();
+        DescriptorEntitySet.Concepts getTypeIndividual();
 
         @Override // see super classes for documentation
-        default DescriptorAxioms.Concepts queryTypeIndividual(){
-            DescriptorAxioms.Concepts set = new DescriptorAxioms.Concepts(getOntology().getIndividualClasses(getInstance()));
+        default DescriptorEntitySet.Concepts queryTypeIndividual(){
+            DescriptorEntitySet.Concepts set = new DescriptorEntitySet.Concepts(getOntology().getIndividualClasses(getInstance()));
             set.setSingleton( getTypeIndividual().isSingleton());
             return set;
         }
@@ -132,7 +132,7 @@ public interface IndividualExpression
         @Override // see super classes for documentation
         default List<MappingIntent> writeSemantic(){
             try {
-                Axioms.SynchronisationIntent<OWLClass> to = synchroniseTypeIndividualToSemantic();
+                EntitySet.SynchronisationIntent<OWLClass> to = synchroniseTypeIndividualToSemantic();
                 if ( to == null)
                     return getIntent( null);
                 List<OWLOntologyChange> changes = new ArrayList<>();
@@ -172,8 +172,8 @@ public interface IndividualExpression
         /**
          * It is an helper that just calls:
          * {@code {@link #getDisjointIndividual()}.add( {@link #getOntology()}.getOWLIndividual( individualName))}
-         * in order to add a new individual_compoundDescriptor (given by name) in the {@link Axioms} list.
-         * @param individualName the individual_compoundDescriptor name to add for synchronisation.
+         * in order to add a new individualCompoundDescriptor (given by name) in the {@link EntitySet} list.
+         * @param individualName the individualCompoundDescriptor name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
         default boolean addDisjointIndividual( String individualName){
@@ -181,9 +181,9 @@ public interface IndividualExpression
         }
         /**
          * It is an helper that just calls:
-         * {@code {@link #getDisjointIndividual()}.add( individual_compoundDescriptor)}
-         * in order to add a new individual_compoundDescriptor in the {@link Axioms} list.
-         * @param individual the individual_compoundDescriptor to add for synchronisation.
+         * {@code {@link #getDisjointIndividual()}.add( individualCompoundDescriptor)}
+         * in order to add a new individualCompoundDescriptor in the {@link EntitySet} list.
+         * @param individual the individualCompoundDescriptor to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
         default boolean addDisjointIndividual( OWLNamedIndividual individual){
@@ -193,8 +193,8 @@ public interface IndividualExpression
         /**
          * It is an helper that just calls:
          * {@code {@link #getDisjointIndividual()}.remove( {@link #getOntology()}.getOWLIndividual( individualName))}
-         * in order to remove an individual_compoundDescriptor (given by name) from the {@link Axioms} list.
-         * @param individualName the individual_compoundDescriptor name to remove for synchronisation.
+         * in order to remove an individualCompoundDescriptor (given by name) from the {@link EntitySet} list.
+         * @param individualName the individualCompoundDescriptor name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeDisjointIndividual( String individualName){
@@ -203,8 +203,8 @@ public interface IndividualExpression
         /**
          * It is an helper that just calls:
          * {@code {@link #getDisjointIndividual()}.remove( property)}
-         * in order to remove a class in the {@link Axioms} list.
-         * @param individual the individual_compoundDescriptor to remove for synchronisation.
+         * in order to remove a class in the {@link EntitySet} list.
+         * @param individual the individualCompoundDescriptor to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeDisjointIndividual( OWLNamedIndividual individual){
@@ -212,11 +212,11 @@ public interface IndividualExpression
         }
 
         @Override
-        DescriptorAxioms.Individuals getDisjointIndividual();
+        DescriptorEntitySet.Individuals getDisjointIndividual();
 
         @Override // see super classes for documentation
-        default DescriptorAxioms.Individuals queryDisjointIndividual(){
-            DescriptorAxioms.Individuals set = new DescriptorAxioms.Individuals(getOntology().getDisjointIndividuals(getInstance()));
+        default DescriptorEntitySet.Individuals queryDisjointIndividual(){
+            DescriptorEntitySet.Individuals set = new DescriptorEntitySet.Individuals(getOntology().getDisjointIndividuals(getInstance()));
             set.remove( getInstance());
             set.setSingleton( getDisjointIndividual().isSingleton());
             return set;
@@ -225,7 +225,7 @@ public interface IndividualExpression
         @Override // see super classes for documentation
         default List<MappingIntent> writeSemantic(){
             try {
-                Axioms.SynchronisationIntent<OWLNamedIndividual> to = synchroniseDisjointIndividualToSemantic();
+                EntitySet.SynchronisationIntent<OWLNamedIndividual> to = synchroniseDisjointIndividualToSemantic();
                 if ( to == null)
                     return getIntent( null);
                 List<OWLOntologyChange> changes = new ArrayList<>();
@@ -273,8 +273,8 @@ public interface IndividualExpression
         /**
          * It is an helper that just calls:
          * {@code {@link #getEquivalentIndividual()}.add( {@link #getOntology()}.getOWLIndividual( individualName))}
-         * in order to add a new individual_compoundDescriptor (given by name) in the {@link Axioms} list.
-         * @param individualName the individual_compoundDescriptor name to add for synchronisation.
+         * in order to add a new individualCompoundDescriptor (given by name) in the {@link EntitySet} list.
+         * @param individualName the individualCompoundDescriptor name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
         default boolean addEquivalentIndividual( String individualName){
@@ -282,9 +282,9 @@ public interface IndividualExpression
         }
         /**
          * It is an helper that just calls:
-         * {@code {@link #getEquivalentIndividual()}.add( individual_compoundDescriptor)}
-         * in order to add a new individual_compoundDescriptor in the {@link Axioms} list.
-         * @param individual the individual_compoundDescriptor to add for synchronisation.
+         * {@code {@link #getEquivalentIndividual()}.add( individualCompoundDescriptor)}
+         * in order to add a new individualCompoundDescriptor in the {@link EntitySet} list.
+         * @param individual the individualCompoundDescriptor to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
         default boolean addEquivalentIndividual( OWLNamedIndividual individual){
@@ -294,8 +294,8 @@ public interface IndividualExpression
         /**
          * It is an helper that just calls:
          * {@code {@link #getEquivalentIndividual()}.remove( {@link #getOntology()}.getOWLIndividual( individualName))}
-         * in order to remove an individual_compoundDescriptor (given by name) from the {@link Axioms} list.
-         * @param individualName the individual_compoundDescriptor name to remove for synchronisation.
+         * in order to remove an individualCompoundDescriptor (given by name) from the {@link EntitySet} list.
+         * @param individualName the individualCompoundDescriptor name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeEquivalentIndividual( String individualName){
@@ -303,9 +303,9 @@ public interface IndividualExpression
         }
         /**
          * It is an helper that just calls:
-         * {@code {@link #getEquivalentIndividual()}.remove( individual_compoundDescriptor)}
-         * in order to remove a class in the {@link Axioms} list.
-         * @param individual the individual_compoundDescriptor to remove for synchronisation.
+         * {@code {@link #getEquivalentIndividual()}.remove( individualCompoundDescriptor)}
+         * in order to remove a class in the {@link EntitySet} list.
+         * @param individual the individualCompoundDescriptor to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeEquivalentIndividual( OWLNamedIndividual individual){
@@ -313,11 +313,11 @@ public interface IndividualExpression
         }
 
         @Override
-        DescriptorAxioms.Individuals getEquivalentIndividual();
+        DescriptorEntitySet.Individuals getEquivalentIndividual();
 
         @Override // see super classes for documentation
-        default DescriptorAxioms.Individuals queryEquivalentIndividual(){
-            DescriptorAxioms.Individuals set = new DescriptorAxioms.Individuals(getOntology().getEquivalentIndividuals(getInstance()));
+        default DescriptorEntitySet.Individuals queryEquivalentIndividual(){
+            DescriptorEntitySet.Individuals set = new DescriptorEntitySet.Individuals(getOntology().getEquivalentIndividuals(getInstance()));
             set.remove( getInstance());
             set.setSingleton( getEquivalentIndividual().isSingleton());
             return set;
@@ -326,7 +326,7 @@ public interface IndividualExpression
         @Override // see super classes for documentation
         default List<MappingIntent> writeSemantic(){
             try {
-                Axioms.SynchronisationIntent<OWLNamedIndividual> to = synchroniseEquivalentIndividualToSemantic();
+                EntitySet.SynchronisationIntent<OWLNamedIndividual> to = synchroniseEquivalentIndividualToSemantic();
                 if ( to == null)
                     return getIntent( null);
                 List<OWLOntologyChange> changes = new ArrayList<>();
@@ -354,15 +354,15 @@ public interface IndividualExpression
      * The {@link Individual.DataLink} {@link Descriptor} implementation for {@link OWLNamedIndividual}.
      * <p>
      *     It specify how to {@link #queryDataIndividual()} and {@link #writeSemantic()} for the
-     *     data properties applied to {@link #getInstance()} (i.e.: {@code this individual_compoundDescriptor}).
-     *     It also implements common function to populate the {@link SemanticAxioms}
-     *     (of type {@link DescriptorAxioms.DataSemantic}) that specify the data properties of this individual_compoundDescriptor
+     *     data properties applied to {@link #getInstance()} (i.e.: {@code this individualCompoundDescriptor}).
+     *     It also implements common function to populate the {@link SemanticEntitySet}
+     *     (of type {@link DescriptorEntitySet.DataSemantic}) that specify the data properties of this individualCompoundDescriptor
      *     that are synchronised with this {@link Descriptor}. For efficiency purposes,
-     *     this descriptor does not map all the property of an individual_compoundDescriptor but only the one which
-     *     {@code semantic} have been initialised in the {@link SemanticAxiom}.
-     *     On the other hand, if the set of {@link SemanticAxioms} is leaved empty during
+     *     this descriptor does not map all the property of an individualCompoundDescriptor but only the one which
+     *     {@code semantic} have been initialised in the {@link SemanticEntity}.
+     *     On the other hand, if the set of {@link SemanticEntitySet} is leaved empty during
      *     {@link #readSemantic()}, it maps all the object properties applied to the described
-     *     individual_compoundDescriptor
+     *     individualCompoundDescriptor
      * </p>
      * <div style="text-align:center;"><small>
      * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorInterface.IndividualExpression <br>
@@ -373,14 +373,14 @@ public interface IndividualExpression
      * </small></div>
      *
      * @param <D> the type of the {@link DataPropertyExpression} descriptors instantiated during
-     *           {@link #buildDataIndividual()} through {@link #getNewDataIndividual(SemanticAxiom, Object)}.
+     *           {@link #buildDataIndividual()} through {@link #getNewDataIndividual(SemanticEntity, Object)}.
      */
     interface DataLink<D extends DataPropertyExpression>
-            extends Individual.DataLink<OWLReferences, OWLNamedIndividual, DescriptorAxioms.DataSemantic, OWLDataProperty, D>,
+            extends Individual.DataLink<OWLReferences, OWLNamedIndividual, DescriptorEntitySet.DataSemantic, OWLDataProperty, D>,
             IndividualExpression {
 
         /**
-         * Remove the {@link SemanticAxiom} of the given semantic ({@link DescriptorAxioms.DataSemantic#getSemantic()})
+         * Remove the {@link SemanticEntity} of the given semantic ({@link DescriptorEntitySet.DataSemantic#getSemantic()})
          * from the {@link Descriptor}. This call may remove multiple value attached to that
          * semantic. It will no longer be used during {@link #readSemantic()} and {@link #writeSemantic()}.
          * @param property a data property name contained in an element of {@link #getDataSemantics()} to be removed.
@@ -390,55 +390,55 @@ public interface IndividualExpression
             return removeData( getOWLDataProperty( property));
         }
         /**
-         * Remove the {@link SemanticAxiom} of the given semantic ({@link DescriptorAxioms.DataSemantic#getSemantic()})
+         * Remove the {@link SemanticEntity} of the given semantic ({@link DescriptorEntitySet.DataSemantic#getSemantic()})
          * from the {@link Descriptor}. This call may remove multiple value attached to that
          * semantic. It will no longer be used during {@link #readSemantic()} and {@link #writeSemantic()}.
          * @param property a data property contained in an element of {@link #getDataSemantics()} to be removed.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeData( OWLDataProperty property){
-            for (DescriptorAxioms.DataSemantic d : getDataSemantics())
+            for (DescriptorEntitySet.DataSemantic d : getDataSemantics())
                 if( d.getSemantic().equals( property))
                     return getDataSemantics().remove( d);
             return false;
         }
 
         /**
-         * Remove the {@link SemanticAxiom#getSemantic()} of the given property, with a specific value, from {@code this}
+         * Remove the {@link SemanticEntity#getSemantic()} of the given property, with a specific value, from {@code this}
          * {@link Descriptor}. This call does not remove the semantic from this object, and it may be
          * repopulate (or completely removed) by calling: {@link #readSemantic()}.
          * The class of the specified value represents its data type, supported {@link OWLLiteral} are:
          * {@link Integer}, {@link Boolean}, {@link Double}, {@link Float} and {@link Long} (see {@link #getOWLLiteral(Object)}).
          * @param property the name of the data property which value, contained in {@link #getDataSemantics()}, will be removed.
-         * @param value the property value to be removed from the {@link DescriptorAxioms.DataSemantic#getValues()} set.
+         * @param value the property value to be removed from the {@link DescriptorEntitySet.DataSemantic#getValues()} set.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeData( String property, Object value){
             return removeData( getOWLDataProperty( property), getOWLLiteral( value));
         }
         /**
-         * Remove the {@link SemanticAxiom#getSemantic()} of the given property, with a specific value, from {@code this}
+         * Remove the {@link SemanticEntity#getSemantic()} of the given property, with a specific value, from {@code this}
          * {@link Descriptor}. This call does not remove the semantic from this object, and it may be
          * repopulate (or completely removed) by calling: {@link #readSemantic()}.
          * @param property the data property which value, contained in {@link #getDataSemantics()}, will be removed.
-         * @param value the specific property literal to be removed from the {@link DescriptorAxioms.DataSemantic#getValues()} set.
+         * @param value the specific property literal to be removed from the {@link DescriptorEntitySet.DataSemantic#getValues()} set.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeData( OWLDataProperty property, OWLLiteral value){
-            for (DescriptorAxioms.DataSemantic d : getDataSemantics())
+            for (DescriptorEntitySet.DataSemantic d : getDataSemantics())
                 if ( d.getSemantic().equals( property))
                     return d.getValues().remove(value);
             return false;
         }
         default boolean removeObject( OWLDataProperty property, Set<OWLLiteral> values){
-            DescriptorAxioms.DataSemantic objectSemantic = new DescriptorAxioms.DataSemantic(property);
+            DescriptorEntitySet.DataSemantic objectSemantic = new DescriptorEntitySet.DataSemantic(property);
             objectSemantic.getValues().addAll( values);
             return getDataSemantics().remove( objectSemantic);
         }
 
         /**
          * Add a new semantic (i.e.: data property) to this {@link Descriptor}.
-         * In case it already exists, this will set the {@link DescriptorAxioms.Literals#isSingleton()}
+         * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * value to {@code false} anyway.
          * On the other hand, it does not assign any value to the properties that are automatically
          * queried during {@link #readSemantic()}.
@@ -451,7 +451,7 @@ public interface IndividualExpression
         }
         /**
          * Add a new semantic (i.e.: data property) to this {@link Descriptor}.
-         * In case it already exists, this will set the {@link DescriptorAxioms.Literals#isSingleton()}
+         * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * value to {@code false} anyway.
          * On the other hand, it does not assign any value to the properties that are automatically
          * queried during {@link #readSemantic()}.
@@ -464,7 +464,7 @@ public interface IndividualExpression
         }
         /**
          * Add a new semantic (i.e.: data property) to this {@link Descriptor}.
-         * In case it already exists, this will set the {@link DescriptorAxioms.Literals#isSingleton()}
+         * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * to the specified value anyway.
          * On the other hand, it does not assign any value to the properties that are automatically
          * queried during {@link #readSemantic()}.
@@ -479,7 +479,7 @@ public interface IndividualExpression
         }
         /**
          * Add a new semantic (i.e.: data property) to this {@link Descriptor}.
-         * In case it already exists, this will set the {@link DescriptorAxioms.Literals#isSingleton()}
+         * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * to the specified value anyway.
          * On the other hand, it does not assign any value to the properties that are automatically
          * queried during {@link #readSemantic()}.
@@ -490,26 +490,26 @@ public interface IndividualExpression
          * (a change of singleton value is not considered).
          */
         default boolean addData( OWLDataProperty property, boolean singleton){
-            for (DescriptorAxioms.DataSemantic d : getDataSemantics()) {
+            for (DescriptorEntitySet.DataSemantic d : getDataSemantics()) {
                 if (d.getSemantic().equals(property)) {
                     d.getValues().setSingleton( singleton);
                     return false;
                 }
             }
 
-            DescriptorAxioms.DataSemantic data = new DescriptorAxioms.DataSemantic(property);
+            DescriptorEntitySet.DataSemantic data = new DescriptorEntitySet.DataSemantic(property);
             data.getValues().setSingleton( singleton);
             return getDataSemantics().add(data);
         }
 
         /**
          * Add a new semantic (i.e.: data property) to this {@link Descriptor} with a particular value.
-         * In case it already exists, this will set the {@link DescriptorAxioms.Literals#isSingleton()}
+         * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * value to {@code false} anyway.
          * The class of the specified value represents its data type, supported {@link OWLLiteral} are:
          * {@link Integer}, {@link Boolean}, {@link Double}, {@link Float} and {@link Long} (see {@link #getOWLLiteral(Object)}).
          * @param property the name of the data property to synchronise.
-         * @param value the specific data to be added to the {@link DescriptorAxioms.DataSemantic#getValues()} set.
+         * @param value the specific data to be added to the {@link DescriptorEntitySet.DataSemantic#getValues()} set.
          * @return {@code true} if an element was added as a result of this call 
          * (a change of singleton value is not considered).
          */
@@ -518,10 +518,10 @@ public interface IndividualExpression
         }
         /**
          * Add a new semantic (i.e.: data property) to this {@link Descriptor} with a particular value.
-         * In case it already exists, this will set the {@link DescriptorAxioms.Literals#isSingleton()}
+         * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * value to {@code false} anyway.
          * @param property the data property to synchronise.
-         * @param value the literal to be added to the {@link DescriptorAxioms.DataSemantic#getValues()} set.
+         * @param value the literal to be added to the {@link DescriptorEntitySet.DataSemantic#getValues()} set.
          * @return {@code true} if an element was added as a result of this call
          * (a change of singleton value is not considered).
          */
@@ -530,13 +530,13 @@ public interface IndividualExpression
         }
         /**
          * Add a new semantic (i.e.: data property) to this {@link Descriptor} with a particular value.
-         * In case it already exists, this will set the {@link DescriptorAxioms.Literals#isSingleton()}
+         * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * value to specified boolean anyway.
          * The class of the specified value represents its data type, supported {@link OWLLiteral} are:
          * {@link Integer}, {@link Boolean}, {@link Double}, {@link Float} and {@link Long} (see {@link #getOWLLiteral(Object)}).
          * @param property the name of the data property to synchronise.
-         * @param value the specific data to be added to the {@link DescriptorAxioms.DataSemantic#getValues()} set.
-         * @param singleton the flag specifying if the new {@link DescriptorAxioms.Literals} should contains only one element.
+         * @param value the specific data to be added to the {@link DescriptorEntitySet.DataSemantic#getValues()} set.
+         * @param singleton the flag specifying if the new {@link DescriptorEntitySet.Literals} should contains only one element.
          * @return {@code true} if an element was added as a result of this call
          * (a change of singleton value is not considered).
          */
@@ -545,18 +545,18 @@ public interface IndividualExpression
         }
         /**
          * Add a new semantic (i.e.: data property) to this {@link Descriptor} with a particular value.
-         * In case it already exists, this will set the {@link DescriptorAxioms.Literals#isSingleton()}
+         * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * value to specified boolean anyway.
          * If {@link #getDataSemantics()} represents a singleton set this call clear the
          * previous contents.
          * @param property the data property to synchronise.
-         * @param value the specific property literal to be added to the {@link DescriptorAxioms.DataSemantic#getValues()} set.
-         * @param singleton the flag specifying if the new {@link DescriptorAxioms.Literals} should contains only one element.
+         * @param value the specific property literal to be added to the {@link DescriptorEntitySet.DataSemantic#getValues()} set.
+         * @param singleton the flag specifying if the new {@link DescriptorEntitySet.Literals} should contains only one element.
          * @return {@code true} if an element was added as a result of this call
          * (a change of singleton value is not considered).
          */
         default boolean addData( OWLDataProperty property, OWLLiteral value, boolean singleton){
-            for (DescriptorAxioms.DataSemantic d : getDataSemantics())
+            for (DescriptorEntitySet.DataSemantic d : getDataSemantics())
                 if( d.getSemantic().equals( property)){
                     if ( singleton)
                         d.getValues().clear();
@@ -564,38 +564,38 @@ public interface IndividualExpression
                     return d.getValues().add( value);
                 }
 
-            DescriptorAxioms.DataSemantic data = new DescriptorAxioms.DataSemantic(property);
+            DescriptorEntitySet.DataSemantic data = new DescriptorEntitySet.DataSemantic(property);
             data.getValues().add(value);
             data.getValues().setSingleton( singleton);
             return getDataSemantics().add(data);
         }
         /**
          * Add a new semantic (i.e.: data property) to this {@link Descriptor} with a particular set of values.
-         * In case it already exists, this will set the {@link DescriptorAxioms.Literals#isSingleton()}
+         * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * value to specified boolean anyway.
          * If {@link #getDataSemantics()} represents a singleton set this call clear the
          * previous contents.
          * @param property the data property to synchronise.
-         * @param values the specific set of property literal to be added to the {@link DescriptorAxioms.DataSemantic#getValues()} set.
-         * @param singleton the flag specifying if the new {@link DescriptorAxioms.Literals} should contains only one element.
+         * @param values the specific set of property literal to be added to the {@link DescriptorEntitySet.DataSemantic#getValues()} set.
+         * @param singleton the flag specifying if the new {@link DescriptorEntitySet.Literals} should contains only one element.
          * @return {@code true} if an element was added as a result of this call
          * (a change of singleton value is not considered).
          */
         default boolean addObject( OWLDataProperty property, Set<OWLLiteral> values, boolean singleton){
-            DescriptorAxioms.DataSemantic objectSemantic = new DescriptorAxioms.DataSemantic(property);
+            DescriptorEntitySet.DataSemantic objectSemantic = new DescriptorEntitySet.DataSemantic(property);
             objectSemantic.getValues().addAll( values);
             objectSemantic.getValues().setSingleton( singleton);
             return getDataSemantics().add( objectSemantic);
         }
         /**
          * Add a new semantic (i.e.: data property) to this {@link Descriptor} with a particular set of values.
-         * In case it already exists, this will set the {@link DescriptorAxioms.Literals#isSingleton()}
+         * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * value to specified boolean anyway.
          * If {@link #getDataSemantics()} represents a singleton set this call clear the
          * previous contents.
          * This call, automatically sets the {@code singleton} flag to false.
          * @param property the data property to synchronise.
-         * @param values the specific set of property literal to be added to the {@link DescriptorAxioms.DataSemantic#getValues()} set.
+         * @param values the specific set of property literal to be added to the {@link DescriptorEntitySet.DataSemantic#getValues()} set.
          * @return {@code true} if an element was added as a result of this call
          * (a change of singleton value is not considered).
          */
@@ -605,10 +605,10 @@ public interface IndividualExpression
 
 
         @Override
-        DescriptorAxioms.DataSemantics getDataSemantics();
+        DescriptorEntitySet.DataSemantics getDataSemantics();
 
         /**
-         * A shortcut for {@link DescriptorAxioms.DataSemantics#getLink(OWLProperty)}
+         * A shortcut for {@link DescriptorEntitySet.DataSemantics#getLink(OWLProperty)}
          * @param semantic the data property to look for its values.
          * @return a value of the given data property. {@code Null} if is not available.
          */
@@ -616,7 +616,7 @@ public interface IndividualExpression
             return getDataSemantics().getLink( semantic);
         }
         /**
-         * A shortcut for {@link DescriptorAxioms.DataSemantics#getLink(OWLProperty)}
+         * A shortcut for {@link DescriptorEntitySet.DataSemantics#getLink(OWLProperty)}
          * @param semanticName the name of the data property to look for its values.
          * @return a value of the given data property. {@code Null} if is not available.
          */
@@ -625,32 +625,32 @@ public interface IndividualExpression
         }
 
         /**
-         * A shortcut for {@link DescriptorAxioms.DataSemantics#getLinks(OWLProperty)}
+         * A shortcut for {@link DescriptorEntitySet.DataSemantics#getLinks(OWLProperty)}
          * @param semantic the data property to look for its values.
          * @return all the values of the given data property. An {@code empty} {@link HashSet} if is not available.
          */
-        default Axioms<OWLLiteral> getLiterals( OWLDataProperty semantic){
+        default EntitySet<OWLLiteral> getLiterals(OWLDataProperty semantic){
             return getDataSemantics().getLinks( semantic);
         }
         /**
-         * A shortcut for {@link DescriptorAxioms.DataSemantics#getLinks(OWLProperty)}
+         * A shortcut for {@link DescriptorEntitySet.DataSemantics#getLinks(OWLProperty)}
          * @param semanticName the name of the data property to look for its values.
          * @return all the values of the given data property. An {@code empty} {@link HashSet} if is not available.
          */
-        default Axioms<OWLLiteral> getLiterals( String semanticName){
+        default EntitySet<OWLLiteral> getLiterals(String semanticName){
             return getDataSemantics().getLinks( getOntology().getOWLDataProperty( semanticName));
         }
 
 
 
         @Override // see super classes for documentation
-        default DescriptorAxioms.DataSemantics queryDataIndividual(){
-            DescriptorAxioms.DataSemantics dataSet = new DescriptorAxioms.DataSemantics();
+        default DescriptorEntitySet.DataSemantics queryDataIndividual(){
+            DescriptorEntitySet.DataSemantics dataSet = new DescriptorEntitySet.DataSemantics();
             dataSet.setSingleton( getDataSemantics().isSingleton());
             for (DataPropertyRelations r :  getOntology().getDataPropertyB2Individual(getInstance())){
-                DescriptorAxioms.DataSemantic data = new DescriptorAxioms.DataSemantic( r.getProperty());
+                DescriptorEntitySet.DataSemantic data = new DescriptorEntitySet.DataSemantic( r.getProperty());
                 data.getValues().addAll( r.getValues());
-                for (DescriptorAxioms.DataSemantic w : getDataSemantics())
+                for (DescriptorEntitySet.DataSemantic w : getDataSemantics())
                     if ( data.equals( w)){
                         data.getValues().setSingleton( w.getValues().isSingleton());
                         break;
@@ -663,14 +663,14 @@ public interface IndividualExpression
         @Override // see super classes for documentation
         default List<MappingIntent> writeSemantic(){
             try {
-                Axioms.SynchronisationIntent<DescriptorAxioms.DataSemantic> to = synchroniseDataIndividualToSemantic();
+                EntitySet.SynchronisationIntent<DescriptorEntitySet.DataSemantic> to = synchroniseDataIndividualToSemantic();
                 if ( to == null)
                     return getIntent( null);
                 List<OWLOntologyChange> changes = new ArrayList<>();
-                for (DescriptorAxioms.DataSemantic a : to.getToAdd())
+                for (DescriptorEntitySet.DataSemantic a : to.getToAdd())
                     for (OWLLiteral l : a.getValues())
                         changes.add(getOntology().addDataPropertyB2Individual(getInstance(), a.getSemantic(), l));
-                for (DescriptorAxioms.DataSemantic r : to.getToRemove())
+                for (DescriptorEntitySet.DataSemantic r : to.getToRemove())
                     for (OWLLiteral l : r.getValues())
                         changes.add(getOntology().removeDataPropertyB2Individual(getInstance(), r.getSemantic(), l));
                 return getChangingIntent(to, changes);
@@ -685,15 +685,15 @@ public interface IndividualExpression
      * The {@link Individual.ObjectLink} {@link Descriptor} implementation for {@link OWLNamedIndividual}.
      * <p>
      *     It specify how to {@link #queryObject()} and {@link #writeSemantic()} for the
-     *     object properties applied to {@link #getInstance()} (i.e.: {@code this individual_compoundDescriptor}).
-     *     It also implements common function to populate the {@link SemanticAxioms}
-     *     (of type {@link DescriptorAxioms.ObjectSemantic}) that specify the object properties of this individual_compoundDescriptor
+     *     object properties applied to {@link #getInstance()} (i.e.: {@code this individualCompoundDescriptor}).
+     *     It also implements common function to populate the {@link SemanticEntitySet}
+     *     (of type {@link DescriptorEntitySet.ObjectSemantic}) that specify the object properties of this individualCompoundDescriptor
      *     that are synchronised with this {@link Descriptor}. For efficiency purposes,
-     *     this descriptor does not map all the property of an individual_compoundDescriptor but only the one which
-     *     {@code semantic} have been initialised in the {@link SemanticAxiom}.
-     *     On the other hand, if the set of {@link SemanticAxioms} is leaved empty during
+     *     this descriptor does not map all the property of an individualCompoundDescriptor but only the one which
+     *     {@code semantic} have been initialised in the {@link SemanticEntity}.
+     *     On the other hand, if the set of {@link SemanticEntitySet} is leaved empty during
      *     {@link #readSemantic()}, it maps all the object properties applied to the described
-     *     individual_compoundDescriptor.
+     *     individualCompoundDescriptor.
      * </p>
      * <div style="text-align:center;"><small>
      * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorInterface.IndividualExpression <br>
@@ -704,14 +704,14 @@ public interface IndividualExpression
      * </small></div>
      *
      * @param <D> the type of the {@link DataPropertyExpression} descriptors instantiated during
-     *           {@link #buildObjectIndividual()} through {@link #getNewObjectIndividual(SemanticAxiom, Object)}.
+     *           {@link #buildObjectIndividual()} through {@link #getNewObjectIndividual(SemanticEntity, Object)}.
      */
     interface ObjectLink<D extends ObjectPropertyExpression>
-            extends Individual.ObjectLink<OWLReferences, OWLNamedIndividual, DescriptorAxioms.ObjectSemantic, OWLObjectProperty, D>,
+            extends Individual.ObjectLink<OWLReferences, OWLNamedIndividual, DescriptorEntitySet.ObjectSemantic, OWLObjectProperty, D>,
             IndividualExpression {
 
         /**
-         * Remove the {@link SemanticAxiom} of the given semantic ({@link DescriptorAxioms.ObjectSemantic#getSemantic()})
+         * Remove the {@link SemanticEntity} of the given semantic ({@link DescriptorEntitySet.ObjectSemantic#getSemantic()})
          * from the {@link Descriptor}. This call may remove multiple value attached to that
          * semantic. It will no longer be used during {@link #readSemantic()} and {@link #writeSemantic()}.
          * @param property an object property name contained in an element of {@link #getObjectSemantics()} to be removed.
@@ -721,7 +721,7 @@ public interface IndividualExpression
             return removeObject( getOWLObjectProperty( property));
         }
         /**
-         * Remove the {@link SemanticAxiom} of the given semantic ({@link DescriptorAxioms.ObjectSemantic#getSemantic()})
+         * Remove the {@link SemanticEntity} of the given semantic ({@link DescriptorEntitySet.ObjectSemantic#getSemantic()})
          * from the {@link Descriptor}. This call may remove multiple value attached to that
          * semantic. It will no longer be used during {@link #readSemantic()} and {@link #writeSemantic()}.
          * @param property an object property contained in an element of {@link #getObjectSemantics()} to be removed.
@@ -732,39 +732,39 @@ public interface IndividualExpression
         }
 
         /**
-         * Remove the {@link SemanticAxiom#getSemantic()} of the given property, with a specific value, from {@code this}
+         * Remove the {@link SemanticEntity#getSemantic()} of the given property, with a specific value, from {@code this}
          * {@link Descriptor}. This call does not remove the semantic from this object, and it may be
          * repopulate (or completely removed) by calling: {@link #readSemantic()}.
          * @param property the name of the object property which value, contained in {@link #getObjectSemantics()}, will be removed.
-         * @param value the property value to be removed from the {@link DescriptorAxioms.ObjectSemantic#getValues()} set.
+         * @param value the property value to be removed from the {@link DescriptorEntitySet.ObjectSemantic#getValues()} set.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeObject( String property, String value){
             return removeObject( getOWLObjectProperty( property), getOWLIndividual( value));
         }
         /**
-         * Remove the {@link SemanticAxiom#getSemantic()} of the given property, with a specific value, from {@code this}
+         * Remove the {@link SemanticEntity#getSemantic()} of the given property, with a specific value, from {@code this}
          * {@link Descriptor}. This call does not remove the semantic from this object, and it may be
          * repopulate (or completely removed) by calling: {@link #readSemantic()}.
          * @param property the object property which value, contained in {@link #getObjectSemantics()}, will be removed.
-         * @param value the specific property literal to be removed from the {@link DescriptorAxioms.ObjectSemantic#getValues()} set.
+         * @param value the specific property literal to be removed from the {@link DescriptorEntitySet.ObjectSemantic#getValues()} set.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeObject( OWLObjectProperty property, OWLNamedIndividual value){
-            DescriptorAxioms.ObjectSemantic objectSemantic = new DescriptorAxioms.ObjectSemantic(property);
+            DescriptorEntitySet.ObjectSemantic objectSemantic = new DescriptorEntitySet.ObjectSemantic(property);
             objectSemantic.getValues().add( value);
             return getObjectSemantics().remove( objectSemantic);
         }
         /**
-         * Remove the {@link SemanticAxiom#getSemantic()} of the given property, with specific values, from {@code this}
+         * Remove the {@link SemanticEntity#getSemantic()} of the given property, with specific values, from {@code this}
          * {@link Descriptor}. This call does not remove the semantic from this object, and it may be
          * repopulate (or completely removed) by calling: {@link #readSemantic()}.
          * @param property the object property which value, contained in {@link #getObjectSemantics()}, will be removed.
-         * @param values the specific set of property literal to be removed from the {@link DescriptorAxioms.ObjectSemantic#getValues()} set.
+         * @param values the specific set of property literal to be removed from the {@link DescriptorEntitySet.ObjectSemantic#getValues()} set.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeObject( OWLObjectProperty property, Set<OWLNamedIndividual> values){
-            DescriptorAxioms.ObjectSemantic objectSemantic = new DescriptorAxioms.ObjectSemantic(property);
+            DescriptorEntitySet.ObjectSemantic objectSemantic = new DescriptorEntitySet.ObjectSemantic(property);
             objectSemantic.getValues().addAll( values);
             return getObjectSemantics().remove( objectSemantic);
         }
@@ -772,7 +772,7 @@ public interface IndividualExpression
 
         /**
          * Add a new semantic (i.e.: object property) to this {@link Descriptor}.
-         * In case it already exists, this will set the {@link DescriptorAxioms.Literals#isSingleton()}
+         * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * value to {@code false} anyway.
          * On the other hand, it does not assign any value to the properties that are automatically
          * queried during {@link #readSemantic()}.
@@ -785,7 +785,7 @@ public interface IndividualExpression
         }
         /**
          * Add a new semantic (i.e.: object property) to this {@link Descriptor}.
-         * In case it already exists, this will set the {@link DescriptorAxioms.Literals#isSingleton()}
+         * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * value to {@code false} anyway.
          * On the other hand, it does not assign any value to the properties that are automatically
          * queried during {@link #readSemantic()}.
@@ -798,7 +798,7 @@ public interface IndividualExpression
         }
         /**
          * Add a new semantic (i.e.: object property) to this {@link Descriptor}.
-         * In case it already exists, this will set the {@link DescriptorAxioms.Literals#isSingleton()}
+         * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * to the specified value anyway.
          * On the other hand, it does not assign any value to the properties that are automatically
          * queried during {@link #readSemantic()}.
@@ -813,7 +813,7 @@ public interface IndividualExpression
         }
         /**
          * Add a new semantic (i.e.: object property) to this {@link Descriptor}.
-         * In case it already exists, this will set the {@link DescriptorAxioms.Literals#isSingleton()}
+         * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * to the specified value anyway.
          * On the other hand, it does not assign any value to the properties that are automatically
          * queried during {@link #readSemantic()}.
@@ -824,19 +824,19 @@ public interface IndividualExpression
          * (a change of singleton value is not considered).
          */
         default boolean addObject( OWLObjectProperty property, boolean singleton){
-            DescriptorAxioms.ObjectSemantic objectSemantic = new DescriptorAxioms.ObjectSemantic(property);
+            DescriptorEntitySet.ObjectSemantic objectSemantic = new DescriptorEntitySet.ObjectSemantic(property);
             objectSemantic.getValues().setSingleton( singleton);
             return getObjectSemantics().add( objectSemantic);
         }
 
         /**
          * Add a new semantic (i.e.: object property) to this {@link Descriptor} with a particular value.
-         * In case it already exists, this will set the {@link DescriptorAxioms.Literals#isSingleton()}
+         * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * value to {@code false} anyway.
          * The class of the specified value represents its object type, supported {@link OWLLiteral} are:
          * {@link Integer}, {@link Boolean}, {@link Double}, {@link Float} and {@link Long} (see {@link #getOWLLiteral(Object)}).
          * @param property the name of the object property to synchronise.
-         * @param value the specific object to be added to the {@link DescriptorAxioms.ObjectSemantic#getValues()} set.
+         * @param value the specific object to be added to the {@link DescriptorEntitySet.ObjectSemantic#getValues()} set.
          * @return {@code true} if an element was added as a result of this call
          * (a change of singleton value is not considered).
          */
@@ -845,10 +845,10 @@ public interface IndividualExpression
         }
         /**
          * Add a new semantic (i.e.: object property) to this {@link Descriptor} with a particular value.
-         * In case it already exists, this will set the {@link DescriptorAxioms.Literals#isSingleton()}
+         * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * value to {@code false} anyway.
          * @param property the object property to synchronise.
-         * @param value the literal to be added to the {@link DescriptorAxioms.ObjectSemantic#getValues()} set.
+         * @param value the literal to be added to the {@link DescriptorEntitySet.ObjectSemantic#getValues()} set.
          * @return {@code true} if an element was added as a result of this call
          * (a change of singleton value is not considered).
          */
@@ -857,11 +857,11 @@ public interface IndividualExpression
         }
         /**
          * Add a new semantic (i.e.: object property) to this {@link Descriptor} with a particular value.
-         * In case it already exists, this will set the {@link DescriptorAxioms.Literals#isSingleton()}
+         * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * value to specified boolean anyway.
          * @param property the name of the object property to synchronise.
-         * @param value the specific object to be added to the {@link DescriptorAxioms.ObjectSemantic#getValues()} set.
-         * @param singleton the flag specifying if the new {@link DescriptorAxioms.Literals} should contains only one element.
+         * @param value the specific object to be added to the {@link DescriptorEntitySet.ObjectSemantic#getValues()} set.
+         * @param singleton the flag specifying if the new {@link DescriptorEntitySet.Literals} should contains only one element.
          * @return {@code true} if an element was added as a result of this call
          * (a change of singleton value is not considered).
          */
@@ -870,49 +870,49 @@ public interface IndividualExpression
         }
         /**
          * Add a new semantic (i.e.: object property) to this {@link Descriptor} with a particular value.
-         * In case it already exists, this will set the {@link DescriptorAxioms.Literals#isSingleton()}
+         * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * value to specified boolean anyway.
          * If {@link #getObjectSemantics()} represents a singleton set this call clear the
          * previous contents.
          * @param property the object property to synchronise.
-         * @param value the specific property literal to be added to the {@link DescriptorAxioms.ObjectSemantic#getValues()} set.
-         * @param singleton the flag specifying if the new {@link DescriptorAxioms.Literals} should contains only one element.
+         * @param value the specific property literal to be added to the {@link DescriptorEntitySet.ObjectSemantic#getValues()} set.
+         * @param singleton the flag specifying if the new {@link DescriptorEntitySet.Literals} should contains only one element.
          * @return {@code true} if an element was added as a result of this call
          * (a change of singleton value is not considered).
          */
         default boolean addObject( OWLObjectProperty property, OWLNamedIndividual value, boolean singleton){
-            DescriptorAxioms.ObjectSemantic objectSemantic = new DescriptorAxioms.ObjectSemantic(property);
+            DescriptorEntitySet.ObjectSemantic objectSemantic = new DescriptorEntitySet.ObjectSemantic(property);
             objectSemantic.getValues().add( value);
             objectSemantic.getValues().setSingleton( singleton);
             return getObjectSemantics().add( objectSemantic);
         }
         /**
          * Add a new semantic (i.e.: object property) to this {@link Descriptor} with a particular set of values.
-         * In case it already exists, this will set the {@link DescriptorAxioms.Literals#isSingleton()}
+         * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * value to specified boolean anyway.
          * If {@link #getObjectSemantics()} represents a singleton set this call clear the
          * previous contents.
          * @param property the object property to synchronise.
-         * @param values the specific set of property literal to be added to the {@link DescriptorAxioms.ObjectSemantic#getValues()} set.
-         * @param singleton the flag specifying if the new {@link DescriptorAxioms.Literals} should contains only one element.
+         * @param values the specific set of property literal to be added to the {@link DescriptorEntitySet.ObjectSemantic#getValues()} set.
+         * @param singleton the flag specifying if the new {@link DescriptorEntitySet.Literals} should contains only one element.
          * @return {@code true} if an element was added as a result of this call
          * (a change of singleton value is not considered).
          */
         default boolean addObject( OWLObjectProperty property, Set<OWLNamedIndividual> values, boolean singleton){
-            DescriptorAxioms.ObjectSemantic objectSemantic = new DescriptorAxioms.ObjectSemantic(property);
+            DescriptorEntitySet.ObjectSemantic objectSemantic = new DescriptorEntitySet.ObjectSemantic(property);
             objectSemantic.getValues().addAll( values);
             objectSemantic.getValues().setSingleton( singleton);
             return getObjectSemantics().add( objectSemantic);
         }
         /**
          * Add a new semantic (i.e.: object property) to this {@link Descriptor} with a particular set of values.
-         * In case it already exists, this will set the {@link DescriptorAxioms.Literals#isSingleton()}
+         * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * value to specified boolean anyway.
          * If {@link #getObjectSemantics()} represents a singleton set this call clear the
          * previous contents.
          * This call, automatically sets the {@code singleton} flag to false.
          * @param property the object property to synchronise.
-         * @param values the specific set of property literal to be added to the {@link DescriptorAxioms.ObjectSemantic#getValues()} set.
+         * @param values the specific set of property literal to be added to the {@link DescriptorEntitySet.ObjectSemantic#getValues()} set.
          * @return {@code true} if an element was added as a result of this call
          * (a change of singleton value is not considered).
          */
@@ -921,10 +921,10 @@ public interface IndividualExpression
         }
 
         @Override
-        DescriptorAxioms.ObjectSemantics getObjectSemantics();
+        DescriptorEntitySet.ObjectSemantics getObjectSemantics();
 
         /**
-         * A shortcut for {@link DescriptorAxioms.ObjectSemantics#getLink(OWLProperty)}
+         * A shortcut for {@link DescriptorEntitySet.ObjectSemantics#getLink(OWLProperty)}
          * @param semantic the object property to look for its values.
          * @return a value of the given object property. {@code Null} if is not available.
          */
@@ -932,7 +932,7 @@ public interface IndividualExpression
             return getObjectSemantics().getLink( semantic);
         }
         /**
-         * A shortcut for {@link DescriptorAxioms.ObjectSemantics#getLink(OWLProperty)}
+         * A shortcut for {@link DescriptorEntitySet.ObjectSemantics#getLink(OWLProperty)}
          * @param semanticName the name of the object property to look for its values.
          * @return a value of the given object property. {@code Null} if is not available.
          */
@@ -941,30 +941,30 @@ public interface IndividualExpression
         }
 
         /**
-         * A shortcut for {@link DescriptorAxioms.ObjectSemantics#getLinks(OWLProperty)}
+         * A shortcut for {@link DescriptorEntitySet.ObjectSemantics#getLinks(OWLProperty)}
          * @param semantic the object property to look for its values.
          * @return all the values of the given object property. An {@code empty} {@link HashSet} if is not available.
          */
-        default Axioms<OWLNamedIndividual> getObjects( OWLObjectProperty semantic){
+        default EntitySet<OWLNamedIndividual> getObjects(OWLObjectProperty semantic){
             return getObjectSemantics().getLinks( semantic);
         }
         /**
-         * A shortcut for {@link DescriptorAxioms.ObjectSemantics#getLinks(OWLProperty)}
+         * A shortcut for {@link DescriptorEntitySet.ObjectSemantics#getLinks(OWLProperty)}
          * @param semanticName the name of the object property to look for its values.
          * @return all the values of the given object property. {@code Null} if is not available.
          */
-        default Axioms<OWLNamedIndividual> getObjects( String semanticName){
+        default EntitySet<OWLNamedIndividual> getObjects(String semanticName){
             return getObjectSemantics().getLinks( getOntology().getOWLObjectProperty( semanticName));
         }
 
         @Override // see super classes for documentation
-        default DescriptorAxioms.ObjectSemantics queryObject(){
-            DescriptorAxioms.ObjectSemantics objectSet = new DescriptorAxioms.ObjectSemantics();
+        default DescriptorEntitySet.ObjectSemantics queryObject(){
+            DescriptorEntitySet.ObjectSemantics objectSet = new DescriptorEntitySet.ObjectSemantics();
             objectSet.setSingleton( getObjectSemantics().isSingleton());
             for (ObjectPropertyRelations r :  getOntology().getObjectPropertyB2Individual(getInstance())){
-                DescriptorAxioms.ObjectSemantic object = new DescriptorAxioms.ObjectSemantic( r.getProperty());
+                DescriptorEntitySet.ObjectSemantic object = new DescriptorEntitySet.ObjectSemantic( r.getProperty());
                 object.getValues().addAll( r.getValues());
-                for (DescriptorAxioms.ObjectSemantic w : getObjectSemantics())
+                for (DescriptorEntitySet.ObjectSemantic w : getObjectSemantics())
                     if ( object.equals( w)){
                         object.getValues().setSingleton( w.getValues().isSingleton());
                         break;
@@ -977,14 +977,14 @@ public interface IndividualExpression
         @Override // see super classes for documentation
         default List<MappingIntent> writeSemantic(){
             try {
-                Axioms.SynchronisationIntent<DescriptorAxioms.ObjectSemantic> to = synchroniseObjectIndividualToSemantic();
+                EntitySet.SynchronisationIntent<DescriptorEntitySet.ObjectSemantic> to = synchroniseObjectIndividualToSemantic();
                 if ( to == null)
                     return getIntent( null);
                 List<OWLOntologyChange> changes = new ArrayList<>();
-                for (DescriptorAxioms.ObjectSemantic a : to.getToAdd())
+                for (DescriptorEntitySet.ObjectSemantic a : to.getToAdd())
                     for (OWLNamedIndividual l : a.getValues())
                         changes.add(getOntology().addObjectPropertyB2Individual(getInstance(), a.getSemantic(), l));
-                for (DescriptorAxioms.ObjectSemantic r : to.getToRemove())
+                for (DescriptorEntitySet.ObjectSemantic r : to.getToRemove())
                     for (OWLNamedIndividual l : r.getValues())
                         changes.add(getOntology().removeObjectPropertyB2Individual(getInstance(), r.getSemantic(), l));
                 return getChangingIntent(to, changes);

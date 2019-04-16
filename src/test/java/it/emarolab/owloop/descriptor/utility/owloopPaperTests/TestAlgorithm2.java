@@ -3,8 +3,8 @@ package it.emarolab.owloop.descriptor.utility.owloopPaperTests;
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.amor.owlInterface.OWLReferencesInterface;
 import it.emarolab.amor.owlInterface.SemanticRestriction;
-import it.emarolab.owloop.descriptor.construction.descriptorInterface.DescriptorAxioms;
-import it.emarolab.owloop.descriptor.utility.concept_compoundDescriptor.FullConceptDesc;
+import it.emarolab.owloop.descriptor.construction.descriptorInterface.DescriptorEntitySet;
+import it.emarolab.owloop.descriptor.utility.conceptCompoundDescriptor.FullConceptDesc;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
@@ -45,7 +45,7 @@ public class TestAlgorithm2 {
     @Test
     public void Algorithm2() {
 
-        //          p: ObjLinkIndividualDesc -> ground: d1,          expression: objectProperty_compoundDescriptor (build: ??ObjectProperty).
+        //          p: ObjLinkIndividualDesc -> ground: d1,          expression: objectPropertyCompoundDescriptor (build: ??ObjectProperty).
         // R=[r,r,..]: TypeIndividualDesc    -> ground: d1,          expression: classOf        (build: DefSubClassDesc).
         // T=[t,t,..]: DefSubClassDesc       -> ground: class,      expression: subclass       (build: ??ClassDescr).
         //                                                                      definition     (build: CANNOT).
@@ -67,7 +67,7 @@ public class TestAlgorithm2 {
             if( setTwoD.size() <= 1 ) { // owl:Nothing is always there            // If less than or equal to 1
 
                 System.out.print("'" + d2.getInstanceName() + "'" + " is of Type " + "'" + d3.getInstanceName() + "'"); // PRINT
-                DescriptorAxioms.Restrictions restrictions = d3.getDefinitionConcept(); //GET DEFINITION
+                DescriptorEntitySet.Restrictions restrictions = d3.getDefinitionConcept(); //GET DEFINITION
                 for( SemanticRestriction rest : restrictions ){
 
                     if( rest instanceof SemanticRestriction.ClassRestrictedOnExactObject ){

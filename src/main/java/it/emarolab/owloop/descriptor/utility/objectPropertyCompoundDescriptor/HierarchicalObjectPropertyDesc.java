@@ -1,8 +1,8 @@
-package it.emarolab.owloop.descriptor.utility.objectProperty_compoundDescriptor;
+package it.emarolab.owloop.descriptor.utility.objectPropertyCompoundDescriptor;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.descriptor.construction.descriptorBase.ObjectPropertyDescriptorBase;
-import it.emarolab.owloop.descriptor.construction.descriptorInterface.DescriptorAxioms;
+import it.emarolab.owloop.descriptor.construction.descriptorInterface.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorInterface.ObjectPropertyExpression;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
 
@@ -14,7 +14,7 @@ import java.util.List;
  *     This is an example of how use the {@link Descriptor}s for implement
  *     a object property that is synchronised w.r.t. its {@link Super} and {@link Sub} properties.
  *     <br>
- *     Its purpose is only to instanciate the {@link DescriptorAxioms.ObjectLinks} for the
+ *     Its purpose is only to instanciate the {@link DescriptorEntitySet.ObjectLinks} for the
  *     respective descriptions, as well as call both interfaces in the
  *     {@link #readSemantic()} and {@link #writeSemantic()} methods.
  *     All its constructions are based on {@link ObjectPropertyDescriptorBase} in order
@@ -27,7 +27,7 @@ import java.util.List;
  *     OWL synchronisation efficiency for object properties.
  *
  * <div style="text-align:center;"><small>
- * <b>File</b>:        it.emarolab.owloop.descriptor.utility.objectProperty_compoundDescriptor.HierarchicalObjectPropertyDesc <br>
+ * <b>File</b>:        it.emarolab.owloop.descriptor.utility.objectPropertyCompoundDescriptor.HierarchicalObjectPropertyDesc <br>
  * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
  * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
  * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -39,8 +39,8 @@ public class HierarchicalObjectPropertyDesc
         implements ObjectPropertyExpression.Sub<HierarchicalObjectPropertyDesc>,
         ObjectPropertyExpression.Super<HierarchicalObjectPropertyDesc>{
 
-    private DescriptorAxioms.ObjectLinks subProperties = new DescriptorAxioms.ObjectLinks();
-    private DescriptorAxioms.ObjectLinks superProperties = new DescriptorAxioms.ObjectLinks();
+    private DescriptorEntitySet.ObjectLinks subProperties = new DescriptorEntitySet.ObjectLinks();
+    private DescriptorEntitySet.ObjectLinks superProperties = new DescriptorEntitySet.ObjectLinks();
 
     // constructors for ObjectPropertyDescriptorBase
 
@@ -71,7 +71,7 @@ public class HierarchicalObjectPropertyDesc
 
 
 
-    // implementations for Semantic.descriptor
+    // implementations for Axiom.descriptor
 
     @Override
     public List<MappingIntent> readSemantic() {
@@ -97,7 +97,7 @@ public class HierarchicalObjectPropertyDesc
     }
 
     @Override
-    public DescriptorAxioms.ObjectLinks getSubObjectProperty() {
+    public DescriptorEntitySet.ObjectLinks getSubObjectProperty() {
         return subProperties;
     }
 
@@ -111,7 +111,7 @@ public class HierarchicalObjectPropertyDesc
     }
 
     @Override
-    public DescriptorAxioms.ObjectLinks getSuperObjectProperty() {
+    public DescriptorEntitySet.ObjectLinks getSuperObjectProperty() {
         return superProperties;
     }
 

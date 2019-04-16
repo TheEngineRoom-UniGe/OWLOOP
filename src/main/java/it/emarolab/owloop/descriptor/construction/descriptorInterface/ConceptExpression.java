@@ -59,7 +59,7 @@ public interface ConceptExpression
      * The {@link Concept.Classify} {@link Descriptor} implementation for {@link OWLClass}.
      * <p>
      *     It specify how to {@link #queryIndividualClassified()} and {@link #writeSemantic()} for the
-     *     individual_compoundDescriptor (i.e.: {@link OWLNamedIndividual}) belonging to the described
+     *     individualCompoundDescriptor (i.e.: {@link OWLNamedIndividual}) belonging to the described
      *     class (i.e.: {@link #getInstance()}).
      * </p>
      * <div style="text-align:center;"><small>
@@ -80,8 +80,8 @@ public interface ConceptExpression
         /**
          * It is an helper that just calls:
          * {@code {@link #getIndividualClassified()}.add( {@link #getOntology()}.getOWLIndividual( propertyName))}
-         * in order to add a new individual_compoundDescriptor (given by name) in the {@link Axioms} list.
-         * @param individualName the individual_compoundDescriptor name to add for synchronisation.
+         * in order to add a new individualCompoundDescriptor (given by name) in the {@link EntitySet} list.
+         * @param individualName the individualCompoundDescriptor name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
         default boolean addIndividualClassified(String individualName){
@@ -89,9 +89,9 @@ public interface ConceptExpression
         }
         /**
          * It is an helper that just calls:
-         * {@code {@link #getIndividualClassified()}.add( individual_compoundDescriptor)}
-         * in order to add a new individual_compoundDescriptor in the {@link Axioms} list.
-         * @param individual the individual_compoundDescriptor to add for synchronisation.
+         * {@code {@link #getIndividualClassified()}.add( individualCompoundDescriptor)}
+         * in order to add a new individualCompoundDescriptor in the {@link EntitySet} list.
+         * @param individual the individualCompoundDescriptor to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
         default boolean addIndividualClassified(OWLNamedIndividual individual){
@@ -101,8 +101,8 @@ public interface ConceptExpression
         /**
          * It is an helper that just calls:
          * {@code {@link #getIndividualClassified()}.remove( {@link #getOntology()}.getOWLIndividual( propertyName))}
-         * in order to remove an individual_compoundDescriptor (given by name) from the {@link Axioms} list.
-         * @param individualName the individual_compoundDescriptor name to remove for synchronisation.
+         * in order to remove an individualCompoundDescriptor (given by name) from the {@link EntitySet} list.
+         * @param individualName the individualCompoundDescriptor name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeIndividualClassified(String individualName){
@@ -110,9 +110,9 @@ public interface ConceptExpression
         }
         /**
          * It is an helper that just calls:
-         * {@code {@link #getIndividualClassified()}.remove( individual_compoundDescriptor)}
-         * in order to remove an individual_compoundDescriptor in the {@link Axioms} list.
-         * @param individual the individual_compoundDescriptor to remove for synchronisation.
+         * {@code {@link #getIndividualClassified()}.remove( individualCompoundDescriptor)}
+         * in order to remove an individualCompoundDescriptor in the {@link EntitySet} list.
+         * @param individual the individualCompoundDescriptor to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeIndividualClassified(OWLNamedIndividual individual){
@@ -120,8 +120,8 @@ public interface ConceptExpression
         }
 
         @Override // see super classes for documentation
-        default DescriptorAxioms.Individuals queryIndividualClassified(){
-            DescriptorAxioms.Individuals set = new DescriptorAxioms.Individuals(getOntology().getIndividualB2Class(getInstance()));
+        default DescriptorEntitySet.Individuals queryIndividualClassified(){
+            DescriptorEntitySet.Individuals set = new DescriptorEntitySet.Individuals(getOntology().getIndividualB2Class(getInstance()));
             set.setSingleton( getIndividualClassified().isSingleton());
             return set;
         }
@@ -129,7 +129,7 @@ public interface ConceptExpression
         @Override // see super classes for documentation
         default List<MappingIntent> writeSemantic(){
             try {
-                Axioms.SynchronisationIntent<OWLNamedIndividual> to = synchroniseIndividualClassifiedToSemantic();
+                EntitySet.SynchronisationIntent<OWLNamedIndividual> to = synchroniseIndividualClassifiedToSemantic();
                 if (to == null)
                     return getIntent(null);
                 List<OWLOntologyChange> changes = new ArrayList<>();
@@ -170,9 +170,9 @@ public interface ConceptExpression
         /**
          * It is an helper that just calls:
          * {@code {@link #getDisjointConcept()}.add( {@link #getOntology()}.getOWLClass( propertyName))}
-         * in order to add a new class (given by name) in the {@link Axioms} list.
+         * in order to add a new class (given by name) in the {@link EntitySet} list.
          * This method should be always synchronised with {@link #writeSemanticInconsistencySafe()}
-         * to be perfectly aligned with the ontology, since it affects {@link ConceptExpression.Sub} {@link Axioms}.
+         * to be perfectly aligned with the ontology, since it affects {@link ConceptExpression.Sub} {@link EntitySet}.
          * @param className the class name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
@@ -182,9 +182,9 @@ public interface ConceptExpression
         /**
          * It is an helper that just calls:
          * {@code {@link #getDisjointConcept()}.add( cl)}
-         * in order to add a new class in the {@link Axioms} list.
+         * in order to add a new class in the {@link EntitySet} list.
          * This method should be always synchronised with {@link #writeSemanticInconsistencySafe()}
-         * to be perfectly aligned with the ontology, since it affects {@link ConceptExpression.Sub} {@link Axioms}.
+         * to be perfectly aligned with the ontology, since it affects {@link ConceptExpression.Sub} {@link EntitySet}.
          * @param cl the class to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
@@ -195,9 +195,9 @@ public interface ConceptExpression
         /**
          * It is an helper that just calls:
          * {@code {@link #getDisjointConcept()}.remove( {@link #getOntology()}.getOWLClass( propertyName))}
-         * in order to remove a class (given by name) from the {@link Axioms} list.
+         * in order to remove a class (given by name) from the {@link EntitySet} list.
          * This method should be always synchronised with {@link #writeSemanticInconsistencySafe()}
-         * to be perfectly aligned with the ontology, since it affects {@link ConceptExpression.Sub} {@link Axioms}.
+         * to be perfectly aligned with the ontology, since it affects {@link ConceptExpression.Sub} {@link EntitySet}.
          * @param className the class name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
@@ -207,9 +207,9 @@ public interface ConceptExpression
         /**
          * It is an helper that just calls:
          * {@code {@link #getDisjointConcept()}.remove( cl)}
-         * in order to remove a class in the {@link Axioms} list.
+         * in order to remove a class in the {@link EntitySet} list.
          * This method should be always synchronised with {@link #writeSemanticInconsistencySafe()}
-         * to be perfectly aligned with the ontology, since it affects {@link ConceptExpression.Sub} {@link Axioms}.
+         * to be perfectly aligned with the ontology, since it affects {@link ConceptExpression.Sub} {@link EntitySet}.
          * @param cl the class to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
@@ -219,8 +219,8 @@ public interface ConceptExpression
 
 
         @Override // see super classes for documentation
-        default DescriptorAxioms.Concepts queryDisjointConcept(){
-            DescriptorAxioms.Concepts set = new DescriptorAxioms.Concepts(getOntology().getDisjointClasses(getInstance()));
+        default DescriptorEntitySet.Concepts queryDisjointConcept(){
+            DescriptorEntitySet.Concepts set = new DescriptorEntitySet.Concepts(getOntology().getDisjointClasses(getInstance()));
             set.remove( getInstance());
             set.setSingleton( getDisjointConcept().isSingleton());
             return set;
@@ -229,7 +229,7 @@ public interface ConceptExpression
         @Override // see super classes for documentation
         default List<MappingIntent> writeSemantic(){
             try {
-                Axioms.SynchronisationIntent<OWLClass> to = synchroniseDisjointConceptToSemantic();
+                EntitySet.SynchronisationIntent<OWLClass> to = synchroniseDisjointConceptToSemantic();
                 if ( to == null)
                     return getIntent( null);
                 List<OWLOntologyChange> changes = new ArrayList<>();
@@ -278,7 +278,7 @@ public interface ConceptExpression
         /**
          * It is an helper that just calls:
          * {@code {@link #getEquivalentConcept()}.add( {@link #getOntology()}.getOWLClass( propertyName))}
-         * in order to add a new class (given by name) in the {@link Axioms} list.
+         * in order to add a new class (given by name) in the {@link EntitySet} list.
          * @param className the class name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
@@ -288,7 +288,7 @@ public interface ConceptExpression
         /**
          * It is an helper that just calls:
          * {@code {@link #getEquivalentConcept()}.add( cl)}
-         * in order to add a new class in the {@link Axioms} list.
+         * in order to add a new class in the {@link EntitySet} list.
          * @param cl the class to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
@@ -299,7 +299,7 @@ public interface ConceptExpression
         /**
          * It is an helper that just calls:
          * {@code {@link #getEquivalentConcept()}.remove( {@link #getOntology()}.getOWLClass( propertyName))}
-         * in order to remove a class (given by name) from the {@link Axioms} list.
+         * in order to remove a class (given by name) from the {@link EntitySet} list.
          * @param className the class name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
@@ -309,7 +309,7 @@ public interface ConceptExpression
         /**
          * It is an helper that just calls:
          * {@code {@link #getEquivalentConcept()}.remove( cl)}
-         * in order to remove a class in the {@link Axioms} list.
+         * in order to remove a class in the {@link EntitySet} list.
          * @param cl the class to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
@@ -318,8 +318,8 @@ public interface ConceptExpression
         }
 
         @Override // see super classes for documentation
-        default DescriptorAxioms.Concepts queryEquivalentConcept(){
-            DescriptorAxioms.Concepts set = new DescriptorAxioms.Concepts(getOntology().getEquivalentClasses(getInstance()));
+        default DescriptorEntitySet.Concepts queryEquivalentConcept(){
+            DescriptorEntitySet.Concepts set = new DescriptorEntitySet.Concepts(getOntology().getEquivalentClasses(getInstance()));
             set.remove( getInstance());
             set.setSingleton( getEquivalentConcept().isSingleton());
             return set;
@@ -328,7 +328,7 @@ public interface ConceptExpression
         @Override // see super classes for documentation
         default List<MappingIntent> writeSemantic(){
             try {
-                Axioms.SynchronisationIntent<OWLClass> to = synchroniseEquivalentConceptToSemantic();
+                EntitySet.SynchronisationIntent<OWLClass> to = synchroniseEquivalentConceptToSemantic();
                 if ( to == null)
                     return getIntent( null);
                 List<OWLOntologyChange> changes = new ArrayList<>();
@@ -377,7 +377,7 @@ public interface ConceptExpression
         /**
          * It is an helper that just calls:
          * {@code {@link #getSubConcept()}.add( {@link #getOntology()}.getOWLClass( propertyName))}
-         * in order to add a new class (given by name) in the {@link Axioms} list.
+         * in order to add a new class (given by name) in the {@link EntitySet} list.
          * @param className the class name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
@@ -387,7 +387,7 @@ public interface ConceptExpression
         /**
          * It is an helper that just calls:
          * {@code {@link #getSubConcept()}.add( cl)}
-         * in order to add a new class in the {@link Axioms} list.
+         * in order to add a new class in the {@link EntitySet} list.
          * @param cl the class to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
@@ -398,7 +398,7 @@ public interface ConceptExpression
         /**
          * It is an helper that just calls:
          * {@code {@link #getSubConcept()}.remove( {@link #getOntology()}.getOWLClass( propertyName))}
-         * in order to remove a class (given by name) from the {@link Axioms} list.
+         * in order to remove a class (given by name) from the {@link EntitySet} list.
          * @param className the class name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
@@ -408,7 +408,7 @@ public interface ConceptExpression
         /**
          * It is an helper that just calls:
          * {@code {@link #getSubConcept()}.remove( cl)}
-         * in order to remove a class in the {@link Axioms} list.
+         * in order to remove a class in the {@link EntitySet} list.
          * @param cl the class to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
@@ -417,8 +417,8 @@ public interface ConceptExpression
         }
 
         @Override // see super classes for documentation
-        default DescriptorAxioms.Concepts querySubConcept(){
-            DescriptorAxioms.Concepts set = new DescriptorAxioms.Concepts(getOntology().getSubClassOf(getInstance()));
+        default DescriptorEntitySet.Concepts querySubConcept(){
+            DescriptorEntitySet.Concepts set = new DescriptorEntitySet.Concepts(getOntology().getSubClassOf(getInstance()));
             set.setSingleton( getSubConcept().isSingleton());
             return set;
         }
@@ -426,7 +426,7 @@ public interface ConceptExpression
         @Override // see super classes for documentation
         default List<MappingIntent> writeSemantic(){
             try {
-                Axioms.SynchronisationIntent<OWLClass> to = synchroniseSubConceptToSemantic();
+                EntitySet.SynchronisationIntent<OWLClass> to = synchroniseSubConceptToSemantic();
                 if ( to == null)
                     return getIntent( null);
                 List<OWLOntologyChange> changes = new ArrayList<>();
@@ -467,9 +467,9 @@ public interface ConceptExpression
         /**
          * It is an helper that just calls:
          * {@code {@link #getSuperConcept()}.add( {@link #getOntology()}.getOWLClass( propertyName))}
-         * in order to add a new class (given by name) in the {@link Axioms} list.
+         * in order to add a new class (given by name) in the {@link EntitySet} list.
          * This method should be always synchronised with {@link #writeSemanticInconsistencySafe()}
-         * to be perfectly aligned with the ontology, since it affects {@link ConceptExpression.Define} {@link Axioms}.
+         * to be perfectly aligned with the ontology, since it affects {@link ConceptExpression.Define} {@link EntitySet}.
          * @param className the class name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
@@ -479,9 +479,9 @@ public interface ConceptExpression
         /**
          * It is an helper that just calls:
          * {@code {@link #getSuperConcept()}.add( cl)}
-         * in order to add a new class in the {@link Axioms} list.
+         * in order to add a new class in the {@link EntitySet} list.
          * This method should be always synchronised with {@link #writeSemanticInconsistencySafe()}
-         * to be perfectly aligned with the ontology, since it affects {@link ConceptExpression.Define} {@link Axioms}.
+         * to be perfectly aligned with the ontology, since it affects {@link ConceptExpression.Define} {@link EntitySet}.
          * @param cl the class to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
@@ -492,9 +492,9 @@ public interface ConceptExpression
         /**
          * It is an helper that just calls:
          * {@code {@link #getSuperConcept()}.remove( {@link #getOntology()}.getOWLClass( propertyName))}
-         * in order to remove a class (given by name) from the {@link Axioms} list.
+         * in order to remove a class (given by name) from the {@link EntitySet} list.
          * This method should be always synchronised with {@link #writeSemanticInconsistencySafe()}
-         * to be perfectly aligned with the ontology, since it affects {@link ConceptExpression.Define} {@link Axioms}.
+         * to be perfectly aligned with the ontology, since it affects {@link ConceptExpression.Define} {@link EntitySet}.
          * @param className the class name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
@@ -504,9 +504,9 @@ public interface ConceptExpression
         /**
          * It is an helper that just calls:
          * {@code {@link #getSuperConcept()}.remove( cl)}
-         * in order to remove a class in the {@link Axioms} list.
+         * in order to remove a class in the {@link EntitySet} list.
          * This method should be always synchronised with {@link #writeSemanticInconsistencySafe()}
-         * to be perfectly aligned with the ontology, since it affects {@link ConceptExpression.Define} {@link Axioms}.
+         * to be perfectly aligned with the ontology, since it affects {@link ConceptExpression.Define} {@link EntitySet}.
          * @param cl the class to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
@@ -516,8 +516,8 @@ public interface ConceptExpression
 
 
         @Override // see super classes for documentation
-        default DescriptorAxioms.Concepts querySuperConcept(){
-            DescriptorAxioms.Concepts set = new DescriptorAxioms.Concepts(getOntology().getSuperClassOf(getInstance()));
+        default DescriptorEntitySet.Concepts querySuperConcept(){
+            DescriptorEntitySet.Concepts set = new DescriptorEntitySet.Concepts(getOntology().getSuperClassOf(getInstance()));
             set.setSingleton( getSuperConcept().isSingleton());
             return set;
         }
@@ -525,7 +525,7 @@ public interface ConceptExpression
         @Override // see super classes for documentation
         default List<MappingIntent> writeSemantic(){
             try {
-                Axioms.SynchronisationIntent<OWLClass> to = synchroniseSuperConceptToSemantic();
+                EntitySet.SynchronisationIntent<OWLClass> to = synchroniseSuperConceptToSemantic();
                 if ( to == null)
                     return getIntent( null);
                 List<OWLOntologyChange> changes = new ArrayList<>();
@@ -572,7 +572,7 @@ public interface ConceptExpression
         // in intersection or in conjunctions
 
         /**
-         * Creates a new class equivalence restriction (to be in conjunction with the others in the specific {@link Axioms})
+         * Creates a new class equivalence restriction (to be in conjunction with the others in the specific {@link EntitySet})
          * which restricts over a minimal cardinality of data properties
          * in a specific range of data type based on: {@link #getOWLDataType(Class)}.
          * @param property the name of the restricting data property.
@@ -584,7 +584,7 @@ public interface ConceptExpression
             return createMinDataRestriction( getOWLDataProperty( property), cardinality, dataType);
         }
         /**
-         * Creates a new class equivalence restriction (to be in conjunction with the others in the specific {@link Axioms})
+         * Creates a new class equivalence restriction (to be in conjunction with the others in the specific {@link EntitySet})
          * which restricts over a minimal cardinality of data properties
          * in a specific range of data type based on: {@link #getOWLDataType(Class)}.
          * @param property the restricting data property.
@@ -596,7 +596,7 @@ public interface ConceptExpression
             return new ClassRestrictedOnMinData( getInstance(), getOWLDataType( dataType), property, cardinality);
         }
         /**
-         * Adds a new restriction to the described {@link Axioms} (i.e.: {@link #getDefinitionConcept()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcept()})
          * based on {@link #createMinDataRestriction(OWLDataProperty, int, Class)}.
          * @param property the restricting data property.
          * @param cardinality the cardinality for the minimal property restriction.
@@ -607,7 +607,7 @@ public interface ConceptExpression
             return getDefinitionConcept().add( createMinDataRestriction( property, cardinality, dataType));
         }
         /**
-         * Adds a new restriction to the described {@link Axioms} (i.e.: {@link #getDefinitionConcept()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcept()})
          * based on {@link #createMinDataRestriction(String, int, Class)}.
          * @param property the name of the restricting data property.
          * @param cardinality the cardinality for the minimal property restriction.
@@ -618,7 +618,7 @@ public interface ConceptExpression
             return getDefinitionConcept().add( createMinDataRestriction( property, cardinality, dataType));
         }
         /**
-         * Removes a restriction to the described {@link Axioms} (i.e.: {@link #getDefinitionConcept()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcept()})
          * based on {@link #createMinDataRestriction(OWLDataProperty, int, Class)}.
          * @param property the restricting data property.
          * @param cardinality the cardinality for the minimal property restriction.
@@ -629,7 +629,7 @@ public interface ConceptExpression
             return getDefinitionConcept().remove( createMinDataRestriction( property, cardinality, dataType));
         }
         /**
-         * Removes a restriction to the described {@link Axioms} (i.e.: {@link #getDefinitionConcept()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcept()})
          * based on {@link #createMinDataRestriction(String, int, Class)}.
          * @param property the name of the restricting data property.
          * @param cardinality the cardinality for the minimal property restriction.
@@ -641,7 +641,7 @@ public interface ConceptExpression
         }
 
         /**
-         * Creates a new class equivalence restriction (to be in conjunction with the others in the specific {@link Axioms})
+         * Creates a new class equivalence restriction (to be in conjunction with the others in the specific {@link EntitySet})
          * which restricts over a maximal cardinality of data properties
          * in a specific range of data type based on: {@link #getOWLDataType(Class)}.
          * @param property the name of the restricting data property.
@@ -653,7 +653,7 @@ public interface ConceptExpression
             return createMaxDataRestriction( getOWLDataProperty( property), cardinality, dataType);
         }
         /**
-         * Creates a new class equivalence restriction (to be in conjunction with the others in the specific {@link Axioms})
+         * Creates a new class equivalence restriction (to be in conjunction with the others in the specific {@link EntitySet})
          * which restricts over a maximal cardinality of data properties
          * in a specific range of data type based on: {@link #getOWLDataType(Class)}.
          * @param property the restricting data property.
@@ -665,7 +665,7 @@ public interface ConceptExpression
             return new ClassRestrictedOnMaxData( getInstance(), getOWLDataType( dataType), property, cardinality);
         }
         /**
-         * Adds a new restriction to the described {@link Axioms} (i.e.: {@link #getDefinitionConcept()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcept()})
          * based on {@link #createMaxDataRestriction(OWLDataProperty, int, Class)}.
          * @param property the restricting data property.
          * @param cardinality the cardinality for the maximal property restriction.
@@ -676,7 +676,7 @@ public interface ConceptExpression
             return getDefinitionConcept().add( createMaxDataRestriction( property, cardinality, dataType));
         }
         /**
-         * Adds a new restriction to the described {@link Axioms} (i.e.: {@link #getDefinitionConcept()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcept()})
          * based on {@link #createMaxDataRestriction(String, int, Class)}.
          * @param property the name of the restricting data property.
          * @param cardinality the cardinality for the maximal property restriction.
@@ -687,7 +687,7 @@ public interface ConceptExpression
             return getDefinitionConcept().add( createMaxDataRestriction( property, cardinality, dataType));
         }
         /**
-         * Removes a restriction to the described {@link Axioms} (i.e.: {@link #getDefinitionConcept()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcept()})
          * based on {@link #createMaxDataRestriction(OWLDataProperty, int, Class)}.
          * @param property the restricting data property.
          * @param cardinality the cardinality for the maximal property restriction.
@@ -698,7 +698,7 @@ public interface ConceptExpression
             return getDefinitionConcept().remove( createMaxDataRestriction( property, cardinality, dataType));
         }
         /**
-         * Removes a restriction to the described {@link Axioms} (i.e.: {@link #getDefinitionConcept()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcept()})
          * based on {@link #createMaxDataRestriction(String, int, Class)}.
          * @param property the name of the restricting data property.
          * @param cardinality the cardinality for the maximal property restriction.
@@ -710,7 +710,7 @@ public interface ConceptExpression
         }
 
         /**
-         * Creates a new class equivalence restriction (to be in conjunction with the others in the specific {@link Axioms})
+         * Creates a new class equivalence restriction (to be in conjunction with the others in the specific {@link EntitySet})
          * which restricts over an exact cardinality of data properties
          * in a specific range of data type based on: {@link #getOWLDataType(Class)}.
          * @param property the name of the restricting data property.
@@ -722,7 +722,7 @@ public interface ConceptExpression
             return createExactDataRestriction( getOWLDataProperty( property), cardinality, dataType);
         }
         /**
-         * Creates a new class equivalence restriction (to be in conjunction with the others in the specific {@link Axioms})
+         * Creates a new class equivalence restriction (to be in conjunction with the others in the specific {@link EntitySet})
          * which restricts over an exact cardinality of data properties
          * in a specific range of data type based on: {@link #getOWLDataType(Class)}.
          * @param property the restricting data property.
@@ -734,7 +734,7 @@ public interface ConceptExpression
             return new ClassRestrictedOnExactData( getInstance(), getOWLDataType( dataType), property, cardinality);
         }
         /**
-         * Adds a new restriction to the described {@link Axioms} (i.e.: {@link #getDefinitionConcept()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcept()})
          * based on {@link #createExactDataRestriction(OWLDataProperty, int, Class)}.
          * @param property the restricting data property.
          * @param cardinality the cardinality for the exact property restriction.
@@ -745,7 +745,7 @@ public interface ConceptExpression
             return getDefinitionConcept().add( createExactDataRestriction( property, cardinality, dataType));
         }
         /**
-         * Adds a new restriction to the described {@link Axioms} (i.e.: {@link #getDefinitionConcept()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcept()})
          * based on {@link #createExactDataRestriction(String, int, Class)}.
          * @param property the name of the restricting data property.
          * @param cardinality the cardinality for the exact property restriction.
@@ -756,7 +756,7 @@ public interface ConceptExpression
             return getDefinitionConcept().add( createExactDataRestriction( property, cardinality, dataType));
         }
         /**
-         * Removes a restriction to the described {@link Axioms} (i.e.: {@link #getDefinitionConcept()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcept()})
          * based on {@link #createExactDataRestriction(OWLDataProperty, int, Class)}.
          * @param property the restricting data property.
          * @param cardinality the cardinality for the exact property restriction.
@@ -767,7 +767,7 @@ public interface ConceptExpression
             return getDefinitionConcept().remove( createExactDataRestriction( property, cardinality, dataType));
         }
         /**
-         * Removes a restriction to the described {@link Axioms} (i.e.: {@link #getDefinitionConcept()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcept()})
          * based on {@link #createExactDataRestriction(String, int, Class)}.
          * @param property the name of the restricting data property.
          * @param cardinality the cardinality for the exact property restriction.
@@ -779,7 +779,7 @@ public interface ConceptExpression
         }
 
         /**
-         * Creates a new class equivalence restriction (to be in conjunction with the others in the specific {@link Axioms})
+         * Creates a new class equivalence restriction (to be in conjunction with the others in the specific {@link EntitySet})
          * which restricts over an existential cardinality of data properties
          * in a specific range of data type based on: {@link #getOWLDataType(Class)}.
          * @param property the name of the restricting data property.
@@ -790,7 +790,7 @@ public interface ConceptExpression
             return createSomeDataRestriction( getOWLDataProperty( property), dataType);
         }
         /**
-         * Creates a new class equivalence restriction (to be in conjunction with the others in the specific {@link Axioms})
+         * Creates a new class equivalence restriction (to be in conjunction with the others in the specific {@link EntitySet})
          * which restricts over an existential cardinality of data properties
          * in a specific range of data type based on: {@link #getOWLDataType(Class)}.
          * @param property the restricting data property.
@@ -801,7 +801,7 @@ public interface ConceptExpression
             return new ClassRestrictedOnSomeData( getInstance(), getOWLDataType( dataType), property);
         }
         /**
-         * Adds a new restriction to the described {@link Axioms} (i.e.: {@link #getDefinitionConcept()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcept()})
          * based on {@link #createSomeDataRestriction(OWLDataProperty, Class)}.
          * @param property the restricting data property.
          * @param dataType the data type of the restriction.
@@ -811,7 +811,7 @@ public interface ConceptExpression
             return getDefinitionConcept().add( createSomeDataRestriction( property, dataType));
         }
         /**
-         * Adds a new restriction to the described {@link Axioms} (i.e.: {@link #getDefinitionConcept()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcept()})
          * based on {@link #createSomeDataRestriction(String, Class)}.
          * @param property the name of the restricting data property.
          * @param dataType the data type of the restriction.
@@ -821,7 +821,7 @@ public interface ConceptExpression
             return getDefinitionConcept().add( createSomeDataRestriction( property, dataType));
         }
         /**
-         * Removes a restriction to the described {@link Axioms} (i.e.: {@link #getDefinitionConcept()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcept()})
          * based on {@link #createSomeDataRestriction(OWLDataProperty, Class)}.
          * @param property the restricting data property.
          * @param dataType the data type of the restriction.
@@ -831,7 +831,7 @@ public interface ConceptExpression
             return getDefinitionConcept().remove( createSomeDataRestriction( property, dataType));
         }
         /**
-         * Removes a restriction to the described {@link Axioms} (i.e.: {@link #getDefinitionConcept()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcept()})
          * based on {@link #createSomeDataRestriction(String, Class)}.
          * @param property the name of the restricting data property.
          * @param dataType the data type of the restriction.
@@ -842,7 +842,7 @@ public interface ConceptExpression
         }
 
         /**
-         * Creates a new class equivalence restriction (to be in conjunction with the others in the specific {@link Axioms})
+         * Creates a new class equivalence restriction (to be in conjunction with the others in the specific {@link EntitySet})
          * which restricts over an universal cardinality of data properties
          * in a specific range of data type based on: {@link #getOWLDataType(Class)}.
          * @param property the name of the restricting data property.
@@ -853,7 +853,7 @@ public interface ConceptExpression
             return createOnlyDataRestriction( getOWLDataProperty( property), dataType);
         }
         /**
-         * Creates a new class equivalence restriction (to be in conjunction with the others in the specific {@link Axioms})
+         * Creates a new class equivalence restriction (to be in conjunction with the others in the specific {@link EntitySet})
          * which restricts over an universal cardinality of data properties
          * in a specific range of data type based on: {@link #getOWLDataType(Class)}.
          * @param property the restricting data property.
@@ -864,7 +864,7 @@ public interface ConceptExpression
             return new ClassRestrictedOnAllData( getInstance(), getOWLDataType( dataType), property);
         }
         /**
-         * Adds a new restriction to the described {@link Axioms} (i.e.: {@link #getDefinitionConcept()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcept()})
          * based on {@link #createOnlyDataRestriction(OWLDataProperty, Class)}.
          * @param property the restricting data property.
          * @param dataType the data type of the restriction.
@@ -874,7 +874,7 @@ public interface ConceptExpression
             return getDefinitionConcept().add( createOnlyDataRestriction( property, dataType));
         }
         /**
-         * Adds a new restriction to the described {@link Axioms} (i.e.: {@link #getDefinitionConcept()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcept()})
          * based on {@link #createOnlyDataRestriction(String, Class)}.
          * @param property the name of the restricting data property.
          * @param dataType the data type of the restriction.
@@ -884,7 +884,7 @@ public interface ConceptExpression
             return getDefinitionConcept().add( createOnlyDataRestriction( property, dataType));
         }
         /**
-         * Removes a restriction to the described {@link Axioms} (i.e.: {@link #getDefinitionConcept()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcept()})
          * based on {@link #createOnlyDataRestriction(OWLDataProperty, Class)}.
          * @param property the restricting data property.
          * @param dataType the data type of the restriction.
@@ -894,7 +894,7 @@ public interface ConceptExpression
             return getDefinitionConcept().remove( createOnlyDataRestriction( property, dataType));
         }
         /**
-         * Removes a restriction to the described {@link Axioms} (i.e.: {@link #getDefinitionConcept()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcept()})
          * based on {@link #createOnlyDataRestriction(String, Class)}.
          * @param property the name of the restricting data property.
          * @param dataType the data type of the restriction.
@@ -905,7 +905,7 @@ public interface ConceptExpression
         }
 
         /**
-         * Creates a new class equivalence restriction (to be in conjunction with the others in the specific {@link Axioms})
+         * Creates a new class equivalence restriction (to be in conjunction with the others in the specific {@link EntitySet})
          * which restricts over a minimal cardinality of object properties
          * within in a specific ontological class.
          * @param property the name of the restricting object property.
@@ -917,7 +917,7 @@ public interface ConceptExpression
             return createMinObjectRestriction( getOWLObjectProperty( property), cardinality, getOWLClass( cl));
         }
         /**
-         * Creates a new class equivalence restriction (to be in conjunction with the others in the specific {@link Axioms})
+         * Creates a new class equivalence restriction (to be in conjunction with the others in the specific {@link EntitySet})
          * which restricts over a minimal cardinality of object properties
          * within in a specific ontological class.
          * @param property the restricting object property.
@@ -929,7 +929,7 @@ public interface ConceptExpression
             return new ClassRestrictedOnMinObject( getInstance(), cl, property, cardinality);
         }
         /**
-         * Adds a new restriction to the described {@link Axioms} (i.e.: {@link #getDefinitionConcept()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcept()})
          * based on {@link #createMinObjectRestriction(OWLObjectProperty, int, OWLClass)}.
          * @param property the restricting object property.
          * @param cardinality the cardinality for the minimal property restriction.
@@ -940,7 +940,7 @@ public interface ConceptExpression
             return getDefinitionConcept().add( createMinObjectRestriction( property, cardinality, cl));
         }
         /**
-         * Adds a new restriction to the described {@link Axioms} (i.e.: {@link #getDefinitionConcept()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcept()})
          * based on {@link #createMinObjectRestriction(String, int, String)}.
          * @param property the name of the restricting object property.
          * @param cardinality the cardinality for the minimal property restriction.
@@ -951,7 +951,7 @@ public interface ConceptExpression
             return getDefinitionConcept().add( createMinObjectRestriction( property, cardinality, cl));
         }
         /**
-         * Removes a restriction to the described {@link Axioms} (i.e.: {@link #getDefinitionConcept()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcept()})
          * based on {@link #createMinObjectRestriction(OWLObjectProperty, int, OWLClass)}.
          * @param property the restricting object property.
          * @param cardinality the cardinality for the minimal property restriction.
@@ -962,7 +962,7 @@ public interface ConceptExpression
             return getDefinitionConcept().remove( createMinObjectRestriction( property, cardinality, cl));
         }
         /**
-         * Removes a restriction to the described {@link Axioms} (i.e.: {@link #getDefinitionConcept()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcept()})
          * based on {@link #createMinObjectRestriction(String, int, String)}.
          * @param property the name of the restricting object property.
          * @param cardinality the cardinality for the minimal property restriction.
@@ -974,7 +974,7 @@ public interface ConceptExpression
         }
 
         /**
-         * Creates a new class equivalence restriction (to be in conjunction with the others in the specific {@link Axioms})
+         * Creates a new class equivalence restriction (to be in conjunction with the others in the specific {@link EntitySet})
          * which restricts over a maximal cardinality of object properties
          * within in a specific ontological class.
          * @param property the name of the restricting object property.
@@ -986,7 +986,7 @@ public interface ConceptExpression
             return createMaxObjectRestriction( getOWLObjectProperty( property), cardinality, getOWLClass( cl));
         }
         /**
-         * Creates a new class equivalence restriction (to be in conjunction with the others in the specific {@link Axioms})
+         * Creates a new class equivalence restriction (to be in conjunction with the others in the specific {@link EntitySet})
          * which restricts over a maximal cardinality of object properties
          * within in a specific ontological class.
          * @param property the restricting object property.
@@ -998,7 +998,7 @@ public interface ConceptExpression
             return new ClassRestrictedOnMaxObject( getInstance(), cl, property, cardinality);
         }
         /**
-         * Adds a new restriction to the described {@link Axioms} (i.e.: {@link #getDefinitionConcept()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcept()})
          * based on {@link #createMaxObjectRestriction(OWLObjectProperty, int, OWLClass)}.
          * @param property the restricting object property.
          * @param cardinality the cardinality for the maximal property restriction.
@@ -1009,7 +1009,7 @@ public interface ConceptExpression
             return getDefinitionConcept().add( createMaxObjectRestriction( property, cardinality, cl));
         }
         /**
-         * Adds a new restriction to the described {@link Axioms} (i.e.: {@link #getDefinitionConcept()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcept()})
          * based on {@link #createMaxObjectRestriction(String, int, String)}.
          * @param property the name of the restricting object property.
          * @param cardinality the cardinality for the maximal property restriction.
@@ -1020,7 +1020,7 @@ public interface ConceptExpression
             return getDefinitionConcept().add( createMaxObjectRestriction( property, cardinality, cl));
         }
         /**
-         * Removes a restriction to the described {@link Axioms} (i.e.: {@link #getDefinitionConcept()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcept()})
          * based on {@link #createMaxObjectRestriction(OWLObjectProperty, int, OWLClass)}.
          * @param property the restricting object property.
          * @param cardinality the cardinality for the maximal property restriction.
@@ -1031,7 +1031,7 @@ public interface ConceptExpression
             return getDefinitionConcept().remove( createMaxObjectRestriction( property, cardinality, cl));
         }
         /**
-         * Removes a restriction to the described {@link Axioms} (i.e.: {@link #getDefinitionConcept()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcept()})
          * based on {@link #createMaxObjectRestriction(String, int, String)}.
          * @param property the name of the restricting object property.
          * @param cardinality the cardinality for the maximal property restriction.
@@ -1043,7 +1043,7 @@ public interface ConceptExpression
         }
 
         /**
-         * Creates a new class equivalence restriction (to be in conjunction with the others in the specific {@link Axioms})
+         * Creates a new class equivalence restriction (to be in conjunction with the others in the specific {@link EntitySet})
          * which restricts over an exact cardinality of object properties
          * within in a specific ontological class.
          * @param property the name of the restricting object property.
@@ -1055,7 +1055,7 @@ public interface ConceptExpression
             return createMaxObjectRestriction( getOWLObjectProperty( property), cardinality, getOWLClass( cl));
         }
         /**
-         * Creates a new class equivalence restriction (to be in conjunction with the others in the specific {@link Axioms})
+         * Creates a new class equivalence restriction (to be in conjunction with the others in the specific {@link EntitySet})
          * which restricts over an exact cardinality of object properties
          * within in a specific ontological class.
          * @param property the restricting object property.
@@ -1067,7 +1067,7 @@ public interface ConceptExpression
             return new ClassRestrictedOnMaxObject( getInstance(), cl, property, cardinality);
         }
         /**
-         * Adds a new restriction to the described {@link Axioms} (i.e.: {@link #getDefinitionConcept()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcept()})
          * based on {@link #createExactObjectRestriction(OWLObjectProperty, int, OWLClass)}.
          * @param property the restricting object property.
          * @param cardinality the cardinality for the exact property restriction.
@@ -1078,7 +1078,7 @@ public interface ConceptExpression
             return getDefinitionConcept().add( createExactObjectRestriction( property, cardinality, cl));
         }
         /**
-         * Adds a new restriction to the described {@link Axioms} (i.e.: {@link #getDefinitionConcept()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcept()})
          * based on {@link #createExactObjectRestriction(String, int, String)}.
          * @param property the name of the restricting object property.
          * @param cardinality the cardinality for the exact property restriction.
@@ -1089,7 +1089,7 @@ public interface ConceptExpression
             return getDefinitionConcept().add( createExactObjectRestriction( property, cardinality, cl));
         }
         /**
-         * Removes a restriction to the described {@link Axioms} (i.e.: {@link #getDefinitionConcept()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcept()})
          * based on {@link #createExactObjectRestriction(OWLObjectProperty, int, OWLClass)}.
          * @param property the restricting object property.
          * @param cardinality the cardinality for the exact property restriction.
@@ -1100,7 +1100,7 @@ public interface ConceptExpression
             return getDefinitionConcept().remove( createExactObjectRestriction( property, cardinality, cl));
         }
         /**
-         * Removes a restriction to the described {@link Axioms} (i.e.: {@link #getDefinitionConcept()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcept()})
          * based on {@link #createExactObjectRestriction(String, int, String)}.
          * @param property the name of the restricting object property.
          * @param cardinality the cardinality for the exact property restriction.
@@ -1112,7 +1112,7 @@ public interface ConceptExpression
         }
 
         /**
-         * Creates a new class equivalence restriction (to be in conjunction with the others in the specific {@link Axioms})
+         * Creates a new class equivalence restriction (to be in conjunction with the others in the specific {@link EntitySet})
          * which restricts over an existential cardinality of object properties
          * within in a specific ontological class.
          * @param property the name of the restricting object property.
@@ -1123,7 +1123,7 @@ public interface ConceptExpression
             return createSomeObjectRestriction( getOWLObjectProperty( property), getOWLClass( cl));
         }
         /**
-         * Creates a new class equivalence restriction (to be in conjunction with the others in the specific {@link Axioms})
+         * Creates a new class equivalence restriction (to be in conjunction with the others in the specific {@link EntitySet})
          * which restricts over an existential cardinality of object properties
          * within in a specific ontological class.
          * @param property the restricting object property.
@@ -1134,7 +1134,7 @@ public interface ConceptExpression
             return new ClassRestrictedOnSomeObject( getInstance(), cl, property);
         }
         /**
-         * Adds a new restriction to the described {@link Axioms} (i.e.: {@link #getDefinitionConcept()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcept()})
          * based on {@link #createSomeObjectRestriction(OWLObjectProperty, OWLClass)}.
          * @param property the restricting object property.
          * @param cl the range class of the restriction.
@@ -1144,7 +1144,7 @@ public interface ConceptExpression
             return getDefinitionConcept().add( createSomeObjectRestriction( property, cl));
         }
         /**
-         * Adds a new restriction to the described {@link Axioms} (i.e.: {@link #getDefinitionConcept()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcept()})
          * based on {@link #createSomeObjectRestriction(String, String)}.
          * @param property the name of the restricting object property.
          * @param cl the name of the range class of the restriction.
@@ -1154,7 +1154,7 @@ public interface ConceptExpression
             return getDefinitionConcept().add( createSomeObjectRestriction( property, cl));
         }
         /**
-         * Removes a restriction to the described {@link Axioms} (i.e.: {@link #getDefinitionConcept()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcept()})
          * based on {@link #createSomeObjectRestriction(OWLObjectProperty, OWLClass)}.
          * @param property the restricting object property.
          * @param cl of the range class of the restriction.
@@ -1164,7 +1164,7 @@ public interface ConceptExpression
             return getDefinitionConcept().remove( createSomeObjectRestriction( property, cl));
         }
         /**
-         * Removes a restriction to the described {@link Axioms} (i.e.: {@link #getDefinitionConcept()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcept()})
          * based on {@link #createSomeObjectRestriction(String, String)}.
          * @param property the name of the restricting object property.
          * @param cl the name of the range class of the restriction.
@@ -1175,7 +1175,7 @@ public interface ConceptExpression
         }
 
         /**
-         * Creates a new class equivalence restriction (to be in conjunction with the others in the specific {@link Axioms})
+         * Creates a new class equivalence restriction (to be in conjunction with the others in the specific {@link EntitySet})
          * which restricts over an universal cardinality of object properties
          * within in a specific ontological class.
          * @param property the name of the restricting object property.
@@ -1186,7 +1186,7 @@ public interface ConceptExpression
             return createOnlyObjectRestriction( getOWLObjectProperty( property), getOWLClass( cl));
         }
         /**
-         * Creates a new class equivalence restriction (to be in conjunction with the others in the specific {@link Axioms})
+         * Creates a new class equivalence restriction (to be in conjunction with the others in the specific {@link EntitySet})
          * which restricts over an universal cardinality of object properties
          * within in a specific ontological class.
          * @param property the restricting object property.
@@ -1197,7 +1197,7 @@ public interface ConceptExpression
             return new ClassRestrictedOnAllObject( getInstance(), cl, property);
         }
         /**
-         * Adds a new restriction to the described {@link Axioms} (i.e.: {@link #getDefinitionConcept()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcept()})
          * based on {@link #createOnlyObjectRestriction(OWLObjectProperty, OWLClass)}.
          * @param property the restricting object property.
          * @param cl the range class of the restriction.
@@ -1207,7 +1207,7 @@ public interface ConceptExpression
             return getDefinitionConcept().add( createOnlyObjectRestriction( property, cl));
         }
         /**
-         * Adds a new restriction to the described {@link Axioms} (i.e.: {@link #getDefinitionConcept()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcept()})
          * based on {@link #createOnlyObjectRestriction(String, String)}.
          * @param property the name of the restricting object property.
          * @param cl the name of the range class of the restriction.
@@ -1217,7 +1217,7 @@ public interface ConceptExpression
             return getDefinitionConcept().add( createOnlyObjectRestriction( property, cl));
         }
         /**
-         * Removes a restriction to the described {@link Axioms} (i.e.: {@link #getDefinitionConcept()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcept()})
          * based on {@link #createOnlyObjectRestriction(OWLObjectProperty, OWLClass)}.
          * @param property the restricting object property.
          * @param cl of the range class of the restriction.
@@ -1227,7 +1227,7 @@ public interface ConceptExpression
             return getDefinitionConcept().remove( createOnlyObjectRestriction( property, cl));
         }
         /**
-         * Removes a restriction to the described {@link Axioms} (i.e.: {@link #getDefinitionConcept()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcept()})
          * based on {@link #createOnlyObjectRestriction(String, String)}.
          * @param property the name of the restricting object property.
          * @param cl the name of the range class of the restriction.
@@ -1238,7 +1238,7 @@ public interface ConceptExpression
         }
 
         /**
-         * Creates a new class equivalence restriction (to be in conjunction with the others in the specific {@link Axioms})
+         * Creates a new class equivalence restriction (to be in conjunction with the others in the specific {@link EntitySet})
          * which represents an equivalent class.
          * @param className the name of the range class of the restriction.
          * @return a new object type restriction for class definition.
@@ -1247,7 +1247,7 @@ public interface ConceptExpression
             return createClassRestriction( getOWLClass( className));
         }
         /**
-         * Creates a new class equivalence restriction (to be in conjunction with the others in the specific {@link Axioms})
+         * Creates a new class equivalence restriction (to be in conjunction with the others in the specific {@link EntitySet})
          * which represents an equivalent class.
          * @param cl the range class of the restriction.
          * @return a new object type restriction for class definition.
@@ -1256,7 +1256,7 @@ public interface ConceptExpression
             return new ClassRestrictedOnClass( getInstance(), cl);
         }
         /**
-         * Adds a new restriction to the described {@link Axioms} (i.e.: {@link #getDefinitionConcept()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcept()})
          * based on {@link #createClassRestriction(String)}.
          * @param className the name of the range class of the restriction.
          * @return {@code true} if a new restriction has been added to the {@link Concept.Define}.
@@ -1265,7 +1265,7 @@ public interface ConceptExpression
             return getDefinitionConcept().add( createClassRestriction( className));
         }
         /**
-         * Adds a new restriction to the described {@link Axioms} (i.e.: {@link #getDefinitionConcept()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcept()})
          * based on {@link #createClassRestriction(String)}.
          * @param cl the range class of the restriction.
          * @return {@code true} if a new restriction has been added to the {@link Concept.Define}.
@@ -1274,7 +1274,7 @@ public interface ConceptExpression
             return getDefinitionConcept().add( createClassRestriction( cl));
         }
         /**
-         * Removes a restriction to the described {@link Axioms} (i.e.: {@link #getDefinitionConcept()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcept()})
          * based on {@link #createClassRestriction(String)}.
          * @param cl the name of the range class of the restriction.
          * @return {@code true} if a new restriction has been added to the {@link Concept.Define}.
@@ -1283,7 +1283,7 @@ public interface ConceptExpression
             return getDefinitionConcept().remove( createClassRestriction( cl));
         }
         /**
-         * Removes a restriction to the described {@link Axioms} (i.e.: {@link #getDefinitionConcept()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcept()})
          * based on {@link #createClassRestriction(String)}.
          * @param cl the range class of the restriction.
          * @return {@code true} if a new restriction has been added to the {@link Concept.Define}.
@@ -1293,10 +1293,10 @@ public interface ConceptExpression
         }
 
         @Override
-        DescriptorAxioms.Restrictions getDefinitionConcept();
+        DescriptorEntitySet.Restrictions getDefinitionConcept();
 
         @Override // see super classes for documentation
-        default DescriptorAxioms.Restrictions queryDefinitionConcept(){
+        default DescriptorEntitySet.Restrictions queryDefinitionConcept(){
             Set<ApplyingRestriction> restrictions = getOntology().getRestrictions(getInstance());
             for ( ApplyingRestriction a : restrictions)
                 if ( a.getRestrictionType().isRestrictionOnClass())
@@ -1304,7 +1304,7 @@ public interface ConceptExpression
                         restrictions.remove( a);
                         break;
                     }
-            DescriptorAxioms.Restrictions set = new DescriptorAxioms.Restrictions( restrictions);
+            DescriptorEntitySet.Restrictions set = new DescriptorEntitySet.Restrictions( restrictions);
             set.setSingleton( getDefinitionConcept().isSingleton());
             return set;
         }
@@ -1312,7 +1312,7 @@ public interface ConceptExpression
         @Override // see super classes for documentation
         default List<MappingIntent> writeSemantic(){
             try {
-                Axioms.SynchronisationIntent<SemanticRestriction> to = synchroniseDefinitionConceptToSemantic();
+                EntitySet.SynchronisationIntent<SemanticRestriction> to = synchroniseDefinitionConceptToSemantic();
                 if ( to == null)
                     return getIntent( null);
                 List<OWLOntologyChange> changes = new ArrayList<>();

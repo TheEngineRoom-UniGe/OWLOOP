@@ -1,24 +1,24 @@
-package it.emarolab.owloop.descriptor.utility.individual_compoundDescriptor;
+package it.emarolab.owloop.descriptor.utility.individualCompoundDescriptor;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
+import it.emarolab.owloop.core.Axiom;
 import it.emarolab.owloop.descriptor.construction.descriptorBase.IndividualDescriptorBase;
-import it.emarolab.owloop.descriptor.construction.descriptorInterface.DescriptorAxioms;
+import it.emarolab.owloop.descriptor.construction.descriptorInterface.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorInterface.IndividualExpression;
-import it.emarolab.owloop.descriptor.utility.dataProperty_compoundDescriptor.FullDataPropertyDesc;
-import it.emarolab.owloop.descriptor.utility.objectProperty_compoundDescriptor.FullObjectPropertyDesc;
-import it.emarolab.owloop.core.Semantic;
+import it.emarolab.owloop.descriptor.utility.dataPropertyCompoundDescriptor.FullDataPropertyDesc;
+import it.emarolab.owloop.descriptor.utility.objectPropertyCompoundDescriptor.FullObjectPropertyDesc;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 
 import java.util.List;
 
 /**
- * A basic implementation for an individual_compoundDescriptor that has data and object property values.
+ * A basic implementation for an individualCompoundDescriptor that has data and object property values.
  * <p>
- *     This is an example of how use the {@link Semantic.Descriptor}s for implement
- *     an individual_compoundDescriptor that is synchronised w.r.t. its {@link DataLink}s
+ *     This is an example of how use the {@link Axiom.Descriptor}s for implement
+ *     an individualCompoundDescriptor that is synchronised w.r.t. its {@link DataLink}s
  *     and {@link ObjectLink}s.
  *     <br>
- *     Its purpose is only to instanciate the {@link DescriptorAxioms.ObjectSemantics} for the
+ *     Its purpose is only to instanciate the {@link DescriptorEntitySet.ObjectSemantics} for the
  *     respective descriptions, as well as call the derived interfaces in the
  *     {@link #readSemantic()} and {@link #writeSemantic()} methods.
  *     All its constructions are based on {@link IndividualDescriptorBase} in order
@@ -33,7 +33,7 @@ import java.util.List;
  *     and maximises the OWL synchronisation efficiency.
  *
  * <div style="text-align:center;"><small>
- * <b>File</b>:        it.emarolab.owloop.descriptor.utility.concept_compoundDescriptor.LinkIndividualDesc <br>
+ * <b>File</b>:        it.emarolab.owloop.descriptor.utility.conceptCompoundDescriptor.LinkIndividualDesc <br>
  * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
  * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
  * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -45,8 +45,8 @@ public class LinkIndividualDesc
         implements IndividualExpression.ObjectLink<FullObjectPropertyDesc>,
         IndividualExpression.DataLink<FullDataPropertyDesc> {
 
-    private DescriptorAxioms.ObjectSemantics objectLinks = new DescriptorAxioms.ObjectSemantics();
-    private DescriptorAxioms.DataSemantics dataLinks = new DescriptorAxioms.DataSemantics();
+    private DescriptorEntitySet.ObjectSemantics objectLinks = new DescriptorEntitySet.ObjectSemantics();
+    private DescriptorEntitySet.DataSemantics dataLinks = new DescriptorEntitySet.DataSemantics();
 
     // constructors for IndividualDescriptorBase
 
@@ -77,7 +77,7 @@ public class LinkIndividualDesc
 
 
 
-    // implementations for Semantic.descriptor
+    // implementations for Axiom.descriptor
 
     @Override
     public List<MappingIntent> readSemantic() {
@@ -97,12 +97,12 @@ public class LinkIndividualDesc
     // implementations for IndividualExpression.ObjectLink
 
     @Override  //called during build...() you can change the returning type to any implementations of ObjectPropertyExpression
-    public FullObjectPropertyDesc getNewObjectIndividual(DescriptorAxioms.ObjectSemantic instance, OWLReferences ontology) {
+    public FullObjectPropertyDesc getNewObjectIndividual(DescriptorEntitySet.ObjectSemantic instance, OWLReferences ontology) {
         return new FullObjectPropertyDesc( instance.getSemantic(), ontology);
     }
 
     @Override
-    public DescriptorAxioms.ObjectSemantics getObjectSemantics() {
+    public DescriptorEntitySet.ObjectSemantics getObjectSemantics() {
         return objectLinks;
     }
 
@@ -111,12 +111,12 @@ public class LinkIndividualDesc
     // implementations for IndividualExpression.DataLink
 
     @Override  //called during build...() you can change the returning type to any implementations of DataPropertyExpression
-    public FullDataPropertyDesc getNewDataIndividual(DescriptorAxioms.DataSemantic instance, OWLReferences ontology) {
+    public FullDataPropertyDesc getNewDataIndividual(DescriptorEntitySet.DataSemantic instance, OWLReferences ontology) {
         return new FullDataPropertyDesc( instance.getSemantic(), ontology);
     }
 
     @Override
-    public DescriptorAxioms.DataSemantics getDataSemantics() {
+    public DescriptorEntitySet.DataSemantics getDataSemantics() {
         return dataLinks;
     }
 

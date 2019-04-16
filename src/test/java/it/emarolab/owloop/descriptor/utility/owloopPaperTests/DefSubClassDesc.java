@@ -2,9 +2,9 @@ package it.emarolab.owloop.descriptor.utility.owloopPaperTests;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.descriptor.construction.descriptorInterface.ConceptExpression;
-import it.emarolab.owloop.descriptor.construction.descriptorInterface.DescriptorAxioms;
+import it.emarolab.owloop.descriptor.construction.descriptorInterface.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorBase.ConceptDescriptorBase;
-import it.emarolab.owloop.descriptor.utility.concept_compoundDescriptor.FullConceptDesc;
+import it.emarolab.owloop.descriptor.utility.conceptCompoundDescriptor.FullConceptDesc;
 import org.semanticweb.owlapi.model.OWLClass;
 
 import java.util.List;
@@ -13,15 +13,15 @@ public class DefSubClassDesc
         extends ConceptDescriptorBase
         implements ConceptExpression.Define, ConceptExpression.Sub<FullConceptDesc>{
 
-    private DescriptorAxioms.Restrictions restrictions = new DescriptorAxioms.Restrictions();
-    private DescriptorAxioms.Concepts subConcept = new DescriptorAxioms.Concepts();
+    private DescriptorEntitySet.Restrictions restrictions = new DescriptorEntitySet.Restrictions();
+    private DescriptorEntitySet.Concepts subConcept = new DescriptorEntitySet.Concepts();
 
     // constructors for ConceptDescriptorBase
     public DefSubClassDesc(OWLClass instance, OWLReferences onto) {
         super(instance, onto);
     }
 
-    // implementations for Semantic.descriptor
+    // implementations for Axiom.descriptor
     @Override
     public List<MappingIntent> readSemantic() {
         List<MappingIntent> r = Define.super.readSemantic(); // call this before Sub or Super !!!
@@ -38,7 +38,7 @@ public class DefSubClassDesc
 
     // implementations for ConceptExpression.Define
     @Override
-    public DescriptorAxioms.Restrictions getDefinitionConcept() {
+    public DescriptorEntitySet.Restrictions getDefinitionConcept() {
         return restrictions;
     }
 
@@ -52,7 +52,7 @@ public class DefSubClassDesc
     }
 
     @Override
-    public DescriptorAxioms.Concepts getSubConcept() {
+    public DescriptorEntitySet.Concepts getSubConcept() {
         return subConcept;
     }
 

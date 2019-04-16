@@ -3,12 +3,12 @@ package it.emarolab.owloop.descriptor.construction.descriptorBase;
 import com.clarkparsia.pellet.owlapi.PelletReasoner;
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.amor.owlInterface.OWLReferencesInterface;
+import it.emarolab.owloop.core.Axiom;
 import it.emarolab.owloop.descriptor.construction.descriptorInterface.*;
-import it.emarolab.owloop.core.Semantic;
 import org.semanticweb.owlapi.model.OWLObject;
 
 /**
- * The base class for {@link Semantic.Descriptor} implemented in the <a href="https://github.com/EmaroLab/multi_ontology_reference">aMOR</a> API.
+ * The base class for {@link Axiom.Descriptor} implemented in the <a href="https://github.com/EmaroLab/multi_ontology_reference">aMOR</a> API.
  * <p>
  *     This class is shared between all the {@link Descriptor}s that uses
  *     <a href="https://github.com/EmaroLab/multi_ontology_reference">aMOR</a>.
@@ -16,7 +16,7 @@ import org.semanticweb.owlapi.model.OWLObject;
  *     {@link DataPropertyExpression} and {@link ObjectPropertyExpression}).
  *     It only describes common constructors and initialisation
  *     for specific {@link DescriptorGrounding}.
- *     Note that all constructors fully initialise a new {@link Semantic.Ground}
+ *     Note that all constructors fully initialise a new {@link Axiom.Ground}
  *     (i.e.: set both an ontology and an instance).
  *     <br>
  *     By default this takes an ontology from file and initialises the {@link PelletReasoner}.
@@ -32,7 +32,7 @@ import org.semanticweb.owlapi.model.OWLObject;
  * </small></div>
  */
 abstract public class DescriptorBase<J extends OWLObject>
-        implements Semantic.Descriptor<OWLReferences,J>, DescriptorGrounding<J> {
+        implements Axiom.Descriptor<OWLReferences,J>, DescriptorGrounding<J> {
 
     protected static final String NL = System.getProperty("line.separator");
 

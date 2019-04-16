@@ -1,7 +1,7 @@
 package it.emarolab.owloop.descriptor.construction.descriptorInterface;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
-import it.emarolab.owloop.core.Semantic;
+import it.emarolab.owloop.core.Axiom;
 import org.semanticweb.owlapi.model.*;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
 import org.semanticweb.owlapi.vocab.OWL2Datatype;
@@ -9,7 +9,7 @@ import org.semanticweb.owlapi.vocab.OWL2Datatype;
 import java.util.Set;
 
 /**
- * The main interface for {@link Semantic.Ground} implemented in the <a href="https://github.com/EmaroLab/multi_ontology_reference">aMOR</a> API.
+ * The main interface for {@link Axiom.Ground} implemented in the <a href="https://github.com/EmaroLab/multi_ontology_reference">aMOR</a> API.
  * <p>
  *     This interface contains all the {@link Ground}s used by the
  *     <a href="https://github.com/EmaroLab/multi_ontology_reference">aMOR</a>
@@ -25,7 +25,7 @@ import java.util.Set;
  *     <br>
  *     Each {@link GroundBase} represents an reference to an OWL ontology (i.e.: {@link #getGroundOntology()}),
  *     which is shared between more {@link GroundBase}s, without reinstating
- *     nether the ontology nor the reasoner. As well as link each {@link Semantic.Descriptor}
+ *     nether the ontology nor the reasoner. As well as link each {@link Axiom.Descriptor}
  *     to a particular instance in such ontology (i.e.: {@link #getGroundInstance()})
  *     to be synchronised with respect to a particular feature with respect to the
  *     ontological OWL representation (e.g.: disjoint, equivalent, sup/super etc.).
@@ -47,7 +47,7 @@ import java.util.Set;
  * </small></div>
  */
 public interface DescriptorGrounding<J extends OWLObject>
-        extends Semantic.Ground<OWLReferences,J>{
+        extends Axiom.Ground<OWLReferences,J>{
 
     /**
      * The base class for each {@link DescriptorGrounding}s.
@@ -148,7 +148,7 @@ public interface DescriptorGrounding<J extends OWLObject>
     }
 
     /**
-     * The {@link Semantic.Ground} for {@link IndividualExpression}.
+     * The {@link Axiom.Ground} for {@link IndividualExpression}.
      * <p>
      *     It just implements super class constructors and set the
      *     entity parameter of {@link DescriptorGrounding} (i.e.: {@code <Y>})
@@ -168,7 +168,7 @@ public interface DescriptorGrounding<J extends OWLObject>
         /**
          * Fully instanciate this class
          * @param ontology the ontology in which the related {@link Descriptor} will operate.
-         * @param instance the ontological individual_compoundDescriptor to be described.
+         * @param instance the ontological individualCompoundDescriptor to be described.
          */
         public IndividualInstance(OWLReferences ontology, OWLNamedIndividual instance) {
             super(ontology, instance);
@@ -185,7 +185,7 @@ public interface DescriptorGrounding<J extends OWLObject>
         /**
          * Fully instanciate this class
          * @param ontology the ontology in which the related {@link Descriptor} will operate.
-         * @param instanceName the name of the ontological individual_compoundDescriptor to be described.
+         * @param instanceName the name of the ontological individualCompoundDescriptor to be described.
          */
         public IndividualInstance(OWLReferences ontology, String instanceName) {
             super(ontology, ontology.getOWLIndividual(instanceName));
@@ -203,7 +203,7 @@ public interface DescriptorGrounding<J extends OWLObject>
     }
 
     /**
-     * The {@link Semantic.Ground} for {@link ConceptExpression}.
+     * The {@link Axiom.Ground} for {@link ConceptExpression}.
      * <p>
      *     It just implements super class constructors and set the
      *     entity parameter of {@link DescriptorGrounding} (i.e.: {@code <Y>})
@@ -259,7 +259,7 @@ public interface DescriptorGrounding<J extends OWLObject>
     }
 
     /**
-     * The {@link Semantic.Ground} for {@link DataInstance}.
+     * The {@link Axiom.Ground} for {@link DataInstance}.
      * <p>
      *     It just implements super class constructors and set the
      *     entity parameter of {@link DescriptorGrounding} (i.e.: {@code <Y>})
@@ -315,7 +315,7 @@ public interface DescriptorGrounding<J extends OWLObject>
     }
 
     /**
-     * The {@link Semantic.Ground} for {@link ObjectInstance}.
+     * The {@link Axiom.Ground} for {@link ObjectInstance}.
      * <p>
      *     It just implements super class constructors and set the
      *     entity parameter of {@link DescriptorGrounding} (i.e.: {@code <Y>})
@@ -381,10 +381,10 @@ public interface DescriptorGrounding<J extends OWLObject>
     }
 
     /**
-     * Given an ontological individual_compoundDescriptor with a specified name
+     * Given an ontological individualCompoundDescriptor with a specified name
      * in the in the {@link #getOWLOntology()} IRI.
      * @param individualName the name of the {@link OWLNamedIndividual}.
-     * @return a new OWL individual_compoundDescriptor with the specified name in the grounded ontology.
+     * @return a new OWL individualCompoundDescriptor with the specified name in the grounded ontology.
      */
     default OWLNamedIndividual getOWLIndividual(String individualName){
         return getGroundOntology().getOWLIndividual( individualName);

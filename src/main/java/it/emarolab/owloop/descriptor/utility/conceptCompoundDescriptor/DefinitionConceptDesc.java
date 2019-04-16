@@ -1,11 +1,11 @@
-package it.emarolab.owloop.descriptor.utility.concept_compoundDescriptor;
+package it.emarolab.owloop.descriptor.utility.conceptCompoundDescriptor;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
+import it.emarolab.owloop.core.Axiom;
 import it.emarolab.owloop.descriptor.construction.descriptorInterface.ConceptExpression;
-import it.emarolab.owloop.descriptor.construction.descriptorInterface.DescriptorAxioms;
+import it.emarolab.owloop.descriptor.construction.descriptorInterface.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorBase.ConceptDescriptorBase;
-import it.emarolab.owloop.descriptor.utility.individual_compoundDescriptor.LinkIndividualDesc;
-import it.emarolab.owloop.core.Semantic;
+import it.emarolab.owloop.descriptor.utility.individualCompoundDescriptor.LinkIndividualDesc;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 
@@ -13,13 +13,13 @@ import java.util.List;
 
 
 /**
- * A basic implementation for a concept_compoundDescriptor with equivalent, disjoint classes as well as defining restrictions.
+ * A basic implementation for a conceptCompoundDescriptor with equivalent, disjoint classes as well as defining restrictions.
  * <p>
- *     This is an example of how use the {@link Semantic.Descriptor}s for implement
- *     a concept_compoundDescriptor that is synchronised w.r.t. its {@link Disjoint} and {@link Equivalent} classes
+ *     This is an example of how use the {@link Axiom.Descriptor}s for implement
+ *     a conceptCompoundDescriptor that is synchronised w.r.t. its {@link Disjoint} and {@link Equivalent} classes
  *     as wel as with its {@link Define} restrictions and {@link Classify}ed individuals.
  *     <br>
- *     Its purpose is only to instanciate the {@link DescriptorAxioms.Concepts} for the
+ *     Its purpose is only to instanciate the {@link DescriptorEntitySet.Concepts} for the
  *     respective descriptions, as well as call the derived interfaces in the
  *     {@link #readSemantic()} and {@link #writeSemantic()} methods.
  *     All its constructions are based on {@link ConceptDescriptorBase} in order
@@ -31,7 +31,7 @@ import java.util.List;
  *     and maximises the OWL synchronisation efficiency.
  *
  * <div style="text-align:center;"><small>
- * <b>File</b>:        it.emarolab.owloop.descriptor.utility.concept_compoundDescriptor.DefinitionConceptDesc <br>
+ * <b>File</b>:        it.emarolab.owloop.descriptor.utility.conceptCompoundDescriptor.DefinitionConceptDesc <br>
  * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
  * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
  * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -46,10 +46,10 @@ public class DefinitionConceptDesc
         ConceptExpression.Classify<LinkIndividualDesc>{
 
 
-    private DescriptorAxioms.Concepts disjointConcept = new DescriptorAxioms.Concepts();
-    private DescriptorAxioms.Concepts equivalentConcept = new DescriptorAxioms.Concepts();
-    private DescriptorAxioms.Restrictions restrictions = new DescriptorAxioms.Restrictions();
-    private DescriptorAxioms.Individuals classifiedIndividual = new DescriptorAxioms.Individuals();
+    private DescriptorEntitySet.Concepts disjointConcept = new DescriptorEntitySet.Concepts();
+    private DescriptorEntitySet.Concepts equivalentConcept = new DescriptorEntitySet.Concepts();
+    private DescriptorEntitySet.Restrictions restrictions = new DescriptorEntitySet.Restrictions();
+    private DescriptorEntitySet.Individuals classifiedIndividual = new DescriptorEntitySet.Individuals();
 
 
 
@@ -82,7 +82,7 @@ public class DefinitionConceptDesc
 
 
 
-    // implementations for Semantic.descriptor
+    // implementations for Axiom.descriptor
 
     @Override
     public List<MappingIntent> readSemantic() {
@@ -111,7 +111,7 @@ public class DefinitionConceptDesc
     }
 
     @Override
-    public DescriptorAxioms.Concepts getDisjointConcept() {
+    public DescriptorEntitySet.Concepts getDisjointConcept() {
         return disjointConcept;
     }
 
@@ -125,7 +125,7 @@ public class DefinitionConceptDesc
     }
 
     @Override
-    public DescriptorAxioms.Concepts getEquivalentConcept() {
+    public DescriptorEntitySet.Concepts getEquivalentConcept() {
         return equivalentConcept;
     }
 
@@ -134,7 +134,7 @@ public class DefinitionConceptDesc
     // implementations for ConceptExpression.Define
 
     @Override
-    public DescriptorAxioms.Restrictions getDefinitionConcept() {
+    public DescriptorEntitySet.Restrictions getDefinitionConcept() {
         return restrictions;
     }
 
@@ -147,7 +147,7 @@ public class DefinitionConceptDesc
     }
 
     @Override
-    public DescriptorAxioms.Individuals getIndividualClassified() {
+    public DescriptorEntitySet.Individuals getIndividualClassified() {
         return classifiedIndividual;
     }
 

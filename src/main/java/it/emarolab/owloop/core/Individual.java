@@ -5,16 +5,16 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * The main interface for ontological individual_compoundDescriptor {@link Semantic.Descriptor}.
+ * The main interface for ontological individualCompoundDescriptor {@link Axiom.Descriptor}.
  * <p>
- *     This interface contains all the {@link Semantic.Descriptor} that
- *     can be applied to an ontological individual_compoundDescriptor (e.g.: {@link org.semanticweb.owlapi.model.OWLNamedIndividual})
- *     in any arbitrary combination since all of them should rely on the same {@link Semantic.Ground}
+ *     This interface contains all the {@link Axiom.Descriptor} that
+ *     can be applied to an ontological individualCompoundDescriptor (e.g.: {@link org.semanticweb.owlapi.model.OWLNamedIndividual})
+ *     in any arbitrary combination since all of them should rely on the same {@link Axiom.Ground}
  *     type.
  *     <br>
  *     More in particular, for the {@link #getInstance()} entities in the {@link #getOntology()}, those are:
  *     <ul>
- *     <li><b>{@link Type}</b>: for describing the classes of an individual_compoundDescriptor.</li>
+ *     <li><b>{@link Type}</b>: for describing the classes of an individualCompoundDescriptor.</li>
  *     <li><b>{@link Disjoint}</b>: for describing disjointed individuals for the one grounded
  *                                         in a specific {@link Individual}.</li>
  *     <li><b>{@link Equivalent}</b>: for describing equivalent individuals for the one grounded
@@ -35,15 +35,15 @@ import java.util.Set;
  * </small></div>
  *
  * @param <O> the type of ontology in which the axioms for classes will be applied.
- * @param <J> the type of instance (i.e.: individual_compoundDescriptor) for the axioms.
+ * @param <J> the type of instance (i.e.: individualCompoundDescriptor) for the axioms.
  */
 public interface Individual<O,J>
-        extends Semantic.Descriptor<O,J>{
+        extends Axiom.Descriptor<O,J>{
 
     /**
-     * The {@link Semantic.Descriptor} for classes (e.g.: types) that describes an ontological individual_compoundDescriptor.
+     * The {@link Axiom.Descriptor} for classes (e.g.: types) that describes an ontological individualCompoundDescriptor.
      * <p>
-     *     This {@link Semantic.Descriptor} synchronises the types in which the specific individual_compoundDescriptor
+     *     This {@link Axiom.Descriptor} synchronises the types in which the specific individualCompoundDescriptor
      *     (i.e.: the {@link Ground#getGroundInstance()}) is classified.
      * </p>
      * <div style="text-align:center;"><small>
@@ -55,19 +55,19 @@ public interface Individual<O,J>
      * </small></div>
      *
      * @param <O> the type of ontology in which the axioms for classes will be applied.
-     * @param <J> the type of the described individual_compoundDescriptor.
-     * @param <Y> the type of classes describing the individual_compoundDescriptor
-     *           (it represents the type of {@link Semantic.Axioms} managed by this {@link Descriptor}.
+     * @param <J> the type of the described individualCompoundDescriptor.
+     * @param <Y> the type of classes describing the individualCompoundDescriptor
+     *           (it represents the type of {@link EntitySet} managed by this {@link Descriptor}.
      * @param <D> the type of the {@link Concept} descriptors instantiated during
      *           {@link #buildTypeIndividual()} through {@link #getNewTypeIndividual(Object, Object)}.
      */
     interface Type<O,J,Y,D extends Concept<O,Y>>
             extends Individual<O,J>{
 
-        @Override // see documentation on Semantic.descriptor.readSemantic
+        @Override // see documentation on Axiom.descriptor.readSemantic
         default List<MappingIntent> readSemantic(){
             try {
-                Axioms.SynchronisationIntent<Y> from = synchroniseTypeIndividualFromSemantic();
+                EntitySet.SynchronisationIntent<Y> from = synchroniseTypeIndividualFromSemantic();
                 if ( from != null) {
                     getTypeIndividual().addAll(from.getToAdd());
                     getTypeIndividual().removeAll(from.getToRemove());
@@ -80,13 +80,13 @@ public interface Individual<O,J>
         }
 
         /**
-         * Create an {@link Semantic.Descriptor} set where each element
-         * represents the classes in which {@code this} individual_compoundDescriptor is belonging to.
+         * Create an {@link Axiom.Descriptor} set where each element
+         * represents the classes in which {@code this} individualCompoundDescriptor is belonging to.
          * Each of {@link Concept}s are instantiated
          * through the method {@link #getNewTypeIndividual(Object, Object)};
          * this is called for all {@link #getTypeIndividual()}.
          * @return the set of {@link Concept}s that describes the
-         * entities in which {@code this} described ontological individual_compoundDescriptor
+         * entities in which {@code this} described ontological individualCompoundDescriptor
          * is belonging to.
          */
         default Set<D> buildTypeIndividual(){
@@ -105,34 +105,34 @@ public interface Individual<O,J>
          * the types of {@code this} {@link Individual} {@link Descriptor}.
          * @param instance the instance to ground the new {@link Concept}.
          * @param ontology the ontology in which ground the new {@link Concept}.
-         * @return a new {@link Semantic.Descriptor} for all the classes
-         * in which {@code this} individual_compoundDescriptor is belonging to.
+         * @return a new {@link Axiom.Descriptor} for all the classes
+         * in which {@code this} individualCompoundDescriptor is belonging to.
          */
         D getNewTypeIndividual(Y instance, O ontology);
 
         /**
-         * Returns the {@link Semantic.Axioms} that describes all the classes in which
+         * Returns the {@link EntitySet} that describes all the classes in which
          * {@code this} {@link Individual} is belonging to, from a no OOP point of view.
-         * @return the entities describing the types of {@code this} individual_compoundDescriptor.
+         * @return the entities describing the types of {@code this} individualCompoundDescriptor.
          */
-        Axioms<Y> getTypeIndividual();
+        EntitySet<Y> getTypeIndividual();
 
         /**
-         * Queries to the OWL representation for the types of {@code this} individual_compoundDescriptor.
-         * @return a new {@link Semantic.Axioms} contained the classes in which {@link #getInstance()}
+         * Queries to the OWL representation for the types of {@code this} individualCompoundDescriptor.
+         * @return a new {@link EntitySet} contained the classes in which {@link #getInstance()}
          * is belonging to, into the OWL structure.
          */
-        Axioms<Y> queryTypeIndividual();
+        EntitySet<Y> queryTypeIndividual();
 
         /**
-         * It calls {@link Semantic.Axioms#synchroniseTo(Axioms)} with {@link #queryTypeIndividual()}
+         * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryTypeIndividual()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getTypeIndividual()}. This should
          * be done by {@link #writeSemantic()}.
          * @return the changes to be done to synchronise {@code this} structure with
          * the classes in which {@link #getInstance()} is belonging to, in the OWL representation.
          */
-        default Axioms.SynchronisationIntent<Y> synchroniseTypeIndividualToSemantic(){
+        default EntitySet.SynchronisationIntent<Y> synchroniseTypeIndividualToSemantic(){
             try {
                 return getTypeIndividual().synchroniseTo( queryTypeIndividual());
             } catch ( Exception e){
@@ -142,14 +142,14 @@ public interface Individual<O,J>
         }
 
         /**
-         * It calls {@link Semantic.Axioms#synchroniseFrom(Axioms)} with {@link #queryTypeIndividual()}
+         * It calls {@link EntitySet#synchroniseFrom(EntitySet)} with {@link #queryTypeIndividual()}
          * as input parameter. This computes the changes to be performed into the {@link #getTypeIndividual()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readSemantic()}.
          * @return the changes to be done to synchronise the classes in which the {@link #getInstance()}
-         * individual_compoundDescriptor is belonging to, from an OWL representation to {@code this} descriptor.
+         * individualCompoundDescriptor is belonging to, from an OWL representation to {@code this} descriptor.
          */
-        default Axioms.SynchronisationIntent<Y> synchroniseTypeIndividualFromSemantic(){
+        default EntitySet.SynchronisationIntent<Y> synchroniseTypeIndividualFromSemantic(){
             try{
                 return getTypeIndividual().synchroniseFrom( queryTypeIndividual());
             } catch ( Exception e){
@@ -160,9 +160,9 @@ public interface Individual<O,J>
     }
 
     /**
-     * The {@link Semantic.Descriptor} for individuals that are different from the one described.
+     * The {@link Axiom.Descriptor} for individuals that are different from the one described.
      * <p>
-     *     This {@link Semantic.Descriptor} synchronises the different individuals from the described one
+     *     This {@link Axiom.Descriptor} synchronises the different individuals from the described one
      *     (i.e.: the {@link Ground#getGroundInstance()}).
      * </p>
      * <div style="text-align:center;"><small>
@@ -174,18 +174,18 @@ public interface Individual<O,J>
      * </small></div>
      *
      * @param <O> the type of ontology in which the axioms for classes will be applied.
-     * @param <J> the type of the described individual_compoundDescriptor.
-     *           (it also represents the type of {@link Semantic.Axioms} managed by this {@link Descriptor}.
+     * @param <J> the type of the described individualCompoundDescriptor.
+     *           (it also represents the type of {@link EntitySet} managed by this {@link Descriptor}.
      * @param <D> the type of the {@link Individual} descriptors instantiated during
      *           {@link #buildDisjointIndividual()} through {@link #getNewDisjointIndividual(Object, Object)}.
      */
     interface Disjoint<O,J,D extends Individual<O,J>>
             extends Individual<O,J>{
 
-        @Override // see documentation on Semantic.descriptor.readSemantic
+        @Override // see documentation on Axiom.descriptor.readSemantic
         default List<MappingIntent> readSemantic(){
             try {
-                Axioms.SynchronisationIntent<J> from = synchroniseDisjointIndividualFromSemantic();
+                EntitySet.SynchronisationIntent<J> from = synchroniseDisjointIndividualFromSemantic();
                 if ( from != null) {
                     getDisjointIndividual().addAll(from.getToAdd());
                     getDisjointIndividual().removeAll(from.getToRemove());
@@ -198,13 +198,13 @@ public interface Individual<O,J>
         }
 
         /**
-         * Create an {@link Semantic.Descriptor} set where each element
+         * Create an {@link Axiom.Descriptor} set where each element
          * represents the different individuals from {@code this} description.
          * Each of {@link Individual}s are instantiated
          * through the method {@link #getNewDisjointIndividual(Object, Object)};
          * this is called for all {@link #getDisjointIndividual()}.
          * @return the set of {@link Individual}s that describes the
-         * entities that are different from {@code this} described ontological individual_compoundDescriptor.
+         * entities that are different from {@code this} described ontological individualCompoundDescriptor.
          */
         default Set<D> buildDisjointIndividual(){
             Set<D> out = new HashSet<>();
@@ -219,37 +219,37 @@ public interface Individual<O,J>
         /**
          * This method is called by {@link #buildDisjointIndividual()} and
          * its purpose is to instantiate a new {@link Individual} to represent
-         * an equivalent individual_compoundDescriptor from {@code this} {@link Individual} {@link Descriptor}.
+         * an equivalent individualCompoundDescriptor from {@code this} {@link Individual} {@link Descriptor}.
          * @param instance the instance to ground the new {@link Individual}.
          * @param ontology the ontology in which ground the new {@link Individual}.
-         * @return a new {@link Semantic.Descriptor} for all the individuals
+         * @return a new {@link Axiom.Descriptor} for all the individuals
          * that are equivalent from the one described by {@code this} interface.
          */
         D getNewDisjointIndividual(J instance, O ontology);
 
         /**
-         * Returns the {@link Semantic.Axioms} that describes all the different individual_compoundDescriptor from
+         * Returns the {@link EntitySet} that describes all the different individualCompoundDescriptor from
          * {@code this} {@link Individual}; from a no OOP point of view.
-         * @return the entities describing the different individual_compoundDescriptor of {@code this} individual_compoundDescriptor.
+         * @return the entities describing the different individualCompoundDescriptor of {@code this} individualCompoundDescriptor.
          */
-        Axioms<J> getDisjointIndividual();
+        EntitySet<J> getDisjointIndividual();
 
         /**
          * Queries to the OWL representation for the different individuals from {@code this} {@link Descriptor}.
-         * @return a new {@link Semantic.Axioms} contained the individuals different from {@link #getInstance()};
+         * @return a new {@link EntitySet} contained the individuals different from {@link #getInstance()};
          * into the OWL structure.
          */
-        Axioms<J> queryDisjointIndividual();
+        EntitySet<J> queryDisjointIndividual();
 
         /**
-         * It calls {@link Semantic.Axioms#synchroniseTo(Axioms)} with {@link #queryDisjointIndividual()}
+         * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryDisjointIndividual()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getDisjointIndividual()}. This should
          * be done by {@link #writeSemantic()}.
          * @return the changes to be done to synchronise {@code this} structure with
          * the different individuals from {@link #getInstance()}; to the OWL representation.
          */
-        default Axioms.SynchronisationIntent<J> synchroniseDisjointIndividualToSemantic(){
+        default EntitySet.SynchronisationIntent<J> synchroniseDisjointIndividualToSemantic(){
             try {
                 return getDisjointIndividual().synchroniseTo( queryDisjointIndividual());
             } catch ( Exception e){
@@ -259,14 +259,14 @@ public interface Individual<O,J>
         }
 
         /**
-         * It calls {@link Semantic.Axioms#synchroniseFrom(Axioms)} with {@link #queryDisjointIndividual()}
+         * It calls {@link EntitySet#synchroniseFrom(EntitySet)} with {@link #queryDisjointIndividual()}
          * as input parameter. This computes the changes to be performed into the {@link #getDisjointIndividual()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readSemantic()}.
          * @return the changes to be done to synchronise the different individuals from {@link #getInstance()};
          * from an OWL representation to {@code this} {@link Descriptor}.
          */
-        default Axioms.SynchronisationIntent<J> synchroniseDisjointIndividualFromSemantic(){
+        default EntitySet.SynchronisationIntent<J> synchroniseDisjointIndividualFromSemantic(){
             try{
                 return getDisjointIndividual().synchroniseFrom( queryDisjointIndividual());
             } catch ( Exception e){
@@ -277,9 +277,9 @@ public interface Individual<O,J>
     }
 
     /**
-     * The {@link Semantic.Descriptor} for individuals that are equivalent from the one described.
+     * The {@link Axiom.Descriptor} for individuals that are equivalent from the one described.
      * <p>
-     *     This {@link Semantic.Descriptor} synchronises the equivalent individuals from the described one
+     *     This {@link Axiom.Descriptor} synchronises the equivalent individuals from the described one
      *     (i.e.: the {@link Ground#getGroundInstance()}).
      * </p>
      * <div style="text-align:center;"><small>
@@ -291,18 +291,18 @@ public interface Individual<O,J>
      * </small></div>
      *
      * @param <O> the type of ontology in which the axioms for classes will be applied.
-     * @param <J> the type of the described individual_compoundDescriptor.
-     *           (it also represents the type of {@link Semantic.Axioms} managed by this {@link Descriptor}.
+     * @param <J> the type of the described individualCompoundDescriptor.
+     *           (it also represents the type of {@link EntitySet} managed by this {@link Descriptor}.
      * @param <D> the type of the {@link Individual} descriptors instantiated during
      *           {@link #buildEquivalentIndividual()} through {@link #getNewEquivalentIndividual(Object, Object)}.
      */
     interface Equivalent<O,J,D extends Individual<O,J>>
             extends Individual<O,J>{
 
-        @Override // see documentation on Semantic.descriptor.readSemantic
+        @Override // see documentation on Axiom.descriptor.readSemantic
         default List<MappingIntent> readSemantic(){
             try {
-                Axioms.SynchronisationIntent<J> from = synchroniseEquivalentIndividualFromSemantic();
+                EntitySet.SynchronisationIntent<J> from = synchroniseEquivalentIndividualFromSemantic();
                 getEquivalentIndividual().addAll(from.getToAdd());
                 getEquivalentIndividual().removeAll(from.getToRemove());
                 return getIntent(from);
@@ -313,13 +313,13 @@ public interface Individual<O,J>
         }
 
         /**
-         * Create an {@link Semantic.Descriptor} set where each element
+         * Create an {@link Axiom.Descriptor} set where each element
          * represents the equivalent individuals from {@code this} description.
          * Each of {@link Individual}s are instantiated
          * through the method {@link #getNewEquivalentIndividual(Object, Object)};
          * this is called for all {@link #getEquivalentIndividual()}.
          * @return the set of {@link Individual}s that describes the
-         * entities that are equivalent from {@code this} described ontological individual_compoundDescriptor.
+         * entities that are equivalent from {@code this} described ontological individualCompoundDescriptor.
          */
         default Set<D> buildEquivalentIndividual(){
             Set<D> out = new HashSet<>();
@@ -334,37 +334,37 @@ public interface Individual<O,J>
         /**
          * This method is called by {@link #buildEquivalentIndividual()} and
          * its purpose is to instantiate a new {@link Individual} to represent
-         * a different individual_compoundDescriptor from {@code this} {@link Individual} {@link Descriptor}.
+         * a different individualCompoundDescriptor from {@code this} {@link Individual} {@link Descriptor}.
          * @param instance the instance to ground the new {@link Individual}.
          * @param ontology the ontology in which ground the new {@link Individual}.
-         * @return a new {@link Semantic.Descriptor} for all the individuals
+         * @return a new {@link Axiom.Descriptor} for all the individuals
          * that are different from the one described by {@code this} interface.
          */
         D getNewEquivalentIndividual(J instance, O ontology);
 
         /**
-         * Returns the {@link Semantic.Axioms} that describes all the equivalent individual_compoundDescriptor from
+         * Returns the {@link EntitySet} that describes all the equivalent individualCompoundDescriptor from
          * {@code this} {@link Individual}; from a no OOP point of view.
-         * @return the entities describing the equivalent individual_compoundDescriptor of {@code this} individual_compoundDescriptor.
+         * @return the entities describing the equivalent individualCompoundDescriptor of {@code this} individualCompoundDescriptor.
          */
-        Axioms<J> getEquivalentIndividual();
+        EntitySet<J> getEquivalentIndividual();
 
         /**
          * Queries to the OWL representation for the equivalent individuals of {@code this} {@link Descriptor}.
-         * @return a new {@link Semantic.Axioms} contained the individuals equivalent from {@link #getInstance()};
+         * @return a new {@link EntitySet} contained the individuals equivalent from {@link #getInstance()};
          * into the OWL structure.
          */
-        Axioms<J> queryEquivalentIndividual();
+        EntitySet<J> queryEquivalentIndividual();
 
         /**
-         * It calls {@link Semantic.Axioms#synchroniseTo(Axioms)} with {@link #queryEquivalentIndividual()}
+         * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryEquivalentIndividual()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getEquivalentIndividual()}. This should
          * be done by {@link #writeSemantic()}.
          * @return the changes to be done to synchronise {@code this} structure with
          * the equivalent individuals from {@link #getInstance()}; to the OWL representation.
          */
-        default Axioms.SynchronisationIntent<J> synchroniseEquivalentIndividualToSemantic(){
+        default EntitySet.SynchronisationIntent<J> synchroniseEquivalentIndividualToSemantic(){
             try {
                 return getEquivalentIndividual().synchroniseTo( queryEquivalentIndividual());
             } catch ( Exception e){
@@ -374,14 +374,14 @@ public interface Individual<O,J>
         }
 
         /**
-         * It calls {@link Semantic.Axioms#synchroniseFrom(Axioms)} with {@link #queryEquivalentIndividual()}
+         * It calls {@link EntitySet#synchroniseFrom(EntitySet)} with {@link #queryEquivalentIndividual()}
          * as input parameter. This computes the changes to be performed into the {@link #getEquivalentIndividual()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readSemantic()}.
          * @return the changes to be done to synchronise the equivalent individuals from {@link #getInstance()};
          * from an OWL representation to {@code this} {@link Descriptor}.
          */
-        default Axioms.SynchronisationIntent<J> synchroniseEquivalentIndividualFromSemantic(){
+        default EntitySet.SynchronisationIntent<J> synchroniseEquivalentIndividualFromSemantic(){
             try{
                 return getEquivalentIndividual().synchroniseFrom( queryEquivalentIndividual());
             } catch ( Exception e){
@@ -392,15 +392,15 @@ public interface Individual<O,J>
     }
 
     /**
-     * The {@link Semantic.Descriptor} for the data properties applied to the described individuals.
+     * The {@link Axiom.Descriptor} for the data properties applied to the described individuals.
      * <p>
-     *     This {@link Semantic.Descriptor} synchronises only the specified data property and
-     *     relative values for an ontological individual_compoundDescriptor (i.e.: the {@link Ground#getGroundInstance()}).
+     *     This {@link Axiom.Descriptor} synchronises only the specified data property and
+     *     relative values for an ontological individualCompoundDescriptor (i.e.: the {@link Ground#getGroundInstance()}).
      *     <br>
      *     By default, the synchronisation occurs only for the proprieties which semantics
-     *     have been initialised in the {@link SemanticAxioms} ({@link #getDataSemantics()}.
-     *     Anyway if the {@link SemanticAxioms} is leaved empty during {@link #readSemantic()}
-     *     it maps all the data properties applied to the described individual_compoundDescriptor.
+     *     have been initialised in the {@link SemanticEntitySet} ({@link #getDataSemantics()}.
+     *     Anyway if the {@link SemanticEntitySet} is leaved empty during {@link #readSemantic()}
+     *     it maps all the data properties applied to the described individualCompoundDescriptor.
      * </p>
      * <div style="text-align:center;"><small>
      * <b>File</b>:        it.emarolab.owloop.core.Individual <br>
@@ -411,19 +411,19 @@ public interface Individual<O,J>
      * </small></div>
      *
      * @param <O> the type of ontology in which the axioms for classes will be applied.
-     * @param <J> the type of the described individual_compoundDescriptor.
-     * @param <Y> the type of {@link SemanticAxiom} synchronised by this descriptor
+     * @param <J> the type of the described individualCompoundDescriptor.
+     * @param <Y> the type of {@link SemanticEntity} synchronised by this descriptor
      * @param <S> the type of semantic described by this class (i.e.: {@code OWLDataProperty})
      * @param <D> the type of the {@link DataProperty} descriptors instantiated during
-     *           {@link #buildDataIndividual()} through {@link #getNewDataIndividual(SemanticAxiom, Object)}.
+     *           {@link #buildDataIndividual()} through {@link #getNewDataIndividual(SemanticEntity, Object)}.
      */
-    interface DataLink<O,J,Y extends SemanticAxiom<S,?>, S,D extends DataProperty<O, S>>
+    interface DataLink<O,J,Y extends SemanticEntity<S,?>, S,D extends DataProperty<O, S>>
             extends Individual<O,J>{
 
-        @Override // see documentation on Semantic.descriptor.readSemantic
+        @Override // see documentation on Axiom.descriptor.readSemantic
         default List<MappingIntent> readSemantic(){
             try {
-                Axioms.SynchronisationIntent<Y> from = synchroniseDataIndividualFromSemantic();
+                EntitySet.SynchronisationIntent<Y> from = synchroniseDataIndividualFromSemantic();
                 if (from != null) {
                     getDataSemantics().addAll(from.getToAdd());
                     getDataSemantics().removeAll(from.getToRemove());
@@ -436,13 +436,13 @@ public interface Individual<O,J>
         }
 
         /**
-         * Create an {@link Semantic.Descriptor} set where each element
+         * Create an {@link Axiom.Descriptor} set where each element
          * represents the specified data properties applied to this {@code this} description.
          * Each of {@link DataProperty}s are instantiated
-         * through the method {@link #getNewDataIndividual(SemanticAxiom, Object)};
+         * through the method {@link #getNewDataIndividual(SemanticEntity, Object)};
          * this is called for all {@link #getDataSemantics()}.
          * @return the set of {@link DataProperty}s that describes the
-         * entities that are applied to {@code this} described ontological individual_compoundDescriptor.
+         * entities that are applied to {@code this} described ontological individualCompoundDescriptor.
          */
         default Set<D> buildDataIndividual(){
             Set<D> out = new HashSet<>();
@@ -460,34 +460,34 @@ public interface Individual<O,J>
          * a data value applied to {@code this} {@link Individual} {@link Descriptor}.
          * @param instance the instance to ground the new {@link DataLink}.
          * @param ontology the ontology in which ground the new {@link DataProperty}.
-         * @return a new {@link Semantic.Descriptor} for all the data properties
+         * @return a new {@link Axiom.Descriptor} for all the data properties
          * that are applied to {@code this} interface.
          */
         D getNewDataIndividual(Y instance, O ontology);
 
         /**
-         * Returns the {@link Semantic.Axioms} that describes the specified data properties applied to
+         * Returns the {@link EntitySet} that describes the specified data properties applied to
          * {@code this} {@link Individual}; from a no OOP point of view.
-         * @return the entities describing the data properties of {@code this} individual_compoundDescriptor.
+         * @return the entities describing the data properties of {@code this} individualCompoundDescriptor.
          */
-        Axioms<Y> getDataSemantics();
+        EntitySet<Y> getDataSemantics();
 
         /**
          * Queries to the OWL representation for the data properties applied to {@code this} {@link Descriptor}.
-         * @return a new {@link SemanticAxioms} contained the data properties of {@link #getInstance()};
+         * @return a new {@link SemanticEntitySet} contained the data properties of {@link #getInstance()};
          * into the OWL structure.
          */
-        Axioms<Y> queryDataIndividual();
+        EntitySet<Y> queryDataIndividual();
 
         /**
-         * It calls {@link SemanticAxioms#synchroniseTo(Axioms)} with {@link #queryDataIndividual()}
+         * It calls {@link SemanticEntitySet#synchroniseTo(EntitySet)} with {@link #queryDataIndividual()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getDataSemantics()}. This should
          * be done by {@link #writeSemantic()}.
          * @return the changes to be done to synchronise {@code this} structure with
          * the data properties applied on {@link #getInstance()}; to the OWL representation.
          */
-        default Axioms.SynchronisationIntent<Y> synchroniseDataIndividualToSemantic(){
+        default EntitySet.SynchronisationIntent<Y> synchroniseDataIndividualToSemantic(){
             try {
                 return getDataSemantics().synchroniseTo( queryDataIndividual());
             } catch ( Exception e){
@@ -497,14 +497,14 @@ public interface Individual<O,J>
         }
 
         /**
-         * It calls {@link SemanticAxioms#synchroniseFrom(Axioms)} with {@link #queryDataIndividual()}
+         * It calls {@link SemanticEntitySet#synchroniseFrom(EntitySet)} with {@link #queryDataIndividual()}
          * as input parameter. This computes the changes to be performed into the {@link #getDataSemantics()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readSemantic()}.
          * @return the changes to be done to synchronise the data properties applied on {@link #getInstance()};
          * from an OWL representation to {@code this} {@link Descriptor}.
          */
-        default Axioms.SynchronisationIntent<Y> synchroniseDataIndividualFromSemantic(){
+        default EntitySet.SynchronisationIntent<Y> synchroniseDataIndividualFromSemantic(){
             try{
                 return getDataSemantics().synchroniseFrom( queryDataIndividual());
             } catch ( Exception e){
@@ -515,16 +515,16 @@ public interface Individual<O,J>
     }
 
     /**
-     * The {@link Semantic.Descriptor} for the object properties applied to the described individuals.
+     * The {@link Axiom.Descriptor} for the object properties applied to the described individuals.
      * <p>
-     *     This {@link Semantic.Descriptor} synchronises only the specified object property and
-     *     relative values for an ontological individual_compoundDescriptor (i.e.: the {@link Ground#getGroundInstance()}).
+     *     This {@link Axiom.Descriptor} synchronises only the specified object property and
+     *     relative values for an ontological individualCompoundDescriptor (i.e.: the {@link Ground#getGroundInstance()}).
      *     <br>
      *     By default, the synchronisation occurs only for the proprieties which semantics
-     *     have been initialised in the {@link SemanticAxioms} ({@link #getObjectSemantics()}),
+     *     have been initialised in the {@link SemanticEntitySet} ({@link #getObjectSemantics()}),
      *     not for all relations in the OWL representation.
-     *     Anyway if the {@link SemanticAxioms} is leaved empty during {@link #readSemantic()}
-     *     it maps all the object properties applied to the described individual_compoundDescriptor.
+     *     Anyway if the {@link SemanticEntitySet} is leaved empty during {@link #readSemantic()}
+     *     it maps all the object properties applied to the described individualCompoundDescriptor.
      * </p>
      * <div style="text-align:center;"><small>
      * <b>File</b>:        it.emarolab.owloop.core.Individual <br>
@@ -535,19 +535,19 @@ public interface Individual<O,J>
      * </small></div>
      *
      * @param <O> the type of ontology in which the axioms for classes will be applied.
-     * @param <J> the type of the described individual_compoundDescriptor.
-     * @param <Y> the type of {@link SemanticAxiom} synchronised by this descriptor
+     * @param <J> the type of the described individualCompoundDescriptor.
+     * @param <Y> the type of {@link SemanticEntity} synchronised by this descriptor
      * @param <S> the type of semantic described by this class (i.e.: {@code OWLObjectProperty})
      * @param <D> the type of the {@link DataProperty} descriptors instantiated during
-     *           {@link #buildObjectIndividual()} through {@link #getNewObjectIndividual(SemanticAxiom, Object)}.
+     *           {@link #buildObjectIndividual()} through {@link #getNewObjectIndividual(SemanticEntity, Object)}.
      */
-    interface ObjectLink<O,J,Y extends SemanticAxiom<S,?>, S,D extends ObjectProperty<O, S>>
+    interface ObjectLink<O,J,Y extends SemanticEntity<S,?>, S,D extends ObjectProperty<O, S>>
             extends Individual<O,J>{
 
-        @Override // see documentation on Semantic.descriptor.readSemantic
+        @Override // see documentation on Axiom.descriptor.readSemantic
         default List<MappingIntent> readSemantic(){
             try{
-                Axioms.SynchronisationIntent<Y> from = synchroniseObjectIndividualFromSemantic();
+                EntitySet.SynchronisationIntent<Y> from = synchroniseObjectIndividualFromSemantic();
                 if (from != null) {
                     getObjectSemantics().addAll(from.getToAdd());
                     getObjectSemantics().removeAll(from.getToRemove());
@@ -560,13 +560,13 @@ public interface Individual<O,J>
         }
 
         /**
-         * Create an {@link Semantic.Descriptor} set where each element
+         * Create an {@link Axiom.Descriptor} set where each element
          * represents the specified object properties applied to this {@code this} description.
          * Each of {@link ObjectProperty}s are instantiated
-         * through the method {@link #getNewObjectIndividual(SemanticAxiom, Object)};
+         * through the method {@link #getNewObjectIndividual(SemanticEntity, Object)};
          * this is called for all {@link #getObjectSemantics()}.
          * @return the set of {@link ObjectProperty}s that describes the
-         * entities that are applied to {@code this} described ontological individual_compoundDescriptor.
+         * entities that are applied to {@code this} described ontological individualCompoundDescriptor.
          */
         default Set< D> buildObjectIndividual(){
             Set<D> out = new HashSet<>();
@@ -584,34 +584,34 @@ public interface Individual<O,J>
          * an object value applied to {@code this} {@link Individual} {@link Descriptor}.
          * @param instance the instance to ground the new {@link ObjectProperty}.
          * @param ontology the ontology in which ground the new {@link ObjectProperty}.
-         * @return a new {@link Semantic.Descriptor} for all the object properties
+         * @return a new {@link Axiom.Descriptor} for all the object properties
          * that are applied to {@code this} interface.
          */
         D getNewObjectIndividual(Y instance, O ontology);
 
         /**
-         * Returns the {@link Semantic.Axioms} that describes the specified object properties applied to
+         * Returns the {@link EntitySet} that describes the specified object properties applied to
          * {@code this} {@link Individual}; from a no OOP point of view.
-         * @return the entities describing the object properties of {@code this} individual_compoundDescriptor.
+         * @return the entities describing the object properties of {@code this} individualCompoundDescriptor.
          */
-        Axioms<Y> getObjectSemantics();
+        EntitySet<Y> getObjectSemantics();
 
         /**
          * Queries to the OWL representation for the data properties applied to {@code this} {@link Descriptor}.
-         * @return a new {@link SemanticAxioms} contained the object properties of {@link #getInstance()};
+         * @return a new {@link SemanticEntitySet} contained the object properties of {@link #getInstance()};
          * into the OWL structure.
          */
-        Axioms<Y> queryObject();
+        EntitySet<Y> queryObject();
 
         /**
-         * It calls {@link SemanticAxioms#synchroniseTo(Axioms)} with {@link #queryObject()}
+         * It calls {@link SemanticEntitySet#synchroniseTo(EntitySet)} with {@link #queryObject()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getObjectSemantics()}. This should
          * be done by {@link #writeSemantic()}.
          * @return the changes to be done to synchronise {@code this} structure with
          * the object properties applied on {@link #getInstance()}; to the OWL representation.
          */
-        default Axioms.SynchronisationIntent<Y> synchroniseObjectIndividualToSemantic(){
+        default EntitySet.SynchronisationIntent<Y> synchroniseObjectIndividualToSemantic(){
             try {
                 return getObjectSemantics().synchroniseTo( queryObject());
             } catch ( Exception e){
@@ -621,14 +621,14 @@ public interface Individual<O,J>
         }
 
         /**
-         * It calls {@link SemanticAxioms#synchroniseFrom(Axioms)} with {@link #queryObject()}
+         * It calls {@link SemanticEntitySet#synchroniseFrom(EntitySet)} with {@link #queryObject()}
          * as input parameter. This computes the changes to be performed into the {@link #getObjectSemantics()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readSemantic()}.
          * @return the changes to be done to synchronise the object properties applied on {@link #getInstance()};
          * from an OWL representation to {@code this} {@link Descriptor}.
          */
-        default Axioms.SynchronisationIntent<Y> synchroniseObjectIndividualFromSemantic(){
+        default EntitySet.SynchronisationIntent<Y> synchroniseObjectIndividualFromSemantic(){
             try{
                 return getObjectSemantics().synchroniseFrom( queryObject());
             } catch ( Exception e){

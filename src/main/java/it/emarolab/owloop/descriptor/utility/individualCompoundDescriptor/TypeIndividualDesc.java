@@ -1,11 +1,11 @@
-package it.emarolab.owloop.descriptor.utility.individual_compoundDescriptor;
+package it.emarolab.owloop.descriptor.utility.individualCompoundDescriptor;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
-import it.emarolab.owloop.descriptor.construction.descriptorInterface.DescriptorAxioms;
+import it.emarolab.owloop.descriptor.construction.descriptorInterface.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorInterface.IndividualExpression;
 import it.emarolab.owloop.descriptor.construction.descriptorBase.IndividualDescriptorBase;
-import it.emarolab.owloop.descriptor.utility.concept_compoundDescriptor.HierarchicalConceptDesc;
-import it.emarolab.owloop.core.Semantic;
+import it.emarolab.owloop.descriptor.utility.conceptCompoundDescriptor.HierarchicalConceptDesc;
+import it.emarolab.owloop.core.Axiom;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 
@@ -13,12 +13,12 @@ import java.util.List;
 
 
 /**
- * A basic implementation for an individual_compoundDescriptor that belongs to classes.
+ * A basic implementation for an individualCompoundDescriptor that belongs to classes.
  * <p>
- *     This is an example of how use the {@link Semantic.Descriptor}s for implement
- *     an individual_compoundDescriptor that is synchronised w.r.t. its {@link Type}s.
+ *     This is an example of how use the {@link Axiom.Descriptor}s for implement
+ *     an individualCompoundDescriptor that is synchronised w.r.t. its {@link Type}s.
  *     <br>
- *     Its purpose is only to instanciate the {@link DescriptorAxioms.Concepts} for the
+ *     Its purpose is only to instanciate the {@link DescriptorEntitySet.Concepts} for the
  *     respective descriptions, as well as call the derived interfaces in the
  *     {@link #readSemantic()} and {@link #writeSemantic()} methods.
  *     From an OOP prospective it returns the classified types as instances
@@ -32,7 +32,7 @@ import java.util.List;
  *     and maximises the OWL synchronisation efficiency.
  *
  * <div style="text-align:center;"><small>
- * <b>File</b>:        it.emarolab.owloop.descriptor.utility.concept_compoundDescriptor.MORTypeIndinvidual <br>
+ * <b>File</b>:        it.emarolab.owloop.descriptor.utility.conceptCompoundDescriptor.MORTypeIndinvidual <br>
  * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
  * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
  * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -43,7 +43,7 @@ public class TypeIndividualDesc
         extends IndividualDescriptorBase
         implements IndividualExpression.Type<HierarchicalConceptDesc>{
 
-    private DescriptorAxioms.Concepts individualTypes = new DescriptorAxioms.Concepts();
+    private DescriptorEntitySet.Concepts individualTypes = new DescriptorEntitySet.Concepts();
 
     // constructors for IndividualDescriptorBase
 
@@ -74,7 +74,7 @@ public class TypeIndividualDesc
 
 
 
-    // implementations for Semantic.descriptor
+    // implementations for Axiom.descriptor
 
     @Override
     public List<MappingIntent> readSemantic() {
@@ -95,7 +95,7 @@ public class TypeIndividualDesc
     }
 
     @Override
-    public DescriptorAxioms.Concepts getTypeIndividual() {
+    public DescriptorEntitySet.Concepts getTypeIndividual() {
         return individualTypes;
     }
 

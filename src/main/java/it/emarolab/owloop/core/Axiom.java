@@ -12,7 +12,7 @@ import java.util.*;
  *     representation (an implementation is based on
  *     <a href="https://github.com/EmaroLab/multi_ontology_reference">aMOR</a>,
  *     which in turn is based on OWL API) and an OWLLOOP representation which contains
- *     of sets of {@link Axioms}. Those can be: <i>read</i> and <i>written</i>,
+ *     of sets of {@link EntitySet}. Those can be: <i>read</i> and <i>written</i>,
  *     through a {@link Descriptor}. The latter is also in charge to
  *     manage the accessibility of {@code Axiom}s within the OOP paradigms.
  *     So, while the semantic description of axioms remains not OOP and standard reasoner
@@ -23,20 +23,20 @@ import java.util.*;
  *     <ul>
  *     <li><b>{@link Ground}</b>: for describing the ontology and the entity
  *                                in which the semantic is applied to. </li>
- *     <li><b>{@link Axioms}</b>: for describing simple a set of semantic entities
+ *     <li><b>{@link EntitySet}</b>: for describing simple a set of semantic entities
  *                                described by a single {@link Ground}. Those elements
  *                                can be synchronised into the ontology through
- *                                the {@link Axioms.SynchronisationIntent} class.</li>
- *     <li><b>{@link SemanticAxiom}</b>: for describing {@link Axioms} with
+ *                                the {@link EntitySet.SynchronisationIntent} class.</li>
+ *     <li><b>{@link SemanticEntity}</b>: for describing {@link EntitySet} with
  *                                a specified {@code semantic}.</li>
- *     <li><b>{@link SemanticAxioms}</b>: for representing a complex set of semantic
- *                                entities (i.e.: {@link SemanticAxiom}) described by a
+ *     <li><b>{@link SemanticEntitySet}</b>: for representing a complex set of semantic
+ *                                entities (i.e.: {@link SemanticEntity}) described by a
  *                                single {@link Ground}. Those elements
  *                                can be synchronised into the ontology through
- *                                the {@link SemanticAxioms.SynchroniseContainedIntent} class.
- *                                The latter, uses {@link SemanticAxioms.SynchronisationMultiIntent},
+ *                                the {@link SemanticEntitySet.SynchroniseContainedIntent} class.
+ *                                The latter, uses {@link SemanticEntitySet.SynchronisationMultiIntent},
  *                                which extends the synchronisation features implemented in
- *                                {@link Axioms.SynchronisationIntent}.</li>
+ *                                {@link EntitySet.SynchronisationIntent}.</li>
  *     <li><b>{@link Descriptor}</b>: which is in charge to manage the mapping between
  *                                the {@code Ground} and {@code Axiom}s for all the OWL semantics.
  *                                The extension of this interface it can be combined in the same
@@ -49,24 +49,24 @@ import java.util.*;
  *                                to the respective OWL representation.</li>
  *     </ul>
  * <div style="text-align:center;"><small>
- * <b>File</b>:        it.emarolab.owloop.core.Semantic <br>
+ * <b>File</b>:        it.emarolab.owloop.core.Axiom <br>
  * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
  * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
  * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
  * <b>date</b>:        21/05/17 <br>
  * </small></div>
  */
-public interface Semantic {
+public interface Axiom {
 
     /**
-     * The object for grounding each {@link Axioms} through a specific {@link Descriptor}.
+     * The object for grounding each {@link EntitySet} through a specific {@link Descriptor}.
      * <p>
-     *     It describes the {@code ontology} in which all axioms of a specific {@link Axioms}
+     *     It describes the {@code ontology} in which all axioms of a specific {@link EntitySet}
      *     will be applied from a {@link Descriptor} to an {@code instance}
      *     (i.e.: the subject of the axioms).
      * </p>
      * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.core.Semantic <br>
+     * <b>File</b>:        it.emarolab.owloop.core.Axiom <br>
      * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
      * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -77,19 +77,19 @@ public interface Semantic {
      * @param <J> the type of instance (i.e.: subject) for the axioms.
      */
     interface Ground<O,J>
-            extends Semantic {
+            extends Axiom {
 
         /**
          * Describes the ontology in which a {@link Descriptor} will
          * apply its synchronisations.
-         * @return the ontology in which apply the {@link Axioms}.
+         * @return the ontology in which apply the {@link EntitySet}.
          */
         O getGroundOntology();
 
         /**
          * Describes the instances in which a {@link Descriptor}
          * will apply its synchronisations.
-         * @return the subject of the {@link Axioms}.
+         * @return the subject of the {@link EntitySet}.
          */
         J getGroundInstance();
 
@@ -119,7 +119,7 @@ public interface Semantic {
      *     {@link SynchronisationIntent} class.
      * </p>
      * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.core.Semantic <br>
+     * <b>File</b>:        it.emarolab.owloop.core.Axiom <br>
      * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
      * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -128,7 +128,7 @@ public interface Semantic {
      *
      * @param <Y> the type of axioms described by this set.
      */
-    interface Axioms<Y>
+    interface EntitySet<Y>
             extends Collection<Y>{
 
         /**
@@ -154,7 +154,7 @@ public interface Semantic {
          * @return the changes to be applied in the ontology to make {@code this} set
          * equal to the one {@code queried} to the OWL representation.
          */
-        default SynchronisationIntent<Y> synchroniseTo(Axioms<Y> queried){
+        default SynchronisationIntent<Y> synchroniseTo(EntitySet<Y> queried){
             // synchronise to ontology (write)
             return new SynchronisationIntent<>( this, queried);
         }
@@ -168,48 +168,48 @@ public interface Semantic {
          * @return the changes to be applied in {@code this} set to make it
          * equal to the one {@code queried} to the OWL representation.
          */
-        default SynchronisationIntent<Y> synchroniseFrom(Axioms<Y> queried){
+        default SynchronisationIntent<Y> synchroniseFrom(EntitySet<Y> queried){
             // synchronise from ontology (read)
             return new SynchronisationIntent<>( queried, this);
         }
 
         /**
-         * The synchronising intent during {@link Axioms} reading or writing.
+         * The synchronising intent during {@link EntitySet} reading or writing.
          * <p>
-         *     It describes the changes that should be performed in a {@link Axioms}
+         *     It describes the changes that should be performed in a {@link EntitySet}
          *     set or in an OWL ontology during: {@link Descriptor#readSemantic()} or
          *     {@link Descriptor#writeSemantic()}.
-         *     This implementation considers sets of {@link Axioms} as
+         *     This implementation considers sets of {@link EntitySet} as
          *     {@code {@link HashSet}<E>}
          *     <br>
          *     This class is not directly instantiable but it can be assessed through:
-         *     {@link Axioms#synchroniseFrom(Axioms)} or {@link Axioms#synchroniseTo(Axioms)}.
+         *     {@link EntitySet#synchroniseFrom(EntitySet)} or {@link EntitySet#synchroniseTo(EntitySet)}.
          * </p>
          * <div style="text-align:center;"><small>
-         * <b>File</b>:        it.emarolab.owloop.core.Semantic <br>
+         * <b>File</b>:        it.emarolab.owloop.core.Axiom <br>
          * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
          * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
          * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
          * <b>date</b>:        21/05/17 <br>
          * </small></div>
          *
-         * @param <E> the type of axioms described in an {@link Axioms} set.
+         * @param <E> the type of axioms described in an {@link EntitySet} set.
          *           It should be the same parameter (or an extension) used for
-         *           a specific {@link Axioms} implementation.
+         *           a specific {@link EntitySet} implementation.
          */
         class SynchronisationIntent<E> {
             // the output of this class
             private Set<E> toAdd, toRemove, unchanged;
 
             /*
-             * non externally instantiable (see Axioms class).
+             * non externally instantiable (see EntitySet class).
              * It setGround th output of the class and call
              * sync(..) (or call it in the derived class).
              */
             private SynchronisationIntent(){
                 initialise();
             } // called by extending class
-            private SynchronisationIntent(Axioms<E> a1, Axioms<E> a2) {
+            private SynchronisationIntent(EntitySet<E> a1, EntitySet<E> a2) {
                 initialise();
                 // empty set if parameter are null
                 sync( copySet( a1), copySet( a2));
@@ -252,13 +252,13 @@ public interface Semantic {
             }
 
             /*
-             * makes a null Axioms as an empty set or copyGround the given
+             * makes a null EntitySet as an empty set or copyGround the given
              * set for further manipulation (in the sync(..) method).
              * It manages also the singleton by copyGround only
              * the first element if necessary
              * (the others are discarded and a warning msg is produced).
              */
-            private Set<E> copySet( Axioms<E> a){
+            private Set<E> copySet( EntitySet<E> a){
                 if ( a == null)
                     return new HashSet<>();
                 Set<E> copy = new HashSet<>();
@@ -313,7 +313,7 @@ public interface Semantic {
             @Override
             public boolean equals(Object o) {
                 if (this == o) return true;
-                if (!(o instanceof Axioms.SynchronisationIntent)) return false;
+                if (!(o instanceof EntitySet.SynchronisationIntent)) return false;
 
                 SynchronisationIntent<?> that = (SynchronisationIntent<?>) o;
 
@@ -346,14 +346,14 @@ public interface Semantic {
     }
 
     /**
-     * The container for {@link Axioms} with a specific {@code Semantic}.
+     * The container for {@link EntitySet} with a specific {@code Axiom}.
      * <p>
-     *     It describes an {@link Axioms} set that are all referring to a given
+     *     It describes an {@link EntitySet} set that are all referring to a given
      *     semantic. It is mainly used to describes the values of data or object
-     *     properties (i.e.: {@link Axioms}), when the {@code Semantic} is such a property.
+     *     properties (i.e.: {@link EntitySet}), when the {@code Axiom} is such a property.
      * </p>
      * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.core.Semantic <br>
+     * <b>File</b>:        it.emarolab.owloop.core.Axiom <br>
      * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
      * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -361,31 +361,31 @@ public interface Semantic {
      * </small></div>
      *
      * @param <S> the type of the semantic of all the element in the axiom set.
-     * @param <Y> the type of {@link Axioms} described by this container.
+     * @param <Y> the type of {@link EntitySet} described by this container.
      */
-    interface SemanticAxiom<S,Y>{
+    interface SemanticEntity<S,Y>{
         /**
          * Represents the semantic (i.e.: data or object property)
-         * that aggregates all {@link #getValues()} (i.e.: {@link Axioms}).
-         * @return the semantic of the {@link Axioms} described in {@code this} container.
+         * that aggregates all {@link #getValues()} (i.e.: {@link EntitySet}).
+         * @return the semantic of the {@link EntitySet} described in {@code this} container.
          */
         S getSemantic();
 
         /**
-         * Represents the {@link Axioms} of this container.
+         * Represents the {@link EntitySet} of this container.
          * All those values are described by the same {@link #getSemantic()}.
          * @return the axioms contained in {@code this} container.
          */
-        Axioms<Y> getValues();
+        EntitySet<Y> getValues();
 
         /**
          * It should create a new instance of this object that preserve
          * the {@code semantic} but assign new values to it.
-         * It is used during synchronisation by {@link SemanticAxioms.SynchronisationMultiIntent}.
+         * It is used during synchronisation by {@link SemanticEntitySet.SynchronisationMultiIntent}.
          * @param values the new data to be assigned to the same semantic.
          * @return a new object with the same {@link #getSemantic()} but new values.
          */
-        SemanticAxiom<S,Y> getNewData(Set<Y> values); // set the semantic it has
+        SemanticEntity<S,Y> getNewData(Set<Y> values); // set the semantic it has
     }
 
     /**
@@ -399,15 +399,15 @@ public interface Semantic {
      *     {@link SynchroniseContainedIntent} class, from which the {@link SynchronisationMultiIntent}
      *     can be retrieved.
      *     <br>
-     *     This class extends {@link Axioms} by managing a set of {@link SemanticAxiom},
-     *     where each element contains a {@code Semantic} and a set of {@link Axioms}.
+     *     This class extends {@link EntitySet} by managing a set of {@link SemanticEntity},
+     *     where each element contains a {@code Axiom} and a set of {@link EntitySet}.
      *     <br>
      *     By default, the synchronisation occurs only for the proprieties which semantics
-     *     have been initialised in the {@link SemanticAxiom}, not for all relations in the OWL representation.
+     *     have been initialised in the {@link SemanticEntity}, not for all relations in the OWL representation.
      *     Note that a {@link Descriptor#readSemantic()} may remove this value if there is no such entities in the ontology.
      * </p>
      * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.core.Semantic <br>
+     * <b>File</b>:        it.emarolab.owloop.core.Axiom <br>
      * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
      * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -417,17 +417,17 @@ public interface Semantic {
      * @param <F> the type of semantic axioms assigned to this set
      * @param <Y> the type of axioms described by this set.
      */
-    interface SemanticAxioms<F extends SemanticAxiom<?,Y>,Y>
-            extends Axioms<F> {
+    interface SemanticEntitySet<F extends SemanticEntity<?,Y>,Y>
+            extends EntitySet<F> {
 
         @Override // see documentation in the super method
-        default SynchronisationIntent<F> synchroniseFrom(Axioms<F> queried) {
+        default SynchronisationIntent<F> synchroniseFrom(EntitySet<F> queried) {
             // synchronise from ontology (read)
             return new SynchroniseContainedIntent<F,Y>().semanticSync( queried, this, true);
         }
 
         @Override // see documentation in the super method
-        default SynchronisationIntent<F> synchroniseTo(Axioms<F> queried) {
+        default SynchronisationIntent<F> synchroniseTo(EntitySet<F> queried) {
             // synchronise to ontology (write)
             return new SynchroniseContainedIntent<F,Y>().semanticSync( this, queried, false);
         }
@@ -440,14 +440,14 @@ public interface Semantic {
          * This class synchronises only the Semantics that have been specied in the
          * OWLOOP architecture, not for all the proprieties !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
          */
-        class SynchroniseContainedIntent<F extends SemanticAxiom<?,Y>,Y> {
+        class SynchroniseContainedIntent<F extends SemanticEntity<?,Y>,Y> {
 
             private SynchroniseContainedIntent(){} // not instantiable outside of this file
 
             // hp: not null inputs
             // write -> a1: atom,    a2: queried
             // read  -> a1: queried, a2: atom
-            private SynchronisationMultiIntent<F,?> semanticSync(Axioms<F> a1, Axioms<F> a2, boolean reading){
+            private SynchronisationMultiIntent<F,?> semanticSync(EntitySet<F> a1, EntitySet<F> a2, boolean reading){
                 SynchronisationMultiIntent<F,Y> sync = new SynchronisationMultiIntent<>();
                 // it could be faster ....
                 if ( a1.isEmpty() & a2.isEmpty())
@@ -493,33 +493,33 @@ public interface Semantic {
         }
 
         /**
-         * The synchronising intent during {@link SemanticAxiom} reading or writing.
+         * The synchronising intent during {@link SemanticEntity} reading or writing.
          * <p>
-         *     It describes the changes that should be performed in a {@link SemanticAxiom}
+         *     It describes the changes that should be performed in a {@link SemanticEntity}
          *     set or in an OWL ontology during: {@link Descriptor#readSemantic()} or
          *     {@link Descriptor#writeSemantic()}.
-         *     This implementation considers sets of {@link Axioms} as
+         *     This implementation considers sets of {@link EntitySet} as
          *     {@code {@link HashSet}<E>}
          *     <br>
          *     This class is not directly instantiable but it can be assessed through:
-         *     {@link SemanticAxioms#synchroniseFrom(Axioms)} or {@link SemanticAxioms#synchroniseTo(Axioms)}.
+         *     {@link SemanticEntitySet#synchroniseFrom(EntitySet)} or {@link SemanticEntitySet#synchroniseTo(EntitySet)}.
          * </p>
          * <div style="text-align:center;"><small>
-         * <b>File</b>:        it.emarolab.owloop.core.Semantic <br>
+         * <b>File</b>:        it.emarolab.owloop.core.Axiom <br>
          * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
          * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
          * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
          * <b>date</b>:        21/05/17 <br>
          * </small></div>
          *
-         * @param <E> the type of {@link SemanticAxioms} to synchronise.
-         *           It has to describe {@link Axioms} of type Y.
+         * @param <E> the type of {@link SemanticEntitySet} to synchronise.
+         *           It has to describe {@link EntitySet} of type Y.
          *           It should be the same parameter (or an extension) used for
-         *           a specific {@link SemanticAxioms} implementation.
-         * @param <Y> the type of element described in an {@link Axioms} set
+         *           a specific {@link SemanticEntitySet} implementation.
+         * @param <Y> the type of element described in an {@link EntitySet} set
          *           contained in E.
          */
-        class SynchronisationMultiIntent<E extends SemanticAxiom<?,Y>,Y>
+        class SynchronisationMultiIntent<E extends SemanticEntity<?,Y>,Y>
                 extends SynchronisationIntent<E> {
 
             /* this class is created by the SynchroniseContainedIntent class.
@@ -543,10 +543,10 @@ public interface Semantic {
 
 
     /**
-     * The interface to read and write from the ontology specific {@link Axioms} or {@link SemanticAxioms}.
+     * The interface to read and write from the ontology specific {@link EntitySet} or {@link SemanticEntitySet}.
      * <p>
      *     This class is the core of the OWLOOP implementation and is in charge to maintain
-     *     the {@link Axioms} and {@link SemanticAxioms} synchronised with respect to an OWL
+     *     the {@link EntitySet} and {@link SemanticEntitySet} synchronised with respect to an OWL
      *     representation (i.e.: {@link Ground}).
      *     <br>
      *     The paradigm through which this implement OWL accessibility through an OOP approach is
@@ -557,7 +557,7 @@ public interface Semantic {
      *     writing policy that the developer should manage.
      * </p>
      * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.core.Semantic <br>
+     * <b>File</b>:        it.emarolab.owloop.core.Axiom <br>
      * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
      * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -570,13 +570,13 @@ public interface Semantic {
      *           It defines the related {@link Ground} parameter for {@code this} descriptor.
      */
     interface Descriptor<O,J>
-            extends Semantic {
+            extends Axiom {
 
         /**
          * Returns the grounding element for {@code this} descriptor.
          * @return the instances using during {@link #writeSemantic()} and
-         * {@link #readSemantic()} to synchronise the described {@link Axioms}
-         * (or {@link SemanticAxioms}).
+         * {@link #readSemantic()} to synchronise the described {@link EntitySet}
+         * (or {@link SemanticEntitySet}).
          */
         Ground<O,J> getGround();
 
@@ -612,19 +612,19 @@ public interface Semantic {
         }
 
         /**
-         * This method is used to synchronise specific {@link Axioms} (or {@link SemanticAxioms})
+         * This method is used to synchronise specific {@link EntitySet} (or {@link SemanticEntitySet})
          * from the ontology. It manipulates the OWLLOOP representation to be
-         * equal to the queried OWL structure. It is based on {@code Axioms#synchroniseFrom(Axioms)}.
-         * @return the changes made in the {@link Axioms} during the reading.
+         * equal to the queried OWL structure. It is based on {@code EntitySet#synchroniseFrom(EntitySet)}.
+         * @return the changes made in the {@link EntitySet} during the reading.
          * Those objects may not have the {@link MappingIntent#getOntologyChanges()} field
          * initialised (i.e.: {@code Void}).
          */
         List< MappingIntent> readSemantic();
 
         /**
-         * This method is used to synchronise specific {@link Axioms} (or {@link SemanticAxioms})
+         * This method is used to synchronise specific {@link EntitySet} (or {@link SemanticEntitySet})
          * to the ontology. It manipulates the OWL representation to be
-         * equal to the OWLOOP structure. It is based on {@code Axioms#synchroniseTo(Axioms)}.
+         * equal to the OWLOOP structure. It is based on {@code EntitySet#synchroniseTo(EntitySet)}.
          * @return the changes made in the OWL ontology during the writing.
          * Those objects may have the {@link MappingIntent#getOntologyChanges()} field
          * initialised (i.e.: {@link org.semanticweb.owlapi.model.OWLOntologyChange}).
@@ -635,7 +635,7 @@ public interface Semantic {
          * This method assure that after {@link #writeSemantic()} the actual OWLLOOP
          * representation is consistent (only for this descriptor) with the OWL ontology.
          * In fact the new written entities may trigger the reasoner in inferring new
-         * elements in the described {@link Axioms} set. This method, after calling
+         * elements in the described {@link EntitySet} set. This method, after calling
          * {@link #writeSemantic()} it calls also {@link #groundReason()} and than,
          * {@link #readSemantic()}, in order to add the new inferred elements in the
          * described set.
@@ -657,7 +657,7 @@ public interface Semantic {
          * This method assure that after {@link #writeSemantic()} the actual OWLLOOP
          * representation is consistent (only for this descriptor) with the OWL ontology.
          * In fact the new written entities may trigger the reasoner in inferring new
-         * elements in the described {@link Axioms} set. This method class a
+         * elements in the described {@link EntitySet} set. This method class a
          * {@link #writeSemantic()} and than {@link #readSemantic()},
          * in order to add the new inferred elements in the
          * described set.
@@ -673,13 +673,13 @@ public interface Semantic {
          * given parameters and {@code Void} as {@link MappingIntent#getOntologyChanges()},
          * which will be null. This is just an helper that can be used by
          * the implementation of the {@link #readSemantic()}, in order to obtain the value
-         * to be returned, based from the results of {@link Axioms#synchroniseFrom(Axioms)}.
-         * @param sync the results of a specific call to {@link Axioms#synchroniseFrom(Axioms)}.
+         * to be returned, based from the results of {@link EntitySet#synchroniseFrom(EntitySet)}.
+         * @param sync the results of a specific call to {@link EntitySet#synchroniseFrom(EntitySet)}.
          * @return the changes based on the input parameters.
          */
-        default List<MappingIntent> getIntent(Axioms.SynchronisationIntent sync){ // read
+        default List<MappingIntent> getIntent(EntitySet.SynchronisationIntent sync){ // read
             List<MappingIntent> intents = new ArrayList<>();
-            Axioms.SynchronisationIntent synchronisationIntent = null;
+            EntitySet.SynchronisationIntent synchronisationIntent = null;
             if( sync != null)
                 synchronisationIntent = sync.copy();
             intents.add( new MappingIntent<Ground<O,J>,Void>( getGround().copyGround(), synchronisationIntent));
@@ -691,31 +691,31 @@ public interface Semantic {
          * (e.g.: {@link org.semanticweb.owlapi.model.OWLOntologyChange}).
          * This is just an helper that can be used by
          * the implementation of the {@link #writeSemantic()}, in order to obtain the value
-         * to be returned, based from the results of {@link Axioms#synchroniseTo(Axioms)}
+         * to be returned, based from the results of {@link EntitySet#synchroniseTo(EntitySet)}
          * and aMOR manipulations.
-         * @param sync the results of a specific call to {@link Axioms#synchroniseTo(Axioms)}.
+         * @param sync the results of a specific call to {@link EntitySet#synchroniseTo(EntitySet)}.
          * @param changes the ontology changes made during writing.
          * @param <C> the types of ontology changes attached to this intent.
          * @return the changes based on the input parameters.
          */
-        default <C> List<MappingIntent> getChangingIntent(Axioms.SynchronisationIntent sync, C changes){ // write
+        default <C> List<MappingIntent> getChangingIntent(EntitySet.SynchronisationIntent sync, C changes){ // write
             List<MappingIntent> intents = new ArrayList<>();
-            Axioms.SynchronisationIntent synchronisationIntent = null;
+            EntitySet.SynchronisationIntent synchronisationIntent = null;
             if( sync != null)
                 synchronisationIntent = sync.copy();
             intents.add( new MappingIntent<>( getGround().copyGround(), synchronisationIntent, changes));
             return intents;
         }
-        /*default List<MappingIntent> getIntent(Axioms.SynchroniseIntent sync, boolean isReading){
+        /*default List<MappingIntent> getIntent(EntitySet.SynchroniseIntent sync, boolean isReading){
             List<MappingIntent> intents = new ArrayList<>();
             intents.add( new MappingIntent<Ground<O,J>,Void>( getGround().copyGround(),
-                    new Axioms.SynchroniseIntent( sync), isReading));
+                    new EntitySet.SynchroniseIntent( sync), isReading));
             return intents;
         }
-        default <C> List<MappingIntent> getChangingIntent(Axioms.SynchroniseIntent sync, C changes, boolean isReading){
+        default <C> List<MappingIntent> getChangingIntent(EntitySet.SynchroniseIntent sync, C changes, boolean isReading){
             List<MappingIntent> intents = new ArrayList<>();
             intents.add( new MappingIntent<>( getGround().copyGround(),
-                    new Axioms.SynchroniseIntent( sync), changes, isReading));
+                    new EntitySet.SynchroniseIntent( sync), changes, isReading));
             return intents;
         }*/
     }
@@ -741,7 +741,7 @@ public interface Semantic {
      *     the value {@link #getIntent()} would be {@code null}.
      * </p>
      * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.core.Semantic <br>
+     * <b>File</b>:        it.emarolab.owloop.core.Axiom <br>
      * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
      * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -751,10 +751,10 @@ public interface Semantic {
      * @param <I> the {@link Ground} used during synchronisation.
      * @param <C> the type of changed done in the axioms set of the ontology.
      */
-    class MappingIntent<I extends Semantic.Ground,C> {
+    class MappingIntent<I extends Axiom.Ground,C> {
 
         private long time;
-        private Axioms.SynchronisationIntent intent; // null if error occurs
+        private EntitySet.SynchronisationIntent intent; // null if error occurs
         private I ground;
         private boolean writing;
         private C ontologyChanges = null;
@@ -766,7 +766,7 @@ public interface Semantic {
          * @param writing {@code true} if this is generated during {@link Descriptor#writeSemantic()}.
          *                {@code false} if this is generated during {@link Descriptor#readSemantic()}.
          */
-        public MappingIntent(I ground, Axioms.SynchronisationIntent intent, boolean writing){
+        public MappingIntent(I ground, EntitySet.SynchronisationIntent intent, boolean writing){
             initialise( ground, intent, writing);
         }
         /**
@@ -774,7 +774,7 @@ public interface Semantic {
          * @param ground the ontology and instance used during synchronisation.
          * @param intent the differences between the OWL and OWLOOP representation.
          */
-        public MappingIntent(I ground, Axioms.SynchronisationIntent intent) {
+        public MappingIntent(I ground, EntitySet.SynchronisationIntent intent) {
             initialise( ground, intent, false);
         }
         /**
@@ -785,7 +785,7 @@ public interface Semantic {
          * @param writing {@code true} if this is generated during {@link Descriptor#writeSemantic()}.
          *                {@code false} if this is generated during {@link Descriptor#readSemantic()}.
          */
-        public MappingIntent(I ground, Axioms.SynchronisationIntent intent, C changes, boolean writing) {
+        public MappingIntent(I ground, EntitySet.SynchronisationIntent intent, C changes, boolean writing) {
             initialise( ground, intent, writing);
             this.ontologyChanges = changes;
         }
@@ -795,11 +795,11 @@ public interface Semantic {
          * @param intent the differences between the OWL and OWLOOP representation.
          * @param changes the ontological changes applied during writing.
          */
-        public MappingIntent(I ground, Axioms.SynchronisationIntent intent, C changes) {
+        public MappingIntent(I ground, EntitySet.SynchronisationIntent intent, C changes) {
             initialise( ground, intent, true);
             this.ontologyChanges = changes;
         }
-        private void initialise(I ground, Axioms.SynchronisationIntent intent, boolean writing){
+        private void initialise(I ground, EntitySet.SynchronisationIntent intent, boolean writing){
             this.time = System.currentTimeMillis();
             this.writing = writing;
             this.ground = ground;
@@ -837,12 +837,12 @@ public interface Semantic {
          * Returns the changes within the OWl and the OWLOOP
          * representation given on construction.
          * If {@link #wasReading()} is {@code true} those are the changes made
-         * on the OWLLOOP representation to become equal to the OWL ontology ({@link Axioms#synchroniseFrom(Axioms)}).
+         * on the OWLLOOP representation to become equal to the OWL ontology ({@link EntitySet#synchroniseFrom(EntitySet)}).
          * If {@link #wasWriting()} is {@code true} those are the changes made
-         * on the OWL ontology to make it equal to the OWLLOOP representation ({@link Axioms#synchroniseTo(Axioms)}).
+         * on the OWL ontology to make it equal to the OWLLOOP representation ({@link EntitySet#synchroniseTo(EntitySet)}).
          * @return the differences between the OWL ontology and the OWLLOOP given during constructors.
          */
-        public final Axioms.SynchronisationIntent getIntent() {
+        public final EntitySet.SynchronisationIntent getIntent() {
             return intent;
         }
 

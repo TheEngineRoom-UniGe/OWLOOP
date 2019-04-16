@@ -94,7 +94,7 @@ public interface DataPropertyExpression
         /**
          * It is an helper that just calls:
          * {@code {@link #getDisjointDataProperty()}.add( {@link #getOntology()}.getOWLDataProperty( propertyName))}
-         * in order to add a new data property (given by name) in the {@link Axioms} list.
+         * in order to add a new data property (given by name) in the {@link EntitySet} list.
          * @param propertyName the property name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
@@ -104,7 +104,7 @@ public interface DataPropertyExpression
         /**
          * It is an helper that just calls:
          * {@code {@link #getDisjointDataProperty()}.add( property)}
-         * in order to add a new data property in the {@link Axioms} list.
+         * in order to add a new data property in the {@link EntitySet} list.
          * @param property the property to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
@@ -115,7 +115,7 @@ public interface DataPropertyExpression
         /**
          * It is an helper that just calls:
          * {@code {@link #getDisjointDataProperty()}.remove( {@link #getOntology()}.getOWLDataProperty( propertyName))}
-         * in order to remove a data property (given by name) from the {@link Axioms} list.
+         * in order to remove a data property (given by name) from the {@link EntitySet} list.
          * @param propertyName the property name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
@@ -125,7 +125,7 @@ public interface DataPropertyExpression
         /**
          * It is an helper that just calls:
          * {@code {@link #getDisjointDataProperty()}.remove( property)}
-         * in order to remove a data property in the {@link Axioms} list.
+         * in order to remove a data property in the {@link EntitySet} list.
          * @param property the property to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
@@ -134,11 +134,11 @@ public interface DataPropertyExpression
         }
 
         @Override
-        DescriptorAxioms.DataLinks getDisjointDataProperty();
+        DescriptorEntitySet.DataLinks getDisjointDataProperty();
 
         @Override // see super class for documentation
-        default DescriptorAxioms.DataLinks queryDisjointDataProperty(){
-            DescriptorAxioms.DataLinks set = new DescriptorAxioms.DataLinks(getOntology().getDisjointDataProperty(getInstance()));
+        default DescriptorEntitySet.DataLinks queryDisjointDataProperty(){
+            DescriptorEntitySet.DataLinks set = new DescriptorEntitySet.DataLinks(getOntology().getDisjointDataProperty(getInstance()));
             set.remove( getInstance());
             set.setSingleton( getDisjointDataProperty().isSingleton());
             return set;
@@ -147,7 +147,7 @@ public interface DataPropertyExpression
         @Override // see super class for documentation
         default List<MappingIntent> writeSemantic(){
             try {
-                Axioms.SynchronisationIntent<OWLDataProperty> to = synchroniseDisjointDataPropertyToSemantic();
+                EntitySet.SynchronisationIntent<OWLDataProperty> to = synchroniseDisjointDataPropertyToSemantic();
                 if ( to == null)
                     return getIntent( null);
                 List<OWLOntologyChange> changes = new ArrayList<>();
@@ -196,7 +196,7 @@ public interface DataPropertyExpression
         /**
          * It is an helper that just calls:
          * {@code {@link #getEquivalentDataProperty()}.add( {@link #getOntology()}.getOWLDataProperty( propertyName))}
-         * in order to add a new data property (given by name) in the {@link Axioms} list.
+         * in order to add a new data property (given by name) in the {@link EntitySet} list.
          * @param propertyName the property name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
@@ -206,7 +206,7 @@ public interface DataPropertyExpression
         /**
          * It is an helper that just calls:
          * {@code {@link #getEquivalentDataProperty()}.add( property)}
-         * in order to add a new data property in the {@link Axioms} list.
+         * in order to add a new data property in the {@link EntitySet} list.
          * @param property the property to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
@@ -217,7 +217,7 @@ public interface DataPropertyExpression
         /**
          * It is an helper that just calls:
          * {@code {@link #getEquivalentDataProperty()}.remove( {@link #getOntology()}.getOWLDataProperty( propertyName))}
-         * in order to remove a data property (given by name) from the {@link Axioms} list.
+         * in order to remove a data property (given by name) from the {@link EntitySet} list.
          * @param propertyName the property name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
@@ -227,7 +227,7 @@ public interface DataPropertyExpression
         /**
          * It is an helper that just calls:
          * {@code {@link #getEquivalentDataProperty()}.remove( property)}
-         * in order to remove a data property in the {@link Axioms} list.
+         * in order to remove a data property in the {@link EntitySet} list.
          * @param property the property to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
@@ -236,11 +236,11 @@ public interface DataPropertyExpression
         }
 
         @Override
-        DescriptorAxioms.DataLinks getEquivalentDataProperty();
+        DescriptorEntitySet.DataLinks getEquivalentDataProperty();
 
         @Override // see super class for documentation
-        default DescriptorAxioms.DataLinks queryEquivalentDataProperty(){
-            DescriptorAxioms.DataLinks set = new DescriptorAxioms.DataLinks(getOntology().getEquivalentDataProperty(getInstance()));
+        default DescriptorEntitySet.DataLinks queryEquivalentDataProperty(){
+            DescriptorEntitySet.DataLinks set = new DescriptorEntitySet.DataLinks(getOntology().getEquivalentDataProperty(getInstance()));
             set.remove( getInstance());
             set.setSingleton( getEquivalentDataProperty().isSingleton());
             return set;
@@ -249,7 +249,7 @@ public interface DataPropertyExpression
         @Override // see super class for documentation
         default List<MappingIntent> writeSemantic(){
             try {
-                Axioms.SynchronisationIntent<OWLDataProperty> to = synchroniseEquivalentDataPropertyToSemantic();
+                EntitySet.SynchronisationIntent<OWLDataProperty> to = synchroniseEquivalentDataPropertyToSemantic();
                 if ( to == null)
                     return getIntent( null);
                 List<OWLOntologyChange> changes = new ArrayList<>();
@@ -298,7 +298,7 @@ public interface DataPropertyExpression
         /**
          * It is an helper that just calls:
          * {@code {@link #getSubDataProperty()}.add( {@link #getOntology()}.getOWLDataProperty( propertyName))}
-         * in order to add a new data property (given by name) in the {@link Axioms} list.
+         * in order to add a new data property (given by name) in the {@link EntitySet} list.
          * @param propertyName the property name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
@@ -308,7 +308,7 @@ public interface DataPropertyExpression
         /**
          * It is an helper that just calls:
          * {@code {@link #getSubDataProperty()}.add( property)}
-         * in order to add a new data property in the {@link Axioms} list.
+         * in order to add a new data property in the {@link EntitySet} list.
          * @param property the property to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
@@ -319,7 +319,7 @@ public interface DataPropertyExpression
         /**
          * It is an helper that just calls:
          * {@code {@link #getSubDataProperty()}.remove( {@link #getOntology()}.getOWLDataProperty( propertyName))}
-         * in order to remove a data property (given by name) from the {@link Axioms} list.
+         * in order to remove a data property (given by name) from the {@link EntitySet} list.
          * @param propertyName the property name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
@@ -329,7 +329,7 @@ public interface DataPropertyExpression
         /**
          * It is an helper that just calls:
          * {@code {@link #getSubDataProperty()}.remove( property)}
-         * in order to remove a data property in the {@link Axioms} list.
+         * in order to remove a data property in the {@link EntitySet} list.
          * @param property the property to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
@@ -338,11 +338,11 @@ public interface DataPropertyExpression
         }
 
         @Override
-        DescriptorAxioms.DataLinks getSubDataProperty();
+        DescriptorEntitySet.DataLinks getSubDataProperty();
 
         @Override // see super class for documentation
-        default DescriptorAxioms.DataLinks querySubDataProperty(){
-            DescriptorAxioms.DataLinks set = new DescriptorAxioms.DataLinks(getOntology().getSubDataPropertyOf(getInstance()));
+        default DescriptorEntitySet.DataLinks querySubDataProperty(){
+            DescriptorEntitySet.DataLinks set = new DescriptorEntitySet.DataLinks(getOntology().getSubDataPropertyOf(getInstance()));
             set.setSingleton( getSubDataProperty().isSingleton());
             return set;
         }
@@ -350,7 +350,7 @@ public interface DataPropertyExpression
         @Override // see super class for documentation
         default List<MappingIntent> writeSemantic(){
             try {
-                Axioms.SynchronisationIntent<OWLDataProperty> to = synchroniseSubDataPropertyToSemantic();
+                EntitySet.SynchronisationIntent<OWLDataProperty> to = synchroniseSubDataPropertyToSemantic();
                 if ( to == null)
                     return getIntent( null);
                 List<OWLOntologyChange> changes = new ArrayList<>();
@@ -391,7 +391,7 @@ public interface DataPropertyExpression
         /**
          * It is an helper that just calls:
          * {@code {@link #getSuperDataProperty()}.add( {@link #getOntology()}.getOWLDataProperty( propertyName))}
-         * in order to add a new data property (given by name) in the {@link Axioms} list.
+         * in order to add a new data property (given by name) in the {@link EntitySet} list.
          * @param propertyName the property name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
@@ -401,7 +401,7 @@ public interface DataPropertyExpression
         /**
          * It is an helper that just calls:
          * {@code {@link #getSuperDataProperty()}.add( property)}
-         * in order to add a new data property in the {@link Axioms} list.
+         * in order to add a new data property in the {@link EntitySet} list.
          * @param property the property to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
@@ -412,7 +412,7 @@ public interface DataPropertyExpression
         /**
          * It is an helper that just calls:
          * {@code {@link #getSuperDataProperty()}.remove( {@link #getOntology()}.getOWLDataProperty( propertyName))}
-         * in order to remove a data property (given by name) from the {@link Axioms} list.
+         * in order to remove a data property (given by name) from the {@link EntitySet} list.
          * @param propertyName the property name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
@@ -422,7 +422,7 @@ public interface DataPropertyExpression
         /**
          * It is an helper that just calls:
          * {@code {@link #getSuperDataProperty()}.remove( property)}
-         * in order to remove a data property in the {@link Axioms} list.
+         * in order to remove a data property in the {@link EntitySet} list.
          * @param property the property to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
@@ -431,11 +431,11 @@ public interface DataPropertyExpression
         }
 
         @Override
-        DescriptorAxioms.DataLinks getSuperDataProperty();
+        DescriptorEntitySet.DataLinks getSuperDataProperty();
 
         @Override // see super class for documentation
-        default DescriptorAxioms.DataLinks querySuperDataProperty(){
-            DescriptorAxioms.DataLinks set = new DescriptorAxioms.DataLinks(getOntology().getSuperDataPropertyOf(getInstance()));
+        default DescriptorEntitySet.DataLinks querySuperDataProperty(){
+            DescriptorEntitySet.DataLinks set = new DescriptorEntitySet.DataLinks(getOntology().getSuperDataPropertyOf(getInstance()));
             set.setSingleton( getSuperDataProperty().isSingleton());
             return set;
         }
@@ -443,7 +443,7 @@ public interface DataPropertyExpression
         @Override // see super class for documentation
         default List<MappingIntent> writeSemantic(){
             try{
-                Axioms.SynchronisationIntent<OWLDataProperty> to = synchroniseSuperDataPropertyToSemantic();
+                EntitySet.SynchronisationIntent<OWLDataProperty> to = synchroniseSuperDataPropertyToSemantic();
                 if ( to == null)
                     return getIntent( null);
                 List<OWLOntologyChange> changes = new ArrayList<>();
@@ -480,7 +480,7 @@ public interface DataPropertyExpression
         
         /**
          * Creates a new data property domain restriction 
-         * (to be in conjunction with the others in the specific {@link Axioms})
+         * (to be in conjunction with the others in the specific {@link EntitySet})
          * which restricts over a minimal cardinality of data properties
          * in a specific range of data type based on: {@link #getOWLDataType(Class)}.
          * @param property the name of the restricting data property.
@@ -493,7 +493,7 @@ public interface DataPropertyExpression
         }
         /**
          * Creates a new data property domain restriction
-         * (to be in conjunction with the others in the specific {@link Axioms})
+         * (to be in conjunction with the others in the specific {@link EntitySet})
          * which restricts over a minimal cardinality of data properties
          * in a specific range of data type based on: {@link #getOWLDataType(Class)}.
          * @param property the restricting data property.
@@ -505,7 +505,7 @@ public interface DataPropertyExpression
             return new DataDomainRestrictedOnMinData( getInstance(), getOWLDataType( dataType), property, cardinality);
         }
         /**
-         * Adds a new restriction to the described {@link Axioms} (i.e.: {@link #getDomainDataProperty()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDomainDataProperty()})
          * based on {@link #domainMinDataRestriction(String, int, Class)}.
          * @param property the name of the restricting data property.
          * @param cardinality the cardinality for the minimal property restriction.
@@ -516,7 +516,7 @@ public interface DataPropertyExpression
             return getDomainDataProperty().add( domainMinDataRestriction( property, cardinality, dataType));
         }
         /**
-         * Adds a new restriction to the described {@link Axioms} (i.e.: {@link #getDomainDataProperty()}
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDomainDataProperty()}
          * based on {@link #domainMinDataRestriction(OWLDataProperty, int, Class)}.
          * @param property the restricting data property.
          * @param cardinality the cardinality for the minimal property restriction.
@@ -527,7 +527,7 @@ public interface DataPropertyExpression
             return getDomainDataProperty().add( domainMinDataRestriction( property, cardinality, dataType));
         }
         /**
-         * Removes a restriction to the described {@link Axioms} (i.e.: {@link #getDomainDataProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDomainDataProperty()})
          * based on {@link #domainMinDataRestriction(String, int, Class)}.
          * @param property the name of the restricting data property.
          * @param cardinality the cardinality for the minimal property restriction.
@@ -538,7 +538,7 @@ public interface DataPropertyExpression
             return getDomainDataProperty().remove( domainMinDataRestriction( property, cardinality, dataType));
         }
         /**
-         * Removes a restriction to the described {@link Axioms} (i.e.: {@link #getDomainDataProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDomainDataProperty()})
          * based on {@link #domainMinDataRestriction(OWLDataProperty, int, Class)}.
          * @param property the restricting data property.
          * @param cardinality the cardinality for the minimal property restriction.
@@ -551,7 +551,7 @@ public interface DataPropertyExpression
 
         /**
          * Creates a new data property domain restriction 
-         * (to be in conjunction with the others in the specific {@link Axioms})
+         * (to be in conjunction with the others in the specific {@link EntitySet})
          * which restricts over a maximal cardinality of data properties
          * in a specific range of data type based on: {@link #getOWLDataType(Class)}.
          * @param property the name of the restricting data property.
@@ -564,7 +564,7 @@ public interface DataPropertyExpression
         }
         /**
          * Creates a new data property domain restriction
-         * (to be in conjunction with the others in the specific {@link Axioms})
+         * (to be in conjunction with the others in the specific {@link EntitySet})
          * which restricts over a maximal cardinality of data properties
          * in a specific range of data type based on: {@link #getOWLDataType(Class)}.
          * @param property the restricting data property.
@@ -576,7 +576,7 @@ public interface DataPropertyExpression
             return new DataDomainRestrictedOnMaxData( getInstance(), getOWLDataType( dataType), property, cardinality);
         }
         /**
-         * Adds a new restriction to the described {@link Axioms} (i.e.: {@link #getDomainDataProperty()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDomainDataProperty()})
          * based on {@link #domainMaxDataRestriction(String, int, Class)}.
          * @param property the name of the restricting data property.
          * @param cardinality the cardinality for the maximal property restriction.
@@ -587,7 +587,7 @@ public interface DataPropertyExpression
             return getDomainDataProperty().add( domainMaxDataRestriction( property, cardinality, dataType));
         }
         /**
-         * Adds a new restriction to the described {@link Axioms} (i.e.: {@link #getDomainDataProperty()}
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDomainDataProperty()}
          * based on {@link #domainMaxDataRestriction(OWLDataProperty, int, Class)}.
          * @param property the restricting data property.
          * @param cardinality the cardinality for the maximal property restriction.
@@ -598,7 +598,7 @@ public interface DataPropertyExpression
             return getDomainDataProperty().add( domainMaxDataRestriction( property, cardinality, dataType));
         }
         /**
-         * Removes a restriction to the described {@link Axioms} (i.e.: {@link #getDomainDataProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDomainDataProperty()})
          * based on {@link #domainMaxDataRestriction(String, int, Class)}.
          * @param property the name of the restricting data property.
          * @param cardinality the cardinality for the maximal property restriction.
@@ -609,7 +609,7 @@ public interface DataPropertyExpression
             return getDomainDataProperty().remove( domainMaxDataRestriction( property, cardinality, dataType));
         }
         /**
-         * Removes a restriction to the described {@link Axioms} (i.e.: {@link #getDomainDataProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDomainDataProperty()})
          * based on {@link #domainMaxDataRestriction(OWLDataProperty, int, Class)}.
          * @param property the restricting data property.
          * @param cardinality the cardinality for the maximal property restriction.
@@ -622,7 +622,7 @@ public interface DataPropertyExpression
 
         /**
          * Creates a new data property domain restriction 
-         * (to be in conjunction with the others in the specific {@link Axioms})
+         * (to be in conjunction with the others in the specific {@link EntitySet})
          * which restricts over an exact cardinality of data properties
          * in a specific range of data type based on: {@link #getOWLDataType(Class)}.
          * @param property the name of the restricting data property.
@@ -635,7 +635,7 @@ public interface DataPropertyExpression
         }
         /**
          * Creates a new data property domain restriction
-         * (to be in conjunction with the others in the specific {@link Axioms})
+         * (to be in conjunction with the others in the specific {@link EntitySet})
          * which restricts over an exact cardinality of data properties
          * in a specific range of data type based on: {@link #getOWLDataType(Class)}.
          * @param property the restricting data property.
@@ -647,7 +647,7 @@ public interface DataPropertyExpression
             return new DataDomainRestrictedOnExactData( getInstance(), getOWLDataType( dataType), property, cardinality);
         }
         /**
-         * Adds a new restriction to the described {@link Axioms} (i.e.: {@link #getDomainDataProperty()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDomainDataProperty()})
          * based on {@link #domainExactDataRestriction(String, int, Class)}.
          * @param property the name of the restricting data property.
          * @param cardinality the cardinality for the exact property restriction.
@@ -658,7 +658,7 @@ public interface DataPropertyExpression
             return getDomainDataProperty().add( domainExactDataRestriction( property, cardinality, dataType));
         }
         /**
-         * Adds a new restriction to the described {@link Axioms} (i.e.: {@link #getDomainDataProperty()}
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDomainDataProperty()}
          * based on {@link #domainExactDataRestriction(OWLDataProperty, int, Class)}.
          * @param property the restricting data property.
          * @param cardinality the cardinality for the exact property restriction.
@@ -669,7 +669,7 @@ public interface DataPropertyExpression
             return getDomainDataProperty().add( domainExactDataRestriction( property, cardinality, dataType));
         }
         /**
-         * Removes a restriction to the described {@link Axioms} (i.e.: {@link #getDomainDataProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDomainDataProperty()})
          * based on {@link #domainExactDataRestriction(String, int, Class)}.
          * @param property the name of the restricting data property.
          * @param cardinality the cardinality for the exact property restriction.
@@ -680,7 +680,7 @@ public interface DataPropertyExpression
             return getDomainDataProperty().remove( domainExactDataRestriction( property, cardinality, dataType));
         }
         /**
-         * Removes a restriction to the described {@link Axioms} (i.e.: {@link #getDomainDataProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDomainDataProperty()})
          * based on {@link #domainExactDataRestriction(OWLDataProperty, int, Class)}.
          * @param property the restricting data property.
          * @param cardinality the cardinality for the exact property restriction.
@@ -693,7 +693,7 @@ public interface DataPropertyExpression
 
         /**
          * Creates a new data property domain restriction 
-         * (to be in conjunction with the others in the specific {@link Axioms})
+         * (to be in conjunction with the others in the specific {@link EntitySet})
          * which restricts over an existential cardinality of data properties
          * in a specific range of data type based on: {@link #getOWLDataType(Class)}.
          * @param property the name of the restricting data property.
@@ -705,7 +705,7 @@ public interface DataPropertyExpression
         }
         /**
          * Creates a new data property domain restriction
-         * (to be in conjunction with the others in the specific {@link Axioms})
+         * (to be in conjunction with the others in the specific {@link EntitySet})
          * which restricts over an existential cardinality of data properties
          * in a specific range of data type based on: {@link #getOWLDataType(Class)}.
          * @param property the restricting data property.
@@ -716,7 +716,7 @@ public interface DataPropertyExpression
             return new DataDomainRestrictedOnSomeData( getInstance(), getOWLDataType( dataType), property);
         }
         /**
-         * Adds a new restriction to the described {@link Axioms} (i.e.: {@link #getDomainDataProperty()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDomainDataProperty()})
          * based on {@link #domainSomeDataRestriction(String, Class)}.
          * @param property the name of the restricting data property.
          * @param dataType the data type of the restriction.
@@ -726,7 +726,7 @@ public interface DataPropertyExpression
             return getDomainDataProperty().add( domainSomeDataRestriction( property, dataType));
         }
         /**
-         * Adds a new restriction to the described {@link Axioms} (i.e.: {@link #getDomainDataProperty()}
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDomainDataProperty()}
          * based on {@link #domainSomeDataRestriction(OWLDataProperty, Class)}.
          * @param property the restricting data property.
          * @param dataType the data type of the restriction.
@@ -736,7 +736,7 @@ public interface DataPropertyExpression
             return getDomainDataProperty().add( domainSomeDataRestriction( property, dataType));
         }
         /**
-         * Removes a restriction to the described {@link Axioms} (i.e.: {@link #getDomainDataProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDomainDataProperty()})
          * based on {@link #domainSomeDataRestriction(String, Class)}.
          * @param property the name of the restricting data property.
          * @param dataType the data type of the restriction.
@@ -746,7 +746,7 @@ public interface DataPropertyExpression
             return getDomainDataProperty().remove( domainSomeDataRestriction( property, dataType));
         }
         /**
-         * Removes a restriction to the described {@link Axioms} (i.e.: {@link #getDomainDataProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDomainDataProperty()})
          * based on {@link #domainSomeDataRestriction(OWLDataProperty, Class)}.
          * @param property the restricting data property.
          * @param dataType the data type of the restriction.
@@ -758,7 +758,7 @@ public interface DataPropertyExpression
 
         /**
          * Creates a new data property domain restriction 
-         * (to be in conjunction with the others in the specific {@link Axioms})
+         * (to be in conjunction with the others in the specific {@link EntitySet})
          * which restricts over an universal cardinality of data properties
          * in a specific range of data type based on: {@link #getOWLDataType(Class)}.
          * @param property the name of the restricting data property.
@@ -770,7 +770,7 @@ public interface DataPropertyExpression
         }
         /**
          * Creates a new data property domain restriction
-         * (to be in conjunction with the others in the specific {@link Axioms})
+         * (to be in conjunction with the others in the specific {@link EntitySet})
          * which restricts over an universal cardinality of data properties
          * in a specific range of data type based on: {@link #getOWLDataType(Class)}.
          * @param property the restricting data property.
@@ -781,7 +781,7 @@ public interface DataPropertyExpression
             return new DataDomainRestrictedOnAllData( getInstance(), getOWLDataType( dataType), property);
         }
         /**
-         * Adds a new restriction to the described {@link Axioms} (i.e.: {@link #getDomainDataProperty()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDomainDataProperty()})
          * based on {@link #domainOnlyDataRestriction(String, Class)}.
          * @param property the name of the restricting data property.
          * @param dataType the data type of the restriction.
@@ -791,7 +791,7 @@ public interface DataPropertyExpression
             return getDomainDataProperty().add( domainOnlyDataRestriction( property, dataType));
         }
         /**
-         * Adds a new restriction to the described {@link Axioms} (i.e.: {@link #getDomainDataProperty()}
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDomainDataProperty()}
          * based on {@link #domainOnlyDataRestriction(OWLDataProperty, Class)}.
          * @param property the restricting data property.
          * @param dataType the data type of the restriction.
@@ -801,7 +801,7 @@ public interface DataPropertyExpression
             return getDomainDataProperty().add( domainOnlyDataRestriction( property, dataType));
         }
         /**
-         * Removes a restriction to the described {@link Axioms} (i.e.: {@link #getDomainDataProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDomainDataProperty()})
          * based on {@link #domainOnlyDataRestriction(String, Class)}.
          * @param property the name of the restricting data property.
          * @param dataType the data type of the restriction.
@@ -811,7 +811,7 @@ public interface DataPropertyExpression
             return getDomainDataProperty().remove( domainOnlyDataRestriction( property, dataType));
         }
         /**
-         * Removes a restriction to the described {@link Axioms} (i.e.: {@link #getDomainDataProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDomainDataProperty()})
          * based on {@link #domainOnlyDataRestriction(OWLDataProperty, Class)}.
          * @param property the restricting data property.
          * @param dataType the data type of the restriction.
@@ -824,7 +824,7 @@ public interface DataPropertyExpression
 
         /**
          * Creates a new data property domain restriction 
-         * (to be in conjunction with the others in the specific {@link Axioms})
+         * (to be in conjunction with the others in the specific {@link EntitySet})
          * which restricts over a minimal cardinality of object properties
          * in a specific ontological class range
          * @param property the name of the restricting object property.
@@ -837,7 +837,7 @@ public interface DataPropertyExpression
         }
         /**
          * Creates a new data property domain restriction
-         * (to be in conjunction with the others in the specific {@link Axioms})
+         * (to be in conjunction with the others in the specific {@link EntitySet})
          * which restricts over a minimal cardinality of object properties
          * in a specific ontological class range
          * @param property the restricting object property.
@@ -849,7 +849,7 @@ public interface DataPropertyExpression
             return new DataDomainRestrictedOnMinObject( getInstance(), cl, property, cardinality);
         }
         /**
-         * Adds a new restriction to the described {@link Axioms} (i.e.: {@link #getDomainDataProperty()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDomainDataProperty()})
          * based on {@link #domainMinObjectRestriction(String, int, String)}.
          * This method should be always synchronised with {@link #writeSemanticInconsistencySafe()}
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
@@ -862,7 +862,7 @@ public interface DataPropertyExpression
             return getDomainDataProperty().add( domainMinObjectRestriction( property, cardinality, className));
         }
         /**
-         * Adds a new restriction to the described {@link Axioms} (i.e.: {@link #getDomainDataProperty()}
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDomainDataProperty()}
          * based on {@link #domainMinObjectRestriction(OWLObjectProperty, int, OWLClass)}.
          * This method should be always synchronised with {@link #writeSemanticInconsistencySafe()}
          * to be perfectly aligned with the {@link #queryDomainDataProperty()},
@@ -877,7 +877,7 @@ public interface DataPropertyExpression
             return getDomainDataProperty().add( domainMinObjectRestriction( property, cardinality, cl));
         }
         /**
-         * Removes a restriction to the described {@link Axioms} (i.e.: {@link #getDomainDataProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDomainDataProperty()})
          * based on {@link #domainMinObjectRestriction(String, int, String)}.
          * This method should be always synchronised with {@link #writeSemanticInconsistencySafe()}
          * to be perfectly aligned with the {@link #queryDomainDataProperty()},
@@ -891,7 +891,7 @@ public interface DataPropertyExpression
             return getDomainDataProperty().remove( domainMinObjectRestriction( property, cardinality, className));
         }
         /**
-         * Removes a restriction to the described {@link Axioms} (i.e.: {@link #getDomainDataProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDomainDataProperty()})
          * based on {@link #domainMinObjectRestriction(OWLObjectProperty, int, OWLClass)}.
          * This method should be always synchronised with {@link #writeSemanticInconsistencySafe()}
          * to be perfectly aligned with the {@link #queryDomainDataProperty()},
@@ -907,7 +907,7 @@ public interface DataPropertyExpression
 
         /**
          * Creates a new data property domain restriction 
-         * (to be in conjunction with the others in the specific {@link Axioms})
+         * (to be in conjunction with the others in the specific {@link EntitySet})
          * which restricts over a maximal cardinality of object properties
          * in a specific ontological class range
          * @param property the name of the restricting object property.
@@ -920,7 +920,7 @@ public interface DataPropertyExpression
         }
         /**
          * Creates a new data property domain restriction
-         * (to be in conjunction with the others in the specific {@link Axioms})
+         * (to be in conjunction with the others in the specific {@link EntitySet})
          * which restricts over a maximal cardinality of object properties
          * in a specific ontological class range
          * @param property the restricting object property.
@@ -932,7 +932,7 @@ public interface DataPropertyExpression
             return new DataDomainRestrictedOnMaxObject( getInstance(), cl, property, cardinality);
         }
         /**
-         * Adds a new restriction to the described {@link Axioms} (i.e.: {@link #getDomainDataProperty()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDomainDataProperty()})
          * based on {@link #domainMaxObjectRestriction(String, int, String)}.
          * This method should be always synchronised with {@link #writeSemanticInconsistencySafe()}
          * to be perfectly aligned with the {@link #queryDomainDataProperty()},
@@ -946,7 +946,7 @@ public interface DataPropertyExpression
             return getDomainDataProperty().add( domainMaxObjectRestriction( property, cardinality, className));
         }
         /**
-         * Adds a new restriction to the described {@link Axioms} (i.e.: {@link #getDomainDataProperty()}
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDomainDataProperty()}
          * based on {@link #domainMaxObjectRestriction(OWLObjectProperty, int, OWLClass)}.
          * This method should be always synchronised with {@link #writeSemanticInconsistencySafe()}
          * to be perfectly aligned with the {@link #queryDomainDataProperty()},
@@ -960,7 +960,7 @@ public interface DataPropertyExpression
             return getDomainDataProperty().add( domainMaxObjectRestriction( property, cardinality, cl));
         }
         /**
-         * Removes a restriction to the described {@link Axioms} (i.e.: {@link #getDomainDataProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDomainDataProperty()})
          * based on {@link #domainMaxObjectRestriction(String, int, String)}.
          * This method should be always synchronised with {@link #writeSemanticInconsistencySafe()}
          * to be perfectly aligned with the {@link #queryDomainDataProperty()},
@@ -974,7 +974,7 @@ public interface DataPropertyExpression
             return getDomainDataProperty().remove( domainMaxObjectRestriction( property, cardinality, className));
         }
         /**
-         * Removes a restriction to the described {@link Axioms} (i.e.: {@link #getDomainDataProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDomainDataProperty()})
          * based on {@link #domainMaxObjectRestriction(OWLObjectProperty, int, OWLClass)}.
          * This method should be always synchronised with {@link #writeSemanticInconsistencySafe()}
          * to be perfectly aligned with the {@link #queryDomainDataProperty()},
@@ -990,7 +990,7 @@ public interface DataPropertyExpression
 
         /**
          * Creates a new data property domain restriction 
-         * (to be in conjunction with the others in the specific {@link Axioms})
+         * (to be in conjunction with the others in the specific {@link EntitySet})
          * which restricts over an exact cardinality of object properties
          * in a specific ontological class range
          * @param property the name of the restricting object property.
@@ -1003,7 +1003,7 @@ public interface DataPropertyExpression
         }
         /**
          * Creates a new data property domain restriction
-         * (to be in conjunction with the others in the specific {@link Axioms})
+         * (to be in conjunction with the others in the specific {@link EntitySet})
          * which restricts over an exact cardinality of object properties
          * in a specific ontological class range
          * @param property the restricting object property.
@@ -1015,7 +1015,7 @@ public interface DataPropertyExpression
             return new DataDomainRestrictedOnExactObject( getInstance(), cl, property, cardinality);
         }
         /**
-         * Adds a new restriction to the described {@link Axioms} (i.e.: {@link #getDomainDataProperty()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDomainDataProperty()})
          * based on {@link #domainExactObjectRestriction(String, int, String)}.
          * This method should be always synchronised with {@link #writeSemanticInconsistencySafe()}
          * to be perfectly aligned with the {@link #queryDomainDataProperty()},
@@ -1029,7 +1029,7 @@ public interface DataPropertyExpression
             return getDomainDataProperty().add( domainExactObjectRestriction( property, cardinality, className));
         }
         /**
-         * Adds a new restriction to the described {@link Axioms} (i.e.: {@link #getDomainDataProperty()}
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDomainDataProperty()}
          * based on {@link #domainExactObjectRestriction(OWLObjectProperty, int, OWLClass)}.
          * This method should be always synchronised with {@link #writeSemanticInconsistencySafe()}
          * to be perfectly aligned with the {@link #queryDomainDataProperty()},
@@ -1043,7 +1043,7 @@ public interface DataPropertyExpression
             return getDomainDataProperty().add( domainExactObjectRestriction( property, cardinality, cl));
         }
         /**
-         * Removes a restriction to the described {@link Axioms} (i.e.: {@link #getDomainDataProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDomainDataProperty()})
          * based on {@link #domainExactObjectRestriction(String, int, String)}.
          * This method should be always synchronised with {@link #writeSemanticInconsistencySafe()}
          * to be perfectly aligned with the {@link #queryDomainDataProperty()},
@@ -1057,7 +1057,7 @@ public interface DataPropertyExpression
             return getDomainDataProperty().remove( domainExactObjectRestriction( property, cardinality, className));
         }
         /**
-         * Removes a restriction to the described {@link Axioms} (i.e.: {@link #getDomainDataProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDomainDataProperty()})
          * based on {@link #domainExactObjectRestriction(OWLObjectProperty, int, OWLClass)}.
          * This method should be always synchronised with {@link #writeSemanticInconsistencySafe()}
          * to be perfectly aligned with the {@link #queryDomainDataProperty()},
@@ -1073,7 +1073,7 @@ public interface DataPropertyExpression
 
         /**
          * Creates a new data property domain restriction 
-         * (to be in conjunction with the others in the specific {@link Axioms})
+         * (to be in conjunction with the others in the specific {@link EntitySet})
          * which restricts over an existential cardinality of object properties
          * in a specific ontological class range
          * @param property the name of the restricting object property.
@@ -1085,7 +1085,7 @@ public interface DataPropertyExpression
         }
         /**
          * Creates a new data property domain restriction
-         * (to be in conjunction with the others in the specific {@link Axioms})
+         * (to be in conjunction with the others in the specific {@link EntitySet})
          * which restricts over an existential cardinality of object properties
          * in a specific ontological class range
          * @param property the restricting object property.
@@ -1096,7 +1096,7 @@ public interface DataPropertyExpression
             return new DataDomainRestrictedOnSomeObject( getInstance(), cl, property);
         }
         /**
-         * Adds a new restriction to the described {@link Axioms} (i.e.: {@link #getDomainDataProperty()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDomainDataProperty()})
          * based on {@link #domainSomeObjectRestriction(String, String)}.
          * @param property the name of the restricting object property.
          * @param cl the name of the class range restriction.
@@ -1106,7 +1106,7 @@ public interface DataPropertyExpression
             return getDomainDataProperty().add( domainSomeObjectRestriction(property,cl));
         }
         /**
-         * Adds a new restriction to the described {@link Axioms} (i.e.: {@link #getDomainDataProperty()}
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDomainDataProperty()}
          * based on {@link #domainSomeObjectRestriction(OWLObjectProperty, OWLClass)}.
          * @param property the restricting object property.
          * @param cl the class range restriction.
@@ -1116,7 +1116,7 @@ public interface DataPropertyExpression
             return getDomainDataProperty().add( domainSomeObjectRestriction(property,cl));
         }
         /**
-         * Removes a restriction to the described {@link Axioms} (i.e.: {@link #getDomainDataProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDomainDataProperty()})
          * based on {@link #domainSomeObjectRestriction(String, String)}.
          * @param property the name of the restricting object property.
          * @param cl the name of the class range restriction.
@@ -1126,7 +1126,7 @@ public interface DataPropertyExpression
             return getDomainDataProperty().remove( domainSomeObjectRestriction(property,cl));
         }
         /**
-         * Removes a restriction to the described {@link Axioms} (i.e.: {@link #getDomainDataProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDomainDataProperty()})
          * based on {@link #domainSomeObjectRestriction(OWLObjectProperty, OWLClass)}.
          * @param property the restricting object property.
          * @param cl the class range restriction.
@@ -1138,7 +1138,7 @@ public interface DataPropertyExpression
 
         /**
          * Creates a new data property domain restriction 
-         * (to be in conjunction with the others in the specific {@link Axioms})
+         * (to be in conjunction with the others in the specific {@link EntitySet})
          * which restricts over an universal cardinality of object properties
          * in a specific ontological class range
          * @param property the name of the restricting object property.
@@ -1150,7 +1150,7 @@ public interface DataPropertyExpression
         }
         /**
          * Creates a new data property domain restriction
-         * (to be in conjunction with the others in the specific {@link Axioms})
+         * (to be in conjunction with the others in the specific {@link EntitySet})
          * which restricts over an universal cardinality of object properties
          * in a specific ontological class range
          * @param property the restricting object property.
@@ -1161,7 +1161,7 @@ public interface DataPropertyExpression
             return new DataDomainRestrictedOnAllObject( getInstance(), cl, property);
         }
         /**
-         * Adds a new restriction to the described {@link Axioms} (i.e.: {@link #getDomainDataProperty()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDomainDataProperty()})
          * based on {@link #domainOnlyObjectRestriction(String, String)}.
          * @param property the name of the restricting object property.
          * @param cl the name of the class range restriction.
@@ -1171,7 +1171,7 @@ public interface DataPropertyExpression
             return getDomainDataProperty().add( domainOnlyObjectRestriction(property,cl));
         }
         /**
-         * Adds a new restriction to the described {@link Axioms} (i.e.: {@link #getDomainDataProperty()}
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDomainDataProperty()}
          * based on {@link #domainOnlyObjectRestriction(OWLObjectProperty, OWLClass)}.
          * @param property the restricting object property.
          * @param cl the class range restriction.
@@ -1181,7 +1181,7 @@ public interface DataPropertyExpression
             return getDomainDataProperty().add( domainOnlyObjectRestriction(property,cl));
         }
         /**
-         * Removes a restriction to the described {@link Axioms} (i.e.: {@link #getDomainDataProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDomainDataProperty()})
          * based on {@link #domainOnlyObjectRestriction(String, String)}.
          * @param property the name of the restricting object property.
          * @param cl the name of the class range restriction.
@@ -1191,7 +1191,7 @@ public interface DataPropertyExpression
             return getDomainDataProperty().remove( domainOnlyObjectRestriction(property,cl));
         }
         /**
-         * Removes a restriction to the described {@link Axioms} (i.e.: {@link #getDomainDataProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDomainDataProperty()})
          * based on {@link #domainOnlyObjectRestriction(OWLObjectProperty, OWLClass)}.
          * @param property the restricting object property.
          * @param cl the class range restriction.
@@ -1203,7 +1203,7 @@ public interface DataPropertyExpression
 
         /**
          * Creates a new data property domain restriction
-         * (to be in conjunction with the others in the specific {@link Axioms})
+         * (to be in conjunction with the others in the specific {@link EntitySet})
          * which is represented by a class.
          * @param className the name of the range class of the restriction.
          * @return a new object type restriction for data property domain.
@@ -1213,7 +1213,7 @@ public interface DataPropertyExpression
         }
         /**
          * Creates a new data property domain restriction
-         * (to be in conjunction with the others in the specific {@link Axioms})
+         * (to be in conjunction with the others in the specific {@link EntitySet})
          * which is represented by a class.
          * @param cl the range class of the restriction.
          * @return a new object type restriction for data property domain.
@@ -1222,7 +1222,7 @@ public interface DataPropertyExpression
             return new DataDomainRestrictedOnClass( getInstance(), cl);
         }
         /**
-         * Adds a new restriction to the described {@link Axioms} 
+         * Adds a new restriction to the described {@link EntitySet}
          * (i.e.: {@link #getDomainDataProperty()})
          * based on {@link #domainClassRestriction(String)}.
          * @param className the name of the range class of the restriction.
@@ -1233,7 +1233,7 @@ public interface DataPropertyExpression
             return getDomainDataProperty().add( domainClassRestriction( className));
         }
         /**
-         * Adds a new restriction to the described {@link Axioms} 
+         * Adds a new restriction to the described {@link EntitySet}
          * (i.e.: {@link #getDomainDataProperty()})
          * based on {@link #domainClassRestriction(String)}.
          * @param cl the range class of the restriction.
@@ -1244,7 +1244,7 @@ public interface DataPropertyExpression
             return getDomainDataProperty().add( domainClassRestriction( cl));
         }
         /**
-         * Removes a restriction to the described {@link Axioms} 
+         * Removes a restriction to the described {@link EntitySet}
          * (i.e.: {@link #getDomainDataProperty()})
          * based on {@link #domainClassRestriction(String)}.
          * @param className the name of the range class of the restriction.
@@ -1255,7 +1255,7 @@ public interface DataPropertyExpression
             return getDomainDataProperty().remove( domainClassRestriction( className));
         }
         /**
-         * Removes a restriction to the described {@link Axioms} 
+         * Removes a restriction to the described {@link EntitySet}
          * (i.e.: {@link #getDomainDataProperty()})
          * based on {@link #domainClassRestriction(String)}.
          * @param cl the range class of the restriction.
@@ -1267,11 +1267,11 @@ public interface DataPropertyExpression
         }
 
         @Override
-        DescriptorAxioms.Restrictions getDomainDataProperty();
+        DescriptorEntitySet.Restrictions getDomainDataProperty();
 
         @Override // see super class for documentation
-        default DescriptorAxioms.Restrictions queryDomainDataProperty(){
-            DescriptorAxioms.Restrictions set = new DescriptorAxioms.Restrictions(getOntology().getDomainRestriction(getInstance()));
+        default DescriptorEntitySet.Restrictions queryDomainDataProperty(){
+            DescriptorEntitySet.Restrictions set = new DescriptorEntitySet.Restrictions(getOntology().getDomainRestriction(getInstance()));
             set.setSingleton( getDomainDataProperty().isSingleton());
             return set;
         }
@@ -1279,7 +1279,7 @@ public interface DataPropertyExpression
         @Override // see super class for documentation
         default List<MappingIntent> writeSemantic(){
             try {
-                Axioms.SynchronisationIntent<SemanticRestriction> to = synchroniseDomainDataPropertyToSemantic();
+                EntitySet.SynchronisationIntent<SemanticRestriction> to = synchroniseDomainDataPropertyToSemantic();
                 List<OWLOntologyChange> changes = new ArrayList<>();
                 for (SemanticRestriction a : to.getToAdd())
                     changes.add(getOntology().addRestriction(a));
@@ -1314,7 +1314,7 @@ public interface DataPropertyExpression
 
         /**
          * Creates a new data property range restriction 
-         * (to be in conjunction with the others in the specific {@link Axioms})
+         * (to be in conjunction with the others in the specific {@link EntitySet})
          * which restricts over an unique data type (see {@link #getOWLDataType(Class)}).
          * @param dataType the value of the restriction.
          * @return a new data type restriction for data property range.
@@ -1323,7 +1323,7 @@ public interface DataPropertyExpression
             return new DataRangeRestricted( getInstance(), getOWLDataType( dataType));
         }
         /**
-         * Adds a new restriction to the described {@link Axioms} 
+         * Adds a new restriction to the described {@link EntitySet}
          * (i.e.: {@link #getRangeDataProperty()})
          * based on {@link #rangeDataRestriction(Class)}.
          * @param dataType the value of the restriction.
@@ -1334,7 +1334,7 @@ public interface DataPropertyExpression
             return getRangeDataProperty().add( rangeDataRestriction( dataType));
         }
         /**
-         * Removes a new restriction to the described {@link Axioms}
+         * Removes a new restriction to the described {@link EntitySet}
          * (i.e.: {@link #getRangeDataProperty()})
          * based on {@link #rangeDataRestriction(Class)}.
          * @param dataType the value of the restriction.
@@ -1346,11 +1346,11 @@ public interface DataPropertyExpression
         }
 
         @Override
-        DescriptorAxioms.Restrictions getRangeDataProperty();
+        DescriptorEntitySet.Restrictions getRangeDataProperty();
 
         @Override // see super class for documentation
-        default DescriptorAxioms.Restrictions queryRangeDataProperty(){
-            DescriptorAxioms.Restrictions set = new DescriptorAxioms.Restrictions(getOntology().getRangeRestriction(getInstance()));
+        default DescriptorEntitySet.Restrictions queryRangeDataProperty(){
+            DescriptorEntitySet.Restrictions set = new DescriptorEntitySet.Restrictions(getOntology().getRangeRestriction(getInstance()));
             set.setSingleton( getRangeDataProperty().isSingleton());
             return set;
         }
@@ -1358,7 +1358,7 @@ public interface DataPropertyExpression
         @Override // see super class for documentation
         default List<MappingIntent> writeSemantic(){
             try {
-                Axioms.SynchronisationIntent<SemanticRestriction> to = synchroniseRangeDataPropertyToSemantic();
+                EntitySet.SynchronisationIntent<SemanticRestriction> to = synchroniseRangeDataPropertyToSemantic();
                 if ( to == null)
                     return getIntent( null);
                 List<OWLOntologyChange> changes = new ArrayList<>();

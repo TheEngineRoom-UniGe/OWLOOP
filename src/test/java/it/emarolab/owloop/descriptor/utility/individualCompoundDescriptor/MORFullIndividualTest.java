@@ -1,6 +1,6 @@
-package it.emarolab.owloop.descriptor.utility.individual_compoundDescriptor;
+package it.emarolab.owloop.descriptor.utility.individualCompoundDescriptor;
 
-import it.emarolab.owloop.descriptor.construction.descriptorInterface.DescriptorAxioms;
+import it.emarolab.owloop.descriptor.construction.descriptorInterface.DescriptorEntitySet;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,7 +14,7 @@ public class MORFullIndividualTest {
     @Before // called a before every @Test
     public void setUp() throws Exception {
         individual = new FullIndividualDesc(
-                "individual_compoundDescriptor-A", // the ground instance name
+                "individualCompoundDescriptor-A", // the ground instance name
                 "ontoName", // ontology reference name
                 "src/test/resources/tboxTest.owl", // the ontology file path
                 "http://www.semanticweb.org/emaroLab/luca-buoncompagni/sit" // the ontology IRI path
@@ -48,7 +48,7 @@ public class MORFullIndividualTest {
         individual.addDisjointIndividual( "Disjoint-Individual-To-Build");
         individual.writeSemantic();
         assertSemantic();
-        System.out.println( "described individual_compoundDescriptor, disjoint test: " + individual.buildDisjointIndividual());
+        System.out.println( "described individualCompoundDescriptor, disjoint test: " + individual.buildDisjointIndividual());
     }
 
     @Test
@@ -74,7 +74,7 @@ public class MORFullIndividualTest {
         individual.addEquivalentIndividual( "Equivalent-Individual-To-Build");
         individual.writeSemantic();
         assertSemantic();
-        System.out.println( "described individual_compoundDescriptor, equivalent test: " + individual.buildEquivalentIndividual());
+        System.out.println( "described individualCompoundDescriptor, equivalent test: " + individual.buildEquivalentIndividual());
     }
 
     @Test
@@ -99,7 +99,7 @@ public class MORFullIndividualTest {
         individual.addTypeIndividual( "Individual-Type-To-Build");
         individual.writeSemanticInconsistencySafe(); // reasoner infers shape properties
         assertSemantic();
-        System.out.println( "described individual_compoundDescriptor, type test: " + individual.buildTypeIndividual());
+        System.out.println( "described individualCompoundDescriptor, type test: " + individual.buildTypeIndividual());
     }
 
     @Test
@@ -126,7 +126,7 @@ public class MORFullIndividualTest {
         //assertSemantic();
 
         individual.writeSemanticInconsistencySafe(); // reasoner infers shape properties
-        System.out.println( "described individual_compoundDescriptor, multi object test: " + individual.buildObjectIndividual());
+        System.out.println( "described individualCompoundDescriptor, multi object test: " + individual.buildObjectIndividual());
 
         System.out.println( "synchronised object properties: " + individual.getObjects( "isRightOf"));
     }
@@ -145,7 +145,7 @@ public class MORFullIndividualTest {
         //assertSemantic();
         individual.addObject( "isRightOf", "Individual-B", true);
         individual.addObject( "isRightOf", "Individual-D",true);
-        for(DescriptorAxioms.ObjectSemantic i : individual.getObjectSemantics())
+        for(DescriptorEntitySet.ObjectSemantic i : individual.getObjectSemantics())
             assertEquals( i.getValues().size(), 1);
         individual.writeSemanticInconsistencySafe(); // reasoner infers shape properties
         assertSemantic();
@@ -159,7 +159,7 @@ public class MORFullIndividualTest {
 
         individual.addObject( "isLeftOf", "Individual-B", true);
         individual.writeSemanticInconsistencySafe(); // reasoner infers shape properties
-        System.out.println( "described individual_compoundDescriptor, multi object test: " + individual.buildObjectIndividual());
+        System.out.println( "described individualCompoundDescriptor, multi object test: " + individual.buildObjectIndividual());
 
         System.out.println( "synchronised object properties: " + individual.getObject( "isRightOf"));
 
@@ -191,7 +191,7 @@ public class MORFullIndividualTest {
         individual.addData( "has-cone_height", 3.6);
         individual.addData( "has-geometric_height");
         individual.writeSemanticInconsistencySafe(); // reasoner infers shape properties
-        System.out.println( "described individual_compoundDescriptor, multi object test: " + individual.buildDataIndividual());
+        System.out.println( "described individualCompoundDescriptor, multi object test: " + individual.buildDataIndividual());
 
         System.out.println( "synchronised object properties: " + individual.getLiterals( "has-cone_height"));
     }
@@ -210,7 +210,7 @@ public class MORFullIndividualTest {
         //assertSemantic();
         individual.addData( "hasProp", 2.3, true);
         individual.addData( "hasProp", 5.7, true);
-        for(DescriptorAxioms.DataSemantic i : individual.getDataSemantics())
+        for(DescriptorEntitySet.DataSemantic i : individual.getDataSemantics())
             assertEquals( i.getValues().size(), 1);
         individual.writeSemanticInconsistencySafe(); // reasoner infers shape properties
         assertSemantic();
@@ -225,7 +225,7 @@ public class MORFullIndividualTest {
         individual.addData( "has-cone_height", 3.6, true);
         individual.addData( "has-geometric_height");
         individual.writeSemanticInconsistencySafe(); // reasoner infers shape properties
-        System.out.println( "described individual_compoundDescriptor, multi object test: " + individual.buildDataIndividual());
+        System.out.println( "described individualCompoundDescriptor, multi object test: " + individual.buildDataIndividual());
 
         System.out.println( "synchronised object properties: " + individual.getLiteral( "has-cone_height"));
     }

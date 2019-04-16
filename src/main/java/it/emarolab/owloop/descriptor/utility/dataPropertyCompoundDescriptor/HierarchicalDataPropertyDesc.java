@@ -1,10 +1,10 @@
-package it.emarolab.owloop.descriptor.utility.dataProperty_compoundDescriptor;
+package it.emarolab.owloop.descriptor.utility.dataPropertyCompoundDescriptor;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
+import it.emarolab.owloop.core.Axiom;
 import it.emarolab.owloop.descriptor.construction.descriptorBase.DataPropertyDescriptorBase;
 import it.emarolab.owloop.descriptor.construction.descriptorInterface.DataPropertyExpression;
-import it.emarolab.owloop.descriptor.construction.descriptorInterface.DescriptorAxioms;
-import it.emarolab.owloop.core.Semantic;
+import it.emarolab.owloop.descriptor.construction.descriptorInterface.DescriptorEntitySet;
 import org.semanticweb.owlapi.model.OWLDataProperty;
 
 import java.util.List;
@@ -12,10 +12,10 @@ import java.util.List;
 /**
  * A basic implementation for a data property with sub and super properties.
  * <p>
- *     This is an example of how use the {@link Semantic.Descriptor}s for implement
+ *     This is an example of how use the {@link Axiom.Descriptor}s for implement
  *     a data property that is synchronised w.r.t. its {@link Super} and {@link Sub} properties.
  *     <br>
- *     Its purpose is only to instanciate the {@link DescriptorAxioms.DataLinks} for the
+ *     Its purpose is only to instanciate the {@link DescriptorEntitySet.DataLinks} for the
  *     respective descriptions, as well as call both interfaces in the
  *     {@link #readSemantic()} and {@link #writeSemantic()} methods.
  *     All its constructions are based on {@link DataPropertyDescriptorBase} in order
@@ -28,7 +28,7 @@ import java.util.List;
  *     OWL synchronisation efficiency for data properties.
  *
  * <div style="text-align:center;"><small>
- * <b>File</b>:        it.emarolab.owloop.descriptor.utility.dataProperty_compoundDescriptor.HierarchicalDataPropertyDesc <br>
+ * <b>File</b>:        it.emarolab.owloop.descriptor.utility.dataPropertyCompoundDescriptor.HierarchicalDataPropertyDesc <br>
  * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
  * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
  * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -40,8 +40,8 @@ public class HierarchicalDataPropertyDesc
         implements DataPropertyExpression.Sub<HierarchicalDataPropertyDesc>,
         DataPropertyExpression.Super<HierarchicalDataPropertyDesc>{
 
-    private DescriptorAxioms.DataLinks subProperties = new DescriptorAxioms.DataLinks();
-    private DescriptorAxioms.DataLinks superProperties = new DescriptorAxioms.DataLinks();
+    private DescriptorEntitySet.DataLinks subProperties = new DescriptorEntitySet.DataLinks();
+    private DescriptorEntitySet.DataLinks superProperties = new DescriptorEntitySet.DataLinks();
 
     // constructors for DataPropertyDescriptorBase
 
@@ -72,7 +72,7 @@ public class HierarchicalDataPropertyDesc
 
 
 
-    // implementations for Semantic.descriptor
+    // implementations for Axiom.descriptor
 
     @Override
     public List<MappingIntent> readSemantic() {
@@ -98,7 +98,7 @@ public class HierarchicalDataPropertyDesc
     }
 
     @Override
-    public DescriptorAxioms.DataLinks getSubDataProperty() {
+    public DescriptorEntitySet.DataLinks getSubDataProperty() {
         return subProperties;
     }
 
@@ -112,7 +112,7 @@ public class HierarchicalDataPropertyDesc
     }
 
     @Override
-    public DescriptorAxioms.DataLinks getSuperDataProperty() {
+    public DescriptorEntitySet.DataLinks getSuperDataProperty() {
         return superProperties;
     }
 
