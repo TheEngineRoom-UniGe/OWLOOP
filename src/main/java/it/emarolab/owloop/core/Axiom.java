@@ -12,9 +12,9 @@ import java.util.*;
  *      <li><b>{@link EntitySet}</b>: is a set of OWL entities associated to the {@link Ground} via an expression. </li>
  *      <li><b>{@link SemanticEntity}</b>: associates an expression to the {@link EntitySet}. </li>
  *      <li><b>{@link SemanticEntitySet}</b>: enables association of complex expressions to the {@link EntitySet}. </li>
- *      <li><b>{@link Descriptor}</b>: is in charge of mapping the {@link Ground} and {@link EntitySet} via an expression.
- *                                      It is also in charge of synchronizing them all,
- *                                      between it's internal state and the OWL representation.
+ *      <li><b>{@link Descriptor}</b>: is in charge of mapping the ({@link Ground}) and the ({@link EntitySet}) via an (expression).
+ *                                      A descriptor is also in charge of synchronizing them all, i.e, the axioms, between it's
+ *                                      internal state and the OWL representation.
  *      <li><b>{@link MappingIntent}</b>: it keeps a record of the manipulations made by the {@link Descriptor}
  *                                during the synchronisation. While 'reading()' it records the changes made in the
  *                                internal state of the descriptors, and while 'writing()' it records also the changes
@@ -32,100 +32,72 @@ import java.util.*;
 public interface Axiom {
 
     /**
-     * The object for grounding each {@link EntitySet} through a specific {@link Descriptor}.
-     * <p>
-     *     It describes the {@code ontology} in which all axioms of a specific {@link EntitySet}
-     *     will be applied from a {@link Descriptor} to an {@code instance}
-     *     (i.e.: the subject of the axioms).
-     * </p>
-     * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.core.Axiom <br>
-     * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
-     * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
-     * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
-     * <b>date</b>:        21/05/17 <br>
-     * </small></div>
+     * Is an OWL entity associated to an ontology.
      *
-     * @param <O> the type of ontology in which the axioms will be applied.
-     * @param <J> the type of instance (i.e.: subject) for the axioms.
+     * @param <O> is the ontology in which the axioms will be applied.
+     * @param <J> is the grounded OWL entity.
      */
     interface Ground<O,J>
             extends Axiom {
 
         /**
-         * Describes the ontology in which a {@link Descriptor} will
-         * apply its synchronisations.
-         * @return the ontology in which apply the {@link EntitySet}.
+         * @return ontology with which a {@link Descriptor} synchronizes its internal state.
          */
         O getGroundOntology();
 
         /**
-         * Describes the instances in which a {@link Descriptor}
-         * will apply its synchronisations.
-         * @return the subject of the {@link EntitySet}.
+         * @return the the grounded OWL entity.
          */
         J getGroundInstance();
 
         /**
-         * Perform reasoning among all the ontology described by {@code this} object.
+         * Perform reasoning in the ontology described by {@link Ground} object.
          */
         void reason();
 
         /**
-         * Make a new copyGround of this object.
+         * Make a copy of the {@link Ground} object.
          * Used to make each {@link MappingIntent} independent
          * for the evolution of the system.
          * This method should call a specific copyGround constructor.
-         * @return a new grounding copyGround.
+         * @return a new grounded copyGround.
          */
         Ground<O,J> copyGround();
     }
 
     /**
-     * The object that describe a generic set of axioms managed by a specific {@link Descriptor}.
-     * <p>
-     *     It describes a collection of simple axioms that can be grounded in an ontology,
-     *     ad with respect an instance, from a {@link Descriptor}.
-     *     <br>
-     *     Given the OWLOOP state of this set and the OWL representation (i.e.: queried description)
-     *     it is possible to synchronise the two set (read or write) by using the
-     *     {@link SynchronisationIntent} class.
-     * </p>
-     * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.core.Axiom <br>
-     * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
-     * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
-     * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
-     * <b>date</b>:        21/05/17 <br>
-     * </small></div>
+     * It describe a generic set of entities managed by a specific {@link Descriptor}.
+     * Given the descriptor's internal state (having the {@link EntitySet} within it) and the OWL representation (i.e., queried description),
+     * it is possible to synchronise the two by using the {@link SynchronisationIntent}.
      *
-     * @param <Y> the type of axioms described by this set.
+     * @param <Y> the OWL entities.
      */
     interface EntitySet<Y>
             extends Collection<Y>{
 
         /**
-         * Describes if this set should contain a single element.
+         * Describes whether this EntitySet contains a single element.
          * If yes, the synchronisation procedure will replace always such an element.
-         * @return {@code true} if this is a singleton set, {@code false} otherwise.
+         * @return (true) if this is a singleton set, (false) otherwise.
          */
         boolean isSingleton();
         /**
-         * Set this set to contain a single element.
+         * Set this EntitySet to contain a single element.
          * If yes, the synchronisation procedure will replace always such an element.
-         * @param singleton {@code true} if this is a singleton set, {@code false} otherwise.
+         * @param singleton (true) if this is a singleton set, (false) otherwise.
          */
-        void setSingleton( boolean singleton);
+        void setSingleton(boolean singleton);
 
         /**
          * This method is used during {@link Descriptor#writeSemantic()} and finds
-         * the differences between the actual state of axioms set (i.e.: {@code this}) and the one
-         * queried to the OWL representation. Such changes represents the intent to
-         * delete and add axioms to the OWL structure, to make it equal to {@code this} set,
-         * for a specific instance in an ontology (i.e.: {@link Ground}).
-         * @param queried the set to check for writing differences from OWL to {@code this} set.
-         * @return the changes to be applied in the ontology to make {@code this} set
-         * equal to the one {@code queried} to the OWL representation.
+         * the differences between the actual state of EntitySet and the one
+         * queried to the OWL representation. Such changes represent the intent to
+         * delete and add axioms to the OWL structure, to make it equal to this EntitySet.
+         *
+         * @param queried the set to check for writing differences from OWL to this EntitySet.
+         *
+         * @return the changes to be applied in the ontology to make this EntitySet
+         * equal to the one queried to the OWL representation.
          */
         default SynchronisationIntent<Y> synchroniseTo(EntitySet<Y> queried){
             // synchronise to ontology (write)
@@ -133,13 +105,14 @@ public interface Axiom {
         }
         /**
          * This method is used during {@link Descriptor#readSemantic()} and finds
-         * the differences between the actual state of axioms set (i.e.: {@code this}) and the one
+         * the differences between the actual state of EntitySet and the one
          * queried to the OWL representation. Such changes represents the intent to
-         * delete and add elements to {@code this} set, to make it equal to the OWL representation,
-         * for a specific instance in an ontology (i.e.: {@link Ground}).
-         * @param queried the set to check for reading differences from OWL to {@code this} set.
-         * @return the changes to be applied in {@code this} set to make it
-         * equal to the one {@code queried} to the OWL representation.
+         * delete and add elements to this EntitySet, to make it equal to the OWL representation.
+         *
+         * @param queried the set to check for reading differences from OWL to this EntitySet.
+         *
+         * @return the changes to be applied in this EntitySet to make it
+         * equal to the one queried to the OWL representation.
          */
         default SynchronisationIntent<Y> synchroniseFrom(EntitySet<Y> queried){
             // synchronise from ontology (read)
@@ -147,26 +120,19 @@ public interface Axiom {
         }
 
         /**
-         * The synchronising intent during {@link EntitySet} reading or writing.
+         * The synchronising intent during reading or writing of {@link EntitySet}.
          * <p>
          *     It describes the changes that should be performed in a {@link EntitySet}
          *     set or in an OWL ontology during: {@link Descriptor#readSemantic()} or
          *     {@link Descriptor#writeSemantic()}.
-         *     This implementation considers sets of {@link EntitySet} as
-         *     {@code {@link HashSet}<E>}
+         *     This implementation considers sets of {@link EntitySet} as a
+         *     {@link HashSet} E.
          *     <br>
          *     This class is not directly instantiable but it can be assessed through:
          *     {@link EntitySet#synchroniseFrom(EntitySet)} or {@link EntitySet#synchroniseTo(EntitySet)}.
          * </p>
-         * <div style="text-align:center;"><small>
-         * <b>File</b>:        it.emarolab.owloop.core.Axiom <br>
-         * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
-         * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
-         * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
-         * <b>date</b>:        21/05/17 <br>
-         * </small></div>
          *
-         * @param <E> the type of axioms described in an {@link EntitySet} set.
+         * @param <E> the type of entities described in an {@link EntitySet} set.
          *           It should be the same parameter (or an extension) used for
          *           a specific {@link EntitySet} implementation.
          */
