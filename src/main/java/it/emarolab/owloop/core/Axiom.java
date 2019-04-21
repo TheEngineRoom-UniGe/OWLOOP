@@ -3,58 +3,31 @@ package it.emarolab.owloop.core;
 import java.util.*;
 
 /**
- * The main interface for the OWLOOP architecture
- * <p>
- *     This interface contains all basic semantic components for the OWLOOP
- *     architecture.
- *     <br>
- *     Such architecture implements an synchronisation interface between an OWL
- *     representation (an implementation is based on
- *     <a href="https://github.com/EmaroLab/multi_ontology_reference">aMOR</a>,
- *     which in turn is based on OWL API) and an OWLLOOP representation which contains
- *     of sets of {@link EntitySet}. Those can be: <i>read</i> and <i>written</i>,
- *     through a {@link Descriptor}. The latter is also in charge to
- *     manage the accessibility of {@code Axiom}s within the OOP paradigms.
- *     So, while the semantic description of axioms remains not OOP and standard reasoner
- *     (as Pellet) can deal with their representation, the accessibility to them by the developer
- *     can be considered as OOP given a correct synchronisation (i.e.: reading and writing) policy.
- *     <br>
- *     It is file are defined all components of OWLOOP, in particular:
- *     <ul>
- *     <li><b>{@link Ground}</b>: for describing the ontology and the entity
- *                                in which the semantic is applied to. </li>
- *     <li><b>{@link EntitySet}</b>: for describing simple a set of semantic entities
- *                                described by a single {@link Ground}. Those elements
- *                                can be synchronised into the ontology through
- *                                the {@link EntitySet.SynchronisationIntent} class.</li>
- *     <li><b>{@link SemanticEntity}</b>: for describing {@link EntitySet} with
- *                                a specified {@code semantic}.</li>
- *     <li><b>{@link SemanticEntitySet}</b>: for representing a complex set of semantic
- *                                entities (i.e.: {@link SemanticEntity}) described by a
- *                                single {@link Ground}. Those elements
- *                                can be synchronised into the ontology through
- *                                the {@link SemanticEntitySet.SynchroniseContainedIntent} class.
- *                                The latter, uses {@link SemanticEntitySet.SynchronisationMultiIntent},
- *                                which extends the synchronisation features implemented in
- *                                {@link EntitySet.SynchronisationIntent}.</li>
- *     <li><b>{@link Descriptor}</b>: which is in charge to manage the mapping between
- *                                the {@code Ground} and {@code Axiom}s for all the OWL semantics.
- *                                The extension of this interface it can be combined in the same
- *                                ground type with the purpose to <i>describe</i> a specific OWl entity
- *                                within OOP paradigms.</li>
- *     <li><b>{@link MappingIntent}</b>: describes the manipulation made by the {@link Descriptor}
- *                                during the synchronisation of the semantic entities. During
- *                                {@code reading} it contains the change made in the OWLOOP structures,
- *                                while during {@code writing} it contains also the changes applied
- *                                to the respective OWL representation.</li>
- *     </ul>
- * <div style="text-align:center;"><small>
- * <b>File</b>:        it.emarolab.owloop.core.Axiom <br>
- * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
- * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
- * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
- * <b>date</b>:        21/05/17 <br>
- * </small></div>
+ *      This interface is a part of the core of OWLOOP architecture.
+ *      It contains interfaces of the basic components within OWLOOP. <p>
+ *      The components are the following:
+ *
+ *      <ul>
+ *      <li><b>{@link Ground}</b>:  is an OWL entity associated to an ontology. </li>
+ *      <li><b>{@link EntitySet}</b>: is a set of OWL entities associated to the {@link Ground} via an expression. </li>
+ *      <li><b>{@link SemanticEntity}</b>: associates an expression to the {@link EntitySet}. </li>
+ *      <li><b>{@link SemanticEntitySet}</b>: enables association of complex expressions to the {@link EntitySet}. </li>
+ *      <li><b>{@link Descriptor}</b>: is in charge of mapping the {@link Ground} and {@link EntitySet} via an expression.
+ *                                      It is also in charge of synchronizing them all,
+ *                                      between it's internal state and the OWL representation.
+ *      <li><b>{@link MappingIntent}</b>: it keeps a record of the manipulations made by the {@link Descriptor}
+ *                                during the synchronisation. While 'reading()' it records the changes made in the
+ *                                internal state of the descriptors, and while 'writing()' it records also the changes
+ *                                applied to the OWL representation. </li>
+ *      </ul>
+ *
+ *      <div style="text-align:center;"><small>
+ *      <b>File</b>:         it.emarolab.owloop.core.Axiom <br>
+ *      <b>Licence</b>:      GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
+ *      <b>Authors</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it), Syed Yusha Kareem (kareem.syed.yusha@dibris.unige.it) <br>
+ *      <b>affiliation</b>:  EMAROLab, DIBRIS, University of Genoa. <br>
+ *      <b>date</b>:         01/05/19 <br>
+ *      </small></div>
  */
 public interface Axiom {
 
@@ -719,7 +692,6 @@ public interface Axiom {
             return intents;
         }*/
     }
-
 
     /**
      * The class to track synchronisation changes.

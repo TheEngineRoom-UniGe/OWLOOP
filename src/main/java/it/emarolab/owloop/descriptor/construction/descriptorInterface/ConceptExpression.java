@@ -53,8 +53,6 @@ public interface ConceptExpression
         return getGround().getGroundInstance();
     }
 
-    
-    
     /**
      * The {@link Concept.Classify} {@link Descriptor} implementation for {@link OWLClass}.
      * <p>

@@ -43,7 +43,6 @@ public class ClassifyConceptDesc
 
     private DescriptorEntitySet.Individuals classifiedIndividual = new DescriptorEntitySet.Individuals();
 
-
     // constructors for ConceptDescriptorBase
 
     public ClassifyConceptDesc(OWLClass instance, OWLReferences onto) {
