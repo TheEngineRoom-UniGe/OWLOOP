@@ -31,11 +31,11 @@ import java.util.Set;
  *     Since they implements common feature of OWLLOOP architecture only.
  *
  * <div style="text-align:center;"><small>
- * <b>File</b>:        it.emarolab.owloop.core.DataProperty <br>
- * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
- * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
- * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
- * <b>date</b>:        21/05/17 <br>
+ * <b>File</b>:         it.emarolab.owloop.core.Axiom <br>
+ * <b>Licence</b>:      GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
+ * <b>Authors</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it), Syed Yusha Kareem (kareem.syed.yusha@dibris.unige.it) <br>
+ * <b>affiliation</b>:  EMAROLab, DIBRIS, University of Genoa. <br>
+ * <b>date</b>:         01/05/19 <br>
  * </small></div>
  *
  * @param <O> the type of ontology in which the axioms for classes will be applied.
@@ -60,13 +60,6 @@ public interface DataProperty<O,J>
      *     This {@link Axiom.Descriptor} synchronises the disjointed data properties of {@code this}
      *     property (i.e.: the {@link Ground#getGroundInstance()}).
      * </p>
-     * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.core.DataProperty <br>
-     * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
-     * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
-     * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
-     * <b>date</b>:        21/05/17 <br>
-     * </small></div>
      *
      * @param <O> the type of ontology in which the axioms for classes will be applied.
      * @param <J> the type of the described data property
@@ -170,13 +163,6 @@ public interface DataProperty<O,J>
      *     This {@link Axiom.Descriptor} synchronises the equivalent data properties of {@code this}
      *     property (i.e.: the {@link Ground#getGroundInstance()}).
      * </p>
-     * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.core.DataProperty <br>
-     * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
-     * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
-     * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
-     * <b>date</b>:        21/05/17 <br>
-     * </small></div>
      *
      * @param <O> the type of ontology in which the axioms for classes will be applied.
      * @param <J> the type of the described data property
@@ -287,13 +273,6 @@ public interface DataProperty<O,J>
      *     This {@link Axiom.Descriptor} synchronises the sub data properties of {@code this}
      *     property (i.e.: the {@link Ground#getGroundInstance()}).
      * </p>
-     * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.core.DataProperty <br>
-     * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
-     * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
-     * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
-     * <b>date</b>:        21/05/17 <br>
-     * </small></div>
      *
      * @param <O> the type of ontology in which the axioms for classes will be applied.
      * @param <J> the type of the described data property
@@ -404,13 +383,6 @@ public interface DataProperty<O,J>
      *     This {@link Axiom.Descriptor} synchronises the super data properties of {@code this}
      *     property (i.e.: the {@link Ground#getGroundInstance()}).
      * </p>
-     * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.core.DataProperty <br>
-     * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
-     * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
-     * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
-     * <b>date</b>:        21/05/17 <br>
-     * </small></div>
      *
      * @param <O> the type of ontology in which the axioms for classes will be applied.
      * @param <J> the type of the described data property
@@ -534,14 +506,6 @@ public interface DataProperty<O,J>
      *     to {@code build} them) since their are not entities that fall back in the {@link Axiom}
      *     representations.
      *
-     * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.core.DataProperty <br>
-     * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
-     * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
-     * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
-     * <b>date</b>:        21/05/17 <br>
-     * </small></div>
-     *
      * @param <O> the type of ontology in which the axioms for classes will be applied.
      * @param <J> the type of the described class.
      * @param <Y> the type of restriction of the domain of the defined property.
@@ -634,14 +598,6 @@ public interface DataProperty<O,J>
      *     This description is not considered from an OOP point of view (it is not possible
      *     to {@code build} them) since their are not entities that fall back in the {@link Axiom}
      *     representations.
-     *
-     * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.core.DataProperty <br>
-     * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
-     * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
-     * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
-     * <b>date</b>:        21/05/17 <br>
-     * </small></div>
      *
      * @param <O> the type of ontology in which the axioms for classes will be applied.
      * @param <J> the type of the described class.

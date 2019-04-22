@@ -26,12 +26,13 @@ import java.util.Set;
  *     </ul>
  *     Nevertheless, they are still generic and not attached to any specific OWL implementation.
  *     Since they implements common feature of OWLLOOP architecture only.
+ *
  * <div style="text-align:center;"><small>
- * <b>File</b>:        it.emarolab.owloop.core.Individual <br>
- * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
- * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
- * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
- * <b>date</b>:        21/05/17 <br>
+ * <b>File</b>:         it.emarolab.owloop.core.Axiom <br>
+ * <b>Licence</b>:      GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
+ * <b>Authors</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it), Syed Yusha Kareem (kareem.syed.yusha@dibris.unige.it) <br>
+ * <b>affiliation</b>:  EMAROLab, DIBRIS, University of Genoa. <br>
+ * <b>date</b>:         01/05/19 <br>
  * </small></div>
  *
  * @param <O> the type of ontology in which the axioms for classes will be applied.
@@ -46,13 +47,6 @@ public interface Individual<O,J>
      *     This {@link Axiom.Descriptor} synchronises the types in which the specific individualCompoundDescriptor
      *     (i.e.: the {@link Ground#getGroundInstance()}) is classified.
      * </p>
-     * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.core.Individual <br>
-     * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
-     * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
-     * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
-     * <b>date</b>:        21/05/17 <br>
-     * </small></div>
      *
      * @param <O> the type of ontology in which the axioms for classes will be applied.
      * @param <J> the type of the described individualCompoundDescriptor.
@@ -165,13 +159,6 @@ public interface Individual<O,J>
      *     This {@link Axiom.Descriptor} synchronises the different individuals from the described one
      *     (i.e.: the {@link Ground#getGroundInstance()}).
      * </p>
-     * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.core.Individual <br>
-     * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
-     * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
-     * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
-     * <b>date</b>:        21/05/17 <br>
-     * </small></div>
      *
      * @param <O> the type of ontology in which the axioms for classes will be applied.
      * @param <J> the type of the described individualCompoundDescriptor.
@@ -282,13 +269,6 @@ public interface Individual<O,J>
      *     This {@link Axiom.Descriptor} synchronises the equivalent individuals from the described one
      *     (i.e.: the {@link Ground#getGroundInstance()}).
      * </p>
-     * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.core.Individual <br>
-     * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
-     * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
-     * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
-     * <b>date</b>:        21/05/17 <br>
-     * </small></div>
      *
      * @param <O> the type of ontology in which the axioms for classes will be applied.
      * @param <J> the type of the described individualCompoundDescriptor.
@@ -402,13 +382,6 @@ public interface Individual<O,J>
      *     Anyway if the {@link SemanticEntitySet} is leaved empty during {@link #readSemantic()}
      *     it maps all the data properties applied to the described individualCompoundDescriptor.
      * </p>
-     * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.core.Individual <br>
-     * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
-     * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
-     * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
-     * <b>date</b>:        21/05/17 <br>
-     * </small></div>
      *
      * @param <O> the type of ontology in which the axioms for classes will be applied.
      * @param <J> the type of the described individualCompoundDescriptor.
@@ -526,13 +499,6 @@ public interface Individual<O,J>
      *     Anyway if the {@link SemanticEntitySet} is leaved empty during {@link #readSemantic()}
      *     it maps all the object properties applied to the described individualCompoundDescriptor.
      * </p>
-     * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.core.Individual <br>
-     * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
-     * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
-     * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
-     * <b>date</b>:        21/05/17 <br>
-     * </small></div>
      *
      * @param <O> the type of ontology in which the axioms for classes will be applied.
      * @param <J> the type of the described individualCompoundDescriptor.

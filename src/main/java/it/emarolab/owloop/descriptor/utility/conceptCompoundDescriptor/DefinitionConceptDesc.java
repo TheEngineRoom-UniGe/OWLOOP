@@ -17,7 +17,7 @@ import java.util.List;
  * <p>
  *     This is an example of how use the {@link Axiom.Descriptor}s for implement
  *     a conceptCompoundDescriptor that is synchronised w.r.t. its {@link Disjoint} and {@link Equivalent} classes
- *     as wel as with its {@link Define} restrictions and {@link Classify}ed individuals.
+ *     as wel as with its {@link Definition} restrictions and {@link Instance}ed individuals.
  *     <br>
  *     Its purpose is only to instanciate the {@link DescriptorEntitySet.Concepts} for the
  *     respective descriptions, as well as call the derived interfaces in the
@@ -40,10 +40,10 @@ import java.util.List;
  */
 public class DefinitionConceptDesc
         extends ConceptDescriptorBase
-        implements ConceptExpression.Define,
+        implements ConceptExpression.Definition,
         ConceptExpression.Disjoint<DefinitionConceptDesc>,
         ConceptExpression.Equivalent<DefinitionConceptDesc>,
-        ConceptExpression.Classify<LinkIndividualDesc>{
+        ConceptExpression.Instance<LinkIndividualDesc> {
 
 
     private DescriptorEntitySet.Concepts disjointConcept = new DescriptorEntitySet.Concepts();
@@ -88,8 +88,8 @@ public class DefinitionConceptDesc
     public List<MappingIntent> readSemantic() {
         List<MappingIntent> r = ConceptExpression.Disjoint.super.readSemantic();
         r.addAll( ConceptExpression.Equivalent.super.readSemantic());
-        r.addAll( ConceptExpression.Define.super.readSemantic());
-        r.addAll( ConceptExpression.Classify.super.readSemantic());
+        r.addAll( Definition.super.readSemantic());
+        r.addAll( Instance.super.readSemantic());
         return r;
     }
 
@@ -97,8 +97,8 @@ public class DefinitionConceptDesc
     public List<MappingIntent> writeSemantic() {
         List<MappingIntent> r = ConceptExpression.Disjoint.super.writeSemantic();
         r.addAll( ConceptExpression.Equivalent.super.writeSemantic());
-        r.addAll( ConceptExpression.Define.super.writeSemantic());
-        r.addAll( ConceptExpression.Classify.super.writeSemantic());
+        r.addAll( Definition.super.writeSemantic());
+        r.addAll( Instance.super.writeSemantic());
         return r;
     }
 
@@ -131,7 +131,7 @@ public class DefinitionConceptDesc
 
 
 
-    // implementations for ConceptExpression.Define
+    // implementations for ConceptExpression.Definition
 
     @Override
     public DescriptorEntitySet.Restrictions getDefinitionConcept() {
@@ -142,12 +142,12 @@ public class DefinitionConceptDesc
     // implementations for ConceptExpression.Classifier
 
     @Override  // called during build...() you can change the returning type to any implementations of ConceptExpression
-    public LinkIndividualDesc getNewIndividualClassified(OWLNamedIndividual instance, OWLReferences ontology) {
+    public LinkIndividualDesc getNewIndividualInstance(OWLNamedIndividual instance, OWLReferences ontology) {
         return new LinkIndividualDesc( instance, ontology);
     }
 
     @Override
-    public DescriptorEntitySet.Individuals getIndividualClassified() {
+    public DescriptorEntitySet.Individuals getIndividualInstance() {
         return classifiedIndividual;
     }
 

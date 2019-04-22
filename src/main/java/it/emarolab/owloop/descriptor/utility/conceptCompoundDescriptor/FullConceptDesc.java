@@ -41,12 +41,12 @@ import java.util.List;
  */
 public class FullConceptDesc
         extends ConceptDescriptorBase
-        implements ConceptExpression.Define,
+        implements ConceptExpression.Definition,
         ConceptExpression.Disjoint<FullConceptDesc>,
         ConceptExpression.Equivalent<FullConceptDesc>,
         ConceptExpression.Sub<FullConceptDesc>,
         ConceptExpression.Super<FullConceptDesc>,
-        ConceptExpression.Classify<LinkIndividualDesc> {
+        ConceptExpression.Instance<LinkIndividualDesc> {
 
     private DescriptorEntitySet.Restrictions restrictions = new DescriptorEntitySet.Restrictions();
     private DescriptorEntitySet.Concepts disjointConcept = new DescriptorEntitySet.Concepts();
@@ -88,10 +88,10 @@ public class FullConceptDesc
     public List<MappingIntent> readSemantic() {
         List<MappingIntent> r = ConceptExpression.Disjoint.super.readSemantic();
         r.addAll( ConceptExpression.Equivalent.super.readSemantic());
-        r.addAll( ConceptExpression.Define.super.readSemantic()); // call this before Sub or Super !!!
+        r.addAll( Definition.super.readSemantic()); // call this before Sub or Super !!!
         r.addAll( ConceptExpression.Sub.super.readSemantic());
         r.addAll( ConceptExpression.Super.super.readSemantic());
-        r.addAll( ConceptExpression.Classify.super.readSemantic());
+        r.addAll( Instance.super.readSemantic());
         return r;
     }
 
@@ -101,8 +101,8 @@ public class FullConceptDesc
         r.addAll( ConceptExpression.Equivalent.super.writeSemantic());
         r.addAll( ConceptExpression.Sub.super.writeSemantic());
         r.addAll( ConceptExpression.Super.super.writeSemantic());
-        r.addAll( ConceptExpression.Define.super.writeSemantic()); // call this before Sub or Super !!!
-        r.addAll( ConceptExpression.Classify.super.writeSemantic());
+        r.addAll( Definition.super.writeSemantic()); // call this before Sub or Super !!!
+        r.addAll( Instance.super.writeSemantic());
         return r;
     }
 
@@ -130,7 +130,7 @@ public class FullConceptDesc
         return equivalentConcept;
     }
 
-    // implementations for ConceptExpression.Define
+    // implementations for ConceptExpression.Definition
 
     @Override
     public DescriptorEntitySet.Restrictions getDefinitionConcept() {
@@ -164,12 +164,12 @@ public class FullConceptDesc
     // implementations for ConceptExpression.Classifier
 
     @Override // called during build...() you can change the returning type to any implementations of ConceptExpression
-    public LinkIndividualDesc getNewIndividualClassified(OWLNamedIndividual instance, OWLReferences ontology) {
+    public LinkIndividualDesc getNewIndividualInstance(OWLNamedIndividual instance, OWLReferences ontology) {
         return new LinkIndividualDesc( instance, ontology);
     }
 
     @Override
-    public DescriptorEntitySet.Individuals getIndividualClassified() {
+    public DescriptorEntitySet.Individuals getIndividualInstance() {
         return classifiedIndividual;
     }
 

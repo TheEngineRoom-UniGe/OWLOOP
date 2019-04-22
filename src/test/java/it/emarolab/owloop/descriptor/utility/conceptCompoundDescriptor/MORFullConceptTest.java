@@ -236,7 +236,7 @@ public class MORFullConceptTest {
 
         concept.setInstance( "Parameter");
         concept.readSemantic();
-        System.out.println( "described conceptCompoundDescriptor, equivalent test: " + concept.buildIndividualClassified());
+        System.out.println( "described conceptCompoundDescriptor, equivalent test: " + concept.buildIndividualInstance());
 
     }
 
@@ -245,7 +245,7 @@ public class MORFullConceptTest {
         assertEquals( concept.getSuperConcept(), concept.querySuperConcept());
         assertEquals( concept.getDisjointConcept(), concept.queryDisjointConcept());
         assertEquals( concept.getEquivalentConcept(), concept.queryEquivalentConcept());
-        assertEquals( concept.getIndividualClassified(), concept.queryIndividualClassified());
+        assertEquals( concept.getIndividualInstance(), concept.queryIndividualInstance());
         assertEquals( concept.getDefinitionConcept(), concept.queryDefinitionConcept());
     }
 }

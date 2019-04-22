@@ -3,39 +3,39 @@ package it.emarolab.owloop.core;
 import java.util.*;
 
 /**
- *      This interface is a part of the core of OWLOOP architecture.
- *      It contains interfaces of the basic components within OWLOOP. <p>
- *      The components are the following:
+ * This interface is a part of the core of OWLOOP architecture.
+ * It contains interfaces of the basic components within OWLOOP. <p>
+ * The components are the following:
  *
- *      <ul>
- *      <li><b>{@link Ground}</b>:  is an OWL entity associated to an ontology. </li>
- *      <li><b>{@link EntitySet}</b>: is a set of OWL entities associated to the {@link Ground} via an expression. </li>
- *      <li><b>{@link SemanticEntity}</b>: associates an expression to the {@link EntitySet}. </li>
- *      <li><b>{@link SemanticEntitySet}</b>: enables association of complex expressions to the {@link EntitySet}. </li>
- *      <li><b>{@link Descriptor}</b>: is in charge of mapping the ({@link Ground}) and the ({@link EntitySet}) via an (expression).
- *                                      A descriptor is also in charge of synchronizing them all, i.e, the axioms, between it's
- *                                      internal state and the OWL representation.
- *      <li><b>{@link MappingIntent}</b>: it keeps a record of the manipulations made by the {@link Descriptor}
- *                                during the synchronisation. While 'reading()' it records the changes made in the
- *                                internal state of the descriptors, and while 'writing()' it records also the changes
- *                                applied to the OWL representation. </li>
- *      </ul>
+ * <ul>
+ * <li><b>{@link Ground}</b>:              is an OWL entity associated to an ontology. </li>
+ * <li><b>{@link EntitySet}</b>:           is a set of OWL entities associated to the {@link Ground} via an expression. </li>
+ * <li><b>{@link SemanticEntity}</b>:      associates an expression to the {@link EntitySet}. </li>
+ * <li><b>{@link SemanticEntitySet}</b>:   enables association of complex expressions to the {@link EntitySet}. </li>
+ * <li><b>{@link Descriptor}</b>:          is in charge of mapping the ({@link Ground}) and the ({@link EntitySet}) via an (expression).
+ *                                         A descriptor is also in charge of synchronizing them all, i.e, the axioms, between it's
+ *                                         internal state and the OWL representation.
+ * <li><b>{@link MappingIntent}</b>:       it keeps a record of the manipulations made by the {@link Descriptor}
+ *                                         during the synchronisation. While 'reading()' it records the changes made in the
+ *                                         internal state of the descriptors, and while 'writing()' it records also the changes
+ *                                         applied to the OWL representation. </li>
+ * </ul>
  *
- *      <div style="text-align:center;"><small>
- *      <b>File</b>:         it.emarolab.owloop.core.Axiom <br>
- *      <b>Licence</b>:      GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
- *      <b>Authors</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it), Syed Yusha Kareem (kareem.syed.yusha@dibris.unige.it) <br>
- *      <b>affiliation</b>:  EMAROLab, DIBRIS, University of Genoa. <br>
- *      <b>date</b>:         01/05/19 <br>
- *      </small></div>
+ * <div style="text-align:center;"><small>
+ * <b>File</b>:         it.emarolab.owloop.core.Axiom <br>
+ * <b>Licence</b>:      GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
+ * <b>Authors</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it), Syed Yusha Kareem (kareem.syed.yusha@dibris.unige.it) <br>
+ * <b>affiliation</b>:  EMAROLab, DIBRIS, University of Genoa. <br>
+ * <b>date</b>:         01/05/19 <br>
+ * </small></div>
  */
 public interface Axiom {
 
     /**
      * Is an OWL entity associated to an ontology.
      *
-     * @param <O> is the ontology in which the axioms will be applied.
-     * @param <J> is the grounded OWL entity.
+     * @param <O> is the ontology.
+     * @param <J> is the ground.
      */
     interface Ground<O,J>
             extends Axiom {

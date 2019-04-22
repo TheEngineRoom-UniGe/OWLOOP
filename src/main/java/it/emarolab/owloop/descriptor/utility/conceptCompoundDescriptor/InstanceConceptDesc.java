@@ -16,7 +16,7 @@ import java.util.List;
  * A basic implementation for a conceptCompoundDescriptor that classify individuals.
  * <p>
  *     This is an example of how use the {@link Axiom.Descriptor}s for implement
- *     a conceptCompoundDescriptor that is synchronised only w.r.t. {@link Classify}ed individuals.
+ *     a conceptCompoundDescriptor that is synchronised only w.r.t. {@link Instance}ed individuals.
  *     <br>
  *     Its purpose is only to instanciate the {@link DescriptorEntitySet.Concepts} for the
  *     respective descriptions, as well as call the derived interfaces in the
@@ -30,43 +30,43 @@ import java.util.List;
  *     and maximises the OWL synchronisation efficiency.
  *
  * <div style="text-align:center;"><small>
- * <b>File</b>:        it.emarolab.owloop.descriptor.utility.conceptCompoundDescriptor.ClassifyConceptDesc <br>
+ * <b>File</b>:        it.emarolab.owloop.descriptor.utility.conceptCompoundDescriptor.InstanceConceptDesc <br>
  * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
  * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
  * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
  * <b>date</b>:        21/05/17 <br>
  * </small></div>
  */
-public class ClassifyConceptDesc
+public class InstanceConceptDesc
         extends ConceptDescriptorBase
-        implements ConceptExpression.Classify<LinkIndividualDesc> {
+        implements ConceptExpression.Instance<LinkIndividualDesc> {
 
     private DescriptorEntitySet.Individuals classifiedIndividual = new DescriptorEntitySet.Individuals();
 
     // constructors for ConceptDescriptorBase
 
-    public ClassifyConceptDesc(OWLClass instance, OWLReferences onto) {
+    public InstanceConceptDesc(OWLClass instance, OWLReferences onto) {
         super(instance, onto);
     }
-    public ClassifyConceptDesc(String instanceName, OWLReferences onto) {
+    public InstanceConceptDesc(String instanceName, OWLReferences onto) {
         super(instanceName, onto);
     }
-    public ClassifyConceptDesc(OWLClass instance, String ontoName) {
+    public InstanceConceptDesc(OWLClass instance, String ontoName) {
         super(instance, ontoName);
     }
-    public ClassifyConceptDesc(OWLClass instance, String ontoName, String filePath, String iriPath) {
+    public InstanceConceptDesc(OWLClass instance, String ontoName, String filePath, String iriPath) {
         super(instance, ontoName, filePath, iriPath);
     }
-    public ClassifyConceptDesc(OWLClass instance, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
+    public InstanceConceptDesc(OWLClass instance, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
         super(instance, ontoName, filePath, iriPath, bufferingChanges);
     }
-    public ClassifyConceptDesc(String instanceName, String ontoName) {
+    public InstanceConceptDesc(String instanceName, String ontoName) {
         super(instanceName, ontoName);
     }
-    public ClassifyConceptDesc(String instanceName, String ontoName, String filePath, String iriPath) {
+    public InstanceConceptDesc(String instanceName, String ontoName, String filePath, String iriPath) {
         super(instanceName, ontoName, filePath, iriPath);
     }
-    public ClassifyConceptDesc(String instanceName, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
+    public InstanceConceptDesc(String instanceName, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
         super(instanceName, ontoName, filePath, iriPath, bufferingChanges);
     }
 
@@ -78,24 +78,24 @@ public class ClassifyConceptDesc
 
     @Override
     public List<MappingIntent> readSemantic() {
-        return ConceptExpression.Classify.super.readSemantic();
+        return Instance.super.readSemantic();
     }
 
     @Override
     public List<MappingIntent> writeSemantic() {
-        return ConceptExpression.Classify.super.writeSemantic();
+        return Instance.super.writeSemantic();
     }
 
     // implementations for ConceptExpression.Classifier
 
 
     @Override // you can change the returning type to any implementations of ConceptExpression
-    public LinkIndividualDesc getNewIndividualClassified(OWLNamedIndividual instance, OWLReferences ontology) {
+    public LinkIndividualDesc getNewIndividualInstance(OWLNamedIndividual instance, OWLReferences ontology) {
         return new LinkIndividualDesc( instance, ontology);
     }
 
     @Override
-    public DescriptorEntitySet.Individuals getIndividualClassified() {
+    public DescriptorEntitySet.Individuals getIndividualInstance() {
         return classifiedIndividual;
     }
 
