@@ -5,31 +5,20 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * The main interface for ontological object property {@link Axiom.Descriptor}.
- * <p>
- *     This interface contains all the {@link Axiom.Descriptor} that
- *     can be applied to an ontological object property (e.g.: {@link org.semanticweb.owlapi.model.OWLObjectProperty})
- *     in any arbitrary combination since all of them should rely on the same {@link Axiom.Ground}
- *     type.
- *     <br>
- *     More in particular, for the {@link #getInstance()} entities in the {@link #getOntology()}, those are:
- *     <ul>
- *     <li><b>{@link Inverse}</b>: for describing the inverse properties.</li>
- *     <li><b>{@link Disjoint}</b>: for describing disjointed properties from the specific
- *                                         grounded {@link ObjectProperty}.</li>
- *     <li><b>{@link Equivalent}</b>: for describing equivalent properties from the specific
- *                                         grounded {@link ObjectProperty}.</li>
- *     <li><b>{@link Sub}</b>: for representing the sub object properties of
- *                                         this grounded {@link ObjectProperty}.</li>
- *     <li><b>{@link Super}</b>: for representing the super object properties of
- *                                         this grounded {@link ObjectProperty}.</li>
- *     <li><b>{@link Domain}</b>: for representing the domain restrictions of the
- *                                         this grounded {@link ObjectProperty}.</li>
- *     <li><b>{@link Range}</b>: for representing the range restrictions of the
- *                                         this grounded {@link ObjectProperty}.</li>
- *     </ul>
- *     Nevertheless, they are still generic and not attached to any specific OWL implementation.
- *     Since they implements common feature of OWLLOOP architecture only.
+ * This interface is a part of the core of OWLOOP architecture.
+ * It contains interfaces of the basic expressions that can be applied to
+ * the ontological entity OWLDataProperty (i.e., {@link org.semanticweb.owlapi.model.OWLObjectProperty}). <p>
+ * The expressions are the following:
+ *
+ * <ul>
+ * <li><b>{@link Equivalent}</b>:   this expression describes that an ObjectProperty is equivalent to another ObjectProperty.</li>
+ * <li><b>{@link Disjoint}</b>:     this expression describes that an ObjectProperty is disjoint to another ObjectProperty.</li>
+ * <li><b>{@link Sub}</b>:          this expression describes that an ObjectProperty subsumes another ObjectProperty.</li>
+ * <li><b>{@link Super}</b>:        this expression describes that an ObjectProperty super-sumes another ObjectProperty.</li>
+ * <li><b>{@link Domain}</b>:       this expression describes the domain restrictions of an ObjectProperty.</li>
+ * <li><b>{@link Range}</b>:        this expression describes the range restrictions of an ObjectProperty.</li>
+ * <li><b>{@link Inverse}</b>:      this expression describes that an ObjectProperty has another inverse ObjectProperty.</li>
+ * </ul>
  *
  * <div style="text-align:center;"><small>
  * <b>File</b>:         it.emarolab.owloop.core.Axiom <br>
@@ -39,8 +28,8 @@ import java.util.Set;
  * <b>date</b>:         01/05/19 <br>
  * </small></div>
  *
- * @param <O> the type of ontology in which the axioms for classes will be applied.
- * @param <J> the type of instance (i.e.: object properties) for the axioms.
+ * @param <O> is the ontology.
+ * @param <J> is the ground.
  */
 public interface ObjectProperty<O,J>
         extends Axiom.Descriptor<O,J>{

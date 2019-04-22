@@ -5,27 +5,20 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * The main interface for ontological individualCompoundDescriptor {@link Axiom.Descriptor}.
- * <p>
- *     This interface contains all the {@link Axiom.Descriptor} that
- *     can be applied to an ontological individualCompoundDescriptor (e.g.: {@link org.semanticweb.owlapi.model.OWLNamedIndividual})
- *     in any arbitrary combination since all of them should rely on the same {@link Axiom.Ground}
- *     type.
- *     <br>
- *     More in particular, for the {@link #getInstance()} entities in the {@link #getOntology()}, those are:
- *     <ul>
- *     <li><b>{@link Type}</b>: for describing the classes of an individualCompoundDescriptor.</li>
- *     <li><b>{@link Disjoint}</b>: for describing disjointed individuals for the one grounded
- *                                         in a specific {@link Individual}.</li>
- *     <li><b>{@link Equivalent}</b>: for describing equivalent individuals for the one grounded
- *                                         in a specific {@link Individual}.</li>
- *     <li><b>{@link DataLink}</b>: for representing the data properties (and related values)
- *                                         applied to an {@link Individual}.</li>
- *     <li><b>{@link ObjectLink}</b>: for representing the object properties (and related individuals value)
- *                                         applied to an {@link Individual}.</li>
- *     </ul>
- *     Nevertheless, they are still generic and not attached to any specific OWL implementation.
- *     Since they implements common feature of OWLLOOP architecture only.
+ * This interface is a part of the core of OWLOOP architecture.
+ * It contains interfaces of the basic expressions that can be applied to
+ * the ontological entity OWLDataProperty (i.e., {@link org.semanticweb.owlapi.model.OWLNamedIndividual}). <p>
+ * The expressions are the following:
+ *
+ * <ul>
+ * <li><b>{@link Equivalent}</b>:   this expression describes an Individual same-as another Individual.</li>
+ * <li><b>{@link Disjoint}</b>:     this expression describes an Individual different from another Individual.</li>
+ * <li><b>{@link Type}</b>:         this expression describes the Type/s (i.e., class/es) of an Individual.</li>
+ * <li><b>{@link ObjectLink}</b>:   this expression describes an ObjectProperty and Individuals related via that ObjectProperty,
+ *                                  for an Individual.</li>
+ * <li><b>{@link DataLink}</b>:     this expression describes an DataProperty and Individuals related via that DataProperty,
+ *                                  for an Individual.</li>
+ * </ul>
  *
  * <div style="text-align:center;"><small>
  * <b>File</b>:         it.emarolab.owloop.core.Axiom <br>
@@ -35,8 +28,8 @@ import java.util.Set;
  * <b>date</b>:         01/05/19 <br>
  * </small></div>
  *
- * @param <O> the type of ontology in which the axioms for classes will be applied.
- * @param <J> the type of instance (i.e.: individualCompoundDescriptor) for the axioms.
+ * @param <O> is the ontology.
+ * @param <J> is the ground.
  */
 public interface Individual<O,J>
         extends Axiom.Descriptor<O,J>{

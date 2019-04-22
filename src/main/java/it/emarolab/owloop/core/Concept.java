@@ -11,12 +11,12 @@ import java.util.Set;
  * The expressions are the following:
  *
  * <ul>
- * <li><b>{@link Equivalent}</b>:  this expression describes that a class is equivalent to another class.</li>
- * <li><b>{@link Disjoint}</b>:    this expression describes that a class is disjoint to another class.</li>
- * <li><b>{@link Sub}</b>:         this expression describes that a class subsumes another class.</li>
- * <li><b>{@link Super}</b>:       this expression describes that a class is a super-class of another class.</li>
- * <li><b>{@link Instance}</b>:    this expression describes an individual of a class.</li>
- * <li><b>{@link Definition}</b>:  this expression describes the definition of a class..</li>
+ * <li><b>{@link Equivalent}</b>:  this expression describes that a Class is equivalent to another Class.</li>
+ * <li><b>{@link Disjoint}</b>:    this expression describes that a Class is disjoint to another Class.</li>
+ * <li><b>{@link Sub}</b>:         this expression describes that a Class subsumes another Class.</li>
+ * <li><b>{@link Super}</b>:       this expression describes that a Class is a super-class of another Class.</li>
+ * <li><b>{@link Instance}</b>:    this expression describes an Individual of a Class.</li>
+ * <li><b>{@link Definition}</b>:  this expression describes the definition of a Class..</li>
  * </ul>
  *
  * <div style="text-align:center;"><small>
@@ -560,11 +560,11 @@ public interface Concept<O,J>
     }
 
     /**
-     /**
      * Implementation of this interface enables a {@link Axiom.Descriptor} to have the {@link Definition} expression.<p>
      * Definition is defined as a conjunction of restriction properties that
      * create a super class of the described ontological class.
      * The restriction can be of the following types:
+     *
      * <ul>
      * <li><b>equivalent restriction</b>:   a class is defined as another.</li>
      * <li><b>data restriction</b>:         a class is defined to have data properties into a given range.

@@ -5,30 +5,19 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * The main interface for ontological data property {@link Axiom.Descriptor}.
- * <p>
- *     This interface contains all the {@link Axiom.Descriptor} that
- *     can be applied to an ontological data property (e.g.: {@link org.semanticweb.owlapi.model.OWLDataProperty})
- *     in any arbitrary combination since all of them should rely on the same {@link Axiom.Ground}
- *     type.
- *     <br>
- *     More in particular, for the {@link #getInstance()} entities in the {@link #getOntology()}, those are:
- *     <ul>
- *     <li><b>{@link Disjoint}</b>: for describing disjointed properties from the specific
- *                                         grounded {@link DataProperty}.</li>
- *     <li><b>{@link Equivalent}</b>: for describing equivalent properties from the specific
- *                                         grounded {@link DataProperty}.</li>
- *     <li><b>{@link Sub}</b>: for representing the sub data properties of
- *                                         this grounded {@link DataProperty}.</li>
- *     <li><b>{@link Super}</b>: for representing the super data properties of
- *                                         this grounded {@link DataProperty}.</li>
- *     <li><b>{@link Domain}</b>: for representing the domain restrictions of the
- *                                         this grounded {@link DataProperty}.</li>
- *     <li><b>{@link Range}</b>: for representing the range restrictions of the
- *                                         this grounded {@link DataProperty}.</li>
- *     </ul>
- *     Nevertheless, they are still generic and not attached to any specific OWL implementation.
- *     Since they implements common feature of OWLLOOP architecture only.
+ * This interface is a part of the core of OWLOOP architecture.
+ * It contains interfaces of the basic expressions that can be applied to
+ * the ontological entity OWLDataProperty (i.e., {@link org.semanticweb.owlapi.model.OWLDataProperty}). <p>
+ * The expressions are the following:
+ *
+ * <ul>
+ * <li><b>{@link Equivalent}</b>:   this expression describes that a DataProperty is equivalent to another DataProperty.</li>
+ * <li><b>{@link Disjoint}</b>:     this expression describes that a DataProperty is disjoint to another DataProperty.</li>
+ * <li><b>{@link Sub}</b>:          this expression describes that a DataProperty is subsumes another DataProperty.</li>
+ * <li><b>{@link Super}</b>:        this expression describes that a DataProperty is super-sumes another DataProperty.</li>
+ * <li><b>{@link Domain}</b>:       this expression describes the domain restrictions of a DataProperty.</li>
+ * <li><b>{@link Range}</b>:        this expression describes the range restrictions of a DataProperty.</li>
+ * </ul>
  *
  * <div style="text-align:center;"><small>
  * <b>File</b>:         it.emarolab.owloop.core.Axiom <br>
@@ -38,8 +27,8 @@ import java.util.Set;
  * <b>date</b>:         01/05/19 <br>
  * </small></div>
  *
- * @param <O> the type of ontology in which the axioms for classes will be applied.
- * @param <J> the type of instance (i.e.: data properties) for the axioms.
+ * @param <O> is the ontology.
+ * @param <J> is the ground.
  */
 public interface DataProperty<O,J>
         extends Axiom.Descriptor<O,J>{
@@ -50,125 +39,17 @@ public interface DataProperty<O,J>
      */
     void setFunctional();
     /**
-     * Make {@link #getInstance()} to be no a functional property anymore.
+     * Make {@link #getInstance()} to be not a functional property.
      */
     void setNotFunctional();
 
     /**
-     * The {@link Axiom.Descriptor} for disjointed data properties.
-     * <p>
-     *     This {@link Axiom.Descriptor} synchronises the disjointed data properties of {@code this}
-     *     property (i.e.: the {@link Ground#getGroundInstance()}).
-     * </p>
+     * Implementation of this interface enables a {@link Axiom.Descriptor} to have the {@link Equivalent} expression.
      *
-     * @param <O> the type of ontology in which the axioms for classes will be applied.
-     * @param <J> the type of the described data property
-     *           (it also represents the type of {@link EntitySet} managed by this {@link Descriptor}.
-     * @param <D> the type of the {@link DataProperty} descriptor instantiated during
-     *           {@link #buildDisjointDataProperty()} through {@link #getNewDisjointDataProperty(Object, Object)}.
-     */
-    interface Disjoint<O,J,D extends DataProperty<O,J>>
-            extends DataProperty<O,J>{
-
-        @Override
-        default List<MappingIntent> readSemantic(){
-            EntitySet.SynchronisationIntent<J> from = synchroniseDisjointDataPropertyFromSemantic();
-            getDisjointDataProperty().addAll( from.getToAdd());
-            getDisjointDataProperty().removeAll( from.getToRemove());
-            return getIntent( from);
-        }
-
-        /**
-         * Create an {@link Axiom.Descriptor} set where each element
-         * represents the disjointed data property of {@code this} property.
-         * Each of {@link DataProperty}s are instantiated
-         * through the method {@link #getNewDisjointDataProperty(Object, Object)};
-         * this is called for all {@link #getDisjointDataProperty()}.
-         * @return the set of {@link DataProperty}s that describes the
-         * disjoint relations of {@code this} described ontological property.
-         */
-        default Set< D> buildDisjointDataProperty(){
-            Set<D> out = new HashSet<>();
-            for( J cl : getDisjointDataProperty()){
-                D built = getNewDisjointDataProperty( cl, getOntology());
-                built.readSemantic();
-                out.add( built);
-            }
-            return out;
-        }
-
-        /**
-         * This method is called by {@link #buildDisjointDataProperty()} and
-         * its purpose is to instantiate a new {@link DataProperty} to represent
-         * a disjointed property of {@code this} {@link DataProperty} {@link Descriptor}.
-         * @param instance the instance to ground the new disjoint {@link DataProperty}.
-         * @param ontology the ontology in which ground the new {@link DataProperty}.
-         * @return a new {@link Axiom.Descriptor} for all the disjointed properties
-         * of the one described by {@code this} interface.
-         */
-        D getNewDisjointDataProperty(J instance, O ontology);
-
-        /**
-         * Returns the {@link EntitySet} that describes all the disjoint data properties of
-         * {@code this} grounded {@link DataProperty}; from a no OOP point of view.
-         * @return the entities describing the disjoint data properties of {@code this} described property.
-         */
-        EntitySet<J> getDisjointDataProperty();
-
-        /**
-         * Queries to the OWL representation for the disjoint properties of {@code this} data property.
-         * @return a new {@link EntitySet} contained the disjoint properties of {@link #getInstance()},
-         * into the OWL structure.
-         */
-        EntitySet<J> queryDisjointDataProperty();
-
-        /**
-         * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryDisjointDataProperty()}
-         * as input parameter. This computes the changes to be performed in the OWL representation
-         * for synchronise it with respect to {@link #getDisjointDataProperty()}. This should
-         * be done by {@link #writeSemantic()}.
-         * @return the changes to be done to synchronise {@code this} structure with
-         * the disjoint properties of {@link #getInstance()}; to the OWL representation.
-         */
-        default EntitySet.SynchronisationIntent<J> synchroniseDisjointDataPropertyToSemantic(){
-            try {
-                return getDisjointDataProperty().synchroniseTo( queryDisjointDataProperty());
-            } catch ( Exception e){
-                e.printStackTrace();
-                return null;
-            }
-        }
-
-        /**
-         * It calls {@link SemanticEntitySet#synchroniseFrom(EntitySet)} with {@link #queryDisjointDataProperty()}
-         * as input parameter. This computes the changes to be performed into the {@link #getDisjointDataProperty()}
-         * in order to synchronise it with respect to an OWL representation. This is
-         * be done by {@link #readSemantic()}.
-         * @return the changes to be done to synchronise the disjoint data properties of {@link #getInstance()};
-         * from an OWL representation to {@code this} {@link Descriptor}.
-         */
-        default EntitySet.SynchronisationIntent<J> synchroniseDisjointDataPropertyFromSemantic(){
-            try{
-                return getDisjointDataProperty().synchroniseFrom( queryDisjointDataProperty());
-            } catch ( Exception e){
-                e.printStackTrace();
-                return null;
-            }
-        }
-    }
-
-    /**
-     * The {@link Axiom.Descriptor} for equivalent data properties.
-     * <p>
-     *     This {@link Axiom.Descriptor} synchronises the equivalent data properties of {@code this}
-     *     property (i.e.: the {@link Ground#getGroundInstance()}).
-     * </p>
-     *
-     * @param <O> the type of ontology in which the axioms for classes will be applied.
-     * @param <J> the type of the described data property
-     *           (it also represents the type of {@link EntitySet} managed by this {@link Descriptor}.
-     * @param <D> the type of the {@link DataProperty} descriptor instantiated during
-     *           {@link #buildEquivalentDataProperty()} through {@link #getNewEquivalentDataProperty(Object, Object)}.
+     * @param <O> the ontology.
+     * @param <J> the type of {@link Ground} and {@link EntitySet} managed by this {@link Descriptor}.
+     * @param <D> the type of {@link DataProperty} descriptor instantiated during
+     *            {@link #buildEquivalentDataProperty()} through {@link #getNewEquivalentDataProperty(Object, Object)}.
      */
     interface Equivalent<O,J,D extends DataProperty<O,J>>
             extends DataProperty<O,J>{
@@ -268,17 +149,110 @@ public interface DataProperty<O,J>
     }
 
     /**
-     * The {@link Axiom.Descriptor} for sub data properties.
-     * <p>
-     *     This {@link Axiom.Descriptor} synchronises the sub data properties of {@code this}
-     *     property (i.e.: the {@link Ground#getGroundInstance()}).
-     * </p>
+     * Implementation of this interface enables a {@link Axiom.Descriptor} to have the {@link Disjoint} expression.
      *
-     * @param <O> the type of ontology in which the axioms for classes will be applied.
-     * @param <J> the type of the described data property
-     *           (it also represents the type of {@link EntitySet} managed by this {@link Descriptor}.
-     * @param <D> the type of the {@link DataProperty} descriptor instantiated during
-     *           {@link #buildSubDataProperty()} through {@link #getNewSubDataProperty(Object, Object)}.
+     * @param <O> the ontology.
+     * @param <J> the type of {@link Ground} and {@link EntitySet} managed by this {@link Descriptor}.
+     * @param <D> the type of {@link DataProperty} descriptor instantiated during
+     *            {@link #buildDisjointDataProperty()} through {@link #getNewDisjointDataProperty(Object, Object)}.
+     */
+    interface Disjoint<O,J,D extends DataProperty<O,J>>
+            extends DataProperty<O,J>{
+
+        @Override
+        default List<MappingIntent> readSemantic(){
+            EntitySet.SynchronisationIntent<J> from = synchroniseDisjointDataPropertyFromSemantic();
+            getDisjointDataProperty().addAll( from.getToAdd());
+            getDisjointDataProperty().removeAll( from.getToRemove());
+            return getIntent( from);
+        }
+
+        /**
+         * Create an {@link Axiom.Descriptor} set where each element
+         * represents the disjointed data property of {@code this} property.
+         * Each of {@link DataProperty}s are instantiated
+         * through the method {@link #getNewDisjointDataProperty(Object, Object)};
+         * this is called for all {@link #getDisjointDataProperty()}.
+         * @return the set of {@link DataProperty}s that describes the
+         * disjoint relations of {@code this} described ontological property.
+         */
+        default Set< D> buildDisjointDataProperty(){
+            Set<D> out = new HashSet<>();
+            for( J cl : getDisjointDataProperty()){
+                D built = getNewDisjointDataProperty( cl, getOntology());
+                built.readSemantic();
+                out.add( built);
+            }
+            return out;
+        }
+
+        /**
+         * This method is called by {@link #buildDisjointDataProperty()} and
+         * its purpose is to instantiate a new {@link DataProperty} to represent
+         * a disjointed property of {@code this} {@link DataProperty} {@link Descriptor}.
+         * @param instance the instance to ground the new disjoint {@link DataProperty}.
+         * @param ontology the ontology in which ground the new {@link DataProperty}.
+         * @return a new {@link Axiom.Descriptor} for all the disjointed properties
+         * of the one described by {@code this} interface.
+         */
+        D getNewDisjointDataProperty(J instance, O ontology);
+
+        /**
+         * Returns the {@link EntitySet} that describes all the disjoint data properties of
+         * {@code this} grounded {@link DataProperty}; from a no OOP point of view.
+         * @return the entities describing the disjoint data properties of {@code this} described property.
+         */
+        EntitySet<J> getDisjointDataProperty();
+
+        /**
+         * Queries to the OWL representation for the disjoint properties of {@code this} data property.
+         * @return a new {@link EntitySet} contained the disjoint properties of {@link #getInstance()},
+         * into the OWL structure.
+         */
+        EntitySet<J> queryDisjointDataProperty();
+
+        /**
+         * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryDisjointDataProperty()}
+         * as input parameter. This computes the changes to be performed in the OWL representation
+         * for synchronise it with respect to {@link #getDisjointDataProperty()}. This should
+         * be done by {@link #writeSemantic()}.
+         * @return the changes to be done to synchronise {@code this} structure with
+         * the disjoint properties of {@link #getInstance()}; to the OWL representation.
+         */
+        default EntitySet.SynchronisationIntent<J> synchroniseDisjointDataPropertyToSemantic(){
+            try {
+                return getDisjointDataProperty().synchroniseTo( queryDisjointDataProperty());
+            } catch ( Exception e){
+                e.printStackTrace();
+                return null;
+            }
+        }
+
+        /**
+         * It calls {@link SemanticEntitySet#synchroniseFrom(EntitySet)} with {@link #queryDisjointDataProperty()}
+         * as input parameter. This computes the changes to be performed into the {@link #getDisjointDataProperty()}
+         * in order to synchronise it with respect to an OWL representation. This is
+         * be done by {@link #readSemantic()}.
+         * @return the changes to be done to synchronise the disjoint data properties of {@link #getInstance()};
+         * from an OWL representation to {@code this} {@link Descriptor}.
+         */
+        default EntitySet.SynchronisationIntent<J> synchroniseDisjointDataPropertyFromSemantic(){
+            try{
+                return getDisjointDataProperty().synchroniseFrom( queryDisjointDataProperty());
+            } catch ( Exception e){
+                e.printStackTrace();
+                return null;
+            }
+        }
+    }
+
+    /**
+     * Implementation of this interface enables a {@link Axiom.Descriptor} to have the {@link Sub} expression.
+     *
+     * @param <O> the ontology.
+     * @param <J> the type of {@link Ground} and {@link EntitySet} managed by this {@link Descriptor}.
+     * @param <D> the type of {@link DataProperty} descriptor instantiated during
+     *            {@link #buildSubDataProperty()} through {@link #getNewSubDataProperty(Object, Object)}.
      */
     interface Sub<O,J,D extends DataProperty<O,J>>
             extends DataProperty<O,J>{
@@ -378,17 +352,12 @@ public interface DataProperty<O,J>
     }
 
     /**
-     * The {@link Axiom.Descriptor} for super data properties.
-     * <p>
-     *     This {@link Axiom.Descriptor} synchronises the super data properties of {@code this}
-     *     property (i.e.: the {@link Ground#getGroundInstance()}).
-     * </p>
+     * Implementation of this interface enables a {@link Axiom.Descriptor} to have the {@link Super} expression.
      *
-     * @param <O> the type of ontology in which the axioms for classes will be applied.
-     * @param <J> the type of the described data property
-     *           (it also represents the type of {@link EntitySet} managed by this {@link Descriptor}.
-     * @param <D> the type of the {@link DataProperty} descriptor instantiated during
-     *           {@link #buildSuperDataProperty()} through {@link #getNewSuperDataProperty(Object, Object)}.
+     * @param <O> the ontology.
+     * @param <J> the type of {@link Ground} and {@link EntitySet} managed by this {@link Descriptor}.
+     * @param <D> the type of {@link DataProperty} descriptor instantiated during
+     *            {@link #buildSuperDataProperty()} through {@link #getNewSuperDataProperty(Object, Object)}.
      */
     interface Super<O,J,D extends DataProperty<O,J>>
             extends DataProperty<O,J>{
@@ -486,30 +455,29 @@ public interface DataProperty<O,J>
     }
 
     /**
-     * The {@link Axiom.Descriptor} for the definition of an ontological data property domain.
-     * <p>
-     *     This {@link Axiom.Descriptor} synchronises the definition of a specific data property domain
-     *     (i.e.: the {@link Ground#getGroundInstance()}).
-     *     Definition is defined as conjunction of restriction properties that
-     *     creates classes in the domain of the described property.
-     *     More in details, such a restriction can be of the type:
-     *     <ul>
-     *     <li><b>class restriction</b>: a domain is restricted to a class.</li>
-     *     <li><b>data restriction</b>: a domain is defined to have data properties into a given range.
-     *                       It is also possible to describe the cardinality of this restriction to be:
-     *                       existential ({@code some}), universal ({@code all}), minimal, maximal and exact.</li>
-     *     <li><b>object restriction</b>: a domain is defined to have data properties into a given class.
-     *                       It is also possible to describe the cardinality of this restriction to be:
-     *                       existential ({@code some}), universal ({@code all}), minimal, maximal and exact.</li>
-     *     </ul>
-     *     This description is not considered from an OOP point of view (it is not possible
-     *     to {@code build} them) since their are not entities that fall back in the {@link Axiom}
-     *     representations.
+     * Implementation of this interface enables a {@link Axiom.Descriptor} to have the {@link Domain} expression.<p>
+     *
+     * This descriptor synchronises the definition of the domain of the grounded data property.
+     * Definition is defined as a conjunction of restriction properties that
+     * create a super class of the described ontological class.
+     * The restriction can be of the following types:
+     *
+     * <ul>
+     * <li><b>class restriction</b>:    a domain is restricted to a class.</li>
+     * <li><b>data restriction</b>:     a domain is defined to have data properties into a given range.
+     *                                  It is also possible to describe the cardinality of this restriction to be:
+     *                                  existential ({@code some}), universal ({@code all}), minimal, maximal and exact.</li>
+     * <li><b>object restriction</b>:   a domain is defined to have data properties into a given class.
+     *                                  It is also possible to describe the cardinality of this restriction to be:
+     *                                  existential ({@code some}), universal ({@code all}), minimal, maximal and exact.</li>
+     * </ul>
+     *
+     * If this expression is used, it is not possible to use the {@code build()} operation since
+     * the restrictions are not simple OWL entities like OWLClass, OWLIndividual, OWLObjectProperty and OWLDataProperty.
      *
      * @param <O> the type of ontology in which the axioms for classes will be applied.
      * @param <J> the type of the described class.
-     * @param <Y> the type of restriction of the domain of the defined property.
-     *           (it represents the of {@link EntitySet} managed by this {@link Descriptor}.
+     * @param <Y> the type of restriction for the {@link EntitySet} managed by this {@link Descriptor}.
      */
     interface Domain<O,J,Y>
             extends DataProperty<O,J>{
@@ -579,31 +547,29 @@ public interface DataProperty<O,J>
     }
 
     /**
-     * The {@link Axiom.Descriptor} for the definition of an ontological data property range.
-     * <p>
-     *     This {@link Axiom.Descriptor} synchronises the definition of a specific data property range
-     *     (i.e.: the {@link Ground#getGroundInstance()}).
-     *     Definition is defined as conjunction of restriction properties that
-     *     creates classes in the range of the described property.
-     *     More in details, such a restriction can be of the type:
-     *     <ul>
-     *     <li><b>class restriction</b>: a range is restricted to a class.</li>
-     *     <li><b>data restriction</b>: a range is defined to have data properties into a given range.
-     *                       It is also possible to describe the cardinality of this restriction to be:
-     *                       existential ({@code some}), universal ({@code all}), minimal, maximal and exact.</li>
-     *     <li><b>object restriction</b>: a range is defined to have data properties into a given class.
-     *                       It is also possible to describe the cardinality of this restriction to be:
-     *                       existential ({@code some}), universal ({@code all}), minimal, maximal and exact.</li>
-     *     </ul>
-     *     This description is not considered from an OOP point of view (it is not possible
-     *     to {@code build} them) since their are not entities that fall back in the {@link Axiom}
-     *     representations.
+     * Implementation of this interface enables a {@link Axiom.Descriptor} to have the {@link Range} expression.<p>
+     *
+     * This descriptor synchronises the definition of the range of the grounded data property.
+     * Definition is defined as a conjunction of restriction properties that
+     * create a super class of the described ontological class.
+     * The restriction can be of the following types:
+     *
+     * <ul>
+     * <li><b>class restriction</b>:    a range is restricted to a class.</li>
+     * <li><b>data restriction</b>:     a range is defined to have data properties into a given range.
+     *                                  It is also possible to describe the cardinality of this restriction to be:
+     *                                  existential ({@code some}), universal ({@code all}), minimal, maximal and exact.</li>
+     * <li><b>object restriction</b>:   a range is defined to have data properties into a given class.
+     *                                  It is also possible to describe the cardinality of this restriction to be:
+     *                                  existential ({@code some}), universal ({@code all}), minimal, maximal and exact.</li>
+     * </ul>
+     *
+     * If this expression is used, it is not possible to use the {@code build()} operation since
+     * the restrictions are not simple OWL entities like OWLClass, OWLIndividual, OWLObjectProperty and OWLDataProperty.
      *
      * @param <O> the type of ontology in which the axioms for classes will be applied.
      * @param <J> the type of the described class.
-     * @param <Y> the type of restriction of the range of the defined property.
-     *           (it represents the of {@link EntitySet} managed by this {@link Descriptor}.
-     *
+     * @param <Y> the type of restriction for the {@link EntitySet} managed by this {@link Descriptor}.
      */
     interface Range<O,J,Y>
             extends DataProperty<O,J>{
