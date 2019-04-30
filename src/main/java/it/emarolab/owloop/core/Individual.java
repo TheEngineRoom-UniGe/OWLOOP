@@ -6,18 +6,16 @@ import java.util.Set;
 
 /**
  * This interface is a part of the core of OWLOOP architecture.
- * It contains interfaces of the basic expressions that can be applied to
- * the ontological entity OWLDataProperty (i.e., {@link org.semanticweb.owlapi.model.OWLNamedIndividual}). <p>
+ * It contains interfaces of the expressions that can be applied to
+ * the OWL entity OWLDataProperty (i.e., {@link org.semanticweb.owlapi.model.OWLNamedIndividual}). <p>
  * The expressions are the following:
  *
  * <ul>
  * <li><b>{@link Equivalent}</b>:   this expression describes an Individual same-as another Individual.</li>
  * <li><b>{@link Disjoint}</b>:     this expression describes an Individual different from another Individual.</li>
  * <li><b>{@link Type}</b>:         this expression describes the Type/s (i.e., class/es) of an Individual.</li>
- * <li><b>{@link ObjectLink}</b>:   this expression describes an ObjectProperty and Individuals related via that ObjectProperty,
- *                                  for an Individual.</li>
- * <li><b>{@link DataLink}</b>:     this expression describes an DataProperty and Individuals related via that DataProperty,
- *                                  for an Individual.</li>
+ * <li><b>{@link ObjectLink}</b>:   this expression describes an ObjectProperty and Individuals related via that ObjectProperty, for an Individual.</li>
+ * <li><b>{@link DataLink}</b>:     this expression describes an DataProperty and Individuals related via that DataProperty, for an Individual.</li>
  * </ul>
  *
  * <div style="text-align:center;"><small>
@@ -35,16 +33,11 @@ public interface Individual<O,J>
         extends Axiom.Descriptor<O,J>{
 
     /**
-     * The {@link Axiom.Descriptor} for classes (e.g.: types) that describes an ontological individualCompoundDescriptor.
-     * <p>
-     *     This {@link Axiom.Descriptor} synchronises the types in which the specific individualCompoundDescriptor
-     *     (i.e.: the {@link Ground#getGroundInstance()}) is classified.
-     * </p>
+     * Implementation of this interface enables a {@link Individual} to have the {@link Type} expression.
      *
-     * @param <O> the type of ontology in which the axioms for classes will be applied.
-     * @param <J> the type of the described individualCompoundDescriptor.
-     * @param <Y> the type of classes describing the individualCompoundDescriptor
-     *           (it represents the type of {@link EntitySet} managed by this {@link Descriptor}.
+     * @param <O> the ontology.
+     * @param <J> the type of {@link Ground} and {@link EntitySet} managed by this {@link Descriptor}.
+     * @param <Y> the type of restriction for the {@link EntitySet} managed by this {@link Descriptor}.
      * @param <D> the type of the {@link Concept} descriptors instantiated during
      *           {@link #buildTypeIndividual()} through {@link #getNewTypeIndividual(Object, Object)}.
      */
@@ -147,15 +140,10 @@ public interface Individual<O,J>
     }
 
     /**
-     * The {@link Axiom.Descriptor} for individuals that are different from the one described.
-     * <p>
-     *     This {@link Axiom.Descriptor} synchronises the different individuals from the described one
-     *     (i.e.: the {@link Ground#getGroundInstance()}).
-     * </p>
+     * Implementation of this interface enables a {@link Individual} to have the {@link Disjoint} expression.
      *
-     * @param <O> the type of ontology in which the axioms for classes will be applied.
-     * @param <J> the type of the described individualCompoundDescriptor.
-     *           (it also represents the type of {@link EntitySet} managed by this {@link Descriptor}.
+     * @param <O> the ontology.
+     * @param <J> the type of {@link Ground} and {@link EntitySet} managed by this {@link Descriptor}.
      * @param <D> the type of the {@link Individual} descriptors instantiated during
      *           {@link #buildDisjointIndividual()} through {@link #getNewDisjointIndividual(Object, Object)}.
      */
@@ -257,15 +245,10 @@ public interface Individual<O,J>
     }
 
     /**
-     * The {@link Axiom.Descriptor} for individuals that are equivalent from the one described.
-     * <p>
-     *     This {@link Axiom.Descriptor} synchronises the equivalent individuals from the described one
-     *     (i.e.: the {@link Ground#getGroundInstance()}).
-     * </p>
+     * Implementation of this interface enables a {@link Individual} to have the {@link Equivalent} expression.
      *
-     * @param <O> the type of ontology in which the axioms for classes will be applied.
-     * @param <J> the type of the described individualCompoundDescriptor.
-     *           (it also represents the type of {@link EntitySet} managed by this {@link Descriptor}.
+     * @param <O> the ontology.
+     * @param <J> the type of {@link Ground} and {@link EntitySet} managed by this {@link Descriptor}.
      * @param <D> the type of the {@link Individual} descriptors instantiated during
      *           {@link #buildEquivalentIndividual()} through {@link #getNewEquivalentIndividual(Object, Object)}.
      */
@@ -365,21 +348,21 @@ public interface Individual<O,J>
     }
 
     /**
-     * The {@link Axiom.Descriptor} for the data properties applied to the described individuals.
+     * Implementation of this interface enables a {@link Individual} to have the {@link DataLink} expression.
      * <p>
-     *     This {@link Axiom.Descriptor} synchronises only the specified data property and
-     *     relative values for an ontological individualCompoundDescriptor (i.e.: the {@link Ground#getGroundInstance()}).
+     *     {@link Individual} synchronises only specified data property and its
+     *     relative values for an individualCompoundDescriptor (i.e.: the {@link Ground#getGroundInstance()}).
      *     <br>
-     *     By default, the synchronisation occurs only for the proprieties which semantics
-     *     have been initialised in the {@link ExpressionEntitySet} ({@link #getDataSemantics()}.
-     *     Anyway if the {@link ExpressionEntitySet} is leaved empty during {@link #readSemantic()}
+     *     By default, the synchronisation occurs only for the proprieties whose expression
+     *     has been initialised in the {@link ExpressionEntitySet} ({@link #getDataExpressions()}.
+     *     If the {@link ExpressionEntitySet} is left empty during {@link #readSemantic()}
      *     it maps all the data properties applied to the described individualCompoundDescriptor.
      * </p>
      *
-     * @param <O> the type of ontology in which the axioms for classes will be applied.
-     * @param <J> the type of the described individualCompoundDescriptor.
+     * @param <O> the ontology.
+     * @param <J> the type of {@link Ground} and {@link EntitySet} managed by this {@link Descriptor}.
      * @param <Y> the type of {@link ExpressionEntity} synchronised by this descriptor
-     * @param <S> the type of semantic described by this class (i.e.: {@code OWLDataProperty})
+     * @param <S> the type of expression described by this class (i.e.: {@code OWLDataProperty})
      * @param <D> the type of the {@link DataProperty} descriptors instantiated during
      *           {@link #buildDataIndividual()} through {@link #getNewDataIndividual(ExpressionEntity, Object)}.
      */
@@ -391,8 +374,8 @@ public interface Individual<O,J>
             try {
                 EntitySet.SynchronisationIntent<Y> from = synchroniseDataIndividualFromSemantic();
                 if (from != null) {
-                    getDataSemantics().addAll(from.getToAdd());
-                    getDataSemantics().removeAll(from.getToRemove());
+                    getDataExpressions().addAll(from.getToAdd());
+                    getDataExpressions().removeAll(from.getToRemove());
                 }
                 return getIntent(from);
             }catch (Exception e){
@@ -406,13 +389,13 @@ public interface Individual<O,J>
          * represents the specified data properties applied to this {@code this} description.
          * Each of {@link DataProperty}s are instantiated
          * through the method {@link #getNewDataIndividual(ExpressionEntity, Object)};
-         * this is called for all {@link #getDataSemantics()}.
+         * this is called for all {@link #getDataExpressions()}.
          * @return the set of {@link DataProperty}s that describes the
          * entities that are applied to {@code this} described ontological individualCompoundDescriptor.
          */
         default Set<D> buildDataIndividual(){
             Set<D> out = new HashSet<>();
-            for( Y cl : getDataSemantics()){
+            for( Y cl : getDataExpressions()){
                 D built = getNewDataIndividual( cl, getOntology());
                 built.readSemantic();
                 out.add( built);
@@ -436,7 +419,7 @@ public interface Individual<O,J>
          * {@code this} {@link Individual}; from a no OOP point of view.
          * @return the entities describing the data properties of {@code this} individualCompoundDescriptor.
          */
-        EntitySet<Y> getDataSemantics();
+        EntitySet<Y> getDataExpressions();
 
         /**
          * Queries to the OWL representation for the data properties applied to {@code this} {@link Descriptor}.
@@ -448,14 +431,14 @@ public interface Individual<O,J>
         /**
          * It calls {@link ExpressionEntitySet#synchroniseTo(EntitySet)} with {@link #queryDataIndividual()}
          * as input parameter. This computes the changes to be performed in the OWL representation
-         * for synchronise it with respect to {@link #getDataSemantics()}. This should
+         * for synchronise it with respect to {@link #getDataExpressions()}. This should
          * be done by {@link #writeSemantic()}.
          * @return the changes to be done to synchronise {@code this} structure with
          * the data properties applied on {@link #getInstance()}; to the OWL representation.
          */
         default EntitySet.SynchronisationIntent<Y> synchroniseDataIndividualToSemantic(){
             try {
-                return getDataSemantics().synchroniseTo( queryDataIndividual());
+                return getDataExpressions().synchroniseTo( queryDataIndividual());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -464,7 +447,7 @@ public interface Individual<O,J>
 
         /**
          * It calls {@link ExpressionEntitySet#synchroniseFrom(EntitySet)} with {@link #queryDataIndividual()}
-         * as input parameter. This computes the changes to be performed into the {@link #getDataSemantics()}
+         * as input parameter. This computes the changes to be performed into the {@link #getDataExpressions()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readSemantic()}.
          * @return the changes to be done to synchronise the data properties applied on {@link #getInstance()};
@@ -472,7 +455,7 @@ public interface Individual<O,J>
          */
         default EntitySet.SynchronisationIntent<Y> synchroniseDataIndividualFromSemantic(){
             try{
-                return getDataSemantics().synchroniseFrom( queryDataIndividual());
+                return getDataExpressions().synchroniseFrom( queryDataIndividual());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -481,22 +464,21 @@ public interface Individual<O,J>
     }
 
     /**
-     * The {@link Axiom.Descriptor} for the object properties applied to the described individuals.
+     * Implementation of this interface enables a {@link Individual} to have the {@link ObjectLink} expression.
      * <p>
-     *     This {@link Axiom.Descriptor} synchronises only the specified object property and
-     *     relative values for an ontological individualCompoundDescriptor (i.e.: the {@link Ground#getGroundInstance()}).
+     *     {@link Individual} synchronises only the specified object property and its
+     *     relative values for an individualCompoundDescriptor (i.e.: the {@link Ground#getGroundInstance()}).
      *     <br>
-     *     By default, the synchronisation occurs only for the proprieties which semantics
-     *     have been initialised in the {@link ExpressionEntitySet} ({@link #getObjectSemantics()}),
-     *     not for all relations in the OWL representation.
-     *     Anyway if the {@link ExpressionEntitySet} is leaved empty during {@link #readSemantic()}
+     *     By default, the synchronisation occurs only for the proprieties whose expression
+     *     has been initialised in the {@link ExpressionEntitySet} ({@link #getObjectSemantics()}).
+     *     If the {@link ExpressionEntitySet} is left empty during {@link #readSemantic()}
      *     it maps all the object properties applied to the described individualCompoundDescriptor.
      * </p>
      *
-     * @param <O> the type of ontology in which the axioms for classes will be applied.
-     * @param <J> the type of the described individualCompoundDescriptor.
+     * @param <O> the ontology.
+     * @param <J> the type of {@link Ground} and {@link EntitySet} managed by this {@link Descriptor}.
      * @param <Y> the type of {@link ExpressionEntity} synchronised by this descriptor
-     * @param <S> the type of semantic described by this class (i.e.: {@code OWLObjectProperty})
+     * @param <S> the type of expression described by this class (i.e.: {@code OWLObjectProperty})
      * @param <D> the type of the {@link DataProperty} descriptors instantiated during
      *           {@link #buildObjectIndividual()} through {@link #getNewObjectIndividual(ExpressionEntity, Object)}.
      */

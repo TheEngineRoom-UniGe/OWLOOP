@@ -6,8 +6,8 @@ import java.util.Set;
 
 /**
  * This interface is a part of the core of OWLOOP architecture.
- * It contains interfaces of the basic expressions that can be applied to
- * the ontological entity OWLDataProperty (i.e., {@link org.semanticweb.owlapi.model.OWLObjectProperty}). <p>
+ * It contains interfaces of the expressions that can be applied to
+ * the OWL entity OWLDataProperty (i.e., {@link org.semanticweb.owlapi.model.OWLObjectProperty}). <p>
  * The expressions are the following:
  *
  * <ul>
@@ -34,13 +34,13 @@ import java.util.Set;
 public interface ObjectProperty<O,J>
         extends Axiom.Descriptor<O,J>{
 
-    // those could return ontology changes
+    // those can return ontology changes
     /**
      * Make {@link #getInstance()} as a functional property.
      */
     void setFunctional();
     /**
-     * Make {@link #getInstance()} to be no a functional property anymore.
+     * Make {@link #getInstance()} to be not a functional property anymore.
      */
     void setNotFunctional();
 
@@ -49,7 +49,7 @@ public interface ObjectProperty<O,J>
      */
     void setInverseFunctional();
     /**
-     * Make {@link #getInstance()} to be no an inverse functional property anymore.
+     * Make {@link #getInstance()} to be not an inverse functional property anymore.
      */
     void setNotInverseFunctional();
 
@@ -58,7 +58,7 @@ public interface ObjectProperty<O,J>
      */
     void setTransitive();
     /**
-     * Make {@link #getInstance()} to be no a transitive property anymore.
+     * Make {@link #getInstance()} to be not a transitive property anymore.
      */
     void setNotTransitive();
 
@@ -76,7 +76,7 @@ public interface ObjectProperty<O,J>
      */
     void setAsymmetric();
     /**
-     * Make {@link #getInstance()} to be no an asymmetric property anymore.
+     * Make {@link #getInstance()} to be not an asymmetric property anymore.
      */
     void setNotAsymmetric();
 
@@ -94,22 +94,15 @@ public interface ObjectProperty<O,J>
      */
     void setIrreflexive();
     /**
-     * Make {@link #getInstance()} to be no an irreflexive property anymore.
+     * Make {@link #getInstance()} to be not an irreflexive property anymore.
      */
     void setNotIrreflexive();
 
-
-
     /**
-     * The {@link Axiom.Descriptor} for inverse object properties.
-     * <p>
-     *     This {@link Axiom.Descriptor} synchronises the inverse object properties of {@code this}
-     *     property (i.e.: the {@link Ground#getGroundInstance()}).
-     * </p>
+     * Implementation of this interface enables a {@link ObjectProperty} to have the {@link Inverse} expression.
      *
-     * @param <O> the type of ontology in which the axioms for classes will be applied.
-     * @param <J> the type of the described object property
-     *           (it also represents the type of {@link EntitySet} managed by this {@link Descriptor}.
+     * @param <O> the ontology.
+     * @param <J> the type of {@link Ground} and {@link EntitySet} managed by this {@link Descriptor}.
      * @param <D> the type of the {@link ObjectProperty} descriptor instantiated during
      *           {@link #buildInverseObjectProperty()} through {@link #getNewInverseObjectProperty(Object, Object)}.
      */
@@ -211,15 +204,10 @@ public interface ObjectProperty<O,J>
     }
 
     /**
-     * The {@link Axiom.Descriptor} for disjointed object properties.
-     * <p>
-     *     This {@link Axiom.Descriptor} synchronises the disjointed object properties of {@code this}
-     *     property (i.e.: the {@link Ground#getGroundInstance()}).
-     * </p>
+     * Implementation of this interface enables a {@link ObjectProperty} to have the {@link Disjoint} expression.
      *
-     * @param <O> the type of ontology in which the axioms for classes will be applied.
-     * @param <J> the type of the described object property
-     *           (it also represents the type of {@link EntitySet} managed by this {@link Descriptor}.
+     * @param <O> the ontology.
+     * @param <J> the type of {@link Ground} and {@link EntitySet} managed by this {@link Descriptor}.
      * @param <D> the type of the {@link ObjectProperty} descriptor instantiated during
      *           {@link #buildDisjointObjectProperty()}  through {@link #getNewDisjointObjectProperty(Object, Object)}.
      */
@@ -321,15 +309,10 @@ public interface ObjectProperty<O,J>
     }
 
     /**
-     * The {@link Axiom.Descriptor} for equivalent object properties.
-     * <p>
-     *     This {@link Axiom.Descriptor} synchronises the equivalent object properties of {@code this}
-     *     property (i.e.: the {@link Ground#getGroundInstance()}).
-     * </p>
+     * Implementation of this interface enables a {@link ObjectProperty} to have the {@link Equivalent} expression.
      *
-     * @param <O> the type of ontology in which the axioms for classes will be applied.
-     * @param <J> the type of the described object property
-     *           (it also represents the type of {@link EntitySet} managed by this {@link Descriptor}.
+     * @param <O> the ontology.
+     * @param <J> the type of {@link Ground} and {@link EntitySet} managed by this {@link Descriptor}.
      * @param <D> the type of the {@link ObjectProperty} descriptor instantiated during
      *           {@link #buildEquivalentObjectProperty()}   through {@link #getNewEquivalentObjectProperty(Object, Object)}.
      */
@@ -431,15 +414,10 @@ public interface ObjectProperty<O,J>
     }
 
     /**
-     * The {@link Axiom.Descriptor} for sub object properties.
-     * <p>
-     *     This {@link Axiom.Descriptor} synchronises the sub object properties of {@code this}
-     *     property (i.e.: the {@link Ground#getGroundInstance()}).
-     * </p>
+     * Implementation of this interface enables a {@link ObjectProperty} to have the {@link Sub} expression.
      *
-     * @param <O> the type of ontology in which the axioms for classes will be applied.
-     * @param <J> the type of the described object property
-     *           (it also represents the type of {@link EntitySet} managed by this {@link Descriptor}.
+     * @param <O> the ontology.
+     * @param <J> the type of {@link Ground} and {@link EntitySet} managed by this {@link Descriptor}.
      * @param <D> the type of the {@link ObjectProperty} descriptor instantiated during
      *           {@link #buildSubObjectProperty()} through {@link #getNewSubObjectProperty(Object, Object)}.
      */
@@ -541,15 +519,10 @@ public interface ObjectProperty<O,J>
     }
 
     /**
-     * The {@link Axiom.Descriptor} for super object properties.
-     * <p>
-     *     This {@link Axiom.Descriptor} synchronises the super object properties of {@code this}
-     *     property (i.e.: the {@link Ground#getGroundInstance()}).
-     * </p>
+     * Implementation of this interface enables a {@link ObjectProperty} to have the {@link Super} expression.
      *
-     * @param <O> the type of ontology in which the axioms for classes will be applied.
-     * @param <J> the type of the described object property
-     *           (it also represents the type of {@link EntitySet} managed by this {@link Descriptor}.
+     * @param <O> the ontology.
+     * @param <J> the type of {@link Ground} and {@link EntitySet} managed by this {@link Descriptor}.
      * @param <D> the type of the {@link ObjectProperty} descriptor instantiated during
      *           {@link #buildSuperObjectProperty()} through {@link #getNewSuperObjectProperty(Object, Object)}.
      */
@@ -651,30 +624,29 @@ public interface ObjectProperty<O,J>
     }
 
     /**
-     * The {@link Axiom.Descriptor} for the definition of an ontological object property domain.
-     * <p>
-     *     This {@link Axiom.Descriptor} synchronises the definition of a specific object property domain
-     *     (i.e.: the {@link Ground#getGroundInstance()}).
-     *     Definition is defined as conjunction of restriction properties that
-     *     creates classes in the domain of the described property.
-     *     More in details, such a restriction can be of the type:
-     *     <ul>
-     *     <li><b>class restriction</b>: a domain is restricted to a class.</li>
-     *     <li><b>data restriction</b>: a domain is defined to have data properties into a given range.
-     *                       It is also possible to describe the cardinality of this restriction to be:
-     *                       existential ({@code some}), universal ({@code all}), minimal, maximal and exact.</li>
-     *     <li><b>object restriction</b>: a domain is defined to have object properties into a given class.
-     *                       It is also possible to describe the cardinality of this restriction to be:
-     *                       existential ({@code some}), universal ({@code all}), minimal, maximal and exact.</li>
-     *     </ul>
-     *     This description is not considered from an OOP point of view (it is not possible
-     *     to {@code build} them) since their are not entities that fall back in the {@link Axiom}
-     *     representations.
+     * Implementation of this interface enables a {@link ObjectProperty} to have the {@link Domain} expression.<p>
+     *
+     * This descriptor synchronises the definition of the domain of the grounded data property.
+     * Definition is defined as a conjunction of restriction properties that
+     * create a super class of the described ontological class.
+     * The restriction can be of the following types:
+     *
+     * <ul>
+     * <li><b>class restriction</b>:    a domain is restricted to a class.</li>
+     * <li><b>data restriction</b>:     a domain is defined to have data properties into a given range.
+     *                                  It is also possible to describe the cardinality of this restriction to be:
+     *                                  existential ({@code some}), universal ({@code all}), minimal, maximal and exact.</li>
+     * <li><b>object restriction</b>:   a domain is defined to have data properties into a given class.
+     *                                  It is also possible to describe the cardinality of this restriction to be:
+     *                                  existential ({@code some}), universal ({@code all}), minimal, maximal and exact.</li>
+     * </ul>
+     *
+     * If this expression is used, it is not possible to use the {@code build()} operation since
+     * the restrictions are not simple OWL entities like OWLClass, OWLIndividual, OWLObjectProperty and OWLDataProperty.
      *
      * @param <O> the type of ontology in which the axioms for classes will be applied.
      * @param <J> the type of the described class.
-     * @param <Y> the type of restriction of the domain of the defined property.
-     *           (it represents the of {@link EntitySet} managed by this {@link Descriptor}.
+     * @param <Y> the type of restriction for the {@link EntitySet} managed by this {@link Descriptor}.
      */
     interface Domain<O,J,Y>
             extends ObjectProperty<O,J>{
@@ -742,31 +714,29 @@ public interface ObjectProperty<O,J>
     }
 
     /**
-     * The {@link Axiom.Descriptor} for the definition of an ontological object property range.
-     * <p>
-     *     This {@link Axiom.Descriptor} synchronises the definition of a specific object property range
-     *     (i.e.: the {@link Ground#getGroundInstance()}).
-     *     Definition is defined as conjunction of restriction properties that
-     *     creates classes in the range of the described property.
-     *     More in details, such a restriction can be of the type:
-     *     <ul>
-     *     <li><b>class restriction</b>: a range is restricted to a class.</li>
-     *     <li><b>data restriction</b>: a range is defined to have data properties into a given range.
-     *                       It is also possible to describe the cardinality of this restriction to be:
-     *                       existential ({@code some}), universal ({@code all}), minimal, maximal and exact.</li>
-     *     <li><b>object restriction</b>: a range is defined to have object properties into a given class.
-     *                       It is also possible to describe the cardinality of this restriction to be:
-     *                       existential ({@code some}), universal ({@code all}), minimal, maximal and exact.</li>
-     *     </ul>
-     *     This description is not considered from an OOP point of view (it is not possible
-     *     to {@code build} them) since their are not entities that fall back in the {@link Axiom}
-     *     representations.
+     * Implementation of this interface enables a {@link ObjectProperty} to have the {@link Range} expression.<p>
+     *
+     * This descriptor synchronises the definition of the range of the grounded data property.
+     * Definition is defined as a conjunction of restriction properties that
+     * create a super class of the described ontological class.
+     * The restriction can be of the following types:
+     *
+     * <ul>
+     * <li><b>class restriction</b>:    a range is restricted to a class.</li>
+     * <li><b>data restriction</b>:     a range is defined to have data properties into a given range.
+     *                                  It is also possible to describe the cardinality of this restriction to be:
+     *                                  existential ({@code some}), universal ({@code all}), minimal, maximal and exact.</li>
+     * <li><b>object restriction</b>:   a range is defined to have data properties into a given class.
+     *                                  It is also possible to describe the cardinality of this restriction to be:
+     *                                  existential ({@code some}), universal ({@code all}), minimal, maximal and exact.</li>
+     * </ul>
+     *
+     * If this expression is used, it is not possible to use the {@code build()} operation since
+     * the restrictions are not simple OWL entities like OWLClass, OWLIndividual, OWLObjectProperty and OWLDataProperty.
      *
      * @param <O> the type of ontology in which the axioms for classes will be applied.
      * @param <J> the type of the described class.
-     * @param <Y> the type of restriction of the range of the defined property.
-     *           (it represents the of {@link EntitySet} managed by this {@link Descriptor}.
-     *
+     * @param <Y> the type of restriction for the {@link EntitySet} managed by this {@link Descriptor}.
      */
     interface Range<O,J,Y>
             extends ObjectProperty<O,J>{

@@ -210,7 +210,7 @@ public class MORFullIndividualTest {
         //assertSemantic();
         individual.addData( "hasProp", 2.3, true);
         individual.addData( "hasProp", 5.7, true);
-        for(DescriptorEntitySet.DataExpression i : individual.getDataSemantics())
+        for(DescriptorEntitySet.DataExpression i : individual.getDataExpressions())
             assertEquals( i.getValues().size(), 1);
         individual.writeSemanticInconsistencySafe(); // reasoner infers shape properties
         assertSemantic();
@@ -236,6 +236,6 @@ public class MORFullIndividualTest {
         assertEquals( individual.getEquivalentIndividual(), individual.queryEquivalentIndividual());
         assertEquals( individual.getTypeIndividual(), individual.queryTypeIndividual());
         assertEquals( individual.getObjectSemantics(), individual.queryObject());
-        assertEquals( individual.getDataSemantics(), individual.queryDataIndividual());
+        assertEquals( individual.getDataExpressions(), individual.queryDataIndividual());
     }
 }

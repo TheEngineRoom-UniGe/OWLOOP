@@ -6,8 +6,8 @@ import java.util.Set;
 
 /**
  * This interface is a part of the core of OWLOOP architecture.
- * It contains interfaces of the basic expressions that can be applied to
- * the ontological entity OWLDataProperty (i.e., {@link org.semanticweb.owlapi.model.OWLDataProperty}). <p>
+ * It contains interfaces of the expressions that can be applied to
+ * the OWL entity OWLDataProperty (i.e., {@link org.semanticweb.owlapi.model.OWLDataProperty}). <p>
  * The expressions are the following:
  *
  * <ul>
@@ -44,7 +44,7 @@ public interface DataProperty<O,J>
     void setNotFunctional();
 
     /**
-     * Implementation of this interface enables a {@link Axiom.Descriptor} to have the {@link Equivalent} expression.
+     * Implementation of this interface enables a {@link DataProperty} to have the {@link Equivalent} expression.
      *
      * @param <O> the ontology.
      * @param <J> the type of {@link Ground} and {@link EntitySet} managed by this {@link Descriptor}.
@@ -149,7 +149,7 @@ public interface DataProperty<O,J>
     }
 
     /**
-     * Implementation of this interface enables a {@link Axiom.Descriptor} to have the {@link Disjoint} expression.
+     * Implementation of this interface enables a {@link DataProperty} to have the {@link Disjoint} expression.
      *
      * @param <O> the ontology.
      * @param <J> the type of {@link Ground} and {@link EntitySet} managed by this {@link Descriptor}.
@@ -247,7 +247,7 @@ public interface DataProperty<O,J>
     }
 
     /**
-     * Implementation of this interface enables a {@link Axiom.Descriptor} to have the {@link Sub} expression.
+     * Implementation of this interface enables a {@link DataProperty} to have the {@link Sub} expression.
      *
      * @param <O> the ontology.
      * @param <J> the type of {@link Ground} and {@link EntitySet} managed by this {@link Descriptor}.
@@ -352,7 +352,7 @@ public interface DataProperty<O,J>
     }
 
     /**
-     * Implementation of this interface enables a {@link Axiom.Descriptor} to have the {@link Super} expression.
+     * Implementation of this interface enables a {@link DataProperty} to have the {@link Super} expression.
      *
      * @param <O> the ontology.
      * @param <J> the type of {@link Ground} and {@link EntitySet} managed by this {@link Descriptor}.
@@ -455,7 +455,7 @@ public interface DataProperty<O,J>
     }
 
     /**
-     * Implementation of this interface enables a {@link Axiom.Descriptor} to have the {@link Domain} expression.<p>
+     * Implementation of this interface enables a {@link DataProperty} to have the {@link Domain} expression.<p>
      *
      * This descriptor synchronises the definition of the domain of the grounded data property.
      * Definition is defined as a conjunction of restriction properties that
@@ -547,7 +547,7 @@ public interface DataProperty<O,J>
     }
 
     /**
-     * Implementation of this interface enables a {@link Axiom.Descriptor} to have the {@link Range} expression.<p>
+     * Implementation of this interface enables a {@link DataProperty} to have the {@link Range} expression.<p>
      *
      * This descriptor synchronises the definition of the range of the grounded data property.
      * Definition is defined as a conjunction of restriction properties that

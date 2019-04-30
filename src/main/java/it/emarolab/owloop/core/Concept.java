@@ -6,8 +6,8 @@ import java.util.Set;
 
 /**
  * This interface is a part of the core of OWLOOP architecture.
- * It contains interfaces of the basic expressions that can be applied to
- * the ontological entity OWLClass (i.e., {@link org.semanticweb.owlapi.model.OWLClass}). <p>
+ * It contains interfaces of the expressions that can be applied to
+ * the OWL entity OWLClass (i.e., {@link org.semanticweb.owlapi.model.OWLClass}). <p>
  * The expressions are the following:
  *
  * <ul>
@@ -34,7 +34,7 @@ public interface Concept<O,J>
         extends Axiom.Descriptor<O,J>{
 
     /**
-     * Implementation of this interface enables a {@link Axiom.Descriptor} to have the {@link Equivalent} expression.
+     * Implementation of this interface enables a {@link Concept} to have the {@link Equivalent} expression.
      *
      * @param <O> the ontology.
      * @param <J> the type of {@link Ground} and {@link EntitySet} managed by this {@link Descriptor}.
@@ -139,7 +139,7 @@ public interface Concept<O,J>
     }
 
     /**
-     * Implementation of this interface enables a {@link Axiom.Descriptor} to have the {@link Disjoint} expression.
+     * Implementation of this interface enables a {@link Concept} to have the {@link Disjoint} expression.
      *
      * @param <O> the ontology.
      * @param <J> the type of {@link Ground} and {@link EntitySet} managed by this {@link Descriptor}.
@@ -245,7 +245,7 @@ public interface Concept<O,J>
     }
 
     /**
-     * Implementation of this interface enables a {@link Axiom.Descriptor} to have the {@link Sub} expression.
+     * Implementation of this interface enables a {@link Concept} to have the {@link Sub} expression.
      *
      * @param <O> the ontology.
      * @param <J> the type of {@link Ground} and {@link EntitySet} managed by this {@link Descriptor}.
@@ -350,7 +350,7 @@ public interface Concept<O,J>
     }
 
     /**
-     * Implementation of this interface enables a {@link Axiom.Descriptor} to have the {@link Super} expression.
+     * Implementation of this interface enables a {@link Concept} to have the {@link Super} expression.
      *
      * @param <O> the ontology.
      * @param <J> the type of {@link Ground} and {@link EntitySet} managed by this {@link Descriptor}.
@@ -455,10 +455,11 @@ public interface Concept<O,J>
     }
 
     /**
-     * Implementation of this interface enables a {@link Axiom.Descriptor} to have the {@link Instance} expression.
+     * Implementation of this interface enables a {@link Concept} to have the {@link Instance} expression.
      *
      * @param <O> the ontology.
      * @param <J> the type of {@link Ground} and {@link EntitySet} managed by this {@link Descriptor}.
+     * @param <Y> the type of restriction for the {@link EntitySet} managed by this {@link Descriptor}.
      * @param <D> the type of {@link Concept} descriptor instantiated during
      *            {@link #buildIndividualInstance()} ()} through {@link #getNewIndividualInstance(Object, Object)}.
      */
@@ -560,7 +561,7 @@ public interface Concept<O,J>
     }
 
     /**
-     * Implementation of this interface enables a {@link Axiom.Descriptor} to have the {@link Definition} expression.<p>
+     * Implementation of this interface enables a {@link Concept} to have the {@link Definition} expression.<p>
      * Definition is defined as a conjunction of restriction properties that
      * create a super class of the described ontological class.
      * The restriction can be of the following types:

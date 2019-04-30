@@ -383,7 +383,7 @@ public interface IndividualExpression
          * Remove the {@link ExpressionEntity} of the given semantic ({@link DescriptorEntitySet.DataExpression#getExpression()})
          * from the {@link Descriptor}. This call may remove multiple value attached to that
          * semantic. It will no longer be used during {@link #readSemantic()} and {@link #writeSemantic()}.
-         * @param property a data property name contained in an element of {@link #getDataSemantics()} to be removed.
+         * @param property a data property name contained in an element of {@link #getDataExpressions()} to be removed.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeData( String property){
@@ -393,13 +393,13 @@ public interface IndividualExpression
          * Remove the {@link ExpressionEntity} of the given semantic ({@link DescriptorEntitySet.DataExpression#getExpression()})
          * from the {@link Descriptor}. This call may remove multiple value attached to that
          * semantic. It will no longer be used during {@link #readSemantic()} and {@link #writeSemantic()}.
-         * @param property a data property contained in an element of {@link #getDataSemantics()} to be removed.
+         * @param property a data property contained in an element of {@link #getDataExpressions()} to be removed.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeData( OWLDataProperty property){
-            for (DescriptorEntitySet.DataExpression d : getDataSemantics())
+            for (DescriptorEntitySet.DataExpression d : getDataExpressions())
                 if( d.getExpression().equals( property))
-                    return getDataSemantics().remove( d);
+                    return getDataExpressions().remove( d);
             return false;
         }
 
@@ -409,7 +409,7 @@ public interface IndividualExpression
          * repopulate (or completely removed) by calling: {@link #readSemantic()}.
          * The class of the specified value represents its data type, supported {@link OWLLiteral} are:
          * {@link Integer}, {@link Boolean}, {@link Double}, {@link Float} and {@link Long} (see {@link #getOWLLiteral(Object)}).
-         * @param property the name of the data property which value, contained in {@link #getDataSemantics()}, will be removed.
+         * @param property the name of the data property which value, contained in {@link #getDataExpressions()}, will be removed.
          * @param value the property value to be removed from the {@link DescriptorEntitySet.DataExpression#getValues()} set.
          * @return {@code true} if an element was removed as a result of this call.
          */
@@ -420,12 +420,12 @@ public interface IndividualExpression
          * Remove the {@link ExpressionEntity#getExpression()} of the given property, with a specific value, from {@code this}
          * {@link Descriptor}. This call does not remove the semantic from this object, and it may be
          * repopulate (or completely removed) by calling: {@link #readSemantic()}.
-         * @param property the data property which value, contained in {@link #getDataSemantics()}, will be removed.
+         * @param property the data property which value, contained in {@link #getDataExpressions()}, will be removed.
          * @param value the specific property literal to be removed from the {@link DescriptorEntitySet.DataExpression#getValues()} set.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeData( OWLDataProperty property, OWLLiteral value){
-            for (DescriptorEntitySet.DataExpression d : getDataSemantics())
+            for (DescriptorEntitySet.DataExpression d : getDataExpressions())
                 if ( d.getExpression().equals( property))
                     return d.getValues().remove(value);
             return false;
@@ -433,7 +433,7 @@ public interface IndividualExpression
         default boolean removeObject( OWLDataProperty property, Set<OWLLiteral> values){
             DescriptorEntitySet.DataExpression objectSemantic = new DescriptorEntitySet.DataExpression(property);
             objectSemantic.getValues().addAll( values);
-            return getDataSemantics().remove( objectSemantic);
+            return getDataExpressions().remove( objectSemantic);
         }
 
         /**
@@ -490,7 +490,7 @@ public interface IndividualExpression
          * (a change of singleton value is not considered).
          */
         default boolean addData( OWLDataProperty property, boolean singleton){
-            for (DescriptorEntitySet.DataExpression d : getDataSemantics()) {
+            for (DescriptorEntitySet.DataExpression d : getDataExpressions()) {
                 if (d.getExpression().equals(property)) {
                     d.getValues().setSingleton( singleton);
                     return false;
@@ -499,7 +499,7 @@ public interface IndividualExpression
 
             DescriptorEntitySet.DataExpression data = new DescriptorEntitySet.DataExpression(property);
             data.getValues().setSingleton( singleton);
-            return getDataSemantics().add(data);
+            return getDataExpressions().add(data);
         }
 
         /**
@@ -547,7 +547,7 @@ public interface IndividualExpression
          * Add a new semantic (i.e.: data property) to this {@link Descriptor} with a particular value.
          * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * value to specified boolean anyway.
-         * If {@link #getDataSemantics()} represents a singleton set this call clear the
+         * If {@link #getDataExpressions()} represents a singleton set this call clear the
          * previous contents.
          * @param property the data property to synchronise.
          * @param value the specific property literal to be added to the {@link DescriptorEntitySet.DataExpression#getValues()} set.
@@ -556,7 +556,7 @@ public interface IndividualExpression
          * (a change of singleton value is not considered).
          */
         default boolean addData( OWLDataProperty property, OWLLiteral value, boolean singleton){
-            for (DescriptorEntitySet.DataExpression d : getDataSemantics())
+            for (DescriptorEntitySet.DataExpression d : getDataExpressions())
                 if( d.getExpression().equals( property)){
                     if ( singleton)
                         d.getValues().clear();
@@ -567,13 +567,13 @@ public interface IndividualExpression
             DescriptorEntitySet.DataExpression data = new DescriptorEntitySet.DataExpression(property);
             data.getValues().add(value);
             data.getValues().setSingleton( singleton);
-            return getDataSemantics().add(data);
+            return getDataExpressions().add(data);
         }
         /**
          * Add a new semantic (i.e.: data property) to this {@link Descriptor} with a particular set of values.
          * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * value to specified boolean anyway.
-         * If {@link #getDataSemantics()} represents a singleton set this call clear the
+         * If {@link #getDataExpressions()} represents a singleton set this call clear the
          * previous contents.
          * @param property the data property to synchronise.
          * @param values the specific set of property literal to be added to the {@link DescriptorEntitySet.DataExpression#getValues()} set.
@@ -585,13 +585,13 @@ public interface IndividualExpression
             DescriptorEntitySet.DataExpression objectSemantic = new DescriptorEntitySet.DataExpression(property);
             objectSemantic.getValues().addAll( values);
             objectSemantic.getValues().setSingleton( singleton);
-            return getDataSemantics().add( objectSemantic);
+            return getDataExpressions().add( objectSemantic);
         }
         /**
          * Add a new semantic (i.e.: data property) to this {@link Descriptor} with a particular set of values.
          * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * value to specified boolean anyway.
-         * If {@link #getDataSemantics()} represents a singleton set this call clear the
+         * If {@link #getDataExpressions()} represents a singleton set this call clear the
          * previous contents.
          * This call, automatically sets the {@code singleton} flag to false.
          * @param property the data property to synchronise.
@@ -605,7 +605,7 @@ public interface IndividualExpression
 
 
         @Override
-        DescriptorEntitySet.DataSemantics getDataSemantics();
+        DescriptorEntitySet.DataSemantics getDataExpressions();
 
         /**
          * A shortcut for {@link DescriptorEntitySet.DataSemantics#getLink(OWLProperty)}
@@ -613,7 +613,7 @@ public interface IndividualExpression
          * @return a value of the given data property. {@code Null} if is not available.
          */
         default OWLLiteral getLiteral( OWLDataProperty semantic){
-            return getDataSemantics().getLink( semantic);
+            return getDataExpressions().getLink( semantic);
         }
         /**
          * A shortcut for {@link DescriptorEntitySet.DataSemantics#getLink(OWLProperty)}
@@ -621,7 +621,7 @@ public interface IndividualExpression
          * @return a value of the given data property. {@code Null} if is not available.
          */
         default OWLLiteral getLiteral( String semanticName){
-            return getDataSemantics().getLink( getOntology().getOWLDataProperty( semanticName));
+            return getDataExpressions().getLink( getOntology().getOWLDataProperty( semanticName));
         }
 
         /**
@@ -630,7 +630,7 @@ public interface IndividualExpression
          * @return all the values of the given data property. An {@code empty} {@link HashSet} if is not available.
          */
         default EntitySet<OWLLiteral> getLiterals(OWLDataProperty semantic){
-            return getDataSemantics().getLinks( semantic);
+            return getDataExpressions().getLinks( semantic);
         }
         /**
          * A shortcut for {@link DescriptorEntitySet.DataSemantics#getLinks(OWLProperty)}
@@ -638,7 +638,7 @@ public interface IndividualExpression
          * @return all the values of the given data property. An {@code empty} {@link HashSet} if is not available.
          */
         default EntitySet<OWLLiteral> getLiterals(String semanticName){
-            return getDataSemantics().getLinks( getOntology().getOWLDataProperty( semanticName));
+            return getDataExpressions().getLinks( getOntology().getOWLDataProperty( semanticName));
         }
 
 
@@ -646,11 +646,11 @@ public interface IndividualExpression
         @Override // see super classes for documentation
         default DescriptorEntitySet.DataSemantics queryDataIndividual(){
             DescriptorEntitySet.DataSemantics dataSet = new DescriptorEntitySet.DataSemantics();
-            dataSet.setSingleton( getDataSemantics().isSingleton());
+            dataSet.setSingleton( getDataExpressions().isSingleton());
             for (DataPropertyRelations r :  getOntology().getDataPropertyB2Individual(getInstance())){
                 DescriptorEntitySet.DataExpression data = new DescriptorEntitySet.DataExpression( r.getProperty());
                 data.getValues().addAll( r.getValues());
-                for (DescriptorEntitySet.DataExpression w : getDataSemantics())
+                for (DescriptorEntitySet.DataExpression w : getDataExpressions())
                     if ( data.equals( w)){
                         data.getValues().setSingleton( w.getValues().isSingleton());
                         break;

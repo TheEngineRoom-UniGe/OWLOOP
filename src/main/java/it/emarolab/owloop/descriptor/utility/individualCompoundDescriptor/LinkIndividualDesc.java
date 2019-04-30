@@ -116,7 +116,7 @@ public class LinkIndividualDesc
     }
 
     @Override
-    public DescriptorEntitySet.DataSemantics getDataSemantics() {
+    public DescriptorEntitySet.DataSemantics getDataExpressions() {
         return dataLinks;
     }
 
