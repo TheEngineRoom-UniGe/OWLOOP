@@ -1,6 +1,6 @@
 package it.emarolab.owloop.descriptor.utility.individualCompoundDescriptor;
 
-import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
+import it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorEntitySet;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;

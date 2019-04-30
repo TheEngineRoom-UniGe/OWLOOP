@@ -1,20 +1,20 @@
 package it.emarolab.owloop.descriptor.utility.owloopPaperTests;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
-import it.emarolab.owloop.descriptor.construction.descriptorGround.IndividualDescriptorGround;
-import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
+import it.emarolab.owloop.descriptor.construction.descriptorBase.IndividualDescriptorBase;
+import it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.IndividualExpression;
 import it.emarolab.owloop.descriptor.utility.objectPropertyCompoundDescriptor.FullObjectPropertyDesc;
 
 import java.util.List;
 
 public class ObjLinkIndividualDesc
-        extends IndividualDescriptorGround
+        extends IndividualDescriptorBase
         implements IndividualExpression.ObjectLink<FullObjectPropertyDesc> {
 
     private DescriptorEntitySet.ObjectSemantics objectLinks = new DescriptorEntitySet.ObjectSemantics();
 
-    // constructors for IndividualDescriptorGround
+    // constructors for IndividualDescriptorBase
     public ObjLinkIndividualDesc(String instanceName, OWLReferences onto) {
         super(instanceName, onto);
     }
@@ -47,7 +47,7 @@ public class ObjLinkIndividualDesc
 
 
     // implementation for standard object interface
-    // equals() and hashCode() is based on DescriptorGround<?> which considers only the ground
+    // equals() and hashCode() is based on DescriptorBase<?> which considers only the ground
     @Override
     public String toString() {
         return getClass().getSimpleName() + "{" +

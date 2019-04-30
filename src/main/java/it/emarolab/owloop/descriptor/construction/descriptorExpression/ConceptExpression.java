@@ -4,7 +4,8 @@ import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.amor.owlInterface.SemanticRestriction;
 import it.emarolab.amor.owlInterface.SemanticRestriction.*;
 import it.emarolab.owloop.core.Concept;
-import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
+import it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorEntitySet;
+import it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorGrounding;
 import org.semanticweb.owlapi.model.*;
 
 import java.util.ArrayList;

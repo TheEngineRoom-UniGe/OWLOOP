@@ -3,7 +3,7 @@ package it.emarolab.owloop.descriptor.utility.owloopPaperTests;
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.amor.owlInterface.OWLReferencesInterface;
 import it.emarolab.amor.owlInterface.SemanticRestriction;
-import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
+import it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.utility.conceptCompoundDescriptor.FullConceptDesc;
 import org.junit.AfterClass;
 import org.junit.Before;

@@ -1,9 +1,9 @@
 package it.emarolab.owloop.descriptor.utility.individualCompoundDescriptor;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
-import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
+import it.emarolab.owloop.descriptor.construction.descriptorBase.IndividualDescriptorBase;
+import it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.IndividualExpression;
-import it.emarolab.owloop.descriptor.construction.descriptorGround.IndividualDescriptorGround;
 import it.emarolab.owloop.descriptor.utility.conceptCompoundDescriptor.HierarchicalConceptDesc;
 import it.emarolab.owloop.core.Axiom;
 import org.semanticweb.owlapi.model.OWLClass;
@@ -23,7 +23,7 @@ import java.util.List;
  *     {@link #readSemantic()} and {@link #writeSemantic()} methods.
  *     From an OOP prospective it returns the classified types as instances
  *     of {@link HierarchicalConceptDesc}s.
- *     All its constructions are based on {@link IndividualDescriptorGround} in order
+ *     All its constructions are based on {@link IndividualDescriptorBase} in order
  *     to automatically manage a grounding {@link IndividualInstance}.
  *     <br>
  *     You may want to use this class (see also {@link DefinitionIndividualDesc} and {@link LinkIndividualDesc},
@@ -40,12 +40,12 @@ import java.util.List;
  * </small></div>
  */
 public class TypeIndividualDesc
-        extends IndividualDescriptorGround
+        extends IndividualDescriptorBase
         implements IndividualExpression.Type<HierarchicalConceptDesc>{
 
     private DescriptorEntitySet.Concepts individualTypes = new DescriptorEntitySet.Concepts();
 
-    // constructors for IndividualDescriptorGround
+    // constructors for IndividualDescriptorBase
 
     public TypeIndividualDesc(OWLNamedIndividual instance, OWLReferences onto) {
         super(instance, onto);
@@ -102,7 +102,7 @@ public class TypeIndividualDesc
 
 
     // implementation for standard object interface
-    // equals() and hashCode() is based on DescriptorGround<?> which considers only the ground
+    // equals() and hashCode() is based on DescriptorBase<?> which considers only the ground
 
     @Override
     public String toString() {

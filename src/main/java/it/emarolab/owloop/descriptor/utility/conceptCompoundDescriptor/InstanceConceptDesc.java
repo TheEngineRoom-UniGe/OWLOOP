@@ -2,9 +2,9 @@ package it.emarolab.owloop.descriptor.utility.conceptCompoundDescriptor;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.core.Axiom;
-import it.emarolab.owloop.descriptor.construction.descriptorGround.ConceptDescriptorGround;
+import it.emarolab.owloop.descriptor.construction.descriptorBase.ConceptDescriptorBase;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.ConceptExpression;
-import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
+import it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.utility.individualCompoundDescriptor.LinkIndividualDesc;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
@@ -21,7 +21,7 @@ import java.util.List;
  *     Its purpose is only to instanciate the {@link DescriptorEntitySet.Concepts} for the
  *     respective descriptions, as well as call the derived interfaces in the
  *     {@link #readSemantic()} and {@link #writeSemantic()} methods.
- *     All its constructions are based on {@link ConceptDescriptorGround} in order
+ *     All its constructions are based on {@link ConceptDescriptorBase} in order
  *     to automatically manage a grounding {@link ConceptInstance}.
  *     <br>
  *     You may want to use this class (see also {@link HierarchicalConceptDesc},
@@ -38,12 +38,12 @@ import java.util.List;
  * </small></div>
  */
 public class InstanceConceptDesc
-        extends ConceptDescriptorGround
+        extends ConceptDescriptorBase
         implements ConceptExpression.Instance<LinkIndividualDesc> {
 
     private DescriptorEntitySet.Individuals classifiedIndividual = new DescriptorEntitySet.Individuals();
 
-    // constructors for ConceptDescriptorGround
+    // constructors for ConceptDescriptorBase
 
     public InstanceConceptDesc(OWLClass instance, OWLReferences onto) {
         super(instance, onto);
@@ -101,7 +101,7 @@ public class InstanceConceptDesc
 
 
     // implementation for standard object interface
-    // equals() and hashCode() is based on DescriptorGround<?> which considers only the ground
+    // equals() and hashCode() is based on DescriptorBase<?> which considers only the ground
 
     @Override
     public String toString() {

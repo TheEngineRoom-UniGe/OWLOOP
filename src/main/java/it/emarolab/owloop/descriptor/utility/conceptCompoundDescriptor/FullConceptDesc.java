@@ -1,9 +1,9 @@
 package it.emarolab.owloop.descriptor.utility.conceptCompoundDescriptor;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
-import it.emarolab.owloop.descriptor.construction.descriptorGround.ConceptDescriptorGround;
+import it.emarolab.owloop.descriptor.construction.descriptorBase.ConceptDescriptorBase;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.ConceptExpression;
-import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
+import it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.utility.individualCompoundDescriptor.LinkIndividualDesc;
 import it.emarolab.owloop.core.Axiom;
 import org.semanticweb.owlapi.model.OWLClass;
@@ -21,7 +21,7 @@ import java.util.List;
  *     and {@link DescriptorEntitySet.Restrictions} for the
  *     respective descriptions, as well as call all interfaces in the
  *     {@link #readSemantic()} and {@link #writeSemantic()} methods.
- *     All its constructions are based on {@link ConceptDescriptorGround} in order
+ *     All its constructions are based on {@link ConceptDescriptorBase} in order
  *     to automatically manage a grounding {@link ConceptInstance}.
  *     <br>
  *     In order to optimise the synchronisation efficiency (i.e.: minimize
@@ -40,7 +40,7 @@ import java.util.List;
  * </small></div>
  */
 public class FullConceptDesc
-        extends ConceptDescriptorGround
+        extends ConceptDescriptorBase
         implements ConceptExpression.Definition,
         ConceptExpression.Disjoint<FullConceptDesc>,
         ConceptExpression.Equivalent<FullConceptDesc>,
@@ -55,7 +55,7 @@ public class FullConceptDesc
     private DescriptorEntitySet.Concepts superConcept = new DescriptorEntitySet.Concepts();
     private DescriptorEntitySet.Individuals classifiedIndividual = new DescriptorEntitySet.Individuals();
 
-    // constructors for ConceptDescriptorGround
+    // constructors for ConceptDescriptorBase
 
     public FullConceptDesc(OWLClass instance, OWLReferences onto) {
         super(instance, onto);
@@ -174,7 +174,7 @@ public class FullConceptDesc
     }
 
     // implementation for standard object interface
-    // equals() and hashCode() is based on DescriptorGround<?> which considers only the ground
+    // equals() and hashCode() is based on DescriptorBase<?> which considers only the ground
 
     @Override
     public String toString() {

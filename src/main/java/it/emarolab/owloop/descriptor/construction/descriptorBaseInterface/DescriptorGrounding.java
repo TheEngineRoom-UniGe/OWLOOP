@@ -1,7 +1,11 @@
-package it.emarolab.owloop.descriptor.construction.descriptorExpression;
+package it.emarolab.owloop.descriptor.construction.descriptorBaseInterface;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.core.Axiom;
+import it.emarolab.owloop.descriptor.construction.descriptorExpression.ConceptExpression;
+import it.emarolab.owloop.descriptor.construction.descriptorExpression.DataPropertyExpression;
+import it.emarolab.owloop.descriptor.construction.descriptorExpression.IndividualExpression;
+import it.emarolab.owloop.descriptor.construction.descriptorExpression.ObjectPropertyExpression;
 import org.semanticweb.owlapi.model.*;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
 import org.semanticweb.owlapi.vocab.OWL2Datatype;
@@ -39,7 +43,7 @@ import java.util.Set;
  *     </ul>
  *
  * <div style="text-align:center;"><small>
- * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.DescriptorGrounding <br>
+ * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorGrounding <br>
  * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
  * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
  * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -59,7 +63,7 @@ public interface DescriptorGrounding<J extends OWLObject>
      *     following the <a href="https://github.com/EmaroLab/multi_ontology_reference">aMOR</a> API.
      *
      * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.DescriptorGrounding <br>
+     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorGrounding <br>
      * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
      * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -156,7 +160,7 @@ public interface DescriptorGrounding<J extends OWLObject>
      *     See super class and related interface for more documentation.
      *
      * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.DescriptorGrounding <br>
+     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorGrounding <br>
      * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
      * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -211,7 +215,7 @@ public interface DescriptorGrounding<J extends OWLObject>
      *     See super class and related interface for more documentation.
      *
      * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.DescriptorGrounding <br>
+     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorGrounding <br>
      * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
      * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -267,7 +271,7 @@ public interface DescriptorGrounding<J extends OWLObject>
      *     See super class and related interface for more documentation.
      *
      * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.DescriptorGrounding <br>
+     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorGrounding <br>
      * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
      * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -323,7 +327,7 @@ public interface DescriptorGrounding<J extends OWLObject>
      *     See super class and related interface for more documentation.
      *
      * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.DescriptorGrounding <br>
+     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorGrounding <br>
      * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
      * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>

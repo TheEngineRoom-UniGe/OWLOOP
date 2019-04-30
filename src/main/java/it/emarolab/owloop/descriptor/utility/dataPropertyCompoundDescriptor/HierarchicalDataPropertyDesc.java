@@ -2,9 +2,9 @@ package it.emarolab.owloop.descriptor.utility.dataPropertyCompoundDescriptor;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.core.Axiom;
-import it.emarolab.owloop.descriptor.construction.descriptorGround.DataPropertyDescriptorGround;
+import it.emarolab.owloop.descriptor.construction.descriptorBase.DataPropertyDescriptorBase;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.DataPropertyExpression;
-import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
+import it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorEntitySet;
 import org.semanticweb.owlapi.model.OWLDataProperty;
 
 import java.util.List;
@@ -18,7 +18,7 @@ import java.util.List;
  *     Its purpose is only to instanciate the {@link DescriptorEntitySet.DataLinks} for the
  *     respective descriptions, as well as call both interfaces in the
  *     {@link #readSemantic()} and {@link #writeSemantic()} methods.
- *     All its constructions are based on {@link DataPropertyDescriptorGround} in order
+ *     All its constructions are based on {@link DataPropertyDescriptorBase} in order
  *     to automatically manage a grounding {@link DataInstance}.
  *     <br>
  *     You may want to use this class (see also {@link DefinitionDataPropertyDesc}
@@ -36,14 +36,14 @@ import java.util.List;
  * </small></div>
  */
 public class HierarchicalDataPropertyDesc
-        extends DataPropertyDescriptorGround
+        extends DataPropertyDescriptorBase
         implements DataPropertyExpression.Sub<HierarchicalDataPropertyDesc>,
         DataPropertyExpression.Super<HierarchicalDataPropertyDesc>{
 
     private DescriptorEntitySet.DataLinks subProperties = new DescriptorEntitySet.DataLinks();
     private DescriptorEntitySet.DataLinks superProperties = new DescriptorEntitySet.DataLinks();
 
-    // constructors for DataPropertyDescriptorGround
+    // constructors for DataPropertyDescriptorBase
 
     public HierarchicalDataPropertyDesc(OWLDataProperty instance, OWLReferences onto) {
         super(instance, onto);
@@ -118,7 +118,7 @@ public class HierarchicalDataPropertyDesc
 
 
     // implementation for standard object interface
-    // equals() and hashCode() is based on DescriptorGround<?> which considers only the ground
+    // equals() and hashCode() is based on DescriptorBase<?> which considers only the ground
 
     @Override
     public String toString() {
