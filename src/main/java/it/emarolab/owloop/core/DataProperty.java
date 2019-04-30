@@ -131,7 +131,7 @@ public interface DataProperty<O,J>
         }
 
         /**
-         * It calls {@link SemanticEntitySet#synchroniseFrom(EntitySet)} with {@link #queryEquivalentDataProperty()}
+         * It calls {@link ExpressionEntitySet#synchroniseFrom(EntitySet)} with {@link #queryEquivalentDataProperty()}
          * as input parameter. This computes the changes to be performed into the {@link #getEquivalentDataProperty()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readSemantic()}.
@@ -229,7 +229,7 @@ public interface DataProperty<O,J>
         }
 
         /**
-         * It calls {@link SemanticEntitySet#synchroniseFrom(EntitySet)} with {@link #queryDisjointDataProperty()}
+         * It calls {@link ExpressionEntitySet#synchroniseFrom(EntitySet)} with {@link #queryDisjointDataProperty()}
          * as input parameter. This computes the changes to be performed into the {@link #getDisjointDataProperty()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readSemantic()}.
@@ -334,7 +334,7 @@ public interface DataProperty<O,J>
         }
 
         /**
-         * It calls {@link SemanticEntitySet#synchroniseFrom(EntitySet)} with {@link #querySubDataProperty()}
+         * It calls {@link ExpressionEntitySet#synchroniseFrom(EntitySet)} with {@link #querySubDataProperty()}
          * as input parameter. This computes the changes to be performed into the {@link #getSubDataProperty()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readSemantic()}.
@@ -437,7 +437,7 @@ public interface DataProperty<O,J>
         }
 
         /**
-         * It calls {@link SemanticEntitySet#synchroniseFrom(EntitySet)} with {@link #querySuperDataProperty()}
+         * It calls {@link ExpressionEntitySet#synchroniseFrom(EntitySet)} with {@link #querySuperDataProperty()}
          * as input parameter. This computes the changes to be performed into the {@link #getSuperDataProperty()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readSemantic()}.
@@ -529,7 +529,7 @@ public interface DataProperty<O,J>
         }
 
         /**
-         * It calls {@link SemanticEntitySet#synchroniseFrom(EntitySet)} with {@link #queryDomainDataProperty()}
+         * It calls {@link ExpressionEntitySet#synchroniseFrom(EntitySet)} with {@link #queryDomainDataProperty()}
          * as input parameter. This computes the changes to be performed into the {@link #getDomainDataProperty()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readSemantic()}.
@@ -621,7 +621,7 @@ public interface DataProperty<O,J>
         }
 
         /**
-         * It calls {@link SemanticEntitySet#synchroniseFrom(EntitySet)} with {@link #queryRangeDataProperty()}
+         * It calls {@link ExpressionEntitySet#synchroniseFrom(EntitySet)} with {@link #queryRangeDataProperty()}
          * as input parameter. This computes the changes to be performed into the {@link #getRangeDataProperty()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readSemantic()}.

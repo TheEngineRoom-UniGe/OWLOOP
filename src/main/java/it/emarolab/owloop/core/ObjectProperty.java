@@ -193,7 +193,7 @@ public interface ObjectProperty<O,J>
         }
 
         /**
-         * It calls {@link SemanticEntitySet#synchroniseFrom(EntitySet)} with {@link #queryInverseObjectProperty()}
+         * It calls {@link ExpressionEntitySet#synchroniseFrom(EntitySet)} with {@link #queryInverseObjectProperty()}
          * as input parameter. This computes the changes to be performed into the {@link #getInverseObjectProperty()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readSemantic()}.
@@ -303,7 +303,7 @@ public interface ObjectProperty<O,J>
         }
 
         /**
-         * It calls {@link SemanticEntitySet#synchroniseFrom(EntitySet)} with {@link #queryDisjointObjectProperty()}
+         * It calls {@link ExpressionEntitySet#synchroniseFrom(EntitySet)} with {@link #queryDisjointObjectProperty()}
          * as input parameter. This computes the changes to be performed into the {@link #getDisjointObjectProperty()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readSemantic()}.
@@ -413,7 +413,7 @@ public interface ObjectProperty<O,J>
         }
 
         /**
-         * It calls {@link SemanticEntitySet#synchroniseFrom(EntitySet)} with {@link #queryEquivalentObjectProperty()}
+         * It calls {@link ExpressionEntitySet#synchroniseFrom(EntitySet)} with {@link #queryEquivalentObjectProperty()}
          * as input parameter. This computes the changes to be performed into the {@link #getEquivalentObjectProperty()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readSemantic()}.
@@ -523,7 +523,7 @@ public interface ObjectProperty<O,J>
         }
 
         /**
-         * It calls {@link SemanticEntitySet#synchroniseFrom(EntitySet)} with {@link #querySubObjectProperty()}
+         * It calls {@link ExpressionEntitySet#synchroniseFrom(EntitySet)} with {@link #querySubObjectProperty()}
          * as input parameter. This computes the changes to be performed into the {@link #getSubObjectProperty()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readSemantic()}.
@@ -633,7 +633,7 @@ public interface ObjectProperty<O,J>
         }
 
         /**
-         * It calls {@link SemanticEntitySet#synchroniseFrom(EntitySet)} with {@link #querySuperObjectProperty()}
+         * It calls {@link ExpressionEntitySet#synchroniseFrom(EntitySet)} with {@link #querySuperObjectProperty()}
          * as input parameter. This computes the changes to be performed into the {@link #getSuperObjectProperty()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readSemantic()}.
@@ -724,7 +724,7 @@ public interface ObjectProperty<O,J>
         }
 
         /**
-         * It calls {@link SemanticEntitySet#synchroniseFrom(EntitySet)} with {@link #queryDomainObjectProperty()}
+         * It calls {@link ExpressionEntitySet#synchroniseFrom(EntitySet)} with {@link #queryDomainObjectProperty()}
          * as input parameter. This computes the changes to be performed into the {@link #getDomainObjectProperty()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readSemantic()}.
@@ -818,7 +818,7 @@ public interface ObjectProperty<O,J>
         }
 
         /**
-         * It calls {@link SemanticEntitySet#synchroniseFrom(EntitySet)} with {@link #queryRangeObjectProperty()}
+         * It calls {@link ExpressionEntitySet#synchroniseFrom(EntitySet)} with {@link #queryRangeObjectProperty()}
          * as input parameter. This computes the changes to be performed into the {@link #getRangeObjectProperty()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readSemantic()}.

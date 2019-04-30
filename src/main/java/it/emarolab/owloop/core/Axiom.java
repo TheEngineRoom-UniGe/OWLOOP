@@ -4,14 +4,14 @@ import java.util.*;
 
 /**
  * This interface is a part of the core of OWLOOP architecture.
- * It contains interfaces of the basic components within OWLOOP. <p>
+ * It contains interfaces of the basic components within OWLOOP. These components are used to define and give structure to a descriptor. <p>
  * The components are the following:
  *
  * <ul>
  * <li><b>{@link Ground}</b>:              is an OWL entity associated to an ontology. </li>
  * <li><b>{@link EntitySet}</b>:           is a set of OWL entities associated to the {@link Ground} via an expression. </li>
- * <li><b>{@link SemanticEntity}</b>:      associates an expression to the {@link EntitySet}. </li>
- * <li><b>{@link SemanticEntitySet}</b>:   enables association of complex expressions to the {@link EntitySet}. </li>
+ * <li><b>{@link ExpressionEntity}</b>:    associates an expression to the {@link EntitySet}. </li>
+ * <li><b>{@link ExpressionEntitySet}</b>: enables association of complex expressions to the {@link EntitySet}. </li>
  * <li><b>{@link Descriptor}</b>:          is in charge of mapping the ({@link Ground}) and the ({@link EntitySet}) via an (expression).
  *                                         A descriptor is also in charge of synchronizing them all, i.e, the axioms, between it's
  *                                         internal state and the OWL representation.
@@ -290,12 +290,12 @@ public interface Axiom {
      * @param <S> the type of expression.
      * @param <Y> the {@link EntitySet}.
      */
-    interface SemanticEntity<S,Y>{
+    interface ExpressionEntity<S,Y>{
         /**
          * Gets the expression.
          * @return the expression associated to the {@link EntitySet}.
          */
-        S getSemantic();
+        S getExpression();
 
         /**
          * Gets the values (i.e., elements) in the {@link EntitySet}.
@@ -304,20 +304,21 @@ public interface Axiom {
         EntitySet<Y> getValues();
 
         /**
-         * Creates a new instance of {@link SemanticEntity} that preserves
+         * Creates a new instance of {@link ExpressionEntity} that preserves
          * the expression but assigns new values to it. <p>
-         * It is used during synchronisation by {@link SemanticEntitySet.SynchronisationMultiIntent}.
+         * It is used during synchronisation by {@link ExpressionEntitySet.SynchronisationMultiIntent}.
          *
          * @param values the new values to be assigned to the expression.
          *
-         * @return a new {@link SemanticEntity} with the same expression but new values.
+         * @return a new {@link ExpressionEntity} with the same expression but new values.
          */
-        SemanticEntity<S,Y> getNewData(Set<Y> values); // set the semantic it has
+        ExpressionEntity<S,Y> getNewData(Set<Y> values); // set the semantic it has
     }
 
     /**
-     *It describes a collection of entities associated to a specific expression and
-     *grounded with a ({@link Ground}) in an ontology.
+     *Enables to associate a set of expressions, within which each is associated to an EntitySet.
+     *Therefore each EntitySet is associated to a specific expression and
+     *grounded with a specific ({@link Ground}).
      *<br>
      *Given the OWLOOP state of this set and the OWL representation (i.e.: queried description)
      *it is possible to synchronise (read or write) the two set by using the
@@ -327,7 +328,7 @@ public interface Axiom {
      * @param <F> the type of semantic entities assigned to this set
      * @param <Y> the type of entities described by this set.
      */
-    interface SemanticEntitySet<F extends SemanticEntity<?,Y>,Y>
+    interface ExpressionEntitySet<F extends ExpressionEntity<?,Y>,Y>
             extends EntitySet<F> {
 
         @Override // see documentation in the super method
@@ -350,7 +351,7 @@ public interface Axiom {
          * This class synchronises only the Semantics that have been specied in the
          * OWLOOP architecture, not for all the proprieties !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
          */
-        class SynchroniseContainedIntent<F extends SemanticEntity<?,Y>,Y> {
+        class SynchroniseContainedIntent<F extends ExpressionEntity<?,Y>,Y> {
 
             private SynchroniseContainedIntent(){} // not instantiable outside of this file
 
@@ -375,7 +376,7 @@ public interface Axiom {
                         boolean matched = false;
                         for (F b2 : a2) {
                             // you may want to add here something to sync all properties
-                            if (b1.getSemantic().equals(b2.getSemantic())) {
+                            if (b1.getExpression().equals(b2.getExpression())) {
                                 sync.addSynchronised(new SynchronisationIntent<>(b1.getValues(), b2.getValues()), b1);
                                 matched = true;
                             }
@@ -403,26 +404,26 @@ public interface Axiom {
         }
 
         /**
-         * The synchronising intent used during {@link SemanticEntity} reading or writing.
+         * The synchronising intent used during {@link ExpressionEntity} reading or writing.
          * <p>
-         *     It describes the changes that should be performed in a {@link SemanticEntity}
+         *     It describes the changes that should be performed in a {@link ExpressionEntity}
          *     set or in an OWL ontology during: {@link Descriptor#readSemantic()} or
          *     {@link Descriptor#writeSemantic()}.
          *     This implementation considers sets of {@link EntitySet} as
          *     {@code {@link HashSet} E}
          *     <br>
          *     This class is not directly instantiable but it can be assessed through:
-         *     {@link SemanticEntitySet#synchroniseFrom(EntitySet)} or {@link SemanticEntitySet#synchroniseTo(EntitySet)}.
+         *     {@link ExpressionEntitySet#synchroniseFrom(EntitySet)} or {@link ExpressionEntitySet#synchroniseTo(EntitySet)}.
          * </p>
          *
-         * @param <E> the type of {@link SemanticEntitySet} to synchronise.
+         * @param <E> the type of {@link ExpressionEntitySet} to synchronise.
          *           It has to describe {@link EntitySet} of type Y.
          *           It should be the same parameter (or an extension) used for
-         *           a specific {@link SemanticEntitySet} implementation.
+         *           a specific {@link ExpressionEntitySet} implementation.
          * @param <Y> the type of elements described in an {@link EntitySet} set
          *           contained in E.
          */
-        class SynchronisationMultiIntent<E extends SemanticEntity<?,Y>,Y>
+        class SynchronisationMultiIntent<E extends ExpressionEntity<?,Y>,Y>
                 extends SynchronisationIntent<E> {
 
             /* this class is created by the SynchroniseContainedIntent class.
@@ -446,9 +447,11 @@ public interface Axiom {
 
 
     /**
-     * The interface to read and write from the ontology specific {@link EntitySet} or {@link SemanticEntitySet}.
-     * The {@link Descriptor} is in charge of maintaining the {@link EntitySet} and {@link SemanticEntitySet}
-     * synchronised with respect to an OWL representation.
+     * Descriptors are OWLOOP representation of axioms.
+     * A {@link Descriptor} deals with axioms by having the structure [Ground,Expression,EntitySet].
+     * It enables reading-from and writing-to an ontology, specific {@link EntitySet} or {@link ExpressionEntitySet}.
+     * A {@link Descriptor} is in charge of maintaining its {@link EntitySet} and {@link ExpressionEntitySet}
+     * synchronised with respect to axioms within an OWL representation.
      *
      * @param <O> the ontology in which the axioms will be applied.
      * @param <J> the {@link Ground} for this descriptor.
@@ -489,7 +492,7 @@ public interface Axiom {
         }
 
         /**
-         * This method is used to update specific {@link EntitySet} (or {@link SemanticEntitySet}) by synchronizing
+         * This method is used to update specific {@link EntitySet} (or {@link ExpressionEntitySet}) by synchronizing
          * the internal state of the descriptor with the queried OWL structure, such that they are equal.
          * It is based on {@link EntitySet#synchroniseFrom(EntitySet)}.
          *
@@ -500,7 +503,7 @@ public interface Axiom {
         List<MappingIntent> readSemantic();
 
         /**
-         * This method is used to update the ontology with a specific {@link EntitySet} (or {@link SemanticEntitySet})
+         * This method is used to update the ontology with a specific {@link EntitySet} (or {@link ExpressionEntitySet})
          * by synchronizing the OWL representation with the internal state of the descriptor, such that they are equal.
          * It is based on {@link EntitySet#synchroniseTo(EntitySet)}.
          *

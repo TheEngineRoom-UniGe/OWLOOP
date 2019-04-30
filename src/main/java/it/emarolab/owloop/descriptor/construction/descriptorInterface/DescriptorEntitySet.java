@@ -13,8 +13,8 @@ import java.util.Set;
 /**
  * The main interface for {@link EntitySet} implemented in the <a href="https://github.com/EmaroLab/multi_ontology_reference">aMOR</a> API.
  * <p>
- *     This interface contains all the {@link EntitySet}, {@link SemanticEntity}
- *     and {@link SemanticEntitySet} used in the {@link Concept}, {@link Individual},
+ *     This interface contains all the {@link EntitySet}, {@link ExpressionEntity}
+ *     and {@link ExpressionEntitySet} used in the {@link Concept}, {@link Individual},
  *     {@link DataProperty} and {@link ObjectProperty} {@link Descriptor}s for the
  *     OWLOOP architecture implemented with the
  *     <a href="https://github.com/EmaroLab/multi_ontology_reference">aMOR</a> framework.
@@ -30,14 +30,14 @@ import java.util.Set;
  *     <li><b>{@link Individuals}</b>: for describing a set of ontological individuals.</li>
  *     <li><b>{@link Concepts}</b>: for describing a set of ontological classes.</li>
  *     <li><b>{@link Literals}</b>: for describing a set of ontological data values
- *                                           (used by the {@link DataSemantic} axiom implementation).</li>
+ *                                           (used by the {@link DataExpression} axiom implementation).</li>
  *     <li><b>{@link DataLinks}</b>: for describing a set of ontological data properties.</li>
  *     <li><b>{@link ObjectLinks}</b>: for describing a set of ontological object properties.</li>
  *     <li><b>{@link Restrictions}</b>: for describing a set of restriction
  *                           (i.e.: for conceptCompoundDescriptor definition as wel as data and property range or domain definition).</li>
- *     <li><b>{@link DataSemantic}</b>: for describing a set of data values with a semantic
+ *     <li><b>{@link DataExpression}</b>: for describing a set of data values with a semantic
  *                                     (i.e.: by {@link DataSemantics}).</li>
- *     <li><b>{@link ObjectSemantic}</b>: for describing a set of data values with a semantic
+ *     <li><b>{@link ObjectExpression}</b>: for describing a set of data values with a semantic
  *                                     (i.e.: by {@link ObjectSemantics}).</li>
  *     </ul>
  *
@@ -52,7 +52,7 @@ import java.util.Set;
 public interface DescriptorEntitySet extends Axiom {
 
     /**
-     * The base interface for all the {@link DescriptorEntitySet} that extends {@link EntitySet} or {@link SemanticEntitySet}.
+     * The base interface for all the {@link DescriptorEntitySet} that extends {@link EntitySet} or {@link ExpressionEntitySet}.
      * <p>
      *     This class implements common features for managing an {@link HashSet} and a {@code singleton} value
      *     for {@link EntitySet}.
@@ -390,10 +390,10 @@ public interface DescriptorEntitySet extends Axiom {
 
 
     /**
-     * An implementation of {@link SemanticEntity} for ontological data properties.
+     * An implementation of {@link ExpressionEntity} for ontological data properties.
      * <p>
      *     This class is a container for all the same data properties applied to an individualCompoundDescriptor
-     *     (with related values). In particular, the {@link #getSemantic()} is a specific
+     *     (with related values). In particular, the {@link #getExpression()} is a specific
      *     property, while {@link #getValues()} represents a set of values linked with the
      *     above property to a {@link Ground}, not specified here.
      *     For this class, the literals ({@link #getValues()}) are of the {@link Literals} type.
@@ -406,83 +406,83 @@ public interface DescriptorEntitySet extends Axiom {
      * <b>date</b>:        21/05/17 <br>
      * </small></div>
      */
-    class DataSemantic
-            implements SemanticEntity<OWLDataProperty,OWLLiteral> {
+    class DataExpression
+            implements ExpressionEntity<OWLDataProperty,OWLLiteral> {
 
         private OWLDataProperty semantic;
         private Literals literals;
 
         /**
-         * Initialise this object to have {@code null} {@link #getSemantic()} and empty {@link #getValues()}.
+         * Initialise this object to have {@code null} {@link #getExpression()} and empty {@link #getValues()}.
          */
-        public DataSemantic() {
+        public DataExpression() {
             this.literals = new Literals();
         }
         /**
-         * Initialise this object to have {@code null} {@link #getSemantic()} and a given set of literal ({@link #getValues()}).
-         * @param c the initial set of literals to assign to {@code this} {@link SemanticEntity}.
+         * Initialise this object to have {@code null} {@link #getExpression()} and a given set of literal ({@link #getValues()}).
+         * @param c the initial set of literals to assign to {@code this} {@link ExpressionEntity}.
          */
-        public DataSemantic(Collection<? extends OWLLiteral> c) {
+        public DataExpression(Collection<? extends OWLLiteral> c) {
             this.literals = new Literals(c);
         }
         /**
-         * Initialise this object to have {@code null} {@link #getSemantic()} and set of literals {@link #getValues()}
+         * Initialise this object to have {@code null} {@link #getExpression()} and set of literals {@link #getValues()}
          * with specified size and load factory.
          * @param initialCapacity the initial size of the literals {@link HashSet}.
          * @param loadFactor the load factor of the literals {@link HashSet}.
          */
-        public DataSemantic(int initialCapacity, float loadFactor) {
+        public DataExpression(int initialCapacity, float loadFactor) {
             this.literals = new Literals(initialCapacity, loadFactor);
         }
         /**
-         * Initialise this object to have {@code null} {@link #getSemantic()} and set of literals {@link #getValues()}
+         * Initialise this object to have {@code null} {@link #getExpression()} and set of literals {@link #getValues()}
          * with specified size and load factory.
          * @param initialCapacity the initial size of the literals {@link HashSet}.
          */
-        public DataSemantic(int initialCapacity) {
+        public DataExpression(int initialCapacity) {
             this.literals = new Literals(initialCapacity);
         }
         /**
-         * Initialise this object to a specific {@link #getSemantic()} and empty {@link #getValues()}.
-         * @param semantic the initial semantic of this {@link SemanticEntity}.
+         * Initialise this object to a specific {@link #getExpression()} and empty {@link #getValues()}.
+         * @param semantic the initial semantic of this {@link ExpressionEntity}.
          */
-        public DataSemantic(OWLDataProperty semantic) {
+        public DataExpression(OWLDataProperty semantic) {
             this.literals = new Literals();
             this.semantic = semantic;
         }
         /**
-         * Initialise this object to have a specific {@link #getSemantic()} and a given set of literal ({@link #getValues()}).
-         * @param semantic the initial semantic of this {@link SemanticEntity}.
-         * @param c the initial set of literals to assign to {@code this} {@link SemanticEntity}.
+         * Initialise this object to have a specific {@link #getExpression()} and a given set of literal ({@link #getValues()}).
+         * @param semantic the initial semantic of this {@link ExpressionEntity}.
+         * @param c the initial set of literals to assign to {@code this} {@link ExpressionEntity}.
          */
-        public DataSemantic(OWLDataProperty semantic, Collection<? extends OWLLiteral> c) {
+        public DataExpression(OWLDataProperty semantic, Collection<? extends OWLLiteral> c) {
             this.literals = new Literals(c);
             this.semantic = semantic;
         }
         /**
-         * Initialise this object to have a specific {@link #getSemantic()} and set of literals {@link #getValues()}
+         * Initialise this object to have a specific {@link #getExpression()} and set of literals {@link #getValues()}
          * with specified size and load factory.
-         * @param semantic the initial semantic of this {@link SemanticEntity}.
+         * @param semantic the initial semantic of this {@link ExpressionEntity}.
          * @param initialCapacity the initial size of the literals {@link HashSet}.
          * @param loadFactor the load factor of the literals {@link HashSet}.
          */
-        public DataSemantic(OWLDataProperty semantic, int initialCapacity, float loadFactor) {
+        public DataExpression(OWLDataProperty semantic, int initialCapacity, float loadFactor) {
             this.literals = new Literals(initialCapacity, loadFactor);
             this.semantic = semantic;
         }
         /**
-         * Initialise this object to have a specific {@link #getSemantic()} and set of literals {@link #getValues()}
+         * Initialise this object to have a specific {@link #getExpression()} and set of literals {@link #getValues()}
          * with specified size and load factory.
-         * @param semantic the initial semantic of this {@link SemanticEntity}.
+         * @param semantic the initial semantic of this {@link ExpressionEntity}.
          * @param initialCapacity the initial size of the literals {@link HashSet}.
          */
-        public DataSemantic(OWLDataProperty semantic, int initialCapacity) {
+        public DataExpression(OWLDataProperty semantic, int initialCapacity) {
             this.literals = new Literals(initialCapacity);
             this.semantic = semantic;
         }
 
         @Override // see super class for documentation
-        public OWLDataProperty getSemantic() {
+        public OWLDataProperty getExpression() {
             return semantic;
         }
 
@@ -500,22 +500,22 @@ public interface DescriptorEntitySet extends Axiom {
         }
 
         @Override // see super class for documentation
-        public DataSemantic getNewData(Set<OWLLiteral> values) {
-            return new DataSemantic( semantic, values);
+        public DataExpression getNewData(Set<OWLLiteral> values) {
+            return new DataExpression( semantic, values);
         }
 
         @Override // see super class for documentation
         public boolean equals(Object o) {
             if (this == o) return true;
-            if (!(o instanceof DataSemantic)) return false;
-            DataSemantic morSemanticData = (DataSemantic) o;
-            return Objects.equal(getSemantic(), morSemanticData.getSemantic()) &&
+            if (!(o instanceof DataExpression)) return false;
+            DataExpression morSemanticData = (DataExpression) o;
+            return Objects.equal(getExpression(), morSemanticData.getExpression()) &&
                     Objects.equal(literals, morSemanticData.literals);
         }
 
         @Override // see super class for documentation
         public int hashCode() {
-            return Objects.hashCode(getSemantic());//, objects);
+            return Objects.hashCode(getExpression());//, objects);
         }
 
         @Override // see super class for documentation
@@ -525,10 +525,10 @@ public interface DescriptorEntitySet extends Axiom {
     }
 
     /**
-     * An implementation of {@link SemanticEntity} for ontological object properties.
+     * An implementation of {@link ExpressionEntity} for ontological object properties.
      * <p>
      *     This class is a container for all the same object properties applied to an individualCompoundDescriptor
-     *     (with related values). In particular, the {@link #getSemantic()} is a specific
+     *     (with related values). In particular, the {@link #getExpression()} is a specific
      *     property, while {@link #getValues()} represents a set of values linked with the
      *     above property to a {@link Ground}, not specified here.
      *     For this class, the individuals ({@link #getValues()}) are of the {@link Individuals} type.
@@ -541,83 +541,83 @@ public interface DescriptorEntitySet extends Axiom {
      * <b>date</b>:        21/05/17 <br>
      * </small></div>
      */
-    class ObjectSemantic
-            implements SemanticEntity<OWLObjectProperty,OWLNamedIndividual> {
+    class ObjectExpression
+            implements ExpressionEntity<OWLObjectProperty,OWLNamedIndividual> {
 
         private OWLObjectProperty semantic;
         private Individuals objects;
 
         /**
-         * Initialise this object to have {@code null} {@link #getSemantic()} and empty {@link #getValues()}.
+         * Initialise this object to have {@code null} {@link #getExpression()} and empty {@link #getValues()}.
          */
-        public ObjectSemantic() {
+        public ObjectExpression() {
             this.objects = new Individuals();
         }
         /**
-         * Initialise this object to have {@code null} {@link #getSemantic()} and a given set of individuals ({@link #getValues()}).
-         * @param c the initial set of individuals to assign to {@code this} {@link SemanticEntity}.
+         * Initialise this object to have {@code null} {@link #getExpression()} and a given set of individuals ({@link #getValues()}).
+         * @param c the initial set of individuals to assign to {@code this} {@link ExpressionEntity}.
          */
-        public ObjectSemantic(Collection<? extends OWLNamedIndividual> c) {
+        public ObjectExpression(Collection<? extends OWLNamedIndividual> c) {
             this.objects = new Individuals(c);
         }
         /**
-         * Initialise this object to have {@code null} {@link #getSemantic()} and set of individuals {@link #getValues()}
+         * Initialise this object to have {@code null} {@link #getExpression()} and set of individuals {@link #getValues()}
          * with specified size and load factory.
          * @param initialCapacity the initial size of the individuals {@link HashSet}.
          * @param loadFactor the load factor of the individuals {@link HashSet}.
          */
-        public ObjectSemantic(int initialCapacity, float loadFactor) {
+        public ObjectExpression(int initialCapacity, float loadFactor) {
             this.objects = new Individuals(initialCapacity, loadFactor);
         }
         /**
-         * Initialise this object to have {@code null} {@link #getSemantic()} and set of individuals {@link #getValues()}
+         * Initialise this object to have {@code null} {@link #getExpression()} and set of individuals {@link #getValues()}
          * with specified size and load factory.
          * @param initialCapacity the initial size of the individuals {@link HashSet}.
          */
-        public ObjectSemantic(int initialCapacity) {
+        public ObjectExpression(int initialCapacity) {
             this.objects = new Individuals(initialCapacity);
         }
         /**
-         * Initialise this object to a specific {@link #getSemantic()} and empty {@link #getValues()}.
-         * @param semantic the initial semantic of this {@link SemanticEntity}.
+         * Initialise this object to a specific {@link #getExpression()} and empty {@link #getValues()}.
+         * @param semantic the initial semantic of this {@link ExpressionEntity}.
          */
-        public ObjectSemantic(OWLObjectProperty semantic) {
+        public ObjectExpression(OWLObjectProperty semantic) {
             this.objects = new Individuals();
             this.semantic = semantic;
         }
         /**
-         * Initialise this object to have a specific {@link #getSemantic()} and a given set of individuals ({@link #getValues()}).
-         * @param semantic the initial semantic of this {@link SemanticEntity}.
-         * @param c the initial set of individuals to assign to {@code this} {@link SemanticEntity}.
+         * Initialise this object to have a specific {@link #getExpression()} and a given set of individuals ({@link #getValues()}).
+         * @param semantic the initial semantic of this {@link ExpressionEntity}.
+         * @param c the initial set of individuals to assign to {@code this} {@link ExpressionEntity}.
          */
-        public ObjectSemantic(OWLObjectProperty semantic, Collection<? extends OWLNamedIndividual> c) {
+        public ObjectExpression(OWLObjectProperty semantic, Collection<? extends OWLNamedIndividual> c) {
             this.objects = new Individuals( c);
             this.semantic = semantic;
         }
         /**
-         * Initialise this object to have a specific {@link #getSemantic()} and set of individuals {@link #getValues()}
+         * Initialise this object to have a specific {@link #getExpression()} and set of individuals {@link #getValues()}
          * with specified size and load factory.
-         * @param semantic the initial semantic of this {@link SemanticEntity}.
+         * @param semantic the initial semantic of this {@link ExpressionEntity}.
          * @param initialCapacity the initial size of the individuals {@link HashSet}.
          * @param loadFactor the load factor of the individuals {@link HashSet}.
          */
-        public ObjectSemantic(OWLObjectProperty semantic, int initialCapacity, float loadFactor) {
+        public ObjectExpression(OWLObjectProperty semantic, int initialCapacity, float loadFactor) {
             this.objects = new Individuals(initialCapacity, loadFactor);
             this.semantic = semantic;
         }
         /**
-         * Initialise this object to have a specific {@link #getSemantic()} and set of individuals {@link #getValues()}
+         * Initialise this object to have a specific {@link #getExpression()} and set of individuals {@link #getValues()}
          * with specified size and load factory.
-         * @param semantic the initial semantic of this {@link SemanticEntity}.
+         * @param semantic the initial semantic of this {@link ExpressionEntity}.
          * @param initialCapacity the initial size of the individuals {@link HashSet}.
          */
-        public ObjectSemantic(OWLObjectProperty semantic, int initialCapacity) {
+        public ObjectExpression(OWLObjectProperty semantic, int initialCapacity) {
             this.objects = new Individuals(initialCapacity);
             this.semantic = semantic;
         }
 
         @Override // see super class for documentation
-        public OWLObjectProperty getSemantic() {
+        public OWLObjectProperty getExpression() {
             return semantic;
         }
 
@@ -635,22 +635,22 @@ public interface DescriptorEntitySet extends Axiom {
         }
 
         @Override // see super class for documentation
-        public ObjectSemantic getNewData(Set<OWLNamedIndividual> values) {
-            return new ObjectSemantic( semantic, values);
+        public ObjectExpression getNewData(Set<OWLNamedIndividual> values) {
+            return new ObjectExpression( semantic, values);
         }
 
         @Override // see super class for documentation
         public boolean equals(Object o) {
             if (this == o) return true;
-            if (!(o instanceof ObjectSemantic)) return false;
-            ObjectSemantic morData = (ObjectSemantic) o;
-            return Objects.equal(getSemantic(), morData.getSemantic()) &&
+            if (!(o instanceof ObjectExpression)) return false;
+            ObjectExpression morData = (ObjectExpression) o;
+            return Objects.equal(getExpression(), morData.getExpression()) &&
                     Objects.equal(objects, morData.objects);
         }
 
         @Override // see super class for documentation
         public int hashCode() {
-            return Objects.hashCode(getSemantic());//, objects);
+            return Objects.hashCode(getExpression());//, objects);
         }
 
         @Override // see super class for documentation
@@ -660,7 +660,7 @@ public interface DescriptorEntitySet extends Axiom {
     }
 
     /**
-     * The base implementation for the {@link SemanticEntitySet}.
+     * The base implementation for the {@link ExpressionEntitySet}.
      * <p>
      *     It implements common methods to be used to manage a set of EntitySet.
      *     In particular, it define the method of adding and removing set of
@@ -670,31 +670,31 @@ public interface DescriptorEntitySet extends Axiom {
      *     on {@link EntitySetBase}.
      * </p>
      * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.SemanticEntitySetBase <br>
+     * <b>File</b>:        it.emarolab.owloop.descriptor.ExpressionEntitySetBase <br>
      * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
      * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
      * <b>date</b>:        21/05/17 <br>
      * </small></div>
      */
-    abstract class SemanticEntitySetBase<X extends SemanticEntity<S,A>,S extends OWLProperty,A>
+    abstract class ExpressionEntitySetBase<X extends ExpressionEntity<S,A>,S extends OWLProperty,A>
             extends EntitySetBase<X>
-            implements SemanticEntitySet<X,A> {
+            implements ExpressionEntitySet<X,A> {
 
-        public SemanticEntitySetBase() {
+        public ExpressionEntitySetBase() {
         }
-        public SemanticEntitySetBase(Collection<? extends X> c) {
+        public ExpressionEntitySetBase(Collection<? extends X> c) {
             super(c);
         }
-        public SemanticEntitySetBase(int initialCapacity, float loadFactor) {
+        public ExpressionEntitySetBase(int initialCapacity, float loadFactor) {
             super(initialCapacity, loadFactor);
         }
-        public SemanticEntitySetBase(int initialCapacity) {
+        public ExpressionEntitySetBase(int initialCapacity) {
             super(initialCapacity);
         }
 
         /**
-         * Searches in the {@link SemanticEntity} for the given property and
+         * Searches in the {@link ExpressionEntity} for the given property and
          * returns all its values.
          * @param semantic the properties to look for.
          * @return all the synchronised values of the given property.
@@ -702,14 +702,14 @@ public interface DescriptorEntitySet extends Axiom {
          */
         public EntitySet<A> getLinks(S semantic){
             for ( X s : this){
-                if ( semantic.equals( s.getSemantic()))
+                if ( semantic.equals( s.getExpression()))
                     return s.getValues();
             }
             return new EntitySetBase<>();
         }
 
         /**
-         * Searches in the {@link SemanticEntity} for the given property and
+         * Searches in the {@link ExpressionEntity} for the given property and
          * returns one of its values. It should be used with a {@link EntitySet#isSingleton()}
          * axioms, since other values are ignored.
          * @param semantic the properties to look for.
@@ -718,7 +718,7 @@ public interface DescriptorEntitySet extends Axiom {
          */
         public A getLink(S semantic){
             for ( X s : this){
-                if ( semantic.equals( s.getSemantic())) {
+                if ( semantic.equals( s.getExpression())) {
                     if ( ! s.getValues().isSingleton())
                         System.out.println( " !! search for only one literal in a not singleton object property: " + s);
                     for (A l : s.getValues())
@@ -731,10 +731,10 @@ public interface DescriptorEntitySet extends Axiom {
 
         /**
          * This method modifies the standard adding procedure to a set
-         * by looking if the {@link SemanticEntitySet} already contains
+         * by looking if the {@link ExpressionEntitySet} already contains
          * the semantic (i.e.: data or object property) specified in the
          * input parameter. If this is true the given value are added
-         * to the related {@link  SemanticEntity#getValues()}. Otherwise
+         * to the related {@link  ExpressionEntity#getValues()}. Otherwise
          * the given object is added as a new element.
          * Note that if the input parameter describes a {@code singleton}
          * object all the previous contents related to that semantic
@@ -745,7 +745,7 @@ public interface DescriptorEntitySet extends Axiom {
         @Override
         public boolean add(X dataSemantic) {
             for ( X d : this)//.set)
-                if( d.getSemantic().equals( dataSemantic.getSemantic())){
+                if( d.getExpression().equals( dataSemantic.getExpression())){
                     if ( dataSemantic.getValues().isSingleton())
                         d.getValues().clear();
                     d.getValues().setSingleton( dataSemantic.getValues().isSingleton());
@@ -756,9 +756,9 @@ public interface DescriptorEntitySet extends Axiom {
         }
 
         /**
-         * It removes an entri from the {@link SemanticEntitySet}.
+         * It removes an entri from the {@link ExpressionEntitySet}.
          * The input parameter cna be ether the object describing the
-         * {@link SemanticEntity} with a specific semantic and values
+         * {@link ExpressionEntity} with a specific semantic and values
          * to be removed. Or it can a property. For the latter,
          * all the values are deleted.
          * @param o the object to be removed.
@@ -769,7 +769,7 @@ public interface DescriptorEntitySet extends Axiom {
             for (X d : this){//.set) {
                 if (d.equals(o))
                     return super.remove(d);
-                if (d.getSemantic().equals(o))
+                if (d.getExpression().equals(o))
                     return super.remove(d);
             }
             return false;
@@ -785,10 +785,10 @@ public interface DescriptorEntitySet extends Axiom {
     }
 
     /**
-     * An extension of {@link EntitySetBase} for {@link SemanticEntitySet} for data properties.
+     * An extension of {@link EntitySetBase} for {@link ExpressionEntitySet} for data properties.
      * <p>
-     *     It represent the {@link SemanticEntitySet} describing a set of
-     *     ontological data properties as a collection of {@link DataSemantic}.
+     *     It represent the {@link ExpressionEntitySet} describing a set of
+     *     ontological data properties as a collection of {@link DataExpression}.
      *     <br>
      *     This class does not add any other feature with respect to its super class
      *     refer to {@link DescriptorEntitySet} and {@link EntitySetBase}  for further documentation.
@@ -802,12 +802,12 @@ public interface DescriptorEntitySet extends Axiom {
      * </small></div>
      */
     class DataSemantics
-            extends SemanticEntitySetBase<DataSemantic,OWLDataProperty,OWLLiteral>
-            implements SemanticEntitySet<DataSemantic,OWLLiteral> {
+            extends ExpressionEntitySetBase<DataExpression,OWLDataProperty,OWLLiteral>
+            implements ExpressionEntitySet<DataExpression,OWLLiteral> {
 
         public DataSemantics() {
         }
-        public DataSemantics(Collection<? extends DataSemantic> c) {
+        public DataSemantics(Collection<? extends DataExpression> c) {
             super(c);
         }
         public DataSemantics(int initialCapacity, float loadFactor) {
@@ -820,10 +820,10 @@ public interface DescriptorEntitySet extends Axiom {
     }
 
     /**
-     * An extension of {@link EntitySetBase} for {@link SemanticEntitySet} for object properties.
+     * An extension of {@link EntitySetBase} for {@link ExpressionEntitySet} for object properties.
      * <p>
-     *     It represent the {@link SemanticEntitySet} describing a set of
-     *     ontological object properties as a collection of {@link ObjectSemantic}.
+     *     It represent the {@link ExpressionEntitySet} describing a set of
+     *     ontological object properties as a collection of {@link ObjectExpression}.
      *     <br>
      *     This class does not add any other feature with respect to its super class
      *     refer to {@link DescriptorEntitySet} and {@link EntitySetBase}  for further documentation.
@@ -837,12 +837,12 @@ public interface DescriptorEntitySet extends Axiom {
      * </small></div>
      */
     class ObjectSemantics
-            extends SemanticEntitySetBase<ObjectSemantic,OWLObjectProperty,OWLNamedIndividual>
-            implements SemanticEntitySet<ObjectSemantic,OWLNamedIndividual> {
+            extends ExpressionEntitySetBase<ObjectExpression,OWLObjectProperty,OWLNamedIndividual>
+            implements ExpressionEntitySet<ObjectExpression,OWLNamedIndividual> {
 
         public ObjectSemantics() {
         }
-        public ObjectSemantics(Collection<? extends ObjectSemantic> c) {
+        public ObjectSemantics(Collection<? extends ObjectExpression> c) {
             super(c);
         }
         public ObjectSemantics(int initialCapacity, float loadFactor) {

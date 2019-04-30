@@ -371,19 +371,19 @@ public interface Individual<O,J>
      *     relative values for an ontological individualCompoundDescriptor (i.e.: the {@link Ground#getGroundInstance()}).
      *     <br>
      *     By default, the synchronisation occurs only for the proprieties which semantics
-     *     have been initialised in the {@link SemanticEntitySet} ({@link #getDataSemantics()}.
-     *     Anyway if the {@link SemanticEntitySet} is leaved empty during {@link #readSemantic()}
+     *     have been initialised in the {@link ExpressionEntitySet} ({@link #getDataSemantics()}.
+     *     Anyway if the {@link ExpressionEntitySet} is leaved empty during {@link #readSemantic()}
      *     it maps all the data properties applied to the described individualCompoundDescriptor.
      * </p>
      *
      * @param <O> the type of ontology in which the axioms for classes will be applied.
      * @param <J> the type of the described individualCompoundDescriptor.
-     * @param <Y> the type of {@link SemanticEntity} synchronised by this descriptor
+     * @param <Y> the type of {@link ExpressionEntity} synchronised by this descriptor
      * @param <S> the type of semantic described by this class (i.e.: {@code OWLDataProperty})
      * @param <D> the type of the {@link DataProperty} descriptors instantiated during
-     *           {@link #buildDataIndividual()} through {@link #getNewDataIndividual(SemanticEntity, Object)}.
+     *           {@link #buildDataIndividual()} through {@link #getNewDataIndividual(ExpressionEntity, Object)}.
      */
-    interface DataLink<O,J,Y extends SemanticEntity<S,?>, S,D extends DataProperty<O, S>>
+    interface DataLink<O,J,Y extends ExpressionEntity<S,?>, S,D extends DataProperty<O, S>>
             extends Individual<O,J>{
 
         @Override // see documentation on Axiom.descriptor.readSemantic
@@ -405,7 +405,7 @@ public interface Individual<O,J>
          * Create an {@link Axiom.Descriptor} set where each element
          * represents the specified data properties applied to this {@code this} description.
          * Each of {@link DataProperty}s are instantiated
-         * through the method {@link #getNewDataIndividual(SemanticEntity, Object)};
+         * through the method {@link #getNewDataIndividual(ExpressionEntity, Object)};
          * this is called for all {@link #getDataSemantics()}.
          * @return the set of {@link DataProperty}s that describes the
          * entities that are applied to {@code this} described ontological individualCompoundDescriptor.
@@ -440,13 +440,13 @@ public interface Individual<O,J>
 
         /**
          * Queries to the OWL representation for the data properties applied to {@code this} {@link Descriptor}.
-         * @return a new {@link SemanticEntitySet} contained the data properties of {@link #getInstance()};
+         * @return a new {@link ExpressionEntitySet} contained the data properties of {@link #getInstance()};
          * into the OWL structure.
          */
         EntitySet<Y> queryDataIndividual();
 
         /**
-         * It calls {@link SemanticEntitySet#synchroniseTo(EntitySet)} with {@link #queryDataIndividual()}
+         * It calls {@link ExpressionEntitySet#synchroniseTo(EntitySet)} with {@link #queryDataIndividual()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getDataSemantics()}. This should
          * be done by {@link #writeSemantic()}.
@@ -463,7 +463,7 @@ public interface Individual<O,J>
         }
 
         /**
-         * It calls {@link SemanticEntitySet#synchroniseFrom(EntitySet)} with {@link #queryDataIndividual()}
+         * It calls {@link ExpressionEntitySet#synchroniseFrom(EntitySet)} with {@link #queryDataIndividual()}
          * as input parameter. This computes the changes to be performed into the {@link #getDataSemantics()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readSemantic()}.
@@ -487,20 +487,20 @@ public interface Individual<O,J>
      *     relative values for an ontological individualCompoundDescriptor (i.e.: the {@link Ground#getGroundInstance()}).
      *     <br>
      *     By default, the synchronisation occurs only for the proprieties which semantics
-     *     have been initialised in the {@link SemanticEntitySet} ({@link #getObjectSemantics()}),
+     *     have been initialised in the {@link ExpressionEntitySet} ({@link #getObjectSemantics()}),
      *     not for all relations in the OWL representation.
-     *     Anyway if the {@link SemanticEntitySet} is leaved empty during {@link #readSemantic()}
+     *     Anyway if the {@link ExpressionEntitySet} is leaved empty during {@link #readSemantic()}
      *     it maps all the object properties applied to the described individualCompoundDescriptor.
      * </p>
      *
      * @param <O> the type of ontology in which the axioms for classes will be applied.
      * @param <J> the type of the described individualCompoundDescriptor.
-     * @param <Y> the type of {@link SemanticEntity} synchronised by this descriptor
+     * @param <Y> the type of {@link ExpressionEntity} synchronised by this descriptor
      * @param <S> the type of semantic described by this class (i.e.: {@code OWLObjectProperty})
      * @param <D> the type of the {@link DataProperty} descriptors instantiated during
-     *           {@link #buildObjectIndividual()} through {@link #getNewObjectIndividual(SemanticEntity, Object)}.
+     *           {@link #buildObjectIndividual()} through {@link #getNewObjectIndividual(ExpressionEntity, Object)}.
      */
-    interface ObjectLink<O,J,Y extends SemanticEntity<S,?>, S,D extends ObjectProperty<O, S>>
+    interface ObjectLink<O,J,Y extends ExpressionEntity<S,?>, S,D extends ObjectProperty<O, S>>
             extends Individual<O,J>{
 
         @Override // see documentation on Axiom.descriptor.readSemantic
@@ -522,7 +522,7 @@ public interface Individual<O,J>
          * Create an {@link Axiom.Descriptor} set where each element
          * represents the specified object properties applied to this {@code this} description.
          * Each of {@link ObjectProperty}s are instantiated
-         * through the method {@link #getNewObjectIndividual(SemanticEntity, Object)};
+         * through the method {@link #getNewObjectIndividual(ExpressionEntity, Object)};
          * this is called for all {@link #getObjectSemantics()}.
          * @return the set of {@link ObjectProperty}s that describes the
          * entities that are applied to {@code this} described ontological individualCompoundDescriptor.
@@ -557,13 +557,13 @@ public interface Individual<O,J>
 
         /**
          * Queries to the OWL representation for the data properties applied to {@code this} {@link Descriptor}.
-         * @return a new {@link SemanticEntitySet} contained the object properties of {@link #getInstance()};
+         * @return a new {@link ExpressionEntitySet} contained the object properties of {@link #getInstance()};
          * into the OWL structure.
          */
         EntitySet<Y> queryObject();
 
         /**
-         * It calls {@link SemanticEntitySet#synchroniseTo(EntitySet)} with {@link #queryObject()}
+         * It calls {@link ExpressionEntitySet#synchroniseTo(EntitySet)} with {@link #queryObject()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getObjectSemantics()}. This should
          * be done by {@link #writeSemantic()}.
@@ -580,7 +580,7 @@ public interface Individual<O,J>
         }
 
         /**
-         * It calls {@link SemanticEntitySet#synchroniseFrom(EntitySet)} with {@link #queryObject()}
+         * It calls {@link ExpressionEntitySet#synchroniseFrom(EntitySet)} with {@link #queryObject()}
          * as input parameter. This computes the changes to be performed into the {@link #getObjectSemantics()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readSemantic()}.
