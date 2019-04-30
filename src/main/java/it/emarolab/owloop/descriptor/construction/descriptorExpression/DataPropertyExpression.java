@@ -1,9 +1,10 @@
-package it.emarolab.owloop.descriptor.construction.descriptorInterface;
+package it.emarolab.owloop.descriptor.construction.descriptorExpression;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.amor.owlInterface.SemanticRestriction;
 import it.emarolab.amor.owlInterface.SemanticRestriction.*;
 import it.emarolab.owloop.core.DataProperty;
+import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLDataProperty;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
@@ -26,7 +27,7 @@ import java.util.Set;
  *     rely on the same ground (i.e.: {@link DataInstance}).
  * </p>
  * <div style="text-align:center;"><small>
- * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorInterface.DataPropertyExpression <br>
+ * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.DataPropertyExpression <br>
  * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
  * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
  * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -77,7 +78,7 @@ public interface DataPropertyExpression
      *     by this class (i.e.: {@link #getInstance()}).
      * </p>
      * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorInterface.DataPropertyExpression <br>
+     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.DataPropertyExpression <br>
      * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
      * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -179,7 +180,7 @@ public interface DataPropertyExpression
      *     by this class (i.e.: {@link #getInstance()}).
      * </p>
      * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorInterface.DataPropertyExpression <br>
+     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.DataPropertyExpression <br>
      * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
      * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -281,7 +282,7 @@ public interface DataPropertyExpression
      *     by this class (i.e.: {@link #getInstance()}).
      * </p>
      * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorInterface.DataPropertyExpression <br>
+     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.DataPropertyExpression <br>
      * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
      * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -337,9 +338,6 @@ public interface DataPropertyExpression
             return getSubDataProperty().remove( property);
         }
 
-        @Override
-        DescriptorEntitySet.DataLinks getSubDataProperty();
-
         @Override // see super class for documentation
         default DescriptorEntitySet.DataLinks querySubDataProperty(){
             DescriptorEntitySet.DataLinks set = new DescriptorEntitySet.DataLinks(getOntology().getSubDataPropertyOf(getInstance()));
@@ -374,7 +372,7 @@ public interface DataPropertyExpression
      *     by this class (i.e.: {@link #getInstance()}).
      * </p>
      * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorInterface.DataPropertyExpression <br>
+     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.DataPropertyExpression <br>
      * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
      * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -467,7 +465,7 @@ public interface DataPropertyExpression
      *     by this class (i.e.: {@link #getInstance()}).
      * </p>
      * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorInterface.DataPropertyExpression <br>
+     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.DataPropertyExpression <br>
      * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
      * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -1301,7 +1299,7 @@ public interface DataPropertyExpression
      *     by this class (i.e.: {@link #getInstance()}).
      * </p>
      * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorInterface.DataPropertyExpression <br>
+     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.DataPropertyExpression <br>
      * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
      * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>

@@ -1,10 +1,10 @@
-package it.emarolab.owloop.descriptor.construction.descriptorBase;
+package it.emarolab.owloop.descriptor.construction.descriptorGround;
 
 import com.clarkparsia.pellet.owlapi.PelletReasoner;
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.amor.owlInterface.OWLReferencesInterface;
 import it.emarolab.owloop.core.Axiom;
-import it.emarolab.owloop.descriptor.construction.descriptorInterface.*;
+import it.emarolab.owloop.descriptor.construction.descriptorExpression.*;
 import org.semanticweb.owlapi.model.OWLObject;
 
 /**
@@ -24,14 +24,14 @@ import org.semanticweb.owlapi.model.OWLObject;
  *     in the {@link OWLReferences.OWLReferencesContainer}, this ontology will be used.
  *
  * <div style="text-align:center;"><small>
- * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorBase.DescriptorBase <br>
+ * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorGround.DescriptorGround <br>
  * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
  * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
  * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
  * <b>date</b>:        21/05/17 <br>
  * </small></div>
  */
-abstract public class DescriptorBase<J extends OWLObject>
+abstract public class DescriptorGround<J extends OWLObject>
         implements Axiom.Descriptor<OWLReferences,J>, DescriptorGrounding<J> {
 
     protected static final String NL = System.getProperty("line.separator");
@@ -41,33 +41,33 @@ abstract public class DescriptorBase<J extends OWLObject>
 
     private GroundBase<J> ground;
 
-    public DescriptorBase(J instance, OWLReferences onto) {
+    public DescriptorGround(J instance, OWLReferences onto) {
         setGround( getNewGround( onto, instance));
     }
-    public DescriptorBase(String instanceName, OWLReferences onto) {
+    public DescriptorGround(String instanceName, OWLReferences onto) {
         setGround( getNewGround( onto, instanceName));
     }
-    public DescriptorBase(J instance, String ontoName) {
+    public DescriptorGround(J instance, String ontoName) {
         OWLReferences ontology = initialiseOntology( ontoName);
         setGround( getNewGround( ontology, instance));
     }
-    public DescriptorBase(J instance, String ontoName, String filePath, String iriPath) {
+    public DescriptorGround(J instance, String ontoName, String filePath, String iriPath) {
         OWLReferences ontology = initialiseOntology( ontoName, filePath, iriPath, DEFAULT_BUFFERING_CHANGES);
         setGround( getNewGround( ontology, instance));
     }
-    public DescriptorBase(J instance, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
+    public DescriptorGround(J instance, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
         OWLReferences ontology = initialiseOntology( ontoName, filePath, iriPath, bufferingChanges);
         setGround( getNewGround( ontology, instance));
     }
-    public DescriptorBase(String instanceName, String ontoName) {
+    public DescriptorGround(String instanceName, String ontoName) {
         OWLReferences ontology = initialiseOntology( ontoName);
         setGround( getNewGround( ontology, instanceName));
     }
-    public DescriptorBase(String instanceName, String ontoName, String filePath, String iriPath) {
+    public DescriptorGround(String instanceName, String ontoName, String filePath, String iriPath) {
         OWLReferences ontology = initialiseOntology( ontoName, filePath, iriPath, DEFAULT_BUFFERING_CHANGES);
         setGround( getNewGround( ontology, instanceName));
     }
-    public DescriptorBase(String instanceName, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
+    public DescriptorGround(String instanceName, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
         OWLReferences ontology = initialiseOntology( ontoName, filePath, iriPath, bufferingChanges);
         setGround( getNewGround( ontology, instanceName));
     }
@@ -168,11 +168,11 @@ abstract public class DescriptorBase<J extends OWLObject>
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof DescriptorBase)) return false;
+        if (!(o instanceof DescriptorGround)) return false;
 
-        DescriptorBase<?> descriptorBase = (DescriptorBase<?>) o;
+        DescriptorGround<?> descriptorGround = (DescriptorGround<?>) o;
 
-        return getGround() != null ? getGround().equals(descriptorBase.getGround()) : descriptorBase.getGround() == null;
+        return getGround() != null ? getGround().equals(descriptorGround.getGround()) : descriptorGround.getGround() == null;
     }
 
     @Override

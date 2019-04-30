@@ -1,4 +1,4 @@
-package it.emarolab.owloop.descriptor.construction.descriptorInterface;
+package it.emarolab.owloop.descriptor.construction.descriptorExpression;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.core.Axiom;
@@ -39,7 +39,7 @@ import java.util.Set;
  *     </ul>
  *
  * <div style="text-align:center;"><small>
- * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorInterface.DescriptorGrounding <br>
+ * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.DescriptorGrounding <br>
  * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
  * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
  * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -59,7 +59,7 @@ public interface DescriptorGrounding<J extends OWLObject>
      *     following the <a href="https://github.com/EmaroLab/multi_ontology_reference">aMOR</a> API.
      *
      * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorInterface.DescriptorGrounding <br>
+     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.DescriptorGrounding <br>
      * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
      * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -156,7 +156,7 @@ public interface DescriptorGrounding<J extends OWLObject>
      *     See super class and related interface for more documentation.
      *
      * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorInterface.DescriptorGrounding <br>
+     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.DescriptorGrounding <br>
      * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
      * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -211,7 +211,7 @@ public interface DescriptorGrounding<J extends OWLObject>
      *     See super class and related interface for more documentation.
      *
      * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorInterface.DescriptorGrounding <br>
+     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.DescriptorGrounding <br>
      * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
      * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -267,7 +267,7 @@ public interface DescriptorGrounding<J extends OWLObject>
      *     See super class and related interface for more documentation.
      *
      * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorInterface.DescriptorGrounding <br>
+     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.DescriptorGrounding <br>
      * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
      * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -323,7 +323,7 @@ public interface DescriptorGrounding<J extends OWLObject>
      *     See super class and related interface for more documentation.
      *
      * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorInterface.DescriptorGrounding <br>
+     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.DescriptorGrounding <br>
      * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
      * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>

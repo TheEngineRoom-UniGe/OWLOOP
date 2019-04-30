@@ -2,9 +2,9 @@ package it.emarolab.owloop.descriptor.utility.individualCompoundDescriptor;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.core.Axiom;
-import it.emarolab.owloop.descriptor.construction.descriptorInterface.DescriptorEntitySet;
-import it.emarolab.owloop.descriptor.construction.descriptorInterface.IndividualExpression;
-import it.emarolab.owloop.descriptor.construction.descriptorBase.IndividualDescriptorBase;
+import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
+import it.emarolab.owloop.descriptor.construction.descriptorExpression.IndividualExpression;
+import it.emarolab.owloop.descriptor.construction.descriptorGround.IndividualDescriptorGround;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 
 import java.util.List;
@@ -20,7 +20,7 @@ import java.util.List;
  *     Its purpose is only to instanciate the {@link DescriptorEntitySet.Individuals} for the
  *     respective descriptions, as well as call both interfaces in the
  *     {@link #readSemantic()} and {@link #writeSemantic()} methods.
- *     All its constructions are based on {@link IndividualDescriptorBase} in order
+ *     All its constructions are based on {@link IndividualDescriptorGround} in order
  *     to automatically manage a grounding {@link IndividualInstance}.
  *     <br>
  *     You may want to use this class (see also {@link TypeIndividualDesc}
@@ -38,14 +38,14 @@ import java.util.List;
  * </small></div>
  */
 public class DefinitionIndividualDesc
-        extends IndividualDescriptorBase
+        extends IndividualDescriptorGround
         implements IndividualExpression.Disjoint<DefinitionIndividualDesc>,
         IndividualExpression.Equivalent<DefinitionIndividualDesc>{
 
     private DescriptorEntitySet.Individuals disjointIndividual = new DescriptorEntitySet.Individuals();
     private DescriptorEntitySet.Individuals equivalentIndividual = new DescriptorEntitySet.Individuals();
 
-    // constructors for IndividualDescriptorBase
+    // constructors for IndividualDescriptorGround
 
     public DefinitionIndividualDesc(OWLNamedIndividual instance, OWLReferences onto) {
         super(instance, onto);
@@ -119,7 +119,7 @@ public class DefinitionIndividualDesc
 
 
     // implementation for standard object interface
-    // equals() and hashCode() is based on DescriptorBase<?> which considers only the ground
+    // equals() and hashCode() is based on DescriptorGround<?> which considers only the ground
 
     @Override
     public String toString() {

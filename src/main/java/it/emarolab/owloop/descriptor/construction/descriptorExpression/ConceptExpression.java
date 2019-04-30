@@ -1,9 +1,10 @@
-package it.emarolab.owloop.descriptor.construction.descriptorInterface;
+package it.emarolab.owloop.descriptor.construction.descriptorExpression;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.amor.owlInterface.SemanticRestriction;
 import it.emarolab.amor.owlInterface.SemanticRestriction.*;
 import it.emarolab.owloop.core.Concept;
+import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import org.semanticweb.owlapi.model.*;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ import java.util.Set;
  *     rely on the same ground (i.e.: {@link ConceptInstance}).
  * </p>
  * <div style="text-align:center;"><small>
- * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorInterface.ConceptExpression <br>
+ * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.ConceptExpression <br>
  * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
  * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
  * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -61,7 +62,7 @@ public interface ConceptExpression
      *     class (i.e.: {@link #getInstance()}).
      * </p>
      * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorInterface.ConceptExpression <br>
+     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.ConceptExpression <br>
      * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
      * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -151,7 +152,7 @@ public interface ConceptExpression
      *     (i.e.: {@link #getInstance()}).
      * </p>
      * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorInterface.ConceptExpression <br>
+     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.ConceptExpression <br>
      * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
      * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -259,7 +260,7 @@ public interface ConceptExpression
      *     (i.e.: {@link #getInstance()}).
      * </p>
      * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorInterface.ConceptExpression <br>
+     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.ConceptExpression <br>
      * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
      * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -358,7 +359,7 @@ public interface ConceptExpression
      *     (i.e.: {@link #getInstance()}).
      * </p>
      * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorInterface.ConceptExpression <br>
+     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.ConceptExpression <br>
      * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
      * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -448,7 +449,7 @@ public interface ConceptExpression
      *     (i.e.: {@link #getInstance()}).
      * </p>
      * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorInterface.ConceptExpression <br>
+     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.ConceptExpression <br>
      * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
      * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -555,7 +556,7 @@ public interface ConceptExpression
      *     always this first.
      * </p>
      * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorInterface.ConceptExpression <br>
+     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.ConceptExpression <br>
      * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
      * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>

@@ -3,9 +3,9 @@ package it.emarolab.owloop.descriptor.utility.conceptCompoundDescriptor;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.core.Axiom;
-import it.emarolab.owloop.descriptor.construction.descriptorInterface.ConceptExpression;
-import it.emarolab.owloop.descriptor.construction.descriptorInterface.DescriptorEntitySet;
-import it.emarolab.owloop.descriptor.construction.descriptorBase.ConceptDescriptorBase;
+import it.emarolab.owloop.descriptor.construction.descriptorExpression.ConceptExpression;
+import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
+import it.emarolab.owloop.descriptor.construction.descriptorGround.ConceptDescriptorGround;
 import org.semanticweb.owlapi.model.OWLClass;
 
 import java.util.List;
@@ -20,7 +20,7 @@ import java.util.List;
  *     Its purpose is only to instanciate the {@link DescriptorEntitySet.Concepts} for the
  *     respective descriptions, as well as call both interfaces in the
  *     {@link #readSemantic()} and {@link #writeSemantic()} methods.
- *     All its constructions are based on {@link ConceptDescriptorBase} in order
+ *     All its constructions are based on {@link ConceptDescriptorGround} in order
  *     to automatically manage a grounding {@link ConceptInstance}.
  *     <br>
  *     You may want to use this class (see also {@link HierarchicalConceptDesc},
@@ -37,14 +37,14 @@ import java.util.List;
  * </small></div>
  */
 public class HierarchicalConceptDesc
-        extends ConceptDescriptorBase
+        extends ConceptDescriptorGround
         implements ConceptExpression.Sub<HierarchicalConceptDesc>,
         ConceptExpression.Super<HierarchicalConceptDesc>{
 
     private DescriptorEntitySet.Concepts subConcept = new DescriptorEntitySet.Concepts();
     private DescriptorEntitySet.Concepts superConcept = new DescriptorEntitySet.Concepts();
 
-    // constructors for ConceptDescriptorBase
+    // constructors for ConceptDescriptorGround
 
     public HierarchicalConceptDesc(OWLClass instance, OWLReferences onto) {
         super(instance, onto);

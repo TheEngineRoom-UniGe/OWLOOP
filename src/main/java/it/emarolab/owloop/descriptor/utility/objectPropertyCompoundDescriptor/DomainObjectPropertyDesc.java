@@ -2,9 +2,9 @@ package it.emarolab.owloop.descriptor.utility.objectPropertyCompoundDescriptor;
 
 
 import it.emarolab.amor.owlInterface.OWLReferences;
-import it.emarolab.owloop.descriptor.construction.descriptorInterface.DescriptorEntitySet;
-import it.emarolab.owloop.descriptor.construction.descriptorInterface.ObjectPropertyExpression;
-import it.emarolab.owloop.descriptor.construction.descriptorBase.ObjectPropertyDescriptorBase;
+import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
+import it.emarolab.owloop.descriptor.construction.descriptorExpression.ObjectPropertyExpression;
+import it.emarolab.owloop.descriptor.construction.descriptorGround.ObjectPropertyDescriptorGround;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
 
 import java.util.List;
@@ -18,7 +18,7 @@ import java.util.List;
  *     Its purpose is only to instanciate the {@link DescriptorEntitySet.Restrictions} for the
  *     respective descriptions, as well as call both interfaces in the
  *     {@link #readSemantic()} and {@link #writeSemantic()} methods.
- *     All its constructions are based on {@link ObjectPropertyDescriptorBase} in order
+ *     All its constructions are based on {@link ObjectPropertyDescriptorGround} in order
  *     to automatically manage an {@link ObjectInstance} ground.
  *     <br>
  *     You may want to use this class (see also {@link DefinitionObjectPropertyDesc}
@@ -36,14 +36,14 @@ import java.util.List;
  * </small></div>
  */
 public class DomainObjectPropertyDesc
-        extends ObjectPropertyDescriptorBase
+        extends ObjectPropertyDescriptorGround
         implements ObjectPropertyExpression.Domain, ObjectPropertyExpression.Range {
 
     private DescriptorEntitySet.Restrictions domainRestriction = new DescriptorEntitySet.Restrictions();
     private DescriptorEntitySet.Restrictions rangeRestriction = new DescriptorEntitySet.Restrictions();
 
 
-    // constructors for ObjectPropertyDescriptorBase
+    // constructors for ObjectPropertyDescriptorGround
 
     public DomainObjectPropertyDesc(OWLObjectProperty instance, OWLReferences onto) {
         super(instance, onto);
@@ -107,7 +107,7 @@ public class DomainObjectPropertyDesc
 
 
     // implementation for standard object interface
-    // equals() and hashCode() is based on DescriptorBase<?> which considers only the ground
+    // equals() and hashCode() is based on DescriptorGround<?> which considers only the ground
 
     public String toString() {
         return "FullObjectPropertyDesc{" +

@@ -1,9 +1,10 @@
-package it.emarolab.owloop.descriptor.construction.descriptorInterface;
+package it.emarolab.owloop.descriptor.construction.descriptorExpression;
 
 import it.emarolab.amor.owlInterface.DataPropertyRelations;
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.amor.owlInterface.ObjectPropertyRelations;
 import it.emarolab.owloop.core.Individual;
+import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import org.semanticweb.owlapi.model.*;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ import java.util.Set;
  *     rely on the same ground (i.e.: {@link IndividualInstance}).
  * </p>
  * <div style="text-align:center;"><small>
- * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorInterface.IndividualExpression <br>
+ * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.IndividualExpression <br>
  * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
  * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
  * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -63,7 +64,7 @@ public interface IndividualExpression
      *     in belonging to.
      * </p>
      * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorInterface.IndividualExpression <br>
+     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.IndividualExpression <br>
      * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
      * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -155,7 +156,7 @@ public interface IndividualExpression
      *     disjoint individuals of {@link #getInstance()}.
      * </p>
      * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorInterface.IndividualExpression <br>
+     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.IndividualExpression <br>
      * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
      * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -256,7 +257,7 @@ public interface IndividualExpression
      *     equivalent individuals of {@link #getInstance()}.
      * </p>
      * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorInterface.IndividualExpression <br>
+     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.IndividualExpression <br>
      * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
      * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -365,7 +366,7 @@ public interface IndividualExpression
      *     individualCompoundDescriptor
      * </p>
      * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorInterface.IndividualExpression <br>
+     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.IndividualExpression <br>
      * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
      * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -696,7 +697,7 @@ public interface IndividualExpression
      *     individualCompoundDescriptor.
      * </p>
      * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorInterface.IndividualExpression <br>
+     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.IndividualExpression <br>
      * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
      * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>

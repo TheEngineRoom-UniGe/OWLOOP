@@ -2,9 +2,9 @@ package it.emarolab.owloop.descriptor.utility.objectPropertyCompoundDescriptor;
 
 
 import it.emarolab.amor.owlInterface.OWLReferences;
-import it.emarolab.owloop.descriptor.construction.descriptorBase.ObjectPropertyDescriptorBase;
-import it.emarolab.owloop.descriptor.construction.descriptorInterface.DescriptorEntitySet;
-import it.emarolab.owloop.descriptor.construction.descriptorInterface.ObjectPropertyExpression;
+import it.emarolab.owloop.descriptor.construction.descriptorGround.ObjectPropertyDescriptorGround;
+import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
+import it.emarolab.owloop.descriptor.construction.descriptorExpression.ObjectPropertyExpression;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
 
 import java.util.List;
@@ -19,7 +19,7 @@ import java.util.List;
  *     and {@link DescriptorEntitySet.Restrictions} for the
  *     respective descriptions, as well as call all interfaces in the
  *     {@link #readSemantic()} and {@link #writeSemantic()} methods.
- *     All its constructions are based on {@link ObjectPropertyDescriptorBase} in order
+ *     All its constructions are based on {@link ObjectPropertyDescriptorGround} in order
  *     to automatically manage an {@link ObjectInstance} ground.
  *     <br>
  *     In order to optimise the synchronissation efficiency (i.e.: minimize
@@ -39,7 +39,7 @@ import java.util.List;
  * </small></div>
  */
 public class FullObjectPropertyDesc
-        extends ObjectPropertyDescriptorBase
+        extends ObjectPropertyDescriptorGround
         implements ObjectPropertyExpression.Disjoint<FullObjectPropertyDesc>,
         ObjectPropertyExpression.Equivalent<FullObjectPropertyDesc>,
         ObjectPropertyExpression.Inverse<FullObjectPropertyDesc>,
@@ -56,7 +56,7 @@ public class FullObjectPropertyDesc
     private DescriptorEntitySet.Restrictions domainRestriction = new DescriptorEntitySet.Restrictions();
     private DescriptorEntitySet.Restrictions rangeRestriction = new DescriptorEntitySet.Restrictions();
 
-    // constructors for DataPropertyDescriptorBase
+    // constructors for DataPropertyDescriptorGround
 
     public FullObjectPropertyDesc(OWLObjectProperty instance, OWLReferences onto) {
         super(instance, onto);
@@ -182,7 +182,7 @@ public class FullObjectPropertyDesc
     }
 
     // implementation for standard object interface
-    // equals() and hashCode() is based on DescriptorBase<?> which considers only the ground
+    // equals() and hashCode() is based on DescriptorGround<?> which considers only the ground
 
     @Override
     public String toString() {
