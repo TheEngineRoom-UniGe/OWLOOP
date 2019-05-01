@@ -1,50 +1,40 @@
-package it.emarolab.owloop.descriptor.utility.individualCompoundDescriptor;
+package it.emarolab.owloop.descriptor.utility.individualDescriptor;
 
 
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.core.Axiom;
+import it.emarolab.owloop.core.Individual;
 import it.emarolab.owloop.descriptor.construction.descriptorBase.IndividualDescriptorBase;
 import it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorEntitySet;
+import it.emarolab.owloop.descriptor.construction.descriptorExpression.DataPropertyExpression;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.IndividualExpression;
-import it.emarolab.owloop.descriptor.utility.conceptCompoundDescriptor.FullConceptDesc;
-import it.emarolab.owloop.descriptor.utility.dataPropertyCompoundDescriptor.FullDataPropertyDesc;
-import it.emarolab.owloop.descriptor.utility.objectPropertyCompoundDescriptor.FullObjectPropertyDesc;
+import it.emarolab.owloop.descriptor.utility.conceptDescriptor.FullConceptDesc;
+import it.emarolab.owloop.descriptor.utility.dataPropertyDescriptor.FullDataPropertyDesc;
+import it.emarolab.owloop.descriptor.utility.objectPropertyDescriptor.FullObjectPropertyDesc;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 
 import java.util.List;
 
-
 /**
- * The implementation of all the semantic features of an individualCompoundDescriptor.
- * <p>
- *     This is an example of how use the {@link Axiom.Descriptor}s for implement
- *     a individualCompoundDescriptor that is synchronised w.r.t. all interfaces of {@link IndividualExpression}.
- *     <br>
- *     Its purpose is only to instanciate the {@link DescriptorEntitySet.Individuals},
- *     {@link DescriptorEntitySet.ObjectSemantics} and {@link DescriptorEntitySet.DataSemantics} for the
- *     respective descriptions, as well as call all interfaces in the
- *     {@link #readSemantic()} and {@link #writeSemantic()} methods.
- *     All its constructions are based on {@link IndividualDescriptorBase} in order
- *     to automatically manage a grounding {@link ConceptInstance}.
- *     From an OOP prospective it returns an {@link FullObjectPropertyDesc}
- *     and {@link FullDataPropertyDesc}, be aware that this may be not efficient and
- *     perhaps a less complete descriptor is enough for your case.
- *     <br>
- *     In order to optimise the synchronisation efficiency (i.e.: minimize
- *     reasoning calls) use this object only if it is necessary.
- *     Otherwise is recommended to use an had hoc {@link Descriptor}.
- *     You may want to use this class, see also {@link DefinitionIndividualDesc},
- *     {@link LinkIndividualDesc} and {@link TypeIndividualDesc}
- *     (generally, all the classes in the {@link it.emarolab.owloop.descriptor.utility} package)
- *     as templates for doing that.
+ * This is an example of a 'compound' Individual Descriptor as it implements more than one {@link IndividualExpression}.
+ * Axioms in this descriptor's internal state (OWLOOP representation) gets synchronized wrt the axioms in the OWL representation.
+ * {@link FullIndividualDesc} can synchronize all the axioms, that are based on the following IndividualExpressions:
+ *
+ * <ul>
+ * <li><b>{@link IndividualExpression.Equivalent}</b>:   to describe an Individual same-as another Individual.</li>
+ * <li><b>{@link IndividualExpression.Disjoint}</b>:     to describe an Individual different from another Individual.</li>
+ * <li><b>{@link IndividualExpression.Type}</b>:         to describe the Type/s (i.e., class/es) of an Individual.</li>
+ * <li><b>{@link IndividualExpression.ObjectLink}</b>:   to describe an ObjectProperty and Individuals related via that ObjectProperty, for an Individual.</li>
+ * <li><b>{@link IndividualExpression.DataLink}</b>:     to describe an DataProperty and Individuals related via that DataProperty, for an Individual.</li>
+ * </ul>
  *
  * <div style="text-align:center;"><small>
- * <b>File</b>:        it.emarolab.owloop.descriptor.utility.individualCompoundDescriptor.FullIndividualDesc <br>
- * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
- * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
- * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
- * <b>date</b>:        21/05/17 <br>
+ * <b>File</b>:         it.emarolab.owloop.core.Axiom <br>
+ * <b>Licence</b>:      GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
+ * <b>Authors</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it), Syed Yusha Kareem (kareem.syed.yusha@dibris.unige.it) <br>
+ * <b>affiliation</b>:  EMAROLab, DIBRIS, University of Genoa. <br>
+ * <b>date</b>:         01/05/19 <br>
  * </small></div>
  */
 public class FullIndividualDesc
@@ -61,7 +51,7 @@ public class FullIndividualDesc
     private DescriptorEntitySet.ObjectSemantics objectLinks = new DescriptorEntitySet.ObjectSemantics();
     private DescriptorEntitySet.DataSemantics dataLinks = new DescriptorEntitySet.DataSemantics();
 
-    // constructors for IndividualDescriptorBase
+    // Constructors from the abstract class: IndividualDescriptorBase
 
     public FullIndividualDesc(OWLNamedIndividual instance, OWLReferences onto) {
         super(instance, onto);
@@ -88,7 +78,7 @@ public class FullIndividualDesc
         super(instanceName, ontoName, filePath, iriPath, bufferingChanges);
     }
 
-    // implementations for Axiom.descriptor
+    // Implementation of readSemantic()
 
     @Override
     public List<MappingIntent> readSemantic() {
@@ -100,6 +90,8 @@ public class FullIndividualDesc
         return r;
     }
 
+    // Implementation of writeSemantic()
+
     @Override
     public List<MappingIntent> writeSemantic() {
         List<MappingIntent> r = IndividualExpression.Equivalent.super.writeSemantic();
@@ -110,7 +102,7 @@ public class FullIndividualDesc
         return r;
     }
 
-    // implementations for IndividualExpression.Disjoint
+    // implementations for: IndividualExpression.Disjoint
 
     @Override //called during build...() you can change the returning type to any implementations of IndividualExpression
     public FullIndividualDesc getNewDisjointIndividual(OWLNamedIndividual instance, OWLReferences ontology) {
@@ -122,7 +114,7 @@ public class FullIndividualDesc
         return disjointIndividual;
     }
 
-    // implementations for IndividualExpression.Equivalent
+    // Implementations for: IndividualExpression.Equivalent
 
     @Override //called during build...() you can change the returning type to any implementations of IndividualExpression
     public FullIndividualDesc getNewEquivalentIndividual(OWLNamedIndividual instance, OWLReferences ontology) {
@@ -134,7 +126,7 @@ public class FullIndividualDesc
         return equivalentIndividual;
     }
 
-    // implementations for IndividualExpression.Type
+    // Implementations for: IndividualExpression.Type
 
     @Override //called during build...() you can change the returning type to any implementations of ConceptExpression
     public FullConceptDesc getNewTypeIndividual(OWLClass instance, OWLReferences ontology) {
@@ -146,7 +138,7 @@ public class FullIndividualDesc
         return individualTypes;
     }
 
-    // implementations for IndividualExpression.ObjectLink
+    // Implementations for: IndividualExpression.ObjectLink
 
     @Override //called during build...() you can change the returning type to any implementations of ObjectPropertyExpression
     public FullObjectPropertyDesc getNewObjectIndividual(DescriptorEntitySet.ObjectExpression instance, OWLReferences ontology) {
@@ -158,7 +150,7 @@ public class FullIndividualDesc
         return objectLinks;
     }
 
-    // implementations for IndividualExpression.DataLink
+    // Implementations for: IndividualExpression.DataLink
 
     @Override //called during build...() you can change the returning type to any implementations of DataPropertyExpression
     public FullDataPropertyDesc getNewDataIndividual(DescriptorEntitySet.DataExpression instance, OWLReferences ontology) {
@@ -170,8 +162,7 @@ public class FullIndividualDesc
         return dataLinks;
     }
 
-    // implementation for standard object interface
-    // equals() and hashCode() is based on DescriptorBase<?> which considers only the ground
+    // Implementations for: standard object interface
 
     @Override
     public String toString() {

@@ -1,11 +1,11 @@
-package it.emarolab.owloop.descriptor.utility.conceptCompoundDescriptor;
+package it.emarolab.owloop.descriptor.utility.conceptDescriptor;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.core.Axiom;
 import it.emarolab.owloop.descriptor.construction.descriptorBase.ConceptDescriptorBase;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.ConceptExpression;
 import it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorEntitySet;
-import it.emarolab.owloop.descriptor.utility.individualCompoundDescriptor.LinkIndividualDesc;
+import it.emarolab.owloop.descriptor.utility.individualDescriptor.LinkIndividualDesc;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 
@@ -13,10 +13,10 @@ import java.util.List;
 
 
 /**
- * A basic implementation for a conceptCompoundDescriptor that classify individuals.
+ * A basic implementation for a conceptDescriptor that classify individuals.
  * <p>
  *     This is an example of how use the {@link Axiom.Descriptor}s for implement
- *     a conceptCompoundDescriptor that is synchronised only w.r.t. {@link Instance}ed individuals.
+ *     a conceptDescriptor that is synchronised only w.r.t. {@link Instance}ed individuals.
  *     <br>
  *     Its purpose is only to instanciate the {@link DescriptorEntitySet.Concepts} for the
  *     respective descriptions, as well as call the derived interfaces in the
@@ -30,7 +30,7 @@ import java.util.List;
  *     and maximises the OWL synchronisation efficiency.
  *
  * <div style="text-align:center;"><small>
- * <b>File</b>:        it.emarolab.owloop.descriptor.utility.conceptCompoundDescriptor.InstanceConceptDesc <br>
+ * <b>File</b>:        it.emarolab.owloop.descriptor.utility.conceptDescriptor.InstanceConceptDesc <br>
  * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
  * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
  * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>

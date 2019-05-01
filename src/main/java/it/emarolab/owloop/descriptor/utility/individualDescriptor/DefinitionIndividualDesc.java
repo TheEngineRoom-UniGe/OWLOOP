@@ -1,4 +1,4 @@
-package it.emarolab.owloop.descriptor.utility.individualCompoundDescriptor;
+package it.emarolab.owloop.descriptor.utility.individualDescriptor;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.core.Axiom;
@@ -11,10 +11,10 @@ import java.util.List;
 
 
 /**
- * A basic implementation for an individualCompoundDescriptor with 'same as' and 'different from' individualCompoundDescriptor description.
+ * A basic implementation for an individualDescriptor with 'same as' and 'different from' individualDescriptor description.
  * <p>
  *     This is an example of how use the {@link Axiom.Descriptor}s for implement
- *     am individualCompoundDescriptor that is synchronised w.r.t. to {@link Equivalent}
+ *     am individualDescriptor that is synchronised w.r.t. to {@link Equivalent}
  *     and {@link Disjoint} instances.
  *     <br>
  *     Its purpose is only to instanciate the {@link DescriptorEntitySet.Individuals} for the
@@ -30,7 +30,7 @@ import java.util.List;
  *     OWL synchronisation efficiency for data properties.
  *
  * <div style="text-align:center;"><small>
- * <b>File</b>:        it.emarolab.owloop.descriptor.utility.individualCompoundDescriptor.DefinitionIndividualDesc <br>
+ * <b>File</b>:        it.emarolab.owloop.descriptor.utility.individualDescriptor.DefinitionIndividualDesc <br>
  * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
  * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
  * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>

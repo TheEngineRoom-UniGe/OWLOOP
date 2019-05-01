@@ -59,7 +59,7 @@ public interface ConceptExpression
      * The {@link Concept.Instance} {@link Descriptor} implementation for {@link OWLClass}.
      * <p>
      *     It specify how to {@link #queryIndividualInstance()} and {@link #writeSemantic()} for the
-     *     individualCompoundDescriptor (i.e.: {@link OWLNamedIndividual}) belonging to the described
+     *     individualDescriptor (i.e.: {@link OWLNamedIndividual}) belonging to the described
      *     class (i.e.: {@link #getInstance()}).
      * </p>
      * <div style="text-align:center;"><small>
@@ -80,8 +80,8 @@ public interface ConceptExpression
         /**
          * It is an helper that just calls:
          * {@code {@link #getIndividualInstance()}.add( {@link #getOntology()}.getOWLIndividual( propertyName))}
-         * in order to add a new individualCompoundDescriptor (given by name) in the {@link EntitySet} list.
-         * @param individualName the individualCompoundDescriptor name to add for synchronisation.
+         * in order to add a new individualDescriptor (given by name) in the {@link EntitySet} list.
+         * @param individualName the individualDescriptor name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
         default boolean addIndividualClassified(String individualName){
@@ -89,9 +89,9 @@ public interface ConceptExpression
         }
         /**
          * It is an helper that just calls:
-         * {@code {@link #getIndividualInstance()}.add( individualCompoundDescriptor)}
-         * in order to add a new individualCompoundDescriptor in the {@link EntitySet} list.
-         * @param individual the individualCompoundDescriptor to add for synchronisation.
+         * {@code {@link #getIndividualInstance()}.add( individualDescriptor)}
+         * in order to add a new individualDescriptor in the {@link EntitySet} list.
+         * @param individual the individualDescriptor to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
         default boolean addIndividualClassified(OWLNamedIndividual individual){
@@ -101,8 +101,8 @@ public interface ConceptExpression
         /**
          * It is an helper that just calls:
          * {@code {@link #getIndividualInstance()}.remove( {@link #getOntology()}.getOWLIndividual( propertyName))}
-         * in order to remove an individualCompoundDescriptor (given by name) from the {@link EntitySet} list.
-         * @param individualName the individualCompoundDescriptor name to remove for synchronisation.
+         * in order to remove an individualDescriptor (given by name) from the {@link EntitySet} list.
+         * @param individualName the individualDescriptor name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeIndividualClassified(String individualName){
@@ -110,9 +110,9 @@ public interface ConceptExpression
         }
         /**
          * It is an helper that just calls:
-         * {@code {@link #getIndividualInstance()}.remove( individualCompoundDescriptor)}
-         * in order to remove an individualCompoundDescriptor in the {@link EntitySet} list.
-         * @param individual the individualCompoundDescriptor to remove for synchronisation.
+         * {@code {@link #getIndividualInstance()}.remove( individualDescriptor)}
+         * in order to remove an individualDescriptor in the {@link EntitySet} list.
+         * @param individual the individualDescriptor to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeIndividualClassified(OWLNamedIndividual individual){

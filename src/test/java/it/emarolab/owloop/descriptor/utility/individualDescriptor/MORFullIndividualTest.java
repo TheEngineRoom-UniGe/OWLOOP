@@ -1,4 +1,4 @@
-package it.emarolab.owloop.descriptor.utility.individualCompoundDescriptor;
+package it.emarolab.owloop.descriptor.utility.individualDescriptor;
 
 import it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorEntitySet;
 import org.junit.AfterClass;
@@ -14,7 +14,7 @@ public class MORFullIndividualTest {
     @Before // called a before every @Test
     public void setUp() throws Exception {
         individual = new FullIndividualDesc(
-                "individualCompoundDescriptor-A", // the ground instance name
+                "individualDescriptor-A", // the ground instance name
                 "ontoName", // ontology reference name
                 "src/test/resources/tboxTest.owl", // the ontology file path
                 "http://www.semanticweb.org/emaroLab/luca-buoncompagni/sit" // the ontology IRI path
@@ -48,7 +48,7 @@ public class MORFullIndividualTest {
         individual.addDisjointIndividual( "Disjoint-Individual-To-Build");
         individual.writeSemantic();
         assertSemantic();
-        System.out.println( "described individualCompoundDescriptor, disjoint test: " + individual.buildDisjointIndividual());
+        System.out.println( "described individualDescriptor, disjoint test: " + individual.buildDisjointIndividual());
     }
 
     @Test
@@ -74,7 +74,7 @@ public class MORFullIndividualTest {
         individual.addEquivalentIndividual( "Equivalent-Individual-To-Build");
         individual.writeSemantic();
         assertSemantic();
-        System.out.println( "described individualCompoundDescriptor, equivalent test: " + individual.buildEquivalentIndividual());
+        System.out.println( "described individualDescriptor, equivalent test: " + individual.buildEquivalentIndividual());
     }
 
     @Test
@@ -99,7 +99,7 @@ public class MORFullIndividualTest {
         individual.addTypeIndividual( "Individual-Type-To-Build");
         individual.writeSemanticInconsistencySafe(); // reasoner infers shape properties
         assertSemantic();
-        System.out.println( "described individualCompoundDescriptor, type test: " + individual.buildTypeIndividual());
+        System.out.println( "described individualDescriptor, type test: " + individual.buildTypeIndividual());
     }
 
     @Test
@@ -126,7 +126,7 @@ public class MORFullIndividualTest {
         //assertSemantic();
 
         individual.writeSemanticInconsistencySafe(); // reasoner infers shape properties
-        System.out.println( "described individualCompoundDescriptor, multi object test: " + individual.buildObjectIndividual());
+        System.out.println( "described individualDescriptor, multi object test: " + individual.buildObjectIndividual());
 
         System.out.println( "synchronised object properties: " + individual.getObjects( "isRightOf"));
     }
@@ -159,7 +159,7 @@ public class MORFullIndividualTest {
 
         individual.addObject( "isLeftOf", "Individual-B", true);
         individual.writeSemanticInconsistencySafe(); // reasoner infers shape properties
-        System.out.println( "described individualCompoundDescriptor, multi object test: " + individual.buildObjectIndividual());
+        System.out.println( "described individualDescriptor, multi object test: " + individual.buildObjectIndividual());
 
         System.out.println( "synchronised object properties: " + individual.getObject( "isRightOf"));
 
@@ -191,7 +191,7 @@ public class MORFullIndividualTest {
         individual.addData( "has-cone_height", 3.6);
         individual.addData( "has-geometric_height");
         individual.writeSemanticInconsistencySafe(); // reasoner infers shape properties
-        System.out.println( "described individualCompoundDescriptor, multi object test: " + individual.buildDataIndividual());
+        System.out.println( "described individualDescriptor, multi object test: " + individual.buildDataIndividual());
 
         System.out.println( "synchronised object properties: " + individual.getLiterals( "has-cone_height"));
     }
@@ -225,7 +225,7 @@ public class MORFullIndividualTest {
         individual.addData( "has-cone_height", 3.6, true);
         individual.addData( "has-geometric_height");
         individual.writeSemanticInconsistencySafe(); // reasoner infers shape properties
-        System.out.println( "described individualCompoundDescriptor, multi object test: " + individual.buildDataIndividual());
+        System.out.println( "described individualDescriptor, multi object test: " + individual.buildDataIndividual());
 
         System.out.println( "synchronised object properties: " + individual.getLiteral( "has-cone_height"));
     }

@@ -172,7 +172,7 @@ public interface DescriptorGrounding<J extends OWLObject>
         /**
          * Fully instanciate this class
          * @param ontology the ontology in which the related {@link Descriptor} will operate.
-         * @param instance the ontological individualCompoundDescriptor to be described.
+         * @param instance the ontological individualDescriptor to be described.
          */
         public IndividualInstance(OWLReferences ontology, OWLNamedIndividual instance) {
             super(ontology, instance);
@@ -189,7 +189,7 @@ public interface DescriptorGrounding<J extends OWLObject>
         /**
          * Fully instanciate this class
          * @param ontology the ontology in which the related {@link Descriptor} will operate.
-         * @param instanceName the name of the ontological individualCompoundDescriptor to be described.
+         * @param instanceName the name of the ontological individualDescriptor to be described.
          */
         public IndividualInstance(OWLReferences ontology, String instanceName) {
             super(ontology, ontology.getOWLIndividual(instanceName));
@@ -385,10 +385,10 @@ public interface DescriptorGrounding<J extends OWLObject>
     }
 
     /**
-     * Given an ontological individualCompoundDescriptor with a specified name
+     * Given an ontological individualDescriptor with a specified name
      * in the in the {@link #getOWLOntology()} IRI.
      * @param individualName the name of the {@link OWLNamedIndividual}.
-     * @return a new OWL individualCompoundDescriptor with the specified name in the grounded ontology.
+     * @return a new OWL individualDescriptor with the specified name in the grounded ontology.
      */
     default OWLNamedIndividual getOWLIndividual(String individualName){
         return getGroundOntology().getOWLIndividual( individualName);

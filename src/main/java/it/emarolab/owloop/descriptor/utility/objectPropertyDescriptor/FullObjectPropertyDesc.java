@@ -1,41 +1,38 @@
-package it.emarolab.owloop.descriptor.utility.objectPropertyCompoundDescriptor;
+package it.emarolab.owloop.descriptor.utility.objectPropertyDescriptor;
 
 
 import it.emarolab.amor.owlInterface.OWLReferences;
+import it.emarolab.owloop.core.ObjectProperty;
 import it.emarolab.owloop.descriptor.construction.descriptorBase.ObjectPropertyDescriptorBase;
 import it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorEntitySet;
+import it.emarolab.owloop.descriptor.construction.descriptorExpression.IndividualExpression;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.ObjectPropertyExpression;
+import it.emarolab.owloop.descriptor.utility.individualDescriptor.FullIndividualDesc;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
 
 import java.util.List;
 
 /**
- * The implementation of all the semantic features of an object property.
- * <p>
- *     This is an example of how use the {@link Descriptor}s for implement
- *     an object property that is synchronised w.r.t. all interfaces of {@link ObjectPropertyExpression}.
- *     <br>
- *     Its purpose is only to instanciate the {@link DescriptorEntitySet.ObjectLinks}
- *     and {@link DescriptorEntitySet.Restrictions} for the
- *     respective descriptions, as well as call all interfaces in the
- *     {@link #readSemantic()} and {@link #writeSemantic()} methods.
- *     All its constructions are based on {@link ObjectPropertyDescriptorBase} in order
- *     to automatically manage an {@link ObjectInstance} ground.
- *     <br>
- *     In order to optimise the synchronissation efficiency (i.e.: minimize
- *     reasoning calls) use this object only if it is necessary.
- *     Otherwise is recommended to use an had hoc {@link Descriptor}.
- *     You may want to use this class, see also {@link HierarchicalObjectPropertyDesc},
- *     {@link DefinitionObjectPropertyDesc} and {@link DomainObjectPropertyDesc}
- *     (generally, all the classes in the {@link it.emarolab.owloop.descriptor.utility} package)
- *     as templates for doing that.
+ * This is an example of a 'compound' ObjectProperty Descriptor as it implements more than one {@link ObjectPropertyExpression}.
+ * Axioms in this descriptor's internal state (OWLOOP representation) gets synchronized wrt the axioms in the OWL representation.
+ * {@link FullObjectPropertyDesc} can synchronize all the axioms, that are based on the following ObjectPropertyExpressions:
+ *
+ * <ul>
+ * <li><b>{@link ObjectPropertyExpression.Equivalent}</b>:   to describe that an ObjectProperty is equivalent to another ObjectProperty.</li>
+ * <li><b>{@link ObjectPropertyExpression.Disjoint}</b>:     to describe that an ObjectProperty is disjoint to another ObjectProperty.</li>
+ * <li><b>{@link ObjectPropertyExpression.Sub}</b>:          to describe that an ObjectProperty subsumes another ObjectProperty.</li>
+ * <li><b>{@link ObjectPropertyExpression.Super}</b>:        to describe that an ObjectProperty super-sumes another ObjectProperty.</li>
+ * <li><b>{@link ObjectPropertyExpression.Domain}</b>:       to describe the domain restrictions of an ObjectProperty.</li>
+ * <li><b>{@link ObjectPropertyExpression.Range}</b>:        to describe the range restrictions of an ObjectProperty.</li>
+ * <li><b>{@link ObjectPropertyExpression.Inverse}</b>:      to describe that an ObjectProperty has another inverse ObjectProperty.</li>
+ * </ul>
  *
  * <div style="text-align:center;"><small>
- * <b>File</b>:        it.emarolab.owloop.descriptor.utility.objectPropertyCompoundDescriptor.FullObjectPropertyDesc <br>
- * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
- * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
- * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
- * <b>date</b>:        21/05/17 <br>
+ * <b>File</b>:         it.emarolab.owloop.core.Axiom <br>
+ * <b>Licence</b>:      GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
+ * <b>Authors</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it), Syed Yusha Kareem (kareem.syed.yusha@dibris.unige.it) <br>
+ * <b>affiliation</b>:  EMAROLab, DIBRIS, University of Genoa. <br>
+ * <b>date</b>:         01/05/19 <br>
  * </small></div>
  */
 public class FullObjectPropertyDesc
@@ -83,7 +80,7 @@ public class FullObjectPropertyDesc
         super(instanceName, ontoName, filePath, iriPath, bufferingChanges);
     }
 
-    // implementations for Axiom.descriptor
+    // Implementation of readSemantic()
 
     @Override
     public List<MappingIntent> readSemantic() {
@@ -97,6 +94,8 @@ public class FullObjectPropertyDesc
         return r;
     }
 
+    // Implementation of writeSemantic()
+
     @Override
     public List<MappingIntent> writeSemantic() {
         List<MappingIntent> r = ObjectPropertyExpression.Disjoint.super.writeSemantic();
@@ -109,7 +108,7 @@ public class FullObjectPropertyDesc
         return r;
     }
 
-    // implementations for ObjectPropertyExpression.Disjoint
+    // implementations for: ObjectPropertyExpression.Disjoint
 
     @Override //called during build...() you can change the returning type to any implementations of ObjectPropertyExpression
     public FullObjectPropertyDesc getNewDisjointObjectProperty(OWLObjectProperty instance, OWLReferences ontology) {
@@ -121,7 +120,7 @@ public class FullObjectPropertyDesc
         return disjointProperties;
     }
 
-    // implementations for ObjectPropertyExpression.Equivalent
+    // implementations for: ObjectPropertyExpression.Equivalent
 
     @Override //called during build...() you can change the returning type to any implementations of ObjectPropertyExpression
     public FullObjectPropertyDesc getNewEquivalentObjectProperty(OWLObjectProperty instance, OWLReferences ontology) {
@@ -133,19 +132,21 @@ public class FullObjectPropertyDesc
         return equivalentProperties;
     }
 
-    // implementations for ObjectPropertyExpression.Domain
+    // implementations for: ObjectPropertyExpression.Domain
+
     @Override
     public DescriptorEntitySet.Restrictions getDomainObjectProperty() {
         return domainRestriction;
     }
 
-    // implementations for ObjectPropertyExpression.Range
+    // implementations for: ObjectPropertyExpression.Range
+
     @Override
     public DescriptorEntitySet.Restrictions getRangeObjectProperty() {
         return rangeRestriction;
     }
 
-    // implementations for ObjectPropertyExpression.Sub
+    // implementations for: ObjectPropertyExpression.Sub
 
     @Override //called during build...() you can change the returning type to any implementations of ObjectPropertyExpression
     public FullObjectPropertyDesc getNewSubObjectProperty(OWLObjectProperty instance, OWLReferences ontology) {
@@ -157,7 +158,7 @@ public class FullObjectPropertyDesc
         return subProperties;
     }
 
-    // implementations for ObjectPropertyExpression.Super
+    // implementations for: ObjectPropertyExpression.Super
 
     @Override //called during build...() you can change the returning type to any implementations of ObjectPropertyExpression
     public FullObjectPropertyDesc getNewSuperObjectProperty(OWLObjectProperty instance, OWLReferences ontology) {
@@ -169,7 +170,7 @@ public class FullObjectPropertyDesc
         return superProperties;
     }
 
-    // implementations for ObjectPropertyExpression.Inverse
+    // implementations for: ObjectPropertyExpression.Inverse
 
     @Override //called during build...() you can change the returning type to any implementations of ObjectPropertyExpression
     public FullObjectPropertyDesc getNewInverseObjectProperty(OWLObjectProperty instance, OWLReferences ontology) {
@@ -181,8 +182,7 @@ public class FullObjectPropertyDesc
         return inverseProperties;
     }
 
-    // implementation for standard object interface
-    // equals() and hashCode() is based on DescriptorBase<?> which considers only the ground
+    // implementations for: standard object interface
 
     @Override
     public String toString() {

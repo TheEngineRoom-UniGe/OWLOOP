@@ -1,10 +1,11 @@
-package it.emarolab.owloop.descriptor.utility.conceptCompoundDescriptor;
+package it.emarolab.owloop.descriptor.utility.conceptDescriptor;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
+import it.emarolab.owloop.core.Concept;
 import it.emarolab.owloop.descriptor.construction.descriptorBase.ConceptDescriptorBase;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.ConceptExpression;
 import it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorEntitySet;
-import it.emarolab.owloop.descriptor.utility.individualCompoundDescriptor.LinkIndividualDesc;
+import it.emarolab.owloop.descriptor.utility.individualDescriptor.LinkIndividualDesc;
 import it.emarolab.owloop.core.Axiom;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
@@ -12,31 +13,25 @@ import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import java.util.List;
 
 /**
- * The implementation of all the semantic features of a class.
- * <p>
- *     This is an example of how use the {@link Axiom.Descriptor}s for implement
- *     a class that is synchronised w.r.t. all interfaces of {@link ConceptExpression}.
- *     <br>
- *     Its purpose is only to instanciate the {@link DescriptorEntitySet.Concepts}
- *     and {@link DescriptorEntitySet.Restrictions} for the
- *     respective descriptions, as well as call all interfaces in the
- *     {@link #readSemantic()} and {@link #writeSemantic()} methods.
- *     All its constructions are based on {@link ConceptDescriptorBase} in order
- *     to automatically manage a grounding {@link ConceptInstance}.
- *     <br>
- *     In order to optimise the synchronisation efficiency (i.e.: minimize
- *     reasoning calls) use this object only if it is necessary.
- *     Otherwise is recommended to use an had hoc {@link Descriptor}.
- *     You may want to use this class, see also {@link DefinitionConceptDesc} and {@link HierarchicalConceptDesc}
- *     (generally, all the classes in the {@link it.emarolab.owloop.descriptor.utility} package)
- *     as templates for doing that.
+ * This is an example of a 'compound' Concept Descriptor as it implements more than one ClassExpression (aka {@link ConceptExpression}).
+ * Axioms in this descriptor's internal state (OWLOOP representation) gets synchronized wrt the axioms in the OWL representation.
+ * {@link FullConceptDesc} can synchronize all the axioms, that are based on the following ClassExpressions:
+ *
+ * <ul>
+ * <li><b>{@link ConceptExpression.Equivalent}</b>:  to describe that a Class is equivalent to another Class.</li>
+ * <li><b>{@link ConceptExpression.Disjoint}</b>:    to describe that a Class is disjoint to another Class.</li>
+ * <li><b>{@link ConceptExpression.Sub}</b>:         to describe that a Class subsumes another Class.</li>
+ * <li><b>{@link ConceptExpression.Super}</b>:       to describe that a Class is a super-class of another Class.</li>
+ * <li><b>{@link ConceptExpression.Instance}</b>:    to describe an Individual of a Class.</li>
+ * <li><b>{@link ConceptExpression.Definition}</b>:  to describe the definition of a Class..</li>
+ * </ul>
  *
  * <div style="text-align:center;"><small>
- * <b>File</b>:        it.emarolab.owloop.descriptor.utility.conceptCompoundDescriptor.FullConceptDesc <br>
- * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
- * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
- * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
- * <b>date</b>:        21/05/17 <br>
+ * <b>File</b>:         it.emarolab.owloop.core.Axiom <br>
+ * <b>Licence</b>:      GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
+ * <b>Authors</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it), Syed Yusha Kareem (kareem.syed.yusha@dibris.unige.it) <br>
+ * <b>affiliation</b>:  EMAROLab, DIBRIS, University of Genoa. <br>
+ * <b>date</b>:         01/05/19 <br>
  * </small></div>
  */
 public class FullConceptDesc
@@ -55,7 +50,7 @@ public class FullConceptDesc
     private DescriptorEntitySet.Concepts superConcept = new DescriptorEntitySet.Concepts();
     private DescriptorEntitySet.Individuals classifiedIndividual = new DescriptorEntitySet.Individuals();
 
-    // constructors for ConceptDescriptorBase
+    // Constructors from the abstract class: ConceptDescriptorBase
 
     public FullConceptDesc(OWLClass instance, OWLReferences onto) {
         super(instance, onto);
@@ -82,7 +77,7 @@ public class FullConceptDesc
         super(instanceName, ontoName, filePath, iriPath, bufferingChanges);
     }
 
-    // implementations for Axiom.descriptor
+    // Implementation of readSemantic()
 
     @Override
     public List<MappingIntent> readSemantic() {
@@ -95,6 +90,8 @@ public class FullConceptDesc
         return r;
     }
 
+    // Implementation of writeSemantic()
+
     @Override
     public List<MappingIntent> writeSemantic() {
         List<MappingIntent> r = ConceptExpression.Disjoint.super.writeSemantic();
@@ -106,7 +103,7 @@ public class FullConceptDesc
         return r;
     }
 
-    // implementations for ConceptExpression.Disjoint
+    // Implementations for: ConceptExpression.Disjoint
 
     @Override // called during build...() you can change the returning type to any implementations of ConceptExpression
     public FullConceptDesc getNewDisjointConcept(OWLClass instance, OWLReferences ontology) {
@@ -118,7 +115,7 @@ public class FullConceptDesc
         return disjointConcept;
     }
 
-    // implementations for ConceptExpression.Equivalent
+    // Implementations for: ConceptExpression.Equivalent
 
     @Override // called during build...() you can change the returning type to any implementations of ConceptExpression
     public FullConceptDesc getNewEquivalentConcept(OWLClass instance, OWLReferences ontology) {
@@ -130,14 +127,14 @@ public class FullConceptDesc
         return equivalentConcept;
     }
 
-    // implementations for ConceptExpression.Definition
+    // Implementations for: ConceptExpression.Definition
 
     @Override
     public DescriptorEntitySet.Restrictions getDefinitionConcept() {
         return restrictions;
     }
 
-    // implementations for ConceptExpression.Super
+    // Implementations for: ConceptExpression.Super
 
     @Override // called during build...() you can change the returning type to any implementations of ConceptExpression
     public FullConceptDesc getNewSubConcept(OWLClass instance, OWLReferences ontology) {
@@ -149,7 +146,7 @@ public class FullConceptDesc
         return subConcept;
     }
 
-    // implementations for ConceptExpression.Super
+    // Implementations for: ConceptExpression.Super
 
     @Override // called during build...() you can change the returning type to any implementations of ConceptExpression
     public FullConceptDesc getNewSuperConcept(OWLClass instance, OWLReferences ontology) {
@@ -161,7 +158,7 @@ public class FullConceptDesc
         return superConcept;
     }
 
-    // implementations for ConceptExpression.Classifier
+    // Implementations for: ConceptExpression.Classifier
 
     @Override // called during build...() you can change the returning type to any implementations of ConceptExpression
     public LinkIndividualDesc getNewIndividualInstance(OWLNamedIndividual instance, OWLReferences ontology) {
@@ -173,8 +170,7 @@ public class FullConceptDesc
         return classifiedIndividual;
     }
 
-    // implementation for standard object interface
-    // equals() and hashCode() is based on DescriptorBase<?> which considers only the ground
+    // Implementations for: standard object interface
 
     @Override
     public String toString() {

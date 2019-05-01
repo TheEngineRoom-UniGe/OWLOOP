@@ -1,10 +1,10 @@
-package it.emarolab.owloop.descriptor.utility.individualCompoundDescriptor;
+package it.emarolab.owloop.descriptor.utility.individualDescriptor;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.descriptor.construction.descriptorBase.IndividualDescriptorBase;
 import it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.IndividualExpression;
-import it.emarolab.owloop.descriptor.utility.conceptCompoundDescriptor.HierarchicalConceptDesc;
+import it.emarolab.owloop.descriptor.utility.conceptDescriptor.HierarchicalConceptDesc;
 import it.emarolab.owloop.core.Axiom;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
@@ -13,10 +13,10 @@ import java.util.List;
 
 
 /**
- * A basic implementation for an individualCompoundDescriptor that belongs to classes.
+ * A basic implementation for an individualDescriptor that belongs to classes.
  * <p>
  *     This is an example of how use the {@link Axiom.Descriptor}s for implement
- *     an individualCompoundDescriptor that is synchronised w.r.t. its {@link Type}s.
+ *     an individualDescriptor that is synchronised w.r.t. its {@link Type}s.
  *     <br>
  *     Its purpose is only to instanciate the {@link DescriptorEntitySet.Concepts} for the
  *     respective descriptions, as well as call the derived interfaces in the
@@ -32,7 +32,7 @@ import java.util.List;
  *     and maximises the OWL synchronisation efficiency.
  *
  * <div style="text-align:center;"><small>
- * <b>File</b>:        it.emarolab.owloop.descriptor.utility.conceptCompoundDescriptor.MORTypeIndinvidual <br>
+ * <b>File</b>:        it.emarolab.owloop.descriptor.utility.conceptDescriptor.MORTypeIndinvidual <br>
  * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
  * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
  * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>

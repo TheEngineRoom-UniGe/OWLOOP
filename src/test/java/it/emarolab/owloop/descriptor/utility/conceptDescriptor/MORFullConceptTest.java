@@ -1,4 +1,4 @@
-package it.emarolab.owloop.descriptor.utility.conceptCompoundDescriptor;
+package it.emarolab.owloop.descriptor.utility.conceptDescriptor;
 
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -10,7 +10,7 @@ import static org.junit.Assert.assertEquals;
 
 public class MORFullConceptTest {
 
-    // todo solve problem on conceptCompoundDescriptor definition
+    // todo solve problem on conceptDescriptor definition
 
     private static FullConceptDesc concept;
 
@@ -51,7 +51,7 @@ public class MORFullConceptTest {
         concept.addSubConcept( "Plane");
         concept.writeSemantic();
         assertSemantic();
-        System.out.println( "described conceptCompoundDescriptor, sub test: " + concept.buildSubConcept());
+        System.out.println( "described conceptDescriptor, sub test: " + concept.buildSubConcept());
     }
 
     @Test
@@ -79,7 +79,7 @@ public class MORFullConceptTest {
         // super class affect class definition during reasoning
         concept.writeSemanticInconsistencySafe();
         assertSemantic();
-        System.out.println( "described conceptCompoundDescriptor, super test: " + concept.buildSuperConcept());
+        System.out.println( "described conceptDescriptor, super test: " + concept.buildSuperConcept());
     }
 
     @Test
@@ -105,7 +105,7 @@ public class MORFullConceptTest {
         // disjoint class affect sub classes during reasoning
         concept.writeSemantic();
         assertSemantic();
-        System.out.println( "described conceptCompoundDescriptor, disjoint test: " + concept.buildDisjointConcept());
+        System.out.println( "described conceptDescriptor, disjoint test: " + concept.buildDisjointConcept());
     }
 
     @Test
@@ -133,7 +133,7 @@ public class MORFullConceptTest {
         // equivalent class affect sub classes during reasoning
         concept.writeSemanticInconsistencySafe();
         assertSemantic();
-        System.out.println( "described conceptCompoundDescriptor, equivalent test: " + concept.buildEquivalentConcept());
+        System.out.println( "described conceptDescriptor, equivalent test: " + concept.buildEquivalentConcept());
     }
 
     @Test @Ignore
@@ -210,7 +210,7 @@ public class MORFullConceptTest {
         concept.addMaxObjectRestriction( "hasRestrictionPropertyTest", 2, "Restricting");
         concept.writeSemanticInconsistencySafe(); // the reasoner always infers here
         assertSemantic();
-        System.out.println( "described conceptCompoundDescriptor, definition test: " + concept.getDefinitionConcept());
+        System.out.println( "described conceptDescriptor, definition test: " + concept.getDefinitionConcept());
     }
 
     @Test
@@ -236,7 +236,7 @@ public class MORFullConceptTest {
 
         concept.setInstance( "Parameter");
         concept.readSemantic();
-        System.out.println( "described conceptCompoundDescriptor, equivalent test: " + concept.buildIndividualInstance());
+        System.out.println( "described conceptDescriptor, equivalent test: " + concept.buildIndividualInstance());
 
     }
 

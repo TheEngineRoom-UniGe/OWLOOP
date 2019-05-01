@@ -1,11 +1,11 @@
-package it.emarolab.owloop.descriptor.utility.conceptCompoundDescriptor;
+package it.emarolab.owloop.descriptor.utility.conceptDescriptor;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.core.Axiom;
 import it.emarolab.owloop.descriptor.construction.descriptorBase.ConceptDescriptorBase;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.ConceptExpression;
 import it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorEntitySet;
-import it.emarolab.owloop.descriptor.utility.individualCompoundDescriptor.LinkIndividualDesc;
+import it.emarolab.owloop.descriptor.utility.individualDescriptor.LinkIndividualDesc;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 
@@ -13,10 +13,10 @@ import java.util.List;
 
 
 /**
- * A basic implementation for a conceptCompoundDescriptor with equivalent, disjoint classes as well as defining restrictions.
+ * A basic implementation for a conceptDescriptor with equivalent, disjoint classes as well as defining restrictions.
  * <p>
  *     This is an example of how use the {@link Axiom.Descriptor}s for implement
- *     a conceptCompoundDescriptor that is synchronised w.r.t. its {@link Disjoint} and {@link Equivalent} classes
+ *     a conceptDescriptor that is synchronised w.r.t. its {@link Disjoint} and {@link Equivalent} classes
  *     as wel as with its {@link Definition} restrictions and {@link Instance}ed individuals.
  *     <br>
  *     Its purpose is only to instanciate the {@link DescriptorEntitySet.Concepts} for the
@@ -31,7 +31,7 @@ import java.util.List;
  *     and maximises the OWL synchronisation efficiency.
  *
  * <div style="text-align:center;"><small>
- * <b>File</b>:        it.emarolab.owloop.descriptor.utility.conceptCompoundDescriptor.DefinitionConceptDesc <br>
+ * <b>File</b>:        it.emarolab.owloop.descriptor.utility.conceptDescriptor.DefinitionConceptDesc <br>
  * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
  * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
  * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>

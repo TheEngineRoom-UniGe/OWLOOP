@@ -4,7 +4,7 @@ import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.descriptor.construction.descriptorBase.ConceptDescriptorBase;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.ConceptExpression;
 import it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorEntitySet;
-import it.emarolab.owloop.descriptor.utility.conceptCompoundDescriptor.FullConceptDesc;
+import it.emarolab.owloop.descriptor.utility.conceptDescriptor.FullConceptDesc;
 import org.semanticweb.owlapi.model.OWLClass;
 
 import java.util.List;

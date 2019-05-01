@@ -483,7 +483,7 @@ public interface Concept<O,J>
 
         /**
          * Create an {@link Axiom.Descriptor} set where each element
-         * represents the individualCompoundDescriptor classified to belonging to this {@link Concept}.
+         * represents the individualDescriptor classified to belonging to this {@link Concept}.
          * Each of {@link Individual}s are instantiated
          * through the method {@link #getNewIndividualInstance(Object, Object)};
          * this is called for all {@link #getIndividualInstance()}.
@@ -503,7 +503,7 @@ public interface Concept<O,J>
         /**
          * This method is called by {@link #buildIndividualInstance()} and
          * its purpose is to instantiate a new {@link Individual} to represent
-         * an individualCompoundDescriptor classified in {@code this} {@link Concept} {@link Descriptor}.
+         * an individualDescriptor classified in {@code this} {@link Concept} {@link Descriptor}.
          * @param instance the instance to ground the new {@link Individual}.
          * @param ontology the ontology in which ground the new {@link Individual}.
          * @return a new {@link Axiom.Descriptor} for all the individuals
@@ -512,15 +512,15 @@ public interface Concept<O,J>
         D getNewIndividualInstance(Y instance, O ontology);
 
         /**
-         * Returns the {@link EntitySet} that describes all the individualCompoundDescriptor classified
+         * Returns the {@link EntitySet} that describes all the individualDescriptor classified
          * in {@code this} {@link Concept} from a no OOP point of view.
          * @return the entities describing the individuals classified in {@code this} object
          */
         EntitySet<Y> getIndividualInstance();
 
         /**
-         * Queries to the OWL representation of the individualCompoundDescriptor that are classified in {@code this} class.
-         * @return a new {@link EntitySet} contained the individualCompoundDescriptor classified by
+         * Queries to the OWL representation of the individualDescriptor that are classified in {@code this} class.
+         * @return a new {@link EntitySet} contained the individualDescriptor classified by
          * the OWL structure of {@link #getInstance()}.
          */
         EntitySet<Y> queryIndividualInstance();
@@ -531,7 +531,7 @@ public interface Concept<O,J>
          * for synchronise it with respect to {@link #getIndividualInstance()}. This should
          * be done by {@link #writeSemantic()}.
          * @return the changes to be done to synchronise {@code this} structure with
-         * the individualCompoundDescriptor classified in an OWL class.
+         * the individualDescriptor classified in an OWL class.
          */
         default EntitySet.SynchronisationIntent<Y> synchroniseIndividualInstanceToSemantic(){
             try {
@@ -547,7 +547,7 @@ public interface Concept<O,J>
          * as input parameter. This computes the changes to be performed into the {@link #getIndividualInstance()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readSemantic()}.
-         * @return the changes to be done to synchronise the individualCompoundDescriptor of an OWL class
+         * @return the changes to be done to synchronise the individualDescriptor of an OWL class
          * with {@code this} structure.
          */
         default EntitySet.SynchronisationIntent<Y> synchroniseIndividualInstanceFromSemantic(){

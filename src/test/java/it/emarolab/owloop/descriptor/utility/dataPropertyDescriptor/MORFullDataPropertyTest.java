@@ -1,4 +1,4 @@
-package it.emarolab.owloop.descriptor.utility.dataPropertyCompoundDescriptor;
+package it.emarolab.owloop.descriptor.utility.dataPropertyDescriptor;
 
 import org.junit.AfterClass;
 import org.junit.Before;

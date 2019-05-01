@@ -61,12 +61,12 @@ public interface Individual<O,J>
 
         /**
          * Create an {@link Axiom.Descriptor} set where each element
-         * represents the classes in which {@code this} individualCompoundDescriptor is belonging to.
+         * represents the classes in which {@code this} individualDescriptor is belonging to.
          * Each of {@link Concept}s are instantiated
          * through the method {@link #getNewTypeIndividual(Object, Object)};
          * this is called for all {@link #getTypeIndividual()}.
          * @return the set of {@link Concept}s that describes the
-         * entities in which {@code this} described ontological individualCompoundDescriptor
+         * entities in which {@code this} described ontological individualDescriptor
          * is belonging to.
          */
         default Set<D> buildTypeIndividual(){
@@ -86,19 +86,19 @@ public interface Individual<O,J>
          * @param instance the instance to ground the new {@link Concept}.
          * @param ontology the ontology in which ground the new {@link Concept}.
          * @return a new {@link Axiom.Descriptor} for all the classes
-         * in which {@code this} individualCompoundDescriptor is belonging to.
+         * in which {@code this} individualDescriptor is belonging to.
          */
         D getNewTypeIndividual(Y instance, O ontology);
 
         /**
          * Returns the {@link EntitySet} that describes all the classes in which
          * {@code this} {@link Individual} is belonging to, from a no OOP point of view.
-         * @return the entities describing the types of {@code this} individualCompoundDescriptor.
+         * @return the entities describing the types of {@code this} individualDescriptor.
          */
         EntitySet<Y> getTypeIndividual();
 
         /**
-         * Queries to the OWL representation for the types of {@code this} individualCompoundDescriptor.
+         * Queries to the OWL representation for the types of {@code this} individualDescriptor.
          * @return a new {@link EntitySet} contained the classes in which {@link #getInstance()}
          * is belonging to, into the OWL structure.
          */
@@ -127,7 +127,7 @@ public interface Individual<O,J>
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readSemantic()}.
          * @return the changes to be done to synchronise the classes in which the {@link #getInstance()}
-         * individualCompoundDescriptor is belonging to, from an OWL representation to {@code this} descriptor.
+         * individualDescriptor is belonging to, from an OWL representation to {@code this} descriptor.
          */
         default EntitySet.SynchronisationIntent<Y> synchroniseTypeIndividualFromSemantic(){
             try{
@@ -172,7 +172,7 @@ public interface Individual<O,J>
          * through the method {@link #getNewDisjointIndividual(Object, Object)};
          * this is called for all {@link #getDisjointIndividual()}.
          * @return the set of {@link Individual}s that describes the
-         * entities that are different from {@code this} described ontological individualCompoundDescriptor.
+         * entities that are different from {@code this} described ontological individualDescriptor.
          */
         default Set<D> buildDisjointIndividual(){
             Set<D> out = new HashSet<>();
@@ -187,7 +187,7 @@ public interface Individual<O,J>
         /**
          * This method is called by {@link #buildDisjointIndividual()} and
          * its purpose is to instantiate a new {@link Individual} to represent
-         * an equivalent individualCompoundDescriptor from {@code this} {@link Individual} {@link Descriptor}.
+         * an equivalent individualDescriptor from {@code this} {@link Individual} {@link Descriptor}.
          * @param instance the instance to ground the new {@link Individual}.
          * @param ontology the ontology in which ground the new {@link Individual}.
          * @return a new {@link Axiom.Descriptor} for all the individuals
@@ -196,9 +196,9 @@ public interface Individual<O,J>
         D getNewDisjointIndividual(J instance, O ontology);
 
         /**
-         * Returns the {@link EntitySet} that describes all the different individualCompoundDescriptor from
+         * Returns the {@link EntitySet} that describes all the different individualDescriptor from
          * {@code this} {@link Individual}; from a no OOP point of view.
-         * @return the entities describing the different individualCompoundDescriptor of {@code this} individualCompoundDescriptor.
+         * @return the entities describing the different individualDescriptor of {@code this} individualDescriptor.
          */
         EntitySet<J> getDisjointIndividual();
 
@@ -275,7 +275,7 @@ public interface Individual<O,J>
          * through the method {@link #getNewEquivalentIndividual(Object, Object)};
          * this is called for all {@link #getEquivalentIndividual()}.
          * @return the set of {@link Individual}s that describes the
-         * entities that are equivalent from {@code this} described ontological individualCompoundDescriptor.
+         * entities that are equivalent from {@code this} described ontological individualDescriptor.
          */
         default Set<D> buildEquivalentIndividual(){
             Set<D> out = new HashSet<>();
@@ -290,7 +290,7 @@ public interface Individual<O,J>
         /**
          * This method is called by {@link #buildEquivalentIndividual()} and
          * its purpose is to instantiate a new {@link Individual} to represent
-         * a different individualCompoundDescriptor from {@code this} {@link Individual} {@link Descriptor}.
+         * a different individualDescriptor from {@code this} {@link Individual} {@link Descriptor}.
          * @param instance the instance to ground the new {@link Individual}.
          * @param ontology the ontology in which ground the new {@link Individual}.
          * @return a new {@link Axiom.Descriptor} for all the individuals
@@ -299,9 +299,9 @@ public interface Individual<O,J>
         D getNewEquivalentIndividual(J instance, O ontology);
 
         /**
-         * Returns the {@link EntitySet} that describes all the equivalent individualCompoundDescriptor from
+         * Returns the {@link EntitySet} that describes all the equivalent individualDescriptor from
          * {@code this} {@link Individual}; from a no OOP point of view.
-         * @return the entities describing the equivalent individualCompoundDescriptor of {@code this} individualCompoundDescriptor.
+         * @return the entities describing the equivalent individualDescriptor of {@code this} individualDescriptor.
          */
         EntitySet<J> getEquivalentIndividual();
 
@@ -351,12 +351,12 @@ public interface Individual<O,J>
      * Implementation of this interface enables a {@link Individual} to have the {@link DataLink} expression.
      * <p>
      *     {@link Individual} synchronises only specified data property and its
-     *     relative values for an individualCompoundDescriptor (i.e.: the {@link Ground#getGroundInstance()}).
+     *     relative values for an individualDescriptor (i.e.: the {@link Ground#getGroundInstance()}).
      *     <br>
      *     By default, the synchronisation occurs only for the proprieties whose expression
      *     has been initialised in the {@link ExpressionEntitySet} ({@link #getDataExpressions()}.
      *     If the {@link ExpressionEntitySet} is left empty during {@link #readSemantic()}
-     *     it maps all the data properties applied to the described individualCompoundDescriptor.
+     *     it maps all the data properties applied to the described individualDescriptor.
      * </p>
      *
      * @param <O> the ontology.
@@ -391,7 +391,7 @@ public interface Individual<O,J>
          * through the method {@link #getNewDataIndividual(ExpressionEntity, Object)};
          * this is called for all {@link #getDataExpressions()}.
          * @return the set of {@link DataProperty}s that describes the
-         * entities that are applied to {@code this} described ontological individualCompoundDescriptor.
+         * entities that are applied to {@code this} described ontological individualDescriptor.
          */
         default Set<D> buildDataIndividual(){
             Set<D> out = new HashSet<>();
@@ -417,7 +417,7 @@ public interface Individual<O,J>
         /**
          * Returns the {@link EntitySet} that describes the specified data properties applied to
          * {@code this} {@link Individual}; from a no OOP point of view.
-         * @return the entities describing the data properties of {@code this} individualCompoundDescriptor.
+         * @return the entities describing the data properties of {@code this} individualDescriptor.
          */
         EntitySet<Y> getDataExpressions();
 
@@ -467,12 +467,12 @@ public interface Individual<O,J>
      * Implementation of this interface enables a {@link Individual} to have the {@link ObjectLink} expression.
      * <p>
      *     {@link Individual} synchronises only the specified object property and its
-     *     relative values for an individualCompoundDescriptor (i.e.: the {@link Ground#getGroundInstance()}).
+     *     relative values for an individualDescriptor (i.e.: the {@link Ground#getGroundInstance()}).
      *     <br>
      *     By default, the synchronisation occurs only for the proprieties whose expression
      *     has been initialised in the {@link ExpressionEntitySet} ({@link #getObjectSemantics()}).
      *     If the {@link ExpressionEntitySet} is left empty during {@link #readSemantic()}
-     *     it maps all the object properties applied to the described individualCompoundDescriptor.
+     *     it maps all the object properties applied to the described individualDescriptor.
      * </p>
      *
      * @param <O> the ontology.
@@ -507,7 +507,7 @@ public interface Individual<O,J>
          * through the method {@link #getNewObjectIndividual(ExpressionEntity, Object)};
          * this is called for all {@link #getObjectSemantics()}.
          * @return the set of {@link ObjectProperty}s that describes the
-         * entities that are applied to {@code this} described ontological individualCompoundDescriptor.
+         * entities that are applied to {@code this} described ontological individualDescriptor.
          */
         default Set< D> buildObjectIndividual(){
             Set<D> out = new HashSet<>();
@@ -533,7 +533,7 @@ public interface Individual<O,J>
         /**
          * Returns the {@link EntitySet} that describes the specified object properties applied to
          * {@code this} {@link Individual}; from a no OOP point of view.
-         * @return the entities describing the object properties of {@code this} individualCompoundDescriptor.
+         * @return the entities describing the object properties of {@code this} individualDescriptor.
          */
         EntitySet<Y> getObjectSemantics();
 

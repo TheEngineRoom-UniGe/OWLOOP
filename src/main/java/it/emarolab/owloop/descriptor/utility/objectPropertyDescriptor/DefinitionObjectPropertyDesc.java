@@ -1,4 +1,4 @@
-package it.emarolab.owloop.descriptor.utility.objectPropertyCompoundDescriptor;
+package it.emarolab.owloop.descriptor.utility.objectPropertyDescriptor;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.descriptor.construction.descriptorBase.ObjectPropertyDescriptorBase;
@@ -29,7 +29,7 @@ import java.util.List;
  *     OWL synchronisation efficiency for object properties.
  *
  * <div style="text-align:center;"><small>
- * <b>File</b>:        it.emarolab.owloop.descriptor.utility.objectPropertyCompoundDescriptor.DefinitionObjectPropertyDesc <br>
+ * <b>File</b>:        it.emarolab.owloop.descriptor.utility.objectPropertyDescriptor.DefinitionObjectPropertyDesc <br>
  * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
  * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
  * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>

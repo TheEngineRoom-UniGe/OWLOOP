@@ -1,4 +1,4 @@
-package it.emarolab.owloop.descriptor.utility.dataPropertyCompoundDescriptor;
+package it.emarolab.owloop.descriptor.utility.dataPropertyDescriptor;
 
 
 import it.emarolab.amor.owlInterface.OWLReferences;
@@ -29,7 +29,7 @@ import java.util.List;
  *     OWL synchronisation efficiency for data properties.
  *
  * <div style="text-align:center;"><small>
- * <b>File</b>:        it.emarolab.owloop.descriptor.utility.dataPropertyCompoundDescriptor.DomainDataPropertyDesc <br>
+ * <b>File</b>:        it.emarolab.owloop.descriptor.utility.dataPropertyDescriptor.DomainDataPropertyDesc <br>
  * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
  * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
  * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>

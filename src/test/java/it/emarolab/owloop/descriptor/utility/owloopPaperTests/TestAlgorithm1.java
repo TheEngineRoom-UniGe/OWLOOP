@@ -1,6 +1,6 @@
 package it.emarolab.owloop.descriptor.utility.owloopPaperTests;
 
-import it.emarolab.owloop.descriptor.utility.individualCompoundDescriptor.FullIndividualDesc;
+import it.emarolab.owloop.descriptor.utility.individualDescriptor.FullIndividualDesc;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;

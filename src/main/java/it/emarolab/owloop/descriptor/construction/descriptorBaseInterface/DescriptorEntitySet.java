@@ -37,7 +37,7 @@ import java.util.Set;
  *     <li><b>{@link DataLinks}</b>: for describing a set of ontological data properties.</li>
  *     <li><b>{@link ObjectLinks}</b>: for describing a set of ontological object properties.</li>
  *     <li><b>{@link Restrictions}</b>: for describing a set of restriction
- *                           (i.e.: for conceptCompoundDescriptor definition as wel as data and property range or domain definition).</li>
+ *                           (i.e.: for conceptDescriptor definition as wel as data and property range or domain definition).</li>
  *     <li><b>{@link DataExpression}</b>: for describing a set of data values with a semantic
  *                                     (i.e.: by {@link DataSemantics}).</li>
  *     <li><b>{@link ObjectExpression}</b>: for describing a set of data values with a semantic
@@ -395,7 +395,7 @@ public interface DescriptorEntitySet extends Axiom {
     /**
      * An implementation of {@link ExpressionEntity} for ontological data properties.
      * <p>
-     *     This class is a container for all the same data properties applied to an individualCompoundDescriptor
+     *     This class is a container for all the same data properties applied to an individualDescriptor
      *     (with related values). In particular, the {@link #getExpression()} is a specific
      *     property, while {@link #getValues()} represents a set of values linked with the
      *     above property to a {@link Ground}, not specified here.
@@ -530,7 +530,7 @@ public interface DescriptorEntitySet extends Axiom {
     /**
      * An implementation of {@link ExpressionEntity} for ontological object properties.
      * <p>
-     *     This class is a container for all the same object properties applied to an individualCompoundDescriptor
+     *     This class is a container for all the same object properties applied to an individualDescriptor
      *     (with related values). In particular, the {@link #getExpression()} is a specific
      *     property, while {@link #getValues()} represents a set of values linked with the
      *     above property to a {@link Ground}, not specified here.

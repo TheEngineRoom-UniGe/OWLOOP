@@ -4,7 +4,7 @@ import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.amor.owlInterface.OWLReferencesInterface;
 import it.emarolab.amor.owlInterface.SemanticRestriction;
 import it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorEntitySet;
-import it.emarolab.owloop.descriptor.utility.conceptCompoundDescriptor.FullConceptDesc;
+import it.emarolab.owloop.descriptor.utility.conceptDescriptor.FullConceptDesc;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
@@ -45,7 +45,7 @@ public class TestAlgorithm2 {
     @Test
     public void Algorithm2() {
 
-        //          p: ObjLinkIndividualDesc -> ground: d1,          expression: objectPropertyCompoundDescriptor (build: ??ObjectProperty).
+        //          p: ObjLinkIndividualDesc -> ground: d1,          expression: objectPropertyDescriptor (build: ??ObjectProperty).
         // R=[r,r,..]: TypeIndividualDesc    -> ground: d1,          expression: classOf        (build: DefSubClassDesc).
         // T=[t,t,..]: DefSubClassDesc       -> ground: class,      expression: subclass       (build: ??ClassDescr).
         //                                                                      definition     (build: CANNOT).

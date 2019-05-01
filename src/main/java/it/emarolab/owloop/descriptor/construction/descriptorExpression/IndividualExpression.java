@@ -61,7 +61,7 @@ public interface IndividualExpression
      * The {@link Individual.Type} {@link Descriptor} implementation for {@link OWLNamedIndividual}.
      * <p>
      *     It specify how to {@link #queryTypeIndividual()} and {@link #writeSemantic()} for the
-     *     types (i.e.: {@link OWLClass}) in which the described individualCompoundDescriptor (i.e.: {@link #getInstance()})
+     *     types (i.e.: {@link OWLClass}) in which the described individualDescriptor (i.e.: {@link #getInstance()})
      *     in belonging to.
      * </p>
      * <div style="text-align:center;"><small>
@@ -112,7 +112,7 @@ public interface IndividualExpression
         }
         /**
          * It is an helper that just calls:
-         * {@code {@link #getTypeIndividual()}.remove( individualCompoundDescriptor)}
+         * {@code {@link #getTypeIndividual()}.remove( individualDescriptor)}
          * in order to remove a class in the {@link EntitySet} list.
          * @param cl the class to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
@@ -174,8 +174,8 @@ public interface IndividualExpression
         /**
          * It is an helper that just calls:
          * {@code {@link #getDisjointIndividual()}.add( {@link #getOntology()}.getOWLIndividual( individualName))}
-         * in order to add a new individualCompoundDescriptor (given by name) in the {@link EntitySet} list.
-         * @param individualName the individualCompoundDescriptor name to add for synchronisation.
+         * in order to add a new individualDescriptor (given by name) in the {@link EntitySet} list.
+         * @param individualName the individualDescriptor name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
         default boolean addDisjointIndividual( String individualName){
@@ -183,9 +183,9 @@ public interface IndividualExpression
         }
         /**
          * It is an helper that just calls:
-         * {@code {@link #getDisjointIndividual()}.add( individualCompoundDescriptor)}
-         * in order to add a new individualCompoundDescriptor in the {@link EntitySet} list.
-         * @param individual the individualCompoundDescriptor to add for synchronisation.
+         * {@code {@link #getDisjointIndividual()}.add( individualDescriptor)}
+         * in order to add a new individualDescriptor in the {@link EntitySet} list.
+         * @param individual the individualDescriptor to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
         default boolean addDisjointIndividual( OWLNamedIndividual individual){
@@ -195,8 +195,8 @@ public interface IndividualExpression
         /**
          * It is an helper that just calls:
          * {@code {@link #getDisjointIndividual()}.remove( {@link #getOntology()}.getOWLIndividual( individualName))}
-         * in order to remove an individualCompoundDescriptor (given by name) from the {@link EntitySet} list.
-         * @param individualName the individualCompoundDescriptor name to remove for synchronisation.
+         * in order to remove an individualDescriptor (given by name) from the {@link EntitySet} list.
+         * @param individualName the individualDescriptor name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeDisjointIndividual( String individualName){
@@ -206,7 +206,7 @@ public interface IndividualExpression
          * It is an helper that just calls:
          * {@code {@link #getDisjointIndividual()}.remove( property)}
          * in order to remove a class in the {@link EntitySet} list.
-         * @param individual the individualCompoundDescriptor to remove for synchronisation.
+         * @param individual the individualDescriptor to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeDisjointIndividual( OWLNamedIndividual individual){
@@ -275,8 +275,8 @@ public interface IndividualExpression
         /**
          * It is an helper that just calls:
          * {@code {@link #getEquivalentIndividual()}.add( {@link #getOntology()}.getOWLIndividual( individualName))}
-         * in order to add a new individualCompoundDescriptor (given by name) in the {@link EntitySet} list.
-         * @param individualName the individualCompoundDescriptor name to add for synchronisation.
+         * in order to add a new individualDescriptor (given by name) in the {@link EntitySet} list.
+         * @param individualName the individualDescriptor name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
         default boolean addEquivalentIndividual( String individualName){
@@ -284,9 +284,9 @@ public interface IndividualExpression
         }
         /**
          * It is an helper that just calls:
-         * {@code {@link #getEquivalentIndividual()}.add( individualCompoundDescriptor)}
-         * in order to add a new individualCompoundDescriptor in the {@link EntitySet} list.
-         * @param individual the individualCompoundDescriptor to add for synchronisation.
+         * {@code {@link #getEquivalentIndividual()}.add( individualDescriptor)}
+         * in order to add a new individualDescriptor in the {@link EntitySet} list.
+         * @param individual the individualDescriptor to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
         default boolean addEquivalentIndividual( OWLNamedIndividual individual){
@@ -296,8 +296,8 @@ public interface IndividualExpression
         /**
          * It is an helper that just calls:
          * {@code {@link #getEquivalentIndividual()}.remove( {@link #getOntology()}.getOWLIndividual( individualName))}
-         * in order to remove an individualCompoundDescriptor (given by name) from the {@link EntitySet} list.
-         * @param individualName the individualCompoundDescriptor name to remove for synchronisation.
+         * in order to remove an individualDescriptor (given by name) from the {@link EntitySet} list.
+         * @param individualName the individualDescriptor name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeEquivalentIndividual( String individualName){
@@ -305,9 +305,9 @@ public interface IndividualExpression
         }
         /**
          * It is an helper that just calls:
-         * {@code {@link #getEquivalentIndividual()}.remove( individualCompoundDescriptor)}
+         * {@code {@link #getEquivalentIndividual()}.remove( individualDescriptor)}
          * in order to remove a class in the {@link EntitySet} list.
-         * @param individual the individualCompoundDescriptor to remove for synchronisation.
+         * @param individual the individualDescriptor to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeEquivalentIndividual( OWLNamedIndividual individual){
@@ -356,15 +356,15 @@ public interface IndividualExpression
      * The {@link Individual.DataLink} {@link Descriptor} implementation for {@link OWLNamedIndividual}.
      * <p>
      *     It specify how to {@link #queryDataIndividual()} and {@link #writeSemantic()} for the
-     *     data properties applied to {@link #getInstance()} (i.e.: {@code this individualCompoundDescriptor}).
+     *     data properties applied to {@link #getInstance()} (i.e.: {@code this individualDescriptor}).
      *     It also implements common function to populate the {@link ExpressionEntitySet}
-     *     (of type {@link DescriptorEntitySet.DataExpression}) that specify the data properties of this individualCompoundDescriptor
+     *     (of type {@link DescriptorEntitySet.DataExpression}) that specify the data properties of this individualDescriptor
      *     that are synchronised with this {@link Descriptor}. For efficiency purposes,
-     *     this descriptor does not map all the property of an individualCompoundDescriptor but only the one which
+     *     this descriptor does not map all the property of an individualDescriptor but only the one which
      *     {@code semantic} have been initialised in the {@link ExpressionEntity}.
      *     On the other hand, if the set of {@link ExpressionEntitySet} is leaved empty during
      *     {@link #readSemantic()}, it maps all the object properties applied to the described
-     *     individualCompoundDescriptor
+     *     individualDescriptor
      * </p>
      * <div style="text-align:center;"><small>
      * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.IndividualExpression <br>
@@ -687,15 +687,15 @@ public interface IndividualExpression
      * The {@link Individual.ObjectLink} {@link Descriptor} implementation for {@link OWLNamedIndividual}.
      * <p>
      *     It specify how to {@link #queryObject()} and {@link #writeSemantic()} for the
-     *     object properties applied to {@link #getInstance()} (i.e.: {@code this individualCompoundDescriptor}).
+     *     object properties applied to {@link #getInstance()} (i.e.: {@code this individualDescriptor}).
      *     It also implements common function to populate the {@link ExpressionEntitySet}
-     *     (of type {@link DescriptorEntitySet.ObjectExpression}) that specify the object properties of this individualCompoundDescriptor
+     *     (of type {@link DescriptorEntitySet.ObjectExpression}) that specify the object properties of this individualDescriptor
      *     that are synchronised with this {@link Descriptor}. For efficiency purposes,
-     *     this descriptor does not map all the property of an individualCompoundDescriptor but only the one which
+     *     this descriptor does not map all the property of an individualDescriptor but only the one which
      *     {@code semantic} have been initialised in the {@link ExpressionEntity}.
      *     On the other hand, if the set of {@link ExpressionEntitySet} is leaved empty during
      *     {@link #readSemantic()}, it maps all the object properties applied to the described
-     *     individualCompoundDescriptor.
+     *     individualDescriptor.
      * </p>
      * <div style="text-align:center;"><small>
      * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.IndividualExpression <br>

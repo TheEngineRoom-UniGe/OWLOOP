@@ -1,4 +1,4 @@
-package it.emarolab.owloop.descriptor.utility.conceptCompoundDescriptor;
+package it.emarolab.owloop.descriptor.utility.conceptDescriptor;
 
 
 import it.emarolab.amor.owlInterface.OWLReferences;
@@ -12,10 +12,10 @@ import java.util.List;
 
 
 /**
- * A basic implementation for a conceptCompoundDescriptor with sub and super concepts.
+ * A basic implementation for a conceptDescriptor with sub and super concepts.
  * <p>
  *     This is an example of how use the {@link Axiom.Descriptor}s for implement
- *     a conceptCompoundDescriptor that is synchronised w.r.t. its {@link Sub} and {@link Super} concepts.
+ *     a conceptDescriptor that is synchronised w.r.t. its {@link Sub} and {@link Super} concepts.
  *     <br>
  *     Its purpose is only to instanciate the {@link DescriptorEntitySet.Concepts} for the
  *     respective descriptions, as well as call both interfaces in the
@@ -29,7 +29,7 @@ import java.util.List;
  *     and maximises the OWL synchronisation efficiency.
  *
  * <div style="text-align:center;"><small>
- * <b>File</b>:        it.emarolab.owloop.descriptor.utility.conceptCompoundDescriptor.HierarchicalConceptDesc <br>
+ * <b>File</b>:        it.emarolab.owloop.descriptor.utility.conceptDescriptor.HierarchicalConceptDesc <br>
  * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
  * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
  * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>

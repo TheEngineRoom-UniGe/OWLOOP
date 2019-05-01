@@ -1,43 +1,39 @@
-package it.emarolab.owloop.descriptor.utility.dataPropertyCompoundDescriptor;
+package it.emarolab.owloop.descriptor.utility.dataPropertyDescriptor;
 
 
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.core.Axiom;
+import it.emarolab.owloop.core.DataProperty;
 import it.emarolab.owloop.descriptor.construction.descriptorBase.DataPropertyDescriptorBase;
+import it.emarolab.owloop.descriptor.construction.descriptorExpression.ConceptExpression;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.DataPropertyExpression;
 import it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorEntitySet;
+import it.emarolab.owloop.descriptor.utility.conceptDescriptor.FullConceptDesc;
 import org.semanticweb.owlapi.model.OWLDataProperty;
 
 import java.util.List;
 import java.util.Set;
 
 /**
- * The implementation of all the semantic features of a data property.
- * <p>
- *     This is an example of how use the {@link Axiom.Descriptor}s for implement
- *     a data property that is synchronised w.r.t. all interfaces of {@link DataPropertyExpression}.
- *     <br>
- *     Its purpose is only to instanciate the {@link DescriptorEntitySet.DataLinks}
- *     and {@link DescriptorEntitySet.Restrictions} for the
- *     respective descriptions, as well as call all interfaces in the
- *     {@link #readSemantic()} and {@link #writeSemantic()} methods.
- *     All its constructions are based on {@link DataPropertyDescriptorBase} in order
- *     to automatically manage a grounding {@link DataInstance}.
- *     <br>
- *     In order to optimise the synchronisation efficiency (i.e.: minimize
- *     reasoning calls) use this object only if it is necessary.
- *     Otherwise is recommended to use an had hoc {@link Descriptor}.
- *     You may want to use this class, see also {@link HierarchicalDataPropertyDesc},
- *     {@link DefinitionDataPropertyDesc} and {@link DomainDataPropertyDesc}
- *     (generally, all the classes in the {@link it.emarolab.owloop.descriptor.utility} package)
- *     as templates for doing that.
+ * This is an example of a 'compound' DataProperty Descriptor as it implements more than one {@link DataPropertyExpression}.
+ * Axioms in this descriptor's internal state (OWLOOP representation) gets synchronized wrt the axioms in the OWL representation.
+ * {@link FullDataPropertyDesc} can synchronize all the axioms, that are based on the following DataPropertyExpressions:
+ *
+ * <ul>
+ * <li><b>{@link DataPropertyExpression.Equivalent}</b>:   to describe that a DataProperty is equivalent to another DataProperty.</li>
+ * <li><b>{@link DataPropertyExpression.Disjoint}</b>:     to describe that a DataProperty is disjoint to another DataProperty.</li>
+ * <li><b>{@link DataPropertyExpression.Sub}</b>:          to describe that a DataProperty is subsumes another DataProperty.</li>
+ * <li><b>{@link DataPropertyExpression.Super}</b>:        to describe that a DataProperty is super-sumes another DataProperty.</li>
+ * <li><b>{@link DataPropertyExpression.Domain}</b>:       to describe the domain restrictions of a DataProperty.</li>
+ * <li><b>{@link DataPropertyExpression.Range}</b>:        to describe the range restrictions of a DataProperty.</li>
+ * </ul>
  *
  * <div style="text-align:center;"><small>
- * <b>File</b>:        it.emarolab.owloop.descriptor.utility.dataPropertyCompoundDescriptor.FullDataPropertyDesc <br>
- * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
- * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
- * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
- * <b>date</b>:        21/05/17 <br>
+ * <b>File</b>:         it.emarolab.owloop.core.Axiom <br>
+ * <b>Licence</b>:      GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
+ * <b>Authors</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it), Syed Yusha Kareem (kareem.syed.yusha@dibris.unige.it) <br>
+ * <b>affiliation</b>:  EMAROLab, DIBRIS, University of Genoa. <br>
+ * <b>date</b>:         01/05/19 <br>
  * </small></div>
  */
 public class FullDataPropertyDesc
@@ -56,7 +52,7 @@ public class FullDataPropertyDesc
     private DescriptorEntitySet.Restrictions domainRestriction = new DescriptorEntitySet.Restrictions();
     private DescriptorEntitySet.Restrictions rangeRestriction = new DescriptorEntitySet.Restrictions();
 
-    // constructors for DataPropertyDescriptorBase
+    // Constructors from the abstract class: DataPropertyDescriptorBase
 
     public FullDataPropertyDesc(OWLDataProperty instance, OWLReferences onto) {
         super(instance, onto);
@@ -83,7 +79,7 @@ public class FullDataPropertyDesc
         super(instanceName, ontoName, filePath, iriPath, bufferingChanges);
     }
 
-    // implementations for Axiom.descriptor
+    // Implementation of readSemantic()
 
     @Override
     public List<MappingIntent> readSemantic() {
@@ -96,6 +92,8 @@ public class FullDataPropertyDesc
         return r;
     }
 
+    // Implementation of writeSemantic()
+
     @Override
     public List<MappingIntent> writeSemantic() {
         List<MappingIntent> r = DataPropertyExpression.Disjoint.super.writeSemantic();
@@ -107,8 +105,7 @@ public class FullDataPropertyDesc
         return r;
     }
 
-    // implementations for DataPropertyExpression.Disjoint
-
+    // Implementations for: DataPropertyExpression.Disjoint
 
     @Override // you can change the returning type to any implementations of DataPropertyExpression
     public FullDataPropertyDesc getNewDisjointDataProperty(OWLDataProperty instance, OWLReferences ontology) {
@@ -120,7 +117,7 @@ public class FullDataPropertyDesc
         return disjointProperties;
     }
 
-    // implementations for DataPropertyExpression.Equivalent
+    // Implementations for: DataPropertyExpression.Equivalent
 
     @Override // returns a set with elements of the same type of getNewDisjointDataProperty()
     public Set<FullDataPropertyDesc> buildEquivalentDataProperty() {
@@ -137,19 +134,21 @@ public class FullDataPropertyDesc
         return equivalentProperties;
     }
 
-    // implementations for DataPropertyExpression.Domain
+    // Implementations for: DataPropertyExpression.Domain
+
     @Override
     public DescriptorEntitySet.Restrictions getDomainDataProperty() {
         return domainRestriction;
     }
 
-    // implementations for DataPropertyExpression.Range
+    // Implementations for: DataPropertyExpression.Range
+
     @Override
     public DescriptorEntitySet.Restrictions getRangeDataProperty() {
         return rangeRestriction;
     }
 
-    // implementations for DataPropertyExpression.Super
+    // Implementations for: DataPropertyExpression.Super
 
     @Override //called during build...() you can change the returning type to any implementations of DataPropertyExpression
     public FullDataPropertyDesc getNewSubDataProperty(OWLDataProperty instance, OWLReferences ontology) {
@@ -161,7 +160,7 @@ public class FullDataPropertyDesc
         return subProperties;
     }
 
-    // implementations for DataPropertyExpression.Super
+    // Implementations for: DataPropertyExpression.Super
 
     @Override //called during build...() you can change the returning type to any implementations of DataPropertyExpression
     public FullDataPropertyDesc getNewSuperDataProperty(OWLDataProperty instance, OWLReferences ontology) {
@@ -173,8 +172,7 @@ public class FullDataPropertyDesc
         return superProperties;
     }
 
-    // implementation for standard object interface
-    // equals() and hashCode() is based on DescriptorBase<?> which considers only the ground
+    // Implementations for: standard object interface
 
     @Override
     public String toString() {
