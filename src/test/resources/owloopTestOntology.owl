@@ -25,21 +25,10 @@
     <!-- http://www.semanticweb.org/yusha_temporary/owloopTestOntology#hasDoor -->
 
 
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/yusha_temporary/owloopTestOntology#hasDoor"/>
-    
-
-
-    <!-- http://www.semanticweb.org/yusha_temporary/owloopTestOntology#hasProp1 -->
-
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/yusha_temporary/owloopTestOntology#hasProp1"/>
-    
-
-
-    <!-- http://www.semanticweb.org/yusha_temporary/owloopTestOntology#hasProp2 -->
-
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/yusha_temporary/owloopTestOntology#hasProp2"/>
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/yusha_temporary/owloopTestOntology#hasDoor">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/yusha_temporary/owloopTestOntology#LOCATION"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/yusha_temporary/owloopTestOntology#DOOR"/>
+    </owl:ObjectProperty>
     
 
 
@@ -120,7 +109,7 @@
         <owl:equivalentClass>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/yusha_temporary/owloopTestOntology#hasDoor"/>
-                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
                 <owl:onClass rdf:resource="http://www.semanticweb.org/yusha_temporary/owloopTestOntology#DOOR"/>
             </owl:Restriction>
         </owl:equivalentClass>
@@ -156,8 +145,6 @@
 
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/yusha_temporary/owloopTestOntology#Robot1">
-        <hasProp1 rdf:resource="http://www.semanticweb.org/yusha_temporary/owloopTestOntology#Y"/>
-        <hasProp2 rdf:resource="http://www.semanticweb.org/yusha_temporary/owloopTestOntology#Y"/>
         <isIn rdf:resource="http://www.semanticweb.org/yusha_temporary/owloopTestOntology#Corridor1"/>
     </owl:NamedIndividual>
     
@@ -181,13 +168,6 @@
     
 
 
-    <!-- http://www.semanticweb.org/yusha_temporary/owloopTestOntology#Y -->
-
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/yusha_temporary/owloopTestOntology#Y"/>
-    
-
-
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
@@ -197,14 +177,6 @@
      -->
 
 
-    <rdf:Description>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
-        <owl:members rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.semanticweb.org/yusha_temporary/owloopTestOntology#DOOR"/>
-            <rdf:Description rdf:about="http://www.semanticweb.org/yusha_temporary/owloopTestOntology#LOCATION"/>
-            <rdf:Description rdf:about="http://www.semanticweb.org/yusha_temporary/owloopTestOntology#ROBOT"/>
-        </owl:members>
-    </rdf:Description>
     <rdf:Description>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDifferent"/>
         <owl:distinctMembers rdf:parseType="Collection">

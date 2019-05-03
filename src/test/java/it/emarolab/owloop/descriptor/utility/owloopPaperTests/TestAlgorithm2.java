@@ -5,9 +5,11 @@ import it.emarolab.amor.owlInterface.OWLReferencesInterface;
 import it.emarolab.amor.owlInterface.SemanticRestriction;
 import it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.utility.conceptDescriptor.FullConceptDesc;
+import it.emarolab.owloop.descriptor.utility.individualDescriptor.FullIndividualDesc;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
+import org.semanticweb.owlapi.model.OWLLiteral;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 
 import java.util.Set;
@@ -52,13 +54,14 @@ public class TestAlgorithm2 {
 
         // Assuming that knowledge of the Robot's position is saved in the ontology after running Algo.1
         // Get knowledge form the ontology
-        d1.addObject("isIn");                                        // To read knowledge specific to the property "isIn"
+        d1.addObject("isIn",true);                                        // To read knowledge specific to the property "isIn"
         d1.readSemantic();                                                   // READ
         OWLNamedIndividual robotPlace = d1.getObject("isIn");    // getObject("isIn")
 
         TypeIndividualDesc d2 = new TypeIndividualDesc(robotPlace, ontoref); // Initialize a DESC with ground as Corridor1
         d2.readSemantic();                                                   // READ
 
+        System.out.println(d2);
         Set<DefSubClassDesc> setOneD = d2.buildTypeIndividual();                   // BUILD Type of an Individual --> CORRIDOR,LOCATION,Top
         for( DefSubClassDesc d3 : setOneD ){
 

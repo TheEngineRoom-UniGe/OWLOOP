@@ -35,7 +35,9 @@ public class TestAlgorithm1 {
         String pos = getRobotPosition();
 
         FullIndividualDesc d = individual;
-        d.addObject("isIn",pos,true); //singleton True means with replacement
+        d.addObject("isIn",pos,false); //singleton 'true' means this descriptor can only have a single element in its EntitySet.
+        System.out.println(d);
+
         d.writeSemantic();
     }
 

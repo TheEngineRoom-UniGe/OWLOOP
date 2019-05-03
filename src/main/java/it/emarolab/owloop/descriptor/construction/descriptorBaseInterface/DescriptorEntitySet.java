@@ -722,8 +722,8 @@ public interface DescriptorEntitySet extends Axiom {
         public A getLink(S semantic){
             for ( X s : this){
                 if ( semantic.equals( s.getExpression())) {
-                    if ( ! s.getValues().isSingleton())
-                        System.out.println( " !! search for only one literal in a not singleton object property: " + s);
+                    if ( ! s.getValues().isSingleton() & s.getValues().size() > 1)
+                        System.out.println( " !![WARNING] Uncertainty in the element that is returned, if there is more than 1 element in the EntitySet: " + s);
                     for (A l : s.getValues())
                         return l;
                 }
