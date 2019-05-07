@@ -23,7 +23,7 @@ import java.util.Set;
  *     in order to fully define {@link Descriptor}s for {@link OWLDataProperty} based on the
  *     <a href="https://github.com/EmaroLab/multi_ontology_reference">aMOR</a> API.
  *     In particular all of the sub interfaces specify how to
- *     {@code query} and {@link #writeSemantic()} specifically for OWL data properties.
+ *     {@code query} and {@link #writeExpressionAxioms()} specifically for OWL data properties.
  *     It contains several semantic descriptors that can be combined in any arbitrary combinations, since they
  *     rely on the same ground (i.e.: {@link DataInstance}).
  * </p>
@@ -74,7 +74,7 @@ public interface DataPropertyExpression
     /**
      * The {@link DataProperty.Disjoint} {@link Descriptor} implementation for {@link OWLDataProperty}.
      * <p>
-     *     It specify how to {@link #queryDisjointDataProperty()} and {@link #writeSemantic()} for the
+     *     It specify how to {@link #queryDisjointDataProperty()} and {@link #writeExpressionAxioms()} for the
      *     disjointed data properties (i.e.: {@link OWLDataProperty}) from the one described 
      *     by this class (i.e.: {@link #getInstance()}).
      * </p>
@@ -147,7 +147,7 @@ public interface DataPropertyExpression
         }
 
         @Override // see super class for documentation
-        default List<MappingIntent> writeSemantic(){
+        default List<MappingIntent> writeExpressionAxioms(){
             try {
                 EntitySet.SynchronisationIntent<OWLDataProperty> to = synchroniseDisjointDataPropertyToSemantic();
                 if ( to == null)
@@ -176,7 +176,7 @@ public interface DataPropertyExpression
     /**
      * The {@link DataProperty.Equivalent} {@link Descriptor} implementation for {@link OWLDataProperty}.
      * <p>
-     *     It specify how to {@link #queryEquivalentDataProperty()} and {@link #writeSemantic()} for the
+     *     It specify how to {@link #queryEquivalentDataProperty()} and {@link #writeExpressionAxioms()} for the
      *     equivalent data properties (i.e.: {@link OWLDataProperty}) from the one described 
      *     by this class (i.e.: {@link #getInstance()}).
      * </p>
@@ -249,7 +249,7 @@ public interface DataPropertyExpression
         }
 
         @Override // see super class for documentation
-        default List<MappingIntent> writeSemantic(){
+        default List<MappingIntent> writeExpressionAxioms(){
             try {
                 EntitySet.SynchronisationIntent<OWLDataProperty> to = synchroniseEquivalentDataPropertyToSemantic();
                 if ( to == null)
@@ -278,7 +278,7 @@ public interface DataPropertyExpression
     /**
      * The {@link DataProperty.Sub} {@link Descriptor} implementation for {@link OWLDataProperty}.
      * <p>
-     *     It specify how to {@link #querySubDataProperty()} and {@link #writeSemantic()} for the
+     *     It specify how to {@link #querySubDataProperty()} and {@link #writeExpressionAxioms()} for the
      *     sub data properties (i.e.: {@link OWLDataProperty}) from the one described 
      *     by this class (i.e.: {@link #getInstance()}).
      * </p>
@@ -347,7 +347,7 @@ public interface DataPropertyExpression
         }
 
         @Override // see super class for documentation
-        default List<MappingIntent> writeSemantic(){
+        default List<MappingIntent> writeExpressionAxioms(){
             try {
                 EntitySet.SynchronisationIntent<OWLDataProperty> to = synchroniseSubDataPropertyToSemantic();
                 if ( to == null)
@@ -368,7 +368,7 @@ public interface DataPropertyExpression
     /**
      * The {@link DataProperty.Super} {@link Descriptor} implementation for {@link OWLDataProperty}.
      * <p>
-     *     It specify how to {@link #querySuperDataProperty()} and {@link #writeSemantic()} for the
+     *     It specify how to {@link #querySuperDataProperty()} and {@link #writeExpressionAxioms()} for the
      *     super data properties (i.e.: {@link OWLDataProperty}) from the one described 
      *     by this class (i.e.: {@link #getInstance()}).
      * </p>
@@ -440,7 +440,7 @@ public interface DataPropertyExpression
         }
 
         @Override // see super class for documentation
-        default List<MappingIntent> writeSemantic(){
+        default List<MappingIntent> writeExpressionAxioms(){
             try{
                 EntitySet.SynchronisationIntent<OWLDataProperty> to = synchroniseSuperDataPropertyToSemantic();
                 if ( to == null)
@@ -461,7 +461,7 @@ public interface DataPropertyExpression
     /**
      * The {@link DataProperty.Domain} {@link Descriptor} implementation for {@link OWLDataProperty}.
      * <p>
-     *     It specify how to {@link #queryDomainDataProperty()} and {@link #writeSemantic()} for the
+     *     It specify how to {@link #queryDomainDataProperty()} and {@link #writeExpressionAxioms()} for the
      *     domain restriction (i.e.: {@link SemanticRestriction}) of the one described 
      *     by this class (i.e.: {@link #getInstance()}).
      * </p>
@@ -850,7 +850,7 @@ public interface DataPropertyExpression
         /**
          * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDomainDataProperty()})
          * based on {@link #domainMinObjectRestriction(String, int, String)}.
-         * This method should be always synchronised with {@link #writeSemanticInconsistencySafe()}
+         * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the name of the restricting object property.
          * @param cardinality the cardinality for the minimal property restriction.
@@ -863,7 +863,7 @@ public interface DataPropertyExpression
         /**
          * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDomainDataProperty()}
          * based on {@link #domainMinObjectRestriction(OWLObjectProperty, int, OWLClass)}.
-         * This method should be always synchronised with {@link #writeSemanticInconsistencySafe()}
+         * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
          * to be perfectly aligned with the {@link #queryDomainDataProperty()},
          * to be perfectly aligned with the {@link #queryDomainDataProperty()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
@@ -878,7 +878,7 @@ public interface DataPropertyExpression
         /**
          * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDomainDataProperty()})
          * based on {@link #domainMinObjectRestriction(String, int, String)}.
-         * This method should be always synchronised with {@link #writeSemanticInconsistencySafe()}
+         * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
          * to be perfectly aligned with the {@link #queryDomainDataProperty()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the name of the restricting object property.
@@ -892,7 +892,7 @@ public interface DataPropertyExpression
         /**
          * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDomainDataProperty()})
          * based on {@link #domainMinObjectRestriction(OWLObjectProperty, int, OWLClass)}.
-         * This method should be always synchronised with {@link #writeSemanticInconsistencySafe()}
+         * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
          * to be perfectly aligned with the {@link #queryDomainDataProperty()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the restricting object property.
@@ -933,7 +933,7 @@ public interface DataPropertyExpression
         /**
          * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDomainDataProperty()})
          * based on {@link #domainMaxObjectRestriction(String, int, String)}.
-         * This method should be always synchronised with {@link #writeSemanticInconsistencySafe()}
+         * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
          * to be perfectly aligned with the {@link #queryDomainDataProperty()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the name of the restricting object property.
@@ -947,7 +947,7 @@ public interface DataPropertyExpression
         /**
          * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDomainDataProperty()}
          * based on {@link #domainMaxObjectRestriction(OWLObjectProperty, int, OWLClass)}.
-         * This method should be always synchronised with {@link #writeSemanticInconsistencySafe()}
+         * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
          * to be perfectly aligned with the {@link #queryDomainDataProperty()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the restricting object property.
@@ -961,7 +961,7 @@ public interface DataPropertyExpression
         /**
          * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDomainDataProperty()})
          * based on {@link #domainMaxObjectRestriction(String, int, String)}.
-         * This method should be always synchronised with {@link #writeSemanticInconsistencySafe()}
+         * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
          * to be perfectly aligned with the {@link #queryDomainDataProperty()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the name of the restricting object property.
@@ -975,7 +975,7 @@ public interface DataPropertyExpression
         /**
          * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDomainDataProperty()})
          * based on {@link #domainMaxObjectRestriction(OWLObjectProperty, int, OWLClass)}.
-         * This method should be always synchronised with {@link #writeSemanticInconsistencySafe()}
+         * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
          * to be perfectly aligned with the {@link #queryDomainDataProperty()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the restricting object property.
@@ -1016,7 +1016,7 @@ public interface DataPropertyExpression
         /**
          * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDomainDataProperty()})
          * based on {@link #domainExactObjectRestriction(String, int, String)}.
-         * This method should be always synchronised with {@link #writeSemanticInconsistencySafe()}
+         * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
          * to be perfectly aligned with the {@link #queryDomainDataProperty()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the name of the restricting object property.
@@ -1030,7 +1030,7 @@ public interface DataPropertyExpression
         /**
          * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDomainDataProperty()}
          * based on {@link #domainExactObjectRestriction(OWLObjectProperty, int, OWLClass)}.
-         * This method should be always synchronised with {@link #writeSemanticInconsistencySafe()}
+         * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
          * to be perfectly aligned with the {@link #queryDomainDataProperty()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the restricting object property.
@@ -1044,7 +1044,7 @@ public interface DataPropertyExpression
         /**
          * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDomainDataProperty()})
          * based on {@link #domainExactObjectRestriction(String, int, String)}.
-         * This method should be always synchronised with {@link #writeSemanticInconsistencySafe()}
+         * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
          * to be perfectly aligned with the {@link #queryDomainDataProperty()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the name of the restricting object property.
@@ -1058,7 +1058,7 @@ public interface DataPropertyExpression
         /**
          * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDomainDataProperty()})
          * based on {@link #domainExactObjectRestriction(OWLObjectProperty, int, OWLClass)}.
-         * This method should be always synchronised with {@link #writeSemanticInconsistencySafe()}
+         * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
          * to be perfectly aligned with the {@link #queryDomainDataProperty()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the restricting object property.
@@ -1276,7 +1276,7 @@ public interface DataPropertyExpression
         }
 
         @Override // see super class for documentation
-        default List<MappingIntent> writeSemantic(){
+        default List<MappingIntent> writeExpressionAxioms(){
             try {
                 EntitySet.SynchronisationIntent<SemanticRestriction> to = synchroniseDomainDataPropertyToSemantic();
                 List<OWLOntologyChange> changes = new ArrayList<>();
@@ -1295,7 +1295,7 @@ public interface DataPropertyExpression
     /**
      * The {@link DataProperty.Range} {@link Descriptor} implementation for {@link OWLDataProperty}.
      * <p>
-     *     It specify how to {@link #queryRangeDataProperty()} and {@link #writeSemantic()} for the
+     *     It specify how to {@link #queryRangeDataProperty()} and {@link #writeExpressionAxioms()} for the
      *     range restriction (i.e.: {@link SemanticRestriction}) of the one described 
      *     by this class (i.e.: {@link #getInstance()}).
      * </p>
@@ -1355,7 +1355,7 @@ public interface DataPropertyExpression
         }
 
         @Override // see super class for documentation
-        default List<MappingIntent> writeSemantic(){
+        default List<MappingIntent> writeExpressionAxioms(){
             try {
                 EntitySet.SynchronisationIntent<SemanticRestriction> to = synchroniseRangeDataPropertyToSemantic();
                 if ( to == null)

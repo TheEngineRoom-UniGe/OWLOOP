@@ -38,7 +38,7 @@ public class TestAlgorithm1 {
         d.addObject("isIn",pos,false); //singleton 'true' means this descriptor can only have a single element in its EntitySet.
         System.out.println(d);
 
-        d.writeSemantic();
+        d.writeExpressionAxioms();
     }
 
     private String getRobotPosition() {

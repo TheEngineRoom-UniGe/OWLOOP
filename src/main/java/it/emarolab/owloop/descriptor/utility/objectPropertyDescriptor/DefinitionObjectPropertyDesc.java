@@ -18,7 +18,7 @@ import java.util.List;
  *     <br>
  *     Its purpose is only to instanciate the {@link DescriptorEntitySet.ObjectLinks} for the
  *     respective descriptions, as well as call both interfaces in the
- *     {@link #readSemantic()} and {@link #writeSemantic()} methods.
+ *     {@link #readExpressionAxioms()} and {@link #writeExpressionAxioms()} methods.
  *     All its constructions are based on {@link ObjectPropertyDescriptorBase} in order
  *     to automatically manage an {@link ObjectInstance} ground.
  *     <br>
@@ -79,18 +79,18 @@ public class DefinitionObjectPropertyDesc
     // implementations for Axiom.descriptor
 
     @Override
-    public List<MappingIntent> readSemantic() {
-        List<MappingIntent> r = ObjectPropertyExpression.Disjoint.super.readSemantic();
-        r.addAll( ObjectPropertyExpression.Equivalent.super.readSemantic());
-        r.addAll( ObjectPropertyExpression.Inverse.super.readSemantic());
+    public List<MappingIntent> readExpressionAxioms() {
+        List<MappingIntent> r = ObjectPropertyExpression.Disjoint.super.readExpressionAxioms();
+        r.addAll( ObjectPropertyExpression.Equivalent.super.readExpressionAxioms());
+        r.addAll( ObjectPropertyExpression.Inverse.super.readExpressionAxioms());
         return r;
     }
 
     @Override
-    public List<MappingIntent> writeSemantic() {
-        List<MappingIntent> r = ObjectPropertyExpression.Disjoint.super.writeSemantic();
-        r.addAll( ObjectPropertyExpression.Equivalent.super.writeSemantic());
-        r.addAll( ObjectPropertyExpression.Inverse.super.writeSemantic());
+    public List<MappingIntent> writeExpressionAxioms() {
+        List<MappingIntent> r = ObjectPropertyExpression.Disjoint.super.writeExpressionAxioms();
+        r.addAll( ObjectPropertyExpression.Equivalent.super.writeExpressionAxioms());
+        r.addAll( ObjectPropertyExpression.Inverse.super.writeExpressionAxioms());
         return r;
     }
 

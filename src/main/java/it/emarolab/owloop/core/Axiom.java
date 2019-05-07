@@ -89,7 +89,7 @@ public interface Axiom {
         void setSingleton(boolean singleton);
 
         /**
-         * This method is used during {@link Descriptor#writeSemantic()} and finds
+         * This method is used during {@link Descriptor#writeExpressionAxioms()} and finds
          * the differences between the actual state of EntitySet and the one
          * queried to the OWL representation. Such changes represent the intent to
          * delete and add axioms to the OWL structure, to make it equal to this EntitySet.
@@ -104,7 +104,7 @@ public interface Axiom {
             return new SynchronisationIntent<>( this, queried);
         }
         /**
-         * This method is used during {@link Descriptor#readSemantic()} and finds
+         * This method is used during {@link Descriptor#readExpressionAxioms()} and finds
          * the differences between the actual state of EntitySet and the one
          * queried to the OWL representation. Such changes represents the intent to
          * delete and add elements to this EntitySet, to make it equal to the OWL representation.
@@ -123,8 +123,8 @@ public interface Axiom {
          * The synchronising intent during reading or writing of {@link EntitySet}.
          * <p>
          *     It describes the changes that should be performed in a {@link EntitySet}
-         *     set or in an OWL ontology during: {@link Descriptor#readSemantic()} or
-         *     {@link Descriptor#writeSemantic()}.
+         *     set or in an OWL ontology during: {@link Descriptor#readExpressionAxioms()} or
+         *     {@link Descriptor#writeExpressionAxioms()}.
          *     This implementation considers sets of {@link EntitySet} as a
          *     {@link HashSet} E.
          *     <br>
@@ -216,9 +216,9 @@ public interface Axiom {
 
             /**
              * Returns the element to add to the set in order to synchronise them.
-             * During {@link Descriptor#writeSemantic()} those are the axioms
+             * During {@link Descriptor#writeExpressionAxioms()} those are the axioms
              * to add in the OWL representation.
-             * During {@link Descriptor#readSemantic()} those are the axioms
+             * During {@link Descriptor#readExpressionAxioms()} those are the axioms
              * to add to the OWLOOP representation.
              * @return the element to add for synchronise the axioms sets.
              */
@@ -228,9 +228,9 @@ public interface Axiom {
 
             /**
              * Returns the element to remove to the set in order to synchronise them.
-             * During {@link Descriptor#writeSemantic()} those are the axioms
+             * During {@link Descriptor#writeExpressionAxioms()} those are the axioms
              * to remove from the OWL representation.
-             * During {@link Descriptor#readSemantic()} those are the axioms
+             * During {@link Descriptor#readExpressionAxioms()} those are the axioms
              * to remove from the OWLOOP representation.
              * @return the element to add for synchronise the axioms sets.
              */
@@ -240,7 +240,7 @@ public interface Axiom {
 
             /**
              * Returns the elements that are in both sets.
-             * During {@link Descriptor#writeSemantic()} and {@link Descriptor#readSemantic()},
+             * During {@link Descriptor#writeExpressionAxioms()} and {@link Descriptor#readExpressionAxioms()},
              * those elements can be not considered.
              * @return the elements in both axioms sets.
              */
@@ -407,8 +407,8 @@ public interface Axiom {
          * The synchronising intent used during {@link ExpressionEntity} reading or writing.
          * <p>
          *     It describes the changes that should be performed in a {@link ExpressionEntity}
-         *     set or in an OWL ontology during: {@link Descriptor#readSemantic()} or
-         *     {@link Descriptor#writeSemantic()}.
+         *     set or in an OWL ontology during: {@link Descriptor#readExpressionAxioms()} or
+         *     {@link Descriptor#writeExpressionAxioms()}.
          *     This implementation considers sets of {@link EntitySet} as
          *     {@code {@link HashSet} E}
          *     <br>
@@ -500,7 +500,7 @@ public interface Axiom {
          * Note that the elements of the returned list, may not have the {@link MappingIntent#getOntologyChanges()} field
          * initialised (i.e.: {@code Void}).
          */
-        List<MappingIntent> readSemantic();
+        List<MappingIntent> readExpressionAxioms();
 
         /**
          * This method is used to update the ontology with a specific {@link EntitySet} (or {@link ExpressionEntitySet})
@@ -511,45 +511,45 @@ public interface Axiom {
          * Note that the elements of the returned list, may have the {@link MappingIntent#getOntologyChanges()} field
          * initialised (i.e.: {@link org.semanticweb.owlapi.model.OWLOntologyChange}).
          */
-        List<MappingIntent> writeSemantic();
+        List<MappingIntent> writeExpressionAxioms();
 
         /**
-         * This method assure that after {@link #writeSemantic()} the internal state of the descriptor is consistent
+         * This method assure that after {@link #writeExpressionAxioms()} the internal state of the descriptor is consistent
          * with the OWL ontology.
          * The new entities written into the ontology may trigger the reasoner, thus inferring new
-         * elements. Therefore, this method, after calling {@link #writeSemantic()}, it also calls
-         * {@link #groundReason()} and then {@link #readSemantic()} in order to add the newly inferred elements into the
+         * elements. Therefore, this method, after calling {@link #writeExpressionAxioms()}, it also calls
+         * {@link #groundReason()} and then {@link #readExpressionAxioms()} in order to add the newly inferred elements into the
          * {@link EntitySet}.
          *
          * @param reason set to (false) to disable reasoning. This will add only asserted elements.
          *
-         * @return the changes made by the {@link #writeSemantic()} and {@link #readSemantic()} operations.
+         * @return the changes made by the {@link #writeExpressionAxioms()} and {@link #readExpressionAxioms()} operations.
          */
-        default List< MappingIntent> writeSemanticInconsistencySafe(boolean reason){
-            //r.addAll( readSemantic()); read also before????
-            List<MappingIntent> intent = writeSemantic();
+        default List< MappingIntent> writeExpressionAxiomsInconsistencySafe(boolean reason){
+            //r.addAll( readExpressionAxioms()); read also before????
+            List<MappingIntent> intent = writeExpressionAxioms();
             if(reason)
                 groundReason();
-            intent.addAll(readSemantic());
+            intent.addAll(readExpressionAxioms());
             return intent;
         }
 
         /**
-         * This method assure that after {@link #writeSemantic()} the internal state of the descriptor is consistent
+         * This method assure that after {@link #writeExpressionAxioms()} the internal state of the descriptor is consistent
          * with the OWL ontology.
          * The new entities written into the ontology may trigger the reasoner, thus inferring new
-         * elements. Therefore, this method, after calling {@link #writeSemantic()}, it also calls
-         * {@link #groundReason()} and then {@link #readSemantic()} in order to add the newly inferred elements into the
+         * elements. Therefore, this method, after calling {@link #writeExpressionAxioms()}, it also calls
+         * {@link #groundReason()} and then {@link #readExpressionAxioms()} in order to add the newly inferred elements into the
          * {@link EntitySet}.
          *
-         * @return the changes made by the {@link #writeSemantic()} and {@link #readSemantic()} operations.
+         * @return the changes made by the {@link #writeExpressionAxioms()} and {@link #readExpressionAxioms()} operations.
          */
-        default List< MappingIntent> writeSemanticInconsistencySafe(){return writeSemanticInconsistencySafe(false);}
+        default List< MappingIntent> writeExpressionAxiomsInconsistencySafe(){return writeExpressionAxiomsInconsistencySafe(false);}
 
         /**
          * It instantiates a lists of {@link MappingIntent} with the
          * parameters as {@link MappingIntent#getOntologyChanges()}.
-         * Its a helper method that can be used by the {@link #readSemantic()}, in order to record the results of
+         * Its a helper method that can be used by the {@link #readExpressionAxioms()}, in order to record the results of
          * {@link EntitySet#synchroniseFrom(EntitySet)}.
          *
          * @param sync the results of a call to {@link EntitySet#synchroniseFrom(EntitySet)}.
@@ -568,7 +568,7 @@ public interface Axiom {
          * It instantiates a lists of {@link MappingIntent} with the
          * parameters as {@link MappingIntent#getOntologyChanges()} and
          * (e.g.: {@link org.semanticweb.owlapi.model.OWLOntologyChange}).
-         * Its a helper that can be used by the implementation of the {@link #writeSemantic()},
+         * Its a helper that can be used by the implementation of the {@link #writeExpressionAxioms()},
          * in order to obtain the value to be returned, based on the results of
          * {@link EntitySet#synchroniseTo(EntitySet)} and aMOR manipulations.
          *
@@ -603,8 +603,8 @@ public interface Axiom {
      * The class to track synchronisation changes.
      * <p>
      *     This class is used to keep a track of the modification in the
-     *     descriptors or OWL structures. The modifications made during {@link Descriptor#readSemantic()}
-     *     or {@link Descriptor#writeSemantic()}.
+     *     descriptors or OWL structures. The modifications made during {@link Descriptor#readExpressionAxioms()}
+     *     or {@link Descriptor#writeExpressionAxioms()}.
      *     For instance it can be used to monitor the evolution of the system
      *     or role back the changes in case of inconsistency.
      *     The data in this container should be copied in order ot be
@@ -635,14 +635,14 @@ public interface Axiom {
          *
          * @param ground the ontology and instance used during synchronisation.
          * @param intent the differences between the OWL structure and internal state of the descriptor.
-         * @param writing {@code true} if this is generated during {@link Descriptor#writeSemantic()}.
-         *                {@code false} if this is generated during {@link Descriptor#readSemantic()}.
+         * @param writing {@code true} if this is generated during {@link Descriptor#writeExpressionAxioms()}.
+         *                {@code false} if this is generated during {@link Descriptor#readExpressionAxioms()}.
          */
         public MappingIntent(I ground, EntitySet.SynchronisationIntent intent, boolean writing){
             initialise( ground, intent, writing);
         }
         /**
-         * Initialise this object during {@link Descriptor#readSemantic()} without specifying any {@link #getOntologyChanges()}.
+         * Initialise this object during {@link Descriptor#readExpressionAxioms()} without specifying any {@link #getOntologyChanges()}.
          *
          * @param ground the ontology and instance used during synchronisation.
          * @param intent the differences between the OWL structure and internal state of the descriptor.
@@ -656,15 +656,15 @@ public interface Axiom {
          * @param ground the ontology and instance used during synchronisation.
          * @param intent the differences between the OWL structure and internal state of the descriptor.
          * @param changes the ontological changes applied during writing.
-         * @param writing {@code true} if this is generated during {@link Descriptor#writeSemantic()}.
-         *                {@code false} if this is generated during {@link Descriptor#readSemantic()}.
+         * @param writing {@code true} if this is generated during {@link Descriptor#writeExpressionAxioms()}.
+         *                {@code false} if this is generated during {@link Descriptor#readExpressionAxioms()}.
          */
         public MappingIntent(I ground, EntitySet.SynchronisationIntent intent, C changes, boolean writing) {
             initialise( ground, intent, writing);
             this.ontologyChanges = changes;
         }
         /**
-         * Initialise this object during {@link Descriptor#writeSemantic()}.
+         * Initialise this object during {@link Descriptor#writeExpressionAxioms()}.
          *
          * @param ground the ontology and instance used during synchronisation.
          * @param intent the differences between the OWL structure and internal state of the descriptor.
@@ -683,8 +683,8 @@ public interface Axiom {
 
         /**
          * Gives a flag ro know if the changes have been made during
-         * {@link Descriptor#writeSemantic()} or {@link Descriptor#readSemantic()}.
-         * @return {@code true} if it has been generated during {@link Descriptor#writeSemantic()}.
+         * {@link Descriptor#writeExpressionAxioms()} or {@link Descriptor#readExpressionAxioms()}.
+         * @return {@code true} if it has been generated during {@link Descriptor#writeExpressionAxioms()}.
          * {@code false} otherwise.
          */
         public boolean wasWriting() {
@@ -692,8 +692,8 @@ public interface Axiom {
         }
         /**
          * Gives a flag ro know if this changes have been made during
-         * {@link Descriptor#writeSemantic()} or {@link Descriptor#readSemantic()}.
-         * @return {@code true} if it has been generated during {@link Descriptor#readSemantic()}.
+         * {@link Descriptor#writeExpressionAxioms()} or {@link Descriptor#readExpressionAxioms()}.
+         * @return {@code true} if it has been generated during {@link Descriptor#readExpressionAxioms()}.
          * {@code false} otherwise.
          */
         public boolean wasReading() {

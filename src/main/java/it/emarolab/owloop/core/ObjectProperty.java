@@ -109,8 +109,8 @@ public interface ObjectProperty<O,J>
     interface Inverse<O,J,D extends ObjectProperty<O,J>>
             extends ObjectProperty<O,J>{
 
-        @Override // see documentation on Axiom.descriptor.readSemantic
-        default List<MappingIntent> readSemantic(){
+        @Override // see documentation on Axiom.descriptor.readExpressionAxioms
+        default List<MappingIntent> readExpressionAxioms(){
             try {
                 EntitySet.SynchronisationIntent<J> from = synchroniseInverseObjectPropertyFromSemantic();
                 if( from != null) {
@@ -137,7 +137,7 @@ public interface ObjectProperty<O,J>
             Set<D> out = new HashSet<>();
             for( J cl : getInverseObjectProperty()){
                 D built = getNewInverseObjectProperty( cl, getOntology());
-                built.readSemantic();
+                built.readExpressionAxioms();
                 out.add( built);
             }
             return out;
@@ -172,7 +172,7 @@ public interface ObjectProperty<O,J>
          * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryInverseObjectProperty()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getInverseObjectProperty()}. This should
-         * be done by {@link #writeSemantic()}.
+         * be done by {@link #writeExpressionAxioms()}.
          * @return the changes to be done to synchronise {@code this} structure with
          * the inverse properties of {@link #getInstance()}; to the OWL representation.
          */
@@ -189,7 +189,7 @@ public interface ObjectProperty<O,J>
          * It calls {@link ExpressionEntitySet#synchroniseFrom(EntitySet)} with {@link #queryInverseObjectProperty()}
          * as input parameter. This computes the changes to be performed into the {@link #getInverseObjectProperty()}
          * in order to synchronise it with respect to an OWL representation. This is
-         * be done by {@link #readSemantic()}.
+         * be done by {@link #readExpressionAxioms()}.
          * @return the changes to be done to synchronise the inverse object properties of {@link #getInstance()};
          * from an OWL representation to {@code this} {@link Descriptor}.
          */
@@ -214,8 +214,8 @@ public interface ObjectProperty<O,J>
     interface Disjoint<O,J,D extends ObjectProperty<O,J>>
             extends ObjectProperty<O,J>{
 
-        @Override // see documentation on Axiom.descriptor.readSemantic
-        default List<MappingIntent> readSemantic(){
+        @Override // see documentation on Axiom.descriptor.readExpressionAxioms
+        default List<MappingIntent> readExpressionAxioms(){
             try {
                 EntitySet.SynchronisationIntent<J> from = synchroniseDisjointObjectPropertyFromSemantic();
                 if ( from != null) {
@@ -242,7 +242,7 @@ public interface ObjectProperty<O,J>
             Set<D> out = new HashSet<>();
             for( J cl : getDisjointObjectProperty()){
                 D built = getNewDisjointObjectProperty( cl, getOntology());
-                built.readSemantic();
+                built.readExpressionAxioms();
                 out.add( built);
             }
             return out;
@@ -277,7 +277,7 @@ public interface ObjectProperty<O,J>
          * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryDisjointObjectProperty()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getDisjointObjectProperty()}. This should
-         * be done by {@link #writeSemantic()}.
+         * be done by {@link #writeExpressionAxioms()}.
          * @return the changes to be done to synchronise {@code this} structure with
          * the disjoint properties of {@link #getInstance()}; to the OWL representation.
          */
@@ -294,7 +294,7 @@ public interface ObjectProperty<O,J>
          * It calls {@link ExpressionEntitySet#synchroniseFrom(EntitySet)} with {@link #queryDisjointObjectProperty()}
          * as input parameter. This computes the changes to be performed into the {@link #getDisjointObjectProperty()}
          * in order to synchronise it with respect to an OWL representation. This is
-         * be done by {@link #readSemantic()}.
+         * be done by {@link #readExpressionAxioms()}.
          * @return the changes to be done to synchronise the disjoint object properties of {@link #getInstance()};
          * from an OWL representation to {@code this} {@link Descriptor}.
          */
@@ -319,8 +319,8 @@ public interface ObjectProperty<O,J>
     interface Equivalent<O,J,D extends ObjectProperty<O,J>>
             extends ObjectProperty<O,J>{
 
-        @Override // see documentation on Axiom.descriptor.readSemantic
-        default List<MappingIntent> readSemantic(){
+        @Override // see documentation on Axiom.descriptor.readExpressionAxioms
+        default List<MappingIntent> readExpressionAxioms(){
             try {
                 EntitySet.SynchronisationIntent<J> from = synchroniseEquivalentObjectPropertyFromSemantic();
                 if (from != null) {
@@ -347,7 +347,7 @@ public interface ObjectProperty<O,J>
             Set<D> out = new HashSet<>();
             for( J cl : getEquivalentObjectProperty()){
                 D built = getNewEquivalentObjectProperty( cl, getOntology());
-                built.readSemantic();
+                built.readExpressionAxioms();
                 out.add( built);
             }
             return out;
@@ -382,7 +382,7 @@ public interface ObjectProperty<O,J>
          * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryEquivalentObjectProperty()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getEquivalentObjectProperty()}. This should
-         * be done by {@link #writeSemantic()}.
+         * be done by {@link #writeExpressionAxioms()}.
          * @return the changes to be done to synchronise {@code this} structure with
          * the equivalent properties of {@link #getInstance()}; to the OWL representation.
          */
@@ -399,7 +399,7 @@ public interface ObjectProperty<O,J>
          * It calls {@link ExpressionEntitySet#synchroniseFrom(EntitySet)} with {@link #queryEquivalentObjectProperty()}
          * as input parameter. This computes the changes to be performed into the {@link #getEquivalentObjectProperty()}
          * in order to synchronise it with respect to an OWL representation. This is
-         * be done by {@link #readSemantic()}.
+         * be done by {@link #readExpressionAxioms()}.
          * @return the changes to be done to synchronise the equivalent object properties of {@link #getInstance()};
          * from an OWL representation to {@code this} {@link Descriptor}.
          */
@@ -424,8 +424,8 @@ public interface ObjectProperty<O,J>
     interface Sub<O,J,D extends ObjectProperty<O,J>>
             extends ObjectProperty<O,J>{
 
-        @Override // see documentation on Axiom.descriptor.readSemantic
-        default List<MappingIntent> readSemantic(){
+        @Override // see documentation on Axiom.descriptor.readExpressionAxioms
+        default List<MappingIntent> readExpressionAxioms(){
             try {
                 EntitySet.SynchronisationIntent<J> from = synchroniseSubObjectPropertyFromSemantic();
                 if (from != null) {
@@ -452,7 +452,7 @@ public interface ObjectProperty<O,J>
             Set<D> out = new HashSet<>();
             for( J cl : getSubObjectProperty()){
                 D built = getNewSubObjectProperty( cl, getOntology());
-                built.readSemantic();
+                built.readExpressionAxioms();
                 out.add( built);
             }
             return out;
@@ -487,7 +487,7 @@ public interface ObjectProperty<O,J>
          * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #querySubObjectProperty()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getSubObjectProperty()}. This should
-         * be done by {@link #writeSemantic()}.
+         * be done by {@link #writeExpressionAxioms()}.
          * @return the changes to be done to synchronise {@code this} structure with
          * the sub properties of {@link #getInstance()}; to the OWL representation.
          */
@@ -504,7 +504,7 @@ public interface ObjectProperty<O,J>
          * It calls {@link ExpressionEntitySet#synchroniseFrom(EntitySet)} with {@link #querySubObjectProperty()}
          * as input parameter. This computes the changes to be performed into the {@link #getSubObjectProperty()}
          * in order to synchronise it with respect to an OWL representation. This is
-         * be done by {@link #readSemantic()}.
+         * be done by {@link #readExpressionAxioms()}.
          * @return the changes to be done to synchronise the sub object properties of {@link #getInstance()};
          * from an OWL representation to {@code this} {@link Descriptor}.
          */
@@ -529,8 +529,8 @@ public interface ObjectProperty<O,J>
     interface Super<O,J,D extends ObjectProperty<O,J>>
             extends ObjectProperty<O,J>{
 
-        @Override // see documentation on Axiom.descriptor.readSemantic
-        default List<MappingIntent> readSemantic(){
+        @Override // see documentation on Axiom.descriptor.readExpressionAxioms
+        default List<MappingIntent> readExpressionAxioms(){
             try {
                 EntitySet.SynchronisationIntent<J> from = synchroniseSuperObjectPropertyFromSemantic();
                 if ( from != null) {
@@ -557,7 +557,7 @@ public interface ObjectProperty<O,J>
             Set<D> out = new HashSet<>();
             for( J cl : getSuperObjectProperty()){
                 D built = getNewSuperObjectProperty( cl, getOntology());
-                built.readSemantic();
+                built.readExpressionAxioms();
                 out.add( built);
             }
             return out;
@@ -592,7 +592,7 @@ public interface ObjectProperty<O,J>
          * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #querySuperObjectProperty()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getSuperObjectProperty()}. This should
-         * be done by {@link #writeSemantic()}.
+         * be done by {@link #writeExpressionAxioms()}.
          * @return the changes to be done to synchronise {@code this} structure with
          * the super properties of {@link #getInstance()}; to the OWL representation.
          */
@@ -609,7 +609,7 @@ public interface ObjectProperty<O,J>
          * It calls {@link ExpressionEntitySet#synchroniseFrom(EntitySet)} with {@link #querySuperObjectProperty()}
          * as input parameter. This computes the changes to be performed into the {@link #getSuperObjectProperty()}
          * in order to synchronise it with respect to an OWL representation. This is
-         * be done by {@link #readSemantic()}.
+         * be done by {@link #readExpressionAxioms()}.
          * @return the changes to be done to synchronise the super object properties of {@link #getInstance()};
          * from an OWL representation to {@code this} {@link Descriptor}.
          */
@@ -651,8 +651,8 @@ public interface ObjectProperty<O,J>
     interface Domain<O,J,Y>
             extends ObjectProperty<O,J>{
 
-        @Override // see documentation on Axiom.descriptor.readSemantic
-        default List<MappingIntent> readSemantic(){
+        @Override // see documentation on Axiom.descriptor.readExpressionAxioms
+        default List<MappingIntent> readExpressionAxioms(){
             try {
                 EntitySet.SynchronisationIntent<Y> from = synchroniseDomainObjectPropertyFromSemantic();
                 getDomainObjectProperty().addAll(from.getToAdd());
@@ -682,7 +682,7 @@ public interface ObjectProperty<O,J>
          * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryDomainObjectProperty()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getDomainObjectProperty()}. This should
-         * be done by {@link #writeSemantic()}.
+         * be done by {@link #writeExpressionAxioms()}.
          * @return the changes to be done to synchronise {@code this} structure with
          * the domain restriction of {@link #getInstance()}; to the OWL representation.
          */
@@ -699,7 +699,7 @@ public interface ObjectProperty<O,J>
          * It calls {@link ExpressionEntitySet#synchroniseFrom(EntitySet)} with {@link #queryDomainObjectProperty()}
          * as input parameter. This computes the changes to be performed into the {@link #getDomainObjectProperty()}
          * in order to synchronise it with respect to an OWL representation. This is
-         * be done by {@link #readSemantic()}.
+         * be done by {@link #readExpressionAxioms()}.
          * @return the changes to be done to synchronise the domain restrictions of {@link #getInstance()};
          * from an OWL representation to {@code this} {@link Descriptor}.
          */
@@ -742,7 +742,7 @@ public interface ObjectProperty<O,J>
             extends ObjectProperty<O,J>{
 
         @Override
-        default List<MappingIntent> readSemantic(){
+        default List<MappingIntent> readExpressionAxioms(){
             try {
                 EntitySet.SynchronisationIntent<Y> from = synchroniseRangeObjectPropertyFromSemantic();
                 if (from != null) {
@@ -774,7 +774,7 @@ public interface ObjectProperty<O,J>
          * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryRangeObjectProperty()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getRangeObjectProperty()}. This should
-         * be done by {@link #writeSemantic()}.
+         * be done by {@link #writeExpressionAxioms()}.
          * @return the changes to be done to synchronise {@code this} structure with
          * the range restriction of {@link #getInstance()}; to the OWL representation.
          */
@@ -791,7 +791,7 @@ public interface ObjectProperty<O,J>
          * It calls {@link ExpressionEntitySet#synchroniseFrom(EntitySet)} with {@link #queryRangeObjectProperty()}
          * as input parameter. This computes the changes to be performed into the {@link #getRangeObjectProperty()}
          * in order to synchronise it with respect to an OWL representation. This is
-         * be done by {@link #readSemantic()}.
+         * be done by {@link #readExpressionAxioms()}.
          * @return the changes to be done to synchronise the range restrictions of {@link #getInstance()};
          * from an OWL representation to {@code this} {@link Descriptor}.
          */

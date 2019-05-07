@@ -20,7 +20,7 @@ import java.util.List;
  *     <br>
  *     Its purpose is only to instanciate the {@link DescriptorEntitySet.Concepts} for the
  *     respective descriptions, as well as call the derived interfaces in the
- *     {@link #readSemantic()} and {@link #writeSemantic()} methods.
+ *     {@link #readExpressionAxioms()} and {@link #writeExpressionAxioms()} methods.
  *     All its constructions are based on {@link ConceptDescriptorBase} in order
  *     to automatically manage a grounding {@link ConceptInstance}.
  *     <br>
@@ -77,13 +77,13 @@ public class InstanceConceptDesc
     // implementations for Axiom.descriptor
 
     @Override
-    public List<MappingIntent> readSemantic() {
-        return Instance.super.readSemantic();
+    public List<MappingIntent> readExpressionAxioms() {
+        return Instance.super.readExpressionAxioms();
     }
 
     @Override
-    public List<MappingIntent> writeSemantic() {
-        return Instance.super.writeSemantic();
+    public List<MappingIntent> writeExpressionAxioms() {
+        return Instance.super.writeExpressionAxioms();
     }
 
     // implementations for ConceptExpression.Classifier

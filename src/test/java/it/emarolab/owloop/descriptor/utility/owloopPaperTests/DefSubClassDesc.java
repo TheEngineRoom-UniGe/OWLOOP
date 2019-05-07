@@ -23,16 +23,16 @@ public class DefSubClassDesc
 
     // implementations for Axiom.descriptor
     @Override
-    public List<MappingIntent> readSemantic() {
-        List<MappingIntent> r = Definition.super.readSemantic(); // call this before Sub or Super !!!
-        r.addAll( Sub.super.readSemantic());
+    public List<MappingIntent> readExpressionAxioms() {
+        List<MappingIntent> r = Definition.super.readExpressionAxioms(); // call this before Sub or Super !!!
+        r.addAll( Sub.super.readExpressionAxioms());
         return r;
     }
 
     @Override
-    public List<MappingIntent> writeSemantic() {
-        List<MappingIntent> r = Sub.super.writeSemantic();
-        r.addAll( Definition.super.writeSemantic()); // call this before Sub or Super !!!
+    public List<MappingIntent> writeExpressionAxioms() {
+        List<MappingIntent> r = Sub.super.writeExpressionAxioms();
+        r.addAll( Definition.super.writeExpressionAxioms()); // call this before Sub or Super !!!
         return r;
     }
 

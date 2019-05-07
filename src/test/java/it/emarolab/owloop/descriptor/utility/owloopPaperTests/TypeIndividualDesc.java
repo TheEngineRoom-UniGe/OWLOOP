@@ -23,14 +23,14 @@ public class TypeIndividualDesc
 
     // implementations for Axiom.descriptor
     @Override
-    public List<MappingIntent> readSemantic() {
-        List<MappingIntent> r = Type.super.readSemantic();
+    public List<MappingIntent> readExpressionAxioms() {
+        List<MappingIntent> r = Type.super.readExpressionAxioms();
         return r;
     }
 
     @Override
-    public List<MappingIntent> writeSemantic() {
-        List<MappingIntent> r = Type.super.writeSemantic();
+    public List<MappingIntent> writeExpressionAxioms() {
+        List<MappingIntent> r = Type.super.writeExpressionAxioms();
         return r;
     }
 

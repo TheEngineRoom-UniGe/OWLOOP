@@ -2,13 +2,9 @@ package it.emarolab.owloop.descriptor.utility.dataPropertyDescriptor;
 
 
 import it.emarolab.amor.owlInterface.OWLReferences;
-import it.emarolab.owloop.core.Axiom;
-import it.emarolab.owloop.core.DataProperty;
 import it.emarolab.owloop.descriptor.construction.descriptorBase.DataPropertyDescriptorBase;
-import it.emarolab.owloop.descriptor.construction.descriptorExpression.ConceptExpression;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.DataPropertyExpression;
 import it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorEntitySet;
-import it.emarolab.owloop.descriptor.utility.conceptDescriptor.FullConceptDesc;
 import org.semanticweb.owlapi.model.OWLDataProperty;
 
 import java.util.List;
@@ -79,29 +75,29 @@ public class FullDataPropertyDesc
         super(instanceName, ontoName, filePath, iriPath, bufferingChanges);
     }
 
-    // Implementation of readSemantic()
+    // Implementation of readExpressionAxioms()
 
     @Override
-    public List<MappingIntent> readSemantic() {
-        List<MappingIntent> r = DataPropertyExpression.Disjoint.super.readSemantic();
-        r.addAll( DataPropertyExpression.Equivalent.super.readSemantic());
-        r.addAll( DataPropertyExpression.Range.super.readSemantic());
-        r.addAll( DataPropertyExpression.Domain.super.readSemantic());
-        r.addAll( DataPropertyExpression.Sub.super.readSemantic());
-        r.addAll( DataPropertyExpression.Super.super.readSemantic());
+    public List<MappingIntent> readExpressionAxioms() {
+        List<MappingIntent> r = DataPropertyExpression.Disjoint.super.readExpressionAxioms();
+        r.addAll( DataPropertyExpression.Equivalent.super.readExpressionAxioms());
+        r.addAll( DataPropertyExpression.Range.super.readExpressionAxioms());
+        r.addAll( DataPropertyExpression.Domain.super.readExpressionAxioms());
+        r.addAll( DataPropertyExpression.Sub.super.readExpressionAxioms());
+        r.addAll( DataPropertyExpression.Super.super.readExpressionAxioms());
         return r;
     }
 
-    // Implementation of writeSemantic()
+    // Implementation of writeExpressionAxioms()
 
     @Override
-    public List<MappingIntent> writeSemantic() {
-        List<MappingIntent> r = DataPropertyExpression.Disjoint.super.writeSemantic();
-        r.addAll( DataPropertyExpression.Equivalent.super.writeSemantic());
-        r.addAll( DataPropertyExpression.Range.super.writeSemantic());
-        r.addAll( DataPropertyExpression.Domain.super.writeSemantic());
-        r.addAll( DataPropertyExpression.Sub.super.writeSemantic());
-        r.addAll( DataPropertyExpression.Super.super.writeSemantic());
+    public List<MappingIntent> writeExpressionAxioms() {
+        List<MappingIntent> r = DataPropertyExpression.Disjoint.super.writeExpressionAxioms();
+        r.addAll( DataPropertyExpression.Equivalent.super.writeExpressionAxioms());
+        r.addAll( DataPropertyExpression.Range.super.writeExpressionAxioms());
+        r.addAll( DataPropertyExpression.Domain.super.writeExpressionAxioms());
+        r.addAll( DataPropertyExpression.Sub.super.writeExpressionAxioms());
+        r.addAll( DataPropertyExpression.Super.super.writeExpressionAxioms());
         return r;
     }
 

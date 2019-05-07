@@ -31,107 +31,107 @@ public class MORFullConceptTest {
 
     @Test
     public void subTest() throws Exception{
-        concept.readSemantic();
+        concept.readExpressionAxioms();
         assertSemantic();
         concept.addSubConcept( "SubClass");
-        concept.readSemantic();
+        concept.readExpressionAxioms();
         assertSemantic();
-        concept.writeSemantic();
+        concept.writeExpressionAxioms();
         assertSemantic();
         concept.addSubConcept( "SubClass");
-        concept.writeSemantic();
+        concept.writeExpressionAxioms();
         assertSemantic();
         concept.removeSubConcept( "SubClass");
-        concept.readSemantic();
+        concept.readExpressionAxioms();
         assertSemantic();
         concept.removeSubConcept( "SubClass");
-        concept.writeSemantic();
+        concept.writeExpressionAxioms();
         assertSemantic();
 
         concept.addSubConcept( "Plane");
-        concept.writeSemantic();
+        concept.writeExpressionAxioms();
         assertSemantic();
         System.out.println( "described conceptDescriptor, sub test: " + concept.buildSubConcept());
     }
 
     @Test
     public void superTest() throws Exception{
-        concept.readSemantic();
+        concept.readExpressionAxioms();
         assertSemantic();
         concept.addSuperConcept( "SuperClass");
-        concept.readSemantic();
+        concept.readExpressionAxioms();
         assertSemantic();
-        concept.writeSemantic();
+        concept.writeExpressionAxioms();
         assertSemantic();
         concept.addSuperConcept( "SuperClass");
         // super class affect class definition during reasoning
-        concept.writeSemanticInconsistencySafe();
+        concept.writeExpressionAxiomsInconsistencySafe();
         assertSemantic();
         concept.removeSuperConcept( "SuperClass");
-        concept.readSemantic();
+        concept.readExpressionAxioms();
         assertSemantic();
         concept.removeSuperConcept( "SuperClass");
         // super class affect class definition during reasoning
-        concept.writeSemanticInconsistencySafe();
+        concept.writeExpressionAxiomsInconsistencySafe();
         assertSemantic();
 
         concept.addSuperConcept( "Object");
         // super class affect class definition during reasoning
-        concept.writeSemanticInconsistencySafe();
+        concept.writeExpressionAxiomsInconsistencySafe();
         assertSemantic();
         System.out.println( "described conceptDescriptor, super test: " + concept.buildSuperConcept());
     }
 
     @Test
     public void disjointTest() throws Exception{
-        concept.readSemantic();
+        concept.readExpressionAxioms();
         assertSemantic();
         concept.addDisjointConcept( "DisjointClass");
-        concept.readSemantic();
+        concept.readExpressionAxioms();
         assertSemantic();
-        concept.writeSemantic();
+        concept.writeExpressionAxioms();
         assertSemantic();
         concept.addDisjointConcept( "DisjointClass");
-        concept.writeSemanticInconsistencySafe();
+        concept.writeExpressionAxiomsInconsistencySafe();
         assertSemantic();
         concept.removeDisjointConcept( "DisjointClass");
-        concept.readSemantic();
+        concept.readExpressionAxioms();
         assertSemantic();
         concept.removeDisjointConcept( "DisjointClass");
-        concept.writeSemanticInconsistencySafe();
+        concept.writeExpressionAxiomsInconsistencySafe();
         assertSemantic();
 
         concept.addDisjointConcept( "Scene");
         // disjoint class affect sub classes during reasoning
-        concept.writeSemantic();
+        concept.writeExpressionAxioms();
         assertSemantic();
         System.out.println( "described conceptDescriptor, disjoint test: " + concept.buildDisjointConcept());
     }
 
     @Test
     public void equivalentTest() throws Exception{
-        concept.readSemantic();
+        concept.readExpressionAxioms();
         assertSemantic();
         concept.addEquivalentConcept( "EquivalentClass");
-        concept.readSemantic();
+        concept.readExpressionAxioms();
         assertSemantic();
-        concept.writeSemantic();
+        concept.writeExpressionAxioms();
         assertSemantic();
         concept.addEquivalentConcept( "EquivalentClass");
         // equivalent class affect sub classes during reasoning
-        concept.writeSemantic();
+        concept.writeExpressionAxioms();
         assertSemantic();
         concept.removeEquivalentConcept( "EquivalentClass");
-        concept.readSemantic();
+        concept.readExpressionAxioms();
         assertSemantic();
         concept.removeEquivalentConcept( "EquivalentClass");
         // equivalent class affect sub classes during reasoning
-        concept.writeSemantic();
+        concept.writeExpressionAxioms();
         assertSemantic();
 
         concept.addEquivalentConcept( "EquivalentClass");
         // equivalent class affect sub classes during reasoning
-        concept.writeSemanticInconsistencySafe();
+        concept.writeExpressionAxiomsInconsistencySafe();
         assertSemantic();
         System.out.println( "described conceptDescriptor, equivalent test: " + concept.buildEquivalentConcept());
     }
@@ -141,101 +141,101 @@ public class MORFullConceptTest {
 
         concept.setInstance( "ToRestrict");
 
-        concept.readSemantic();
+        concept.readExpressionAxioms();
         assertSemantic();
         concept.addClassRestriction( "ClassRestriction");
-        concept.readSemantic();
+        concept.readExpressionAxioms();
         assertSemantic();
-        concept.writeSemanticInconsistencySafe(); // the reasoner considers also all super class as equivalent classes
-        assertSemantic();
-        concept.addClassRestriction( "ClassRestriction");
-        concept.writeSemanticInconsistencySafe(); // the reasoner considers also all super class as equivalent classes
+        concept.writeExpressionAxiomsInconsistencySafe(); // the reasoner considers also all super class as equivalent classes
         assertSemantic();
         concept.addClassRestriction( "ClassRestriction");
-        concept.readSemantic();
+        concept.writeExpressionAxiomsInconsistencySafe(); // the reasoner considers also all super class as equivalent classes
         assertSemantic();
         concept.addClassRestriction( "ClassRestriction");
-        concept.writeSemanticInconsistencySafe(); // the reasoner considers also all super class as equivalent classes
+        concept.readExpressionAxioms();
+        assertSemantic();
+        concept.addClassRestriction( "ClassRestriction");
+        concept.writeExpressionAxiomsInconsistencySafe(); // the reasoner considers also all super class as equivalent classes
         assertSemantic();
 
         concept.addClassRestriction( "ClassRestriction");
-        concept.writeSemanticInconsistencySafe(); // the reasoner considers also all super class as equivalent classes
+        concept.writeExpressionAxiomsInconsistencySafe(); // the reasoner considers also all super class as equivalent classes
         assertSemantic();
 
 
 
-        concept.readSemantic();
+        concept.readExpressionAxioms();
         assertSemantic();
         concept.addExactDataRestriction( "hasRestrictionProperty", 3, Long.class);
-        concept.readSemantic();
+        concept.readExpressionAxioms();
         assertSemantic();
-        concept.writeSemanticInconsistencySafe(); // the reasoner considers also all super class as equivalent classes
-        assertSemantic();
-        concept.addExactDataRestriction( "hasRestrictionProperty", 3, Long.class);
-        concept.writeSemanticInconsistencySafe(); // the reasoner considers also all super class as equivalent classes
+        concept.writeExpressionAxiomsInconsistencySafe(); // the reasoner considers also all super class as equivalent classes
         assertSemantic();
         concept.addExactDataRestriction( "hasRestrictionProperty", 3, Long.class);
-        concept.readSemantic();
+        concept.writeExpressionAxiomsInconsistencySafe(); // the reasoner considers also all super class as equivalent classes
         assertSemantic();
         concept.addExactDataRestriction( "hasRestrictionProperty", 3, Long.class);
-        concept.writeSemanticInconsistencySafe(); // the reasoner considers also all super class as equivalent classes
+        concept.readExpressionAxioms();
+        assertSemantic();
+        concept.addExactDataRestriction( "hasRestrictionProperty", 3, Long.class);
+        concept.writeExpressionAxiomsInconsistencySafe(); // the reasoner considers also all super class as equivalent classes
         concept.removeExactDataRestriction( "hasRestrictionProperty", 3, Long.class);
-        concept.writeSemanticInconsistencySafe(); // the reasoner considers also all super class as equivalent classes
+        concept.writeExpressionAxiomsInconsistencySafe(); // the reasoner considers also all super class as equivalent classes
         assertSemantic();
 
         concept.addExactDataRestriction( "hasRestrictionPropertyTest", 3, Double.class);
-        concept.writeSemanticInconsistencySafe(); // the reasoner considers also all super class as equivalent classes
+        concept.writeExpressionAxiomsInconsistencySafe(); // the reasoner considers also all super class as equivalent classes
         assertSemantic();
 
 
 
-        concept.readSemantic();
+        concept.readExpressionAxioms();
         assertSemantic();
         concept.addMinObjectRestriction( "hasRestrictionProperty", 3, "Restricting");
-        concept.readSemantic();
+        concept.readExpressionAxioms();
         assertSemantic();
-        concept.writeSemanticInconsistencySafe(); // the reasoner considers also all super class as equivalent classes
-        assertSemantic();
-        concept.addMinObjectRestriction( "hasRestrictionProperty", 3, "Restricting");
-        concept.addMinObjectRestriction( "hasRestrictionProperty", 3, "Restricting");
-        concept.writeSemanticInconsistencySafe(); // the reasoner always infers here
+        concept.writeExpressionAxiomsInconsistencySafe(); // the reasoner considers also all super class as equivalent classes
         assertSemantic();
         concept.addMinObjectRestriction( "hasRestrictionProperty", 3, "Restricting");
-        concept.readSemantic();
+        concept.addMinObjectRestriction( "hasRestrictionProperty", 3, "Restricting");
+        concept.writeExpressionAxiomsInconsistencySafe(); // the reasoner always infers here
         assertSemantic();
         concept.addMinObjectRestriction( "hasRestrictionProperty", 3, "Restricting");
-        concept.writeSemanticInconsistencySafe(); // the reasoner always infers here
+        concept.readExpressionAxioms();
+        assertSemantic();
+        concept.addMinObjectRestriction( "hasRestrictionProperty", 3, "Restricting");
+        concept.writeExpressionAxiomsInconsistencySafe(); // the reasoner always infers here
         assertSemantic();
 
         concept.addMaxObjectRestriction( "hasRestrictionPropertyTest", 2, "Restricting");
-        concept.writeSemanticInconsistencySafe(); // the reasoner always infers here
+        concept.writeExpressionAxiomsInconsistencySafe(); // the reasoner always infers here
         assertSemantic();
         System.out.println( "described conceptDescriptor, definition test: " + concept.getDefinitionConcept());
     }
 
     @Test
     public void classifyTest() throws Exception{
-        concept.readSemantic();
+        concept.readExpressionAxioms();
         assertSemantic();
         concept.addIndividualClassified( "Individual-A");
-        concept.readSemantic();
+        concept.readExpressionAxioms();
         assertSemantic();
-        concept.writeSemantic();
+        concept.writeExpressionAxioms();
         assertSemantic();
         concept.addIndividualClassified( "Individual-A");
         // equivalent class affect sub classes during reasoning
-        concept.writeSemantic();
+        concept.writeExpressionAxioms();
         assertSemantic();
         concept.removeIndividualClassified( "Individual-A");
-        concept.readSemantic();
+        concept.readExpressionAxioms();
         assertSemantic();
         concept.removeIndividualClassified( "Individual-A");
         // equivalent class affect sub classes during reasoning
-        concept.writeSemantic();
+        concept.writeExpressionAxioms();
         assertSemantic();
 
         concept.setInstance( "Parameter");
-        concept.readSemantic();
+        concept.readExpressionAxioms();
         System.out.println( "described conceptDescriptor, equivalent test: " + concept.buildIndividualInstance());
 
     }

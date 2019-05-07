@@ -5,11 +5,9 @@ import it.emarolab.amor.owlInterface.OWLReferencesInterface;
 import it.emarolab.amor.owlInterface.SemanticRestriction;
 import it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.utility.conceptDescriptor.FullConceptDesc;
-import it.emarolab.owloop.descriptor.utility.individualDescriptor.FullIndividualDesc;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
-import org.semanticweb.owlapi.model.OWLLiteral;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 
 import java.util.Set;
@@ -55,11 +53,11 @@ public class TestAlgorithm2 {
         // Assuming that knowledge of the Robot's position is saved in the ontology after running Algo.1
         // Get knowledge form the ontology
         d1.addObject("isIn",true);                                        // To read knowledge specific to the property "isIn"
-        d1.readSemantic();                                                   // READ
+        d1.readExpressionAxioms();                                                   // READ
         OWLNamedIndividual robotPlace = d1.getObject("isIn");    // getObject("isIn")
 
         TypeIndividualDesc d2 = new TypeIndividualDesc(robotPlace, ontoref); // Initialize a DESC with ground as Corridor1
-        d2.readSemantic();                                                   // READ
+        d2.readExpressionAxioms();                                                   // READ
 
         System.out.println(d2);
         Set<DefSubClassDesc> setOneD = d2.buildTypeIndividual();                   // BUILD Type of an Individual --> CORRIDOR,LOCATION,Top
@@ -88,19 +86,19 @@ public class TestAlgorithm2 {
 }
 
 /*
-//      Regarding the use of readSemantic()
+//      Regarding the use of readExpressionAxioms()
 
         d1.addObject( "hasProp1", "X");
         d1.addObject( "hasProp2", "X");
-        d1.writeSemantic();
+        d1.writeExpressionAxioms();
 
         FullIndividualDesc d1 = new FullIndividualDesc("Robot1", ontoref);
-        d1.readSemantic();          //at this point the descriptor reads all knowledge
+        d1.readExpressionAxioms();          //at this point the descriptor reads all knowledge
         System.out.println( " 11 " + d1);
 
         FullIndividualDesc d2 = new FullIndividualDesc("Robot1", ontoref);
         d2.addObject( "hasProp1");
         d2.addObject( "hasProp2");
-        d2.readSemantic();          //at this point the descriptor reads only particular knowledge
+        d2.readExpressionAxioms();          //at this point the descriptor reads only particular knowledge
         System.out.println( " 22 " + d2);
 */

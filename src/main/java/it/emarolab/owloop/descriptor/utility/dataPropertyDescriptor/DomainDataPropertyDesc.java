@@ -18,7 +18,7 @@ import java.util.List;
  *     <br>
  *     Its purpose is only to instanciate the {@link DescriptorEntitySet.Restrictions} for the
  *     respective descriptions, as well as call both interfaces in the
- *     {@link #readSemantic()} and {@link #writeSemantic()} methods.
+ *     {@link #readExpressionAxioms()} and {@link #writeExpressionAxioms()} methods.
  *     All its constructions are based on {@link DataPropertyDescriptorBase} in order
  *     to automatically manage a grounding {@link DataInstance}.
  *     <br>
@@ -76,16 +76,16 @@ public class DomainDataPropertyDesc
     // implementations for Axiom.descriptor
 
     @Override
-    public List<MappingIntent> readSemantic() {
-        List<MappingIntent> r = DataPropertyExpression.Domain.super.readSemantic();
-        r.addAll( DataPropertyExpression.Range.super.readSemantic());
+    public List<MappingIntent> readExpressionAxioms() {
+        List<MappingIntent> r = DataPropertyExpression.Domain.super.readExpressionAxioms();
+        r.addAll( DataPropertyExpression.Range.super.readExpressionAxioms());
         return r;
     }
 
     @Override
-    public List<MappingIntent> writeSemantic() {
-        List<MappingIntent> r = DataPropertyExpression.Range.super.writeSemantic();
-        r.addAll( DataPropertyExpression.Domain.super.writeSemantic());
+    public List<MappingIntent> writeExpressionAxioms() {
+        List<MappingIntent> r = DataPropertyExpression.Range.super.writeExpressionAxioms();
+        r.addAll( DataPropertyExpression.Domain.super.writeExpressionAxioms());
         return r;
     }
 

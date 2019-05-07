@@ -44,8 +44,8 @@ public interface Concept<O,J>
     interface Equivalent<O,J,D extends Concept<O,J>>
             extends Concept<O,J> {
 
-        @Override  // see documentation on Axiom.descriptor.readSemantic
-        default List<MappingIntent> readSemantic(){
+        @Override  // see documentation on Axiom.descriptor.readExpressionAxioms
+        default List<MappingIntent> readExpressionAxioms(){
             try {
                 EntitySet.SynchronisationIntent<J> from = synchroniseEquivalentConceptFromSemantic();
                 if ( from != null) {
@@ -72,7 +72,7 @@ public interface Concept<O,J>
             Set<D> out = new HashSet<>();
             for( J cl : getEquivalentConcept()){
                 D built = getNewEquivalentConcept( cl, getOntology());
-                built.readSemantic();
+                built.readExpressionAxioms();
                 out.add( built);
             }
             return out;
@@ -107,7 +107,7 @@ public interface Concept<O,J>
          * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryEquivalentConcept()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getEquivalentConcept()}. This should
-         * be done by {@link #writeSemantic()}.
+         * be done by {@link #writeExpressionAxioms()}.
          * @return the changes to be done to synchronise {@code this} structure with
          * the equivalent classes of an OWL class.
          */
@@ -124,7 +124,7 @@ public interface Concept<O,J>
          * It calls {@link EntitySet#synchroniseFrom(EntitySet)} with {@link #queryEquivalentConcept()}
          * as input parameter. This computes the changes to be performed into the {@link #getEquivalentConcept()}
          * in order to synchronise it with respect to an OWL representation. This is
-         * be done by {@link #readSemantic()}.
+         * be done by {@link #readExpressionAxioms()}.
          * @return the changes to be done to synchronise the equivalent classes of an OWL class
          * with {@code this} structure.
          */
@@ -149,8 +149,8 @@ public interface Concept<O,J>
     interface Disjoint<O,J,D extends Concept<O,J>>
             extends Concept<O,J> {
 
-        @Override // see documentation on Axiom.descriptor.readSemantic
-        default List<MappingIntent> readSemantic(){
+        @Override // see documentation on Axiom.descriptor.readExpressionAxioms
+        default List<MappingIntent> readExpressionAxioms(){
             try {
                 EntitySet.SynchronisationIntent<J> from = synchroniseDisjointConceptFromSemantic();
                 if ( from != null) {
@@ -178,7 +178,7 @@ public interface Concept<O,J>
             Set<D> out = new HashSet<>();
             for( J cl : getDisjointConcept()){
                 D built = getNewDisjointConcept( cl, getOntology());
-                built.readSemantic();
+                built.readExpressionAxioms();
                 out.add( built);
             }
             return out;
@@ -213,7 +213,7 @@ public interface Concept<O,J>
          * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryDisjointConcept()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getDisjointConcept()}. This should
-         * be done by {@link #writeSemantic()}.
+         * be done by {@link #writeExpressionAxioms()}.
          * @return the changes to be done to synchronise {@code this} structure with
          * the disjointed classes of an OWL class.
          */
@@ -230,7 +230,7 @@ public interface Concept<O,J>
          * It calls {@link EntitySet#synchroniseFrom(EntitySet)} with {@link #queryDisjointConcept()}
          * as input parameter. This computes the changes to be performed into the {@link #getDisjointConcept()}
          * in order to synchronise it with respect to an OWL representation. This is
-         * be done by {@link #readSemantic()}.
+         * be done by {@link #readExpressionAxioms()}.
          * @return the changes to be done to synchronise the disjointed classes of an OWL class
          * with {@code this} structure.
          */
@@ -255,8 +255,8 @@ public interface Concept<O,J>
     interface Sub<O,J,D extends Concept<O,J>>
             extends Concept<O,J> {
 
-        @Override // see documentation on Axiom.descriptor.readSemantic
-        default List<MappingIntent> readSemantic(){
+        @Override // see documentation on Axiom.descriptor.readExpressionAxioms
+        default List<MappingIntent> readExpressionAxioms(){
             try {
                 EntitySet.SynchronisationIntent<J> from = synchroniseSubConceptFromSemantic();
                 if ( from != null) {
@@ -283,7 +283,7 @@ public interface Concept<O,J>
             Set<D> out = new HashSet<>();
             for( J cl : getSubConcept()){
                 D built = getNewSubConcept( cl, getOntology());
-                built.readSemantic();
+                built.readExpressionAxioms();
                 out.add( built);
             }
             return out;
@@ -318,7 +318,7 @@ public interface Concept<O,J>
          * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #querySubConcept()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getSubConcept()}. This should
-         * be done by {@link #writeSemantic()}.
+         * be done by {@link #writeExpressionAxioms()}.
          * @return the changes to be done to synchronise {@code this} structure with
          * the sub classes of an OWL class.
          */
@@ -335,7 +335,7 @@ public interface Concept<O,J>
          * It calls {@link EntitySet#synchroniseFrom(EntitySet)} with {@link #querySubConcept()}
          * as input parameter. This computes the changes to be performed into the {@link #getSubConcept()}
          * in order to synchronise it with respect to an OWL representation. This is
-         * be done by {@link #readSemantic()}.
+         * be done by {@link #readExpressionAxioms()}.
          * @return the changes to be done to synchronise the sub classes of an OWL class
          * with {@code this} structure.
          */
@@ -360,8 +360,8 @@ public interface Concept<O,J>
     interface Super<O,J,D extends Concept<O,J>>
             extends Concept<O,J> {
 
-        @Override // see documentation on Axiom.descriptor.readSemantic
-        default List<MappingIntent> readSemantic(){
+        @Override // see documentation on Axiom.descriptor.readExpressionAxioms
+        default List<MappingIntent> readExpressionAxioms(){
             try {
                 EntitySet.SynchronisationIntent<J> from = synchroniseSuperConceptFromSemantic();
                 if ( from != null) {
@@ -388,7 +388,7 @@ public interface Concept<O,J>
             Set<D> out = new HashSet<>();
             for( J cl : getSuperConcept()){
                 D built = getNewSuperConcept( cl, getOntology());
-                built.readSemantic();
+                built.readExpressionAxioms();
                 out.add( built);
             }
             return out;
@@ -423,7 +423,7 @@ public interface Concept<O,J>
          * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #querySuperConcept()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getSuperConcept()}. This should
-         * be done by {@link #writeSemantic()}.
+         * be done by {@link #writeExpressionAxioms()}.
          * @return the changes to be done to synchronise {@code this} structure with
          * the super classes of an OWL class.
          */
@@ -440,7 +440,7 @@ public interface Concept<O,J>
          * It calls {@link EntitySet#synchroniseFrom(EntitySet)} with {@link #querySuperConcept()}
          * as input parameter. This computes the changes to be performed into the {@link #getSuperConcept()}
          * in order to synchronise it with respect to an OWL representation. This is
-         * be done by {@link #readSemantic()}.
+         * be done by {@link #readExpressionAxioms()}.
          * @return the changes to be done to synchronise the super classes of an OWL class
          * with {@code this} structure.
          */
@@ -466,8 +466,8 @@ public interface Concept<O,J>
     interface Instance<O,J,Y,D extends Individual<O,Y>>
             extends Concept<O,J> {
 
-        @Override // see documentation on Axiom.descriptor.readSemantic
-        default List<MappingIntent> readSemantic(){
+        @Override // see documentation on Axiom.descriptor.readExpressionAxioms
+        default List<MappingIntent> readExpressionAxioms(){
             try {
                 EntitySet.SynchronisationIntent<Y> from = synchroniseIndividualInstanceFromSemantic();
                 if ( from != null) {
@@ -494,7 +494,7 @@ public interface Concept<O,J>
             Set<D> out = new HashSet<>();
             for( Y cl : getIndividualInstance()){
                 D built = getNewIndividualInstance( cl, getOntology());
-                built.readSemantic();
+                built.readExpressionAxioms();
                 out.add( built);
             }
             return out;
@@ -529,7 +529,7 @@ public interface Concept<O,J>
          * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryIndividualInstance()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getIndividualInstance()}. This should
-         * be done by {@link #writeSemantic()}.
+         * be done by {@link #writeExpressionAxioms()}.
          * @return the changes to be done to synchronise {@code this} structure with
          * the individualDescriptor classified in an OWL class.
          */
@@ -546,7 +546,7 @@ public interface Concept<O,J>
          * It calls {@link EntitySet#synchroniseFrom(EntitySet)} with {@link #queryIndividualInstance()}
          * as input parameter. This computes the changes to be performed into the {@link #getIndividualInstance()}
          * in order to synchronise it with respect to an OWL representation. This is
-         * be done by {@link #readSemantic()}.
+         * be done by {@link #readExpressionAxioms()}.
          * @return the changes to be done to synchronise the individualDescriptor of an OWL class
          * with {@code this} structure.
          */
@@ -586,8 +586,8 @@ public interface Concept<O,J>
     interface Definition<O,J,Y>
             extends Concept<O,J> {
 
-        @Override // see documentation on Axiom.descriptor.readSemantic
-        default List<MappingIntent> readSemantic(){
+        @Override // see documentation on Axiom.descriptor.readExpressionAxioms
+        default List<MappingIntent> readExpressionAxioms(){
             try {
                 EntitySet.SynchronisationIntent<Y> from = synchroniseDefinitionConceptFromSemantic();
                 if ( from != null) {
@@ -619,7 +619,7 @@ public interface Concept<O,J>
          * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryDefinitionConcept()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getDefinitionConcept()}. This should
-         * be done by {@link #writeSemantic()}.
+         * be done by {@link #writeExpressionAxioms()}.
          * @return the changes to be done to synchronise {@code this} structure with
          * the class definition of an OWL class.
          */
@@ -636,7 +636,7 @@ public interface Concept<O,J>
          * It calls {@link EntitySet#synchroniseFrom(EntitySet)} with {@link #queryDefinitionConcept()}
          * as input parameter. This computes the changes to be performed into the {@link #getDefinitionConcept()}
          * in order to synchronise it with respect to an OWL representation. This is
-         * be done by {@link #readSemantic()}.
+         * be done by {@link #readExpressionAxioms()}.
          * @return the changes to be done to synchronise the class definition of an OWL class
          * with {@code this} structure.
          */

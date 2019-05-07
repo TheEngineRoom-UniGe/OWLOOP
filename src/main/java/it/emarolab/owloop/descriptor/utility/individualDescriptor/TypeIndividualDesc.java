@@ -20,7 +20,7 @@ import java.util.List;
  *     <br>
  *     Its purpose is only to instanciate the {@link DescriptorEntitySet.Concepts} for the
  *     respective descriptions, as well as call the derived interfaces in the
- *     {@link #readSemantic()} and {@link #writeSemantic()} methods.
+ *     {@link #readExpressionAxioms()} and {@link #writeExpressionAxioms()} methods.
  *     From an OOP prospective it returns the classified types as instances
  *     of {@link HierarchicalConceptDesc}s.
  *     All its constructions are based on {@link IndividualDescriptorBase} in order
@@ -77,13 +77,13 @@ public class TypeIndividualDesc
     // implementations for Axiom.descriptor
 
     @Override
-    public List<MappingIntent> readSemantic() {
-        return IndividualExpression.Type.super.readSemantic();
+    public List<MappingIntent> readExpressionAxioms() {
+        return IndividualExpression.Type.super.readExpressionAxioms();
     }
 
     @Override
-    public List<MappingIntent> writeSemantic() {
-        return IndividualExpression.Type.super.writeSemantic();
+    public List<MappingIntent> writeExpressionAxioms() {
+        return IndividualExpression.Type.super.writeExpressionAxioms();
     }
 
 

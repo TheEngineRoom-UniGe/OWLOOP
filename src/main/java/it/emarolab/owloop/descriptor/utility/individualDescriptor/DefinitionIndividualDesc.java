@@ -19,7 +19,7 @@ import java.util.List;
  *     <br>
  *     Its purpose is only to instanciate the {@link DescriptorEntitySet.Individuals} for the
  *     respective descriptions, as well as call both interfaces in the
- *     {@link #readSemantic()} and {@link #writeSemantic()} methods.
+ *     {@link #readExpressionAxioms()} and {@link #writeExpressionAxioms()} methods.
  *     All its constructions are based on {@link IndividualDescriptorBase} in order
  *     to automatically manage a grounding {@link IndividualInstance}.
  *     <br>
@@ -77,16 +77,16 @@ public class DefinitionIndividualDesc
     // implementations for Axiom.descriptor
 
     @Override
-    public List<MappingIntent> readSemantic() {
-        List<MappingIntent> r = IndividualExpression.Equivalent.super.readSemantic();
-        r.addAll( IndividualExpression.Disjoint.super.readSemantic());
+    public List<MappingIntent> readExpressionAxioms() {
+        List<MappingIntent> r = IndividualExpression.Equivalent.super.readExpressionAxioms();
+        r.addAll( IndividualExpression.Disjoint.super.readExpressionAxioms());
         return r;
     }
 
     @Override
-    public List<MappingIntent> writeSemantic() {
-        List<MappingIntent> r = IndividualExpression.Equivalent.super.writeSemantic();
-        r.addAll( IndividualExpression.Disjoint.super.writeSemantic());
+    public List<MappingIntent> writeExpressionAxioms() {
+        List<MappingIntent> r = IndividualExpression.Equivalent.super.writeExpressionAxioms();
+        r.addAll( IndividualExpression.Disjoint.super.writeExpressionAxioms());
         return r;
     }
 

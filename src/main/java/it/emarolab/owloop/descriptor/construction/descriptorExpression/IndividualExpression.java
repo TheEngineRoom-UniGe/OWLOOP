@@ -20,7 +20,7 @@ import java.util.Set;
  *     in order to fully define {@link Descriptor}s for {@link OWLNamedIndividual} based on the
  *     <a href="https://github.com/EmaroLab/multi_ontology_reference">aMOR</a> API.
  *     In particular all of the sub interfaces specify how to
- *     {@code query} and {@link #writeSemantic()} specifically for OWL individuals.
+ *     {@code query} and {@link #writeExpressionAxioms()} specifically for OWL individuals.
  *     It contains several semantic descriptors that can be combined in any arbitrary combinations, since they
  *     rely on the same ground (i.e.: {@link IndividualInstance}).
  * </p>
@@ -60,7 +60,7 @@ public interface IndividualExpression
     /**
      * The {@link Individual.Type} {@link Descriptor} implementation for {@link OWLNamedIndividual}.
      * <p>
-     *     It specify how to {@link #queryTypeIndividual()} and {@link #writeSemantic()} for the
+     *     It specify how to {@link #queryTypeIndividual()} and {@link #writeExpressionAxioms()} for the
      *     types (i.e.: {@link OWLClass}) in which the described individualDescriptor (i.e.: {@link #getInstance()})
      *     in belonging to.
      * </p>
@@ -132,7 +132,7 @@ public interface IndividualExpression
         }
 
         @Override // see super classes for documentation
-        default List<MappingIntent> writeSemantic(){
+        default List<MappingIntent> writeExpressionAxioms(){
             try {
                 EntitySet.SynchronisationIntent<OWLClass> to = synchroniseTypeIndividualToSemantic();
                 if ( to == null)
@@ -153,7 +153,7 @@ public interface IndividualExpression
     /**
      * The {@link Individual.Disjoint} {@link Descriptor} implementation for {@link OWLNamedIndividual}.
      * <p>
-     *     It specify how to {@link #queryDisjointIndividual()} and {@link #writeSemantic()} for the
+     *     It specify how to {@link #queryDisjointIndividual()} and {@link #writeExpressionAxioms()} for the
      *     disjoint individuals of {@link #getInstance()}.
      * </p>
      * <div style="text-align:center;"><small>
@@ -225,7 +225,7 @@ public interface IndividualExpression
         }
 
         @Override // see super classes for documentation
-        default List<MappingIntent> writeSemantic(){
+        default List<MappingIntent> writeExpressionAxioms(){
             try {
                 EntitySet.SynchronisationIntent<OWLNamedIndividual> to = synchroniseDisjointIndividualToSemantic();
                 if ( to == null)
@@ -254,7 +254,7 @@ public interface IndividualExpression
     /**
      * The {@link Individual.Equivalent} {@link Descriptor} implementation for {@link OWLNamedIndividual}.
      * <p>
-     *     It specify how to {@link #queryEquivalentIndividual()} and {@link #writeSemantic()} for the
+     *     It specify how to {@link #queryEquivalentIndividual()} and {@link #writeExpressionAxioms()} for the
      *     equivalent individuals of {@link #getInstance()}.
      * </p>
      * <div style="text-align:center;"><small>
@@ -326,7 +326,7 @@ public interface IndividualExpression
         }
 
         @Override // see super classes for documentation
-        default List<MappingIntent> writeSemantic(){
+        default List<MappingIntent> writeExpressionAxioms(){
             try {
                 EntitySet.SynchronisationIntent<OWLNamedIndividual> to = synchroniseEquivalentIndividualToSemantic();
                 if ( to == null)
@@ -355,7 +355,7 @@ public interface IndividualExpression
     /**
      * The {@link Individual.DataLink} {@link Descriptor} implementation for {@link OWLNamedIndividual}.
      * <p>
-     *     It specify how to {@link #queryDataIndividual()} and {@link #writeSemantic()} for the
+     *     It specify how to {@link #queryDataIndividual()} and {@link #writeExpressionAxioms()} for the
      *     data properties applied to {@link #getInstance()} (i.e.: {@code this individualDescriptor}).
      *     It also implements common function to populate the {@link ExpressionEntitySet}
      *     (of type {@link DescriptorEntitySet.DataExpression}) that specify the data properties of this individualDescriptor
@@ -363,7 +363,7 @@ public interface IndividualExpression
      *     this descriptor does not map all the property of an individualDescriptor but only the one which
      *     {@code semantic} have been initialised in the {@link ExpressionEntity}.
      *     On the other hand, if the set of {@link ExpressionEntitySet} is leaved empty during
-     *     {@link #readSemantic()}, it maps all the object properties applied to the described
+     *     {@link #readExpressionAxioms()}, it maps all the object properties applied to the described
      *     individualDescriptor
      * </p>
      * <div style="text-align:center;"><small>
@@ -384,7 +384,7 @@ public interface IndividualExpression
         /**
          * Remove the {@link ExpressionEntity} of the given semantic ({@link DescriptorEntitySet.DataExpression#getExpression()})
          * from the {@link Descriptor}. This call may remove multiple value attached to that
-         * semantic. It will no longer be used during {@link #readSemantic()} and {@link #writeSemantic()}.
+         * semantic. It will no longer be used during {@link #readExpressionAxioms()} and {@link #writeExpressionAxioms()}.
          * @param property a data property name contained in an element of {@link #getDataExpressions()} to be removed.
          * @return {@code true} if an element was removed as a result of this call.
          */
@@ -394,7 +394,7 @@ public interface IndividualExpression
         /**
          * Remove the {@link ExpressionEntity} of the given semantic ({@link DescriptorEntitySet.DataExpression#getExpression()})
          * from the {@link Descriptor}. This call may remove multiple value attached to that
-         * semantic. It will no longer be used during {@link #readSemantic()} and {@link #writeSemantic()}.
+         * semantic. It will no longer be used during {@link #readExpressionAxioms()} and {@link #writeExpressionAxioms()}.
          * @param property a data property contained in an element of {@link #getDataExpressions()} to be removed.
          * @return {@code true} if an element was removed as a result of this call.
          */
@@ -408,7 +408,7 @@ public interface IndividualExpression
         /**
          * Remove the {@link ExpressionEntity#getExpression()} of the given property, with a specific value, from {@code this}
          * {@link Descriptor}. This call does not remove the semantic from this object, and it may be
-         * repopulate (or completely removed) by calling: {@link #readSemantic()}.
+         * repopulate (or completely removed) by calling: {@link #readExpressionAxioms()}.
          * The class of the specified value represents its data type, supported {@link OWLLiteral} are:
          * {@link Integer}, {@link Boolean}, {@link Double}, {@link Float} and {@link Long} (see {@link #getOWLLiteral(Object)}).
          * @param property the name of the data property which value, contained in {@link #getDataExpressions()}, will be removed.
@@ -421,7 +421,7 @@ public interface IndividualExpression
         /**
          * Remove the {@link ExpressionEntity#getExpression()} of the given property, with a specific value, from {@code this}
          * {@link Descriptor}. This call does not remove the semantic from this object, and it may be
-         * repopulate (or completely removed) by calling: {@link #readSemantic()}.
+         * repopulate (or completely removed) by calling: {@link #readExpressionAxioms()}.
          * @param property the data property which value, contained in {@link #getDataExpressions()}, will be removed.
          * @param value the specific property literal to be removed from the {@link DescriptorEntitySet.DataExpression#getValues()} set.
          * @return {@code true} if an element was removed as a result of this call.
@@ -443,7 +443,7 @@ public interface IndividualExpression
          * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * value to {@code false} anyway.
          * On the other hand, it does not assign any value to the properties that are automatically
-         * queried during {@link #readSemantic()}.
+         * queried during {@link #readExpressionAxioms()}.
          * @param property the name of the data property to synchronise.
          * @return {@code true} if an element was added as a result of this call 
          * (a change of singleton value is not considered).
@@ -456,7 +456,7 @@ public interface IndividualExpression
          * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * value to {@code false} anyway.
          * On the other hand, it does not assign any value to the properties that are automatically
-         * queried during {@link #readSemantic()}.
+         * queried during {@link #readExpressionAxioms()}.
          * @param property the data property to synchronise.
          * @return {@code true} if an element was added as a result of this call 
          * (a change of singleton value is not considered).
@@ -469,7 +469,7 @@ public interface IndividualExpression
          * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * to the specified value anyway.
          * On the other hand, it does not assign any value to the properties that are automatically
-         * queried during {@link #readSemantic()}.
+         * queried during {@link #readExpressionAxioms()}.
          * @param property the name of the data property to synchronise.
          * @param singleton the flag to enable the synchronisation of only one element of the set, 
          *                  others will be discarded.
@@ -484,7 +484,7 @@ public interface IndividualExpression
          * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * to the specified value anyway.
          * On the other hand, it does not assign any value to the properties that are automatically
-         * queried during {@link #readSemantic()}.
+         * queried during {@link #readExpressionAxioms()}.
          * @param property the data property to synchronise.
          * @param singleton the flag to enable the synchronisation of only one element of the set, 
          *                  others will be discarded.
@@ -663,7 +663,7 @@ public interface IndividualExpression
         }
 
         @Override // see super classes for documentation
-        default List<MappingIntent> writeSemantic(){
+        default List<MappingIntent> writeExpressionAxioms(){
             try {
                 EntitySet.SynchronisationIntent<DescriptorEntitySet.DataExpression> to = synchroniseDataIndividualToSemantic();
                 if ( to == null)
@@ -686,7 +686,7 @@ public interface IndividualExpression
     /**
      * The {@link Individual.ObjectLink} {@link Descriptor} implementation for {@link OWLNamedIndividual}.
      * <p>
-     *     It specify how to {@link #queryObject()} and {@link #writeSemantic()} for the
+     *     It specify how to {@link #queryObject()} and {@link #writeExpressionAxioms()} for the
      *     object properties applied to {@link #getInstance()} (i.e.: {@code this individualDescriptor}).
      *     It also implements common function to populate the {@link ExpressionEntitySet}
      *     (of type {@link DescriptorEntitySet.ObjectExpression}) that specify the object properties of this individualDescriptor
@@ -694,7 +694,7 @@ public interface IndividualExpression
      *     this descriptor does not map all the property of an individualDescriptor but only the one which
      *     {@code semantic} have been initialised in the {@link ExpressionEntity}.
      *     On the other hand, if the set of {@link ExpressionEntitySet} is leaved empty during
-     *     {@link #readSemantic()}, it maps all the object properties applied to the described
+     *     {@link #readExpressionAxioms()}, it maps all the object properties applied to the described
      *     individualDescriptor.
      * </p>
      * <div style="text-align:center;"><small>
@@ -715,7 +715,7 @@ public interface IndividualExpression
         /**
          * Remove the {@link ExpressionEntity} of the given semantic ({@link DescriptorEntitySet.ObjectExpression#getExpression()})
          * from the {@link Descriptor}. This call may remove multiple value attached to that
-         * semantic. It will no longer be used during {@link #readSemantic()} and {@link #writeSemantic()}.
+         * semantic. It will no longer be used during {@link #readExpressionAxioms()} and {@link #writeExpressionAxioms()}.
          * @param property an object property name contained in an element of {@link #getObjectSemantics()} to be removed.
          * @return {@code true} if an element was removed as a result of this call.
          */
@@ -725,7 +725,7 @@ public interface IndividualExpression
         /**
          * Remove the {@link ExpressionEntity} of the given semantic ({@link DescriptorEntitySet.ObjectExpression#getExpression()})
          * from the {@link Descriptor}. This call may remove multiple value attached to that
-         * semantic. It will no longer be used during {@link #readSemantic()} and {@link #writeSemantic()}.
+         * semantic. It will no longer be used during {@link #readExpressionAxioms()} and {@link #writeExpressionAxioms()}.
          * @param property an object property contained in an element of {@link #getObjectSemantics()} to be removed.
          * @return {@code true} if an element was removed as a result of this call.
          */
@@ -736,7 +736,7 @@ public interface IndividualExpression
         /**
          * Remove the {@link ExpressionEntity#getExpression()} of the given property, with a specific value, from {@code this}
          * {@link Descriptor}. This call does not remove the semantic from this object, and it may be
-         * repopulate (or completely removed) by calling: {@link #readSemantic()}.
+         * repopulate (or completely removed) by calling: {@link #readExpressionAxioms()}.
          * @param property the name of the object property which value, contained in {@link #getObjectSemantics()}, will be removed.
          * @param value the property value to be removed from the {@link DescriptorEntitySet.ObjectExpression#getValues()} set.
          * @return {@code true} if an element was removed as a result of this call.
@@ -747,7 +747,7 @@ public interface IndividualExpression
         /**
          * Remove the {@link ExpressionEntity#getExpression()} of the given property, with a specific value, from {@code this}
          * {@link Descriptor}. This call does not remove the semantic from this object, and it may be
-         * repopulate (or completely removed) by calling: {@link #readSemantic()}.
+         * repopulate (or completely removed) by calling: {@link #readExpressionAxioms()}.
          * @param property the object property which value, contained in {@link #getObjectSemantics()}, will be removed.
          * @param value the specific property literal to be removed from the {@link DescriptorEntitySet.ObjectExpression#getValues()} set.
          * @return {@code true} if an element was removed as a result of this call.
@@ -760,7 +760,7 @@ public interface IndividualExpression
         /**
          * Remove the {@link ExpressionEntity#getExpression()} of the given property, with specific values, from {@code this}
          * {@link Descriptor}. This call does not remove the semantic from this object, and it may be
-         * repopulate (or completely removed) by calling: {@link #readSemantic()}.
+         * repopulate (or completely removed) by calling: {@link #readExpressionAxioms()}.
          * @param property the object property which value, contained in {@link #getObjectSemantics()}, will be removed.
          * @param values the specific set of property literal to be removed from the {@link DescriptorEntitySet.ObjectExpression#getValues()} set.
          * @return {@code true} if an element was removed as a result of this call.
@@ -777,7 +777,7 @@ public interface IndividualExpression
          * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * value to {@code false} anyway.
          * On the other hand, it does not assign any value to the properties that are automatically
-         * queried during {@link #readSemantic()}.
+         * queried during {@link #readExpressionAxioms()}.
          * @param property the name of the object property to synchronise.
          * @return {@code true} if an element was added as a result of this call
          * (a change of singleton value is not considered).
@@ -790,7 +790,7 @@ public interface IndividualExpression
          * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * value to {@code false} anyway.
          * On the other hand, it does not assign any value to the properties that are automatically
-         * queried during {@link #readSemantic()}.
+         * queried during {@link #readExpressionAxioms()}.
          * @param property the object property to synchronise.
          * @return {@code true} if an element was added as a result of this call
          * (a change of singleton value is not considered).
@@ -803,7 +803,7 @@ public interface IndividualExpression
          * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * to the specified value anyway.
          * On the other hand, it does not assign any value to the properties that are automatically
-         * queried during {@link #readSemantic()}.
+         * queried during {@link #readExpressionAxioms()}.
          * @param property the name of the object property to synchronise.
          * @param singleton the flag to enable the synchronisation of only one element of the set,
          *                  others will be discarded.
@@ -818,7 +818,7 @@ public interface IndividualExpression
          * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * to the specified value anyway.
          * On the other hand, it does not assign any value to the properties that are automatically
-         * queried during {@link #readSemantic()}.
+         * queried during {@link #readExpressionAxioms()}.
          * @param property the object property to synchronise.
          * @param singleton the flag to enable the synchronisation of only one element of the set,
          *                  others will be discarded.
@@ -977,7 +977,7 @@ public interface IndividualExpression
         }
 
         @Override // see super classes for documentation
-        default List<MappingIntent> writeSemantic(){
+        default List<MappingIntent> writeExpressionAxioms(){
             try {
                 EntitySet.SynchronisationIntent<DescriptorEntitySet.ObjectExpression> to = synchroniseObjectIndividualToSemantic();
                 if ( to == null)

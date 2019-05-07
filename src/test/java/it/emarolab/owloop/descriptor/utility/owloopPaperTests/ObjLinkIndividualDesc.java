@@ -21,14 +21,14 @@ public class ObjLinkIndividualDesc
 
     // implementations for Axiom.descriptor
     @Override
-    public List<MappingIntent> readSemantic() {
-        List<MappingIntent> r = ObjectLink.super.readSemantic();
+    public List<MappingIntent> readExpressionAxioms() {
+        List<MappingIntent> r = ObjectLink.super.readExpressionAxioms();
         return r;
     }
 
     @Override
-    public List<MappingIntent> writeSemantic() {
-        List<MappingIntent> r = ObjectLink.super.writeSemantic();
+    public List<MappingIntent> writeExpressionAxioms() {
+        List<MappingIntent> r = ObjectLink.super.writeExpressionAxioms();
         return r;
     }
 

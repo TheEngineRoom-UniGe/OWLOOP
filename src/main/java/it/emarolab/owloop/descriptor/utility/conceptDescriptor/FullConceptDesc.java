@@ -1,12 +1,10 @@
 package it.emarolab.owloop.descriptor.utility.conceptDescriptor;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
-import it.emarolab.owloop.core.Concept;
 import it.emarolab.owloop.descriptor.construction.descriptorBase.ConceptDescriptorBase;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.ConceptExpression;
 import it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.utility.individualDescriptor.LinkIndividualDesc;
-import it.emarolab.owloop.core.Axiom;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 
@@ -77,29 +75,29 @@ public class FullConceptDesc
         super(instanceName, ontoName, filePath, iriPath, bufferingChanges);
     }
 
-    // Implementation of readSemantic()
+    // Implementation of readExpressionAxioms()
 
     @Override
-    public List<MappingIntent> readSemantic() {
-        List<MappingIntent> r = ConceptExpression.Disjoint.super.readSemantic();
-        r.addAll( ConceptExpression.Equivalent.super.readSemantic());
-        r.addAll( Definition.super.readSemantic()); // call this before Sub or Super !!!
-        r.addAll( ConceptExpression.Sub.super.readSemantic());
-        r.addAll( ConceptExpression.Super.super.readSemantic());
-        r.addAll( Instance.super.readSemantic());
+    public List<MappingIntent> readExpressionAxioms() {
+        List<MappingIntent> r = ConceptExpression.Disjoint.super.readExpressionAxioms();
+        r.addAll( ConceptExpression.Equivalent.super.readExpressionAxioms());
+        r.addAll( Definition.super.readExpressionAxioms()); // call this before Sub or Super !!!
+        r.addAll( ConceptExpression.Sub.super.readExpressionAxioms());
+        r.addAll( ConceptExpression.Super.super.readExpressionAxioms());
+        r.addAll( Instance.super.readExpressionAxioms());
         return r;
     }
 
-    // Implementation of writeSemantic()
+    // Implementation of writeExpressionAxioms()
 
     @Override
-    public List<MappingIntent> writeSemantic() {
-        List<MappingIntent> r = ConceptExpression.Disjoint.super.writeSemantic();
-        r.addAll( ConceptExpression.Equivalent.super.writeSemantic());
-        r.addAll( ConceptExpression.Sub.super.writeSemantic());
-        r.addAll( ConceptExpression.Super.super.writeSemantic());
-        r.addAll( Definition.super.writeSemantic()); // call this before Sub or Super !!!
-        r.addAll( Instance.super.writeSemantic());
+    public List<MappingIntent> writeExpressionAxioms() {
+        List<MappingIntent> r = ConceptExpression.Disjoint.super.writeExpressionAxioms();
+        r.addAll( ConceptExpression.Equivalent.super.writeExpressionAxioms());
+        r.addAll( ConceptExpression.Sub.super.writeExpressionAxioms());
+        r.addAll( ConceptExpression.Super.super.writeExpressionAxioms());
+        r.addAll( Definition.super.writeExpressionAxioms()); // call this before Sub or Super !!!
+        r.addAll( Instance.super.writeExpressionAxioms());
         return r;
     }
 

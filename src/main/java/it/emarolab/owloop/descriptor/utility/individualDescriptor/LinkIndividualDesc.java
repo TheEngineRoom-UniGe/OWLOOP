@@ -20,7 +20,7 @@ import java.util.List;
  *     <br>
  *     Its purpose is only to instanciate the {@link DescriptorEntitySet.ObjectSemantics} for the
  *     respective descriptions, as well as call the derived interfaces in the
- *     {@link #readSemantic()} and {@link #writeSemantic()} methods.
+ *     {@link #readExpressionAxioms()} and {@link #writeExpressionAxioms()} methods.
  *     All its constructions are based on {@link IndividualDescriptorBase} in order
  *     to automatically manage a grounding {@link ConceptInstance}.
  *     From an OOP prospective it returns an {@link FullObjectPropertyDesc}
@@ -80,16 +80,16 @@ public class LinkIndividualDesc
     // implementations for Axiom.descriptor
 
     @Override
-    public List<MappingIntent> readSemantic() {
-        List<MappingIntent> r = IndividualExpression.ObjectLink.super.readSemantic();
-        r.addAll( IndividualExpression.DataLink.super.readSemantic());
+    public List<MappingIntent> readExpressionAxioms() {
+        List<MappingIntent> r = IndividualExpression.ObjectLink.super.readExpressionAxioms();
+        r.addAll( IndividualExpression.DataLink.super.readExpressionAxioms());
         return r;
     }
 
     @Override
-    public List<MappingIntent> writeSemantic() {
-        List<MappingIntent> r = ObjectLink.super.writeSemantic();
-        r.addAll( DataLink.super.writeSemantic());
+    public List<MappingIntent> writeExpressionAxioms() {
+        List<MappingIntent> r = ObjectLink.super.writeExpressionAxioms();
+        r.addAll( DataLink.super.writeExpressionAxioms());
         return r;
     }
 

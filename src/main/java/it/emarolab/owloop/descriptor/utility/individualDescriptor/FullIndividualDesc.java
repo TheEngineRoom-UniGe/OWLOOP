@@ -2,11 +2,8 @@ package it.emarolab.owloop.descriptor.utility.individualDescriptor;
 
 
 import it.emarolab.amor.owlInterface.OWLReferences;
-import it.emarolab.owloop.core.Axiom;
-import it.emarolab.owloop.core.Individual;
 import it.emarolab.owloop.descriptor.construction.descriptorBase.IndividualDescriptorBase;
 import it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorEntitySet;
-import it.emarolab.owloop.descriptor.construction.descriptorExpression.DataPropertyExpression;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.IndividualExpression;
 import it.emarolab.owloop.descriptor.utility.conceptDescriptor.FullConceptDesc;
 import it.emarolab.owloop.descriptor.utility.dataPropertyDescriptor.FullDataPropertyDesc;
@@ -78,27 +75,27 @@ public class FullIndividualDesc
         super(instanceName, ontoName, filePath, iriPath, bufferingChanges);
     }
 
-    // Implementation of readSemantic()
+    // Implementation of readExpressionAxioms()
 
     @Override
-    public List<MappingIntent> readSemantic() {
-        List<MappingIntent> r = IndividualExpression.Equivalent.super.readSemantic();
-        r.addAll( IndividualExpression.Disjoint.super.readSemantic());
-        r.addAll( IndividualExpression.Type.super.readSemantic());
-        r.addAll( IndividualExpression.ObjectLink.super.readSemantic());
-        r.addAll( IndividualExpression.DataLink.super.readSemantic());
+    public List<MappingIntent> readExpressionAxioms() {
+        List<MappingIntent> r = IndividualExpression.Equivalent.super.readExpressionAxioms();
+        r.addAll( IndividualExpression.Disjoint.super.readExpressionAxioms());
+        r.addAll( IndividualExpression.Type.super.readExpressionAxioms());
+        r.addAll( IndividualExpression.ObjectLink.super.readExpressionAxioms());
+        r.addAll( IndividualExpression.DataLink.super.readExpressionAxioms());
         return r;
     }
 
-    // Implementation of writeSemantic()
+    // Implementation of writeExpressionAxioms()
 
     @Override
-    public List<MappingIntent> writeSemantic() {
-        List<MappingIntent> r = IndividualExpression.Equivalent.super.writeSemantic();
-        r.addAll( IndividualExpression.Disjoint.super.writeSemantic());
-        r.addAll( IndividualExpression.Type.super.writeSemantic());
-        r.addAll( IndividualExpression.ObjectLink.super.writeSemantic());
-        r.addAll( IndividualExpression.DataLink.super.writeSemantic());
+    public List<MappingIntent> writeExpressionAxioms() {
+        List<MappingIntent> r = IndividualExpression.Equivalent.super.writeExpressionAxioms();
+        r.addAll( IndividualExpression.Disjoint.super.writeExpressionAxioms());
+        r.addAll( IndividualExpression.Type.super.writeExpressionAxioms());
+        r.addAll( IndividualExpression.ObjectLink.super.writeExpressionAxioms());
+        r.addAll( IndividualExpression.DataLink.super.writeExpressionAxioms());
         return r;
     }
 

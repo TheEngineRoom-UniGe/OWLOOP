@@ -21,7 +21,7 @@ import java.util.List;
  *     <br>
  *     Its purpose is only to instanciate the {@link DescriptorEntitySet.Concepts} for the
  *     respective descriptions, as well as call the derived interfaces in the
- *     {@link #readSemantic()} and {@link #writeSemantic()} methods.
+ *     {@link #readExpressionAxioms()} and {@link #writeExpressionAxioms()} methods.
  *     All its constructions are based on {@link ConceptDescriptorBase} in order
  *     to automatically manage a grounding {@link ConceptInstance}.
  *     <br>
@@ -85,20 +85,20 @@ public class DefinitionConceptDesc
     // implementations for Axiom.descriptor
 
     @Override
-    public List<MappingIntent> readSemantic() {
-        List<MappingIntent> r = ConceptExpression.Disjoint.super.readSemantic();
-        r.addAll( ConceptExpression.Equivalent.super.readSemantic());
-        r.addAll( Definition.super.readSemantic());
-        r.addAll( Instance.super.readSemantic());
+    public List<MappingIntent> readExpressionAxioms() {
+        List<MappingIntent> r = ConceptExpression.Disjoint.super.readExpressionAxioms();
+        r.addAll( ConceptExpression.Equivalent.super.readExpressionAxioms());
+        r.addAll( Definition.super.readExpressionAxioms());
+        r.addAll( Instance.super.readExpressionAxioms());
         return r;
     }
 
     @Override
-    public List<MappingIntent> writeSemantic() {
-        List<MappingIntent> r = ConceptExpression.Disjoint.super.writeSemantic();
-        r.addAll( ConceptExpression.Equivalent.super.writeSemantic());
-        r.addAll( Definition.super.writeSemantic());
-        r.addAll( Instance.super.writeSemantic());
+    public List<MappingIntent> writeExpressionAxioms() {
+        List<MappingIntent> r = ConceptExpression.Disjoint.super.writeExpressionAxioms();
+        r.addAll( ConceptExpression.Equivalent.super.writeExpressionAxioms());
+        r.addAll( Definition.super.writeExpressionAxioms());
+        r.addAll( Instance.super.writeExpressionAxioms());
         return r;
     }
 

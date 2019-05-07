@@ -20,7 +20,7 @@ import java.util.Set;
  *     in order to fully define {@link Descriptor}s for {@link OWLClass} based on the
  *     <a href="https://github.com/EmaroLab/multi_ontology_reference">aMOR</a> API.
  *     In particular all of the sub interfaces specify how to
- *     {@code query} and {@link #writeSemantic()} specifically for OWL classes.
+ *     {@code query} and {@link #writeExpressionAxioms()} specifically for OWL classes.
  *     It contains several semantic descriptors that can be combined in any arbitrary combinations, since they
  *     rely on the same ground (i.e.: {@link ConceptInstance}).
  * </p>
@@ -58,7 +58,7 @@ public interface ConceptExpression
     /**
      * The {@link Concept.Instance} {@link Descriptor} implementation for {@link OWLClass}.
      * <p>
-     *     It specify how to {@link #queryIndividualInstance()} and {@link #writeSemantic()} for the
+     *     It specify how to {@link #queryIndividualInstance()} and {@link #writeExpressionAxioms()} for the
      *     individualDescriptor (i.e.: {@link OWLNamedIndividual}) belonging to the described
      *     class (i.e.: {@link #getInstance()}).
      * </p>
@@ -127,7 +127,7 @@ public interface ConceptExpression
         }
 
         @Override // see super classes for documentation
-        default List<MappingIntent> writeSemantic(){
+        default List<MappingIntent> writeExpressionAxioms(){
             try {
                 EntitySet.SynchronisationIntent<OWLNamedIndividual> to = synchroniseIndividualInstanceToSemantic();
                 if (to == null)
@@ -148,7 +148,7 @@ public interface ConceptExpression
     /**
      * The {@link Concept.Disjoint} {@link Descriptor} implementation for {@link OWLClass}.
      * <p>
-     *     It specify how to {@link #queryDisjointConcept()} and {@link #writeSemantic()} for the
+     *     It specify how to {@link #queryDisjointConcept()} and {@link #writeExpressionAxioms()} for the
      *     classes (i.e.: {@link OWLClass}) tha are disjointed to the described one 
      *     (i.e.: {@link #getInstance()}).
      * </p>
@@ -171,7 +171,7 @@ public interface ConceptExpression
          * It is an helper that just calls:
          * {@code {@link #getDisjointConcept()}.add( {@link #getOntology()}.getOWLClass( propertyName))}
          * in order to add a new class (given by name) in the {@link EntitySet} list.
-         * This method should be always synchronised with {@link #writeSemanticInconsistencySafe()}
+         * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
          * to be perfectly aligned with the ontology, since it affects {@link ConceptExpression.Sub} {@link EntitySet}.
          * @param className the class name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
@@ -183,7 +183,7 @@ public interface ConceptExpression
          * It is an helper that just calls:
          * {@code {@link #getDisjointConcept()}.add( cl)}
          * in order to add a new class in the {@link EntitySet} list.
-         * This method should be always synchronised with {@link #writeSemanticInconsistencySafe()}
+         * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
          * to be perfectly aligned with the ontology, since it affects {@link ConceptExpression.Sub} {@link EntitySet}.
          * @param cl the class to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
@@ -196,7 +196,7 @@ public interface ConceptExpression
          * It is an helper that just calls:
          * {@code {@link #getDisjointConcept()}.remove( {@link #getOntology()}.getOWLClass( propertyName))}
          * in order to remove a class (given by name) from the {@link EntitySet} list.
-         * This method should be always synchronised with {@link #writeSemanticInconsistencySafe()}
+         * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
          * to be perfectly aligned with the ontology, since it affects {@link ConceptExpression.Sub} {@link EntitySet}.
          * @param className the class name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
@@ -208,7 +208,7 @@ public interface ConceptExpression
          * It is an helper that just calls:
          * {@code {@link #getDisjointConcept()}.remove( cl)}
          * in order to remove a class in the {@link EntitySet} list.
-         * This method should be always synchronised with {@link #writeSemanticInconsistencySafe()}
+         * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
          * to be perfectly aligned with the ontology, since it affects {@link ConceptExpression.Sub} {@link EntitySet}.
          * @param cl the class to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
@@ -227,7 +227,7 @@ public interface ConceptExpression
         }
 
         @Override // see super classes for documentation
-        default List<MappingIntent> writeSemantic(){
+        default List<MappingIntent> writeExpressionAxioms(){
             try {
                 EntitySet.SynchronisationIntent<OWLClass> to = synchroniseDisjointConceptToSemantic();
                 if ( to == null)
@@ -256,7 +256,7 @@ public interface ConceptExpression
     /**
      * The {@link Concept.Equivalent} {@link Descriptor} implementation for {@link OWLClass}.
      * <p>
-     *     It specify how to {@link #queryEquivalentConcept()} and {@link #writeSemantic()} for the
+     *     It specify how to {@link #queryEquivalentConcept()} and {@link #writeExpressionAxioms()} for the
      *     classes (i.e.: {@link OWLClass}) tha are equivalent to the described one 
      *     (i.e.: {@link #getInstance()}).
      * </p>
@@ -326,7 +326,7 @@ public interface ConceptExpression
         }
 
         @Override // see super classes for documentation
-        default List<MappingIntent> writeSemantic(){
+        default List<MappingIntent> writeExpressionAxioms(){
             try {
                 EntitySet.SynchronisationIntent<OWLClass> to = synchroniseEquivalentConceptToSemantic();
                 if ( to == null)
@@ -355,7 +355,7 @@ public interface ConceptExpression
     /**
      * The {@link Concept.Sub} {@link Descriptor} implementation for {@link OWLClass}.
      * <p>
-     *     It specify how to {@link #querySubConcept()} and {@link #writeSemantic()} for the
+     *     It specify how to {@link #querySubConcept()} and {@link #writeExpressionAxioms()} for the
      *     classes (i.e.: {@link OWLClass}) tha are sub classes to the described one 
      *     (i.e.: {@link #getInstance()}).
      * </p>
@@ -424,7 +424,7 @@ public interface ConceptExpression
         }
 
         @Override // see super classes for documentation
-        default List<MappingIntent> writeSemantic(){
+        default List<MappingIntent> writeExpressionAxioms(){
             try {
                 EntitySet.SynchronisationIntent<OWLClass> to = synchroniseSubConceptToSemantic();
                 if ( to == null)
@@ -445,7 +445,7 @@ public interface ConceptExpression
     /**
      * The {@link Concept.Super} {@link Descriptor} implementation for {@link OWLClass}.
      * <p>
-     *     It specify how to {@link #querySuperConcept()} and {@link #writeSemantic()} for the
+     *     It specify how to {@link #querySuperConcept()} and {@link #writeExpressionAxioms()} for the
      *     classes (i.e.: {@link OWLClass}) tha are super classes to the described one 
      *     (i.e.: {@link #getInstance()}).
      * </p>
@@ -468,7 +468,7 @@ public interface ConceptExpression
          * It is an helper that just calls:
          * {@code {@link #getSuperConcept()}.add( {@link #getOntology()}.getOWLClass( propertyName))}
          * in order to add a new class (given by name) in the {@link EntitySet} list.
-         * This method should be always synchronised with {@link #writeSemanticInconsistencySafe()}
+         * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
          * to be perfectly aligned with the ontology, since it affects {@link ConceptExpression.Definition} {@link EntitySet}.
          * @param className the class name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
@@ -480,7 +480,7 @@ public interface ConceptExpression
          * It is an helper that just calls:
          * {@code {@link #getSuperConcept()}.add( cl)}
          * in order to add a new class in the {@link EntitySet} list.
-         * This method should be always synchronised with {@link #writeSemanticInconsistencySafe()}
+         * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
          * to be perfectly aligned with the ontology, since it affects {@link ConceptExpression.Definition} {@link EntitySet}.
          * @param cl the class to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
@@ -493,7 +493,7 @@ public interface ConceptExpression
          * It is an helper that just calls:
          * {@code {@link #getSuperConcept()}.remove( {@link #getOntology()}.getOWLClass( propertyName))}
          * in order to remove a class (given by name) from the {@link EntitySet} list.
-         * This method should be always synchronised with {@link #writeSemanticInconsistencySafe()}
+         * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
          * to be perfectly aligned with the ontology, since it affects {@link ConceptExpression.Definition} {@link EntitySet}.
          * @param className the class name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
@@ -505,7 +505,7 @@ public interface ConceptExpression
          * It is an helper that just calls:
          * {@code {@link #getSuperConcept()}.remove( cl)}
          * in order to remove a class in the {@link EntitySet} list.
-         * This method should be always synchronised with {@link #writeSemanticInconsistencySafe()}
+         * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
          * to be perfectly aligned with the ontology, since it affects {@link ConceptExpression.Definition} {@link EntitySet}.
          * @param cl the class to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
@@ -523,7 +523,7 @@ public interface ConceptExpression
         }
 
         @Override // see super classes for documentation
-        default List<MappingIntent> writeSemantic(){
+        default List<MappingIntent> writeExpressionAxioms(){
             try {
                 EntitySet.SynchronisationIntent<OWLClass> to = synchroniseSuperConceptToSemantic();
                 if ( to == null)
@@ -544,13 +544,13 @@ public interface ConceptExpression
     /**
      * The {@link Concept.Definition} {@link Descriptor} implementation for {@link OWLClass}.
      * <p>
-     *     It specify how to {@link #queryDefinitionConcept()} and {@link #writeSemantic()} for 
+     *     It specify how to {@link #queryDefinitionConcept()} and {@link #writeExpressionAxioms()} for
      *     definition (i.e.: {@link SemanticRestriction}) applied to the described one 
      *     (i.e.: {@link #getInstance()}).
      *     All the restriction managed by this class are considered as a unique class definition
      *     made by their intersection.
      *     <br>
-     *     <b>ATTENTION</b>: the {@link #writeSemantic()} method implemented by
+     *     <b>ATTENTION</b>: the {@link #writeExpressionAxioms()} method implemented by
      *     this constructor uses {@link org.semanticweb.owlapi.change.ConvertSuperClassesToEquivalentClass}
      *     and {@link org.semanticweb.owlapi.change.ConvertEquivalentClassesToSuperClasses}.
      *     It may affect {@link ConceptExpression.Super} or {@link ConceptExpression.Sub} descriptors. Call
@@ -1310,7 +1310,7 @@ public interface ConceptExpression
         }
 
         @Override // see super classes for documentation
-        default List<MappingIntent> writeSemantic(){
+        default List<MappingIntent> writeExpressionAxioms(){
             try {
                 EntitySet.SynchronisationIntent<SemanticRestriction> to = synchroniseDefinitionConceptToSemantic();
                 if ( to == null)
