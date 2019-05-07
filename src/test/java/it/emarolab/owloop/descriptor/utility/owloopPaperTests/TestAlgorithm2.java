@@ -33,7 +33,7 @@ public class TestAlgorithm2 {
                 true
         );
 
-    d1 = new ObjLinkIndividualDesc("Robot1", ontoref);           // Initialize a DESC with ground as Robot1
+        d1 = new ObjLinkIndividualDesc("Robot1", ontoref);           // Initialize a DESC with ground as Robot1
     }
 
     @AfterClass // called after all @Test-s
