@@ -1,42 +1,42 @@
-package it.emarolab.owloop.descriptor.construction.descriptorBase;
+package it.emarolab.owloop.descriptor.construction.descriptorGround;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.IndividualExpression;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 
-abstract public class IndividualDescriptorBase
-        extends DescriptorBase<OWLNamedIndividual>
+abstract public class IndividualDescriptorGround
+        extends DescriptorGround<OWLNamedIndividual>
         implements IndividualExpression {
 
-    public IndividualDescriptorBase(OWLNamedIndividual instance, OWLReferences onto) {
+    public IndividualDescriptorGround(OWLNamedIndividual instance, OWLReferences onto) {
         super(instance, onto);
     }
 
-    public IndividualDescriptorBase(String instanceName, OWLReferences onto) {
+    public IndividualDescriptorGround(String instanceName, OWLReferences onto) {
         super(instanceName, onto);
     }
 
-    public IndividualDescriptorBase(OWLNamedIndividual instance, String ontoName) {
+    public IndividualDescriptorGround(OWLNamedIndividual instance, String ontoName) {
         super(instance, ontoName);
     }
 
-    public IndividualDescriptorBase(OWLNamedIndividual instance, String ontoName, String filePath, String iriPath) {
+    public IndividualDescriptorGround(OWLNamedIndividual instance, String ontoName, String filePath, String iriPath) {
         super(instance, ontoName, filePath, iriPath);
     }
 
-    public IndividualDescriptorBase(OWLNamedIndividual instance, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
+    public IndividualDescriptorGround(OWLNamedIndividual instance, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
         super(instance, ontoName, filePath, iriPath, bufferingChanges);
     }
 
-    public IndividualDescriptorBase(String instanceName, String ontoName) {
+    public IndividualDescriptorGround(String instanceName, String ontoName) {
         super(instanceName, ontoName);
     }
 
-    public IndividualDescriptorBase(String instanceName, String ontoName, String filePath, String iriPath) {
+    public IndividualDescriptorGround(String instanceName, String ontoName, String filePath, String iriPath) {
         super(instanceName, ontoName, filePath, iriPath);
     }
 
-    public IndividualDescriptorBase(String instanceName, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
+    public IndividualDescriptorGround(String instanceName, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
         super(instanceName, ontoName, filePath, iriPath, bufferingChanges);
     }
 

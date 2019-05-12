@@ -4,8 +4,8 @@ import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.amor.owlInterface.SemanticRestriction;
 import it.emarolab.amor.owlInterface.SemanticRestriction.*;
 import it.emarolab.owloop.core.Concept;
-import it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorEntitySet;
-import it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorGrounding;
+import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
+import it.emarolab.owloop.descriptor.construction.descriptorGround.DescriptorGroundInterface;
 import org.semanticweb.owlapi.model.*;
 
 import java.util.ArrayList;
@@ -34,10 +34,10 @@ import java.util.Set;
  */
 public interface ConceptExpression
         extends Concept<OWLReferences,OWLClass>,
-        DescriptorGrounding<OWLClass> {
+        DescriptorGroundInterface<OWLClass> {
 
     /**
-     * It is used to easily access to the {@link DescriptorGrounding} facilities.
+     * It is used to easily access to the {@link DescriptorGroundInterface} facilities.
      * @return the ontology in which {@code this} description is working on.
      * @deprecated use {@link #getGround()} instead.
      */
@@ -46,7 +46,7 @@ public interface ConceptExpression
         return getGround().getGroundOntology();
     }
     /**
-     * It is used to easily access to the {@link DescriptorGrounding} facilities.
+     * It is used to easily access to the {@link DescriptorGroundInterface} facilities.
      * @return the instance described by {@code this} implementation.
      * @deprecated use {@link #getInstance()} instead.
      */

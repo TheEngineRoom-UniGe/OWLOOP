@@ -1,22 +1,22 @@
 package it.emarolab.owloop.descriptor.utility.owloopPaperTests;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
-import it.emarolab.owloop.descriptor.construction.descriptorBase.ConceptDescriptorBase;
+import it.emarolab.owloop.descriptor.construction.descriptorGround.ConceptDescriptorGround;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.ConceptExpression;
-import it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorEntitySet;
+import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.utility.conceptDescriptor.FullConceptDesc;
 import org.semanticweb.owlapi.model.OWLClass;
 
 import java.util.List;
 
 public class DefSubClassDesc
-        extends ConceptDescriptorBase
+        extends ConceptDescriptorGround
         implements ConceptExpression.Definition, ConceptExpression.Sub<FullConceptDesc>{
 
     private DescriptorEntitySet.Restrictions restrictions = new DescriptorEntitySet.Restrictions();
     private DescriptorEntitySet.Concepts subConcept = new DescriptorEntitySet.Concepts();
 
-    // constructors for ConceptDescriptorBase
+    // constructors for ConceptDescriptorGround
     public DefSubClassDesc(OWLClass instance, OWLReferences onto) {
         super(instance, onto);
     }
@@ -58,7 +58,7 @@ public class DefSubClassDesc
 
 
     // implementation for standard object interface
-    // equals() and hashCode() is based on DescriptorBase<?> which considers only the ground
+    // equals() and hashCode() is based on DescriptorGround<?> which considers only the ground
     @Override
     public String toString() {
         return getClass().getSimpleName() + "{" +

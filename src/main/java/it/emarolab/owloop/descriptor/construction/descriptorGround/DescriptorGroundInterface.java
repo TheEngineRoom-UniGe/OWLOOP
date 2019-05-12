@@ -1,4 +1,4 @@
-package it.emarolab.owloop.descriptor.construction.descriptorBaseInterface;
+package it.emarolab.owloop.descriptor.construction.descriptorGround;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.core.Axiom;
@@ -43,18 +43,18 @@ import java.util.Set;
  *     </ul>
  *
  * <div style="text-align:center;"><small>
- * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorGrounding <br>
+ * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorGround.DescriptorGroundInterface <br>
  * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
  * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
  * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
  * <b>date</b>:        21/05/17 <br>
  * </small></div>
  */
-public interface DescriptorGrounding<J extends OWLObject>
+public interface DescriptorGroundInterface<J extends OWLObject>
         extends Axiom.Ground<OWLReferences,J>{
 
     /**
-     * The base class for each {@link DescriptorGrounding}s.
+     * The base class for each {@link DescriptorGroundInterface}s.
      * <p>
      *     It describes common implementation for the: {@link IndividualInstance},
      *     {@link ConceptInstance}, {@link DataInstance} and
@@ -63,7 +63,7 @@ public interface DescriptorGrounding<J extends OWLObject>
      *     following the <a href="https://github.com/EmaroLab/multi_ontology_reference">aMOR</a> API.
      *
      * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorGrounding <br>
+     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorGround.DescriptorGroundInterface <br>
      * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
      * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -73,7 +73,7 @@ public interface DescriptorGrounding<J extends OWLObject>
      * @param <J> the type of ontological entity to be manipulated in the ontology by a descriptor.
      */
     abstract class GroundBase<J extends OWLObject>
-            implements DescriptorGrounding<J> {
+            implements DescriptorGroundInterface<J> {
 
         private OWLReferences ontology;
         protected J instance;
@@ -117,7 +117,7 @@ public interface DescriptorGrounding<J extends OWLObject>
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;
-            if (!(o instanceof DescriptorGrounding.GroundBase)) return false;
+            if (!(o instanceof DescriptorGroundInterface.GroundBase)) return false;
 
             GroundBase<?> morGround = (GroundBase<?>) o;
 
@@ -155,12 +155,12 @@ public interface DescriptorGrounding<J extends OWLObject>
      * The {@link Axiom.Ground} for {@link IndividualExpression}.
      * <p>
      *     It just implements super class constructors and set the
-     *     entity parameter of {@link DescriptorGrounding} (i.e.: {@code <Y>})
+     *     entity parameter of {@link DescriptorGroundInterface} (i.e.: {@code <Y>})
      *     to be an {@link OWLNamedIndividual}.
      *     See super class and related interface for more documentation.
      *
      * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorGrounding <br>
+     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorGround.DescriptorGroundInterface <br>
      * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
      * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -210,12 +210,12 @@ public interface DescriptorGrounding<J extends OWLObject>
      * The {@link Axiom.Ground} for {@link ConceptExpression}.
      * <p>
      *     It just implements super class constructors and set the
-     *     entity parameter of {@link DescriptorGrounding} (i.e.: {@code <Y>})
+     *     entity parameter of {@link DescriptorGroundInterface} (i.e.: {@code <Y>})
      *     to be an {@link OWLClass}.
      *     See super class and related interface for more documentation.
      *
      * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorGrounding <br>
+     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorGround.DescriptorGroundInterface <br>
      * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
      * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -266,12 +266,12 @@ public interface DescriptorGrounding<J extends OWLObject>
      * The {@link Axiom.Ground} for {@link DataInstance}.
      * <p>
      *     It just implements super class constructors and set the
-     *     entity parameter of {@link DescriptorGrounding} (i.e.: {@code <Y>})
+     *     entity parameter of {@link DescriptorGroundInterface} (i.e.: {@code <Y>})
      *     to be an {@link OWLDataProperty}.
      *     See super class and related interface for more documentation.
      *
      * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorGrounding <br>
+     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorGround.DescriptorGroundInterface <br>
      * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
      * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -322,12 +322,12 @@ public interface DescriptorGrounding<J extends OWLObject>
      * The {@link Axiom.Ground} for {@link ObjectInstance}.
      * <p>
      *     It just implements super class constructors and set the
-     *     entity parameter of {@link DescriptorGrounding} (i.e.: {@code <Y>})
+     *     entity parameter of {@link DescriptorGroundInterface} (i.e.: {@code <Y>})
      *     to be an {@link OWLObjectProperty}.
      *     See super class and related interface for more documentation.
      *
      * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorGrounding <br>
+     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorGround.DescriptorGroundInterface <br>
      * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
      * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>

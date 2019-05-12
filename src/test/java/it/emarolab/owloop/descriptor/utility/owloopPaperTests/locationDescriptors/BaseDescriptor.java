@@ -2,12 +2,12 @@ package it.emarolab.owloop.descriptor.utility.owloopPaperTests.locationDescripto
 
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.amor.owlInterface.SemanticRestriction;
-import it.emarolab.owloop.descriptor.construction.descriptorBase.ConceptDescriptorBase;
-import it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorEntitySet;
+import it.emarolab.owloop.descriptor.construction.descriptorGround.ConceptDescriptorGround;
+import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.ConceptExpression;
 
 public abstract class BaseDescriptor<T extends SemanticRestriction.ApplyingPropertyRestriction>
-        extends ConceptDescriptorBase
+        extends ConceptDescriptorGround
         implements ConceptExpression.Definition {
 
     private DescriptorEntitySet.Restrictions restrictions = new DescriptorEntitySet.Restrictions();

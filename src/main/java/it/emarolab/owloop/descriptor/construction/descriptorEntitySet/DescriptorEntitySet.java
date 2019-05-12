@@ -1,4 +1,4 @@
-package it.emarolab.owloop.descriptor.construction.descriptorBaseInterface;
+package it.emarolab.owloop.descriptor.construction.descriptorEntitySet;
 
 import com.google.common.base.Objects;
 import it.emarolab.amor.owlInterface.OWLReferencesInterface;
@@ -45,7 +45,7 @@ import java.util.Set;
  *     </ul>
  *
  * <div style="text-align:center;"><small>
- * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorEntitySet <br>
+ * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet <br>
  * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
  * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
  * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -61,7 +61,7 @@ public interface DescriptorEntitySet extends Axiom {
      *     for {@link EntitySet}.
      * </p>
      * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorEntitySet <br>
+     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet <br>
      * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
      * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -147,7 +147,7 @@ public interface DescriptorEntitySet extends Axiom {
      *     (constructors only call {@code super(..)}).
      * </p>
      * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorEntitySet <br>
+     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet <br>
      * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
      * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -198,7 +198,7 @@ public interface DescriptorEntitySet extends Axiom {
      *     refer to {@link DescriptorEntitySet} and {@link EntitySetBase}  for further documentation.
      * </p>
      * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorEntitySet <br>
+     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet <br>
      * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
      * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -231,7 +231,7 @@ public interface DescriptorEntitySet extends Axiom {
      *     refer to {@link DescriptorEntitySet} and {@link EntitySetBase} for further documentation.
      * </p>
      * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorEntitySet <br>
+     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet <br>
      * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
      * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -264,7 +264,7 @@ public interface DescriptorEntitySet extends Axiom {
      *     refer to {@link DescriptorEntitySet} and {@link EntitySetBase}  for further documentation.
      * </p>
      * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorEntitySet <br>
+     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet <br>
      * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
      * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -298,7 +298,7 @@ public interface DescriptorEntitySet extends Axiom {
      *     refer to {@link DescriptorEntitySet} and {@link EntitySetBase}  for further documentation.
      * </p>
      * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorEntitySet <br>
+     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet <br>
      * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
      * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -332,7 +332,7 @@ public interface DescriptorEntitySet extends Axiom {
      *     refer to {@link DescriptorEntitySet} and {@link EntitySetBase}  for further documentation.
      * </p>
      * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorEntitySet <br>
+     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet <br>
      * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
      * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -367,7 +367,7 @@ public interface DescriptorEntitySet extends Axiom {
      *     refer to {@link DescriptorEntitySet} and {@link EntitySetBase}  for further documentation.
      * </p>
      * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorEntitySet <br>
+     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet <br>
      * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
      * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -402,7 +402,7 @@ public interface DescriptorEntitySet extends Axiom {
      *     For this class, the literals ({@link #getValues()}) are of the {@link Literals} type.
      * </p>
      * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorEntitySet <br>
+     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet <br>
      * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
      * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -537,7 +537,7 @@ public interface DescriptorEntitySet extends Axiom {
      *     For this class, the individuals ({@link #getValues()}) are of the {@link Individuals} type.
      * </p>
      * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorEntitySet <br>
+     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet <br>
      * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
      * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -797,7 +797,7 @@ public interface DescriptorEntitySet extends Axiom {
      *     refer to {@link DescriptorEntitySet} and {@link EntitySetBase}  for further documentation.
      * </p>
      * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorEntitySet <br>
+     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet <br>
      * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
      * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
@@ -832,7 +832,7 @@ public interface DescriptorEntitySet extends Axiom {
      *     refer to {@link DescriptorEntitySet} and {@link EntitySetBase}  for further documentation.
      * </p>
      * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorEntitySet <br>
+     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet <br>
      * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
      * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
      * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>

@@ -2,8 +2,8 @@ package it.emarolab.owloop.descriptor.utility.individualDescriptor;
 
 
 import it.emarolab.amor.owlInterface.OWLReferences;
-import it.emarolab.owloop.descriptor.construction.descriptorBase.IndividualDescriptorBase;
-import it.emarolab.owloop.descriptor.construction.descriptorBaseInterface.DescriptorEntitySet;
+import it.emarolab.owloop.descriptor.construction.descriptorGround.IndividualDescriptorGround;
+import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.IndividualExpression;
 import it.emarolab.owloop.descriptor.utility.conceptDescriptor.FullConceptDesc;
 import it.emarolab.owloop.descriptor.utility.dataPropertyDescriptor.FullDataPropertyDesc;
@@ -35,7 +35,7 @@ import java.util.List;
  * </small></div>
  */
 public class FullIndividualDesc
-        extends IndividualDescriptorBase
+        extends IndividualDescriptorGround
         implements IndividualExpression.Disjoint<FullIndividualDesc>,
         IndividualExpression.Equivalent<FullIndividualDesc>,
         IndividualExpression.Type<FullConceptDesc>,
@@ -48,7 +48,7 @@ public class FullIndividualDesc
     private DescriptorEntitySet.ObjectSemantics objectLinks = new DescriptorEntitySet.ObjectSemantics();
     private DescriptorEntitySet.DataSemantics dataLinks = new DescriptorEntitySet.DataSemantics();
 
-    // Constructors from the abstract class: IndividualDescriptorBase
+    // Constructors from the abstract class: IndividualDescriptorGround
 
     public FullIndividualDesc(OWLNamedIndividual instance, OWLReferences onto) {
         super(instance, onto);
