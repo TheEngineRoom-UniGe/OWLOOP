@@ -2,7 +2,7 @@ package it.emarolab.owloop.descriptor.utility.owloopPaperTests;
 
 
 import it.emarolab.amor.owlInterface.OWLReferences;
-import it.emarolab.owloop.descriptor.construction.descriptorGround.IndividualDescriptorGround;
+import it.emarolab.owloop.descriptor.construction.descriptorGround.IndividualGround;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.IndividualExpression;
 import org.semanticweb.owlapi.model.OWLClass;
@@ -11,12 +11,12 @@ import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import java.util.List;
 
 public class TypeIndividualDesc
-        extends IndividualDescriptorGround
+        extends IndividualGround
         implements IndividualExpression.Type<DefSubClassDesc> {
 
     private DescriptorEntitySet.Concepts individualTypes = new DescriptorEntitySet.Concepts();
 
-    // constructors for IndividualDescriptorGround
+    // constructors for IndividualGround
     public TypeIndividualDesc(OWLNamedIndividual instance, OWLReferences onto) {
         super(instance, onto);
     }

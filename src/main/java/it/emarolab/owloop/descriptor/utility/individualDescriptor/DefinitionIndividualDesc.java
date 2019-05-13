@@ -4,7 +4,7 @@ import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.core.Axiom;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.IndividualExpression;
-import it.emarolab.owloop.descriptor.construction.descriptorGround.IndividualDescriptorGround;
+import it.emarolab.owloop.descriptor.construction.descriptorGround.IndividualGround;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 
 import java.util.List;
@@ -20,7 +20,7 @@ import java.util.List;
  *     Its purpose is only to instanciate the {@link DescriptorEntitySet.Individuals} for the
  *     respective descriptions, as well as call both interfaces in the
  *     {@link #readExpressionAxioms()} and {@link #writeExpressionAxioms()} methods.
- *     All its constructions are based on {@link IndividualDescriptorGround} in order
+ *     All its constructions are based on {@link IndividualGround} in order
  *     to automatically manage a grounding {@link IndividualGroundInstance}.
  *     <br>
  *     You may want to use this class (see also {@link TypeIndividualDesc}
@@ -38,14 +38,14 @@ import java.util.List;
  * </small></div>
  */
 public class DefinitionIndividualDesc
-        extends IndividualDescriptorGround
+        extends IndividualGround
         implements IndividualExpression.Disjoint<DefinitionIndividualDesc>,
         IndividualExpression.Equivalent<DefinitionIndividualDesc>{
 
     private DescriptorEntitySet.Individuals disjointIndividual = new DescriptorEntitySet.Individuals();
     private DescriptorEntitySet.Individuals equivalentIndividual = new DescriptorEntitySet.Individuals();
 
-    // constructors for IndividualDescriptorGround
+    // constructors for IndividualGround
 
     public DefinitionIndividualDesc(OWLNamedIndividual instance, OWLReferences onto) {
         super(instance, onto);

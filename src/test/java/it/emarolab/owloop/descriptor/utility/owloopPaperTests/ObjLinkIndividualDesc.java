@@ -1,7 +1,7 @@
 package it.emarolab.owloop.descriptor.utility.owloopPaperTests;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
-import it.emarolab.owloop.descriptor.construction.descriptorGround.IndividualDescriptorGround;
+import it.emarolab.owloop.descriptor.construction.descriptorGround.IndividualGround;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.IndividualExpression;
 import it.emarolab.owloop.descriptor.utility.objectPropertyDescriptor.FullObjectPropertyDesc;
@@ -9,12 +9,12 @@ import it.emarolab.owloop.descriptor.utility.objectPropertyDescriptor.FullObject
 import java.util.List;
 
 public class ObjLinkIndividualDesc
-        extends IndividualDescriptorGround
+        extends IndividualGround
         implements IndividualExpression.ObjectLink<FullObjectPropertyDesc> {
 
     private DescriptorEntitySet.ObjectSemantics objectLinks = new DescriptorEntitySet.ObjectSemantics();
 
-    // constructors for IndividualDescriptorGround
+    // constructors for IndividualGround
     public ObjLinkIndividualDesc(String instanceName, OWLReferences onto) {
         super(instanceName, onto);
     }

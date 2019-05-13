@@ -1,7 +1,7 @@
 package it.emarolab.owloop.descriptor.utility.conceptDescriptor;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
-import it.emarolab.owloop.descriptor.construction.descriptorGround.ConceptDescriptorGround;
+import it.emarolab.owloop.descriptor.construction.descriptorGround.ConceptGround;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.ConceptExpression;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.utility.individualDescriptor.LinkIndividualDesc;
@@ -33,7 +33,7 @@ import java.util.List;
  * </small></div>
  */
 public class FullConceptDesc
-        extends ConceptDescriptorGround
+        extends ConceptGround
         implements ConceptExpression.Definition,
         ConceptExpression.Disjoint<FullConceptDesc>,
         ConceptExpression.Equivalent<FullConceptDesc>,
@@ -48,7 +48,7 @@ public class FullConceptDesc
     private DescriptorEntitySet.Concepts superConcept = new DescriptorEntitySet.Concepts();
     private DescriptorEntitySet.Individuals classifiedIndividual = new DescriptorEntitySet.Individuals();
 
-    // Constructors from the abstract class: ConceptDescriptorGround
+    // Constructors from the abstract class: ConceptGround
 
     public FullConceptDesc(OWLClass instance, OWLReferences onto) {
         super(instance, onto);

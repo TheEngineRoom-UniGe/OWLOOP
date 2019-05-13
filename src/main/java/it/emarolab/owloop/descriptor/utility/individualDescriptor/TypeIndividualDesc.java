@@ -1,7 +1,7 @@
 package it.emarolab.owloop.descriptor.utility.individualDescriptor;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
-import it.emarolab.owloop.descriptor.construction.descriptorGround.IndividualDescriptorGround;
+import it.emarolab.owloop.descriptor.construction.descriptorGround.IndividualGround;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.IndividualExpression;
 import it.emarolab.owloop.descriptor.utility.conceptDescriptor.HierarchicalConceptDesc;
@@ -23,7 +23,7 @@ import java.util.List;
  *     {@link #readExpressionAxioms()} and {@link #writeExpressionAxioms()} methods.
  *     From an OOP prospective it returns the classified types as instances
  *     of {@link HierarchicalConceptDesc}s.
- *     All its constructions are based on {@link IndividualDescriptorGround} in order
+ *     All its constructions are based on {@link IndividualGround} in order
  *     to automatically manage a grounding {@link IndividualGroundInstance}.
  *     <br>
  *     You may want to use this class (see also {@link DefinitionIndividualDesc} and {@link LinkIndividualDesc},
@@ -40,12 +40,12 @@ import java.util.List;
  * </small></div>
  */
 public class TypeIndividualDesc
-        extends IndividualDescriptorGround
+        extends IndividualGround
         implements IndividualExpression.Type<HierarchicalConceptDesc>{
 
     private DescriptorEntitySet.Concepts individualTypes = new DescriptorEntitySet.Concepts();
 
-    // constructors for IndividualDescriptorGround
+    // constructors for IndividualGround
 
     public TypeIndividualDesc(OWLNamedIndividual instance, OWLReferences onto) {
         super(instance, onto);

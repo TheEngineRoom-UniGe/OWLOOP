@@ -17,32 +17,32 @@ import org.semanticweb.owlapi.model.OWLObjectProperty;
  * <b>date</b>:         01/05/19 <br>
  * </small></div>
  */
-abstract public class ObjectPropertyDescriptorGround
+abstract public class ObjectPropertyGround
         extends DescriptorGround<OWLObjectProperty>
         implements ObjectPropertyExpression {
 
-    public ObjectPropertyDescriptorGround(OWLObjectProperty instance, OWLReferences onto) {
+    public ObjectPropertyGround(OWLObjectProperty instance, OWLReferences onto) {
         super(instance, onto);
     }
-    public ObjectPropertyDescriptorGround(String instanceName, OWLReferences onto) {
+    public ObjectPropertyGround(String instanceName, OWLReferences onto) {
         super(instanceName, onto);
     }
-    public ObjectPropertyDescriptorGround(OWLObjectProperty instance, String ontoName) {
+    public ObjectPropertyGround(OWLObjectProperty instance, String ontoName) {
         super(instance, ontoName);
     }
-    public ObjectPropertyDescriptorGround(OWLObjectProperty instance, String ontoName, String filePath, String iriPath) {
+    public ObjectPropertyGround(OWLObjectProperty instance, String ontoName, String filePath, String iriPath) {
         super(instance, ontoName, filePath, iriPath);
     }
-    public ObjectPropertyDescriptorGround(OWLObjectProperty instance, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
+    public ObjectPropertyGround(OWLObjectProperty instance, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
         super(instance, ontoName, filePath, iriPath, bufferingChanges);
     }
-    public ObjectPropertyDescriptorGround(String instanceName, String ontoName) {
+    public ObjectPropertyGround(String instanceName, String ontoName) {
         super(instanceName, ontoName);
     }
-    public ObjectPropertyDescriptorGround(String instanceName, String ontoName, String filePath, String iriPath) {
+    public ObjectPropertyGround(String instanceName, String ontoName, String filePath, String iriPath) {
         super(instanceName, ontoName, filePath, iriPath);
     }
-    public ObjectPropertyDescriptorGround(String instanceName, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
+    public ObjectPropertyGround(String instanceName, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
         super(instanceName, ontoName, filePath, iriPath, bufferingChanges);
     }
 

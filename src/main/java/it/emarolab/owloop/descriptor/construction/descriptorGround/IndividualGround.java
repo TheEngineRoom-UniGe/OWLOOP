@@ -17,39 +17,39 @@ import org.semanticweb.owlapi.model.OWLNamedIndividual;
  * <b>date</b>:         01/05/19 <br>
  * </small></div>
  */
-abstract public class IndividualDescriptorGround
+abstract public class IndividualGround
         extends DescriptorGround<OWLNamedIndividual>
         implements IndividualExpression {
 
-    public IndividualDescriptorGround(OWLNamedIndividual instance, OWLReferences onto) {
+    public IndividualGround(OWLNamedIndividual instance, OWLReferences onto) {
         super(instance, onto);
     }
 
-    public IndividualDescriptorGround(String instanceName, OWLReferences onto) {
+    public IndividualGround(String instanceName, OWLReferences onto) {
         super(instanceName, onto);
     }
 
-    public IndividualDescriptorGround(OWLNamedIndividual instance, String ontoName) {
+    public IndividualGround(OWLNamedIndividual instance, String ontoName) {
         super(instance, ontoName);
     }
 
-    public IndividualDescriptorGround(OWLNamedIndividual instance, String ontoName, String filePath, String iriPath) {
+    public IndividualGround(OWLNamedIndividual instance, String ontoName, String filePath, String iriPath) {
         super(instance, ontoName, filePath, iriPath);
     }
 
-    public IndividualDescriptorGround(OWLNamedIndividual instance, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
+    public IndividualGround(OWLNamedIndividual instance, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
         super(instance, ontoName, filePath, iriPath, bufferingChanges);
     }
 
-    public IndividualDescriptorGround(String instanceName, String ontoName) {
+    public IndividualGround(String instanceName, String ontoName) {
         super(instanceName, ontoName);
     }
 
-    public IndividualDescriptorGround(String instanceName, String ontoName, String filePath, String iriPath) {
+    public IndividualGround(String instanceName, String ontoName, String filePath, String iriPath) {
         super(instanceName, ontoName, filePath, iriPath);
     }
 
-    public IndividualDescriptorGround(String instanceName, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
+    public IndividualGround(String instanceName, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
         super(instanceName, ontoName, filePath, iriPath, bufferingChanges);
     }
 

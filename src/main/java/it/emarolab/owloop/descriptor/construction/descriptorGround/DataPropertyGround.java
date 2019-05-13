@@ -17,32 +17,32 @@ import org.semanticweb.owlapi.model.OWLDataProperty;
  * <b>date</b>:         01/05/19 <br>
  * </small></div>
  */
-abstract public class DataPropertyDescriptorGround
+abstract public class DataPropertyGround
         extends DescriptorGround<OWLDataProperty>
         implements DataPropertyExpression {
 
-    public DataPropertyDescriptorGround(OWLDataProperty instance, OWLReferences onto) {
+    public DataPropertyGround(OWLDataProperty instance, OWLReferences onto) {
         super(instance, onto);
     }
-    public DataPropertyDescriptorGround(String instanceName, OWLReferences onto) {
+    public DataPropertyGround(String instanceName, OWLReferences onto) {
         super(instanceName, onto);
     }
-    public DataPropertyDescriptorGround(OWLDataProperty instance, String ontoName) {
+    public DataPropertyGround(OWLDataProperty instance, String ontoName) {
         super(instance, ontoName);
     }
-    public DataPropertyDescriptorGround(OWLDataProperty instance, String ontoName, String filePath, String iriPath) {
+    public DataPropertyGround(OWLDataProperty instance, String ontoName, String filePath, String iriPath) {
         super(instance, ontoName, filePath, iriPath);
     }
-    public DataPropertyDescriptorGround(OWLDataProperty instance, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
+    public DataPropertyGround(OWLDataProperty instance, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
         super(instance, ontoName, filePath, iriPath, bufferingChanges);
     }
-    public DataPropertyDescriptorGround(String instanceName, String ontoName) {
+    public DataPropertyGround(String instanceName, String ontoName) {
         super(instanceName, ontoName);
     }
-    public DataPropertyDescriptorGround(String instanceName, String ontoName, String filePath, String iriPath) {
+    public DataPropertyGround(String instanceName, String ontoName, String filePath, String iriPath) {
         super(instanceName, ontoName, filePath, iriPath);
     }
-    public DataPropertyDescriptorGround(String instanceName, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
+    public DataPropertyGround(String instanceName, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
         super(instanceName, ontoName, filePath, iriPath, bufferingChanges);
     }
 

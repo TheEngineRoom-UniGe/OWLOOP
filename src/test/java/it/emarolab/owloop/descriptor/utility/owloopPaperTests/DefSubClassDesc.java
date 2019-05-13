@@ -1,7 +1,7 @@
 package it.emarolab.owloop.descriptor.utility.owloopPaperTests;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
-import it.emarolab.owloop.descriptor.construction.descriptorGround.ConceptDescriptorGround;
+import it.emarolab.owloop.descriptor.construction.descriptorGround.ConceptGround;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.ConceptExpression;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.utility.conceptDescriptor.FullConceptDesc;
@@ -10,13 +10,13 @@ import org.semanticweb.owlapi.model.OWLClass;
 import java.util.List;
 
 public class DefSubClassDesc
-        extends ConceptDescriptorGround
+        extends ConceptGround
         implements ConceptExpression.Definition, ConceptExpression.Sub<FullConceptDesc>{
 
     private DescriptorEntitySet.Restrictions restrictions = new DescriptorEntitySet.Restrictions();
     private DescriptorEntitySet.Concepts subConcept = new DescriptorEntitySet.Concepts();
 
-    // constructors for ConceptDescriptorGround
+    // constructors for ConceptGround
     public DefSubClassDesc(OWLClass instance, OWLReferences onto) {
         super(instance, onto);
     }

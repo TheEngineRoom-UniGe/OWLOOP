@@ -16,32 +16,32 @@ import org.semanticweb.owlapi.model.OWLClass;
  * <b>date</b>:         01/05/19 <br>
  * </small></div>
  */
-abstract public class ConceptDescriptorGround
+abstract public class ConceptGround
         extends DescriptorGround<OWLClass>
         implements ConceptExpression {
 
-    public ConceptDescriptorGround(OWLClass instance, OWLReferences onto) {
+    public ConceptGround(OWLClass instance, OWLReferences onto) {
         super(instance, onto);
     }
-    public ConceptDescriptorGround(String instanceName, OWLReferences onto) {
+    public ConceptGround(String instanceName, OWLReferences onto) {
         super(instanceName, onto);
     }
-    public ConceptDescriptorGround(OWLClass instance, String ontoName) {
+    public ConceptGround(OWLClass instance, String ontoName) {
         super(instance, ontoName);
     }
-    public ConceptDescriptorGround(OWLClass instance, String ontoName, String filePath, String iriPath) {
+    public ConceptGround(OWLClass instance, String ontoName, String filePath, String iriPath) {
         super(instance, ontoName, filePath, iriPath);
     }
-    public ConceptDescriptorGround(OWLClass instance, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
+    public ConceptGround(OWLClass instance, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
         super(instance, ontoName, filePath, iriPath, bufferingChanges);
     }
-    public ConceptDescriptorGround(String instanceName, String ontoName) {
+    public ConceptGround(String instanceName, String ontoName) {
         super(instanceName, ontoName);
     }
-    public ConceptDescriptorGround(String instanceName, String ontoName, String filePath, String iriPath) {
+    public ConceptGround(String instanceName, String ontoName, String filePath, String iriPath) {
         super(instanceName, ontoName, filePath, iriPath);
     }
-    public ConceptDescriptorGround(String instanceName, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
+    public ConceptGround(String instanceName, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
         super(instanceName, ontoName, filePath, iriPath, bufferingChanges);
     }
 

@@ -2,7 +2,7 @@ package it.emarolab.owloop.descriptor.utility.dataPropertyDescriptor;
 
 
 import it.emarolab.amor.owlInterface.OWLReferences;
-import it.emarolab.owloop.descriptor.construction.descriptorGround.DataPropertyDescriptorGround;
+import it.emarolab.owloop.descriptor.construction.descriptorGround.DataPropertyGround;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.DataPropertyExpression;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.core.Axiom;
@@ -19,7 +19,7 @@ import java.util.List;
  *     Its purpose is only to instanciate the {@link DescriptorEntitySet.Restrictions} for the
  *     respective descriptions, as well as call both interfaces in the
  *     {@link #readExpressionAxioms()} and {@link #writeExpressionAxioms()} methods.
- *     All its constructions are based on {@link DataPropertyDescriptorGround} in order
+ *     All its constructions are based on {@link DataPropertyGround} in order
  *     to automatically manage a grounding {@link DataGroundInstance}.
  *     <br>
  *     You may want to use this class (see also {@link DefinitionDataPropertyDesc}
@@ -37,14 +37,14 @@ import java.util.List;
  * </small></div>
  */
 public class DomainDataPropertyDesc
-        extends DataPropertyDescriptorGround
+        extends DataPropertyGround
         implements DataPropertyExpression.Domain, DataPropertyExpression.Range {
 
     private DescriptorEntitySet.Restrictions domainRestriction = new DescriptorEntitySet.Restrictions();
     private DescriptorEntitySet.Restrictions rangeRestriction = new DescriptorEntitySet.Restrictions();
 
 
-    // constructors for DataPropertyDescriptorGround
+    // constructors for DataPropertyGround
 
     public DomainDataPropertyDesc(OWLDataProperty instance, OWLReferences onto) {
         super(instance, onto);

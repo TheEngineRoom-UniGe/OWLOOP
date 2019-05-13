@@ -2,7 +2,7 @@ package it.emarolab.owloop.descriptor.utility.individualDescriptor;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.core.Axiom;
-import it.emarolab.owloop.descriptor.construction.descriptorGround.IndividualDescriptorGround;
+import it.emarolab.owloop.descriptor.construction.descriptorGround.IndividualGround;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.IndividualExpression;
 import it.emarolab.owloop.descriptor.utility.dataPropertyDescriptor.FullDataPropertyDesc;
@@ -21,7 +21,7 @@ import java.util.List;
  *     Its purpose is only to instanciate the {@link DescriptorEntitySet.ObjectSemantics} for the
  *     respective descriptions, as well as call the derived interfaces in the
  *     {@link #readExpressionAxioms()} and {@link #writeExpressionAxioms()} methods.
- *     All its constructions are based on {@link IndividualDescriptorGround} in order
+ *     All its constructions are based on {@link IndividualGround} in order
  *     to automatically manage a grounding {@link ConceptGroundInstance}.
  *     From an OOP prospective it returns an {@link FullObjectPropertyDesc}
  *     and {@link FullDataPropertyDesc}, be aware that this may be not efficient and
@@ -41,14 +41,14 @@ import java.util.List;
  * </small></div>
  */
 public class LinkIndividualDesc
-        extends IndividualDescriptorGround
+        extends IndividualGround
         implements IndividualExpression.ObjectLink<FullObjectPropertyDesc>,
         IndividualExpression.DataLink<FullDataPropertyDesc> {
 
     private DescriptorEntitySet.ObjectSemantics objectLinks = new DescriptorEntitySet.ObjectSemantics();
     private DescriptorEntitySet.DataSemantics dataLinks = new DescriptorEntitySet.DataSemantics();
 
-    // constructors for IndividualDescriptorGround
+    // constructors for IndividualGround
 
     public LinkIndividualDesc(OWLNamedIndividual instance, OWLReferences onto) {
         super(instance, onto);

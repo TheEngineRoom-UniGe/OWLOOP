@@ -4,7 +4,7 @@ package it.emarolab.owloop.descriptor.utility.objectPropertyDescriptor;
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.ObjectPropertyExpression;
-import it.emarolab.owloop.descriptor.construction.descriptorGround.ObjectPropertyDescriptorGround;
+import it.emarolab.owloop.descriptor.construction.descriptorGround.ObjectPropertyGround;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
 
 import java.util.List;
@@ -18,7 +18,7 @@ import java.util.List;
  *     Its purpose is only to instanciate the {@link DescriptorEntitySet.Restrictions} for the
  *     respective descriptions, as well as call both interfaces in the
  *     {@link #readExpressionAxioms()} and {@link #writeExpressionAxioms()} methods.
- *     All its constructions are based on {@link ObjectPropertyDescriptorGround} in order
+ *     All its constructions are based on {@link ObjectPropertyGround} in order
  *     to automatically manage an {@link ObjectGroundInstance} ground.
  *     <br>
  *     You may want to use this class (see also {@link DefinitionObjectPropertyDesc}
@@ -36,14 +36,14 @@ import java.util.List;
  * </small></div>
  */
 public class DomainObjectPropertyDesc
-        extends ObjectPropertyDescriptorGround
+        extends ObjectPropertyGround
         implements ObjectPropertyExpression.Domain, ObjectPropertyExpression.Range {
 
     private DescriptorEntitySet.Restrictions domainRestriction = new DescriptorEntitySet.Restrictions();
     private DescriptorEntitySet.Restrictions rangeRestriction = new DescriptorEntitySet.Restrictions();
 
 
-    // constructors for ObjectPropertyDescriptorGround
+    // constructors for ObjectPropertyGround
 
     public DomainObjectPropertyDesc(OWLObjectProperty instance, OWLReferences onto) {
         super(instance, onto);

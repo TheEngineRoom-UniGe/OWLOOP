@@ -2,7 +2,7 @@ package it.emarolab.owloop.descriptor.utility.dataPropertyDescriptor;
 
 
 import it.emarolab.amor.owlInterface.OWLReferences;
-import it.emarolab.owloop.descriptor.construction.descriptorGround.DataPropertyDescriptorGround;
+import it.emarolab.owloop.descriptor.construction.descriptorGround.DataPropertyGround;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.DataPropertyExpression;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import org.semanticweb.owlapi.model.OWLDataProperty;
@@ -33,7 +33,7 @@ import java.util.Set;
  * </small></div>
  */
 public class FullDataPropertyDesc
-        extends DataPropertyDescriptorGround
+        extends DataPropertyGround
         implements DataPropertyExpression.Disjoint<FullDataPropertyDesc>,
         DataPropertyExpression.Equivalent<FullDataPropertyDesc>,
         DataPropertyExpression.Sub<FullDataPropertyDesc>,
@@ -48,7 +48,7 @@ public class FullDataPropertyDesc
     private DescriptorEntitySet.Restrictions domainRestriction = new DescriptorEntitySet.Restrictions();
     private DescriptorEntitySet.Restrictions rangeRestriction = new DescriptorEntitySet.Restrictions();
 
-    // Constructors from the abstract class: DataPropertyDescriptorGround
+    // Constructors from the abstract class: DataPropertyGround
 
     public FullDataPropertyDesc(OWLDataProperty instance, OWLReferences onto) {
         super(instance, onto);

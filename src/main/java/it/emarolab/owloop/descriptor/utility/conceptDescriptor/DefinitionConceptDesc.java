@@ -2,7 +2,7 @@ package it.emarolab.owloop.descriptor.utility.conceptDescriptor;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.core.Axiom;
-import it.emarolab.owloop.descriptor.construction.descriptorGround.ConceptDescriptorGround;
+import it.emarolab.owloop.descriptor.construction.descriptorGround.ConceptGround;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.ConceptExpression;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.utility.individualDescriptor.LinkIndividualDesc;
@@ -22,7 +22,7 @@ import java.util.List;
  *     Its purpose is only to instanciate the {@link DescriptorEntitySet.Concepts} for the
  *     respective descriptions, as well as call the derived interfaces in the
  *     {@link #readExpressionAxioms()} and {@link #writeExpressionAxioms()} methods.
- *     All its constructions are based on {@link ConceptDescriptorGround} in order
+ *     All its constructions are based on {@link ConceptGround} in order
  *     to automatically manage a grounding {@link ConceptGroundInstance}.
  *     <br>
  *     You may want to use this class (see also {@link HierarchicalConceptDesc},
@@ -39,7 +39,7 @@ import java.util.List;
  * </small></div>
  */
 public class DefinitionConceptDesc
-        extends ConceptDescriptorGround
+        extends ConceptGround
         implements ConceptExpression.Definition,
         ConceptExpression.Disjoint<DefinitionConceptDesc>,
         ConceptExpression.Equivalent<DefinitionConceptDesc>,
@@ -53,7 +53,7 @@ public class DefinitionConceptDesc
 
 
 
-    // constructors for ConceptDescriptorGround
+    // constructors for ConceptGround
     
     public DefinitionConceptDesc(OWLClass instance, OWLReferences onto) {
         super(instance, onto);
