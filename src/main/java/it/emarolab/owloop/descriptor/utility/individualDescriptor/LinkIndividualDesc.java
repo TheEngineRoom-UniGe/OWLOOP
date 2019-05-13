@@ -22,7 +22,7 @@ import java.util.List;
  *     respective descriptions, as well as call the derived interfaces in the
  *     {@link #readExpressionAxioms()} and {@link #writeExpressionAxioms()} methods.
  *     All its constructions are based on {@link IndividualDescriptorGround} in order
- *     to automatically manage a grounding {@link ConceptInstance}.
+ *     to automatically manage a grounding {@link ConceptGroundInstance}.
  *     From an OOP prospective it returns an {@link FullObjectPropertyDesc}
  *     and {@link FullDataPropertyDesc}, be aware that this may be not efficient and
  *     perhaps a less complete descriptor is enough for your case.

@@ -21,7 +21,7 @@ import java.util.List;
  *     respective descriptions, as well as call both interfaces in the
  *     {@link #readExpressionAxioms()} and {@link #writeExpressionAxioms()} methods.
  *     All its constructions are based on {@link ConceptDescriptorGround} in order
- *     to automatically manage a grounding {@link ConceptInstance}.
+ *     to automatically manage a grounding {@link ConceptGroundInstance}.
  *     <br>
  *     You may want to use this class (see also {@link HierarchicalConceptDesc},
  *     as well as other classes in the {@link it.emarolab.owloop.descriptor.utility} package)

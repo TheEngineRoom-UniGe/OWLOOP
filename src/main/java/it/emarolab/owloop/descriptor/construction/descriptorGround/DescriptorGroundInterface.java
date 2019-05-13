@@ -9,70 +9,46 @@ import it.emarolab.owloop.descriptor.construction.descriptorExpression.ObjectPro
 import org.semanticweb.owlapi.model.*;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
 import org.semanticweb.owlapi.vocab.OWL2Datatype;
-
 import java.util.Set;
 
 /**
- * The main interface for {@link Axiom.Ground} implemented in the <a href="https://github.com/EmaroLab/multi_ontology_reference">aMOR</a> API.
- * <p>
- *     This interface contains all the {@link Ground}s used by the
- *     <a href="https://github.com/EmaroLab/multi_ontology_reference">aMOR</a>
- *     {@link Descriptor} (i.e.: {@link ConceptExpression}, {@link IndividualExpression},
- *     {@link DataPropertyExpression} and {@link ObjectPropertyExpression}).
- *     As well as, It implements common facility to interface with an OWL ontology
- *     though a {@link OWLReferences}, which are implemented also by the
- *     above {@link Descriptor}s; just for simple usage.
- *     <br>
- *     By using this class each {@link Descriptor} is actually link to
- *     a specific OWL entity to be described as well external users can
- *     access to any further feature of the standard OWL API.
- *     <br>
- *     Each {@link GroundBase} represents an reference to an OWL ontology (i.e.: {@link #getGroundOntology()}),
- *     which is shared between more {@link GroundBase}s, without reinstating
- *     nether the ontology nor the reasoner. As well as link each {@link Axiom.Descriptor}
- *     to a particular instance in such ontology (i.e.: {@link #getGroundInstance()})
- *     to be synchronised with respect to a particular feature with respect to the
- *     ontological OWL representation (e.g.: disjoint, equivalent, sup/super etc.).
- *     More in particular, the class defined in this interface are:
+ * This interface implements {@link Axiom.Ground} and allows grounding of Descriptors of the type
+ * {@link ConceptExpression}, {@link IndividualExpression}, {@link DataPropertyExpression} and
+ * {@link ObjectPropertyExpression}).
+ * A Ground associates to an Ontology using {@link OWLReferences}.
+ * The following classes implement {@link DescriptorGroundInterface}:
  *     <ul>
- *     <li><b>{@link GroundBase}</b>: which is a base implementation for all the classes below.</li>
- *     <li><b>{@link IndividualInstance}</b>: used to ground descriptions about {@link IndividualExpression}.</li>
- *     <li><b>{@link ConceptInstance}</b>: used to ground descriptions about {@link ConceptExpression}.</li>
- *     <li><b>{@link DataInstance}</b>: used to ground descriptions about {@link DataPropertyExpression}.</li>
- *     <li><b>{@link ObjectInstance}</b>: used to ground descriptions about {@link ObjectPropertyExpression}.</li>
+ *     <li><b>{@link GroundInstance}</b>:       an abstract class of all the classes below.</li>
+ *     <li><b>{@link IndividualGroundInstance}</b>:   class to ground axioms of type {@link IndividualExpression}.</li>
+ *     <li><b>{@link ConceptGroundInstance}</b>:      class to ground axioms of type {@link ConceptExpression}.</li>
+ *     <li><b>{@link DataGroundInstance}</b>:         class to ground axioms of type {@link DataPropertyExpression}.</li>
+ *     <li><b>{@link ObjectGroundInstance}</b>:       class to ground axioms of type {@link ObjectPropertyExpression}.</li>
  *     </ul>
+ * Using these classes each {@link Descriptor}, (i) links to a specific OWL entity in an Ontology and (ii) allows access
+ * to features in the standard OWL-API.
  *
  * <div style="text-align:center;"><small>
- * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorGround.DescriptorGroundInterface <br>
- * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
- * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
- * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
- * <b>date</b>:        21/05/17 <br>
+ * <b>File</b>:         it.emarolab.owloop.core.Axiom <br>
+ * <b>Licence</b>:      GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
+ * <b>Authors</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it), Syed Yusha Kareem (kareem.syed.yusha@dibris.unige.it) <br>
+ * <b>affiliation</b>:  EMAROLab, DIBRIS, University of Genoa. <br>
+ * <b>date</b>:         01/05/19 <br>
  * </small></div>
  */
 public interface DescriptorGroundInterface<J extends OWLObject>
         extends Axiom.Ground<OWLReferences,J>{
 
     /**
-     * The base class for each {@link DescriptorGroundInterface}s.
-     * <p>
-     *     It describes common implementation for the: {@link IndividualInstance},
-     *     {@link ConceptInstance}, {@link DataInstance} and
-     *     {@link ObjectInstance}. It poses the instance to be an
-     *     {@link OWLObject} while the ontology to be an {@link OWLReferences},
-     *     following the <a href="https://github.com/EmaroLab/multi_ontology_reference">aMOR</a> API.
+     * A {@link GroundInstance} has the reference to an Ontology (i.e., using {@link #getGroundOntology()}). The reference
+     * is shared between all {@link GroundInstance}s. This way ontology and reasoner are not instantiated for all.
      *
-     * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorGround.DescriptorGroundInterface <br>
-     * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
-     * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
-     * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
-     * <b>date</b>:        21/05/17 <br>
-     * </small></div>
+     * The base class for each {@link DescriptorGroundInterface}s.
+     * Is used for implementing: {@link IndividualGroundInstance}, {@link ConceptGroundInstance}, {@link DataGroundInstance} and
+     * {@link ObjectGroundInstance}. It makes the instance to be an {@link OWLObject} and the ontology to be an {@link OWLReferences}.
      *
      * @param <J> the type of ontological entity to be manipulated in the ontology by a descriptor.
      */
-    abstract class GroundBase<J extends OWLObject>
+    abstract class GroundInstance<J extends OWLObject>
             implements DescriptorGroundInterface<J> {
 
         private OWLReferences ontology;
@@ -83,7 +59,7 @@ public interface DescriptorGroundInterface<J extends OWLObject>
          * @param ontology the ontology in which the related {@link Descriptor} will operate.
          * @param instance the ontological entities to be described.
          */
-        public GroundBase(OWLReferences ontology, J instance) {
+        public GroundInstance(OWLReferences ontology, J instance) {
             this.ontology = ontology;
             this.instance = instance;
         }
@@ -91,7 +67,7 @@ public interface DescriptorGroundInterface<J extends OWLObject>
          * Copy constructor. It should be used by {@link #copyGround()}.
          * @param copy the ground to copyGround in a {@code new} instance
          */
-        protected GroundBase(GroundBase<J> copy){
+        protected GroundInstance(GroundInstance<J> copy){
             this.ontology = copy.ontology;
             this.instance = copy.instance;
         }
@@ -107,7 +83,7 @@ public interface DescriptorGroundInterface<J extends OWLObject>
         }
 
         @Override // see super class for documentation
-        abstract public GroundBase<J> copyGround();
+        abstract public GroundInstance<J> copyGround();
 
         @Override // see super class for documentation
         public void reason() {
@@ -117,9 +93,9 @@ public interface DescriptorGroundInterface<J extends OWLObject>
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;
-            if (!(o instanceof DescriptorGroundInterface.GroundBase)) return false;
+            if (!(o instanceof DescriptorGroundInterface.GroundInstance)) return false;
 
-            GroundBase<?> morGround = (GroundBase<?>) o;
+            GroundInstance<?> morGround = (GroundInstance<?>) o;
 
             if (ontology != null ? !ontology.equals(morGround.ontology) : morGround.ontology != null) return false;
             return instance != null ? instance.equals(morGround.instance) : morGround.instance == null;
@@ -152,29 +128,17 @@ public interface DescriptorGroundInterface<J extends OWLObject>
     }
 
     /**
-     * The {@link Axiom.Ground} for {@link IndividualExpression}.
-     * <p>
-     *     It just implements super class constructors and set the
-     *     entity parameter of {@link DescriptorGroundInterface} (i.e.: {@code <Y>})
-     *     to be an {@link OWLNamedIndividual}.
-     *     See super class and related interface for more documentation.
-     *
-     * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorGround.DescriptorGroundInterface <br>
-     * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
-     * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
-     * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
-     * <b>date</b>:        21/05/17 <br>
-     * </small></div>
+     * The {@link Axiom.Ground} for an {@link IndividualExpression}.
+     * It sets the entity parameter of {@link DescriptorGroundInterface} to be an {@link OWLNamedIndividual}.
      */
-    class IndividualInstance
-            extends GroundBase<OWLNamedIndividual> {
+    class IndividualGroundInstance
+            extends GroundInstance<OWLNamedIndividual> {
         /**
          * Fully instanciate this class
          * @param ontology the ontology in which the related {@link Descriptor} will operate.
          * @param instance the ontological individualDescriptor to be described.
          */
-        public IndividualInstance(OWLReferences ontology, OWLNamedIndividual instance) {
+        public IndividualGroundInstance(OWLReferences ontology, OWLNamedIndividual instance) {
             super(ontology, instance);
         }
 
@@ -182,7 +146,7 @@ public interface DescriptorGroundInterface<J extends OWLObject>
          * Copy constructor
          * @param copy the ground to copy
          */
-        public IndividualInstance( IndividualInstance copy) {
+        public IndividualGroundInstance(IndividualGroundInstance copy) {
             super(copy);
         }
 
@@ -191,7 +155,7 @@ public interface DescriptorGroundInterface<J extends OWLObject>
          * @param ontology the ontology in which the related {@link Descriptor} will operate.
          * @param instanceName the name of the ontological individualDescriptor to be described.
          */
-        public IndividualInstance(OWLReferences ontology, String instanceName) {
+        public IndividualGroundInstance(OWLReferences ontology, String instanceName) {
             super(ontology, ontology.getOWLIndividual(instanceName));
         }
 
@@ -201,35 +165,23 @@ public interface DescriptorGroundInterface<J extends OWLObject>
         }
 
         @Override
-        public IndividualInstance copyGround() {
-            return new IndividualInstance( this);
+        public IndividualGroundInstance copyGround() {
+            return new IndividualGroundInstance( this);
         }
     }
 
     /**
-     * The {@link Axiom.Ground} for {@link ConceptExpression}.
-     * <p>
-     *     It just implements super class constructors and set the
-     *     entity parameter of {@link DescriptorGroundInterface} (i.e.: {@code <Y>})
-     *     to be an {@link OWLClass}.
-     *     See super class and related interface for more documentation.
-     *
-     * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorGround.DescriptorGroundInterface <br>
-     * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
-     * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
-     * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
-     * <b>date</b>:        21/05/17 <br>
-     * </small></div>
+     * The {@link Axiom.Ground} for a {@link ConceptExpression}.
+     * It sets the entity parameter of {@link DescriptorGroundInterface} to be an {@link OWLClass}.
      */
-    class ConceptInstance
-            extends GroundBase<OWLClass> {
+    class ConceptGroundInstance
+            extends GroundInstance<OWLClass> {
 
         /**
          * Copy constructor
          * @param copy the ground to copy
          */
-        public ConceptInstance( ConceptInstance copy) {
+        public ConceptGroundInstance(ConceptGroundInstance copy) {
             super(copy);
         }
 
@@ -238,7 +190,7 @@ public interface DescriptorGroundInterface<J extends OWLObject>
          * @param ontology the ontology in which the related {@link Descriptor} will operate.
          * @param instance the ontological class to be described.
          */
-        public ConceptInstance(OWLReferences ontology, OWLClass instance) {
+        public ConceptGroundInstance(OWLReferences ontology, OWLClass instance) {
             super(ontology, instance);
         }
 
@@ -247,7 +199,7 @@ public interface DescriptorGroundInterface<J extends OWLObject>
          * @param ontology the ontology in which the related {@link Descriptor} will operate.
          * @param instanceName the name of the ontological class to be described.
          */
-        public ConceptInstance(OWLReferences ontology, String instanceName) {
+        public ConceptGroundInstance(OWLReferences ontology, String instanceName) {
             super(ontology, ontology.getOWLClass( instanceName));
         }
 
@@ -257,35 +209,23 @@ public interface DescriptorGroundInterface<J extends OWLObject>
         }
 
         @Override
-        public ConceptInstance copyGround() {
-            return new ConceptInstance( this);
+        public ConceptGroundInstance copyGround() {
+            return new ConceptGroundInstance( this);
         }
     }
 
     /**
-     * The {@link Axiom.Ground} for {@link DataInstance}.
-     * <p>
-     *     It just implements super class constructors and set the
-     *     entity parameter of {@link DescriptorGroundInterface} (i.e.: {@code <Y>})
-     *     to be an {@link OWLDataProperty}.
-     *     See super class and related interface for more documentation.
-     *
-     * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorGround.DescriptorGroundInterface <br>
-     * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
-     * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
-     * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
-     * <b>date</b>:        21/05/17 <br>
-     * </small></div>
+     * The {@link Axiom.Ground} for a {@link DataGroundInstance}.
+     * It sets the entity parameter of {@link DescriptorGroundInterface} to be an {@link OWLDataProperty}.
      */
-    class DataInstance
-            extends GroundBase<OWLDataProperty> {
+    class DataGroundInstance
+            extends GroundInstance<OWLDataProperty> {
 
         /**
          * Copy constructor
          * @param copy the ground to copy
          */
-        public DataInstance( DataInstance copy) {
+        public DataGroundInstance(DataGroundInstance copy) {
             super(copy);
         }
 
@@ -294,7 +234,7 @@ public interface DescriptorGroundInterface<J extends OWLObject>
          * @param ontology the ontology in which the related {@link Descriptor} will operate.
          * @param instance the ontological data property to be described.
          */
-        public DataInstance(OWLReferences ontology, OWLDataProperty instance) {
+        public DataGroundInstance(OWLReferences ontology, OWLDataProperty instance) {
             super(ontology, instance);
         }
 
@@ -303,7 +243,7 @@ public interface DescriptorGroundInterface<J extends OWLObject>
          * @param ontology the ontology in which the related {@link Descriptor} will operate.
          * @param instanceName the name of the ontological data property to be described.
          */
-        public DataInstance(OWLReferences ontology, String instanceName) {
+        public DataGroundInstance(OWLReferences ontology, String instanceName) {
             super(ontology, ontology.getOWLDataProperty( instanceName));
         }
 
@@ -313,35 +253,23 @@ public interface DescriptorGroundInterface<J extends OWLObject>
         }
 
         @Override
-        public DataInstance copyGround() {
-            return new DataInstance( this);
+        public DataGroundInstance copyGround() {
+            return new DataGroundInstance( this);
         }
     }
 
     /**
-     * The {@link Axiom.Ground} for {@link ObjectInstance}.
-     * <p>
-     *     It just implements super class constructors and set the
-     *     entity parameter of {@link DescriptorGroundInterface} (i.e.: {@code <Y>})
-     *     to be an {@link OWLObjectProperty}.
-     *     See super class and related interface for more documentation.
-     *
-     * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorGround.DescriptorGroundInterface <br>
-     * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
-     * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
-     * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
-     * <b>date</b>:        21/05/17 <br>
-     * </small></div>
+     * The {@link Axiom.Ground} for an {@link ObjectGroundInstance}.
+     * It sets the entity parameter of {@link DescriptorGroundInterface} to be an {@link OWLObjectProperty}.
      */
-    class ObjectInstance
-            extends GroundBase<OWLObjectProperty> {
+    class ObjectGroundInstance
+            extends GroundInstance<OWLObjectProperty> {
 
         /**
          * Copy constructor
          * @param copy the ground to copy
          */
-        public ObjectInstance( ObjectInstance copy) {
+        public ObjectGroundInstance(ObjectGroundInstance copy) {
             super(copy);
         }
 
@@ -350,7 +278,7 @@ public interface DescriptorGroundInterface<J extends OWLObject>
          * @param ontology the ontology in which the related {@link Descriptor} will operate.
          * @param instance the ontological object property to be described.
          */
-        public ObjectInstance(OWLReferences ontology, OWLObjectProperty instance) {
+        public ObjectGroundInstance(OWLReferences ontology, OWLObjectProperty instance) {
             super(ontology, instance);
         }
 
@@ -359,7 +287,7 @@ public interface DescriptorGroundInterface<J extends OWLObject>
          * @param ontology the ontology in which the related {@link Descriptor} will operate.
          * @param instanceName the name of the ontological object property to be described.
          */
-        public ObjectInstance(OWLReferences ontology, String instanceName) {
+        public ObjectGroundInstance(OWLReferences ontology, String instanceName) {
             super(ontology, ontology.getOWLObjectProperty( instanceName));
         }
 
@@ -369,8 +297,8 @@ public interface DescriptorGroundInterface<J extends OWLObject>
         }
 
         @Override
-        public ObjectInstance copyGround() {
-            return new ObjectInstance( this);
+        public ObjectGroundInstance copyGround() {
+            return new ObjectGroundInstance( this);
         }
     }
 

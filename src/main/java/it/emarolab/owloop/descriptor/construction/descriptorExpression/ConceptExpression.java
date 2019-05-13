@@ -22,7 +22,7 @@ import java.util.Set;
  *     In particular all of the sub interfaces specify how to
  *     {@code query} and {@link #writeExpressionAxioms()} specifically for OWL classes.
  *     It contains several semantic descriptors that can be combined in any arbitrary combinations, since they
- *     rely on the same ground (i.e.: {@link ConceptInstance}).
+ *     rely on the same ground (i.e.: {@link ConceptGroundInstance}).
  * </p>
  * <div style="text-align:center;"><small>
  * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.ConceptExpression <br>

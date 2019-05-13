@@ -8,27 +8,18 @@ import it.emarolab.owloop.descriptor.construction.descriptorExpression.*;
 import org.semanticweb.owlapi.model.OWLObject;
 
 /**
- * The base class for {@link Axiom.Descriptor} implemented in the <a href="https://github.com/EmaroLab/multi_ontology_reference">aMOR</a> API.
- * <p>
- *     This class is shared between all the {@link Descriptor}s that uses
- *     <a href="https://github.com/EmaroLab/multi_ontology_reference">aMOR</a>.
- *     (i.e.: the once which are based on: {@link ConceptExpression}, {@link IndividualExpression},
- *     {@link DataPropertyExpression} and {@link ObjectPropertyExpression}).
- *     It only describes common constructors and initialisation
- *     for specific {@link DescriptorGroundInterface}.
- *     Note that all constructors fully initialise a new {@link Axiom.Ground}
- *     (i.e.: set both an ontology and an instance).
- *     <br>
- *     By default this takes an ontology from file and initialises the {@link PelletReasoner}.
- *     Otherwise, if another {@link OWLReferences} is instanciate with the same {@code name}
- *     in the {@link OWLReferences.OWLReferencesContainer}, this ontology will be used.
+ * This abstract class describes common constructors and initialisations for
+ * a specific {@link GroundInstance}.
+ * All constructors fully initialise a new {@link Axiom.Ground} (i.e., set both an ontology and an instance).
+ * By default, this class takes an ontology from a file and initialises the {@link PelletReasoner}
+ * (If another {@link OWLReferences} is instantiated with the same ontoName then this ontology will be used.).
  *
  * <div style="text-align:center;"><small>
- * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorGround.DescriptorGround <br>
- * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
- * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
- * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
- * <b>date</b>:        21/05/17 <br>
+ * <b>File</b>:         it.emarolab.owloop.core.Axiom <br>
+ * <b>Licence</b>:      GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
+ * <b>Authors</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it), Syed Yusha Kareem (kareem.syed.yusha@dibris.unige.it) <br>
+ * <b>affiliation</b>:  EMAROLab, DIBRIS, University of Genoa. <br>
+ * <b>date</b>:         01/05/19 <br>
  * </small></div>
  */
 abstract public class DescriptorGround<J extends OWLObject>
@@ -39,7 +30,7 @@ abstract public class DescriptorGround<J extends OWLObject>
     private static final boolean DEFAULT_BUFFERING_CHANGES = false;
     private static final boolean DEFAULT_AMOR_LOG = false;
 
-    private GroundBase<J> ground;
+    private GroundInstance<J> ground;
 
     public DescriptorGround(J instance, OWLReferences onto) {
         setGround( getNewGround( onto, instance));
@@ -108,7 +99,7 @@ abstract public class DescriptorGround<J extends OWLObject>
      * This set should be done with a fully constructed input parameter.
      * @param ground the ground to set as field of this class.
      */
-    public void setGround(GroundBase<J> ground){ // call this in all constructor
+    public void setGround(GroundInstance<J> ground){ // call this in all constructor
         this.ground = ground;
     }
 
@@ -130,20 +121,20 @@ abstract public class DescriptorGround<J extends OWLObject>
 
     /**
      * This method should return a new instanciate {@link DescriptorGroundInterface} with the given values.
-     * It is automatically called on all default constructors in order to {@link #setGround(GroundBase)}.
+     * It is automatically called on all default constructors in order to {@link #setGround(GroundInstance)}.
      * @param ontology the grounding ontology.
      * @param instance the grounding instance.
      * @return a new instance of the {@link DescriptorGroundInterface}.
      */
-    abstract protected GroundBase<J> getNewGround(OWLReferences ontology, J instance);
+    abstract protected GroundInstance<J> getNewGround(OWLReferences ontology, J instance);
     /**
      * This method should return a new instanciate {@link DescriptorGroundInterface} with the given values.
-     * It is automatically called on all default constructors in order to {@link #setGround(GroundBase)}.
+     * It is automatically called on all default constructors in order to {@link #setGround(GroundInstance)}.
      * @param ontology the grounding ontology.
      * @param instance the ane of the grounding instance.
      * @return a new instance of the {@link DescriptorGroundInterface}.
      */
-    abstract protected GroundBase<J> getNewGround(OWLReferences ontology, String instance);
+    abstract protected GroundInstance<J> getNewGround(OWLReferences ontology, String instance);
 
     /** Returns the Ground instance's name as a String*/
     public String getInstanceName() {
@@ -151,7 +142,7 @@ abstract public class DescriptorGround<J extends OWLObject>
     }
 
     @Override // see super class for documentation
-    public GroundBase<J> getGround() {
+    public GroundInstance<J> getGround() {
         return ground;
     }
 

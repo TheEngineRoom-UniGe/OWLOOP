@@ -20,7 +20,7 @@ import java.util.List;
  *     respective descriptions, as well as call both interfaces in the
  *     {@link #readExpressionAxioms()} and {@link #writeExpressionAxioms()} methods.
  *     All its constructions are based on {@link DataPropertyDescriptorGround} in order
- *     to automatically manage a grounding {@link DataInstance}.
+ *     to automatically manage a grounding {@link DataGroundInstance}.
  *     <br>
  *     You may want to use this class (see also {@link DefinitionDataPropertyDesc}
  *     and {@link HierarchicalDataPropertyDesc}, as well as other classes in the

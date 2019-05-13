@@ -312,7 +312,7 @@ public interface Axiom {
          *
          * @return a new {@link ExpressionEntity} with the same expression but new values.
          */
-        ExpressionEntity<S,Y> getNewData(Set<Y> values); // set the semantic it has
+        ExpressionEntity<S,Y> getNewData(Set<Y> values);
     }
 
     /**
@@ -325,8 +325,8 @@ public interface Axiom {
      *{@link SynchroniseContainedIntent} class, from which the {@link SynchronisationMultiIntent}
      *can be retrieved.
      *
-     * @param <F> the type of semantic entities assigned to this set
-     * @param <Y> the type of entities described by this set.
+     * @param <F> the ExpressionEntities.
+     * @param <Y> the Entities.
      */
     interface ExpressionEntitySet<F extends ExpressionEntity<?,Y>,Y>
             extends EntitySet<F> {
@@ -334,21 +334,21 @@ public interface Axiom {
         @Override // see documentation in the super method
         default SynchronisationIntent<F> synchroniseFrom(EntitySet<F> queried) {
             // synchronise from ontology (read)
-            return new SynchroniseContainedIntent<F,Y>().semanticSync( queried, this, true);
+            return new SynchroniseContainedIntent<F,Y>().expressionAxiomsSync( queried, this, true);
         }
 
         @Override // see documentation in the super method
         default SynchronisationIntent<F> synchroniseTo(EntitySet<F> queried) {
             // synchronise to ontology (write)
-            return new SynchroniseContainedIntent<F,Y>().semanticSync( this, queried, false);
+            return new SynchroniseContainedIntent<F,Y>().expressionAxiomsSync( this, queried, false);
         }
 
 
         /* this class in private and never expose outside this interface.
-         * Its purpose is to synchronise two SemanticSet and populate an
+         * Its purpose is to synchronise two expressionAxioms and populate an
          * opportune SynchroniseMultiIntent object.
          * Its implementation is based on SynchroniseIntent.syn().
-         * This class synchronises only the Semantics that have been specied in the
+         * This class synchronises only the expressionAxioms that have been specied in the
          * OWLOOP architecture, not for all the proprieties !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
          */
         class SynchroniseContainedIntent<F extends ExpressionEntity<?,Y>,Y> {
@@ -358,7 +358,7 @@ public interface Axiom {
             // hp: not null inputs
             // write -> a1: atom,    a2: queried
             // read  -> a1: queried, a2: atom
-            private SynchronisationMultiIntent<F,?> semanticSync(EntitySet<F> a1, EntitySet<F> a2, boolean reading){
+            private SynchronisationMultiIntent<F,?> expressionAxiomsSync(EntitySet<F> a1, EntitySet<F> a2, boolean reading){
                 SynchronisationMultiIntent<F,Y> sync = new SynchronisationMultiIntent<>();
                 // it could be faster ....
                 if ( a1.isEmpty() & a2.isEmpty())

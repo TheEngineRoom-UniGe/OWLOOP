@@ -24,7 +24,7 @@ import java.util.List;
  *     From an OOP prospective it returns the classified types as instances
  *     of {@link HierarchicalConceptDesc}s.
  *     All its constructions are based on {@link IndividualDescriptorGround} in order
- *     to automatically manage a grounding {@link IndividualInstance}.
+ *     to automatically manage a grounding {@link IndividualGroundInstance}.
  *     <br>
  *     You may want to use this class (see also {@link DefinitionIndividualDesc} and {@link LinkIndividualDesc},
  *     as well as other classes in the {@link it.emarolab.owloop.descriptor.utility} package)
