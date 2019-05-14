@@ -17,22 +17,19 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * The {@link DataProperty} {@link Descriptor} implementation for {@link OWLDataProperty}.
+ * This interface extends all the interfaces in {@link DataProperty}.
+ * It allows to {@link #readExpressionAxioms()} and {@link #writeExpressionAxioms()}
+ * specifically for OWL data properties.
+ * It contains several expressions that can be combined in any arbitrary way as they
+ * rely on the same ground ({@link DataGroundInstance}).
+ *
  * <p>
- *     This interface extends all the interfaces contained in {@link DataProperty}
- *     in order to fully define {@link Descriptor}s for {@link OWLDataProperty} based on the
- *     <a href="https://github.com/EmaroLab/multi_ontology_reference">aMOR</a> API.
- *     In particular all of the sub interfaces specify how to
- *     {@code query} and {@link #writeExpressionAxioms()} specifically for OWL data properties.
- *     It contains several semantic descriptors that can be combined in any arbitrary combinations, since they
- *     rely on the same ground (i.e.: {@link DataGroundInstance}).
- * </p>
  * <div style="text-align:center;"><small>
- * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.DataPropertyExpression <br>
- * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
- * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
- * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
- * <b>date</b>:        21/05/17 <br>
+ * <b>File</b>:         it.emarolab.owloop.core.Axiom <br>
+ * <b>Licence</b>:      GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
+ * <b>Authors</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it), Syed Yusha Kareem (kareem.syed.yusha@dibris.unige.it) <br>
+ * <b>affiliation</b>:  EMAROLab, DIBRIS, University of Genoa. <br>
+ * <b>date</b>:         01/05/19 <br>
  * </small></div>
  */
 public interface DataPropertyExpression
@@ -40,8 +37,8 @@ public interface DataPropertyExpression
         DescriptorGroundInterface<OWLDataProperty> {
 
     /**
-     * It is used to easily access to the {@link DescriptorGroundInterface} facilities.
-     * @return the ontology in which {@code this} description is working on.
+     * To access the {@link DescriptorGroundInterface} facilities.
+     * @return the ontology on which {@code this} descriptor is working.
      * @deprecated use {@link #getGround()} instead.
      */
     @Override @Deprecated
@@ -49,8 +46,8 @@ public interface DataPropertyExpression
         return getGround().getGroundOntology();
     }
     /**
-     * It is used to easily access to the {@link DescriptorGroundInterface} facilities.
-     * @return the instance described by {@code this} implementation.
+     * To access the {@link DescriptorGroundInterface} facilities.
+     * @return the ground instance of {@code this} descriptor.
      * @deprecated use {@link #getInstance()} instead.
      */
     @Override @Deprecated
@@ -72,19 +69,11 @@ public interface DataPropertyExpression
     
     
     /**
-     * The {@link DataProperty.Disjoint} {@link Descriptor} implementation for {@link OWLDataProperty}.
+     * The {@link DataProperty.Disjoint} expression for a {@link Descriptor} whose ground is {@link OWLDataProperty}.
      * <p>
-     *     It specify how to {@link #queryDisjointDataProperty()} and {@link #writeExpressionAxioms()} for the
-     *     disjointed data properties (i.e.: {@link OWLDataProperty}) from the one described 
-     *     by this class (i.e.: {@link #getInstance()}).
+     *     It specifies how to {@link #queryDisjointDataProperty()} and {@link #writeExpressionAxioms()} for the
+     *     DataProperties disjoint to the ground DataProperty (i.e.: {@link OWLDataProperty}).
      * </p>
-     * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.DataPropertyExpression <br>
-     * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
-     * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
-     * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
-     * <b>date</b>:        21/05/17 <br>
-     * </small></div>
      *
      * @param <D> the type of the {@link DataPropertyExpression} descriptor instantiated during
      *           {@link #buildDisjointDataProperty()} through {@link #getNewDisjointDataProperty(Object, Object)}.
@@ -136,11 +125,11 @@ public interface DataPropertyExpression
         }
 
         @Override
-        DescriptorEntitySet.DataLinks getDisjointDataProperty();
+        DescriptorEntitySet.DataProperties getDisjointDataProperty();
 
         @Override // see super class for documentation
-        default DescriptorEntitySet.DataLinks queryDisjointDataProperty(){
-            DescriptorEntitySet.DataLinks set = new DescriptorEntitySet.DataLinks(getOntology().getDisjointDataProperty(getInstance()));
+        default DescriptorEntitySet.DataProperties queryDisjointDataProperty(){
+            DescriptorEntitySet.DataProperties set = new DescriptorEntitySet.DataProperties(getOntology().getDisjointDataProperty(getInstance()));
             set.remove( getInstance());
             set.setSingleton( getDisjointDataProperty().isSingleton());
             return set;
@@ -174,19 +163,11 @@ public interface DataPropertyExpression
     }
 
     /**
-     * The {@link DataProperty.Equivalent} {@link Descriptor} implementation for {@link OWLDataProperty}.
+     * The {@link DataProperty.Equivalent} expression for a {@link Descriptor} whose ground is {@link OWLDataProperty}.
      * <p>
-     *     It specify how to {@link #queryEquivalentDataProperty()} and {@link #writeExpressionAxioms()} for the
-     *     equivalent data properties (i.e.: {@link OWLDataProperty}) from the one described 
-     *     by this class (i.e.: {@link #getInstance()}).
+     *     It specifies how to {@link #queryEquivalentDataProperty()} and {@link #writeExpressionAxioms()} for the
+     *     DataProperties equivalent to the ground DataProperty (i.e.: {@link OWLDataProperty}).
      * </p>
-     * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.DataPropertyExpression <br>
-     * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
-     * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
-     * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
-     * <b>date</b>:        21/05/17 <br>
-     * </small></div>
      *
      * @param <D> the type of the {@link DataPropertyExpression} descriptor instantiated during
      *           {@link #buildEquivalentDataProperty()} through {@link #getNewEquivalentDataProperty(Object, Object)}.
@@ -238,11 +219,11 @@ public interface DataPropertyExpression
         }
 
         @Override
-        DescriptorEntitySet.DataLinks getEquivalentDataProperty();
+        DescriptorEntitySet.DataProperties getEquivalentDataProperty();
 
         @Override // see super class for documentation
-        default DescriptorEntitySet.DataLinks queryEquivalentDataProperty(){
-            DescriptorEntitySet.DataLinks set = new DescriptorEntitySet.DataLinks(getOntology().getEquivalentDataProperty(getInstance()));
+        default DescriptorEntitySet.DataProperties queryEquivalentDataProperty(){
+            DescriptorEntitySet.DataProperties set = new DescriptorEntitySet.DataProperties(getOntology().getEquivalentDataProperty(getInstance()));
             set.remove( getInstance());
             set.setSingleton( getEquivalentDataProperty().isSingleton());
             return set;
@@ -276,19 +257,11 @@ public interface DataPropertyExpression
     }
 
     /**
-     * The {@link DataProperty.Sub} {@link Descriptor} implementation for {@link OWLDataProperty}.
+     * The {@link DataProperty.Sub} expression for a {@link Descriptor} whose ground is {@link OWLDataProperty}.
      * <p>
-     *     It specify how to {@link #querySubDataProperty()} and {@link #writeExpressionAxioms()} for the
-     *     sub data properties (i.e.: {@link OWLDataProperty}) from the one described 
-     *     by this class (i.e.: {@link #getInstance()}).
+     *     It specifies how to {@link #querySubDataProperty()} and {@link #writeExpressionAxioms()} for the
+     *     DataProperties subsumed by the ground DataProperty (i.e.: {@link OWLDataProperty}).
      * </p>
-     * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.DataPropertyExpression <br>
-     * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
-     * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
-     * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
-     * <b>date</b>:        21/05/17 <br>
-     * </small></div>
      *
      * @param <D> the type of the {@link DataPropertyExpression} descriptor instantiated during
      *           {@link #buildSubDataProperty()}  through {@link #getNewSubDataProperty(Object, Object)}.
@@ -340,8 +313,8 @@ public interface DataPropertyExpression
         }
 
         @Override // see super class for documentation
-        default DescriptorEntitySet.DataLinks querySubDataProperty(){
-            DescriptorEntitySet.DataLinks set = new DescriptorEntitySet.DataLinks(getOntology().getSubDataPropertyOf(getInstance()));
+        default DescriptorEntitySet.DataProperties querySubDataProperty(){
+            DescriptorEntitySet.DataProperties set = new DescriptorEntitySet.DataProperties(getOntology().getSubDataPropertyOf(getInstance()));
             set.setSingleton( getSubDataProperty().isSingleton());
             return set;
         }
@@ -366,19 +339,11 @@ public interface DataPropertyExpression
     }
 
     /**
-     * The {@link DataProperty.Super} {@link Descriptor} implementation for {@link OWLDataProperty}.
+     * The {@link DataProperty.Super} expression for a {@link Descriptor} whose ground is {@link OWLDataProperty}.
      * <p>
-     *     It specify how to {@link #querySuperDataProperty()} and {@link #writeExpressionAxioms()} for the
-     *     super data properties (i.e.: {@link OWLDataProperty}) from the one described 
-     *     by this class (i.e.: {@link #getInstance()}).
+     *     It specifies how to {@link #querySuperDataProperty()} and {@link #writeExpressionAxioms()} for the
+     *     DataProperties super over by the ground DataProperty (i.e.: {@link OWLDataProperty}).
      * </p>
-     * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.DataPropertyExpression <br>
-     * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
-     * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
-     * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
-     * <b>date</b>:        21/05/17 <br>
-     * </small></div>
      *
      * @param <D> the type of the {@link DataPropertyExpression} descriptor instantiated during
      *           {@link #buildSuperDataProperty()} through {@link #getNewSuperDataProperty(Object, Object)}.
@@ -430,11 +395,11 @@ public interface DataPropertyExpression
         }
 
         @Override
-        DescriptorEntitySet.DataLinks getSuperDataProperty();
+        DescriptorEntitySet.DataProperties getSuperDataProperty();
 
         @Override // see super class for documentation
-        default DescriptorEntitySet.DataLinks querySuperDataProperty(){
-            DescriptorEntitySet.DataLinks set = new DescriptorEntitySet.DataLinks(getOntology().getSuperDataPropertyOf(getInstance()));
+        default DescriptorEntitySet.DataProperties querySuperDataProperty(){
+            DescriptorEntitySet.DataProperties set = new DescriptorEntitySet.DataProperties(getOntology().getSuperDataPropertyOf(getInstance()));
             set.setSingleton( getSuperDataProperty().isSingleton());
             return set;
         }
@@ -459,19 +424,11 @@ public interface DataPropertyExpression
     }
 
     /**
-     * The {@link DataProperty.Domain} {@link Descriptor} implementation for {@link OWLDataProperty}.
+     * The {@link DataProperty.Domain} expression for a {@link Descriptor} whose ground is {@link OWLDataProperty}.
      * <p>
-     *     It specify how to {@link #queryDomainDataProperty()} and {@link #writeExpressionAxioms()} for the
-     *     domain restriction (i.e.: {@link SemanticRestriction}) of the one described 
-     *     by this class (i.e.: {@link #getInstance()}).
+     *     It specifies how to {@link #queryDomainDataProperty()} and {@link #writeExpressionAxioms()} for the
+     *     domain restriction of the ground DataProperty (i.e.: {@link SemanticRestriction}).
      * </p>
-     * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.DataPropertyExpression <br>
-     * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
-     * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
-     * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
-     * <b>date</b>:        21/05/17 <br>
-     * </small></div>
      */
     interface Domain
             extends DataProperty.Domain<OWLReferences, OWLDataProperty, SemanticRestriction>,
@@ -1293,19 +1250,11 @@ public interface DataPropertyExpression
     }
 
     /**
-     * The {@link DataProperty.Range} {@link Descriptor} implementation for {@link OWLDataProperty}.
+     * The {@link DataProperty.Range} expression for a {@link Descriptor} whose ground is {@link OWLDataProperty}.
      * <p>
-     *     It specify how to {@link #queryRangeDataProperty()} and {@link #writeExpressionAxioms()} for the
-     *     range restriction (i.e.: {@link SemanticRestriction}) of the one described 
-     *     by this class (i.e.: {@link #getInstance()}).
+     *     It specifies how to {@link #queryRangeDataProperty()} and {@link #writeExpressionAxioms()} for the
+     *     range restriction of the ground DataProperty (i.e.: {@link SemanticRestriction}).
      * </p>
-     * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.DataPropertyExpression <br>
-     * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
-     * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
-     * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
-     * <b>date</b>:        21/05/17 <br>
-     * </small></div>
      */
     interface Range
             extends DataProperty.Range<OWLReferences, OWLDataProperty, SemanticRestriction>,

@@ -2,7 +2,6 @@ package it.emarolab.owloop.descriptor.utility.conceptDescriptor;
 
 
 import it.emarolab.amor.owlInterface.OWLReferences;
-import it.emarolab.owloop.core.Axiom;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.ConceptGround;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.ConceptExpression;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
@@ -12,29 +11,13 @@ import java.util.List;
 
 
 /**
- * A basic implementation for a conceptDescriptor with sub and super concepts.
- * <p>
- *     This is an example of how use the {@link Axiom.Descriptor}s for implement
- *     a conceptDescriptor that is synchronised w.r.t. its {@link Sub} and {@link Super} concepts.
- *     <br>
- *     Its purpose is only to instanciate the {@link DescriptorEntitySet.Concepts} for the
- *     respective descriptions, as well as call both interfaces in the
- *     {@link #readExpressionAxioms()} and {@link #writeExpressionAxioms()} methods.
- *     All its constructions are based on {@link ConceptGround} in order
- *     to automatically manage a grounding {@link ConceptGroundInstance}.
- *     <br>
- *     You may want to use this class (see also {@link HierarchicalConceptDesc},
- *     as well as other classes in the {@link it.emarolab.owloop.descriptor.utility} package)
- *     as templates to build a specific {@link ConceptExpression} descriptor that fits your needs
- *     and maximises the OWL synchronisation efficiency.
+ * This is an example of a 'compound' Concept Descriptor that implements 2 ClassExpressions (aka {@link ConceptExpression}):
+ * <ul>
+ * <li><b>{@link ConceptExpression.Sub}</b>:         to describe that a Class subsumes another Class.</li>
+ * <li><b>{@link ConceptExpression.Super}</b>:       to describe that a Class is a super-class of another Class.</li>
+ * </ul>
  *
- * <div style="text-align:center;"><small>
- * <b>File</b>:        it.emarolab.owloop.descriptor.utility.conceptDescriptor.HierarchicalConceptDesc <br>
- * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
- * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
- * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
- * <b>date</b>:        21/05/17 <br>
- * </small></div>
+ * See {@link FullConceptDescriptor} for an example of a 'compound' Concept Descriptor that implements all ClassExpressions (aka {@link ConceptExpression}).
  */
 public class HierarchicalConceptDesc
         extends ConceptGround
@@ -120,7 +103,7 @@ public class HierarchicalConceptDesc
 
     @Override
     public String toString() {
-        return "FullObjectPropertyDesc{" +
+        return "FullObjectPropertyDescriptor{" +
                 NL + "\t\t\t" + getGround() +
                 "," + NL + "\t⊃ " + subConcept +
                 "," + NL + "\t⊂ " + superConcept +

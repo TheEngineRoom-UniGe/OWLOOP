@@ -1,7 +1,6 @@
 package it.emarolab.owloop.descriptor.utility.individualDescriptor;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
-import it.emarolab.owloop.core.Axiom;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.IndividualExpression;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.IndividualGround;
@@ -11,31 +10,12 @@ import java.util.List;
 
 
 /**
- * A basic implementation for an individualDescriptor with 'same as' and 'different from' individualDescriptor description.
- * <p>
- *     This is an example of how use the {@link Axiom.Descriptor}s for implement
- *     am individualDescriptor that is synchronised w.r.t. to {@link Equivalent}
- *     and {@link Disjoint} instances.
- *     <br>
- *     Its purpose is only to instanciate the {@link DescriptorEntitySet.Individuals} for the
- *     respective descriptions, as well as call both interfaces in the
- *     {@link #readExpressionAxioms()} and {@link #writeExpressionAxioms()} methods.
- *     All its constructions are based on {@link IndividualGround} in order
- *     to automatically manage a grounding {@link IndividualGroundInstance}.
- *     <br>
- *     You may want to use this class (see also {@link TypeIndividualDesc}
- *     and {@link LinkIndividualDesc}, as well as other classes in the
- *     {@link it.emarolab.owloop.descriptor.utility} package) as templates to build a specific
- *     {@link IndividualExpression} descriptor that fits your needs and maximises the
- *     OWL synchronisation efficiency for data properties.
- *
- * <div style="text-align:center;"><small>
- * <b>File</b>:        it.emarolab.owloop.descriptor.utility.individualDescriptor.DefinitionIndividualDesc <br>
- * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
- * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
- * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
- * <b>date</b>:        21/05/17 <br>
- * </small></div>
+ * This is an example of a 'compound' Individual Descriptor which implements 2 {@link IndividualExpression}s.
+ * <ul>
+ * <li><b>{@link IndividualExpression.Equivalent}</b>:   to describe an Individual same-as another Individual.</li>
+ * <li><b>{@link IndividualExpression.Disjoint}</b>:     to describe an Individual different from another Individual.</li>
+ * </ul>
+ * See {@link FullIndividualDescriptor} for an example of a 'compound' Individual Descriptor that implements all IndividualExpressions.
  */
 public class DefinitionIndividualDesc
         extends IndividualGround
@@ -72,8 +52,6 @@ public class DefinitionIndividualDesc
         super(instanceName, ontoName, filePath, iriPath, bufferingChanges);
     }
 
-
-
     // implementations for Axiom.descriptor
 
     @Override
@@ -90,7 +68,6 @@ public class DefinitionIndividualDesc
         return r;
     }
 
-
     // implementations for IndividualExpression.Disjoint
 
     @Override //called during build...() you can change the returning type to any implementations of IndividualExpression
@@ -102,8 +79,6 @@ public class DefinitionIndividualDesc
     public DescriptorEntitySet.Individuals getDisjointIndividual() {
         return disjointIndividual;
     }
-
-
 
     // implementations for IndividualExpression.Equivalent
 
@@ -117,13 +92,9 @@ public class DefinitionIndividualDesc
         return equivalentIndividual;
     }
 
-
-    // implementation for standard object interface
-    // equals() and hashCode() is based on DescriptorGround<?> which considers only the ground
-
     @Override
     public String toString() {
-        return "FullObjectPropertyDesc{" +
+        return "FullObjectPropertyDescriptor{" +
                 NL + "\t\t\t" + getGround() +
                 ":" + NL + "\t≠ " + disjointIndividual +
                 "," + NL + "\t≡ " + equivalentIndividual +

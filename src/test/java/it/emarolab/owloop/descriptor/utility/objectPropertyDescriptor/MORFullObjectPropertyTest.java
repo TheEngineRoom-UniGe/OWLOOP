@@ -8,11 +8,11 @@ import static org.junit.Assert.assertEquals;
 
 public class MORFullObjectPropertyTest {
 
-    private static FullObjectPropertyDesc objectProperty;
+    private static FullObjectPropertyDescriptor objectProperty;
 
     @Before // called a before every @Test
     public void setUp() throws Exception {
-        objectProperty = new FullObjectPropertyDesc(
+        objectProperty = new FullObjectPropertyDescriptor(
                 "isAboveOf", // the ground instance name
                 "ontoName", // ontology reference name
                 "src/test/resources/tboxTest.owl", // the ontology file path

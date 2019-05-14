@@ -9,11 +9,11 @@ import static org.junit.Assert.assertEquals;
 
 public class MORFullDataPropertyTest {
 
-    private static FullDataPropertyDesc dataProperty;
+    private static FullDataPropertyDescriptor dataProperty;
 
     @Before // called a before every @Test
     public void setUp() throws Exception {
-        dataProperty = new FullDataPropertyDesc(
+        dataProperty = new FullDataPropertyDescriptor(
                 "has_time", // the ground instance name
                 "ontoName", // ontology reference name
                 "src/test/resources/tboxTest.owl", // the ontology file path

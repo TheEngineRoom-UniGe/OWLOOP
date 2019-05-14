@@ -18,6 +18,7 @@ import java.util.Set;
  * <li><b>{@link DataLink}</b>:     this expression describes an DataProperty and Individuals related via that DataProperty, for an Individual.</li>
  * </ul>
  *
+ * <p>
  * <div style="text-align:center;"><small>
  * <b>File</b>:         it.emarolab.owloop.core.Axiom <br>
  * <b>Licence</b>:      GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
@@ -354,7 +355,7 @@ public interface Individual<O,J>
      *     relative values for an individualDescriptor (i.e.: the {@link Ground#getGroundInstance()}).
      *     <br>
      *     By default, the synchronisation occurs only for the proprieties whose expression
-     *     has been initialised in the {@link ExpressionEntitySet} ({@link #getDataExpressions()}.
+     *     has been initialised in the {@link ExpressionEntitySet} ({@link #getDataExpressionAxioms()}.
      *     If the {@link ExpressionEntitySet} is left empty during {@link #readExpressionAxioms()}
      *     it maps all the data properties applied to the described individualDescriptor.
      * </p>
@@ -374,8 +375,8 @@ public interface Individual<O,J>
             try {
                 EntitySet.SynchronisationIntent<Y> from = synchroniseDataIndividualFromSemantic();
                 if (from != null) {
-                    getDataExpressions().addAll(from.getToAdd());
-                    getDataExpressions().removeAll(from.getToRemove());
+                    getDataExpressionAxioms().addAll(from.getToAdd());
+                    getDataExpressionAxioms().removeAll(from.getToRemove());
                 }
                 return getIntent(from);
             }catch (Exception e){
@@ -389,13 +390,13 @@ public interface Individual<O,J>
          * represents the specified data properties applied to this {@code this} description.
          * Each of {@link DataProperty}s are instantiated
          * through the method {@link #getNewDataIndividual(ExpressionEntity, Object)};
-         * this is called for all {@link #getDataExpressions()}.
+         * this is called for all {@link #getDataExpressionAxioms()}.
          * @return the set of {@link DataProperty}s that describes the
          * entities that are applied to {@code this} described ontological individualDescriptor.
          */
         default Set<D> buildDataIndividual(){
             Set<D> out = new HashSet<>();
-            for( Y cl : getDataExpressions()){
+            for( Y cl : getDataExpressionAxioms()){
                 D built = getNewDataIndividual( cl, getOntology());
                 built.readExpressionAxioms();
                 out.add( built);
@@ -419,7 +420,7 @@ public interface Individual<O,J>
          * {@code this} {@link Individual}; from a no OOP point of view.
          * @return the entities describing the data properties of {@code this} individualDescriptor.
          */
-        EntitySet<Y> getDataExpressions();
+        EntitySet<Y> getDataExpressionAxioms();
 
         /**
          * Queries to the OWL representation for the data properties applied to {@code this} {@link Descriptor}.
@@ -431,14 +432,14 @@ public interface Individual<O,J>
         /**
          * It calls {@link ExpressionEntitySet#synchroniseTo(EntitySet)} with {@link #queryDataIndividual()}
          * as input parameter. This computes the changes to be performed in the OWL representation
-         * for synchronise it with respect to {@link #getDataExpressions()}. This should
+         * for synchronise it with respect to {@link #getDataExpressionAxioms()}. This should
          * be done by {@link #writeExpressionAxioms()}.
          * @return the changes to be done to synchronise {@code this} structure with
          * the data properties applied on {@link #getInstance()}; to the OWL representation.
          */
         default EntitySet.SynchronisationIntent<Y> synchroniseDataIndividualToSemantic(){
             try {
-                return getDataExpressions().synchroniseTo( queryDataIndividual());
+                return getDataExpressionAxioms().synchroniseTo( queryDataIndividual());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -447,7 +448,7 @@ public interface Individual<O,J>
 
         /**
          * It calls {@link ExpressionEntitySet#synchroniseFrom(EntitySet)} with {@link #queryDataIndividual()}
-         * as input parameter. This computes the changes to be performed into the {@link #getDataExpressions()}
+         * as input parameter. This computes the changes to be performed into the {@link #getDataExpressionAxioms()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readExpressionAxioms()}.
          * @return the changes to be done to synchronise the data properties applied on {@link #getInstance()};
@@ -455,7 +456,7 @@ public interface Individual<O,J>
          */
         default EntitySet.SynchronisationIntent<Y> synchroniseDataIndividualFromSemantic(){
             try{
-                return getDataExpressions().synchroniseFrom( queryDataIndividual());
+                return getDataExpressionAxioms().synchroniseFrom( queryDataIndividual());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -470,7 +471,7 @@ public interface Individual<O,J>
      *     relative values for an individualDescriptor (i.e.: the {@link Ground#getGroundInstance()}).
      *     <br>
      *     By default, the synchronisation occurs only for the proprieties whose expression
-     *     has been initialised in the {@link ExpressionEntitySet} ({@link #getObjectSemantics()}).
+     *     has been initialised in the {@link ExpressionEntitySet} ({@link #getObjectExpressionAxioms()}).
      *     If the {@link ExpressionEntitySet} is left empty during {@link #readExpressionAxioms()}
      *     it maps all the object properties applied to the described individualDescriptor.
      * </p>
@@ -490,8 +491,8 @@ public interface Individual<O,J>
             try{
                 EntitySet.SynchronisationIntent<Y> from = synchroniseObjectIndividualFromSemantic();
                 if (from != null) {
-                    getObjectSemantics().addAll(from.getToAdd());
-                    getObjectSemantics().removeAll(from.getToRemove());
+                    getObjectExpressionAxioms().addAll(from.getToAdd());
+                    getObjectExpressionAxioms().removeAll(from.getToRemove());
                 }
                 return getIntent( from);
             }catch (Exception e){
@@ -505,13 +506,13 @@ public interface Individual<O,J>
          * represents the specified object properties applied to this {@code this} description.
          * Each of {@link ObjectProperty}s are instantiated
          * through the method {@link #getNewObjectIndividual(ExpressionEntity, Object)};
-         * this is called for all {@link #getObjectSemantics()}.
+         * this is called for all {@link #getObjectExpressionAxioms()}.
          * @return the set of {@link ObjectProperty}s that describes the
          * entities that are applied to {@code this} described ontological individualDescriptor.
          */
         default Set< D> buildObjectIndividual(){
             Set<D> out = new HashSet<>();
-            for( Y cl : getObjectSemantics()){
+            for( Y cl : getObjectExpressionAxioms()){
                 D built = getNewObjectIndividual( cl, getOntology());
                 built.readExpressionAxioms();
                 out.add( built);
@@ -535,7 +536,7 @@ public interface Individual<O,J>
          * {@code this} {@link Individual}; from a no OOP point of view.
          * @return the entities describing the object properties of {@code this} individualDescriptor.
          */
-        EntitySet<Y> getObjectSemantics();
+        EntitySet<Y> getObjectExpressionAxioms();
 
         /**
          * Queries to the OWL representation for the data properties applied to {@code this} {@link Descriptor}.
@@ -547,14 +548,14 @@ public interface Individual<O,J>
         /**
          * It calls {@link ExpressionEntitySet#synchroniseTo(EntitySet)} with {@link #queryObject()}
          * as input parameter. This computes the changes to be performed in the OWL representation
-         * for synchronise it with respect to {@link #getObjectSemantics()}. This should
+         * for synchronise it with respect to {@link #getObjectExpressionAxioms()}. This should
          * be done by {@link #writeExpressionAxioms()}.
          * @return the changes to be done to synchronise {@code this} structure with
          * the object properties applied on {@link #getInstance()}; to the OWL representation.
          */
         default EntitySet.SynchronisationIntent<Y> synchroniseObjectIndividualToSemantic(){
             try {
-                return getObjectSemantics().synchroniseTo( queryObject());
+                return getObjectExpressionAxioms().synchroniseTo( queryObject());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -563,7 +564,7 @@ public interface Individual<O,J>
 
         /**
          * It calls {@link ExpressionEntitySet#synchroniseFrom(EntitySet)} with {@link #queryObject()}
-         * as input parameter. This computes the changes to be performed into the {@link #getObjectSemantics()}
+         * as input parameter. This computes the changes to be performed into the {@link #getObjectExpressionAxioms()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readExpressionAxioms()}.
          * @return the changes to be done to synchronise the object properties applied on {@link #getInstance()};
@@ -571,7 +572,7 @@ public interface Individual<O,J>
          */
         default EntitySet.SynchronisationIntent<Y> synchroniseObjectIndividualFromSemantic(){
             try{
-                return getObjectSemantics().synchroniseFrom( queryObject());
+                return getObjectExpressionAxioms().synchroniseFrom( queryObject());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;

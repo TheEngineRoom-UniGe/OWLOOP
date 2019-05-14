@@ -5,7 +5,6 @@ import it.emarolab.owloop.descriptor.construction.descriptorGround.IndividualGro
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.IndividualExpression;
 import it.emarolab.owloop.descriptor.utility.conceptDescriptor.HierarchicalConceptDesc;
-import it.emarolab.owloop.core.Axiom;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 
@@ -13,31 +12,11 @@ import java.util.List;
 
 
 /**
- * A basic implementation for an individualDescriptor that belongs to classes.
- * <p>
- *     This is an example of how use the {@link Axiom.Descriptor}s for implement
- *     an individualDescriptor that is synchronised w.r.t. its {@link Type}s.
- *     <br>
- *     Its purpose is only to instanciate the {@link DescriptorEntitySet.Concepts} for the
- *     respective descriptions, as well as call the derived interfaces in the
- *     {@link #readExpressionAxioms()} and {@link #writeExpressionAxioms()} methods.
- *     From an OOP prospective it returns the classified types as instances
- *     of {@link HierarchicalConceptDesc}s.
- *     All its constructions are based on {@link IndividualGround} in order
- *     to automatically manage a grounding {@link IndividualGroundInstance}.
- *     <br>
- *     You may want to use this class (see also {@link DefinitionIndividualDesc} and {@link LinkIndividualDesc},
- *     as well as other classes in the {@link it.emarolab.owloop.descriptor.utility} package)
- *     as templates to build a specific {@link IndividualExpression} descriptor that fits your needs
- *     and maximises the OWL synchronisation efficiency.
- *
- * <div style="text-align:center;"><small>
- * <b>File</b>:        it.emarolab.owloop.descriptor.utility.conceptDescriptor.MORTypeIndinvidual <br>
- * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
- * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
- * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
- * <b>date</b>:        21/05/17 <br>
- * </small></div>
+ * This is an example of a 'simple' Individual Descriptor which implements 1 {@link IndividualExpression}s.
+ * <ul>
+ * <li><b>{@link IndividualExpression.Type}</b>: to describe the Type/s (i.e., class/es) of an Individual.</li>
+ * </ul>
+ * See {@link FullIndividualDescriptor} for an example of a 'compound' Individual Descriptor that implements all IndividualExpressions.
  */
 public class TypeIndividualDesc
         extends IndividualGround
@@ -72,8 +51,6 @@ public class TypeIndividualDesc
         super(instanceName, ontoName, filePath, iriPath, bufferingChanges);
     }
 
-
-
     // implementations for Axiom.descriptor
 
     @Override
@@ -85,7 +62,6 @@ public class TypeIndividualDesc
     public List<MappingIntent> writeExpressionAxioms() {
         return IndividualExpression.Type.super.writeExpressionAxioms();
     }
-
 
     // implementations for IndividualExpression.Type
 
@@ -99,14 +75,9 @@ public class TypeIndividualDesc
         return individualTypes;
     }
 
-
-
-    // implementation for standard object interface
-    // equals() and hashCode() is based on DescriptorGround<?> which considers only the ground
-
     @Override
     public String toString() {
-        return "FullObjectPropertyDesc{" +
+        return "FullObjectPropertyDescriptor{" +
                 NL + "\t\t\t" + getGround() +
                 ":" + NL + "\t ∈ " + individualTypes +
                 NL + "}";

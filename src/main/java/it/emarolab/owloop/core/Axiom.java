@@ -21,6 +21,7 @@ import java.util.*;
  *                                         applied to the OWL representation. </li>
  * </ul>
  *
+ * <p>
  * <div style="text-align:center;"><small>
  * <b>File</b>:         it.emarolab.owloop.core.Axiom <br>
  * <b>Licence</b>:      GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>

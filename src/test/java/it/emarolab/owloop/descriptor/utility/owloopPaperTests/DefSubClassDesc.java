@@ -4,14 +4,14 @@ import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.ConceptGround;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.ConceptExpression;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
-import it.emarolab.owloop.descriptor.utility.conceptDescriptor.FullConceptDesc;
+import it.emarolab.owloop.descriptor.utility.conceptDescriptor.FullConceptDescriptor;
 import org.semanticweb.owlapi.model.OWLClass;
 
 import java.util.List;
 
 public class DefSubClassDesc
         extends ConceptGround
-        implements ConceptExpression.Definition, ConceptExpression.Sub<FullConceptDesc>{
+        implements ConceptExpression.Definition, ConceptExpression.Sub<FullConceptDescriptor>{
 
     private DescriptorEntitySet.Restrictions restrictions = new DescriptorEntitySet.Restrictions();
     private DescriptorEntitySet.Concepts subConcept = new DescriptorEntitySet.Concepts();
@@ -47,8 +47,8 @@ public class DefSubClassDesc
 
     // implementations for ConceptExpression.Super
     @Override // called during build...() you can change the returning type to any implementations of ConceptExpression
-    public FullConceptDesc getNewSubConcept(OWLClass instance, OWLReferences ontology) {
-        return new FullConceptDesc( instance, ontology);
+    public FullConceptDescriptor getNewSubConcept(OWLClass instance, OWLReferences ontology) {
+        return new FullConceptDescriptor( instance, ontology);
     }
 
     @Override

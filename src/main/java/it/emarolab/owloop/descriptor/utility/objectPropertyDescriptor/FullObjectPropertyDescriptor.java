@@ -11,8 +11,8 @@ import java.util.List;
 
 /**
  * This is an example of a 'compound' ObjectProperty Descriptor as it implements more than one {@link ObjectPropertyExpression}.
- * Axioms in this descriptor's internal state (OWLOOP representation) gets synchronized wrt the axioms in the OWL representation.
- * {@link FullObjectPropertyDesc} can synchronize all the axioms, that are based on the following ObjectPropertyExpressions:
+ * Axioms in this descriptor's internal state (i.e., OWLOOP representation) can be synchronized to/from an OWL ontology.
+ * {@link FullObjectPropertyDescriptor} can synchronize all the axioms, that are based on the following ObjectPropertyExpressions:
  *
  * <ul>
  * <li><b>{@link ObjectPropertyExpression.Equivalent}</b>:   to describe that an ObjectProperty is equivalent to another ObjectProperty.</li>
@@ -24,6 +24,7 @@ import java.util.List;
  * <li><b>{@link ObjectPropertyExpression.Inverse}</b>:      to describe that an ObjectProperty has another inverse ObjectProperty.</li>
  * </ul>
  *
+ * <p>
  * <div style="text-align:center;"><small>
  * <b>File</b>:         it.emarolab.owloop.core.Axiom <br>
  * <b>Licence</b>:      GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
@@ -32,48 +33,48 @@ import java.util.List;
  * <b>date</b>:         01/05/19 <br>
  * </small></div>
  */
-public class FullObjectPropertyDesc
+public class FullObjectPropertyDescriptor
         extends ObjectPropertyGround
-        implements ObjectPropertyExpression.Disjoint<FullObjectPropertyDesc>,
-        ObjectPropertyExpression.Equivalent<FullObjectPropertyDesc>,
-        ObjectPropertyExpression.Inverse<FullObjectPropertyDesc>,
-        ObjectPropertyExpression.Sub<FullObjectPropertyDesc>,
-        ObjectPropertyExpression.Super<FullObjectPropertyDesc>,
+        implements ObjectPropertyExpression.Disjoint<FullObjectPropertyDescriptor>,
+        ObjectPropertyExpression.Equivalent<FullObjectPropertyDescriptor>,
+        ObjectPropertyExpression.Inverse<FullObjectPropertyDescriptor>,
+        ObjectPropertyExpression.Sub<FullObjectPropertyDescriptor>,
+        ObjectPropertyExpression.Super<FullObjectPropertyDescriptor>,
         ObjectPropertyExpression.Domain,
         ObjectPropertyExpression.Range{
 
-    private DescriptorEntitySet.ObjectLinks disjointProperties = new DescriptorEntitySet.ObjectLinks();
-    private DescriptorEntitySet.ObjectLinks equivalentProperties = new DescriptorEntitySet.ObjectLinks();
-    private DescriptorEntitySet.ObjectLinks inverseProperties = new DescriptorEntitySet.ObjectLinks();
-    private DescriptorEntitySet.ObjectLinks subProperties = new DescriptorEntitySet.ObjectLinks();
-    private DescriptorEntitySet.ObjectLinks superProperties = new DescriptorEntitySet.ObjectLinks();
+    private DescriptorEntitySet.ObjectProperties disjointProperties = new DescriptorEntitySet.ObjectProperties();
+    private DescriptorEntitySet.ObjectProperties equivalentProperties = new DescriptorEntitySet.ObjectProperties();
+    private DescriptorEntitySet.ObjectProperties inverseProperties = new DescriptorEntitySet.ObjectProperties();
+    private DescriptorEntitySet.ObjectProperties subProperties = new DescriptorEntitySet.ObjectProperties();
+    private DescriptorEntitySet.ObjectProperties superProperties = new DescriptorEntitySet.ObjectProperties();
     private DescriptorEntitySet.Restrictions domainRestriction = new DescriptorEntitySet.Restrictions();
     private DescriptorEntitySet.Restrictions rangeRestriction = new DescriptorEntitySet.Restrictions();
 
     // constructors for DataPropertyGround
 
-    public FullObjectPropertyDesc(OWLObjectProperty instance, OWLReferences onto) {
+    public FullObjectPropertyDescriptor(OWLObjectProperty instance, OWLReferences onto) {
         super(instance, onto);
     }
-    public FullObjectPropertyDesc(String instanceName, OWLReferences onto) {
+    public FullObjectPropertyDescriptor(String instanceName, OWLReferences onto) {
         super(instanceName, onto);
     }
-    public FullObjectPropertyDesc(OWLObjectProperty instance, String ontoName) {
+    public FullObjectPropertyDescriptor(OWLObjectProperty instance, String ontoName) {
         super(instance, ontoName);
     }
-    public FullObjectPropertyDesc(OWLObjectProperty instance, String ontoName, String filePath, String iriPath) {
+    public FullObjectPropertyDescriptor(OWLObjectProperty instance, String ontoName, String filePath, String iriPath) {
         super(instance, ontoName, filePath, iriPath);
     }
-    public FullObjectPropertyDesc(OWLObjectProperty instance, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
+    public FullObjectPropertyDescriptor(OWLObjectProperty instance, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
         super(instance, ontoName, filePath, iriPath, bufferingChanges);
     }
-    public FullObjectPropertyDesc(String instanceName, String ontoName) {
+    public FullObjectPropertyDescriptor(String instanceName, String ontoName) {
         super(instanceName, ontoName);
     }
-    public FullObjectPropertyDesc(String instanceName, String ontoName, String filePath, String iriPath) {
+    public FullObjectPropertyDescriptor(String instanceName, String ontoName, String filePath, String iriPath) {
         super(instanceName, ontoName, filePath, iriPath);
     }
-    public FullObjectPropertyDesc(String instanceName, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
+    public FullObjectPropertyDescriptor(String instanceName, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
         super(instanceName, ontoName, filePath, iriPath, bufferingChanges);
     }
 
@@ -108,24 +109,24 @@ public class FullObjectPropertyDesc
     // implementations for: ObjectPropertyExpression.Disjoint
 
     @Override //called during build...() you can change the returning type to any implementations of ObjectPropertyExpression
-    public FullObjectPropertyDesc getNewDisjointObjectProperty(OWLObjectProperty instance, OWLReferences ontology) {
-        return new FullObjectPropertyDesc( instance, ontology);
+    public FullObjectPropertyDescriptor getNewDisjointObjectProperty(OWLObjectProperty instance, OWLReferences ontology) {
+        return new FullObjectPropertyDescriptor( instance, ontology);
     }
 
     @Override
-    public DescriptorEntitySet.ObjectLinks getDisjointObjectProperty() {
+    public DescriptorEntitySet.ObjectProperties getDisjointObjectProperty() {
         return disjointProperties;
     }
 
     // implementations for: ObjectPropertyExpression.Equivalent
 
     @Override //called during build...() you can change the returning type to any implementations of ObjectPropertyExpression
-    public FullObjectPropertyDesc getNewEquivalentObjectProperty(OWLObjectProperty instance, OWLReferences ontology) {
-        return new FullObjectPropertyDesc( instance, ontology);
+    public FullObjectPropertyDescriptor getNewEquivalentObjectProperty(OWLObjectProperty instance, OWLReferences ontology) {
+        return new FullObjectPropertyDescriptor( instance, ontology);
     }
 
     @Override
-    public DescriptorEntitySet.ObjectLinks getEquivalentObjectProperty() {
+    public DescriptorEntitySet.ObjectProperties getEquivalentObjectProperty() {
         return equivalentProperties;
     }
 
@@ -146,36 +147,36 @@ public class FullObjectPropertyDesc
     // implementations for: ObjectPropertyExpression.Sub
 
     @Override //called during build...() you can change the returning type to any implementations of ObjectPropertyExpression
-    public FullObjectPropertyDesc getNewSubObjectProperty(OWLObjectProperty instance, OWLReferences ontology) {
-        return new FullObjectPropertyDesc( instance, ontology);
+    public FullObjectPropertyDescriptor getNewSubObjectProperty(OWLObjectProperty instance, OWLReferences ontology) {
+        return new FullObjectPropertyDescriptor( instance, ontology);
     }
 
     @Override
-    public DescriptorEntitySet.ObjectLinks getSubObjectProperty() {
+    public DescriptorEntitySet.ObjectProperties getSubObjectProperty() {
         return subProperties;
     }
 
     // implementations for: ObjectPropertyExpression.Super
 
     @Override //called during build...() you can change the returning type to any implementations of ObjectPropertyExpression
-    public FullObjectPropertyDesc getNewSuperObjectProperty(OWLObjectProperty instance, OWLReferences ontology) {
-        return new FullObjectPropertyDesc( instance, ontology);
+    public FullObjectPropertyDescriptor getNewSuperObjectProperty(OWLObjectProperty instance, OWLReferences ontology) {
+        return new FullObjectPropertyDescriptor( instance, ontology);
     }
 
     @Override
-    public DescriptorEntitySet.ObjectLinks getSuperObjectProperty() {
+    public DescriptorEntitySet.ObjectProperties getSuperObjectProperty() {
         return superProperties;
     }
 
     // implementations for: ObjectPropertyExpression.Inverse
 
     @Override //called during build...() you can change the returning type to any implementations of ObjectPropertyExpression
-    public FullObjectPropertyDesc getNewInverseObjectProperty(OWLObjectProperty instance, OWLReferences ontology) {
-        return new FullObjectPropertyDesc( instance, ontology);
+    public FullObjectPropertyDescriptor getNewInverseObjectProperty(OWLObjectProperty instance, OWLReferences ontology) {
+        return new FullObjectPropertyDescriptor( instance, ontology);
     }
 
     @Override
-    public DescriptorEntitySet.ObjectLinks getInverseObjectProperty() {
+    public DescriptorEntitySet.ObjectProperties getInverseObjectProperty() {
         return inverseProperties;
     }
 
@@ -183,7 +184,7 @@ public class FullObjectPropertyDesc
 
     @Override
     public String toString() {
-        return "FullObjectPropertyDesc{" +
+        return "FullObjectPropertyDescriptor{" +
                 NL + "\t\t\t" + getGround() +
                 ":" + NL + "\t≠ " + disjointProperties +
                 "," + NL + "\t≡ " + equivalentProperties +

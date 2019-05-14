@@ -19,6 +19,7 @@ import java.util.Set;
  * <li><b>{@link Definition}</b>:  this expression describes the definition of a Class..</li>
  * </ul>
  *
+ * <p>
  * <div style="text-align:center;"><small>
  * <b>File</b>:         it.emarolab.owloop.core.Axiom <br>
  * <b>Licence</b>:      GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>

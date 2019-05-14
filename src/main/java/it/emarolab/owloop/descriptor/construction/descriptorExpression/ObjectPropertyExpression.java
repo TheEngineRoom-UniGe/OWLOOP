@@ -17,22 +17,19 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * The {@link ObjectProperty} {@link Descriptor} implementation for {@link OWLObjectProperty}.
+ * This interface extends all the interfaces in {@link ObjectProperty}.
+ * It allows to {@link #readExpressionAxioms()} and {@link #writeExpressionAxioms()}
+ * specifically for OWL DataProperties.
+ * It contains several expressions that can be combined in any arbitrary way as they
+ * rely on the same ground ({@link ObjectGroundInstance}).
+ *
  * <p>
- *     This interface extends all the interfaces contained in {@link ObjectProperty}
- *     in order to fully define {@link Descriptor}s for {@link OWLObjectProperty} based on the
- *     <a href="https://github.com/EmaroLab/multi_ontology_reference">aMOR</a> API.
- *     In particular all of the sub interfaces specify how to
- *     {@code query} and {@link #writeExpressionAxioms()} specifically for OWL data properties.
- *     It contains several semantic descriptors that can be combined in any arbitrary combinations, since they
- *     rely on the same ground (i.e.: {@link ObjectGroundInstance}).
- * </p>
  * <div style="text-align:center;"><small>
- * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.ObjectPropertyExpression <br>
- * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
- * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
- * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
- * <b>date</b>:        21/05/17 <br>
+ * <b>File</b>:         it.emarolab.owloop.core.Axiom <br>
+ * <b>Licence</b>:      GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
+ * <b>Authors</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it), Syed Yusha Kareem (kareem.syed.yusha@dibris.unige.it) <br>
+ * <b>affiliation</b>:  EMAROLab, DIBRIS, University of Genoa. <br>
+ * <b>date</b>:         01/05/19 <br>
  * </small></div>
  */
 public interface ObjectPropertyExpression
@@ -40,8 +37,8 @@ public interface ObjectPropertyExpression
         DescriptorGroundInterface<OWLObjectProperty> {
 
     /**
-     * It is used to easily access to the {@link DescriptorGroundInterface} facilities.
-     * @return the ontology in which {@code this} description is working on.
+     * To access the {@link DescriptorGroundInterface} facilities.
+     * @return the ontology on which {@code this} descriptor is working.
      * @deprecated use {@link #getGround()} instead.
      */
     @Override @Deprecated
@@ -49,8 +46,8 @@ public interface ObjectPropertyExpression
         return getGround().getGroundOntology();
     }
     /**
-     * It is used to easily access to the {@link DescriptorGroundInterface} facilities.
-     * @return the instance described by {@code this} implementation.
+     * To access the {@link DescriptorGroundInterface} facilities.
+     * @return the ground instance of {@code this} descriptor.
      * @deprecated use {@link #getInstance()} instead.
      */
     @Override @Deprecated
@@ -124,19 +121,11 @@ public interface ObjectPropertyExpression
 
 
     /**
-     * The {@link ObjectProperty.Inverse} {@link Descriptor} implementation for {@link OWLObjectProperty}.
+     * The {@link ObjectProperty.Inverse} expression for a {@link Descriptor} whose ground is {@link OWLObjectProperty}.
      * <p>
-     *     It specify how to {@link #queryInverseObjectProperty()} and {@link #writeExpressionAxioms()} for the
-     *     disjointed object properties (i.e.: {@link OWLObjectProperty}) from the one described
-     *     by this class (i.e.: {@link #getInstance()}).
+     *     It specifies how to {@link #queryInverseObjectProperty()} and {@link #writeExpressionAxioms()} for the
+     *     ObjectProperties inverse to the ground ObjectProperty (i.e.: {@link #getInstance()}).
      * </p>
-     * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.ObjectPropertyExpression <br>
-     * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
-     * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
-     * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
-     * <b>date</b>:        21/05/17 <br>
-     * </small></div>
      *
      * @param <D> the type of the {@link ObjectPropertyExpression} descriptor instantiated during
      *           {@link #buildInverseObjectProperty()} through {@link #getNewInverseObjectProperty(Object, Object)}.
@@ -188,11 +177,11 @@ public interface ObjectPropertyExpression
         }
 
         @Override
-        DescriptorEntitySet.ObjectLinks getInverseObjectProperty();
+        DescriptorEntitySet.ObjectProperties getInverseObjectProperty();
 
         @Override // see super class for documentation
-        default DescriptorEntitySet.ObjectLinks queryInverseObjectProperty(){
-            DescriptorEntitySet.ObjectLinks set = new DescriptorEntitySet.ObjectLinks(getOntology().getInverseProperty(getInstance()));
+        default DescriptorEntitySet.ObjectProperties queryInverseObjectProperty(){
+            DescriptorEntitySet.ObjectProperties set = new DescriptorEntitySet.ObjectProperties(getOntology().getInverseProperty(getInstance()));
             set.setSingleton( getInverseObjectProperty().isSingleton());
             return set;
         }
@@ -217,19 +206,11 @@ public interface ObjectPropertyExpression
     }
 
     /**
-     * The {@link ObjectProperty.Disjoint} {@link Descriptor} implementation for {@link OWLObjectProperty}.
+     * The {@link ObjectProperty.Disjoint} expression for a {@link Descriptor} whose ground is {@link OWLObjectProperty}.
      * <p>
-     *     It specify how to {@link #queryDisjointObjectProperty()} and {@link #writeExpressionAxioms()} for the
-     *     disjointed object properties (i.e.: {@link OWLObjectProperty}) from the one described
-     *     by this class (i.e.: {@link #getInstance()}).
+     *     It specifies how to {@link #queryDisjointObjectProperty()} and {@link #writeExpressionAxioms()} for the
+     *     ObjectProperties disjoint to the ground ObjectProperty (i.e.: {@link OWLObjectProperty}).
      * </p>
-     * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.ObjectPropertyExpression <br>
-     * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
-     * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
-     * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
-     * <b>date</b>:        21/05/17 <br>
-     * </small></div>
      *
      * @param <D> the type of the {@link ObjectPropertyExpression} descriptor instantiated during
      *           {@link #buildDisjointObjectProperty()} through {@link #getNewDisjointObjectProperty(Object, Object)}.
@@ -281,11 +262,11 @@ public interface ObjectPropertyExpression
         }
 
         @Override
-        DescriptorEntitySet.ObjectLinks getDisjointObjectProperty();
+        DescriptorEntitySet.ObjectProperties getDisjointObjectProperty();
 
         @Override // see super class for documentation
-        default DescriptorEntitySet.ObjectLinks queryDisjointObjectProperty(){
-            DescriptorEntitySet.ObjectLinks set = new DescriptorEntitySet.ObjectLinks(getOntology().getDisjointObjectProperty(getInstance()));
+        default DescriptorEntitySet.ObjectProperties queryDisjointObjectProperty(){
+            DescriptorEntitySet.ObjectProperties set = new DescriptorEntitySet.ObjectProperties(getOntology().getDisjointObjectProperty(getInstance()));
             set.remove( getInstance());
             set.setSingleton( getDisjointObjectProperty().isSingleton());
             return set;
@@ -319,19 +300,11 @@ public interface ObjectPropertyExpression
     }
 
     /**
-     * The {@link ObjectProperty.Equivalent} {@link Descriptor} implementation for {@link OWLObjectProperty}.
+     * The {@link ObjectProperty.Equivalent} expression for a {@link Descriptor} whose ground is {@link OWLObjectProperty}.
      * <p>
-     *     It specify how to {@link #queryEquivalentObjectProperty()} ()} and {@link #writeExpressionAxioms()} for the
-     *     equivalent object properties (i.e.: {@link OWLObjectProperty}) from the one described
-     *     by this class (i.e.: {@link #getInstance()}).
+     *     It specifies how to {@link #queryEquivalentObjectProperty()} ()} and {@link #writeExpressionAxioms()} for the
+     *     ObjectProperties equivalent to the ground ObjectProperty (i.e.: {@link OWLObjectProperty}).
      * </p>
-     * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.ObjectPropertyExpression <br>
-     * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
-     * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
-     * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
-     * <b>date</b>:        21/05/17 <br>
-     * </small></div>
      *
      * @param <D> the type of the {@link ObjectPropertyExpression} descriptor instantiated during
      *           {@link #buildEquivalentObjectProperty()} through {@link #getNewEquivalentObjectProperty(Object, Object)}.
@@ -383,11 +356,11 @@ public interface ObjectPropertyExpression
         }
 
         @Override
-        DescriptorEntitySet.ObjectLinks getEquivalentObjectProperty();
+        DescriptorEntitySet.ObjectProperties getEquivalentObjectProperty();
 
         @Override // see super class for documentation
-        default DescriptorEntitySet.ObjectLinks queryEquivalentObjectProperty(){
-            DescriptorEntitySet.ObjectLinks set = new DescriptorEntitySet.ObjectLinks(getOntology().getEquivalentObjectProperty(getInstance()));
+        default DescriptorEntitySet.ObjectProperties queryEquivalentObjectProperty(){
+            DescriptorEntitySet.ObjectProperties set = new DescriptorEntitySet.ObjectProperties(getOntology().getEquivalentObjectProperty(getInstance()));
             set.remove( getInstance());
             set.setSingleton( getEquivalentObjectProperty().isSingleton());
             return set;
@@ -421,19 +394,11 @@ public interface ObjectPropertyExpression
     }
 
     /**
-     * The {@link ObjectProperty.Sub} {@link Descriptor} implementation for {@link OWLObjectProperty}.
+     * The {@link ObjectProperty.Sub} expression for a {@link Descriptor} whose ground is {@link OWLObjectProperty}.
      * <p>
-     *     It specify how to {@link #querySubObjectProperty()} and {@link #writeExpressionAxioms()} for the
-     *     sub object properties (i.e.: {@link OWLObjectProperty}) from the one described
-     *     by this class (i.e.: {@link #getInstance()}).
+     *     It specifies how to {@link #querySubObjectProperty()} and {@link #writeExpressionAxioms()} for the
+     *     ObjectProperties subsumed by the ground ObjectProperty(i.e.: {@link OWLObjectProperty}).
      * </p>
-     * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.ObjectPropertyExpression <br>
-     * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
-     * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
-     * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
-     * <b>date</b>:        21/05/17 <br>
-     * </small></div>
      *
      * @param <D> the type of the {@link ObjectPropertyExpression} descriptor instantiated during
      *           {@link #buildSubObjectProperty()}  through {@link #getSubObjectProperty()}.
@@ -485,11 +450,11 @@ public interface ObjectPropertyExpression
         }
 
         @Override
-        DescriptorEntitySet.ObjectLinks getSubObjectProperty();
+        DescriptorEntitySet.ObjectProperties getSubObjectProperty();
 
         @Override // see super class for documentation
-        default DescriptorEntitySet.ObjectLinks querySubObjectProperty(){
-            DescriptorEntitySet.ObjectLinks set = new DescriptorEntitySet.ObjectLinks(getOntology().getSubObjectPropertyOf(getInstance()));
+        default DescriptorEntitySet.ObjectProperties querySubObjectProperty(){
+            DescriptorEntitySet.ObjectProperties set = new DescriptorEntitySet.ObjectProperties(getOntology().getSubObjectPropertyOf(getInstance()));
             set.setSingleton( getSubObjectProperty().isSingleton());
             return set;
         }
@@ -514,19 +479,11 @@ public interface ObjectPropertyExpression
     }
 
     /**
-     * The {@link ObjectProperty.Super} {@link Descriptor} implementation for {@link OWLObjectProperty}.
+     * The {@link ObjectProperty.Super} expression for a {@link Descriptor} whose ground is {@link OWLObjectProperty}.
      * <p>
-     *     It specify how to {@link #querySuperObjectProperty()} and {@link #writeExpressionAxioms()} for the
-     *     super object properties (i.e.: {@link OWLObjectProperty}) from the one described
-     *     by this class (i.e.: {@link #getInstance()}).
+     *     It specifies how to {@link #querySuperObjectProperty()} and {@link #writeExpressionAxioms()} for the
+     *     ObjectProperties super over the ground ObjectProperty (i.e.: {@link OWLObjectProperty}).
      * </p>
-     * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.ObjectPropertyExpression <br>
-     * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
-     * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
-     * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
-     * <b>date</b>:        21/05/17 <br>
-     * </small></div>
      *
      * @param <D> the type of the {@link ObjectPropertyExpression} descriptor instantiated during
      *           {@link #buildSuperObjectProperty()}  through {@link #getSuperObjectProperty()}.
@@ -579,11 +536,11 @@ public interface ObjectPropertyExpression
         }
 
         @Override
-        DescriptorEntitySet.ObjectLinks getSuperObjectProperty();
+        DescriptorEntitySet.ObjectProperties getSuperObjectProperty();
 
         @Override // see super class for documentation
-        default DescriptorEntitySet.ObjectLinks querySuperObjectProperty(){
-            DescriptorEntitySet.ObjectLinks set = new DescriptorEntitySet.ObjectLinks(getOntology().getSuperObjectPropertyOf(getInstance()));
+        default DescriptorEntitySet.ObjectProperties querySuperObjectProperty(){
+            DescriptorEntitySet.ObjectProperties set = new DescriptorEntitySet.ObjectProperties(getOntology().getSuperObjectPropertyOf(getInstance()));
             set.setSingleton( getSuperObjectProperty().isSingleton());
             return set;
         }
@@ -608,19 +565,11 @@ public interface ObjectPropertyExpression
     }
 
     /**
-     * The {@link ObjectProperty.Domain} {@link Descriptor} implementation for {@link OWLObjectProperty}.
+     * The {@link ObjectProperty.Domain} expression for a {@link Descriptor} whose ground is {@link OWLObjectProperty}.
      * <p>
-     *     It specify how to {@link #queryDomainObjectProperty()} and {@link #writeExpressionAxioms()} for the
-     *     domain restriction (i.e.: {@link SemanticRestriction}) of the one described
-     *     by this class (i.e.: {@link #getInstance()}).
+     *     It specifies how to {@link #queryDomainObjectProperty()} and {@link #writeExpressionAxioms()} for the
+     *     domain restriction of the ground ObjectProperty (i.e.: {@link SemanticRestriction}).
      * </p>
-     * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.ObjectPropertyExpression <br>
-     * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
-     * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
-     * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
-     * <b>date</b>:        21/05/17 <br>
-     * </small></div>
      */
     interface Domain
             extends ObjectProperty.Domain<OWLReferences, OWLObjectProperty, SemanticRestriction>,
@@ -1441,19 +1390,10 @@ public interface ObjectPropertyExpression
     }
 
     /**
-     * The {@link ObjectProperty.Range} {@link Descriptor} implementation for {@link OWLObjectProperty}.
+     * The {@link ObjectProperty.Range} expression for a {@link Descriptor} whose ground is {@link OWLObjectProperty}.
      * <p>
-     *     It specify how to {@link #queryRangeObjectProperty()} and {@link #writeExpressionAxioms()} for the
-     *     range restriction (i.e.: {@link SemanticRestriction}) of the one described
-     *     by this class (i.e.: {@link #getInstance()}).
-     * </p>
-     * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.ObjectPropertyExpression <br>
-     * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
-     * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
-     * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
-     * <b>date</b>:        21/05/17 <br>
-     * </small></div>
+     *     It specifies how to {@link #queryRangeObjectProperty()} and {@link #writeExpressionAxioms()} for the
+     *     range restriction of the ground ObjectProperty (i.e.: {@link SemanticRestriction}).
      */
     interface Range
             extends ObjectProperty.Range<OWLReferences, OWLObjectProperty, SemanticRestriction>,

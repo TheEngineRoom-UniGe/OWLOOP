@@ -9,38 +9,20 @@ import org.semanticweb.owlapi.model.OWLObjectProperty;
 import java.util.List;
 
 /**
- * A basic implementation for an object property with sub and super properties.
- * <p>
- *     This is an example of how use the {@link Descriptor}s for implement
- *     a object property that is synchronised w.r.t. its {@link Super} and {@link Sub} properties.
- *     <br>
- *     Its purpose is only to instanciate the {@link DescriptorEntitySet.ObjectLinks} for the
- *     respective descriptions, as well as call both interfaces in the
- *     {@link #readExpressionAxioms()} and {@link #writeExpressionAxioms()} methods.
- *     All its constructions are based on {@link ObjectPropertyGround} in order
- *     to automatically manage an {@link ObjectGroundInstance} ground.
- *     <br>
- *     You may want to use this class (see also {@link DefinitionObjectPropertyDesc}
- *     and {@link DomainObjectPropertyDesc} as well as other classes in the
- *     {@link it.emarolab.owloop.descriptor.utility} package) as templates to build a specific
- *     {@link ObjectPropertyExpression} descriptor that fits your needs and maximises the
- *     OWL synchronisation efficiency for object properties.
- *
- * <div style="text-align:center;"><small>
- * <b>File</b>:        it.emarolab.owloop.descriptor.utility.objectPropertyDescriptor.HierarchicalObjectPropertyDesc <br>
- * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
- * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
- * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
- * <b>date</b>:        21/05/17 <br>
- * </small></div>
+ * This is an example of a 'compound' ObjectProperty Descriptor which implements 2 {@link ObjectPropertyExpression}s.
+ * <ul>
+ * <li><b>{@link ObjectPropertyExpression.Sub}</b>:          to describe that an ObjectProperty subsumes another ObjectProperty.</li>
+ * <li><b>{@link ObjectPropertyExpression.Super}</b>:        to describe that an ObjectProperty super-sumes another ObjectProperty.</li>
+ * </ul>
+ * See {@link FullObjectPropertyDescriptor} for an example of a 'compound' Individual Descriptor that implements all ObjectPropertyExpressions.
  */
 public class HierarchicalObjectPropertyDesc
         extends ObjectPropertyGround
         implements ObjectPropertyExpression.Sub<HierarchicalObjectPropertyDesc>,
         ObjectPropertyExpression.Super<HierarchicalObjectPropertyDesc>{
 
-    private DescriptorEntitySet.ObjectLinks subProperties = new DescriptorEntitySet.ObjectLinks();
-    private DescriptorEntitySet.ObjectLinks superProperties = new DescriptorEntitySet.ObjectLinks();
+    private DescriptorEntitySet.ObjectProperties subProperties = new DescriptorEntitySet.ObjectProperties();
+    private DescriptorEntitySet.ObjectProperties superProperties = new DescriptorEntitySet.ObjectProperties();
 
     // constructors for ObjectPropertyGround
 
@@ -69,8 +51,6 @@ public class HierarchicalObjectPropertyDesc
         super(instanceName, ontoName, filePath, iriPath, bufferingChanges);
     }
 
-
-
     // implementations for Axiom.descriptor
 
     @Override
@@ -87,8 +67,6 @@ public class HierarchicalObjectPropertyDesc
         return r;
     }
 
-
-
     // implementations for ObjectPropertyExpression.Super
 
     @Override //called during build...() you can change the returning type to any implementations of ObjectPropertyExpression
@@ -97,11 +75,9 @@ public class HierarchicalObjectPropertyDesc
     }
 
     @Override
-    public DescriptorEntitySet.ObjectLinks getSubObjectProperty() {
+    public DescriptorEntitySet.ObjectProperties getSubObjectProperty() {
         return subProperties;
     }
-
-
 
     // implementations for ObjectPropertyExpression.Super
 
@@ -111,16 +87,12 @@ public class HierarchicalObjectPropertyDesc
     }
 
     @Override
-    public DescriptorEntitySet.ObjectLinks getSuperObjectProperty() {
+    public DescriptorEntitySet.ObjectProperties getSuperObjectProperty() {
         return superProperties;
     }
 
-
-    // implementation for standard object interface
-    // equals() and hashCode() is based on DescriptorGround<?> which considers only the ground
-
     public String toString() {
-        return "FullObjectPropertyDesc{" +
+        return "FullObjectPropertyDescriptor{" +
                 NL + "\t\t\t" + getGround() +
                 "," + NL + "\t⊃ " + subProperties +
                 "," + NL + "\t⊂ " + superProperties +

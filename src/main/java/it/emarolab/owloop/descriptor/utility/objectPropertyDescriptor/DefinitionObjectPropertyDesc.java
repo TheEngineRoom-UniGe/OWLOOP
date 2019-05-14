@@ -10,31 +10,13 @@ import java.util.List;
 
 
 /**
- * A basic implementation for an object property with equivalent, disjoint and inverse properties.
- * <p>
- *     This is an example of how use the {@link Descriptor}s for implement
- *     an object property that is synchronised w.r.t. its {@link Disjoint},
- *     {@link Equivalent} and {@link Inverse} properties.
- *     <br>
- *     Its purpose is only to instanciate the {@link DescriptorEntitySet.ObjectLinks} for the
- *     respective descriptions, as well as call both interfaces in the
- *     {@link #readExpressionAxioms()} and {@link #writeExpressionAxioms()} methods.
- *     All its constructions are based on {@link ObjectPropertyGround} in order
- *     to automatically manage an {@link ObjectGroundInstance} ground.
- *     <br>
- *     You may want to use this class (see also {@link DefinitionObjectPropertyDesc}
- *     and {@link HierarchicalObjectPropertyDesc},as well as other classes in the
- *     {@link it.emarolab.owloop.descriptor.utility} package) as templates to build a specific
- *     {@link ObjectPropertyExpression} descriptor that fits your needs and maximises the
- *     OWL synchronisation efficiency for object properties.
- *
- * <div style="text-align:center;"><small>
- * <b>File</b>:        it.emarolab.owloop.descriptor.utility.objectPropertyDescriptor.DefinitionObjectPropertyDesc <br>
- * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
- * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
- * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
- * <b>date</b>:        21/05/17 <br>
- * </small></div>
+ * This is an example of a 'compound' ObjectProperty Descriptor which implements 3 {@link ObjectPropertyExpression}s.
+ * <ul>
+ * <li><b>{@link ObjectPropertyExpression.Equivalent}</b>:   to describe that an ObjectProperty is equivalent to another ObjectProperty.</li>
+ * <li><b>{@link ObjectPropertyExpression.Disjoint}</b>:     to describe that an ObjectProperty is disjoint to another ObjectProperty.</li>
+ * <li><b>{@link ObjectPropertyExpression.Inverse}</b>:      to describe that an ObjectProperty has another inverse ObjectProperty.</li>
+ * </ul>
+ * See {@link FullObjectPropertyDescriptor} for an example of a 'compound' Individual Descriptor that implements all ObjectPropertyExpressions.
  */
 public class DefinitionObjectPropertyDesc
         extends ObjectPropertyGround
@@ -42,10 +24,9 @@ public class DefinitionObjectPropertyDesc
         ObjectPropertyExpression.Equivalent<DefinitionObjectPropertyDesc>,
         ObjectPropertyExpression.Inverse<DefinitionObjectPropertyDesc> {
 
-    private DescriptorEntitySet.ObjectLinks disjointProperties = new DescriptorEntitySet.ObjectLinks();
-    private DescriptorEntitySet.ObjectLinks equivalentProperties = new DescriptorEntitySet.ObjectLinks();
-    private DescriptorEntitySet.ObjectLinks inverseProperties = new DescriptorEntitySet.ObjectLinks();
-
+    private DescriptorEntitySet.ObjectProperties disjointProperties = new DescriptorEntitySet.ObjectProperties();
+    private DescriptorEntitySet.ObjectProperties equivalentProperties = new DescriptorEntitySet.ObjectProperties();
+    private DescriptorEntitySet.ObjectProperties inverseProperties = new DescriptorEntitySet.ObjectProperties();
 
     // constructors for ObjectPropertyGround
 
@@ -74,8 +55,6 @@ public class DefinitionObjectPropertyDesc
         super(instanceName, ontoName, filePath, iriPath, bufferingChanges);
     }
 
-
-
     // implementations for Axiom.descriptor
 
     @Override
@@ -94,7 +73,6 @@ public class DefinitionObjectPropertyDesc
         return r;
     }
 
-
     // implementations for ObjectPropertyExpression.Disjoint
 
     @Override //called during build...() you can change the returning type to any implementations of ObjectPropertyExpression
@@ -103,11 +81,9 @@ public class DefinitionObjectPropertyDesc
     }
 
     @Override
-    public DescriptorEntitySet.ObjectLinks getDisjointObjectProperty() {
+    public DescriptorEntitySet.ObjectProperties getDisjointObjectProperty() {
         return disjointProperties;
     }
-
-
 
     // implementations for ObjectPropertyExpression.Equivalent
 
@@ -117,11 +93,9 @@ public class DefinitionObjectPropertyDesc
     }
 
     @Override
-    public DescriptorEntitySet.ObjectLinks getEquivalentObjectProperty() {
+    public DescriptorEntitySet.ObjectProperties getEquivalentObjectProperty() {
         return equivalentProperties;
     }
-
-
 
     // implementations for ObjectPropertyExpression.Inverse
 
@@ -131,17 +105,12 @@ public class DefinitionObjectPropertyDesc
     }
 
     @Override
-    public DescriptorEntitySet.ObjectLinks getInverseObjectProperty() {
+    public DescriptorEntitySet.ObjectProperties getInverseObjectProperty() {
         return inverseProperties;
     }
 
-
-
-    // implementation for standard object interface
-    // equals() and hashCode() is based on DescriptorGround<?> which considers only the ground
-
     public String toString() {
-        return "FullObjectPropertyDesc{" +
+        return "FullObjectPropertyDescriptor{" +
                 NL + "\t\t\t" + getGround() +
                 ":" + NL + "\t≠ " + disjointProperties +
                 "," + NL + "\t≡ " + equivalentProperties +

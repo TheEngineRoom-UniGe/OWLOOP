@@ -1,6 +1,6 @@
 package it.emarolab.owloop.descriptor.utility.owloopPaperTests;
 
-import it.emarolab.owloop.descriptor.utility.individualDescriptor.FullIndividualDesc;
+import it.emarolab.owloop.descriptor.utility.individualDescriptor.FullIndividualDescriptor;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,12 +9,12 @@ import static org.junit.Assert.assertEquals;
 
 public class TestAlgorithm1 {
 
-    private static FullIndividualDesc individual;
+    private static FullIndividualDescriptor individual;
 
     @Before // called a before every @Test
     public void setUp() {
 
-        individual = new FullIndividualDesc(
+        individual = new FullIndividualDescriptor(
 
                 "Robot1", // the ground instance name
                 "owloopTest", // ontology reference name
@@ -34,7 +34,7 @@ public class TestAlgorithm1 {
 
         String pos = getRobotPosition();
 
-        FullIndividualDesc d = individual;
+        FullIndividualDescriptor d = individual;
         d.addObject("isIn",pos,false); //singleton 'true' means this descriptor can only have a single element in its EntitySet.
         System.out.println(d);
 

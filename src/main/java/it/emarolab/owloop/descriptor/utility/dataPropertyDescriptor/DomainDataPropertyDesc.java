@@ -5,44 +5,25 @@ import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.DataPropertyGround;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.DataPropertyExpression;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
-import it.emarolab.owloop.core.Axiom;
 import org.semanticweb.owlapi.model.OWLDataProperty;
 
 import java.util.List;
 
 /**
- * A basic implementation for a data property with domain and range restrictions.
- * <p>
- *     This is an example of how use the {@link Axiom.Descriptor}s for implement
- *     a data property that is synchronised w.r.t. its {@link Domain} and {@link Range} restrictions.
- *     <br>
- *     Its purpose is only to instanciate the {@link DescriptorEntitySet.Restrictions} for the
- *     respective descriptions, as well as call both interfaces in the
- *     {@link #readExpressionAxioms()} and {@link #writeExpressionAxioms()} methods.
- *     All its constructions are based on {@link DataPropertyGround} in order
- *     to automatically manage a grounding {@link DataGroundInstance}.
- *     <br>
- *     You may want to use this class (see also {@link DefinitionDataPropertyDesc}
- *     and {@link HierarchicalDataPropertyDesc}, as well as other classes in the
- *     {@link it.emarolab.owloop.descriptor.utility} package) as templates to build a specific
- *     {@link DataPropertyExpression} descriptor that fits your needs and maximises the
- *     OWL synchronisation efficiency for data properties.
- *
- * <div style="text-align:center;"><small>
- * <b>File</b>:        it.emarolab.owloop.descriptor.utility.dataPropertyDescriptor.DomainDataPropertyDesc <br>
- * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
- * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
- * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
- * <b>date</b>:        21/05/17 <br>
- * </small></div>
+ * This is an example of a 'compound' DataProperty Descriptor which implements 2 {@link DataPropertyExpression}s.
+ * <ul>
+ * <li><b>{@link DataPropertyExpression.Domain}</b>:       to describe the domain restrictions of a DataProperty.</li>
+ * <li><b>{@link DataPropertyExpression.Range}</b>:        to describe the range restrictions of a DataProperty.</li>
+ * </ul>
+ * See {@link FullDataPropertyDescriptor} for an example of a 'compound' DataProperty Descriptor that implements all DataPropertyExpressions.
  */
 public class DomainDataPropertyDesc
         extends DataPropertyGround
-        implements DataPropertyExpression.Domain, DataPropertyExpression.Range {
+        implements DataPropertyExpression.Domain,
+        DataPropertyExpression.Range {
 
     private DescriptorEntitySet.Restrictions domainRestriction = new DescriptorEntitySet.Restrictions();
     private DescriptorEntitySet.Restrictions rangeRestriction = new DescriptorEntitySet.Restrictions();
-
 
     // constructors for DataPropertyGround
 
@@ -71,8 +52,6 @@ public class DomainDataPropertyDesc
         super(instanceName, ontoName, filePath, iriPath, bufferingChanges);
     }
 
-
-
     // implementations for Axiom.descriptor
 
     @Override
@@ -89,15 +68,11 @@ public class DomainDataPropertyDesc
         return r;
     }
 
-
-
     // implementations for DataPropertyExpression.Domain
     @Override
     public DescriptorEntitySet.Restrictions getDomainDataProperty() {
         return domainRestriction;
     }
-
-
 
     // implementations for DataPropertyExpression.Range
     @Override
@@ -105,13 +80,12 @@ public class DomainDataPropertyDesc
         return rangeRestriction;
     }
 
-
     // implementation for standard object interface
     // equals() and hashCode() is based on DescriptorGround<?> which considers only the ground
 
     @Override
     public String toString() {
-        return "FullObjectPropertyDesc{" +
+        return "FullObjectPropertyDescriptor{" +
                 NL + "\t\t\t" + getGround() +
                 "," + NL + "\t→ " + domainRestriction +
                 "," + NL + "\t← " + rangeRestriction +

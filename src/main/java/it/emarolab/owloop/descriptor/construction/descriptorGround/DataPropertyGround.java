@@ -9,6 +9,7 @@ import org.semanticweb.owlapi.model.OWLDataProperty;
  * This abstract class is used to instantiate a {@link DescriptorGround} for a {@link DataGroundInstance}
  * linked to {@link DataPropertyExpression}s.
  *
+ * <p>
  * <div style="text-align:center;"><small>
  * <b>File</b>:         it.emarolab.owloop.core.Axiom <br>
  * <b>Licence</b>:      GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>

@@ -4,15 +4,15 @@ import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.IndividualGround;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.IndividualExpression;
-import it.emarolab.owloop.descriptor.utility.objectPropertyDescriptor.FullObjectPropertyDesc;
+import it.emarolab.owloop.descriptor.utility.objectPropertyDescriptor.FullObjectPropertyDescriptor;
 
 import java.util.List;
 
 public class ObjLinkIndividualDesc
         extends IndividualGround
-        implements IndividualExpression.ObjectLink<FullObjectPropertyDesc> {
+        implements IndividualExpression.ObjectLink<FullObjectPropertyDescriptor> {
 
-    private DescriptorEntitySet.ObjectSemantics objectLinks = new DescriptorEntitySet.ObjectSemantics();
+    private DescriptorEntitySet.ObjectLinksSet objectLinks = new DescriptorEntitySet.ObjectLinksSet();
 
     // constructors for IndividualGround
     public ObjLinkIndividualDesc(String instanceName, OWLReferences onto) {
@@ -35,12 +35,12 @@ public class ObjLinkIndividualDesc
 
     // implementations for IndividualExpression.ObjectLink
     @Override //called during build...() you can change the returning type to any implementations of ObjectPropertyExpression
-    public FullObjectPropertyDesc getNewObjectIndividual(DescriptorEntitySet.ObjectExpression instance, OWLReferences ontology) {
-        return new FullObjectPropertyDesc( instance.getExpression(), ontology);
+    public FullObjectPropertyDescriptor getNewObjectIndividual(DescriptorEntitySet.ObjectLinks instance, OWLReferences ontology) {
+        return new FullObjectPropertyDescriptor( instance.getExpression(), ontology);
     }
 
     @Override
-    public DescriptorEntitySet.ObjectSemantics getObjectSemantics() {
+    public DescriptorEntitySet.ObjectLinksSet getObjectExpressionAxioms() {
         return objectLinks;
     }
 

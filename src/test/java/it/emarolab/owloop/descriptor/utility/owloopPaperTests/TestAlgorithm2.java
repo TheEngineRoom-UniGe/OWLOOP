@@ -4,7 +4,7 @@ import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.amor.owlInterface.OWLReferencesInterface;
 import it.emarolab.amor.owlInterface.SemanticRestriction;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
-import it.emarolab.owloop.descriptor.utility.conceptDescriptor.FullConceptDesc;
+import it.emarolab.owloop.descriptor.utility.conceptDescriptor.FullConceptDescriptor;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
@@ -63,7 +63,7 @@ public class TestAlgorithm2 {
         Set<DefSubClassDesc> setOneD = d2.buildTypeIndividual();                   // BUILD Type of an Individual --> CORRIDOR,LOCATION,Top
         for( DefSubClassDesc d3 : setOneD ){
 
-            Set<FullConceptDesc> setTwoD = d3.buildSubConcept();                    // BUILD Sub of a Concept --> we have the sub-classes of all the 3 above
+            Set<FullConceptDescriptor> setTwoD = d3.buildSubConcept();                    // BUILD Sub of a Concept --> we have the sub-classes of all the 3 above
 
             if( setTwoD.size() <= 1 ) { // owl:Nothing is always there            // If less than or equal to 1
 
@@ -92,11 +92,11 @@ public class TestAlgorithm2 {
         d1.addObject( "hasProp2", "X");
         d1.writeExpressionAxioms();
 
-        FullIndividualDesc d1 = new FullIndividualDesc("Robot1", ontoref);
+        FullIndividualDescriptor d1 = new FullIndividualDescriptor("Robot1", ontoref);
         d1.readExpressionAxioms();          //at this point the descriptor reads all knowledge
         System.out.println( " 11 " + d1);
 
-        FullIndividualDesc d2 = new FullIndividualDesc("Robot1", ontoref);
+        FullIndividualDescriptor d2 = new FullIndividualDescriptor("Robot1", ontoref);
         d2.addObject( "hasProp1");
         d2.addObject( "hasProp2");
         d2.readExpressionAxioms();          //at this point the descriptor reads only particular knowledge

@@ -12,11 +12,11 @@ public class MORFullConceptTest {
 
     // todo solve problem on conceptDescriptor definition
 
-    private static FullConceptDesc concept;
+    private static FullConceptDescriptor concept;
 
     @Before // called a before every @Test
     public void setUp() throws Exception {
-        concept = new FullConceptDesc(
+        concept = new FullConceptDescriptor(
                 "Sphere", // the ground instance name
                 "ontoName", // ontology reference name
                 "src/test/resources/tboxTest.owl", // the ontology file path

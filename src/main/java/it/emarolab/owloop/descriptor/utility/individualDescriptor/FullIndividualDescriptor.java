@@ -5,9 +5,9 @@ import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.IndividualGround;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.IndividualExpression;
-import it.emarolab.owloop.descriptor.utility.conceptDescriptor.FullConceptDesc;
-import it.emarolab.owloop.descriptor.utility.dataPropertyDescriptor.FullDataPropertyDesc;
-import it.emarolab.owloop.descriptor.utility.objectPropertyDescriptor.FullObjectPropertyDesc;
+import it.emarolab.owloop.descriptor.utility.conceptDescriptor.FullConceptDescriptor;
+import it.emarolab.owloop.descriptor.utility.dataPropertyDescriptor.FullDataPropertyDescriptor;
+import it.emarolab.owloop.descriptor.utility.objectPropertyDescriptor.FullObjectPropertyDescriptor;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 
@@ -15,8 +15,8 @@ import java.util.List;
 
 /**
  * This is an example of a 'compound' Individual Descriptor as it implements more than one {@link IndividualExpression}.
- * Axioms in this descriptor's internal state (OWLOOP representation) gets synchronized wrt the axioms in the OWL representation.
- * {@link FullIndividualDesc} can synchronize all the axioms, that are based on the following IndividualExpressions:
+ * Axioms in this descriptor's internal state (i.e., OWLOOP representation) can be synchronized to/from an OWL ontology.
+ * {@link FullIndividualDescriptor} can synchronize all the axioms, that are based on the following IndividualExpressions:
  *
  * <ul>
  * <li><b>{@link IndividualExpression.Equivalent}</b>:   to describe an Individual same-as another Individual.</li>
@@ -26,6 +26,7 @@ import java.util.List;
  * <li><b>{@link IndividualExpression.DataLink}</b>:     to describe an DataProperty and Individuals related via that DataProperty, for an Individual.</li>
  * </ul>
  *
+ * <p>
  * <div style="text-align:center;"><small>
  * <b>File</b>:         it.emarolab.owloop.core.Axiom <br>
  * <b>Licence</b>:      GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
@@ -34,44 +35,44 @@ import java.util.List;
  * <b>date</b>:         01/05/19 <br>
  * </small></div>
  */
-public class FullIndividualDesc
+public class FullIndividualDescriptor
         extends IndividualGround
-        implements IndividualExpression.Disjoint<FullIndividualDesc>,
-        IndividualExpression.Equivalent<FullIndividualDesc>,
-        IndividualExpression.Type<FullConceptDesc>,
-        IndividualExpression.ObjectLink<FullObjectPropertyDesc>,
-        IndividualExpression.DataLink<FullDataPropertyDesc> {
+        implements IndividualExpression.Disjoint<FullIndividualDescriptor>,
+        IndividualExpression.Equivalent<FullIndividualDescriptor>,
+        IndividualExpression.Type<FullConceptDescriptor>,
+        IndividualExpression.ObjectLink<FullObjectPropertyDescriptor>,
+        IndividualExpression.DataLink<FullDataPropertyDescriptor> {
 
     private DescriptorEntitySet.Individuals disjointIndividual = new DescriptorEntitySet.Individuals();
     private DescriptorEntitySet.Individuals equivalentIndividual = new DescriptorEntitySet.Individuals();
     private DescriptorEntitySet.Concepts individualTypes = new DescriptorEntitySet.Concepts();
-    private DescriptorEntitySet.ObjectSemantics objectLinks = new DescriptorEntitySet.ObjectSemantics();
-    private DescriptorEntitySet.DataSemantics dataLinks = new DescriptorEntitySet.DataSemantics();
+    private DescriptorEntitySet.ObjectLinksSet objectLinks = new DescriptorEntitySet.ObjectLinksSet();
+    private DescriptorEntitySet.DataLinksSet dataLinks = new DescriptorEntitySet.DataLinksSet();
 
     // Constructors from the abstract class: IndividualGround
 
-    public FullIndividualDesc(OWLNamedIndividual instance, OWLReferences onto) {
+    public FullIndividualDescriptor(OWLNamedIndividual instance, OWLReferences onto) {
         super(instance, onto);
     }
-    public FullIndividualDesc(String instanceName, OWLReferences onto) {
+    public FullIndividualDescriptor(String instanceName, OWLReferences onto) {
         super(instanceName, onto);
     }
-    public FullIndividualDesc(OWLNamedIndividual instance, String ontoName) {
+    public FullIndividualDescriptor(OWLNamedIndividual instance, String ontoName) {
         super(instance, ontoName);
     }
-    public FullIndividualDesc(OWLNamedIndividual instance, String ontoName, String filePath, String iriPath) {
+    public FullIndividualDescriptor(OWLNamedIndividual instance, String ontoName, String filePath, String iriPath) {
         super(instance, ontoName, filePath, iriPath);
     }
-    public FullIndividualDesc(OWLNamedIndividual instance, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
+    public FullIndividualDescriptor(OWLNamedIndividual instance, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
         super(instance, ontoName, filePath, iriPath, bufferingChanges);
     }
-    public FullIndividualDesc(String instanceName, String ontoName) {
+    public FullIndividualDescriptor(String instanceName, String ontoName) {
         super(instanceName, ontoName);
     }
-    public FullIndividualDesc(String instanceName, String ontoName, String filePath, String iriPath) {
+    public FullIndividualDescriptor(String instanceName, String ontoName, String filePath, String iriPath) {
         super(instanceName, ontoName, filePath, iriPath);
     }
-    public FullIndividualDesc(String instanceName, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
+    public FullIndividualDescriptor(String instanceName, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
         super(instanceName, ontoName, filePath, iriPath, bufferingChanges);
     }
 
@@ -102,8 +103,8 @@ public class FullIndividualDesc
     // implementations for: IndividualExpression.Disjoint
 
     @Override //called during build...() you can change the returning type to any implementations of IndividualExpression
-    public FullIndividualDesc getNewDisjointIndividual(OWLNamedIndividual instance, OWLReferences ontology) {
-        return new FullIndividualDesc( instance, ontology);
+    public FullIndividualDescriptor getNewDisjointIndividual(OWLNamedIndividual instance, OWLReferences ontology) {
+        return new FullIndividualDescriptor( instance, ontology);
     }
 
     @Override
@@ -114,8 +115,8 @@ public class FullIndividualDesc
     // Implementations for: IndividualExpression.Equivalent
 
     @Override //called during build...() you can change the returning type to any implementations of IndividualExpression
-    public FullIndividualDesc getNewEquivalentIndividual(OWLNamedIndividual instance, OWLReferences ontology) {
-        return new FullIndividualDesc( instance, ontology);
+    public FullIndividualDescriptor getNewEquivalentIndividual(OWLNamedIndividual instance, OWLReferences ontology) {
+        return new FullIndividualDescriptor( instance, ontology);
     }
 
     @Override
@@ -126,8 +127,8 @@ public class FullIndividualDesc
     // Implementations for: IndividualExpression.Type
 
     @Override //called during build...() you can change the returning type to any implementations of ConceptExpression
-    public FullConceptDesc getNewTypeIndividual(OWLClass instance, OWLReferences ontology) {
-        return new FullConceptDesc( instance, ontology);
+    public FullConceptDescriptor getNewTypeIndividual(OWLClass instance, OWLReferences ontology) {
+        return new FullConceptDescriptor( instance, ontology);
     }
 
     @Override
@@ -138,24 +139,24 @@ public class FullIndividualDesc
     // Implementations for: IndividualExpression.ObjectLink
 
     @Override //called during build...() you can change the returning type to any implementations of ObjectPropertyExpression
-    public FullObjectPropertyDesc getNewObjectIndividual(DescriptorEntitySet.ObjectExpression instance, OWLReferences ontology) {
-        return new FullObjectPropertyDesc( instance.getExpression(), ontology);
+    public FullObjectPropertyDescriptor getNewObjectIndividual(DescriptorEntitySet.ObjectLinks instance, OWLReferences ontology) {
+        return new FullObjectPropertyDescriptor( instance.getExpression(), ontology);
     }
 
     @Override
-    public DescriptorEntitySet.ObjectSemantics getObjectSemantics() {
+    public DescriptorEntitySet.ObjectLinksSet getObjectExpressionAxioms() {
         return objectLinks;
     }
 
     // Implementations for: IndividualExpression.DataLink
 
     @Override //called during build...() you can change the returning type to any implementations of DataPropertyExpression
-    public FullDataPropertyDesc getNewDataIndividual(DescriptorEntitySet.DataExpression instance, OWLReferences ontology) {
-        return new FullDataPropertyDesc( instance.getExpression(), ontology);
+    public FullDataPropertyDescriptor getNewDataIndividual(DescriptorEntitySet.DataLinks instance, OWLReferences ontology) {
+        return new FullDataPropertyDescriptor( instance.getExpression(), ontology);
     }
 
     @Override
-    public DescriptorEntitySet.DataSemantics getDataExpressions() {
+    public DescriptorEntitySet.DataLinksSet getDataExpressionAxioms() {
         return dataLinks;
     }
 
@@ -163,7 +164,7 @@ public class FullIndividualDesc
 
     @Override
     public String toString() {
-        return "FullObjectPropertyDesc{" +
+        return "FullObjectPropertyDescriptor{" +
                 NL + "\t\t\t" + getGround() +
                 ":" + NL + "\t≠ " + disjointIndividual +
                 "," + NL + "\t≡ " + equivalentIndividual +

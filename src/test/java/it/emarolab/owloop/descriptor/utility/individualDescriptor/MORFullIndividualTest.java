@@ -9,11 +9,11 @@ import static org.junit.Assert.assertEquals;
 
 public class MORFullIndividualTest {
 
-    private static FullIndividualDesc individual;
+    private static FullIndividualDescriptor individual;
 
     @Before // called a before every @Test
     public void setUp() throws Exception {
-        individual = new FullIndividualDesc(
+        individual = new FullIndividualDescriptor(
                 "individualDescriptor-A", // the ground instance name
                 "ontoName", // ontology reference name
                 "src/test/resources/tboxTest.owl", // the ontology file path
@@ -145,7 +145,7 @@ public class MORFullIndividualTest {
         //assertSemantic();
         individual.addObject( "isRightOf", "Individual-B", true);
         individual.addObject( "isRightOf", "Individual-D",true);
-        for(DescriptorEntitySet.ObjectExpression i : individual.getObjectSemantics())
+        for(DescriptorEntitySet.ObjectLinks i : individual.getObjectExpressionAxioms())
             assertEquals( i.getValues().size(), 1);
         individual.writeExpressionAxiomsInconsistencySafe(); // reasoner infers shape properties
         assertSemantic();
@@ -210,7 +210,7 @@ public class MORFullIndividualTest {
         //assertSemantic();
         individual.addData( "hasProp", 2.3, true);
         individual.addData( "hasProp", 5.7, true);
-        for(DescriptorEntitySet.DataExpression i : individual.getDataExpressions())
+        for(DescriptorEntitySet.DataLinks i : individual.getDataExpressionAxioms())
             assertEquals( i.getValues().size(), 1);
         individual.writeExpressionAxiomsInconsistencySafe(); // reasoner infers shape properties
         assertSemantic();
@@ -235,7 +235,7 @@ public class MORFullIndividualTest {
         assertEquals( individual.getDisjointIndividual(), individual.queryDisjointIndividual());
         assertEquals( individual.getEquivalentIndividual(), individual.queryEquivalentIndividual());
         assertEquals( individual.getTypeIndividual(), individual.queryTypeIndividual());
-        assertEquals( individual.getObjectSemantics(), individual.queryObject());
-        assertEquals( individual.getDataExpressions(), individual.queryDataIndividual());
+        assertEquals( individual.getObjectExpressionAxioms(), individual.queryObject());
+        assertEquals( individual.getDataExpressionAxioms(), individual.queryDataIndividual());
     }
 }

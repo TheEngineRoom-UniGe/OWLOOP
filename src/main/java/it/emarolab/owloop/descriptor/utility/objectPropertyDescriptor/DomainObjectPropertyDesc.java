@@ -10,38 +10,20 @@ import org.semanticweb.owlapi.model.OWLObjectProperty;
 import java.util.List;
 
 /**
- * A basic implementation for an object property with domain and range restrictions.
- * <p>
- *     This is an example of how use the {@link Descriptor}s for implement
- *     an object property that is synchronised w.r.t. its {@link Domain} and {@link Range} restrictions.
- *     <br>
- *     Its purpose is only to instanciate the {@link DescriptorEntitySet.Restrictions} for the
- *     respective descriptions, as well as call both interfaces in the
- *     {@link #readExpressionAxioms()} and {@link #writeExpressionAxioms()} methods.
- *     All its constructions are based on {@link ObjectPropertyGround} in order
- *     to automatically manage an {@link ObjectGroundInstance} ground.
- *     <br>
- *     You may want to use this class (see also {@link DefinitionObjectPropertyDesc}
- *     and {@link HierarchicalObjectPropertyDesc},as well as other classes in the
- *     {@link it.emarolab.owloop.descriptor.utility} package) as templates to build a specific
- *     {@link ObjectPropertyExpression} descriptor that fits your needs and maximises the
- *     OWL synchronisation efficiency for object properties.
- *
- * <div style="text-align:center;"><small>
- * <b>File</b>:        it.emarolab.owloop.descriptor.utility.objectPropertyDescriptor.DomainObjectPropertyDesc <br>
- * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
- * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
- * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
- * <b>date</b>:        21/05/17 <br>
- * </small></div>
+ * This is an example of a 'compound' ObjectProperty Descriptor which implements 2 {@link ObjectPropertyExpression}s.
+ * <ul>
+ * <li><b>{@link ObjectPropertyExpression.Domain}</b>:       to describe the domain restrictions of an ObjectProperty.</li>
+ * <li><b>{@link ObjectPropertyExpression.Range}</b>:        to describe the range restrictions of an ObjectProperty.</li>
+ * </ul>
+ * See {@link FullObjectPropertyDescriptor} for an example of a 'compound' Individual Descriptor that implements all ObjectPropertyExpressions.
  */
 public class DomainObjectPropertyDesc
         extends ObjectPropertyGround
-        implements ObjectPropertyExpression.Domain, ObjectPropertyExpression.Range {
+        implements ObjectPropertyExpression.Domain,
+        ObjectPropertyExpression.Range {
 
     private DescriptorEntitySet.Restrictions domainRestriction = new DescriptorEntitySet.Restrictions();
     private DescriptorEntitySet.Restrictions rangeRestriction = new DescriptorEntitySet.Restrictions();
-
 
     // constructors for ObjectPropertyGround
 
@@ -70,8 +52,6 @@ public class DomainObjectPropertyDesc
         super(instanceName, ontoName, filePath, iriPath, bufferingChanges);
     }
 
-
-
     // implementations for Axiom.descriptor
 
     @Override
@@ -88,29 +68,22 @@ public class DomainObjectPropertyDesc
         return r;
     }
 
-    
-
     // implementations for ObjectPropertyExpression.Domain
+
     @Override
     public DescriptorEntitySet.Restrictions getDomainObjectProperty() {
         return domainRestriction;
     }
 
-    
-
     // implementations for ObjectPropertyExpression.Range
+
     @Override
     public DescriptorEntitySet.Restrictions getRangeObjectProperty() {
         return rangeRestriction;
     }
 
-
-
-    // implementation for standard object interface
-    // equals() and hashCode() is based on DescriptorGround<?> which considers only the ground
-
     public String toString() {
-        return "FullObjectPropertyDesc{" +
+        return "FullObjectPropertyDescriptor{" +
                 NL + "\t\t\t" + getGround() +
                 "," + NL + "\t→ " + domainRestriction +
                 "," + NL + "\t← " + rangeRestriction +

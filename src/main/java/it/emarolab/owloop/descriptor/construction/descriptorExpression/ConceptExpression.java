@@ -14,22 +14,19 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * The {@link Concept} {@link Descriptor} implementation for {@link OWLClass}.
+ * This interface extends all the interfaces in {@link Concept}.
+ * It allows to {@link #readExpressionAxioms()} and {@link #writeExpressionAxioms()}
+ * specifically for OWL Classes.
+ * It contains several expressions that can be combined in any arbitrary way as they
+ * rely on the same ground ({@link ConceptGroundInstance}).
+ *
  * <p>
- *     This interface extends all the interfaces contained in {@link Concept}
- *     in order to fully define {@link Descriptor}s for {@link OWLClass} based on the
- *     <a href="https://github.com/EmaroLab/multi_ontology_reference">aMOR</a> API.
- *     In particular all of the sub interfaces specify how to
- *     {@code query} and {@link #writeExpressionAxioms()} specifically for OWL classes.
- *     It contains several semantic descriptors that can be combined in any arbitrary combinations, since they
- *     rely on the same ground (i.e.: {@link ConceptGroundInstance}).
- * </p>
  * <div style="text-align:center;"><small>
- * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.ConceptExpression <br>
- * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
- * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
- * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
- * <b>date</b>:        21/05/17 <br>
+ * <b>File</b>:         it.emarolab.owloop.core.Axiom <br>
+ * <b>Licence</b>:      GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
+ * <b>Authors</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it), Syed Yusha Kareem (kareem.syed.yusha@dibris.unige.it) <br>
+ * <b>affiliation</b>:  EMAROLab, DIBRIS, University of Genoa. <br>
+ * <b>date</b>:         01/05/19 <br>
  * </small></div>
  */
 public interface ConceptExpression
@@ -37,8 +34,8 @@ public interface ConceptExpression
         DescriptorGroundInterface<OWLClass> {
 
     /**
-     * It is used to easily access to the {@link DescriptorGroundInterface} facilities.
-     * @return the ontology in which {@code this} description is working on.
+     * To access the {@link DescriptorGroundInterface} facilities.
+     * @return the ontology on which {@code this} descriptor is working.
      * @deprecated use {@link #getGround()} instead.
      */
     @Override @Deprecated
@@ -46,8 +43,8 @@ public interface ConceptExpression
         return getGround().getGroundOntology();
     }
     /**
-     * It is used to easily access to the {@link DescriptorGroundInterface} facilities.
-     * @return the instance described by {@code this} implementation.
+     * To access the {@link DescriptorGroundInterface} facilities.
+     * @return the ground instance of {@code this} descriptor.
      * @deprecated use {@link #getInstance()} instead.
      */
     @Override @Deprecated
@@ -56,19 +53,11 @@ public interface ConceptExpression
     }
 
     /**
-     * The {@link Concept.Instance} {@link Descriptor} implementation for {@link OWLClass}.
+     * The {@link Concept.Instance} expression for a {@link Descriptor} whose ground is {@link OWLClass}.
      * <p>
-     *     It specify how to {@link #queryIndividualInstance()} and {@link #writeExpressionAxioms()} for the
-     *     individualDescriptor (i.e.: {@link OWLNamedIndividual}) belonging to the described
-     *     class (i.e.: {@link #getInstance()}).
+     *     It specifies how to {@link #queryIndividualInstance()} and {@link #writeExpressionAxioms()} for the
+     *     individuals of the ground Class ({@link #getInstance()).
      * </p>
-     * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.ConceptExpression <br>
-     * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
-     * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
-     * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
-     * <b>date</b>:        21/05/17 <br>
-     * </small></div>
      *
      * @param <D> the type of the {@link IndividualExpression} descriptor instantiated during
      *           {@link #buildIndividualInstance()} through {@link #getNewIndividualInstance(Object, Object)}.
@@ -146,19 +135,11 @@ public interface ConceptExpression
     }
 
     /**
-     * The {@link Concept.Disjoint} {@link Descriptor} implementation for {@link OWLClass}.
+     * The {@link Concept.Disjoint} expression for a {@link Descriptor} whose ground is {@link OWLClass}.
      * <p>
-     *     It specify how to {@link #queryDisjointConcept()} and {@link #writeExpressionAxioms()} for the
-     *     classes (i.e.: {@link OWLClass}) tha are disjointed to the described one 
-     *     (i.e.: {@link #getInstance()}).
+     *     It specifies how to {@link #queryDisjointConcept()} and {@link #writeExpressionAxioms()} for the
+     *     classes disjoint to the ground Class ({@link #getInstance()).
      * </p>
-     * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.ConceptExpression <br>
-     * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
-     * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
-     * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
-     * <b>date</b>:        21/05/17 <br>
-     * </small></div>
      *
      * @param <D> the type of the {@link ConceptExpression} descriptor instantiated during
      *           {@link #buildDisjointConcept()} through {@link #getNewDisjointConcept(Object, Object)}.
@@ -254,19 +235,11 @@ public interface ConceptExpression
     }
 
     /**
-     * The {@link Concept.Equivalent} {@link Descriptor} implementation for {@link OWLClass}.
+     * The {@link Concept.Equivalent} expression for a {@link Descriptor} whose ground is {@link OWLClass}.
      * <p>
-     *     It specify how to {@link #queryEquivalentConcept()} and {@link #writeExpressionAxioms()} for the
-     *     classes (i.e.: {@link OWLClass}) tha are equivalent to the described one 
-     *     (i.e.: {@link #getInstance()}).
+     *     It specifies how to {@link #queryEquivalentConcept()} and {@link #writeExpressionAxioms()} for the
+     *     classes equivalent to the ground Class ({@link #getInstance()).
      * </p>
-     * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.ConceptExpression <br>
-     * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
-     * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
-     * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
-     * <b>date</b>:        21/05/17 <br>
-     * </small></div>
      *
      * @param <D> the type of the {@link ConceptExpression} descriptor instantiated during
      *           {@link #buildEquivalentConcept()} through {@link #getNewEquivalentConcept(Object, Object)}.
@@ -353,19 +326,11 @@ public interface ConceptExpression
     }
 
     /**
-     * The {@link Concept.Sub} {@link Descriptor} implementation for {@link OWLClass}.
+     * The {@link Concept.Sub} expression for a {@link Descriptor} whose ground is {@link OWLClass}.
      * <p>
-     *     It specify how to {@link #querySubConcept()} and {@link #writeExpressionAxioms()} for the
-     *     classes (i.e.: {@link OWLClass}) tha are sub classes to the described one 
-     *     (i.e.: {@link #getInstance()}).
+     *     It specifies how to {@link #querySubConcept()} and {@link #writeExpressionAxioms()} for the
+     *     sub-classes of the ground Class ({@link #getInstance()).
      * </p>
-     * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.ConceptExpression <br>
-     * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
-     * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
-     * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
-     * <b>date</b>:        21/05/17 <br>
-     * </small></div>
      *
      * @param <D> the type of the {@link ConceptExpression} descriptor instantiated during
      *           {@link #buildSubConcept()} through {@link #getNewSubConcept(Object, Object)}.
@@ -443,19 +408,11 @@ public interface ConceptExpression
     }
 
     /**
-     * The {@link Concept.Super} {@link Descriptor} implementation for {@link OWLClass}.
+     * The {@link Concept.Super} expression for a {@link Descriptor} whose ground is {@link OWLClass}.
      * <p>
-     *     It specify how to {@link #querySuperConcept()} and {@link #writeExpressionAxioms()} for the
-     *     classes (i.e.: {@link OWLClass}) tha are super classes to the described one 
-     *     (i.e.: {@link #getInstance()}).
+     *     It specifies how to {@link #querySuperConcept()} and {@link #writeExpressionAxioms()} for the
+     *     super-classes of the ground Class ({@link #getInstance()).
      * </p>
-     * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.ConceptExpression <br>
-     * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
-     * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
-     * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
-     * <b>date</b>:        21/05/17 <br>
-     * </small></div>
      *
      * @param <D> the type of the {@link ConceptExpression} descriptor instantiated during
      *           {@link #buildSuperConcept()} through {@link #getNewSuperConcept(Object, Object)}.
@@ -542,27 +499,19 @@ public interface ConceptExpression
     }
 
     /**
-     * The {@link Concept.Definition} {@link Descriptor} implementation for {@link OWLClass}.
+     * The {@link Concept.Definition} expression for a {@link Descriptor} whose ground is {@link OWLClass}.
      * <p>
-     *     It specify how to {@link #queryDefinitionConcept()} and {@link #writeExpressionAxioms()} for
-     *     definition (i.e.: {@link SemanticRestriction}) applied to the described one 
-     *     (i.e.: {@link #getInstance()}).
-     *     All the restriction managed by this class are considered as a unique class definition
+     *     It specifies how to {@link #queryDefinitionConcept()} and {@link #writeExpressionAxioms()} for
+     *     definition (i.e.: {@link SemanticRestriction}) of the ground Class ({@link #getInstance()).
+     *     All the restrictions managed by this Class are considered to be a unique class definition
      *     made by their intersection.
      *     <br>
      *     <b>ATTENTION</b>: the {@link #writeExpressionAxioms()} method implemented by
      *     this constructor uses {@link org.semanticweb.owlapi.change.ConvertSuperClassesToEquivalentClass}
      *     and {@link org.semanticweb.owlapi.change.ConvertEquivalentClassesToSuperClasses}.
-     *     It may affect {@link ConceptExpression.Super} or {@link ConceptExpression.Sub} descriptors. Call
-     *     always this first.
+     *     It may affect {@link ConceptExpression.Super} or {@link ConceptExpression.Sub} descriptors.
+     *     Call always this first!!
      * </p>
-     * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorExpression.ConceptExpression <br>
-     * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
-     * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
-     * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
-     * <b>date</b>:        21/05/17 <br>
-     * </small></div>
      */
     interface Definition
             extends Concept.Definition<OWLReferences, OWLClass, SemanticRestriction>,

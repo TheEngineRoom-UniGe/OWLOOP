@@ -27,6 +27,7 @@ import java.util.Set;
  * Using these classes each {@link Descriptor}, (i) links to a specific OWL entity in an Ontology and (ii) allows access
  * to features in the standard OWL-API.
  *
+ * <p>
  * <div style="text-align:center;"><small>
  * <b>File</b>:         it.emarolab.owloop.core.Axiom <br>
  * <b>Licence</b>:      GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>

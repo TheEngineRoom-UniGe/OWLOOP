@@ -12,8 +12,8 @@ import java.util.List;
 
 /**
  * This is an example of a 'compound' Concept Descriptor as it implements more than one ClassExpression (aka {@link ConceptExpression}).
- * Axioms in this descriptor's internal state (OWLOOP representation) gets synchronized wrt the axioms in the OWL representation.
- * {@link FullConceptDesc} can synchronize all the axioms, that are based on the following ClassExpressions:
+ * Axioms in this descriptor's internal state (i.e., OWLOOP representation) can be synchronized to/from an OWL ontology.
+ * {@link FullConceptDescriptor} can synchronize all the axioms, that are based on the following ClassExpressions:
  *
  * <ul>
  * <li><b>{@link ConceptExpression.Equivalent}</b>:  to describe that a Class is equivalent to another Class.</li>
@@ -24,6 +24,7 @@ import java.util.List;
  * <li><b>{@link ConceptExpression.Definition}</b>:  to describe the definition of a Class..</li>
  * </ul>
  *
+ * <p>
  * <div style="text-align:center;"><small>
  * <b>File</b>:         it.emarolab.owloop.core.Axiom <br>
  * <b>Licence</b>:      GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
@@ -32,13 +33,13 @@ import java.util.List;
  * <b>date</b>:         01/05/19 <br>
  * </small></div>
  */
-public class FullConceptDesc
+public class FullConceptDescriptor
         extends ConceptGround
         implements ConceptExpression.Definition,
-        ConceptExpression.Disjoint<FullConceptDesc>,
-        ConceptExpression.Equivalent<FullConceptDesc>,
-        ConceptExpression.Sub<FullConceptDesc>,
-        ConceptExpression.Super<FullConceptDesc>,
+        ConceptExpression.Disjoint<FullConceptDescriptor>,
+        ConceptExpression.Equivalent<FullConceptDescriptor>,
+        ConceptExpression.Sub<FullConceptDescriptor>,
+        ConceptExpression.Super<FullConceptDescriptor>,
         ConceptExpression.Instance<LinkIndividualDesc> {
 
     private DescriptorEntitySet.Restrictions restrictions = new DescriptorEntitySet.Restrictions();
@@ -50,28 +51,28 @@ public class FullConceptDesc
 
     // Constructors from the abstract class: ConceptGround
 
-    public FullConceptDesc(OWLClass instance, OWLReferences onto) {
+    public FullConceptDescriptor(OWLClass instance, OWLReferences onto) {
         super(instance, onto);
     }
-    public FullConceptDesc(String instanceName, OWLReferences onto) {
+    public FullConceptDescriptor(String instanceName, OWLReferences onto) {
         super(instanceName, onto);
     }
-    public FullConceptDesc(OWLClass instance, String ontoName) {
+    public FullConceptDescriptor(OWLClass instance, String ontoName) {
         super(instance, ontoName);
     }
-    public FullConceptDesc(OWLClass instance, String ontoName, String filePath, String iriPath) {
+    public FullConceptDescriptor(OWLClass instance, String ontoName, String filePath, String iriPath) {
         super(instance, ontoName, filePath, iriPath);
     }
-    public FullConceptDesc(OWLClass instance, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
+    public FullConceptDescriptor(OWLClass instance, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
         super(instance, ontoName, filePath, iriPath, bufferingChanges);
     }
-    public FullConceptDesc(String instanceName, String ontoName) {
+    public FullConceptDescriptor(String instanceName, String ontoName) {
         super(instanceName, ontoName);
     }
-    public FullConceptDesc(String instanceName, String ontoName, String filePath, String iriPath) {
+    public FullConceptDescriptor(String instanceName, String ontoName, String filePath, String iriPath) {
         super(instanceName, ontoName, filePath, iriPath);
     }
-    public FullConceptDesc(String instanceName, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
+    public FullConceptDescriptor(String instanceName, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
         super(instanceName, ontoName, filePath, iriPath, bufferingChanges);
     }
 
@@ -104,8 +105,8 @@ public class FullConceptDesc
     // Implementations for: ConceptExpression.Disjoint
 
     @Override // called during build...() you can change the returning type to any implementations of ConceptExpression
-    public FullConceptDesc getNewDisjointConcept(OWLClass instance, OWLReferences ontology) {
-        return new FullConceptDesc( instance, ontology);
+    public FullConceptDescriptor getNewDisjointConcept(OWLClass instance, OWLReferences ontology) {
+        return new FullConceptDescriptor( instance, ontology);
     }
 
     @Override
@@ -116,8 +117,8 @@ public class FullConceptDesc
     // Implementations for: ConceptExpression.Equivalent
 
     @Override // called during build...() you can change the returning type to any implementations of ConceptExpression
-    public FullConceptDesc getNewEquivalentConcept(OWLClass instance, OWLReferences ontology) {
-        return new FullConceptDesc( instance, ontology);
+    public FullConceptDescriptor getNewEquivalentConcept(OWLClass instance, OWLReferences ontology) {
+        return new FullConceptDescriptor( instance, ontology);
     }
 
     @Override
@@ -135,8 +136,8 @@ public class FullConceptDesc
     // Implementations for: ConceptExpression.Super
 
     @Override // called during build...() you can change the returning type to any implementations of ConceptExpression
-    public FullConceptDesc getNewSubConcept(OWLClass instance, OWLReferences ontology) {
-        return new FullConceptDesc( instance, ontology);
+    public FullConceptDescriptor getNewSubConcept(OWLClass instance, OWLReferences ontology) {
+        return new FullConceptDescriptor( instance, ontology);
     }
 
     @Override
@@ -147,8 +148,8 @@ public class FullConceptDesc
     // Implementations for: ConceptExpression.Super
 
     @Override // called during build...() you can change the returning type to any implementations of ConceptExpression
-    public FullConceptDesc getNewSuperConcept(OWLClass instance, OWLReferences ontology) {
-        return new FullConceptDesc( instance, ontology);
+    public FullConceptDescriptor getNewSuperConcept(OWLClass instance, OWLReferences ontology) {
+        return new FullConceptDescriptor( instance, ontology);
     }
 
     @Override
@@ -172,7 +173,7 @@ public class FullConceptDesc
 
     @Override
     public String toString() {
-        return "FullObjectPropertyDesc{" +
+        return "FullObjectPropertyDescriptor{" +
                 NL + "\t\t\t" + getGround() +
                 ":" + NL + "\t≠ " + disjointConcept +
                 "," + NL + "\t≡ " + equivalentConcept +

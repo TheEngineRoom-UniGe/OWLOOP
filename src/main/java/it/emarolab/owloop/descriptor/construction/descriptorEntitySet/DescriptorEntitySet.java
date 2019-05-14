@@ -11,62 +11,37 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * CONTAINS CLASSES that can instantiate an EntitySet as a for containing a particular type of OWL entity.
+ * This interface contains classes that can be used to instantiate EntitySets containing
+ * entities of a particular type.
+ * The entity types within the OWLOOP architecture are among the following:
+ * <ul>
+ * <li><b>{@link Individuals}</b>:      type to describe a set of: [OWL-Individual].</li>
+ * <li><b>{@link Concepts}</b>:         type to describe a set of: [OWL-Class].</li>
+ * <li><b>{@link Literals}</b>:         type to describe a set of: [OWL-Literal] (i.e., data values).</li>
+ * <li><b>{@link DataProperties}</b>:   type to describe a set of: [OWL-DataProperty].</li>
+ * <li><b>{@link ObjectProperties}</b>: type to describe a set of: [OWL-ObjectProperty].</li>
+ * <li><b>{@link Restrictions}</b>:     type to describe a set of: [OWL-Restriction].</li>
+ * <li><b>{@link DataLinks}</b>:        type to describe a set of: [An Expression along with an OWL-Literal] .</li>
+ * <li><b>{@link ObjectLinks}</b>:      type to describe a set of: [An Expression along with an OWL Individual].</li>
+ * </ul>
  *
- *
- * The main interface for {@link EntitySet} implemented in the <a href="https://github.com/EmaroLab/multi_ontology_reference">aMOR</a> API.
  * <p>
- *     This interface contains all the {@link EntitySet}, {@link ExpressionEntity}
- *     and {@link ExpressionEntitySet} used in the {@link Concept}, {@link Individual},
- *     {@link DataProperty} and {@link ObjectProperty} {@link Descriptor}s for the
- *     OWLOOP architecture implemented with the
- *     <a href="https://github.com/EmaroLab/multi_ontology_reference">aMOR</a> framework.
- *     <br>
- *     All of those manage a collection of ontological entities, eventually attached with
- *     a specific semantic. In particular all are based on {@link EntitySetBase}, which
- *     implements the management of an {@link HashSet} with a specified type. When the type
- *     is an {@link OWLObject}, the {@link OWLEntitySetBase} in used just to extend the
- *     {@link EntitySetBase#toString()} method.
- *     <br>
- *     More in particular, the implemented axioms set are:
- *     <ul>
- *     <li><b>{@link Individuals}</b>: for describing a set of ontological individuals.</li>
- *     <li><b>{@link Concepts}</b>: for describing a set of ontological classes.</li>
- *     <li><b>{@link Literals}</b>: for describing a set of ontological data values
- *                                           (used by the {@link DataExpression} axiom implementation).</li>
- *     <li><b>{@link DataLinks}</b>: for describing a set of ontological data properties.</li>
- *     <li><b>{@link ObjectLinks}</b>: for describing a set of ontological object properties.</li>
- *     <li><b>{@link Restrictions}</b>: for describing a set of restriction
- *                           (i.e.: for conceptDescriptor definition as wel as data and property range or domain definition).</li>
- *     <li><b>{@link DataExpression}</b>: for describing a set of data values with a semantic
- *                                     (i.e.: by {@link DataSemantics}).</li>
- *     <li><b>{@link ObjectExpression}</b>: for describing a set of data values with a semantic
- *                                     (i.e.: by {@link ObjectSemantics}).</li>
- *     </ul>
- *
  * <div style="text-align:center;"><small>
- * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet <br>
- * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
- * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
- * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
- * <b>date</b>:        21/05/17 <br>
+ * <b>File</b>:         it.emarolab.owloop.core.Axiom <br>
+ * <b>Licence</b>:      GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
+ * <b>Authors</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it), Syed Yusha Kareem (kareem.syed.yusha@dibris.unige.it) <br>
+ * <b>affiliation</b>:  EMAROLab, DIBRIS, University of Genoa. <br>
+ * <b>date</b>:         01/05/19 <br>
  * </small></div>
  */
 public interface DescriptorEntitySet extends Axiom {
 
     /**
-     * The base interface for all the {@link DescriptorEntitySet} that extends {@link EntitySet} or {@link ExpressionEntitySet}.
+     * Base interface for all the {@link DescriptorEntitySet} that extends {@link EntitySet}.
      * <p>
-     *     This class implements common features for managing an {@link HashSet} and a {@code singleton} value
-     *     for {@link EntitySet}.
+     *      This class implements common features for managing an {@link HashSet} and a {@code singleton} value
+     *      for {@link EntitySet}.
      * </p>
-     * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet <br>
-     * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
-     * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
-     * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
-     * <b>date</b>:        21/05/17 <br>
-     * </small></div>
      *
      * @param <T> the type of the axiom to collect.
      */
@@ -80,14 +55,14 @@ public interface DescriptorEntitySet extends Axiom {
         protected boolean singleton = false;
 
         /**
-         * Instanciate this {@link EntitySet} as an empty {@link HashSet}.
+         * Instantiate this {@link EntitySet} as an empty {@link HashSet}.
          * It is not set to be a {@code singleton}.
          */
         public EntitySetBase() {
            super();
         }
         /**
-         * Instanciate this {@link EntitySet} as a {@link HashSet} containing the given value.
+         * Instantiate this {@link EntitySet} as a {@link HashSet} containing the given value.
          * It is not set to be {@code singleton}.
          * @param c the element with wich setGround the set of {@link EntitySet}.
          */
@@ -95,7 +70,7 @@ public interface DescriptorEntitySet extends Axiom {
             super(c);
         }
         /**
-         * Instanciate this {@link EntitySet} as a {@link HashSet} with a given initial size and load factor.
+         * Instantiate this {@link EntitySet} as a {@link HashSet} with a given initial size and load factor.
          * It is not set to be {@code singleton}.
          * @param initialCapacity the initial capacity of the axioms {@link HashSet}.
          * @param loadFactor the load factor of the axioms {@link HashSet}
@@ -104,7 +79,7 @@ public interface DescriptorEntitySet extends Axiom {
             super( initialCapacity, loadFactor);
         }
         /**
-         * Instanciate this {@link EntitySet} as a {@link HashSet} with a given initial size.
+         * Instantiate this {@link EntitySet} as a {@link HashSet} with a given initial size.
          * It is not set to be {@code singleton}.
          * @param initialCapacity the initial capacity of the axioms {@link HashSet}.
          */
@@ -146,13 +121,6 @@ public interface DescriptorEntitySet extends Axiom {
      *     Refer to the super class for documentation
      *     (constructors only call {@code super(..)}).
      * </p>
-     * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet <br>
-     * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
-     * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
-     * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
-     * <b>date</b>:        21/05/17 <br>
-     * </small></div>
      *
      * @param <T> the type of the axiom to collect.
      */
@@ -187,498 +155,16 @@ public interface DescriptorEntitySet extends Axiom {
         }
     }
 
-
-    /**
-     * An extension of {@link EntitySetBase} for {@link OWLNamedIndividual}.
-     * <p>
-     *     It represent the {@link EntitySet} describing a set of
-     *     ontological individuals.
-     *     <br>
-     *     This class does not add any other feature with respect to its super class
-     *     refer to {@link DescriptorEntitySet} and {@link EntitySetBase}  for further documentation.
-     * </p>
-     * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet <br>
-     * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
-     * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
-     * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
-     * <b>date</b>:        21/05/17 <br>
-     * </small></div>
-     */
-    class Individuals
-            extends OWLEntitySetBase<OWLNamedIndividual>
-            implements EntitySet<OWLNamedIndividual> {
-        public Individuals() {
-        }
-        public Individuals(Collection<? extends OWLNamedIndividual> c) {
-            super(c);
-        }
-        public Individuals(int initialCapacity, float loadFactor) {
-            super(initialCapacity, loadFactor);
-        }
-        public Individuals(int initialCapacity) {
-            super(initialCapacity);
-        }
-    }
-
-    /**
-     * An extension of {@link EntitySetBase} for {@link OWLClass}.
-     * <p>
-     *     It represent the {@link EntitySet} describing a set of
-     *     ontological classes.
-     *     <br>
-     *     This class does not add any other feature with respect to its super class
-     *     refer to {@link DescriptorEntitySet} and {@link EntitySetBase} for further documentation.
-     * </p>
-     * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet <br>
-     * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
-     * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
-     * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
-     * <b>date</b>:        21/05/17 <br>
-     * </small></div>
-     */
-    class Concepts
-            extends OWLEntitySetBase<OWLClass>
-            implements EntitySet<OWLClass> {
-        public Concepts() {
-        }
-        public Concepts(Collection<? extends OWLClass> c) {
-            super(c);
-        }
-        public Concepts(int initialCapacity, float loadFactor) {
-            super(initialCapacity, loadFactor);
-        }
-        public Concepts(int initialCapacity) {
-            super(initialCapacity);
-        }
-    }
-
-    /**
-     * An extension of {@link EntitySetBase} for {@link OWLLiteral}.
-     * <p>
-     *     It represent the {@link EntitySet} describing a set of
-     *     ontological literal values.
-     *     <br>
-     *     This class does not add any other feature with respect to its super class
-     *     refer to {@link DescriptorEntitySet} and {@link EntitySetBase}  for further documentation.
-     * </p>
-     * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet <br>
-     * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
-     * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
-     * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
-     * <b>date</b>:        21/05/17 <br>
-     * </small></div>
-     */
-    class Literals
-            extends OWLEntitySetBase<OWLLiteral>
-            implements EntitySet<OWLLiteral> {
-
-        public Literals() {
-        }
-        public Literals(Collection<? extends OWLLiteral> c) {
-            super(c);
-        }
-        public Literals(int initialCapacity, float loadFactor) {
-            super(initialCapacity, loadFactor);
-        }
-        public Literals(int initialCapacity) {
-            super(initialCapacity);
-        }
-    }
-
-    /**
-     * An extension of {@link EntitySetBase} for {@link OWLDataProperty}.
-     * <p>
-     *     It represent the {@link EntitySet} describing a set of
-     *     ontological data properties.
-     *     <br>
-     *     This class does not add any other feature with respect to its super class
-     *     refer to {@link DescriptorEntitySet} and {@link EntitySetBase}  for further documentation.
-     * </p>
-     * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet <br>
-     * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
-     * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
-     * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
-     * <b>date</b>:        21/05/17 <br>
-     * </small></div>
-     */
-    class DataLinks
-            extends OWLEntitySetBase<OWLDataProperty>
-            implements EntitySet<OWLDataProperty> {
-
-        public DataLinks() {
-        }
-        public DataLinks(Collection<? extends OWLDataProperty> c) {
-            super(c);
-        }
-        public DataLinks(int initialCapacity, float loadFactor) {
-            super(initialCapacity, loadFactor);
-        }
-        public DataLinks(int initialCapacity) {
-            super(initialCapacity);
-        }
-    }
-
-    /**
-     * An extension of {@link EntitySetBase} for {@link OWLObjectProperty}.
-     * <p>
-     *     It represent the {@link EntitySet} describing a set of
-     *     ontological object properties.
-     *     <br>
-     *     This class does not add any other feature with respect to its super class
-     *     refer to {@link DescriptorEntitySet} and {@link EntitySetBase}  for further documentation.
-     * </p>
-     * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet <br>
-     * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
-     * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
-     * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
-     * <b>date</b>:        21/05/17 <br>
-     * </small></div>
-     */
-    class ObjectLinks
-            extends OWLEntitySetBase<OWLObjectProperty>
-            implements EntitySet<OWLObjectProperty> {
-
-        public ObjectLinks() {
-        }
-        public ObjectLinks(Collection<? extends OWLObjectProperty> c) {
-            super(c);
-        }
-        public ObjectLinks(int initialCapacity, float loadFactor) {
-            super(initialCapacity, loadFactor);
-        }
-        public ObjectLinks(int initialCapacity) {
-            super(initialCapacity);
-        }
-    }
-
-
-    /**
-     * An extension of {@link EntitySetBase} for {@link SemanticRestriction}.
-     * <p>
-     *     It represent the {@link EntitySet} describing a set of
-     *     ontological restrictions.
-     *     <br>
-     *     This class does not add any other feature with respect to its super class
-     *     refer to {@link DescriptorEntitySet} and {@link EntitySetBase}  for further documentation.
-     * </p>
-     * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet <br>
-     * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
-     * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
-     * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
-     * <b>date</b>:        21/05/17 <br>
-     * </small></div>
-     */
-    class Restrictions
-            extends EntitySetBase<SemanticRestriction>
-            implements EntitySet<SemanticRestriction> {
-
-        public Restrictions() {
-        }
-        public Restrictions(Collection<? extends SemanticRestriction> c) {
-            super(c);
-        }
-        public Restrictions(int initialCapacity, float loadFactor) {
-            super(initialCapacity, loadFactor);
-        }
-        public Restrictions(int initialCapacity) {
-            super(initialCapacity);
-        }
-    }
-
-
-    /**
-     * An implementation of {@link ExpressionEntity} for ontological data properties.
-     * <p>
-     *     This class is a container for all the same data properties applied to an individualDescriptor
-     *     (with related values). In particular, the {@link #getExpression()} is a specific
-     *     property, while {@link #getValues()} represents a set of values linked with the
-     *     above property to a {@link Ground}, not specified here.
-     *     For this class, the literals ({@link #getValues()}) are of the {@link Literals} type.
-     * </p>
-     * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet <br>
-     * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
-     * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
-     * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
-     * <b>date</b>:        21/05/17 <br>
-     * </small></div>
-     */
-    class DataExpression
-            implements ExpressionEntity<OWLDataProperty,OWLLiteral> {
-
-        private OWLDataProperty semantic;
-        private Literals literals;
-
-        /**
-         * Initialise this object to have {@code null} {@link #getExpression()} and empty {@link #getValues()}.
-         */
-        public DataExpression() {
-            this.literals = new Literals();
-        }
-        /**
-         * Initialise this object to have {@code null} {@link #getExpression()} and a given set of literal ({@link #getValues()}).
-         * @param c the initial set of literals to assign to {@code this} {@link ExpressionEntity}.
-         */
-        public DataExpression(Collection<? extends OWLLiteral> c) {
-            this.literals = new Literals(c);
-        }
-        /**
-         * Initialise this object to have {@code null} {@link #getExpression()} and set of literals {@link #getValues()}
-         * with specified size and load factory.
-         * @param initialCapacity the initial size of the literals {@link HashSet}.
-         * @param loadFactor the load factor of the literals {@link HashSet}.
-         */
-        public DataExpression(int initialCapacity, float loadFactor) {
-            this.literals = new Literals(initialCapacity, loadFactor);
-        }
-        /**
-         * Initialise this object to have {@code null} {@link #getExpression()} and set of literals {@link #getValues()}
-         * with specified size and load factory.
-         * @param initialCapacity the initial size of the literals {@link HashSet}.
-         */
-        public DataExpression(int initialCapacity) {
-            this.literals = new Literals(initialCapacity);
-        }
-        /**
-         * Initialise this object to a specific {@link #getExpression()} and empty {@link #getValues()}.
-         * @param semantic the initial semantic of this {@link ExpressionEntity}.
-         */
-        public DataExpression(OWLDataProperty semantic) {
-            this.literals = new Literals();
-            this.semantic = semantic;
-        }
-        /**
-         * Initialise this object to have a specific {@link #getExpression()} and a given set of literal ({@link #getValues()}).
-         * @param semantic the initial semantic of this {@link ExpressionEntity}.
-         * @param c the initial set of literals to assign to {@code this} {@link ExpressionEntity}.
-         */
-        public DataExpression(OWLDataProperty semantic, Collection<? extends OWLLiteral> c) {
-            this.literals = new Literals(c);
-            this.semantic = semantic;
-        }
-        /**
-         * Initialise this object to have a specific {@link #getExpression()} and set of literals {@link #getValues()}
-         * with specified size and load factory.
-         * @param semantic the initial semantic of this {@link ExpressionEntity}.
-         * @param initialCapacity the initial size of the literals {@link HashSet}.
-         * @param loadFactor the load factor of the literals {@link HashSet}.
-         */
-        public DataExpression(OWLDataProperty semantic, int initialCapacity, float loadFactor) {
-            this.literals = new Literals(initialCapacity, loadFactor);
-            this.semantic = semantic;
-        }
-        /**
-         * Initialise this object to have a specific {@link #getExpression()} and set of literals {@link #getValues()}
-         * with specified size and load factory.
-         * @param semantic the initial semantic of this {@link ExpressionEntity}.
-         * @param initialCapacity the initial size of the literals {@link HashSet}.
-         */
-        public DataExpression(OWLDataProperty semantic, int initialCapacity) {
-            this.literals = new Literals(initialCapacity);
-            this.semantic = semantic;
-        }
-
-        @Override // see super class for documentation
-        public OWLDataProperty getExpression() {
-            return semantic;
-        }
-
-        /**
-         * Set the semantic (i.e.: data property) for all the {@link #getValues()}
-         * @param semantic the semantic described by {@code this} container.
-         */
-        public void setSemantic(OWLDataProperty semantic) {
-            this.semantic = semantic;
-        }
-
-        @Override // see super class for documentation
-        public Literals getValues() {
-            return literals;
-        }
-
-        @Override // see super class for documentation
-        public DataExpression getNewData(Set<OWLLiteral> values) {
-            return new DataExpression( semantic, values);
-        }
-
-        @Override // see super class for documentation
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (!(o instanceof DataExpression)) return false;
-            DataExpression morSemanticData = (DataExpression) o;
-            return Objects.equal(getExpression(), morSemanticData.getExpression()) &&
-                    Objects.equal(literals, morSemanticData.literals);
-        }
-
-        @Override // see super class for documentation
-        public int hashCode() {
-            return Objects.hashCode(getExpression());//, objects);
-        }
-
-        @Override // see super class for documentation
-        public String toString() {
-            return semantic.getIRI().getRemainder().get() + "." + getValues();
-        }
-    }
-
-    /**
-     * An implementation of {@link ExpressionEntity} for ontological object properties.
-     * <p>
-     *     This class is a container for all the same object properties applied to an individualDescriptor
-     *     (with related values). In particular, the {@link #getExpression()} is a specific
-     *     property, while {@link #getValues()} represents a set of values linked with the
-     *     above property to a {@link Ground}, not specified here.
-     *     For this class, the individuals ({@link #getValues()}) are of the {@link Individuals} type.
-     * </p>
-     * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet <br>
-     * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
-     * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
-     * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
-     * <b>date</b>:        21/05/17 <br>
-     * </small></div>
-     */
-    class ObjectExpression
-            implements ExpressionEntity<OWLObjectProperty,OWLNamedIndividual> {
-
-        private OWLObjectProperty semantic;
-        private Individuals objects;
-
-        /**
-         * Initialise this object to have {@code null} {@link #getExpression()} and empty {@link #getValues()}.
-         */
-        public ObjectExpression() {
-            this.objects = new Individuals();
-        }
-        /**
-         * Initialise this object to have {@code null} {@link #getExpression()} and a given set of individuals ({@link #getValues()}).
-         * @param c the initial set of individuals to assign to {@code this} {@link ExpressionEntity}.
-         */
-        public ObjectExpression(Collection<? extends OWLNamedIndividual> c) {
-            this.objects = new Individuals(c);
-        }
-        /**
-         * Initialise this object to have {@code null} {@link #getExpression()} and set of individuals {@link #getValues()}
-         * with specified size and load factory.
-         * @param initialCapacity the initial size of the individuals {@link HashSet}.
-         * @param loadFactor the load factor of the individuals {@link HashSet}.
-         */
-        public ObjectExpression(int initialCapacity, float loadFactor) {
-            this.objects = new Individuals(initialCapacity, loadFactor);
-        }
-        /**
-         * Initialise this object to have {@code null} {@link #getExpression()} and set of individuals {@link #getValues()}
-         * with specified size and load factory.
-         * @param initialCapacity the initial size of the individuals {@link HashSet}.
-         */
-        public ObjectExpression(int initialCapacity) {
-            this.objects = new Individuals(initialCapacity);
-        }
-        /**
-         * Initialise this object to a specific {@link #getExpression()} and empty {@link #getValues()}.
-         * @param semantic the initial semantic of this {@link ExpressionEntity}.
-         */
-        public ObjectExpression(OWLObjectProperty semantic) {
-            this.objects = new Individuals();
-            this.semantic = semantic;
-        }
-        /**
-         * Initialise this object to have a specific {@link #getExpression()} and a given set of individuals ({@link #getValues()}).
-         * @param semantic the initial semantic of this {@link ExpressionEntity}.
-         * @param c the initial set of individuals to assign to {@code this} {@link ExpressionEntity}.
-         */
-        public ObjectExpression(OWLObjectProperty semantic, Collection<? extends OWLNamedIndividual> c) {
-            this.objects = new Individuals( c);
-            this.semantic = semantic;
-        }
-        /**
-         * Initialise this object to have a specific {@link #getExpression()} and set of individuals {@link #getValues()}
-         * with specified size and load factory.
-         * @param semantic the initial semantic of this {@link ExpressionEntity}.
-         * @param initialCapacity the initial size of the individuals {@link HashSet}.
-         * @param loadFactor the load factor of the individuals {@link HashSet}.
-         */
-        public ObjectExpression(OWLObjectProperty semantic, int initialCapacity, float loadFactor) {
-            this.objects = new Individuals(initialCapacity, loadFactor);
-            this.semantic = semantic;
-        }
-        /**
-         * Initialise this object to have a specific {@link #getExpression()} and set of individuals {@link #getValues()}
-         * with specified size and load factory.
-         * @param semantic the initial semantic of this {@link ExpressionEntity}.
-         * @param initialCapacity the initial size of the individuals {@link HashSet}.
-         */
-        public ObjectExpression(OWLObjectProperty semantic, int initialCapacity) {
-            this.objects = new Individuals(initialCapacity);
-            this.semantic = semantic;
-        }
-
-        @Override // see super class for documentation
-        public OWLObjectProperty getExpression() {
-            return semantic;
-        }
-
-        /**
-         * Set the semantic (i.e.: object property) for all the {@link #getValues()}
-         * @param semantic the semantic described by {@code this} container.
-         */
-        public void setSemantic(OWLObjectProperty semantic) {
-            this.semantic = semantic;
-        }
-
-        @Override // see super class for documentation
-        public Individuals getValues() {
-            return objects;
-        }
-
-        @Override // see super class for documentation
-        public ObjectExpression getNewData(Set<OWLNamedIndividual> values) {
-            return new ObjectExpression( semantic, values);
-        }
-
-        @Override // see super class for documentation
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (!(o instanceof ObjectExpression)) return false;
-            ObjectExpression morData = (ObjectExpression) o;
-            return Objects.equal(getExpression(), morData.getExpression()) &&
-                    Objects.equal(objects, morData.objects);
-        }
-
-        @Override // see super class for documentation
-        public int hashCode() {
-            return Objects.hashCode(getExpression());//, objects);
-        }
-
-        @Override // see super class for documentation
-        public String toString() {
-            return semantic.getIRI().getRemainder().get() + "." + getValues();
-        }
-    }
-
     /**
      * The base implementation for the {@link ExpressionEntitySet}.
      * <p>
      *     It implements common methods to be used to manage a set of EntitySet.
      *     In particular, it define the method of adding and removing set of
-     *     data or object properties values with the same semantic. Also,
-     *     it implements helping way to obtain the actual value of a property.
-     *     Constructors, and common way to manage an {@link HashSet} are based
+     *     data or object properties values with the same expression. Also,
+     *     it enables obtaining the actual value of a property.
+     *     Constructors and {@link HashSet} management are based
      *     on {@link EntitySetBase}.
      * </p>
-     * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.ExpressionEntitySetBase <br>
-     * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
-     * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
-     * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
-     * <b>date</b>:        21/05/17 <br>
-     * </small></div>
      */
     abstract class ExpressionEntitySetBase<X extends ExpressionEntity<S,A>,S extends OWLProperty,A>
             extends EntitySetBase<X>
@@ -788,70 +274,441 @@ public interface DescriptorEntitySet extends Axiom {
     }
 
     /**
-     * An extension of {@link EntitySetBase} for {@link ExpressionEntitySet} for data properties.
+     * An extension of {@link EntitySetBase} for {@link OWLNamedIndividual}.
      * <p>
-     *     It represent the {@link ExpressionEntitySet} describing a set of
-     *     ontological data properties as a collection of {@link DataExpression}.
-     *     <br>
-     *     This class does not add any other feature with respect to its super class
-     *     refer to {@link DescriptorEntitySet} and {@link EntitySetBase}  for further documentation.
+     *     It represents the {@link EntitySet} which contains OWL-Individuals.
      * </p>
-     * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet <br>
-     * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
-     * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
-     * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
-     * <b>date</b>:        21/05/17 <br>
-     * </small></div>
      */
-    class DataSemantics
-            extends ExpressionEntitySetBase<DataExpression,OWLDataProperty,OWLLiteral>
-            implements ExpressionEntitySet<DataExpression,OWLLiteral> {
-
-        public DataSemantics() {
+    class Individuals
+            extends OWLEntitySetBase<OWLNamedIndividual>
+            implements EntitySet<OWLNamedIndividual> {
+        public Individuals() {
         }
-        public DataSemantics(Collection<? extends DataExpression> c) {
+        public Individuals(Collection<? extends OWLNamedIndividual> c) {
             super(c);
         }
-        public DataSemantics(int initialCapacity, float loadFactor) {
+        public Individuals(int initialCapacity, float loadFactor) {
             super(initialCapacity, loadFactor);
         }
-        public DataSemantics(int initialCapacity) {
+        public Individuals(int initialCapacity) {
+            super(initialCapacity);
+        }
+    }
+
+    /**
+     * An extension of {@link EntitySetBase} for {@link OWLClass}.
+     * <p>
+     *     It represent the {@link EntitySet} which contains OWL-Classes.
+     * </p>
+     */
+    class Concepts
+            extends OWLEntitySetBase<OWLClass>
+            implements EntitySet<OWLClass> {
+        public Concepts() {
+        }
+        public Concepts(Collection<? extends OWLClass> c) {
+            super(c);
+        }
+        public Concepts(int initialCapacity, float loadFactor) {
+            super(initialCapacity, loadFactor);
+        }
+        public Concepts(int initialCapacity) {
+            super(initialCapacity);
+        }
+    }
+
+    /**
+     * An extension of {@link EntitySetBase} for {@link OWLLiteral}.
+     * <p>
+     *     It represent the {@link EntitySet} which contains OWL-literals.
+     * </p>
+     */
+    class Literals
+            extends OWLEntitySetBase<OWLLiteral>
+            implements EntitySet<OWLLiteral> {
+
+        public Literals() {
+        }
+        public Literals(Collection<? extends OWLLiteral> c) {
+            super(c);
+        }
+        public Literals(int initialCapacity, float loadFactor) {
+            super(initialCapacity, loadFactor);
+        }
+        public Literals(int initialCapacity) {
+            super(initialCapacity);
+        }
+    }
+
+    /**
+     * An extension of {@link EntitySetBase} for {@link OWLDataProperty}.
+     * <p>
+     *     It represent the {@link EntitySet} which contains OWL-DataProperties.
+     * </p>
+     */
+    class DataProperties
+            extends OWLEntitySetBase<OWLDataProperty>
+            implements EntitySet<OWLDataProperty> {
+
+        public DataProperties() {
+        }
+        public DataProperties(Collection<? extends OWLDataProperty> c) {
+            super(c);
+        }
+        public DataProperties(int initialCapacity, float loadFactor) {
+            super(initialCapacity, loadFactor);
+        }
+        public DataProperties(int initialCapacity) {
+            super(initialCapacity);
+        }
+    }
+
+    /**
+     * An extension of {@link EntitySetBase} for {@link OWLObjectProperty}.
+     * <p>
+     *     It represent the {@link EntitySet} which contains OWL-ObjectProperties.
+     * </p>
+     */
+    class ObjectProperties
+            extends OWLEntitySetBase<OWLObjectProperty>
+            implements EntitySet<OWLObjectProperty> {
+
+        public ObjectProperties() {
+        }
+        public ObjectProperties(Collection<? extends OWLObjectProperty> c) {
+            super(c);
+        }
+        public ObjectProperties(int initialCapacity, float loadFactor) {
+            super(initialCapacity, loadFactor);
+        }
+        public ObjectProperties(int initialCapacity) {
+            super(initialCapacity);
+        }
+    }
+
+
+    /**
+     * An extension of {@link EntitySetBase} for {@link SemanticRestriction}.
+     * <p>
+     *     It represent the {@link EntitySet} which contains OWL-Restrictions.
+     * </p>
+     */
+    class Restrictions
+            extends EntitySetBase<SemanticRestriction>
+            implements EntitySet<SemanticRestriction> {
+
+        public Restrictions() {
+        }
+        public Restrictions(Collection<? extends SemanticRestriction> c) {
+            super(c);
+        }
+        public Restrictions(int initialCapacity, float loadFactor) {
+            super(initialCapacity, loadFactor);
+        }
+        public Restrictions(int initialCapacity) {
+            super(initialCapacity);
+        }
+    }
+
+    /**
+     * An implementation of {@link ExpressionEntity} for DataLinks.
+     * <p>
+     *     This class is a container for all the same data properties applied to an individualDescriptor
+     *     (with related values). In particular, the {@link #getExpression()} is a specific
+     *     property, while {@link #getValues()} represents a set of values linked with the
+     *     above property to a {@link Ground}, not specified here.
+     *     For this class, ({@link #getValues()}) returns elements of {@link Literals} type.
+     * </p>
+     */
+    class DataLinks
+            implements ExpressionEntity<OWLDataProperty,OWLLiteral> {
+
+        private OWLDataProperty semantic;
+        private Literals literals;
+
+        /**
+         * Initialise this object to have {@code null} {@link #getExpression()} and empty {@link #getValues()}.
+         */
+        public DataLinks() {
+            this.literals = new Literals();
+        }
+        /**
+         * Initialise this object to have {@code null} {@link #getExpression()} and a given set of literal ({@link #getValues()}).
+         * @param c the initial set of literals to assign to {@code this} {@link ExpressionEntity}.
+         */
+        public DataLinks(Collection<? extends OWLLiteral> c) {
+            this.literals = new Literals(c);
+        }
+        /**
+         * Initialise this object to have {@code null} {@link #getExpression()} and set of literals {@link #getValues()}
+         * with specified size and load factory.
+         * @param initialCapacity the initial size of the literals {@link HashSet}.
+         * @param loadFactor the load factor of the literals {@link HashSet}.
+         */
+        public DataLinks(int initialCapacity, float loadFactor) {
+            this.literals = new Literals(initialCapacity, loadFactor);
+        }
+        /**
+         * Initialise this object to have {@code null} {@link #getExpression()} and set of literals {@link #getValues()}
+         * with specified size and load factory.
+         * @param initialCapacity the initial size of the literals {@link HashSet}.
+         */
+        public DataLinks(int initialCapacity) {
+            this.literals = new Literals(initialCapacity);
+        }
+        /**
+         * Initialise this object to a specific {@link #getExpression()} and empty {@link #getValues()}.
+         * @param semantic the initial semantic of this {@link ExpressionEntity}.
+         */
+        public DataLinks(OWLDataProperty semantic) {
+            this.literals = new Literals();
+            this.semantic = semantic;
+        }
+        /**
+         * Initialise this object to have a specific {@link #getExpression()} and a given set of literal ({@link #getValues()}).
+         * @param semantic the initial semantic of this {@link ExpressionEntity}.
+         * @param c the initial set of literals to assign to {@code this} {@link ExpressionEntity}.
+         */
+        public DataLinks(OWLDataProperty semantic, Collection<? extends OWLLiteral> c) {
+            this.literals = new Literals(c);
+            this.semantic = semantic;
+        }
+        /**
+         * Initialise this object to have a specific {@link #getExpression()} and set of literals {@link #getValues()}
+         * with specified size and load factory.
+         * @param semantic the initial semantic of this {@link ExpressionEntity}.
+         * @param initialCapacity the initial size of the literals {@link HashSet}.
+         * @param loadFactor the load factor of the literals {@link HashSet}.
+         */
+        public DataLinks(OWLDataProperty semantic, int initialCapacity, float loadFactor) {
+            this.literals = new Literals(initialCapacity, loadFactor);
+            this.semantic = semantic;
+        }
+        /**
+         * Initialise this object to have a specific {@link #getExpression()} and set of literals {@link #getValues()}
+         * with specified size and load factory.
+         * @param semantic the initial semantic of this {@link ExpressionEntity}.
+         * @param initialCapacity the initial size of the literals {@link HashSet}.
+         */
+        public DataLinks(OWLDataProperty semantic, int initialCapacity) {
+            this.literals = new Literals(initialCapacity);
+            this.semantic = semantic;
+        }
+
+        @Override // see super class for documentation
+        public OWLDataProperty getExpression() {
+            return semantic;
+        }
+
+        /**
+         * Set the semantic (i.e.: data property) for all the {@link #getValues()}
+         * @param semantic the semantic described by {@code this} container.
+         */
+        public void setSemantic(OWLDataProperty semantic) {
+            this.semantic = semantic;
+        }
+
+        @Override // see super class for documentation
+        public Literals getValues() {
+            return literals;
+        }
+
+        @Override // see super class for documentation
+        public DataLinks getNewData(Set<OWLLiteral> values) {
+            return new DataLinks( semantic, values);
+        }
+
+        @Override // see super class for documentation
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof DataLinks)) return false;
+            DataLinks morSemanticData = (DataLinks) o;
+            return Objects.equal(getExpression(), morSemanticData.getExpression()) &&
+                    Objects.equal(literals, morSemanticData.literals);
+        }
+
+        @Override // see super class for documentation
+        public int hashCode() {
+            return Objects.hashCode(getExpression());//, objects);
+        }
+
+        @Override // see super class for documentation
+        public String toString() {
+            return semantic.getIRI().getRemainder().get() + "." + getValues();
+        }
+    }
+
+    /**
+     * An implementation of {@link ExpressionEntity} for ObjectLinks.
+     * <p>
+     *     This class is a container for all the same object properties applied to an individualDescriptor
+     *     (with related values). In particular, the {@link #getExpression()} is a specific
+     *     property, while {@link #getValues()} represents a set of values linked with the
+     *     above property to a {@link Ground}, not specified here.
+     *     For this class, ({@link #getValues()}) returns elements of {@link Individuals} type.
+     * </p>
+     */
+    class ObjectLinks
+            implements ExpressionEntity<OWLObjectProperty,OWLNamedIndividual> {
+
+        private OWLObjectProperty semantic;
+        private Individuals objects;
+
+        /**
+         * Initialise this object to have {@code null} {@link #getExpression()} and empty {@link #getValues()}.
+         */
+        public ObjectLinks() {
+            this.objects = new Individuals();
+        }
+        /**
+         * Initialise this object to have {@code null} {@link #getExpression()} and a given set of individuals ({@link #getValues()}).
+         * @param c the initial set of individuals to assign to {@code this} {@link ExpressionEntity}.
+         */
+        public ObjectLinks(Collection<? extends OWLNamedIndividual> c) {
+            this.objects = new Individuals(c);
+        }
+        /**
+         * Initialise this object to have {@code null} {@link #getExpression()} and set of individuals {@link #getValues()}
+         * with specified size and load factory.
+         * @param initialCapacity the initial size of the individuals {@link HashSet}.
+         * @param loadFactor the load factor of the individuals {@link HashSet}.
+         */
+        public ObjectLinks(int initialCapacity, float loadFactor) {
+            this.objects = new Individuals(initialCapacity, loadFactor);
+        }
+        /**
+         * Initialise this object to have {@code null} {@link #getExpression()} and set of individuals {@link #getValues()}
+         * with specified size and load factory.
+         * @param initialCapacity the initial size of the individuals {@link HashSet}.
+         */
+        public ObjectLinks(int initialCapacity) {
+            this.objects = new Individuals(initialCapacity);
+        }
+        /**
+         * Initialise this object to a specific {@link #getExpression()} and empty {@link #getValues()}.
+         * @param semantic the initial semantic of this {@link ExpressionEntity}.
+         */
+        public ObjectLinks(OWLObjectProperty semantic) {
+            this.objects = new Individuals();
+            this.semantic = semantic;
+        }
+        /**
+         * Initialise this object to have a specific {@link #getExpression()} and a given set of individuals ({@link #getValues()}).
+         * @param semantic the initial semantic of this {@link ExpressionEntity}.
+         * @param c the initial set of individuals to assign to {@code this} {@link ExpressionEntity}.
+         */
+        public ObjectLinks(OWLObjectProperty semantic, Collection<? extends OWLNamedIndividual> c) {
+            this.objects = new Individuals( c);
+            this.semantic = semantic;
+        }
+        /**
+         * Initialise this object to have a specific {@link #getExpression()} and set of individuals {@link #getValues()}
+         * with specified size and load factory.
+         * @param semantic the initial semantic of this {@link ExpressionEntity}.
+         * @param initialCapacity the initial size of the individuals {@link HashSet}.
+         * @param loadFactor the load factor of the individuals {@link HashSet}.
+         */
+        public ObjectLinks(OWLObjectProperty semantic, int initialCapacity, float loadFactor) {
+            this.objects = new Individuals(initialCapacity, loadFactor);
+            this.semantic = semantic;
+        }
+        /**
+         * Initialise this object to have a specific {@link #getExpression()} and set of individuals {@link #getValues()}
+         * with specified size and load factory.
+         * @param semantic the initial semantic of this {@link ExpressionEntity}.
+         * @param initialCapacity the initial size of the individuals {@link HashSet}.
+         */
+        public ObjectLinks(OWLObjectProperty semantic, int initialCapacity) {
+            this.objects = new Individuals(initialCapacity);
+            this.semantic = semantic;
+        }
+
+        @Override // see super class for documentation
+        public OWLObjectProperty getExpression() {
+            return semantic;
+        }
+
+        /**
+         * Set the semantic (i.e.: object property) for all the {@link #getValues()}
+         * @param semantic the semantic described by {@code this} container.
+         */
+        public void setSemantic(OWLObjectProperty semantic) {
+            this.semantic = semantic;
+        }
+
+        @Override // see super class for documentation
+        public Individuals getValues() {
+            return objects;
+        }
+
+        @Override // see super class for documentation
+        public ObjectLinks getNewData(Set<OWLNamedIndividual> values) {
+            return new ObjectLinks( semantic, values);
+        }
+
+        @Override // see super class for documentation
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof ObjectLinks)) return false;
+            ObjectLinks morData = (ObjectLinks) o;
+            return Objects.equal(getExpression(), morData.getExpression()) &&
+                    Objects.equal(objects, morData.objects);
+        }
+
+        @Override // see super class for documentation
+        public int hashCode() {
+            return Objects.hashCode(getExpression());//, objects);
+        }
+
+        @Override // see super class for documentation
+        public String toString() {
+            return semantic.getIRI().getRemainder().get() + "." + getValues();
+        }
+    }
+
+    /**
+     * An extension of {@link EntitySetBase} for {@link ExpressionEntitySet} for DataLinks.
+     * <p>
+     *     It represents a set of OWL-DataProperties and related OWL-Literals, as a collection of {@link DataLinks}.
+     * </p>
+     */
+    class DataLinksSet
+            extends ExpressionEntitySetBase<DataLinks,OWLDataProperty,OWLLiteral>
+            implements ExpressionEntitySet<DataLinks,OWLLiteral> {
+
+        public DataLinksSet() {
+        }
+        public DataLinksSet(Collection<? extends DataLinks> c) {
+            super(c);
+        }
+        public DataLinksSet(int initialCapacity, float loadFactor) {
+            super(initialCapacity, loadFactor);
+        }
+        public DataLinksSet(int initialCapacity) {
             super(initialCapacity);
         }
 
     }
 
     /**
-     * An extension of {@link EntitySetBase} for {@link ExpressionEntitySet} for object properties.
+     * An extension of {@link EntitySetBase} for {@link ExpressionEntitySet} for ObjectLinks.
      * <p>
-     *     It represent the {@link ExpressionEntitySet} describing a set of
-     *     ontological object properties as a collection of {@link ObjectExpression}.
-     *     <br>
-     *     This class does not add any other feature with respect to its super class
-     *     refer to {@link DescriptorEntitySet} and {@link EntitySetBase}  for further documentation.
+     *     It represents a set of OWL-ObjectProperties and related OWL-Individuals, as a collection of {@link ObjectLinks}.
      * </p>
-     * <div style="text-align:center;"><small>
-     * <b>File</b>:        it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet <br>
-     * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
-     * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
-     * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
-     * <b>date</b>:        21/05/17 <br>
-     * </small></div>
      */
-    class ObjectSemantics
-            extends ExpressionEntitySetBase<ObjectExpression,OWLObjectProperty,OWLNamedIndividual>
-            implements ExpressionEntitySet<ObjectExpression,OWLNamedIndividual> {
+    class ObjectLinksSet
+            extends ExpressionEntitySetBase<ObjectLinks,OWLObjectProperty,OWLNamedIndividual>
+            implements ExpressionEntitySet<ObjectLinks,OWLNamedIndividual> {
 
-        public ObjectSemantics() {
+        public ObjectLinksSet() {
         }
-        public ObjectSemantics(Collection<? extends ObjectExpression> c) {
+        public ObjectLinksSet(Collection<? extends ObjectLinks> c) {
             super(c);
         }
-        public ObjectSemantics(int initialCapacity, float loadFactor) {
+        public ObjectLinksSet(int initialCapacity, float loadFactor) {
             super(initialCapacity, loadFactor);
         }
-        public ObjectSemantics(int initialCapacity) {
+        public ObjectLinksSet(int initialCapacity) {
             super(initialCapacity);
         }
 

@@ -1,52 +1,30 @@
 package it.emarolab.owloop.descriptor.utility.individualDescriptor;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
-import it.emarolab.owloop.core.Axiom;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.IndividualGround;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.IndividualExpression;
-import it.emarolab.owloop.descriptor.utility.dataPropertyDescriptor.FullDataPropertyDesc;
-import it.emarolab.owloop.descriptor.utility.objectPropertyDescriptor.FullObjectPropertyDesc;
+import it.emarolab.owloop.descriptor.utility.dataPropertyDescriptor.FullDataPropertyDescriptor;
+import it.emarolab.owloop.descriptor.utility.objectPropertyDescriptor.FullObjectPropertyDescriptor;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 
 import java.util.List;
 
 /**
- * A basic implementation for an individualDescriptor that has data and object property values.
- * <p>
- *     This is an example of how use the {@link Axiom.Descriptor}s for implement
- *     an individualDescriptor that is synchronised w.r.t. its {@link DataLink}s
- *     and {@link ObjectLink}s.
- *     <br>
- *     Its purpose is only to instanciate the {@link DescriptorEntitySet.ObjectSemantics} for the
- *     respective descriptions, as well as call the derived interfaces in the
- *     {@link #readExpressionAxioms()} and {@link #writeExpressionAxioms()} methods.
- *     All its constructions are based on {@link IndividualGround} in order
- *     to automatically manage a grounding {@link ConceptGroundInstance}.
- *     From an OOP prospective it returns an {@link FullObjectPropertyDesc}
- *     and {@link FullDataPropertyDesc}, be aware that this may be not efficient and
- *     perhaps a less complete descriptor is enough for your case.
- *     <br>
- *     You may want to use this class (see also {@link DefinitionIndividualDesc} and {@link TypeIndividualDesc},
- *     as well as other classes in the {@link it.emarolab.owloop.descriptor.utility} package)
- *     as templates to build a specific {@link IndividualExpression} descriptor that fits your needs
- *     and maximises the OWL synchronisation efficiency.
- *
- * <div style="text-align:center;"><small>
- * <b>File</b>:        it.emarolab.owloop.descriptor.utility.conceptDescriptor.LinkIndividualDesc <br>
- * <b>Licence</b>:     GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
- * <b>Author</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
- * <b>affiliation</b>: EMAROLab, DIBRIS, University of Genoa. <br>
- * <b>date</b>:        21/05/17 <br>
- * </small></div>
+ * This is an example of a 'compound' Individual Descriptor which implements 2 {@link IndividualExpression}s.
+ * <ul>
+ * <li><b>{@link IndividualExpression.ObjectLink}</b>:   to describe an ObjectProperty and Individuals related via that ObjectProperty, for an Individual.</li>
+ * <li><b>{@link IndividualExpression.DataLink}</b>:     to describe an DataProperty and Individuals related via that DataProperty, for an Individual.</li>
+ * </ul>
+ * See {@link FullIndividualDescriptor} for an example of a 'compound' Individual Descriptor that implements all IndividualExpressions.
  */
 public class LinkIndividualDesc
         extends IndividualGround
-        implements IndividualExpression.ObjectLink<FullObjectPropertyDesc>,
-        IndividualExpression.DataLink<FullDataPropertyDesc> {
+        implements IndividualExpression.ObjectLink<FullObjectPropertyDescriptor>,
+        IndividualExpression.DataLink<FullDataPropertyDescriptor> {
 
-    private DescriptorEntitySet.ObjectSemantics objectLinks = new DescriptorEntitySet.ObjectSemantics();
-    private DescriptorEntitySet.DataSemantics dataLinks = new DescriptorEntitySet.DataSemantics();
+    private DescriptorEntitySet.ObjectLinksSet objectLinks = new DescriptorEntitySet.ObjectLinksSet();
+    private DescriptorEntitySet.DataLinksSet dataLinks = new DescriptorEntitySet.DataLinksSet();
 
     // constructors for IndividualGround
 
@@ -75,8 +53,6 @@ public class LinkIndividualDesc
         super(instanceName, ontoName, filePath, iriPath, bufferingChanges);
     }
 
-
-
     // implementations for Axiom.descriptor
 
     @Override
@@ -93,40 +69,33 @@ public class LinkIndividualDesc
         return r;
     }
 
-
     // implementations for IndividualExpression.ObjectLink
 
     @Override  //called during build...() you can change the returning type to any implementations of ObjectPropertyExpression
-    public FullObjectPropertyDesc getNewObjectIndividual(DescriptorEntitySet.ObjectExpression instance, OWLReferences ontology) {
-        return new FullObjectPropertyDesc( instance.getExpression(), ontology);
+    public FullObjectPropertyDescriptor getNewObjectIndividual(DescriptorEntitySet.ObjectLinks instance, OWLReferences ontology) {
+        return new FullObjectPropertyDescriptor( instance.getExpression(), ontology);
     }
 
     @Override
-    public DescriptorEntitySet.ObjectSemantics getObjectSemantics() {
+    public DescriptorEntitySet.ObjectLinksSet getObjectExpressionAxioms() {
         return objectLinks;
     }
-
-
 
     // implementations for IndividualExpression.DataLink
 
     @Override  //called during build...() you can change the returning type to any implementations of DataPropertyExpression
-    public FullDataPropertyDesc getNewDataIndividual(DescriptorEntitySet.DataExpression instance, OWLReferences ontology) {
-        return new FullDataPropertyDesc( instance.getExpression(), ontology);
+    public FullDataPropertyDescriptor getNewDataIndividual(DescriptorEntitySet.DataLinks instance, OWLReferences ontology) {
+        return new FullDataPropertyDescriptor( instance.getExpression(), ontology);
     }
 
     @Override
-    public DescriptorEntitySet.DataSemantics getDataExpressions() {
+    public DescriptorEntitySet.DataLinksSet getDataExpressionAxioms() {
         return dataLinks;
     }
 
-
-    // implementation for standard object interface
-    // equals() and hashCode() is based on DescriptorGround<?> which considers only the ground
-
     @Override
     public String toString() {
-        return "FullObjectPropertyDesc{" +
+        return "FullObjectPropertyDescriptor{" +
                 NL + "\t\t\t" + getGround() +
                 "," + NL + "\t⊨ " + objectLinks +
                 "," + NL + "\t⊢ " + dataLinks +

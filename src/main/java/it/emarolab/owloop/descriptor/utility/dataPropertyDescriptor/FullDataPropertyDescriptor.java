@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * This is an example of a 'compound' DataProperty Descriptor as it implements more than one {@link DataPropertyExpression}.
- * Axioms in this descriptor's internal state (OWLOOP representation) gets synchronized wrt the axioms in the OWL representation.
- * {@link FullDataPropertyDesc} can synchronize all the axioms, that are based on the following DataPropertyExpressions:
+ * This is an example of a 'compound' DataProperty Descriptor as it implements more than one {@link DataPropertyExpression}s.
+ * Axioms in this descriptor's internal state (i.e., OWLOOP representation) can be synchronized to/from an OWL ontology.
+ * {@link FullDataPropertyDescriptor} can synchronize all the axioms, that are based on the following DataPropertyExpressions:
  *
  * <ul>
  * <li><b>{@link DataPropertyExpression.Equivalent}</b>:   to describe that a DataProperty is equivalent to another DataProperty.</li>
@@ -24,6 +24,7 @@ import java.util.Set;
  * <li><b>{@link DataPropertyExpression.Range}</b>:        to describe the range restrictions of a DataProperty.</li>
  * </ul>
  *
+ * <p>
  * <div style="text-align:center;"><small>
  * <b>File</b>:         it.emarolab.owloop.core.Axiom <br>
  * <b>Licence</b>:      GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
@@ -32,46 +33,46 @@ import java.util.Set;
  * <b>date</b>:         01/05/19 <br>
  * </small></div>
  */
-public class FullDataPropertyDesc
+public class FullDataPropertyDescriptor
         extends DataPropertyGround
-        implements DataPropertyExpression.Disjoint<FullDataPropertyDesc>,
-        DataPropertyExpression.Equivalent<FullDataPropertyDesc>,
-        DataPropertyExpression.Sub<FullDataPropertyDesc>,
-        DataPropertyExpression.Super<FullDataPropertyDesc>,
+        implements DataPropertyExpression.Disjoint<FullDataPropertyDescriptor>,
+        DataPropertyExpression.Equivalent<FullDataPropertyDescriptor>,
+        DataPropertyExpression.Sub<FullDataPropertyDescriptor>,
+        DataPropertyExpression.Super<FullDataPropertyDescriptor>,
         DataPropertyExpression.Domain,
         DataPropertyExpression.Range{
 
-    private DescriptorEntitySet.DataLinks disjointProperties = new DescriptorEntitySet.DataLinks();
-    private DescriptorEntitySet.DataLinks equivalentProperties = new DescriptorEntitySet.DataLinks();
-    private DescriptorEntitySet.DataLinks subProperties = new DescriptorEntitySet.DataLinks();
-    private DescriptorEntitySet.DataLinks superProperties = new DescriptorEntitySet.DataLinks();
+    private DescriptorEntitySet.DataProperties disjointProperties = new DescriptorEntitySet.DataProperties();
+    private DescriptorEntitySet.DataProperties equivalentProperties = new DescriptorEntitySet.DataProperties();
+    private DescriptorEntitySet.DataProperties subProperties = new DescriptorEntitySet.DataProperties();
+    private DescriptorEntitySet.DataProperties superProperties = new DescriptorEntitySet.DataProperties();
     private DescriptorEntitySet.Restrictions domainRestriction = new DescriptorEntitySet.Restrictions();
     private DescriptorEntitySet.Restrictions rangeRestriction = new DescriptorEntitySet.Restrictions();
 
     // Constructors from the abstract class: DataPropertyGround
 
-    public FullDataPropertyDesc(OWLDataProperty instance, OWLReferences onto) {
+    public FullDataPropertyDescriptor(OWLDataProperty instance, OWLReferences onto) {
         super(instance, onto);
     }
-    public FullDataPropertyDesc(String instanceName, OWLReferences onto) {
+    public FullDataPropertyDescriptor(String instanceName, OWLReferences onto) {
         super(instanceName, onto);
     }
-    public FullDataPropertyDesc(OWLDataProperty instance, String ontoName) {
+    public FullDataPropertyDescriptor(OWLDataProperty instance, String ontoName) {
         super(instance, ontoName);
     }
-    public FullDataPropertyDesc(OWLDataProperty instance, String ontoName, String filePath, String iriPath) {
+    public FullDataPropertyDescriptor(OWLDataProperty instance, String ontoName, String filePath, String iriPath) {
         super(instance, ontoName, filePath, iriPath);
     }
-    public FullDataPropertyDesc(OWLDataProperty instance, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
+    public FullDataPropertyDescriptor(OWLDataProperty instance, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
         super(instance, ontoName, filePath, iriPath, bufferingChanges);
     }
-    public FullDataPropertyDesc(String instanceName, String ontoName) {
+    public FullDataPropertyDescriptor(String instanceName, String ontoName) {
         super(instanceName, ontoName);
     }
-    public FullDataPropertyDesc(String instanceName, String ontoName, String filePath, String iriPath) {
+    public FullDataPropertyDescriptor(String instanceName, String ontoName, String filePath, String iriPath) {
         super(instanceName, ontoName, filePath, iriPath);
     }
-    public FullDataPropertyDesc(String instanceName, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
+    public FullDataPropertyDescriptor(String instanceName, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
         super(instanceName, ontoName, filePath, iriPath, bufferingChanges);
     }
 
@@ -104,29 +105,29 @@ public class FullDataPropertyDesc
     // Implementations for: DataPropertyExpression.Disjoint
 
     @Override // you can change the returning type to any implementations of DataPropertyExpression
-    public FullDataPropertyDesc getNewDisjointDataProperty(OWLDataProperty instance, OWLReferences ontology) {
-        return new FullDataPropertyDesc( instance, ontology);
+    public FullDataPropertyDescriptor getNewDisjointDataProperty(OWLDataProperty instance, OWLReferences ontology) {
+        return new FullDataPropertyDescriptor( instance, ontology);
     }
 
     @Override
-    public DescriptorEntitySet.DataLinks getDisjointDataProperty() {
+    public DescriptorEntitySet.DataProperties getDisjointDataProperty() {
         return disjointProperties;
     }
 
     // Implementations for: DataPropertyExpression.Equivalent
 
     @Override // returns a set with elements of the same type of getNewDisjointDataProperty()
-    public Set<FullDataPropertyDesc> buildEquivalentDataProperty() {
+    public Set<FullDataPropertyDescriptor> buildEquivalentDataProperty() {
         return DataPropertyExpression.Equivalent.super.buildEquivalentDataProperty();
     }
 
     @Override // you can change the returning type to any implementations of DataPropertyExpression
-    public FullDataPropertyDesc getNewEquivalentDataProperty(OWLDataProperty instance, OWLReferences ontology) {
-        return new FullDataPropertyDesc( instance, ontology);
+    public FullDataPropertyDescriptor getNewEquivalentDataProperty(OWLDataProperty instance, OWLReferences ontology) {
+        return new FullDataPropertyDescriptor( instance, ontology);
     }
 
     @Override
-    public DescriptorEntitySet.DataLinks getEquivalentDataProperty() {
+    public DescriptorEntitySet.DataProperties getEquivalentDataProperty() {
         return equivalentProperties;
     }
 
@@ -147,24 +148,24 @@ public class FullDataPropertyDesc
     // Implementations for: DataPropertyExpression.Super
 
     @Override //called during build...() you can change the returning type to any implementations of DataPropertyExpression
-    public FullDataPropertyDesc getNewSubDataProperty(OWLDataProperty instance, OWLReferences ontology) {
-        return new FullDataPropertyDesc( instance, ontology);
+    public FullDataPropertyDescriptor getNewSubDataProperty(OWLDataProperty instance, OWLReferences ontology) {
+        return new FullDataPropertyDescriptor( instance, ontology);
     }
 
     @Override
-    public DescriptorEntitySet.DataLinks getSubDataProperty() {
+    public DescriptorEntitySet.DataProperties getSubDataProperty() {
         return subProperties;
     }
 
     // Implementations for: DataPropertyExpression.Super
 
     @Override //called during build...() you can change the returning type to any implementations of DataPropertyExpression
-    public FullDataPropertyDesc getNewSuperDataProperty(OWLDataProperty instance, OWLReferences ontology) {
-        return new FullDataPropertyDesc( instance, ontology);
+    public FullDataPropertyDescriptor getNewSuperDataProperty(OWLDataProperty instance, OWLReferences ontology) {
+        return new FullDataPropertyDescriptor( instance, ontology);
     }
 
     @Override
-    public DescriptorEntitySet.DataLinks getSuperDataProperty() {
+    public DescriptorEntitySet.DataProperties getSuperDataProperty() {
         return superProperties;
     }
 
@@ -172,7 +173,7 @@ public class FullDataPropertyDesc
 
     @Override
     public String toString() {
-        return "FullObjectPropertyDesc{" +
+        return "FullObjectPropertyDescriptor{" +
                 NL + "\t\t\t" + getGround() +
                 ":" + NL + "\t≠ " + disjointProperties +
                 "," + NL + "\t≡ " + equivalentProperties +

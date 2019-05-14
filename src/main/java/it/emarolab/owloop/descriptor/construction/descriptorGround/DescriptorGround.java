@@ -14,6 +14,7 @@ import org.semanticweb.owlapi.model.OWLObject;
  * By default, this class takes an ontology from a file and initialises the {@link PelletReasoner}
  * (If another {@link OWLReferences} is instantiated with the same ontoName then this ontology will be used.).
  *
+ * <p>
  * <div style="text-align:center;"><small>
  * <b>File</b>:         it.emarolab.owloop.core.Axiom <br>
  * <b>Licence</b>:      GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
