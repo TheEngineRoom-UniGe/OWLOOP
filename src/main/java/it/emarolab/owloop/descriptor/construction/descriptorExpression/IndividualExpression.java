@@ -400,10 +400,10 @@ public interface IndividualExpression
                     return d.getValues().remove(value);
             return false;
         }
-        default boolean removeObject( OWLDataProperty property, Set<OWLLiteral> values){
-            DescriptorEntitySet.DataLinks objectSemantic = new DescriptorEntitySet.DataLinks(property);
-            objectSemantic.getValues().addAll( values);
-            return getDataExpressionAxioms().remove( objectSemantic);
+        default boolean removeData( OWLDataProperty property, Set<OWLLiteral> values){
+            DescriptorEntitySet.DataLinks dataSemantic = new DescriptorEntitySet.DataLinks(property);
+            dataSemantic.getValues().addAll( values);
+            return getDataExpressionAxioms().remove( dataSemantic);
         }
 
         /**
