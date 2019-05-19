@@ -1,14 +1,16 @@
-package it.emarolab.owloop.descriptor.utility.owloopPaperTests.locationDescriptors;
+package it.emarolab.owloop.descriptor.utility.owloopPaperTests.exampleDescriptors;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.amor.owlInterface.SemanticRestriction;
 
-public class CorridorDescriptor extends BaseDescriptor<SemanticRestriction.ClassRestrictedOnMinObject> {
+public class CorridorConceptDesc extends DefConceptDesc {
 
-    public CorridorDescriptor( OWLReferences onto) {
+    public CorridorConceptDesc(OWLReferences onto) {
+
         super("CORRIDOR", onto);
     }
 
+    // implementing with a MinCardinality-restriction
     @Override
     protected SemanticRestriction.ClassRestrictedOnMinObject getRestriction(){
         SemanticRestriction.ClassRestrictedOnMinObject definition = new SemanticRestriction.ClassRestrictedOnMinObject();

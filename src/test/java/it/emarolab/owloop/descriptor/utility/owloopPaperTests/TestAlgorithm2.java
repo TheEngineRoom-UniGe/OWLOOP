@@ -40,6 +40,9 @@ public class TestAlgorithm2 {
     public static void save() {
 
         d1.saveOntology( "src/test/resources/owloopTestOntology.owl");
+
+        d1.readExpressionAxioms(); //extra
+        System.out.println(d1); //extra
     }
 
     @Test

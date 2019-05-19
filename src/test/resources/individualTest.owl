@@ -1094,7 +1094,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/emaroLab/luca-buoncompagni/sit#Equivalent-Individual-To-Build">
-        <owl:sameAs rdf:resource="http://www.semanticweb.org/emaroLab/luca-buoncompagni/sit#individual-A"/>
+        <owl:sameAs rdf:resource="http://www.semanticweb.org/emaroLab/luca-buoncompagni/sit#individualDescriptor-A"/>
     </owl:NamedIndividual>
     
 
@@ -1113,10 +1113,10 @@
     
 
 
-    <!-- http://www.semanticweb.org/emaroLab/luca-buoncompagni/sit#individual-A -->
+    <!-- http://www.semanticweb.org/emaroLab/luca-buoncompagni/sit#individualDescriptor-A -->
 
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/emaroLab/luca-buoncompagni/sit#individual-A">
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/emaroLab/luca-buoncompagni/sit#individualDescriptor-A">
         <rdf:type rdf:resource="http://www.semanticweb.org/emaroLab/luca-buoncompagni/sit#GeometricPrimitive"/>
         <rdf:type rdf:resource="http://www.semanticweb.org/emaroLab/luca-buoncompagni/sit#Individual-Type-To-Build"/>
         <rdf:type rdf:resource="http://www.semanticweb.org/emaroLab/luca-buoncompagni/sit#RealObject"/>
@@ -1157,7 +1157,7 @@
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDifferent"/>
         <owl:distinctMembers rdf:parseType="Collection">
             <rdf:Description rdf:about="http://www.semanticweb.org/emaroLab/luca-buoncompagni/sit#Disjoint-Individual-To-Build"/>
-            <rdf:Description rdf:about="http://www.semanticweb.org/emaroLab/luca-buoncompagni/sit#individual-A"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/emaroLab/luca-buoncompagni/sit#individualDescriptor-A"/>
         </owl:distinctMembers>
     </rdf:Description>
 </rdf:RDF>

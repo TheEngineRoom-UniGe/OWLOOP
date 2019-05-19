@@ -17,7 +17,7 @@ import java.util.List;
  * </ul>
  * See {@link FullObjectPropertyDescriptor} for an example of a 'compound' Individual Descriptor that implements all ObjectPropertyExpressions.
  */
-public class DomainObjectPropertyDesc
+public class DomainRangeObjectPropertyDesc
         extends ObjectPropertyGround
         implements ObjectPropertyExpression.Domain,
         ObjectPropertyExpression.Range {
@@ -27,28 +27,28 @@ public class DomainObjectPropertyDesc
 
     // constructors for ObjectPropertyGround
 
-    public DomainObjectPropertyDesc(OWLObjectProperty instance, OWLReferences onto) {
+    public DomainRangeObjectPropertyDesc(OWLObjectProperty instance, OWLReferences onto) {
         super(instance, onto);
     }
-    public DomainObjectPropertyDesc(String instanceName, OWLReferences onto) {
+    public DomainRangeObjectPropertyDesc(String instanceName, OWLReferences onto) {
         super(instanceName, onto);
     }
-    public DomainObjectPropertyDesc(OWLObjectProperty instance, String ontoName) {
+    public DomainRangeObjectPropertyDesc(OWLObjectProperty instance, String ontoName) {
         super(instance, ontoName);
     }
-    public DomainObjectPropertyDesc(OWLObjectProperty instance, String ontoName, String filePath, String iriPath) {
+    public DomainRangeObjectPropertyDesc(OWLObjectProperty instance, String ontoName, String filePath, String iriPath) {
         super(instance, ontoName, filePath, iriPath);
     }
-    public DomainObjectPropertyDesc(OWLObjectProperty instance, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
+    public DomainRangeObjectPropertyDesc(OWLObjectProperty instance, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
         super(instance, ontoName, filePath, iriPath, bufferingChanges);
     }
-    public DomainObjectPropertyDesc(String instanceName, String ontoName) {
+    public DomainRangeObjectPropertyDesc(String instanceName, String ontoName) {
         super(instanceName, ontoName);
     }
-    public DomainObjectPropertyDesc(String instanceName, String ontoName, String filePath, String iriPath) {
+    public DomainRangeObjectPropertyDesc(String instanceName, String ontoName, String filePath, String iriPath) {
         super(instanceName, ontoName, filePath, iriPath);
     }
-    public DomainObjectPropertyDesc(String instanceName, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
+    public DomainRangeObjectPropertyDesc(String instanceName, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
         super(instanceName, ontoName, filePath, iriPath, bufferingChanges);
     }
 

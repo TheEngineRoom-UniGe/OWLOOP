@@ -17,7 +17,7 @@ import java.util.List;
  * </ul>
  * See {@link FullDataPropertyDescriptor} for an example of a 'compound' DataProperty Descriptor that implements all DataPropertyExpressions.
  */
-public class DomainDataPropertyDesc
+public class DomainRangeDataPropertyDesc
         extends DataPropertyGround
         implements DataPropertyExpression.Domain,
         DataPropertyExpression.Range {
@@ -27,28 +27,28 @@ public class DomainDataPropertyDesc
 
     // constructors for DataPropertyGround
 
-    public DomainDataPropertyDesc(OWLDataProperty instance, OWLReferences onto) {
+    public DomainRangeDataPropertyDesc(OWLDataProperty instance, OWLReferences onto) {
         super(instance, onto);
     }
-    public DomainDataPropertyDesc(String instanceName, OWLReferences onto) {
+    public DomainRangeDataPropertyDesc(String instanceName, OWLReferences onto) {
         super(instanceName, onto);
     }
-    public DomainDataPropertyDesc(OWLDataProperty instance, String ontoName) {
+    public DomainRangeDataPropertyDesc(OWLDataProperty instance, String ontoName) {
         super(instance, ontoName);
     }
-    public DomainDataPropertyDesc(OWLDataProperty instance, String ontoName, String filePath, String iriPath) {
+    public DomainRangeDataPropertyDesc(OWLDataProperty instance, String ontoName, String filePath, String iriPath) {
         super(instance, ontoName, filePath, iriPath);
     }
-    public DomainDataPropertyDesc(OWLDataProperty instance, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
+    public DomainRangeDataPropertyDesc(OWLDataProperty instance, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
         super(instance, ontoName, filePath, iriPath, bufferingChanges);
     }
-    public DomainDataPropertyDesc(String instanceName, String ontoName) {
+    public DomainRangeDataPropertyDesc(String instanceName, String ontoName) {
         super(instanceName, ontoName);
     }
-    public DomainDataPropertyDesc(String instanceName, String ontoName, String filePath, String iriPath) {
+    public DomainRangeDataPropertyDesc(String instanceName, String ontoName, String filePath, String iriPath) {
         super(instanceName, ontoName, filePath, iriPath);
     }
-    public DomainDataPropertyDesc(String instanceName, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
+    public DomainRangeDataPropertyDesc(String instanceName, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
         super(instanceName, ontoName, filePath, iriPath, bufferingChanges);
     }
 
