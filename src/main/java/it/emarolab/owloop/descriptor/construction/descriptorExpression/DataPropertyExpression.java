@@ -138,7 +138,7 @@ public interface DataPropertyExpression
         @Override // see super class for documentation
         default List<MappingIntent> writeExpressionAxioms(){
             try {
-                EntitySet.SynchronisationIntent<OWLDataProperty> to = synchroniseDisjointDataPropertyToSemantic();
+                EntitySet.SynchronisationIntent<OWLDataProperty> to = synchroniseDisjointDataPropertyToExpressionAxioms();
                 if ( to == null)
                     return getIntent( null);
                 List<OWLOntologyChange> changes = new ArrayList<>();
@@ -232,7 +232,7 @@ public interface DataPropertyExpression
         @Override // see super class for documentation
         default List<MappingIntent> writeExpressionAxioms(){
             try {
-                EntitySet.SynchronisationIntent<OWLDataProperty> to = synchroniseEquivalentDataPropertyToSemantic();
+                EntitySet.SynchronisationIntent<OWLDataProperty> to = synchroniseEquivalentDataPropertyToExpressionAxioms();
                 if ( to == null)
                     return getIntent( null);
                 List<OWLOntologyChange> changes = new ArrayList<>();
@@ -322,7 +322,7 @@ public interface DataPropertyExpression
         @Override // see super class for documentation
         default List<MappingIntent> writeExpressionAxioms(){
             try {
-                EntitySet.SynchronisationIntent<OWLDataProperty> to = synchroniseSubDataPropertyToSemantic();
+                EntitySet.SynchronisationIntent<OWLDataProperty> to = synchroniseSubDataPropertyToExpressionAxioms();
                 if ( to == null)
                     return getIntent( null);
                 List<OWLOntologyChange> changes = new ArrayList<>();
@@ -407,7 +407,7 @@ public interface DataPropertyExpression
         @Override // see super class for documentation
         default List<MappingIntent> writeExpressionAxioms(){
             try{
-                EntitySet.SynchronisationIntent<OWLDataProperty> to = synchroniseSuperDataPropertyToSemantic();
+                EntitySet.SynchronisationIntent<OWLDataProperty> to = synchroniseSuperDataPropertyToExpressionAxioms();
                 if ( to == null)
                     return getIntent( null);
                 List<OWLOntologyChange> changes = new ArrayList<>();
@@ -1235,7 +1235,7 @@ public interface DataPropertyExpression
         @Override // see super class for documentation
         default List<MappingIntent> writeExpressionAxioms(){
             try {
-                EntitySet.SynchronisationIntent<SemanticRestriction> to = synchroniseDomainDataPropertyToSemantic();
+                EntitySet.SynchronisationIntent<SemanticRestriction> to = synchroniseDomainDataPropertyToExpressionAxioms();
                 List<OWLOntologyChange> changes = new ArrayList<>();
                 for (SemanticRestriction a : to.getToAdd())
                     changes.add(getOntology().addRestriction(a));
@@ -1306,7 +1306,7 @@ public interface DataPropertyExpression
         @Override // see super class for documentation
         default List<MappingIntent> writeExpressionAxioms(){
             try {
-                EntitySet.SynchronisationIntent<SemanticRestriction> to = synchroniseRangeDataPropertyToSemantic();
+                EntitySet.SynchronisationIntent<SemanticRestriction> to = synchroniseRangeDataPropertyToExpressionAxioms();
                 if ( to == null)
                     return getIntent( null);
                 List<OWLOntologyChange> changes = new ArrayList<>();

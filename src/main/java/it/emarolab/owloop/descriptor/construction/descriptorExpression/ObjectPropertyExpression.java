@@ -189,7 +189,7 @@ public interface ObjectPropertyExpression
         @Override // see super class for documentation
         default List<MappingIntent> writeExpressionAxioms(){
             try {
-                EntitySet.SynchronisationIntent<OWLObjectProperty> to = synchroniseInverseObjectPropertyToSemantic();
+                EntitySet.SynchronisationIntent<OWLObjectProperty> to = synchroniseInverseObjectPropertyToExpressionAxioms();
                 if ( to == null)
                     return getIntent( null);
                 List<OWLOntologyChange> changes = new ArrayList<>();
@@ -275,7 +275,7 @@ public interface ObjectPropertyExpression
         @Override // see super class for documentation
         default List<MappingIntent> writeExpressionAxioms(){
             try{
-                EntitySet.SynchronisationIntent<OWLObjectProperty> to = synchroniseDisjointObjectPropertyToSemantic();
+                EntitySet.SynchronisationIntent<OWLObjectProperty> to = synchroniseDisjointObjectPropertyToExpressionAxioms();
                 if ( to == null)
                     return getIntent( null);
                 List<OWLOntologyChange> changes = new ArrayList<>();
@@ -369,7 +369,7 @@ public interface ObjectPropertyExpression
         @Override // see super class for documentation
         default List<MappingIntent> writeExpressionAxioms(){
             try {
-                EntitySet.SynchronisationIntent<OWLObjectProperty> to = synchroniseEquivalentObjectPropertyToSemantic();
+                EntitySet.SynchronisationIntent<OWLObjectProperty> to = synchroniseEquivalentObjectPropertyToExpressionAxioms();
                 if( to == null)
                     return getIntent( null);
                 List<OWLOntologyChange> changes = new ArrayList<>();
@@ -462,7 +462,7 @@ public interface ObjectPropertyExpression
         @Override // see super class for documentation
         default List<MappingIntent> writeExpressionAxioms(){
             try{
-                EntitySet.SynchronisationIntent<OWLObjectProperty> to = synchroniseSubObjectPropertyToSemantic();
+                EntitySet.SynchronisationIntent<OWLObjectProperty> to = synchroniseSubObjectPropertyToExpressionAxioms();
                 if ( to == null)
                     return getIntent( null);
                 List<OWLOntologyChange> changes = new ArrayList<>();
@@ -548,7 +548,7 @@ public interface ObjectPropertyExpression
         @Override // see super class for documentation
         default List<MappingIntent> writeExpressionAxioms(){
             try{
-                EntitySet.SynchronisationIntent<OWLObjectProperty> to = synchroniseSuperObjectPropertyToSemantic();
+                EntitySet.SynchronisationIntent<OWLObjectProperty> to = synchroniseSuperObjectPropertyToExpressionAxioms();
                 if ( to == null)
                     return getIntent( null);
                 List<OWLOntologyChange> changes = new ArrayList<>();
@@ -1373,7 +1373,7 @@ public interface ObjectPropertyExpression
         @Override // see super class for documentation
         default List<MappingIntent> writeExpressionAxioms(){
             try{
-                EntitySet.SynchronisationIntent<SemanticRestriction> to = synchroniseDomainObjectPropertyToSemantic();
+                EntitySet.SynchronisationIntent<SemanticRestriction> to = synchroniseDomainObjectPropertyToExpressionAxioms();
                 if ( to == null)
                     return getIntent( null);
                 List<OWLOntologyChange> changes = new ArrayList<>();
@@ -2199,7 +2199,7 @@ public interface ObjectPropertyExpression
         @Override // see super class for documentation
         default List<MappingIntent> writeExpressionAxioms(){
             try{
-                EntitySet.SynchronisationIntent<SemanticRestriction> to = synchroniseRangeObjectPropertyToSemantic();
+                EntitySet.SynchronisationIntent<SemanticRestriction> to = synchroniseRangeObjectPropertyToExpressionAxioms();
                 if ( to == null)
                     return getIntent( null);
                 List<OWLOntologyChange> changes = new ArrayList<>();

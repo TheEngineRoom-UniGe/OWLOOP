@@ -48,7 +48,7 @@ public interface Concept<O,J>
         @Override  // see documentation on Axiom.descriptor.readExpressionAxioms
         default List<MappingIntent> readExpressionAxioms(){
             try {
-                EntitySet.SynchronisationIntent<J> from = synchroniseEquivalentConceptFromSemantic();
+                EntitySet.SynchronisationIntent<J> from = synchroniseEquivalentConceptFromExpressionAxioms();
                 if ( from != null) {
                     getEquivalentConcept().addAll(from.getToAdd());
                     getEquivalentConcept().removeAll(from.getToRemove());
@@ -112,7 +112,7 @@ public interface Concept<O,J>
          * @return the changes to be done to synchronise {@code this} structure with
          * the equivalent classes of an OWL class.
          */
-        default EntitySet.SynchronisationIntent<J> synchroniseEquivalentConceptToSemantic(){
+        default EntitySet.SynchronisationIntent<J> synchroniseEquivalentConceptToExpressionAxioms(){
             try {
                 return getEquivalentConcept().synchroniseTo( queryEquivalentConcept());
             } catch ( Exception e){
@@ -129,7 +129,7 @@ public interface Concept<O,J>
          * @return the changes to be done to synchronise the equivalent classes of an OWL class
          * with {@code this} structure.
          */
-        default EntitySet.SynchronisationIntent<J> synchroniseEquivalentConceptFromSemantic(){
+        default EntitySet.SynchronisationIntent<J> synchroniseEquivalentConceptFromExpressionAxioms(){
             try{
                 return getEquivalentConcept().synchroniseFrom( queryEquivalentConcept());
             } catch ( Exception e){
@@ -153,7 +153,7 @@ public interface Concept<O,J>
         @Override // see documentation on Axiom.descriptor.readExpressionAxioms
         default List<MappingIntent> readExpressionAxioms(){
             try {
-                EntitySet.SynchronisationIntent<J> from = synchroniseDisjointConceptFromSemantic();
+                EntitySet.SynchronisationIntent<J> from = synchroniseDisjointConceptFromExpressionAxioms();
                 if ( from != null) {
                     getDisjointConcept().addAll(from.getToAdd());
                     getDisjointConcept().removeAll(from.getToRemove());
@@ -218,7 +218,7 @@ public interface Concept<O,J>
          * @return the changes to be done to synchronise {@code this} structure with
          * the disjointed classes of an OWL class.
          */
-        default EntitySet.SynchronisationIntent<J> synchroniseDisjointConceptToSemantic(){
+        default EntitySet.SynchronisationIntent<J> synchroniseDisjointConceptToExpressionAxioms(){
             try {
                 return getDisjointConcept().synchroniseTo( queryDisjointConcept());
             } catch ( Exception e){
@@ -235,7 +235,7 @@ public interface Concept<O,J>
          * @return the changes to be done to synchronise the disjointed classes of an OWL class
          * with {@code this} structure.
          */
-        default EntitySet.SynchronisationIntent<J> synchroniseDisjointConceptFromSemantic(){
+        default EntitySet.SynchronisationIntent<J> synchroniseDisjointConceptFromExpressionAxioms(){
             try{
                 return getDisjointConcept().synchroniseFrom( queryDisjointConcept());
             } catch ( Exception e){
@@ -259,7 +259,7 @@ public interface Concept<O,J>
         @Override // see documentation on Axiom.descriptor.readExpressionAxioms
         default List<MappingIntent> readExpressionAxioms(){
             try {
-                EntitySet.SynchronisationIntent<J> from = synchroniseSubConceptFromSemantic();
+                EntitySet.SynchronisationIntent<J> from = synchroniseSubConceptFromExpressionAxioms();
                 if ( from != null) {
                     getSubConcept().addAll(from.getToAdd());
                     getSubConcept().removeAll(from.getToRemove());
@@ -323,7 +323,7 @@ public interface Concept<O,J>
          * @return the changes to be done to synchronise {@code this} structure with
          * the sub classes of an OWL class.
          */
-        default EntitySet.SynchronisationIntent<J> synchroniseSubConceptToSemantic(){
+        default EntitySet.SynchronisationIntent<J> synchroniseSubConceptToExpressionAxioms(){
             try {
                 return getSubConcept().synchroniseTo( querySubConcept());
             } catch ( Exception e){
@@ -340,7 +340,7 @@ public interface Concept<O,J>
          * @return the changes to be done to synchronise the sub classes of an OWL class
          * with {@code this} structure.
          */
-        default EntitySet.SynchronisationIntent<J> synchroniseSubConceptFromSemantic(){
+        default EntitySet.SynchronisationIntent<J> synchroniseSubConceptFromExpressionAxioms(){
             try{
                 return getSubConcept().synchroniseFrom( querySubConcept());
             } catch ( Exception e){
@@ -364,7 +364,7 @@ public interface Concept<O,J>
         @Override // see documentation on Axiom.descriptor.readExpressionAxioms
         default List<MappingIntent> readExpressionAxioms(){
             try {
-                EntitySet.SynchronisationIntent<J> from = synchroniseSuperConceptFromSemantic();
+                EntitySet.SynchronisationIntent<J> from = synchroniseSuperConceptFromExpressionAxioms();
                 if ( from != null) {
                     getSuperConcept().addAll(from.getToAdd());
                     getSuperConcept().removeAll(from.getToRemove());
@@ -428,7 +428,7 @@ public interface Concept<O,J>
          * @return the changes to be done to synchronise {@code this} structure with
          * the super classes of an OWL class.
          */
-        default EntitySet.SynchronisationIntent<J> synchroniseSuperConceptToSemantic(){
+        default EntitySet.SynchronisationIntent<J> synchroniseSuperConceptToExpressionAxioms(){
             try {
                 return getSuperConcept().synchroniseTo( querySuperConcept());
             } catch ( Exception e){
@@ -445,7 +445,7 @@ public interface Concept<O,J>
          * @return the changes to be done to synchronise the super classes of an OWL class
          * with {@code this} structure.
          */
-        default EntitySet.SynchronisationIntent<J> synchroniseSuperConceptFromSemantic(){
+        default EntitySet.SynchronisationIntent<J> synchroniseSuperConceptFromExpressionAxioms(){
             try{
                 return getSuperConcept().synchroniseFrom( querySuperConcept());
             } catch ( Exception e){
@@ -470,7 +470,7 @@ public interface Concept<O,J>
         @Override // see documentation on Axiom.descriptor.readExpressionAxioms
         default List<MappingIntent> readExpressionAxioms(){
             try {
-                EntitySet.SynchronisationIntent<Y> from = synchroniseIndividualInstanceFromSemantic();
+                EntitySet.SynchronisationIntent<Y> from = synchroniseIndividualInstanceFromExpressionAxioms();
                 if ( from != null) {
                     getIndividualInstance().addAll(from.getToAdd());
                     getIndividualInstance().removeAll(from.getToRemove());
@@ -534,7 +534,7 @@ public interface Concept<O,J>
          * @return the changes to be done to synchronise {@code this} structure with
          * the individualDescriptor classified in an OWL class.
          */
-        default EntitySet.SynchronisationIntent<Y> synchroniseIndividualInstanceToSemantic(){
+        default EntitySet.SynchronisationIntent<Y> synchroniseIndividualInstanceToExpressionAxioms(){
             try {
                 return getIndividualInstance().synchroniseTo( queryIndividualInstance());
             } catch ( Exception e){
@@ -551,7 +551,7 @@ public interface Concept<O,J>
          * @return the changes to be done to synchronise the individualDescriptor of an OWL class
          * with {@code this} structure.
          */
-        default EntitySet.SynchronisationIntent<Y> synchroniseIndividualInstanceFromSemantic(){
+        default EntitySet.SynchronisationIntent<Y> synchroniseIndividualInstanceFromExpressionAxioms(){
             try{
                 return getIndividualInstance().synchroniseFrom( queryIndividualInstance());
             } catch ( Exception e){
@@ -590,7 +590,7 @@ public interface Concept<O,J>
         @Override // see documentation on Axiom.descriptor.readExpressionAxioms
         default List<MappingIntent> readExpressionAxioms(){
             try {
-                EntitySet.SynchronisationIntent<Y> from = synchroniseDefinitionConceptFromSemantic();
+                EntitySet.SynchronisationIntent<Y> from = synchroniseDefinitionConceptFromExpressionAxioms();
                 if ( from != null) {
                     getDefinitionConcept().addAll(from.getToAdd());
                     getDefinitionConcept().removeAll(from.getToRemove());
@@ -624,7 +624,7 @@ public interface Concept<O,J>
          * @return the changes to be done to synchronise {@code this} structure with
          * the class definition of an OWL class.
          */
-        default EntitySet.SynchronisationIntent<Y> synchroniseDefinitionConceptToSemantic(){
+        default EntitySet.SynchronisationIntent<Y> synchroniseDefinitionConceptToExpressionAxioms(){
             try {
                 return getDefinitionConcept().synchroniseTo( queryDefinitionConcept());
             } catch ( Exception e){
@@ -641,7 +641,7 @@ public interface Concept<O,J>
          * @return the changes to be done to synchronise the class definition of an OWL class
          * with {@code this} structure.
          */
-        default EntitySet.SynchronisationIntent<Y> synchroniseDefinitionConceptFromSemantic(){
+        default EntitySet.SynchronisationIntent<Y> synchroniseDefinitionConceptFromExpressionAxioms(){
             try{
                 return getDefinitionConcept().synchroniseFrom( queryDefinitionConcept());
             } catch ( Exception e){

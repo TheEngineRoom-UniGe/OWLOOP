@@ -123,7 +123,7 @@ public interface IndividualExpression
         @Override // see super classes for documentation
         default List<MappingIntent> writeExpressionAxioms(){
             try {
-                EntitySet.SynchronisationIntent<OWLClass> to = synchroniseTypeIndividualToSemantic();
+                EntitySet.SynchronisationIntent<OWLClass> to = synchroniseTypeIndividualToExpressionAxioms();
                 if ( to == null)
                     return getIntent( null);
                 List<OWLOntologyChange> changes = new ArrayList<>();
@@ -209,7 +209,7 @@ public interface IndividualExpression
         @Override // see super classes for documentation
         default List<MappingIntent> writeExpressionAxioms(){
             try {
-                EntitySet.SynchronisationIntent<OWLNamedIndividual> to = synchroniseDisjointIndividualToSemantic();
+                EntitySet.SynchronisationIntent<OWLNamedIndividual> to = synchroniseDisjointIndividualToExpressionAxioms();
                 if ( to == null)
                     return getIntent( null);
                 List<OWLOntologyChange> changes = new ArrayList<>();
@@ -303,7 +303,7 @@ public interface IndividualExpression
         @Override // see super classes for documentation
         default List<MappingIntent> writeExpressionAxioms(){
             try {
-                EntitySet.SynchronisationIntent<OWLNamedIndividual> to = synchroniseEquivalentIndividualToSemantic();
+                EntitySet.SynchronisationIntent<OWLNamedIndividual> to = synchroniseEquivalentIndividualToExpressionAxioms();
                 if ( to == null)
                     return getIntent( null);
                 List<OWLOntologyChange> changes = new ArrayList<>();
@@ -633,7 +633,7 @@ public interface IndividualExpression
         @Override // see super classes for documentation
         default List<MappingIntent> writeExpressionAxioms(){
             try {
-                EntitySet.SynchronisationIntent<DescriptorEntitySet.DataLinks> to = synchroniseDataIndividualToSemantic();
+                EntitySet.SynchronisationIntent<DescriptorEntitySet.DataLinks> to = synchroniseDataIndividualToExpressionAxioms();
                 if ( to == null)
                     return getIntent( null);
                 List<OWLOntologyChange> changes = new ArrayList<>();
@@ -940,7 +940,7 @@ public interface IndividualExpression
         @Override // see super classes for documentation
         default List<MappingIntent> writeExpressionAxioms(){
             try {
-                EntitySet.SynchronisationIntent<DescriptorEntitySet.ObjectLinks> to = synchroniseObjectIndividualToSemantic();
+                EntitySet.SynchronisationIntent<DescriptorEntitySet.ObjectLinks> to = synchroniseObjectIndividualToExpressionAxioms();
                 if ( to == null)
                     return getIntent( null);
                 List<OWLOntologyChange> changes = new ArrayList<>();

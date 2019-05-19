@@ -113,7 +113,7 @@ public interface ObjectProperty<O,J>
         @Override // see documentation on Axiom.descriptor.readExpressionAxioms
         default List<MappingIntent> readExpressionAxioms(){
             try {
-                EntitySet.SynchronisationIntent<J> from = synchroniseInverseObjectPropertyFromSemantic();
+                EntitySet.SynchronisationIntent<J> from = synchroniseInverseObjectPropertyFromExpressionAxioms();
                 if( from != null) {
                     getInverseObjectProperty().addAll(from.getToAdd());
                     getInverseObjectProperty().removeAll(from.getToRemove());
@@ -177,7 +177,7 @@ public interface ObjectProperty<O,J>
          * @return the changes to be done to synchronise {@code this} structure with
          * the inverse properties of {@link #getInstance()}; to the OWL representation.
          */
-        default EntitySet.SynchronisationIntent<J> synchroniseInverseObjectPropertyToSemantic(){
+        default EntitySet.SynchronisationIntent<J> synchroniseInverseObjectPropertyToExpressionAxioms(){
             try {
                 return getInverseObjectProperty().synchroniseTo( queryInverseObjectProperty());
             } catch ( Exception e){
@@ -194,7 +194,7 @@ public interface ObjectProperty<O,J>
          * @return the changes to be done to synchronise the inverse object properties of {@link #getInstance()};
          * from an OWL representation to {@code this} {@link Descriptor}.
          */
-        default EntitySet.SynchronisationIntent<J> synchroniseInverseObjectPropertyFromSemantic(){
+        default EntitySet.SynchronisationIntent<J> synchroniseInverseObjectPropertyFromExpressionAxioms(){
             try{
                 return getInverseObjectProperty().synchroniseFrom( queryInverseObjectProperty());
             } catch ( Exception e){
@@ -218,7 +218,7 @@ public interface ObjectProperty<O,J>
         @Override // see documentation on Axiom.descriptor.readExpressionAxioms
         default List<MappingIntent> readExpressionAxioms(){
             try {
-                EntitySet.SynchronisationIntent<J> from = synchroniseDisjointObjectPropertyFromSemantic();
+                EntitySet.SynchronisationIntent<J> from = synchroniseDisjointObjectPropertyFromExpressionAxioms();
                 if ( from != null) {
                     getDisjointObjectProperty().addAll(from.getToAdd());
                     getDisjointObjectProperty().removeAll(from.getToRemove());
@@ -282,7 +282,7 @@ public interface ObjectProperty<O,J>
          * @return the changes to be done to synchronise {@code this} structure with
          * the disjoint properties of {@link #getInstance()}; to the OWL representation.
          */
-        default EntitySet.SynchronisationIntent<J> synchroniseDisjointObjectPropertyToSemantic(){
+        default EntitySet.SynchronisationIntent<J> synchroniseDisjointObjectPropertyToExpressionAxioms(){
             try {
                 return getDisjointObjectProperty().synchroniseTo( queryDisjointObjectProperty());
             } catch ( Exception e){
@@ -299,7 +299,7 @@ public interface ObjectProperty<O,J>
          * @return the changes to be done to synchronise the disjoint object properties of {@link #getInstance()};
          * from an OWL representation to {@code this} {@link Descriptor}.
          */
-        default EntitySet.SynchronisationIntent<J> synchroniseDisjointObjectPropertyFromSemantic(){
+        default EntitySet.SynchronisationIntent<J> synchroniseDisjointObjectPropertyFromExpressionAxioms(){
             try{
                 return getDisjointObjectProperty().synchroniseFrom( queryDisjointObjectProperty());
             } catch ( Exception e){
@@ -323,7 +323,7 @@ public interface ObjectProperty<O,J>
         @Override // see documentation on Axiom.descriptor.readExpressionAxioms
         default List<MappingIntent> readExpressionAxioms(){
             try {
-                EntitySet.SynchronisationIntent<J> from = synchroniseEquivalentObjectPropertyFromSemantic();
+                EntitySet.SynchronisationIntent<J> from = synchroniseEquivalentObjectPropertyFromExpressionAxioms();
                 if (from != null) {
                     getEquivalentObjectProperty().addAll(from.getToAdd());
                     getEquivalentObjectProperty().removeAll(from.getToRemove());
@@ -387,7 +387,7 @@ public interface ObjectProperty<O,J>
          * @return the changes to be done to synchronise {@code this} structure with
          * the equivalent properties of {@link #getInstance()}; to the OWL representation.
          */
-        default EntitySet.SynchronisationIntent<J> synchroniseEquivalentObjectPropertyToSemantic(){
+        default EntitySet.SynchronisationIntent<J> synchroniseEquivalentObjectPropertyToExpressionAxioms(){
             try {
                 return getEquivalentObjectProperty().synchroniseTo( queryEquivalentObjectProperty());
             } catch ( Exception e){
@@ -404,7 +404,7 @@ public interface ObjectProperty<O,J>
          * @return the changes to be done to synchronise the equivalent object properties of {@link #getInstance()};
          * from an OWL representation to {@code this} {@link Descriptor}.
          */
-        default EntitySet.SynchronisationIntent<J> synchroniseEquivalentObjectPropertyFromSemantic(){
+        default EntitySet.SynchronisationIntent<J> synchroniseEquivalentObjectPropertyFromExpressionAxioms(){
             try{
                 return getEquivalentObjectProperty().synchroniseFrom( queryEquivalentObjectProperty());
             } catch ( Exception e){
@@ -428,7 +428,7 @@ public interface ObjectProperty<O,J>
         @Override // see documentation on Axiom.descriptor.readExpressionAxioms
         default List<MappingIntent> readExpressionAxioms(){
             try {
-                EntitySet.SynchronisationIntent<J> from = synchroniseSubObjectPropertyFromSemantic();
+                EntitySet.SynchronisationIntent<J> from = synchroniseSubObjectPropertyFromExpressionAxioms();
                 if (from != null) {
                     getSubObjectProperty().addAll(from.getToAdd());
                     getSubObjectProperty().removeAll(from.getToRemove());
@@ -492,7 +492,7 @@ public interface ObjectProperty<O,J>
          * @return the changes to be done to synchronise {@code this} structure with
          * the sub properties of {@link #getInstance()}; to the OWL representation.
          */
-        default EntitySet.SynchronisationIntent<J> synchroniseSubObjectPropertyToSemantic(){
+        default EntitySet.SynchronisationIntent<J> synchroniseSubObjectPropertyToExpressionAxioms(){
             try {
                 return getSubObjectProperty().synchroniseTo( querySubObjectProperty());
             } catch ( Exception e){
@@ -509,7 +509,7 @@ public interface ObjectProperty<O,J>
          * @return the changes to be done to synchronise the sub object properties of {@link #getInstance()};
          * from an OWL representation to {@code this} {@link Descriptor}.
          */
-        default EntitySet.SynchronisationIntent<J> synchroniseSubObjectPropertyFromSemantic(){
+        default EntitySet.SynchronisationIntent<J> synchroniseSubObjectPropertyFromExpressionAxioms(){
             try{
                 return getSubObjectProperty().synchroniseFrom( querySubObjectProperty());
             } catch ( Exception e){
@@ -533,7 +533,7 @@ public interface ObjectProperty<O,J>
         @Override // see documentation on Axiom.descriptor.readExpressionAxioms
         default List<MappingIntent> readExpressionAxioms(){
             try {
-                EntitySet.SynchronisationIntent<J> from = synchroniseSuperObjectPropertyFromSemantic();
+                EntitySet.SynchronisationIntent<J> from = synchroniseSuperObjectPropertyFromExpressionAxioms();
                 if ( from != null) {
                     getSuperObjectProperty().addAll(from.getToAdd());
                     getSuperObjectProperty().removeAll(from.getToRemove());
@@ -597,7 +597,7 @@ public interface ObjectProperty<O,J>
          * @return the changes to be done to synchronise {@code this} structure with
          * the super properties of {@link #getInstance()}; to the OWL representation.
          */
-        default EntitySet.SynchronisationIntent<J> synchroniseSuperObjectPropertyToSemantic(){
+        default EntitySet.SynchronisationIntent<J> synchroniseSuperObjectPropertyToExpressionAxioms(){
             try {
                 return getSuperObjectProperty().synchroniseTo( querySuperObjectProperty());
             } catch ( Exception e){
@@ -614,7 +614,7 @@ public interface ObjectProperty<O,J>
          * @return the changes to be done to synchronise the super object properties of {@link #getInstance()};
          * from an OWL representation to {@code this} {@link Descriptor}.
          */
-        default EntitySet.SynchronisationIntent<J> synchroniseSuperObjectPropertyFromSemantic(){
+        default EntitySet.SynchronisationIntent<J> synchroniseSuperObjectPropertyFromExpressionAxioms(){
             try{
                 return getSuperObjectProperty().synchroniseFrom( querySuperObjectProperty());
             } catch ( Exception e){
@@ -655,7 +655,7 @@ public interface ObjectProperty<O,J>
         @Override // see documentation on Axiom.descriptor.readExpressionAxioms
         default List<MappingIntent> readExpressionAxioms(){
             try {
-                EntitySet.SynchronisationIntent<Y> from = synchroniseDomainObjectPropertyFromSemantic();
+                EntitySet.SynchronisationIntent<Y> from = synchroniseDomainObjectPropertyFromExpressionAxioms();
                 getDomainObjectProperty().addAll(from.getToAdd());
                 getDomainObjectProperty().removeAll(from.getToRemove());
                 return getIntent(from);
@@ -687,7 +687,7 @@ public interface ObjectProperty<O,J>
          * @return the changes to be done to synchronise {@code this} structure with
          * the domain restriction of {@link #getInstance()}; to the OWL representation.
          */
-        default EntitySet.SynchronisationIntent<Y> synchroniseDomainObjectPropertyToSemantic(){
+        default EntitySet.SynchronisationIntent<Y> synchroniseDomainObjectPropertyToExpressionAxioms(){
             try {
                 return getDomainObjectProperty().synchroniseTo( queryDomainObjectProperty());
             } catch ( Exception e){
@@ -704,7 +704,7 @@ public interface ObjectProperty<O,J>
          * @return the changes to be done to synchronise the domain restrictions of {@link #getInstance()};
          * from an OWL representation to {@code this} {@link Descriptor}.
          */
-        default EntitySet.SynchronisationIntent<Y> synchroniseDomainObjectPropertyFromSemantic(){
+        default EntitySet.SynchronisationIntent<Y> synchroniseDomainObjectPropertyFromExpressionAxioms(){
             try{
                 return getDomainObjectProperty().synchroniseFrom( queryDomainObjectProperty());
             } catch ( Exception e){
@@ -745,7 +745,7 @@ public interface ObjectProperty<O,J>
         @Override
         default List<MappingIntent> readExpressionAxioms(){
             try {
-                EntitySet.SynchronisationIntent<Y> from = synchroniseRangeObjectPropertyFromSemantic();
+                EntitySet.SynchronisationIntent<Y> from = synchroniseRangeObjectPropertyFromExpressionAxioms();
                 if (from != null) {
                     getRangeObjectProperty().addAll(from.getToAdd());
                     getRangeObjectProperty().removeAll(from.getToRemove());
@@ -779,7 +779,7 @@ public interface ObjectProperty<O,J>
          * @return the changes to be done to synchronise {@code this} structure with
          * the range restriction of {@link #getInstance()}; to the OWL representation.
          */
-        default EntitySet.SynchronisationIntent<Y> synchroniseRangeObjectPropertyToSemantic(){
+        default EntitySet.SynchronisationIntent<Y> synchroniseRangeObjectPropertyToExpressionAxioms(){
             try {
                 return getRangeObjectProperty().synchroniseTo( queryRangeObjectProperty());
             } catch ( Exception e){
@@ -796,7 +796,7 @@ public interface ObjectProperty<O,J>
          * @return the changes to be done to synchronise the range restrictions of {@link #getInstance()};
          * from an OWL representation to {@code this} {@link Descriptor}.
          */
-        default EntitySet.SynchronisationIntent<Y> synchroniseRangeObjectPropertyFromSemantic(){
+        default EntitySet.SynchronisationIntent<Y> synchroniseRangeObjectPropertyFromExpressionAxioms(){
             try{
                 return getRangeObjectProperty().synchroniseFrom( queryRangeObjectProperty());
             } catch ( Exception e){

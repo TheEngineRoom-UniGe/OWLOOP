@@ -118,7 +118,7 @@ public interface ConceptExpression
         @Override // see super classes for documentation
         default List<MappingIntent> writeExpressionAxioms(){
             try {
-                EntitySet.SynchronisationIntent<OWLNamedIndividual> to = synchroniseIndividualInstanceToSemantic();
+                EntitySet.SynchronisationIntent<OWLNamedIndividual> to = synchroniseIndividualInstanceToExpressionAxioms();
                 if (to == null)
                     return getIntent(null);
                 List<OWLOntologyChange> changes = new ArrayList<>();
@@ -210,7 +210,7 @@ public interface ConceptExpression
         @Override // see super classes for documentation
         default List<MappingIntent> writeExpressionAxioms(){
             try {
-                EntitySet.SynchronisationIntent<OWLClass> to = synchroniseDisjointConceptToSemantic();
+                EntitySet.SynchronisationIntent<OWLClass> to = synchroniseDisjointConceptToExpressionAxioms();
                 if ( to == null)
                     return getIntent( null);
                 List<OWLOntologyChange> changes = new ArrayList<>();
@@ -301,7 +301,7 @@ public interface ConceptExpression
         @Override // see super classes for documentation
         default List<MappingIntent> writeExpressionAxioms(){
             try {
-                EntitySet.SynchronisationIntent<OWLClass> to = synchroniseEquivalentConceptToSemantic();
+                EntitySet.SynchronisationIntent<OWLClass> to = synchroniseEquivalentConceptToExpressionAxioms();
                 if ( to == null)
                     return getIntent( null);
                 List<OWLOntologyChange> changes = new ArrayList<>();
@@ -391,7 +391,7 @@ public interface ConceptExpression
         @Override // see super classes for documentation
         default List<MappingIntent> writeExpressionAxioms(){
             try {
-                EntitySet.SynchronisationIntent<OWLClass> to = synchroniseSubConceptToSemantic();
+                EntitySet.SynchronisationIntent<OWLClass> to = synchroniseSubConceptToExpressionAxioms();
                 if ( to == null)
                     return getIntent( null);
                 List<OWLOntologyChange> changes = new ArrayList<>();
@@ -482,7 +482,7 @@ public interface ConceptExpression
         @Override // see super classes for documentation
         default List<MappingIntent> writeExpressionAxioms(){
             try {
-                EntitySet.SynchronisationIntent<OWLClass> to = synchroniseSuperConceptToSemantic();
+                EntitySet.SynchronisationIntent<OWLClass> to = synchroniseSuperConceptToExpressionAxioms();
                 if ( to == null)
                     return getIntent( null);
                 List<OWLOntologyChange> changes = new ArrayList<>();
@@ -1261,7 +1261,7 @@ public interface ConceptExpression
         @Override // see super classes for documentation
         default List<MappingIntent> writeExpressionAxioms(){
             try {
-                EntitySet.SynchronisationIntent<SemanticRestriction> to = synchroniseDefinitionConceptToSemantic();
+                EntitySet.SynchronisationIntent<SemanticRestriction> to = synchroniseDefinitionConceptToExpressionAxioms();
                 if ( to == null)
                     return getIntent( null);
                 List<OWLOntologyChange> changes = new ArrayList<>();

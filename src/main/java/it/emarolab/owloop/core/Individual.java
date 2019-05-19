@@ -48,7 +48,7 @@ public interface Individual<O,J>
         @Override // see documentation on Axiom.descriptor.readExpressionAxioms
         default List<MappingIntent> readExpressionAxioms(){
             try {
-                EntitySet.SynchronisationIntent<Y> from = synchroniseTypeIndividualFromSemantic();
+                EntitySet.SynchronisationIntent<Y> from = synchroniseTypeIndividualFromExpressionAxioms();
                 if ( from != null) {
                     getTypeIndividual().addAll(from.getToAdd());
                     getTypeIndividual().removeAll(from.getToRemove());
@@ -113,7 +113,7 @@ public interface Individual<O,J>
          * @return the changes to be done to synchronise {@code this} structure with
          * the classes in which {@link #getInstance()} is belonging to, in the OWL representation.
          */
-        default EntitySet.SynchronisationIntent<Y> synchroniseTypeIndividualToSemantic(){
+        default EntitySet.SynchronisationIntent<Y> synchroniseTypeIndividualToExpressionAxioms(){
             try {
                 return getTypeIndividual().synchroniseTo( queryTypeIndividual());
             } catch ( Exception e){
@@ -130,7 +130,7 @@ public interface Individual<O,J>
          * @return the changes to be done to synchronise the classes in which the {@link #getInstance()}
          * individualDescriptor is belonging to, from an OWL representation to {@code this} descriptor.
          */
-        default EntitySet.SynchronisationIntent<Y> synchroniseTypeIndividualFromSemantic(){
+        default EntitySet.SynchronisationIntent<Y> synchroniseTypeIndividualFromExpressionAxioms(){
             try{
                 return getTypeIndividual().synchroniseFrom( queryTypeIndividual());
             } catch ( Exception e){
@@ -154,7 +154,7 @@ public interface Individual<O,J>
         @Override // see documentation on Axiom.descriptor.readExpressionAxioms
         default List<MappingIntent> readExpressionAxioms(){
             try {
-                EntitySet.SynchronisationIntent<J> from = synchroniseDisjointIndividualFromSemantic();
+                EntitySet.SynchronisationIntent<J> from = synchroniseDisjointIndividualFromExpressionAxioms();
                 if ( from != null) {
                     getDisjointIndividual().addAll(from.getToAdd());
                     getDisjointIndividual().removeAll(from.getToRemove());
@@ -218,7 +218,7 @@ public interface Individual<O,J>
          * @return the changes to be done to synchronise {@code this} structure with
          * the different individuals from {@link #getInstance()}; to the OWL representation.
          */
-        default EntitySet.SynchronisationIntent<J> synchroniseDisjointIndividualToSemantic(){
+        default EntitySet.SynchronisationIntent<J> synchroniseDisjointIndividualToExpressionAxioms(){
             try {
                 return getDisjointIndividual().synchroniseTo( queryDisjointIndividual());
             } catch ( Exception e){
@@ -235,7 +235,7 @@ public interface Individual<O,J>
          * @return the changes to be done to synchronise the different individuals from {@link #getInstance()};
          * from an OWL representation to {@code this} {@link Descriptor}.
          */
-        default EntitySet.SynchronisationIntent<J> synchroniseDisjointIndividualFromSemantic(){
+        default EntitySet.SynchronisationIntent<J> synchroniseDisjointIndividualFromExpressionAxioms(){
             try{
                 return getDisjointIndividual().synchroniseFrom( queryDisjointIndividual());
             } catch ( Exception e){
@@ -259,7 +259,7 @@ public interface Individual<O,J>
         @Override // see documentation on Axiom.descriptor.readExpressionAxioms
         default List<MappingIntent> readExpressionAxioms(){
             try {
-                EntitySet.SynchronisationIntent<J> from = synchroniseEquivalentIndividualFromSemantic();
+                EntitySet.SynchronisationIntent<J> from = synchroniseEquivalentIndividualFromExpressionAxioms();
                 getEquivalentIndividual().addAll(from.getToAdd());
                 getEquivalentIndividual().removeAll(from.getToRemove());
                 return getIntent(from);
@@ -321,7 +321,7 @@ public interface Individual<O,J>
          * @return the changes to be done to synchronise {@code this} structure with
          * the equivalent individuals from {@link #getInstance()}; to the OWL representation.
          */
-        default EntitySet.SynchronisationIntent<J> synchroniseEquivalentIndividualToSemantic(){
+        default EntitySet.SynchronisationIntent<J> synchroniseEquivalentIndividualToExpressionAxioms(){
             try {
                 return getEquivalentIndividual().synchroniseTo( queryEquivalentIndividual());
             } catch ( Exception e){
@@ -338,7 +338,7 @@ public interface Individual<O,J>
          * @return the changes to be done to synchronise the equivalent individuals from {@link #getInstance()};
          * from an OWL representation to {@code this} {@link Descriptor}.
          */
-        default EntitySet.SynchronisationIntent<J> synchroniseEquivalentIndividualFromSemantic(){
+        default EntitySet.SynchronisationIntent<J> synchroniseEquivalentIndividualFromExpressionAxioms(){
             try{
                 return getEquivalentIndividual().synchroniseFrom( queryEquivalentIndividual());
             } catch ( Exception e){
@@ -373,7 +373,7 @@ public interface Individual<O,J>
         @Override // see documentation on Axiom.descriptor.readExpressionAxioms
         default List<MappingIntent> readExpressionAxioms(){
             try {
-                EntitySet.SynchronisationIntent<Y> from = synchroniseDataIndividualFromSemantic();
+                EntitySet.SynchronisationIntent<Y> from = synchroniseDataIndividualFromExpressionAxioms();
                 if (from != null) {
                     getDataExpressionAxioms().addAll(from.getToAdd());
                     getDataExpressionAxioms().removeAll(from.getToRemove());
@@ -437,7 +437,7 @@ public interface Individual<O,J>
          * @return the changes to be done to synchronise {@code this} structure with
          * the data properties applied on {@link #getInstance()}; to the OWL representation.
          */
-        default EntitySet.SynchronisationIntent<Y> synchroniseDataIndividualToSemantic(){
+        default EntitySet.SynchronisationIntent<Y> synchroniseDataIndividualToExpressionAxioms(){
             try {
                 return getDataExpressionAxioms().synchroniseTo( queryDataIndividual());
             } catch ( Exception e){
@@ -454,7 +454,7 @@ public interface Individual<O,J>
          * @return the changes to be done to synchronise the data properties applied on {@link #getInstance()};
          * from an OWL representation to {@code this} {@link Descriptor}.
          */
-        default EntitySet.SynchronisationIntent<Y> synchroniseDataIndividualFromSemantic(){
+        default EntitySet.SynchronisationIntent<Y> synchroniseDataIndividualFromExpressionAxioms(){
             try{
                 return getDataExpressionAxioms().synchroniseFrom( queryDataIndividual());
             } catch ( Exception e){
@@ -489,7 +489,7 @@ public interface Individual<O,J>
         @Override // see documentation on Axiom.descriptor.readExpressionAxioms
         default List<MappingIntent> readExpressionAxioms(){
             try{
-                EntitySet.SynchronisationIntent<Y> from = synchroniseObjectIndividualFromSemantic();
+                EntitySet.SynchronisationIntent<Y> from = synchroniseObjectIndividualFromExpressionAxioms();
                 if (from != null) {
                     getObjectExpressionAxioms().addAll(from.getToAdd());
                     getObjectExpressionAxioms().removeAll(from.getToRemove());
@@ -553,7 +553,7 @@ public interface Individual<O,J>
          * @return the changes to be done to synchronise {@code this} structure with
          * the object properties applied on {@link #getInstance()}; to the OWL representation.
          */
-        default EntitySet.SynchronisationIntent<Y> synchroniseObjectIndividualToSemantic(){
+        default EntitySet.SynchronisationIntent<Y> synchroniseObjectIndividualToExpressionAxioms(){
             try {
                 return getObjectExpressionAxioms().synchroniseTo( queryObject());
             } catch ( Exception e){
@@ -570,7 +570,7 @@ public interface Individual<O,J>
          * @return the changes to be done to synchronise the object properties applied on {@link #getInstance()};
          * from an OWL representation to {@code this} {@link Descriptor}.
          */
-        default EntitySet.SynchronisationIntent<Y> synchroniseObjectIndividualFromSemantic(){
+        default EntitySet.SynchronisationIntent<Y> synchroniseObjectIndividualFromExpressionAxioms(){
             try{
                 return getObjectExpressionAxioms().synchroniseFrom( queryObject());
             } catch ( Exception e){
