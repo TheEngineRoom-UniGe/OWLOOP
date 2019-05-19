@@ -1,7 +1,8 @@
-package it.emarolab.owloop.descriptor.utility.owloopPaperTests;
+package it.emarolab.owloop.descriptor.utility.owloopArticleExamples.exampleDescriptors;
 
 
 import it.emarolab.amor.owlInterface.OWLReferences;
+import it.emarolab.owloop.descriptor.utility.individualDescriptor.FullIndividualDescriptor;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.IndividualGround;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.IndividualExpression;
@@ -10,9 +11,20 @@ import org.semanticweb.owlapi.model.OWLNamedIndividual;
 
 import java.util.List;
 
+/**
+ * A 'simple' Individual Descriptor which implements 1 {@link IndividualExpression}s.
+ * <ul>
+ * <li><b>{@link IndividualExpression.Type}</b>:         to describe the Type/s (i.e., class/es) of an Individual.</li>
+ * </ul>
+ * <p>
+ *     Doing build() with this Descriptor returns another descriptor of type {@link DefSubConceptDesc}.
+ * </p>
+ *
+ * See {@link FullIndividualDescriptor} for an example of a 'compound' Individual Descriptor that implements all IndividualExpressions.
+ */
 public class TypeIndividualDesc
         extends IndividualGround
-        implements IndividualExpression.Type<DefSubClassDesc> {
+        implements IndividualExpression.Type<DefSubConceptDesc> {
 
     private DescriptorEntitySet.Concepts individualTypes = new DescriptorEntitySet.Concepts();
 
@@ -37,8 +49,8 @@ public class TypeIndividualDesc
 
     // implementations for IndividualExpression.Type
     @Override //called during build...() you can change the returning type to any implementations of ConceptExpression
-    public DefSubClassDesc getNewTypeIndividual(OWLClass instance, OWLReferences ontology) {
-        return new DefSubClassDesc( instance, ontology);
+    public DefSubConceptDesc getNewTypeIndividual(OWLClass instance, OWLReferences ontology) {
+        return new DefSubConceptDesc( instance, ontology);
     }
 
     @Override

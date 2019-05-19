@@ -1,4 +1,4 @@
-package it.emarolab.owloop.descriptor.utility.owloopPaperTests.exampleDescriptors;
+package it.emarolab.owloop.descriptor.utility.owloopArticleExamples.exampleDescriptors;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.amor.owlInterface.SemanticRestriction;

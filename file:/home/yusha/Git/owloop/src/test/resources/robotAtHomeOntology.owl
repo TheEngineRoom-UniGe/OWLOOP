@@ -33,6 +33,13 @@
     
 
 
+    <!-- http://www.semanticweb.org/emaroLab/robotAtHomeOntology#isAlsoIn -->
+
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/emaroLab/robotAtHomeOntology#isAlsoIn"/>
+    
+
+
     <!-- http://www.semanticweb.org/emaroLab/robotAtHomeOntology#isIn -->
 
 
@@ -165,6 +172,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/emaroLab/robotAtHomeOntology#Robot1">
+        <isAlsoIn rdf:resource="http://www.semanticweb.org/emaroLab/robotAtHomeOntology#Sahara"/>
         <isIn rdf:resource="http://www.semanticweb.org/emaroLab/robotAtHomeOntology#Corridor1"/>
     </owl:NamedIndividual>
     
@@ -181,6 +189,13 @@
 
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/emaroLab/robotAtHomeOntology#Room2"/>
+    
+
+
+    <!-- http://www.semanticweb.org/emaroLab/robotAtHomeOntology#Sahara -->
+
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/emaroLab/robotAtHomeOntology#Sahara"/>
 </rdf:RDF>
 
 

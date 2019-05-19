@@ -1,21 +1,32 @@
-package it.emarolab.owloop.descriptor.utility.owloopPaperTests;
+package it.emarolab.owloop.descriptor.utility.owloopArticleExamples.exampleDescriptors;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
-import it.emarolab.owloop.descriptor.construction.descriptorGround.IndividualGround;
+import it.emarolab.owloop.descriptor.utility.individualDescriptor.FullIndividualDescriptor;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.IndividualExpression;
+import it.emarolab.owloop.descriptor.construction.descriptorGround.IndividualGround;
 import it.emarolab.owloop.descriptor.utility.objectPropertyDescriptor.FullObjectPropertyDescriptor;
 
 import java.util.List;
 
-public class ObjLinkIndividualDesc
+/**
+ * A 'simple' Individual Descriptor which implements 1 {@link IndividualExpression}s.
+ * <ul>
+ * <li><b>{@link IndividualExpression.ObjectLink}</b>:   to describe an ObjectProperty and Individuals related via that ObjectProperty, for an Individual.</li>
+ * </ul>
+ * <p>
+ *     Doing build() with this Descriptor returns another descriptor of type {@link FullObjectPropertyDescriptor}.
+ * </p>
+ * See {@link FullIndividualDescriptor} for an example of a 'compound' Individual Descriptor that implements all IndividualExpressions.
+ */
+public class ObjectLinkIndividualDesc
         extends IndividualGround
         implements IndividualExpression.ObjectLink<FullObjectPropertyDescriptor> {
 
     private DescriptorEntitySet.ObjectLinksSet objectLinks = new DescriptorEntitySet.ObjectLinksSet();
 
     // constructors for IndividualGround
-    public ObjLinkIndividualDesc(String instanceName, OWLReferences onto) {
+    public ObjectLinkIndividualDesc(String instanceName, OWLReferences onto) {
         super(instanceName, onto);
     }
 
@@ -43,8 +54,6 @@ public class ObjLinkIndividualDesc
     public DescriptorEntitySet.ObjectLinksSet getObjectExpressionAxioms() {
         return objectLinks;
     }
-
-
 
     // implementation for standard object interface
     // equals() and hashCode() is based on DescriptorGround<?> which considers only the ground

@@ -1,4 +1,4 @@
-package it.emarolab.owloop.descriptor.utility.owloopPaperTests;
+package it.emarolab.owloop.descriptor.utility.owloopArticleExamples.exampleDescriptors;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.ConceptGround;
@@ -9,15 +9,27 @@ import org.semanticweb.owlapi.model.OWLClass;
 
 import java.util.List;
 
-public class DefSubClassDesc
+/**
+ * This is an example of a 'compound' Concept Descriptor which implements 2 {@link ConceptExpression}s.
+ * <ul>
+ * <li><b>{@link ConceptExpression.Definition}</b>:  to describe the definition of a Class..</li>
+ * <li><b>{@link ConceptExpression.Sub}</b>:         to describe that a Class subsumes another Class.</li>
+ * </ul>
+ * <p>
+ *     Doing build() with this Descriptor returns another descriptor of type {@link FullConceptDescriptor}.
+ * </p>
+ * See {@link FullConceptDescriptor} for an example of a 'compound' Concept Descriptor that implements all ConceptExpressions.
+ */
+public class DefSubConceptDesc
         extends ConceptGround
-        implements ConceptExpression.Definition, ConceptExpression.Sub<FullConceptDescriptor>{
+        implements ConceptExpression.Definition,
+        ConceptExpression.Sub<FullConceptDescriptor>{
 
     private DescriptorEntitySet.Restrictions restrictions = new DescriptorEntitySet.Restrictions();
     private DescriptorEntitySet.Concepts subConcept = new DescriptorEntitySet.Concepts();
 
     // constructors for ConceptGround
-    public DefSubClassDesc(OWLClass instance, OWLReferences onto) {
+    public DefSubConceptDesc(OWLClass instance, OWLReferences onto) {
         super(instance, onto);
     }
 
