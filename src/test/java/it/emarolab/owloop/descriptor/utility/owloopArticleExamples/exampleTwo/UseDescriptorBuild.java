@@ -40,13 +40,13 @@ public class UseDescriptorBuild {
         ObjectLinkIndividualDesc d1 = new ObjectLinkIndividualDesc( "Robot1", ontoRef); // Initialize a DESC with ground as Robot1
         d1.addObject( "isIn",true);                              // To read knowledge specific to the property "isIn"
         d1.readExpressionAxioms();                                               // READ
-        System.out.println( d1);                                                 // PRINT
+        System.out.println( d1);                                                 // PRINT to see on console
         OWLNamedIndividual robotPosition = d1.getObject( "isIn");    // getObject("isIn")
 
         TypeIndividualDesc d2 = new TypeIndividualDesc( robotPosition, ontoRef); // Initialize a DESC with ground as Corridor1
         d2.readExpressionAxioms();                                               // READ
 
-        System.out.println( d2);                                                 // PRINT
+        System.out.println( d2);                                                 // PRINT to see on console
         Set<DefSubConceptDesc> setOfTypes = d2.buildTypeIndividual();            // BUILD Type of an Individual --> CORRIDOR,LOCATION,Top
         for( DefSubConceptDesc d3 : setOfTypes ){
 
@@ -60,11 +60,11 @@ public class UseDescriptorBuild {
 
                     if( rest instanceof SemanticRestriction.ClassRestrictedOnExactObject ){
 
-                        System.out.println( "\n" + "'" + d3.getInstanceName() + "'" + " is defined with Exact Cardinality Restriction " + "'" + rest + "'"); //PRINT
+                        System.out.println( "\n" + "'" + d3.getInstanceName() + "'" + " is defined with Exact Cardinality Restriction " + "'" + rest + "'"); // PRINT to see on console
                     }
                     else if( rest instanceof SemanticRestriction.ClassRestrictedOnMinObject ){
 
-                        System.out.println( "\n" + "'" + d3.getInstanceName() + "'" + " is defined with Min Cardinality Restriction " + "'" + rest + "'"); //PRINT
+                        System.out.println( "\n" + "'" + d3.getInstanceName() + "'" + " is defined with Min Cardinality Restriction " + "'" + rest + "'"); // PRINT to see on console
                     }
                 }
             }
@@ -98,4 +98,8 @@ We need ..OWLRefFromFile.. to interact with an ontology which already exists
 From the ..OWLRefCreated.. file we can write/save in both ways (ontoref.save(), descriptor.save(path)) and CAN-READ in both ways (same descriptor, new descriptor).
 From the ..OWLRefFromFile.. we can write/save in one way (descriptor.save(path)) and CAN-READ in both ways (same descriptor, new descriptor).
 SynchronizeReasoner() to be in sync with the latest state of the ontology (else the descriptor reads the state of the ontology, when it was instantiated)
+readExpressionAxioms(), when called for the first time, reads all (asserted and inferred) axioms because when the descriptor is initialized, syncOnto() is called.
+With newOWLReferenceFromFileWithPellet(), decriptor.saveOntology(path), IS WORKING
+With newOWLReferenceFromFileWithPellet(), ontoRef.saveOntology(path), IS WORKING
+Its nice to (sync and save) after writing something to the ontology.
 */

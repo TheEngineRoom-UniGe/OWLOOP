@@ -20,7 +20,7 @@ public class ConstructOntology {
 
         it.emarolab.amor.owlDebugger.Logger.setPrintOnConsole( false);
 
-        // Ontology reference, newOWLReferencesCreatedWithPellet() allows to create a new ontology which does not exist
+        // newOWLReferencesCreatedWithPellet() creates a new ontology
         ontoRef = OWLReferencesInterface.OWLReferencesContainer.newOWLReferencesCreatedWithPellet(
                 "robotAtHomeOnto", // ontology reference name
                 "src/test/resources/robotAtHomeOntology.owl", // the ontology file path
