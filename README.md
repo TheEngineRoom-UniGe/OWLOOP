@@ -1,33 +1,65 @@
 # OWLOOP
 
-An **O**bject **O**riented **P**rogramming interface for using the **O**ntology **W**eb **L**anguage within real architecting paradigms.
+To enable a developer to use **O**ntology **W**eb **L**anguage (OWL) along with its reasoning capabilities, in an **O**bject **O**riented **P**rogramming (OOP) paradigm, by providing an easy interface.
+
+Although OWL and OOP paradigms have similar structure, there are some key differences between them; see this [W3C publication](https://www.w3.org/2001/sw/BestPractices/SE/ODSD/) for more details about the differences. Nevertheless, it is possible to use OWL along with its reasoning capabilities within applications developed in an OOP paradigm, by using the classic [OWL-API](https://github.com/owlcs/owlapi).
+But, the usage of classic OWL-API leaves your application filled with lots of boilerplate code. Therefore, built on top of OWL-API is the **OWLOOP-API**, which not only reduces boilerplate code but enables interaction with 'OWL entities' (i.e, Concept, Individual, Object property and Data property) as objects within the OOP paradigm. These objects are termed as Descriptors (i.e., ConceptDescriptor, IndividualDescriptor, ObjectPropertyDescriptor and DataPropertyDescriptor).  
+Furthermore, with the help of a descriptor, OWLOOP enables easy synchronization of axioms between the OWL paradigm and the OOP paradigm.
+
+## Table of Contents
+- Reference to the publication
+- Installation
+- Usage
+- License
+- Dependencies
+- Known Issues to be Resolved
+- Author's message
+
+##
+
+## Reference to the Publication
+
+This repository has been published in the journal ... (todo: add the link here once the repo gets published)
+
+## Installation
+
+- Clone or download the repository.
+- Open the project by opening the file `owloop/build.gradle` in IntelliJ, with the following parameters ... (todo: show screen shot of the correct parameters)
+**OR**
+- add the following line in your IntelliJ project's `build.gradle` ... (todo: the developer should be able to add a single line and thus have acess to the OWLOOP API)
+
+## Usage
+
+In the repository's [wiki](https://github.com/EmaroLab/owloop/wiki) we:
+- Present the overall structure of the project and its JavaDoc.
+- Introduce the idea of a Descriptor, the types of descriptors and the possible expressions that each type can implement (and thus deal with).
+- Examples to show how to construct a simple descriptor or a compound descriptor (of a particular type).
+- Example that shows how to add axioms to an ontology, using descriptors.
+- Example that shows how to infer some knowledge (i.e., axioms) from axioms already within an ontology, using descriptors.
+- Example that shows how to remove axioms from an ontology, using descriptors.
+
+## License
+
+OWLOOP is under the license: [GNU General Public License v3.0](owloop/LICENSE)
 
 
->The design of ontologies does not follow OOP paradigms since properties and hierarchy are dynamically inferred by the reasoner; see [this W3C](https://www.w3.org/2001/sw/BestPractices/SE/ODSD/) publication for more details about their differences. 
->Nevertheless, this API implements an efficient, customizable and general (but jet simple) synchronization interface that allows developers for an easier designing of flexible systems. While OWLOOP cares at run time to map the reasoned ontological representation in their objects. 
-> 
->From now on you do not have to deal with `String` or `IRI` anymore, instead, let's directly rely and extend your `Objects` with real semantics !!!
+### Dependencies
 
-# 
+[Gradle](https://gradle.org/) is used for building the project and OWLOOP has the following dependencies (can be found in `owloop/build.gradle`):
 
-### Dependences
+- [aMOR](https://github.com/EmaroLab/multi_ontology_reference): **a** **M**ulti-**O**ntology **R**eference library (based on OWL-API) that provides helper functions for OWL Ontologies.
+- [OWL-API](https://github.com/owlcs/owlapi): a Java API for creating, manipulating and serialising OWL Ontologies.
+- [Pellet](https://github.com/stardog-union/pellet): an open source OWL 2 DL reasoner.
+- [JUnit](https://github.com/junit-team): a programmer-oriented testing framework for Java.
 
-OWLOOP as been developed on top of the [aMOR](https://github.com/EmaroLab/multi_ontology_reference), which is a collection of helpers methods based on [OWL API](https://github.com/owlcs/owlapi). Those are still completely accessible through OWLOOP and allow to work with many reasoners, we test this software with [Pellet](https://github.com/Galigator/openllet). 
-Finally, the runnable examples are based on [JUnit](http://junit.org/junit4/) within the [Intellij IDEA](https://www.jetbrains.com/idea/) IDE. The compilation is based on [Gradle](https://gradle.org/) and you can find a detailed list of the dependences versions in the [build.gradle](https://github.com/EmaroLab/owloop/blob/master/build.gradle) file. 
+### Known Issues to be Resolved
 
-In the [lib](https://github.com/EmaroLab/owloop/tree/master/lib) folder you can find OWLOOP as a jar archive with (and without) its dependencies, as well as the compatible aMOR archive.
+We are currently working on a known issue, i.e., during manipulation of a class definition, especially while removing restrictions, due to an unknown (for now) reason, the restrictions do not get removed. 
+To circumvent the problem (for now), we clear the class hierarchy and regenerate it from scratch, instead of updating it. 
 
-##### Known Problem
+### Author's message
+Feel free to contribute to the project by sharing your thoughts and ideas, raising issues (if found) and providing bug-fixes. 
+For any information or support, do not hesitate to contact us through this Github repository or through email.
 
-We are currently working in a known issue about the manipulation of a class definition (especially on removing restrictions). 
-This step depends on the super and sub classes of the class to be manipulated. In order to go around it,
-for the moment you may want to be very careful about the hierarchy of the class to manipulate (this strongly depends on the shape of your ontology) or clear its
-definition and regenerate it from scratch, instead of updating. 
-
-
-# 
-
-### Contacts
-
-For any information, support, discussion or comments do not hesitate to contact me through this Github repository or at: 
-[luca.buoncompagni@edu.unige.it](mailto:luca.buoncompagni@edu.unige.it), 
+[luca.buoncompagni@edu.unige.it](mailto:luca.buoncompagni@edu.unige.it),
+[kareem.syed.yusha@dibris.unige.it](mailto:kareem.syed.yusha@dibris.unige.it).
