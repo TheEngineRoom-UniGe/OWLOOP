@@ -1,4 +1,4 @@
-package it.emarolab.owloopArticleExamples.exampleOne;
+package it.emarolab.owloopArticleExamples.example1;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.amor.owlInterface.OWLReferencesInterface;

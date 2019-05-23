@@ -1,11 +1,8 @@
-package it.emarolab.owloopArticleExamples.exampleThree;
+package it.emarolab.owloopArticleExamples.example3;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.amor.owlInterface.OWLReferencesInterface;
-import it.emarolab.owloop.descriptor.utility.conceptDescriptor.FullConceptDescriptor;
 import it.emarolab.owloop.descriptor.utility.individualDescriptor.FullIndividualDescriptor;
-import org.apache.jena.base.Sys;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
