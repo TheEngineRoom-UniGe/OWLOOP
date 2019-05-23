@@ -1,10 +1,10 @@
 # OWLOOP
 
-To enable a developer to use **O**ntology **W**eb **L**anguage (OWL) along with its reasoning capabilities, in an **O**bject **O**riented **P**rogramming (OOP) paradigm, by providing an easy interface.
+Enabling a developer to use **O**ntology **W**eb **L**anguage (OWL) along with its reasoning capabilities in an **O**bject **O**riented **P**rogramming (OOP) paradigm, by providing an easy to use interface.
 
 Although OWL and OOP paradigms have similar structure, there are some key differences between them; see this [W3C publication](https://www.w3.org/2001/sw/BestPractices/SE/ODSD/) for more details about the differences. Nevertheless, it is possible to use OWL along with its reasoning capabilities within applications developed in an OOP paradigm, by using the classic [OWL-API](https://github.com/owlcs/owlapi).
 But, the usage of classic OWL-API leaves your application filled with lots of boilerplate code. Therefore, built on top of OWL-API is the **OWLOOP-API**, which not only reduces boilerplate code but enables interaction with 'OWL entities' (i.e, Concept, Individual, Object property and Data property) as objects within the OOP paradigm. These objects are termed as Descriptors (i.e., ConceptDescriptor, IndividualDescriptor, ObjectPropertyDescriptor and DataPropertyDescriptor).  
-Furthermore, with the help of a descriptor, OWLOOP enables easy synchronization of axioms between the OWL paradigm and the OOP paradigm.
+Furthermore, with the help of a descriptor, OWLOOP enables synchronization of axioms between the OWL paradigm and the OOP paradigm.
 
 ## Table of Contents
 - Reference to the publication
@@ -15,7 +15,7 @@ Furthermore, with the help of a descriptor, OWLOOP enables easy synchronization 
 - Known Issues to be Resolved
 - Author's message
 
-##
+#
 
 ## Reference to the Publication
 
@@ -30,13 +30,13 @@ This repository has been published in the journal ... (todo: add the link here o
 
 ## Usage
 
-In the repository's [wiki](https://github.com/EmaroLab/owloop/wiki) we:
-- Present the overall structure of the project and its JavaDoc.
-- Introduce the idea of a Descriptor, the types of descriptors and the possible expressions that each type can implement (and thus deal with).
-- Examples to show how to construct a simple descriptor or a compound descriptor (of a particular type).
-- Example that shows how to add axioms to an ontology, using descriptors.
-- Example that shows how to infer some knowledge (i.e., axioms) from axioms already within an ontology, using descriptors.
-- Example that shows how to remove axioms from an ontology, using descriptors.
+In the repository's [wiki](https://github.com/EmaroLab/owloop/wiki) we present:
+- the overall structure of the project and its JavaDoc.
+- the idea of a Descriptor, the types of descriptors and the possible expressions that each type can implement (and thus deal with).
+- examples to show how to construct a simple descriptor or a compound descriptor (of a particular type).
+- an example that shows how to add axioms to an ontology, using descriptors.
+- an example that shows how to infer some knowledge (i.e., axioms) from axioms already within an ontology, using descriptors.
+- an example that shows how to remove axioms from an ontology, using descriptors.
 
 ## License
 
@@ -45,7 +45,7 @@ OWLOOP is under the license: [GNU General Public License v3.0](owloop/LICENSE)
 
 ### Dependencies
 
-[Gradle](https://gradle.org/) is used for building the project and OWLOOP has the following dependencies (can be found in `owloop/build.gradle`):
+[Gradle](https://gradle.org/) is used for building OWLOOP and it has the following dependencies; can be found in `owloop/build.gradle`:
 
 - [aMOR](https://github.com/EmaroLab/multi_ontology_reference): **a** **M**ulti-**O**ntology **R**eference library (based on OWL-API) that provides helper functions for OWL Ontologies.
 - [OWL-API](https://github.com/owlcs/owlapi): a Java API for creating, manipulating and serialising OWL Ontologies.
