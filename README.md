@@ -30,13 +30,13 @@ This repository has been published in the journal ... (todo: add the link here o
 
 ## Usage
 
-In the repository's [wiki](https://github.com/EmaroLab/owloop/wiki) we present:
-- [the overall structure of the project and its JavaDoc](https://github.com/EmaroLab/owloop/wiki/1.-OWLOOP:-Project-Structure-&-JavaDoc).
-- [the idea of a Descriptor, the types of descriptors and the possible expressions that each type can implement (and thus deal with)](https://github.com/EmaroLab/owloop/wiki/2.-The-OWLOOP-Descriptor).
-- [examples to show how to construct a simple descriptor or a compound descriptor (of a particular type)](https://github.com/EmaroLab/owloop/wiki/3.-Example:-Simple-vs-Compound-Descriptor).
-- [an example that shows how to add axioms to an ontology, using descriptors](https://github.com/EmaroLab/owloop/wiki/4.-Example:-Adding-Axioms-to-an-Ontology).
-- [an example that shows how to infer some knowledge (i.e., axioms) from axioms already within an ontology, using descriptors](https://github.com/EmaroLab/owloop/wiki/5.-Example:-Inferring-Axioms-from-an-Ontology).
-- [an example that shows how to remove axioms from an ontology, using descriptors](https://github.com/EmaroLab/owloop/wiki/6.-Example:-Removing-Axioms-from-an-Ontology).
+To explain the usage of OWLOOP, we present in this repository's [wiki](https://github.com/EmaroLab/owloop/wiki):
+1. [The overall structure of the OWLOOP project and its JavaDoc](https://github.com/EmaroLab/owloop/wiki/1.-OWLOOP:-Project-Structure-&-JavaDoc).
+2. [The idea of a Descriptor, the types of descriptors and the possible expressions that each type can implement (and thus deal with)](https://github.com/EmaroLab/owloop/wiki/2.-The-OWLOOP-Descriptor).
+3. [Examples to show how to construct a simple descriptor or a compound descriptor (of a particular type)](https://github.com/EmaroLab/owloop/wiki/3.-Example:-Simple-vs-Compound-Descriptor).
+4. [An example that shows how to add axioms to an ontology, using descriptors](https://github.com/EmaroLab/owloop/wiki/4.-Example:-Adding-Axioms-to-an-Ontology).
+5. [An example that shows how to infer some knowledge (i.e., axioms) from axioms already within an ontology, using descriptors](https://github.com/EmaroLab/owloop/wiki/5.-Example:-Inferring-Axioms-from-an-Ontology).
+6. [An example that shows how to remove axioms from an ontology, using descriptors](https://github.com/EmaroLab/owloop/wiki/6.-Example:-Removing-Axioms-from-an-Ontology).
 
 ## License
 
