@@ -59,7 +59,7 @@ To circumvent the problem (for now), we clear the class hierarchy and regenerate
 
 ### Author's message
 Feel free to contribute to the project by sharing your thoughts and ideas, raising issues (if found) and providing bug-fixes. 
-For any information or support, do not hesitate to contact us through this Github repository or through email.
+For any information or support, do not hesitate to contact us through this Github repository or by email.
 
 [luca.buoncompagni@edu.unige.it](mailto:luca.buoncompagni@edu.unige.it),
 [kareem.syed.yusha@dibris.unige.it](mailto:kareem.syed.yusha@dibris.unige.it).
