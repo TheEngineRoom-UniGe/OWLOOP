@@ -52,7 +52,7 @@ OWLOOP is under the license: [GNU General Public License v3.0](owloop/LICENSE)
 - [Pellet](https://github.com/stardog-union/pellet): an open source OWL 2 DL reasoner.
 - [JUnit](https://github.com/junit-team): a programmer-oriented testing framework for Java.
 
-### Known Issues to be Resolved
+### Issues to be Resolved
 
 We are currently working on a known issue, i.e., during manipulation of a class definition, especially while removing restrictions, due to an unknown (for now) reason, the restrictions do not get removed. 
 To circumvent the problem (for now), we clear the class hierarchy and regenerate it from scratch, instead of updating it. 
