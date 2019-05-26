@@ -64,8 +64,8 @@ We are currently working on a known issue, i.e., during manipulation of a class 
 To circumvent the problem (for now), we clear the class hierarchy and regenerate it from scratch, instead of updating it. 
 
 ## 7. Author's message
-Feel free to contribute to the project by sharing your thoughts and ideas, raising issues (if found) and providing bug-fixes. 
-For any information or support, do not hesitate to contact us through this Github repository or by email.
+Feel free to contribute to OWLOOP by sharing your thoughts and ideas, raising issues (if found) and providing bug-fixes. 
+For any information or support, please do not hesitate to contact us through this Github repository or by email.
 
 [luca.buoncompagni@edu.unige.it](mailto:luca.buoncompagni@edu.unige.it),
 [kareem.syed.yusha@dibris.unige.it](mailto:kareem.syed.yusha@dibris.unige.it).
