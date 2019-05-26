@@ -38,7 +38,7 @@ compile group: 'com.github.owloop', name: 'owloop-api', version: '1.0'
 To explain the usage of OWLOOP, we present in this repository's [wiki](https://github.com/EmaroLab/owloop/wiki):
 
 - [The overall structure of the OWLOOP project and its JavaDoc](https://github.com/EmaroLab/owloop/wiki/1.-OWLOOP:-Project-Structure-&-JavaDoc).
-- [The idea of a Descriptor, the types of descriptors and the possible expressions that each type can implement (and thus deal with)](https://github.com/EmaroLab/owloop/wiki/2.-The-OWLOOP-Descriptor).
+- [The idea of a Descriptor, the types of descriptors and the possible expressions that each type can implement.](https://github.com/EmaroLab/owloop/wiki/2.-The-OWLOOP-Descriptor).
 - [Examples that show construction of a simple descriptor vs a compound descriptor](https://github.com/EmaroLab/owloop/wiki/3.-Example:-Simple-vs-Compound-Descriptor).
 - [An example that shows how to add axioms to an ontology, using descriptors](https://github.com/EmaroLab/owloop/wiki/4.-Example:-Adding-Axioms-to-an-Ontology).
 - [An example that shows how to infer some knowledge (i.e., axioms) from axioms already within an ontology, using descriptors](https://github.com/EmaroLab/owloop/wiki/5.-Example:-Inferring-Axioms-from-an-Ontology).
