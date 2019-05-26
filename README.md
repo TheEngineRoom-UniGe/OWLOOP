@@ -24,9 +24,12 @@ This repository has been published in the journal ... (todo: add the link here o
 ## Installation
 
 - Clone or download the repository.
-- Open the project by opening the file `owloop/build.gradle` in IntelliJ, with the following parameters ... (todo: show screen shot of the correct parameters)
+- Open the project by opening the file `owloop/build.gradle` in IntelliJ, with the following parameters ... (**todo**: show screen shot of the correct parameters)
 **OR**
-- add the following line in your IntelliJ project's `build.gradle` ... (todo: the developer should be able to add a single line and thus have acess to the OWLOOP API)
+- add the following dependency in your project's `build.gradle` file ... (**todo**: the developer should be able to add a single line and thus have acess to the OWLOOP API)
+```gradle
+compile group: 'com.github.owloop', name: 'owloop-api', version: '1.0'
+```
 
 ## Usage
 
