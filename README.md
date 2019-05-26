@@ -7,46 +7,54 @@ But, the usage of classic OWL-API leaves your application filled with lots of bo
 Furthermore, with the help of a descriptor, OWLOOP enables synchronization of axioms between the OWL paradigm and the OOP paradigm.
 
 ## Table of Contents
-- Reference to the publication
-- Installation
-- Usage
-- License
-- Dependencies
-- Known Issues to be Resolved
-- Author's message
+1. Reference to the publication
+2. Installation
+3. Usage
+4. License
+5. Dependencies
+6. Known Issues to be Resolved
+7. Author's message
 
 #
 
-## Reference to the Publication
+## 1. Reference to the Publication
 
 This repository has been published in the journal ... (todo: add the link here once the repo gets published)
 
-## Installation
+## 2. Installation
 
 - Clone or download the repository.
 - Open the project by opening the file `owloop/build.gradle` in IntelliJ, with the following parameters ... (**todo**: show screen shot of the correct parameters)
+
 **OR**
-- add the following dependency in your project's `build.gradle` file ... (**todo**: the developer should be able to add a single line and thus have acess to the OWLOOP API)
+
+- Add the following dependency in your project's `build.gradle` file ... (**todo**: the developer should be able to add a single line and thus have acess to the OWLOOP API)
 ```gradle
 compile group: 'com.github.owloop', name: 'owloop-api', version: '1.0'
 ```
 
-## Usage
+## 3. Usage
 
 To explain the usage of OWLOOP, we present in this repository's [wiki](https://github.com/EmaroLab/owloop/wiki):
-1. [The overall structure of the OWLOOP project and its JavaDoc](https://github.com/EmaroLab/owloop/wiki/1.-OWLOOP:-Project-Structure-&-JavaDoc).
-2. [The idea of a Descriptor, the types of descriptors and the possible expressions that each type can implement (and thus deal with)](https://github.com/EmaroLab/owloop/wiki/2.-The-OWLOOP-Descriptor).
-3. [Examples to show how to construct a simple descriptor or a compound descriptor (of a particular type)](https://github.com/EmaroLab/owloop/wiki/3.-Example:-Simple-vs-Compound-Descriptor).
-4. [An example that shows how to add axioms to an ontology, using descriptors](https://github.com/EmaroLab/owloop/wiki/4.-Example:-Adding-Axioms-to-an-Ontology).
-5. [An example that shows how to infer some knowledge (i.e., axioms) from axioms already within an ontology, using descriptors](https://github.com/EmaroLab/owloop/wiki/5.-Example:-Inferring-Axioms-from-an-Ontology).
-6. [An example that shows how to remove axioms from an ontology, using descriptors](https://github.com/EmaroLab/owloop/wiki/6.-Example:-Removing-Axioms-from-an-Ontology).
 
-## License
+3.1. [The overall structure of the OWLOOP project and its JavaDoc](https://github.com/EmaroLab/owloop/wiki/1.-OWLOOP:-Project-Structure-&-JavaDoc).
+
+3.2. [The idea of a Descriptor, the types of descriptors and the possible expressions that each type can implement (and thus deal with)](https://github.com/EmaroLab/owloop/wiki/2.-The-OWLOOP-Descriptor).
+
+3.3. [Examples to show how to construct a simple descriptor or a compound descriptor (of a particular type)](https://github.com/EmaroLab/owloop/wiki/3.-Example:-Simple-vs-Compound-Descriptor).
+
+3.4. [An example that shows how to add axioms to an ontology, using descriptors](https://github.com/EmaroLab/owloop/wiki/4.-Example:-Adding-Axioms-to-an-Ontology).
+
+3.5. [An example that shows how to infer some knowledge (i.e., axioms) from axioms already within an ontology, using descriptors](https://github.com/EmaroLab/owloop/wiki/5.-Example:-Inferring-Axioms-from-an-Ontology).
+
+3.6. [An example that shows how to remove axioms from an ontology, using descriptors](https://github.com/EmaroLab/owloop/wiki/6.-Example:-Removing-Axioms-from-an-Ontology).
+
+## 4. License
 
 OWLOOP is under the license: [GNU General Public License v3.0](owloop/LICENSE)
 
 
-### Dependencies
+### 5. Dependencies
 
 [Gradle](https://gradle.org/) is used for building OWLOOP and it has the following dependencies; can be found in `owloop/build.gradle`:
 
@@ -55,12 +63,12 @@ OWLOOP is under the license: [GNU General Public License v3.0](owloop/LICENSE)
 - [Pellet](https://github.com/stardog-union/pellet): an open source OWL 2 DL reasoner.
 - [JUnit](https://github.com/junit-team): a programmer-oriented testing framework for Java.
 
-### Issues to be Resolved
+### 6. Issues to be Resolved
 
 We are currently working on a known issue, i.e., during manipulation of a class definition, especially while removing restrictions, due to an unknown (for now) reason, the restrictions do not get removed. 
 To circumvent the problem (for now), we clear the class hierarchy and regenerate it from scratch, instead of updating it. 
 
-### Author's message
+### 7. Author's message
 Feel free to contribute to the project by sharing your thoughts and ideas, raising issues (if found) and providing bug-fixes. 
 For any information or support, do not hesitate to contact us through this Github repository or by email.
 
