@@ -49,7 +49,7 @@ To explain the usage of OWLOOP, we present in this repository's [wiki](https://g
 OWLOOP is under the license: [GNU General Public License v3.0](owloop/LICENSE)
 
 
-### 5. Dependencies
+## 5. Dependencies
 
 [Gradle](https://gradle.org/) is used for building OWLOOP and it has the following dependencies; can be found in `owloop/build.gradle`:
 
@@ -58,12 +58,12 @@ OWLOOP is under the license: [GNU General Public License v3.0](owloop/LICENSE)
 - [Pellet](https://github.com/stardog-union/pellet): an open source OWL 2 DL reasoner.
 - [JUnit](https://github.com/junit-team): a programmer-oriented testing framework for Java.
 
-### 6. Issues to be Resolved
+## 6. Issues to be Resolved
 
 We are currently working on a known issue, i.e., during manipulation of a class definition, especially while removing restrictions, due to an unknown (for now) reason, the restrictions do not get removed. 
 To circumvent the problem (for now), we clear the class hierarchy and regenerate it from scratch, instead of updating it. 
 
-### 7. Author's message
+## 7. Author's message
 Feel free to contribute to the project by sharing your thoughts and ideas, raising issues (if found) and providing bug-fixes. 
 For any information or support, do not hesitate to contact us through this Github repository or by email.
 
