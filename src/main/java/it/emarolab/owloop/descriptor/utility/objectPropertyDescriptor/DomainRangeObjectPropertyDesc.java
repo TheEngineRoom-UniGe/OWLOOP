@@ -15,7 +15,7 @@ import java.util.List;
  * <li><b>{@link ObjectPropertyExpression.Domain}</b>:       to describe the domain restrictions of an ObjectProperty.</li>
  * <li><b>{@link ObjectPropertyExpression.Range}</b>:        to describe the range restrictions of an ObjectProperty.</li>
  * </ul>
- * See {@link FullObjectPropertyDescriptor} for an example of a 'compound' Individual Descriptor that implements all ObjectPropertyExpressions.
+ * See {@link FullObjectPropertyDesc} for an example of a 'compound' Individual Descriptor that implements all ObjectPropertyExpressions.
  */
 public class DomainRangeObjectPropertyDesc
         extends ObjectPropertyGround
@@ -83,7 +83,7 @@ public class DomainRangeObjectPropertyDesc
     }
 
     public String toString() {
-        return "FullObjectPropertyDescriptor{" +
+        return "FullObjectPropertyDesc{" +
                 NL + "\t\t\t" + getGround() +
                 "," + NL + "\t→ " + domainRestriction +
                 "," + NL + "\t← " + rangeRestriction +

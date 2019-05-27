@@ -15,7 +15,7 @@ import java.util.List;
  * <li><b>{@link IndividualExpression.Equivalent}</b>:   to describe an Individual same-as another Individual.</li>
  * <li><b>{@link IndividualExpression.Disjoint}</b>:     to describe an Individual different from another Individual.</li>
  * </ul>
- * See {@link FullIndividualDescriptor} for an example of a 'compound' Individual Descriptor that implements all IndividualExpressions.
+ * See {@link FullIndividualDesc} for an example of a 'compound' Individual Descriptor that implements all IndividualExpressions.
  */
 public class DefinitionIndividualDesc
         extends IndividualGround
@@ -94,7 +94,7 @@ public class DefinitionIndividualDesc
 
     @Override
     public String toString() {
-        return "FullObjectPropertyDescriptor{" +
+        return "FullObjectPropertyDesc{" +
                 NL + "\t\t\t" + getGround() +
                 ":" + NL + "\t≠ " + disjointIndividual +
                 "," + NL + "\t≡ " + equivalentIndividual +

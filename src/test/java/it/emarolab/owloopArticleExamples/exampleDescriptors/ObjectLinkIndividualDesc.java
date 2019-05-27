@@ -1,11 +1,11 @@
 package it.emarolab.owloopArticleExamples.exampleDescriptors;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
-import it.emarolab.owloop.descriptor.utility.individualDescriptor.FullIndividualDescriptor;
+import it.emarolab.owloop.descriptor.utility.individualDescriptor.FullIndividualDesc;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.IndividualExpression;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.IndividualGround;
-import it.emarolab.owloop.descriptor.utility.objectPropertyDescriptor.FullObjectPropertyDescriptor;
+import it.emarolab.owloop.descriptor.utility.objectPropertyDescriptor.FullObjectPropertyDesc;
 
 import java.util.List;
 
@@ -15,13 +15,13 @@ import java.util.List;
  * <li><b>{@link IndividualExpression.ObjectLink}</b>:   to describe an ObjectProperty and Individuals related via that ObjectProperty, for an Individual.</li>
  * </ul>
  * <p>
- *     Doing build() with this Descriptor returns another descriptor of type {@link FullObjectPropertyDescriptor}.
+ *     Doing build() with this Descriptor returns another descriptor of type {@link FullObjectPropertyDesc}.
  * </p>
- * See {@link FullIndividualDescriptor} for an example of a 'compound' Individual Descriptor that implements all IndividualExpressions.
+ * See {@link FullIndividualDesc} for an example of a 'compound' Individual Descriptor that implements all IndividualExpressions.
  */
 public class ObjectLinkIndividualDesc
         extends IndividualGround
-        implements IndividualExpression.ObjectLink<FullObjectPropertyDescriptor> {
+        implements IndividualExpression.ObjectLink<FullObjectPropertyDesc> {
 
     private DescriptorEntitySet.ObjectLinksSet objectLinks = new DescriptorEntitySet.ObjectLinksSet();
 
@@ -46,8 +46,8 @@ public class ObjectLinkIndividualDesc
 
     // implementations for IndividualExpression.ObjectLink
     @Override //called during build...() you can change the returning type to any implementations of ObjectPropertyExpression
-    public FullObjectPropertyDescriptor getNewObjectIndividual(DescriptorEntitySet.ObjectLinks instance, OWLReferences ontology) {
-        return new FullObjectPropertyDescriptor( instance.getExpression(), ontology);
+    public FullObjectPropertyDesc getNewObjectIndividual(DescriptorEntitySet.ObjectLinks instance, OWLReferences ontology) {
+        return new FullObjectPropertyDesc( instance.getExpression(), ontology);
     }
 
     @Override

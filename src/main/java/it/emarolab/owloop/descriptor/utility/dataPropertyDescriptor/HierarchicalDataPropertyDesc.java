@@ -14,7 +14,7 @@ import java.util.List;
  * <li><b>{@link DataPropertyExpression.Sub}</b>:          to describe that a DataProperty is subsumes another DataProperty.</li>
  * <li><b>{@link DataPropertyExpression.Super}</b>:        to describe that a DataProperty is super-sumes another DataProperty.</li>
  * </ul>
- * See {@link FullDataPropertyDescriptor} for an example of a 'compound' DataProperty Descriptor that implements all DataPropertyExpressions.
+ * See {@link FullDataPropertyDesc} for an example of a 'compound' DataProperty Descriptor that implements all DataPropertyExpressions.
  */
 public class HierarchicalDataPropertyDesc
         extends DataPropertyGround
@@ -96,7 +96,7 @@ public class HierarchicalDataPropertyDesc
 
     @Override
     public String toString() {
-        return "FullObjectPropertyDescriptor{" +
+        return "FullObjectPropertyDesc{" +
                 NL + "\t\t\t" + getGround() +
                 "," + NL + "\t⊃ " + subProperties +
                 "," + NL + "\t⊂ " + superProperties +

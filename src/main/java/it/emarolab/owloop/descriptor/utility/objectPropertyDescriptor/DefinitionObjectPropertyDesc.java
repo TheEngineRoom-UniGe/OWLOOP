@@ -16,7 +16,7 @@ import java.util.List;
  * <li><b>{@link ObjectPropertyExpression.Disjoint}</b>:     to describe that an ObjectProperty is disjoint to another ObjectProperty.</li>
  * <li><b>{@link ObjectPropertyExpression.Inverse}</b>:      to describe that an ObjectProperty has another inverse ObjectProperty.</li>
  * </ul>
- * See {@link FullObjectPropertyDescriptor} for an example of a 'compound' Individual Descriptor that implements all ObjectPropertyExpressions.
+ * See {@link FullObjectPropertyDesc} for an example of a 'compound' Individual Descriptor that implements all ObjectPropertyExpressions.
  */
 public class DefinitionObjectPropertyDesc
         extends ObjectPropertyGround
@@ -110,7 +110,7 @@ public class DefinitionObjectPropertyDesc
     }
 
     public String toString() {
-        return "FullObjectPropertyDescriptor{" +
+        return "FullObjectPropertyDesc{" +
                 NL + "\t\t\t" + getGround() +
                 ":" + NL + "\t≠ " + disjointProperties +
                 "," + NL + "\t≡ " + equivalentProperties +

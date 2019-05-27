@@ -13,7 +13,7 @@ import java.util.Set;
 /**
  * This is an example of a 'compound' DataProperty Descriptor as it implements more than one {@link DataPropertyExpression}s.
  * Axioms in this descriptor's internal state (i.e., OWLOOP representation) can be synchronized to/from an OWL ontology.
- * {@link FullDataPropertyDescriptor} can synchronize all the axioms, that are based on the following DataPropertyExpressions:
+ * {@link FullDataPropertyDesc} can synchronize all the axioms, that are based on the following DataPropertyExpressions:
  *
  * <ul>
  * <li><b>{@link DataPropertyExpression.Equivalent}</b>:   to describe that a DataProperty is equivalent to another DataProperty.</li>
@@ -33,12 +33,12 @@ import java.util.Set;
  * <b>date</b>:         01/05/19 <br>
  * </small></div>
  */
-public class FullDataPropertyDescriptor
+public class FullDataPropertyDesc
         extends DataPropertyGround
-        implements DataPropertyExpression.Disjoint<FullDataPropertyDescriptor>,
-        DataPropertyExpression.Equivalent<FullDataPropertyDescriptor>,
-        DataPropertyExpression.Sub<FullDataPropertyDescriptor>,
-        DataPropertyExpression.Super<FullDataPropertyDescriptor>,
+        implements DataPropertyExpression.Disjoint<FullDataPropertyDesc>,
+        DataPropertyExpression.Equivalent<FullDataPropertyDesc>,
+        DataPropertyExpression.Sub<FullDataPropertyDesc>,
+        DataPropertyExpression.Super<FullDataPropertyDesc>,
         DataPropertyExpression.Domain,
         DataPropertyExpression.Range{
 
@@ -51,28 +51,28 @@ public class FullDataPropertyDescriptor
 
     // Constructors from the abstract class: DataPropertyGround
 
-    public FullDataPropertyDescriptor(OWLDataProperty instance, OWLReferences onto) {
+    public FullDataPropertyDesc(OWLDataProperty instance, OWLReferences onto) {
         super(instance, onto);
     }
-    public FullDataPropertyDescriptor(String instanceName, OWLReferences onto) {
+    public FullDataPropertyDesc(String instanceName, OWLReferences onto) {
         super(instanceName, onto);
     }
-    public FullDataPropertyDescriptor(OWLDataProperty instance, String ontoName) {
+    public FullDataPropertyDesc(OWLDataProperty instance, String ontoName) {
         super(instance, ontoName);
     }
-    public FullDataPropertyDescriptor(OWLDataProperty instance, String ontoName, String filePath, String iriPath) {
+    public FullDataPropertyDesc(OWLDataProperty instance, String ontoName, String filePath, String iriPath) {
         super(instance, ontoName, filePath, iriPath);
     }
-    public FullDataPropertyDescriptor(OWLDataProperty instance, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
+    public FullDataPropertyDesc(OWLDataProperty instance, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
         super(instance, ontoName, filePath, iriPath, bufferingChanges);
     }
-    public FullDataPropertyDescriptor(String instanceName, String ontoName) {
+    public FullDataPropertyDesc(String instanceName, String ontoName) {
         super(instanceName, ontoName);
     }
-    public FullDataPropertyDescriptor(String instanceName, String ontoName, String filePath, String iriPath) {
+    public FullDataPropertyDesc(String instanceName, String ontoName, String filePath, String iriPath) {
         super(instanceName, ontoName, filePath, iriPath);
     }
-    public FullDataPropertyDescriptor(String instanceName, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
+    public FullDataPropertyDesc(String instanceName, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
         super(instanceName, ontoName, filePath, iriPath, bufferingChanges);
     }
 
@@ -105,8 +105,8 @@ public class FullDataPropertyDescriptor
     // Implementations for: DataPropertyExpression.Disjoint
 
     @Override // you can change the returning type to any implementations of DataPropertyExpression
-    public FullDataPropertyDescriptor getNewDisjointDataProperty(OWLDataProperty instance, OWLReferences ontology) {
-        return new FullDataPropertyDescriptor( instance, ontology);
+    public FullDataPropertyDesc getNewDisjointDataProperty(OWLDataProperty instance, OWLReferences ontology) {
+        return new FullDataPropertyDesc( instance, ontology);
     }
 
     @Override
@@ -117,13 +117,13 @@ public class FullDataPropertyDescriptor
     // Implementations for: DataPropertyExpression.Equivalent
 
     @Override // returns a set with elements of the same type of getNewDisjointDataProperty()
-    public Set<FullDataPropertyDescriptor> buildEquivalentDataProperty() {
+    public Set<FullDataPropertyDesc> buildEquivalentDataProperty() {
         return DataPropertyExpression.Equivalent.super.buildEquivalentDataProperty();
     }
 
     @Override // you can change the returning type to any implementations of DataPropertyExpression
-    public FullDataPropertyDescriptor getNewEquivalentDataProperty(OWLDataProperty instance, OWLReferences ontology) {
-        return new FullDataPropertyDescriptor( instance, ontology);
+    public FullDataPropertyDesc getNewEquivalentDataProperty(OWLDataProperty instance, OWLReferences ontology) {
+        return new FullDataPropertyDesc( instance, ontology);
     }
 
     @Override
@@ -148,8 +148,8 @@ public class FullDataPropertyDescriptor
     // Implementations for: DataPropertyExpression.Super
 
     @Override //called during build...() you can change the returning type to any implementations of DataPropertyExpression
-    public FullDataPropertyDescriptor getNewSubDataProperty(OWLDataProperty instance, OWLReferences ontology) {
-        return new FullDataPropertyDescriptor( instance, ontology);
+    public FullDataPropertyDesc getNewSubDataProperty(OWLDataProperty instance, OWLReferences ontology) {
+        return new FullDataPropertyDesc( instance, ontology);
     }
 
     @Override
@@ -160,8 +160,8 @@ public class FullDataPropertyDescriptor
     // Implementations for: DataPropertyExpression.Super
 
     @Override //called during build...() you can change the returning type to any implementations of DataPropertyExpression
-    public FullDataPropertyDescriptor getNewSuperDataProperty(OWLDataProperty instance, OWLReferences ontology) {
-        return new FullDataPropertyDescriptor( instance, ontology);
+    public FullDataPropertyDesc getNewSuperDataProperty(OWLDataProperty instance, OWLReferences ontology) {
+        return new FullDataPropertyDesc( instance, ontology);
     }
 
     @Override
@@ -173,7 +173,7 @@ public class FullDataPropertyDescriptor
 
     @Override
     public String toString() {
-        return "FullObjectPropertyDescriptor{" +
+        return "FullObjectPropertyDesc{" +
                 NL + "\t\t\t" + getGround() +
                 ":" + NL + "\t≠ " + disjointProperties +
                 "," + NL + "\t≡ " + equivalentProperties +

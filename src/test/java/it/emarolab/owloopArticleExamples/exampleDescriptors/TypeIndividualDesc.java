@@ -2,7 +2,7 @@ package it.emarolab.owloopArticleExamples.exampleDescriptors;
 
 
 import it.emarolab.amor.owlInterface.OWLReferences;
-import it.emarolab.owloop.descriptor.utility.individualDescriptor.FullIndividualDescriptor;
+import it.emarolab.owloop.descriptor.utility.individualDescriptor.FullIndividualDesc;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.IndividualGround;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.IndividualExpression;
@@ -20,7 +20,7 @@ import java.util.List;
  *     Doing build() with this Descriptor returns another descriptor of type {@link DefSubConceptDesc}.
  * </p>
  *
- * See {@link FullIndividualDescriptor} for an example of a 'compound' Individual Descriptor that implements all IndividualExpressions.
+ * See {@link FullIndividualDesc} for an example of a 'compound' Individual Descriptor that implements all IndividualExpressions.
  */
 public class TypeIndividualDesc
         extends IndividualGround

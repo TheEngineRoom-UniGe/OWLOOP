@@ -4,7 +4,7 @@ import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.amor.owlInterface.OWLReferencesInterface;
 import it.emarolab.amor.owlInterface.SemanticRestriction;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
-import it.emarolab.owloop.descriptor.utility.conceptDescriptor.FullConceptDescriptor;
+import it.emarolab.owloop.descriptor.utility.conceptDescriptor.FullConceptDesc;
 import it.emarolab.owloopArticleExamples.exampleDescriptors.DefSubConceptDesc;
 import it.emarolab.owloopArticleExamples.exampleDescriptors.TypeIndividualDesc;
 import it.emarolab.owloopArticleExamples.exampleDescriptors.ObjectLinkIndividualDesc;
@@ -50,12 +50,12 @@ public class UseDescriptorBuild {
         Set<DefSubConceptDesc> setOfTypes = d2.buildTypeIndividual();            // BUILD Type of an Individual --> CORRIDOR,LOCATION,Top
         for( DefSubConceptDesc d3 : setOfTypes ){
 
-            Set<FullConceptDescriptor> setOfSubTypes = d3.buildSubConcept();     // BUILD Sub of a Concept --> we have the sub-classes of all the 3 above
+            Set<FullConceptDesc> setOfSubTypes = d3.buildSubConcept();     // BUILD Sub of a Concept --> we have the sub-classes of all the 3 above
 
             if( setOfSubTypes.size() <= 1 ) {                                    // If less than or equal to 1 (owl:Nothing is always there )
 
                 System.out.print("'" + d2.getInstanceName() + "'" + " is of Type " + "'" + d3.getInstanceName() + "' \n"); // PRINT
-                DescriptorEntitySet.Restrictions restrictions = d3.getDefinitionConcept(); //GET DEFINITION
+                DescriptorEntitySet.Restrictions restrictions = d3.getDefinitionConcepts(); //GET DEFINITION
                 for( SemanticRestriction rest : restrictions ){
 
                     if( rest instanceof SemanticRestriction.ClassRestrictedOnExactObject ){
@@ -80,11 +80,11 @@ public class UseDescriptorBuild {
         d1.addObject( "hasProp2", "X");
         d1.writeExpressionAxioms();
 
-        FullIndividualDescriptor d1 = new FullIndividualDescriptor("Robot1", ontoref);
+        FullIndividualDesc d1 = new FullIndividualDesc("Robot1", ontoref);
         d1.readExpressionAxioms();          //at this point the descriptor reads all knowledge
         System.out.println( " 11 " + d1);
 
-        FullIndividualDescriptor d2 = new FullIndividualDescriptor("Robot1", ontoref);
+        FullIndividualDesc d2 = new FullIndividualDesc("Robot1", ontoref);
         d2.addObject( "hasProp1");
         d2.addObject( "hasProp2");
         d2.readExpressionAxioms();          //at this point the descriptor reads only particular knowledge

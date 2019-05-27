@@ -14,7 +14,7 @@ import java.util.List;
  * <li><b>{@link ObjectPropertyExpression.Sub}</b>:          to describe that an ObjectProperty subsumes another ObjectProperty.</li>
  * <li><b>{@link ObjectPropertyExpression.Super}</b>:        to describe that an ObjectProperty super-sumes another ObjectProperty.</li>
  * </ul>
- * See {@link FullObjectPropertyDescriptor} for an example of a 'compound' Individual Descriptor that implements all ObjectPropertyExpressions.
+ * See {@link FullObjectPropertyDesc} for an example of a 'compound' Individual Descriptor that implements all ObjectPropertyExpressions.
  */
 public class HierarchicalObjectPropertyDesc
         extends ObjectPropertyGround
@@ -92,7 +92,7 @@ public class HierarchicalObjectPropertyDesc
     }
 
     public String toString() {
-        return "FullObjectPropertyDescriptor{" +
+        return "FullObjectPropertyDesc{" +
                 NL + "\t\t\t" + getGround() +
                 "," + NL + "\t⊃ " + subProperties +
                 "," + NL + "\t⊂ " + superProperties +

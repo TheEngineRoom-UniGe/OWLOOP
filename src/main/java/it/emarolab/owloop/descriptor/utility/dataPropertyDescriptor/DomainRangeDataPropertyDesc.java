@@ -15,7 +15,7 @@ import java.util.List;
  * <li><b>{@link DataPropertyExpression.Domain}</b>:       to describe the domain restrictions of a DataProperty.</li>
  * <li><b>{@link DataPropertyExpression.Range}</b>:        to describe the range restrictions of a DataProperty.</li>
  * </ul>
- * See {@link FullDataPropertyDescriptor} for an example of a 'compound' DataProperty Descriptor that implements all DataPropertyExpressions.
+ * See {@link FullDataPropertyDesc} for an example of a 'compound' DataProperty Descriptor that implements all DataPropertyExpressions.
  */
 public class DomainRangeDataPropertyDesc
         extends DataPropertyGround
@@ -85,7 +85,7 @@ public class DomainRangeDataPropertyDesc
 
     @Override
     public String toString() {
-        return "FullObjectPropertyDescriptor{" +
+        return "FullObjectPropertyDesc{" +
                 NL + "\t\t\t" + getGround() +
                 "," + NL + "\t→ " + domainRestriction +
                 "," + NL + "\t← " + rangeRestriction +

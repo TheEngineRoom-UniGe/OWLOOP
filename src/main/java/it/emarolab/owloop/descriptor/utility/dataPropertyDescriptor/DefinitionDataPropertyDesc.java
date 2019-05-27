@@ -15,7 +15,7 @@ import java.util.List;
  * <li><b>{@link DataPropertyExpression.Equivalent}</b>:   to describe that a DataProperty is equivalent to another DataProperty.</li>
  * <li><b>{@link DataPropertyExpression.Disjoint}</b>:     to describe that a DataProperty is disjoint to another DataProperty.</li>
  * </ul>
- * See {@link FullDataPropertyDescriptor} for an example of a 'compound' DataProperty Descriptor that implements all DataPropertyExpressions.
+ * See {@link FullDataPropertyDesc} for an example of a 'compound' DataProperty Descriptor that implements all DataPropertyExpressions.
  */
 public class DefinitionDataPropertyDesc
         extends DataPropertyGround
@@ -94,7 +94,7 @@ public class DefinitionDataPropertyDesc
 
     @Override
     public String toString() {
-        return "FullObjectPropertyDescriptor{" +
+        return "FullObjectPropertyDesc{" +
                 NL + "\t\t\t" + getGround() +
                 ":" + NL + "\t≠ " + disjointProperties +
                 "," + NL + "\t≡ " + equivalentProperties +

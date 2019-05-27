@@ -2,9 +2,7 @@ package it.emarolab.owloopArticleExamples.example3;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.amor.owlInterface.OWLReferencesInterface;
-import it.emarolab.owloop.core.Individual;
-import it.emarolab.owloop.descriptor.utility.individualDescriptor.FullIndividualDescriptor;
-import it.emarolab.owloopArticleExamples.exampleDescriptors.ObjectLinkIndividualDesc;
+import it.emarolab.owloop.descriptor.utility.individualDescriptor.FullIndividualDesc;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -29,21 +27,17 @@ public class RemoveAxioms {
     public void removeStuff() {
 
         // robot individual
-        FullIndividualDescriptor robot_Desc = new FullIndividualDescriptor( "Robot1", ontoRef);
+        FullIndividualDesc robot_Desc = new FullIndividualDesc( "Robot1", ontoRef);
         robot_Desc.readExpressionAxioms();
         System.out.println(robot_Desc);
 
-        ObjectLinkIndividualDesc test = new ObjectLinkIndividualDesc("dsfads", ontoRef);
-
-
-
         // corridor individual
-        FullIndividualDescriptor corridor_Desc = new FullIndividualDescriptor( "Corridor1", ontoRef);
+        FullIndividualDesc corridor_Desc = new FullIndividualDesc( "Corridor1", ontoRef);
         corridor_Desc.readExpressionAxioms();
         System.out.println(corridor_Desc);
 
         // room individual
-        FullIndividualDescriptor room1_Desc = new FullIndividualDescriptor("Room1", ontoRef);
+        FullIndividualDesc room1_Desc = new FullIndividualDesc("Room1", ontoRef);
         room1_Desc.readExpressionAxioms();
         System.out.println(room1_Desc);
 

@@ -2,7 +2,7 @@ package it.emarolab.owloopArticleExamples.exampleDescriptors;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.amor.owlInterface.SemanticRestriction;
-import it.emarolab.owloop.descriptor.utility.conceptDescriptor.FullConceptDescriptor;
+import it.emarolab.owloop.descriptor.utility.conceptDescriptor.FullConceptDesc;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.ConceptGround;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.ConceptExpression;
@@ -13,7 +13,7 @@ import it.emarolab.owloop.descriptor.construction.descriptorExpression.ConceptEx
  * <li><b>{@link ConceptExpression.Definition}</b>:  to describe the definition of a Class..</li>
  * </ul>
  *
- *  See {@link FullConceptDescriptor} for an example of a 'compound' Concept Descriptor that implements all ClassExpressions (aka {@link ConceptExpression}).
+ *  See {@link FullConceptDesc} for an example of a 'compound' Concept Descriptor that implements all ClassExpressions (aka {@link ConceptExpression}).
  */
 public abstract class DefConceptDesc
         extends ConceptGround
@@ -31,7 +31,7 @@ public abstract class DefConceptDesc
         defRestrictions.setSubject( getGround().getGroundInstance());
         defRestrictions.setProperty( getOWLObjectProperty( "hasDoor"));
         defRestrictions.setValue( getOWLClass( "DOOR"));
-        getDefinitionConcept().add( defRestrictions);
+        getDefinitionConcepts().add( defRestrictions);
         writeExpressionAxioms();
     }
 
@@ -40,7 +40,7 @@ public abstract class DefConceptDesc
     // inherit read/write Expression Axioms from the only simple descriptor `ConceptExpression.Definition`
 
     @Override
-    public DescriptorEntitySet.Restrictions getDefinitionConcept() {
+    public DescriptorEntitySet.Restrictions getDefinitionConcepts() {
         return newDefRestrictions;
     }
 

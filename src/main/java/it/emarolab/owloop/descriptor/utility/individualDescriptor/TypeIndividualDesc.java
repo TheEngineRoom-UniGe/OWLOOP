@@ -16,7 +16,7 @@ import java.util.List;
  * <ul>
  * <li><b>{@link IndividualExpression.Type}</b>: to describe the Type/s (i.e., class/es) of an Individual.</li>
  * </ul>
- * See {@link FullIndividualDescriptor} for an example of a 'compound' Individual Descriptor that implements all IndividualExpressions.
+ * See {@link FullIndividualDesc} for an example of a 'compound' Individual Descriptor that implements all IndividualExpressions.
  */
 public class TypeIndividualDesc
         extends IndividualGround
@@ -77,7 +77,7 @@ public class TypeIndividualDesc
 
     @Override
     public String toString() {
-        return "FullObjectPropertyDescriptor{" +
+        return "FullObjectPropertyDesc{" +
                 NL + "\t\t\t" + getGround() +
                 ":" + NL + "\t ∈ " + individualTypes +
                 NL + "}";

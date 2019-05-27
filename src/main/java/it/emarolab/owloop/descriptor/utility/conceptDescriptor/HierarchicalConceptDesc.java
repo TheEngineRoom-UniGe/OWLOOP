@@ -17,7 +17,7 @@ import java.util.List;
  * <li><b>{@link ConceptExpression.Super}</b>:       to describe that a Class is a super-class of another Class.</li>
  * </ul>
  *
- * See {@link FullConceptDescriptor} for an example of a 'compound' Concept Descriptor that implements all ClassExpressions (aka {@link ConceptExpression}).
+ * See {@link FullConceptDesc} for an example of a 'compound' Concept Descriptor that implements all ClassExpressions (aka {@link ConceptExpression}).
  */
 public class HierarchicalConceptDesc
         extends ConceptGround
@@ -75,12 +75,12 @@ public class HierarchicalConceptDesc
     // implementations for ConceptExpression.Super
 
     @Override //called during build...() you can change the returning type to any implementations of ConceptExpression
-    public HierarchicalConceptDesc getNewSubConcept(OWLClass instance, OWLReferences ontology) {
+    public HierarchicalConceptDesc getSubConceptDescriptor(OWLClass instance, OWLReferences ontology) {
         return new HierarchicalConceptDesc( instance, ontology);
     }
 
     @Override
-    public DescriptorEntitySet.Concepts getSubConcept() {
+    public DescriptorEntitySet.Concepts getSubConcepts() {
         return subConcept;
     }
 
@@ -89,19 +89,19 @@ public class HierarchicalConceptDesc
     // implementations for ConceptExpression.Sub
 
     @Override // called during build...() you can change the returning type to any implementations of ConceptExpression
-    public HierarchicalConceptDesc getNewSuperConcept(OWLClass instance, OWLReferences ontology) {
+    public HierarchicalConceptDesc getSuperConceptDescriptor(OWLClass instance, OWLReferences ontology) {
         return new HierarchicalConceptDesc( instance, ontology);
     }
 
     @Override
-    public DescriptorEntitySet.Concepts getSuperConcept() {
+    public DescriptorEntitySet.Concepts getSuperConcepts() {
         return superConcept;
     }
 
 
     @Override
     public String toString() {
-        return "FullObjectPropertyDescriptor{" +
+        return "FullObjectPropertyDesc{" +
                 NL + "\t\t\t" + getGround() +
                 "," + NL + "\t⊃ " + subConcept +
                 "," + NL + "\t⊂ " + superConcept +

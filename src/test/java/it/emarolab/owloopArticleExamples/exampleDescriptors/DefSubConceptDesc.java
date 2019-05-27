@@ -4,7 +4,7 @@ import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.ConceptGround;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.ConceptExpression;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
-import it.emarolab.owloop.descriptor.utility.conceptDescriptor.FullConceptDescriptor;
+import it.emarolab.owloop.descriptor.utility.conceptDescriptor.FullConceptDesc;
 import org.semanticweb.owlapi.model.OWLClass;
 
 import java.util.List;
@@ -16,14 +16,14 @@ import java.util.List;
  * <li><b>{@link ConceptExpression.Sub}</b>:         to describe that a Class subsumes another Class.</li>
  * </ul>
  * <p>
- *     Doing build() with this Descriptor returns another descriptor of type {@link FullConceptDescriptor}.
+ *     Doing build() with this Descriptor returns another descriptor of type {@link FullConceptDesc}.
  * </p>
- * See {@link FullConceptDescriptor} for an example of a 'compound' Concept Descriptor that implements all ConceptExpressions.
+ * See {@link FullConceptDesc} for an example of a 'compound' Concept Descriptor that implements all ConceptExpressions.
  */
 public class DefSubConceptDesc
         extends ConceptGround
         implements ConceptExpression.Definition,
-        ConceptExpression.Sub<FullConceptDescriptor>{
+        ConceptExpression.Sub<FullConceptDesc>{
 
     private DescriptorEntitySet.Restrictions restrictions = new DescriptorEntitySet.Restrictions();
     private DescriptorEntitySet.Concepts subConcept = new DescriptorEntitySet.Concepts();
@@ -50,7 +50,7 @@ public class DefSubConceptDesc
 
     // implementations for ConceptExpression.Definition
     @Override
-    public DescriptorEntitySet.Restrictions getDefinitionConcept() {
+    public DescriptorEntitySet.Restrictions getDefinitionConcepts() {
         return restrictions;
     }
 
@@ -59,12 +59,12 @@ public class DefSubConceptDesc
 
     // implementations for ConceptExpression.Super
     @Override // called during build...() you can change the returning type to any implementations of ConceptExpression
-    public FullConceptDescriptor getNewSubConcept(OWLClass instance, OWLReferences ontology) {
-        return new FullConceptDescriptor( instance, ontology);
+    public FullConceptDesc getSubConceptDescriptor(OWLClass instance, OWLReferences ontology) {
+        return new FullConceptDesc( instance, ontology);
     }
 
     @Override
-    public DescriptorEntitySet.Concepts getSubConcept() {
+    public DescriptorEntitySet.Concepts getSubConcepts() {
         return subConcept;
     }
 

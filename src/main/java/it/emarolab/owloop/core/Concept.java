@@ -40,7 +40,7 @@ public interface Concept<O,J>
      * @param <O> the ontology.
      * @param <J> the type of {@link Ground} and {@link EntitySet} managed by this {@link Descriptor}.
      * @param <D> the type of {@link Concept} descriptor instantiated during
-     *            {@link #buildEquivalentConcept()} through {@link #getNewEquivalentConcept(Object, Object)}.
+     *            {@link #buildEquivalentConcept()} through {@link #getEquivalentConceptDescriptor(Object, Object)}.
      */
     interface Equivalent<O,J,D extends Concept<O,J>>
             extends Concept<O,J> {
@@ -50,8 +50,8 @@ public interface Concept<O,J>
             try {
                 EntitySet.SynchronisationIntent<J> from = synchroniseEquivalentConceptFromExpressionAxioms();
                 if ( from != null) {
-                    getEquivalentConcept().addAll(from.getToAdd());
-                    getEquivalentConcept().removeAll(from.getToRemove());
+                    getEquivalentConcepts().addAll(from.getToAdd());
+                    getEquivalentConcepts().removeAll(from.getToRemove());
                 }
                 return getIntent( from);
             } catch (Exception e){
@@ -64,15 +64,15 @@ public interface Concept<O,J>
          * Create an {@link Axiom.Descriptor} set where each element
          * represents the classes equivalent to this {@link Concept}.
          * Each of those {@link Concept}s are instantiated
-         * through the method {@link #getNewEquivalentConcept(Object, Object)};
-         * this is called for all {@link #getEquivalentConcept()}.
+         * through the method {@link #getEquivalentConceptDescriptor(Object, Object)};
+         * this is called for all {@link #getEquivalentConcepts()}.
          * @return the set of {@link Concept}s that describes the
          * entities equivalent to {@code this} described ontological class.
          */
         default Set<D> buildEquivalentConcept(){
             Set<D> out = new HashSet<>();
-            for( J cl : getEquivalentConcept()){
-                D built = getNewEquivalentConcept( cl, getOntology());
+            for( J cl : getEquivalentConcepts()){
+                D built = getEquivalentConceptDescriptor( cl, getOntology());
                 built.readExpressionAxioms();
                 out.add( built);
             }
@@ -88,14 +88,14 @@ public interface Concept<O,J>
          * @return a new {@link Axiom.Descriptor} for all the classes
          * equivalent to {@code this} descriptor.
          */
-        D getNewEquivalentConcept(J instance, O ontology);
+        D getEquivalentConceptDescriptor(J instance, O ontology);
 
         /**
          * Returns the {@link EntitySet} that describes all the equivalent classes of
          * {@code this} {@link Concept} from a no OOP point of view.
          * @return the entities describing the equivalent classes to {@code this} object
          */
-        EntitySet<J> getEquivalentConcept();
+        EntitySet<J> getEquivalentConcepts();
 
         /**
          * Queries to the OWL representation for the equivalent classes of {@code this} class.
@@ -107,14 +107,14 @@ public interface Concept<O,J>
         /**
          * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryEquivalentConcept()}
          * as input parameter. This computes the changes to be performed in the OWL representation
-         * for synchronise it with respect to {@link #getEquivalentConcept()}. This should
+         * for synchronise it with respect to {@link #getEquivalentConcepts()}. This should
          * be done by {@link #writeExpressionAxioms()}.
          * @return the changes to be done to synchronise {@code this} structure with
          * the equivalent classes of an OWL class.
          */
         default EntitySet.SynchronisationIntent<J> synchroniseEquivalentConceptToExpressionAxioms(){
             try {
-                return getEquivalentConcept().synchroniseTo( queryEquivalentConcept());
+                return getEquivalentConcepts().synchroniseTo( queryEquivalentConcept());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -123,7 +123,7 @@ public interface Concept<O,J>
 
         /**
          * It calls {@link EntitySet#synchroniseFrom(EntitySet)} with {@link #queryEquivalentConcept()}
-         * as input parameter. This computes the changes to be performed into the {@link #getEquivalentConcept()}
+         * as input parameter. This computes the changes to be performed into the {@link #getEquivalentConcepts()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readExpressionAxioms()}.
          * @return the changes to be done to synchronise the equivalent classes of an OWL class
@@ -131,7 +131,7 @@ public interface Concept<O,J>
          */
         default EntitySet.SynchronisationIntent<J> synchroniseEquivalentConceptFromExpressionAxioms(){
             try{
-                return getEquivalentConcept().synchroniseFrom( queryEquivalentConcept());
+                return getEquivalentConcepts().synchroniseFrom( queryEquivalentConcept());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -145,7 +145,7 @@ public interface Concept<O,J>
      * @param <O> the ontology.
      * @param <J> the type of {@link Ground} and {@link EntitySet} managed by this {@link Descriptor}.
      * @param <D> the type of {@link Concept} descriptor instantiated during
-     *            {@link #buildDisjointConcept()} ()} through {@link #getNewDisjointConcept(Object, Object)}.
+     *            {@link #buildDisjointConcept()} ()} through {@link #getDisjointConceptDescriptor(Object, Object)}.
      */
     interface Disjoint<O,J,D extends Concept<O,J>>
             extends Concept<O,J> {
@@ -155,8 +155,8 @@ public interface Concept<O,J>
             try {
                 EntitySet.SynchronisationIntent<J> from = synchroniseDisjointConceptFromExpressionAxioms();
                 if ( from != null) {
-                    getDisjointConcept().addAll(from.getToAdd());
-                    getDisjointConcept().removeAll(from.getToRemove());
+                    getDisjointConcepts().addAll(from.getToAdd());
+                    getDisjointConcepts().removeAll(from.getToRemove());
                 }
                 return getIntent( from);
             } catch (Exception e){
@@ -170,15 +170,15 @@ public interface Concept<O,J>
          * Create an {@link Axiom.Descriptor} set where each element
          * represents the classes disjointed to this {@link Concept}.
          * Each of those {@link Concept}s are instantiated
-         * through the method {@link #getNewDisjointConcept(Object, Object)};
-         * this is called for all {@link #getDisjointConcept()}.
+         * through the method {@link #getDisjointConceptDescriptor(Object, Object)};
+         * this is called for all {@link #getDisjointConcepts()}.
          * @return the set of {@link Concept}s that describes the
          * entities disjointed to {@code this} described ontological class.
          */
         default Set<D> buildDisjointConcept(){
             Set<D> out = new HashSet<>();
-            for( J cl : getDisjointConcept()){
-                D built = getNewDisjointConcept( cl, getOntology());
+            for( J cl : getDisjointConcepts()){
+                D built = getDisjointConceptDescriptor( cl, getOntology());
                 built.readExpressionAxioms();
                 out.add( built);
             }
@@ -194,14 +194,14 @@ public interface Concept<O,J>
          * @return a new {@link Axiom.Descriptor} for all the classes
          * disjointed to {@code this} descriptor.
          */
-        D getNewDisjointConcept(J instance, O ontology);
+        D getDisjointConceptDescriptor(J instance, O ontology);
 
         /**
          * Returns the {@link EntitySet} that describes all the disjointed classes of
          * {@code this} {@link Concept} from a no OOP point of view.
          * @return the entities describing the disjointed classes from {@code this} object
          */
-        EntitySet<J> getDisjointConcept();
+        EntitySet<J> getDisjointConcepts();
 
         /**
          * Queries to the OWL representation of the disjointed classes for {@code this} class.
@@ -213,14 +213,14 @@ public interface Concept<O,J>
         /**
          * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryDisjointConcept()}
          * as input parameter. This computes the changes to be performed in the OWL representation
-         * for synchronise it with respect to {@link #getDisjointConcept()}. This should
+         * for synchronise it with respect to {@link #getDisjointConcepts()}. This should
          * be done by {@link #writeExpressionAxioms()}.
          * @return the changes to be done to synchronise {@code this} structure with
          * the disjointed classes of an OWL class.
          */
         default EntitySet.SynchronisationIntent<J> synchroniseDisjointConceptToExpressionAxioms(){
             try {
-                return getDisjointConcept().synchroniseTo( queryDisjointConcept());
+                return getDisjointConcepts().synchroniseTo( queryDisjointConcept());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -229,7 +229,7 @@ public interface Concept<O,J>
 
         /**
          * It calls {@link EntitySet#synchroniseFrom(EntitySet)} with {@link #queryDisjointConcept()}
-         * as input parameter. This computes the changes to be performed into the {@link #getDisjointConcept()}
+         * as input parameter. This computes the changes to be performed into the {@link #getDisjointConcepts()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readExpressionAxioms()}.
          * @return the changes to be done to synchronise the disjointed classes of an OWL class
@@ -237,7 +237,7 @@ public interface Concept<O,J>
          */
         default EntitySet.SynchronisationIntent<J> synchroniseDisjointConceptFromExpressionAxioms(){
             try{
-                return getDisjointConcept().synchroniseFrom( queryDisjointConcept());
+                return getDisjointConcepts().synchroniseFrom( queryDisjointConcept());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -251,7 +251,7 @@ public interface Concept<O,J>
      * @param <O> the ontology.
      * @param <J> the type of {@link Ground} and {@link EntitySet} managed by this {@link Descriptor}.
      * @param <D> the type of {@link Concept} descriptor instantiated during
-     *            {@link #buildSubConcept()} ()} through {@link #getNewSubConcept(Object, Object)}.
+     *            {@link #buildSubConcept()} ()} through {@link #getSubConceptDescriptor(Object, Object)}.
      */
     interface Sub<O,J,D extends Concept<O,J>>
             extends Concept<O,J> {
@@ -261,8 +261,8 @@ public interface Concept<O,J>
             try {
                 EntitySet.SynchronisationIntent<J> from = synchroniseSubConceptFromExpressionAxioms();
                 if ( from != null) {
-                    getSubConcept().addAll(from.getToAdd());
-                    getSubConcept().removeAll(from.getToRemove());
+                    getSubConcepts().addAll(from.getToAdd());
+                    getSubConcepts().removeAll(from.getToRemove());
                 }
                 return getIntent(from);
             }catch (Exception e){
@@ -275,15 +275,15 @@ public interface Concept<O,J>
          * Create an {@link Axiom.Descriptor} set where each element
          * represents the sub classes of this {@link Concept}.
          * Each of those {@link Concept}s are instantiated
-         * through the method {@link #getNewSubConcept(Object, Object)};
-         * this is called for all {@link #getSubConcept()}.
+         * through the method {@link #getSubConceptDescriptor(Object, Object)};
+         * this is called for all {@link #getSubConcepts()}.
          * @return the set of {@link Concept}s that describes the
          * sub entities of {@code this} described ontological class.
          */
         default Set<D> buildSubConcept(){
             Set<D> out = new HashSet<>();
-            for( J cl : getSubConcept()){
-                D built = getNewSubConcept( cl, getOntology());
+            for( J cl : getSubConcepts()){
+                D built = getSubConceptDescriptor( cl, getOntology());
                 built.readExpressionAxioms();
                 out.add( built);
             }
@@ -299,14 +299,14 @@ public interface Concept<O,J>
          * @return a new {@link Axiom.Descriptor} for all the sub classes
          * of {@code this} descriptor.
          */
-        D getNewSubConcept(J instance, O ontology);
+        D getSubConceptDescriptor(J instance, O ontology);
 
         /**
          * Returns the {@link EntitySet} that describes all the sub classes of
          * {@code this} {@link Concept} from a no OOP point of view.
          * @return the entities describing the sub classes of {@code this} class.
          */
-        EntitySet<J> getSubConcept();
+        EntitySet<J> getSubConcepts();
 
         /**
          * Queries to the OWL representation for the sub classes of {@code this} class.
@@ -318,14 +318,14 @@ public interface Concept<O,J>
         /**
          * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #querySubConcept()}
          * as input parameter. This computes the changes to be performed in the OWL representation
-         * for synchronise it with respect to {@link #getSubConcept()}. This should
+         * for synchronise it with respect to {@link #getSubConcepts()}. This should
          * be done by {@link #writeExpressionAxioms()}.
          * @return the changes to be done to synchronise {@code this} structure with
          * the sub classes of an OWL class.
          */
         default EntitySet.SynchronisationIntent<J> synchroniseSubConceptToExpressionAxioms(){
             try {
-                return getSubConcept().synchroniseTo( querySubConcept());
+                return getSubConcepts().synchroniseTo( querySubConcept());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -334,7 +334,7 @@ public interface Concept<O,J>
 
         /**
          * It calls {@link EntitySet#synchroniseFrom(EntitySet)} with {@link #querySubConcept()}
-         * as input parameter. This computes the changes to be performed into the {@link #getSubConcept()}
+         * as input parameter. This computes the changes to be performed into the {@link #getSubConcepts()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readExpressionAxioms()}.
          * @return the changes to be done to synchronise the sub classes of an OWL class
@@ -342,7 +342,7 @@ public interface Concept<O,J>
          */
         default EntitySet.SynchronisationIntent<J> synchroniseSubConceptFromExpressionAxioms(){
             try{
-                return getSubConcept().synchroniseFrom( querySubConcept());
+                return getSubConcepts().synchroniseFrom( querySubConcept());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -356,7 +356,7 @@ public interface Concept<O,J>
      * @param <O> the ontology.
      * @param <J> the type of {@link Ground} and {@link EntitySet} managed by this {@link Descriptor}.
      * @param <D> the type of {@link Concept} descriptor instantiated during
-     *            {@link #buildSuperConcept()} ()} through {@link #getNewSuperConcept(Object, Object)}.
+     *            {@link #buildSuperConcept()} ()} through {@link #getSuperConceptDescriptor(Object, Object)}.
      */
     interface Super<O,J,D extends Concept<O,J>>
             extends Concept<O,J> {
@@ -366,8 +366,8 @@ public interface Concept<O,J>
             try {
                 EntitySet.SynchronisationIntent<J> from = synchroniseSuperConceptFromExpressionAxioms();
                 if ( from != null) {
-                    getSuperConcept().addAll(from.getToAdd());
-                    getSuperConcept().removeAll(from.getToRemove());
+                    getSuperConcepts().addAll(from.getToAdd());
+                    getSuperConcepts().removeAll(from.getToRemove());
                 }
                 return getIntent(from);
             } catch (Exception e){
@@ -380,15 +380,15 @@ public interface Concept<O,J>
          * Create an {@link Axiom.Descriptor} set where each element
          * represents the super classes of this {@link Concept}.
          * Each of those {@link Concept}s are instantiated
-         * through the method {@link #getNewSuperConcept(Object, Object)};
-         * this is called for all {@link #getSuperConcept()}.
+         * through the method {@link #getSuperConceptDescriptor(Object, Object)};
+         * this is called for all {@link #getSuperConcepts()}.
          * @return the set of {@link Concept}s that describes the
          * super entities of {@code this} described ontological class.
          */
         default Set<D> buildSuperConcept(){
             Set<D> out = new HashSet<>();
-            for( J cl : getSuperConcept()){
-                D built = getNewSuperConcept( cl, getOntology());
+            for( J cl : getSuperConcepts()){
+                D built = getSuperConceptDescriptor( cl, getOntology());
                 built.readExpressionAxioms();
                 out.add( built);
             }
@@ -404,14 +404,14 @@ public interface Concept<O,J>
          * @return a new {@link Axiom.Descriptor} for all the super classes
          * of {@code this} descriptor.
          */
-        D getNewSuperConcept(J instance, O ontology);
+        D getSuperConceptDescriptor(J instance, O ontology);
 
         /**
          * Returns the {@link EntitySet} that describes all the super classes of
          * {@code this} {@link Concept} from a no OOP point of view.
          * @return the entities describing the super classes of {@code this} class.
          */
-        EntitySet<J> getSuperConcept();
+        EntitySet<J> getSuperConcepts();
 
         /**
          * Queries to the OWL representation for the super classes of {@code this} class.
@@ -423,14 +423,14 @@ public interface Concept<O,J>
         /**
          * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #querySuperConcept()}
          * as input parameter. This computes the changes to be performed in the OWL representation
-         * for synchronise it with respect to {@link #getSuperConcept()}. This should
+         * for synchronise it with respect to {@link #getSuperConcepts()}. This should
          * be done by {@link #writeExpressionAxioms()}.
          * @return the changes to be done to synchronise {@code this} structure with
          * the super classes of an OWL class.
          */
         default EntitySet.SynchronisationIntent<J> synchroniseSuperConceptToExpressionAxioms(){
             try {
-                return getSuperConcept().synchroniseTo( querySuperConcept());
+                return getSuperConcepts().synchroniseTo( querySuperConcept());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -439,7 +439,7 @@ public interface Concept<O,J>
 
         /**
          * It calls {@link EntitySet#synchroniseFrom(EntitySet)} with {@link #querySuperConcept()}
-         * as input parameter. This computes the changes to be performed into the {@link #getSuperConcept()}
+         * as input parameter. This computes the changes to be performed into the {@link #getSuperConcepts()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readExpressionAxioms()}.
          * @return the changes to be done to synchronise the super classes of an OWL class
@@ -447,7 +447,7 @@ public interface Concept<O,J>
          */
         default EntitySet.SynchronisationIntent<J> synchroniseSuperConceptFromExpressionAxioms(){
             try{
-                return getSuperConcept().synchroniseFrom( querySuperConcept());
+                return getSuperConcepts().synchroniseFrom( querySuperConcept());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -462,7 +462,7 @@ public interface Concept<O,J>
      * @param <J> the type of {@link Ground} and {@link EntitySet} managed by this {@link Descriptor}.
      * @param <Y> the type of restriction for the {@link EntitySet} managed by this {@link Descriptor}.
      * @param <D> the type of {@link Concept} descriptor instantiated during
-     *            {@link #buildIndividualInstance()} ()} through {@link #getNewIndividualInstance(Object, Object)}.
+     *            {@link #buildIndividualInstances()} ()} through {@link #getIndividualDescriptor(Object, Object)}.
      */
     interface Instance<O,J,Y,D extends Individual<O,Y>>
             extends Concept<O,J> {
@@ -472,8 +472,8 @@ public interface Concept<O,J>
             try {
                 EntitySet.SynchronisationIntent<Y> from = synchroniseIndividualInstanceFromExpressionAxioms();
                 if ( from != null) {
-                    getIndividualInstance().addAll(from.getToAdd());
-                    getIndividualInstance().removeAll(from.getToRemove());
+                    getIndividualInstances().addAll(from.getToAdd());
+                    getIndividualInstances().removeAll(from.getToRemove());
                 }
                 return getIntent(from);
             } catch (Exception e){
@@ -486,15 +486,15 @@ public interface Concept<O,J>
          * Create an {@link Axiom.Descriptor} set where each element
          * represents the individualDescriptor classified to belonging to this {@link Concept}.
          * Each of {@link Individual}s are instantiated
-         * through the method {@link #getNewIndividualInstance(Object, Object)};
-         * this is called for all {@link #getIndividualInstance()}.
+         * through the method {@link #getIndividualDescriptor(Object, Object)};
+         * this is called for all {@link #getIndividualInstances()}.
          * @return the set of {@link Individual}s that describes the
          * entities belonging to {@code this} described ontological class.
          */
-        default Set<D> buildIndividualInstance(){
+        default Set<D> buildIndividualInstances(){
             Set<D> out = new HashSet<>();
-            for( Y cl : getIndividualInstance()){
-                D built = getNewIndividualInstance( cl, getOntology());
+            for( Y cl : getIndividualInstances()){
+                D built = getIndividualDescriptor( cl, getOntology());
                 built.readExpressionAxioms();
                 out.add( built);
             }
@@ -502,7 +502,7 @@ public interface Concept<O,J>
         }
 
         /**
-         * This method is called by {@link #buildIndividualInstance()} and
+         * This method is called by {@link #buildIndividualInstances()} and
          * its purpose is to instantiate a new {@link Individual} to represent
          * an individualDescriptor classified in {@code this} {@link Concept} {@link Descriptor}.
          * @param instance the instance to ground the new {@link Individual}.
@@ -510,33 +510,33 @@ public interface Concept<O,J>
          * @return a new {@link Axiom.Descriptor} for all the individuals
          * classified by {@code this} descriptor.
          */
-        D getNewIndividualInstance(Y instance, O ontology);
+        D getIndividualDescriptor(Y instance, O ontology);
 
         /**
          * Returns the {@link EntitySet} that describes all the individualDescriptor classified
          * in {@code this} {@link Concept} from a no OOP point of view.
          * @return the entities describing the individuals classified in {@code this} object
          */
-        EntitySet<Y> getIndividualInstance();
+        EntitySet<Y> getIndividualInstances();
 
         /**
          * Queries to the OWL representation of the individualDescriptor that are classified in {@code this} class.
          * @return a new {@link EntitySet} contained the individualDescriptor classified by
          * the OWL structure of {@link #getInstance()}.
          */
-        EntitySet<Y> queryIndividualInstance();
+        EntitySet<Y> queryIndividualInstances();
 
         /**
-         * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryIndividualInstance()}
+         * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryIndividualInstances()}
          * as input parameter. This computes the changes to be performed in the OWL representation
-         * for synchronise it with respect to {@link #getIndividualInstance()}. This should
+         * for synchronise it with respect to {@link #getIndividualInstances()}. This should
          * be done by {@link #writeExpressionAxioms()}.
          * @return the changes to be done to synchronise {@code this} structure with
          * the individualDescriptor classified in an OWL class.
          */
         default EntitySet.SynchronisationIntent<Y> synchroniseIndividualInstanceToExpressionAxioms(){
             try {
-                return getIndividualInstance().synchroniseTo( queryIndividualInstance());
+                return getIndividualInstances().synchroniseTo( queryIndividualInstances());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -544,8 +544,8 @@ public interface Concept<O,J>
         }
 
         /**
-         * It calls {@link EntitySet#synchroniseFrom(EntitySet)} with {@link #queryIndividualInstance()}
-         * as input parameter. This computes the changes to be performed into the {@link #getIndividualInstance()}
+         * It calls {@link EntitySet#synchroniseFrom(EntitySet)} with {@link #queryIndividualInstances()}
+         * as input parameter. This computes the changes to be performed into the {@link #getIndividualInstances()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readExpressionAxioms()}.
          * @return the changes to be done to synchronise the individualDescriptor of an OWL class
@@ -553,7 +553,7 @@ public interface Concept<O,J>
          */
         default EntitySet.SynchronisationIntent<Y> synchroniseIndividualInstanceFromExpressionAxioms(){
             try{
-                return getIndividualInstance().synchroniseFrom( queryIndividualInstance());
+                return getIndividualInstances().synchroniseFrom( queryIndividualInstances());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -592,8 +592,8 @@ public interface Concept<O,J>
             try {
                 EntitySet.SynchronisationIntent<Y> from = synchroniseDefinitionConceptFromExpressionAxioms();
                 if ( from != null) {
-                    getDefinitionConcept().addAll(from.getToAdd());
-                    getDefinitionConcept().removeAll(from.getToRemove());
+                    getDefinitionConcepts().addAll(from.getToAdd());
+                    getDefinitionConcepts().removeAll(from.getToRemove());
                 }
                 return getIntent(from);
             } catch (Exception e){
@@ -607,7 +607,7 @@ public interface Concept<O,J>
          * {@code this} {@link Concept} from a no OOP point of view.
          * @return the entities describing {@code this} class.
          */
-        EntitySet<Y> getDefinitionConcept();
+        EntitySet<Y> getDefinitionConcepts();
 
         /**
          * Queries to the OWL representation for the definition of {@code this} class.
@@ -619,14 +619,14 @@ public interface Concept<O,J>
         /**
          * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryDefinitionConcept()}
          * as input parameter. This computes the changes to be performed in the OWL representation
-         * for synchronise it with respect to {@link #getDefinitionConcept()}. This should
+         * for synchronise it with respect to {@link #getDefinitionConcepts()}. This should
          * be done by {@link #writeExpressionAxioms()}.
          * @return the changes to be done to synchronise {@code this} structure with
          * the class definition of an OWL class.
          */
         default EntitySet.SynchronisationIntent<Y> synchroniseDefinitionConceptToExpressionAxioms(){
             try {
-                return getDefinitionConcept().synchroniseTo( queryDefinitionConcept());
+                return getDefinitionConcepts().synchroniseTo( queryDefinitionConcept());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -635,7 +635,7 @@ public interface Concept<O,J>
 
         /**
          * It calls {@link EntitySet#synchroniseFrom(EntitySet)} with {@link #queryDefinitionConcept()}
-         * as input parameter. This computes the changes to be performed into the {@link #getDefinitionConcept()}
+         * as input parameter. This computes the changes to be performed into the {@link #getDefinitionConcepts()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readExpressionAxioms()}.
          * @return the changes to be done to synchronise the class definition of an OWL class
@@ -643,7 +643,7 @@ public interface Concept<O,J>
          */
         default EntitySet.SynchronisationIntent<Y> synchroniseDefinitionConceptFromExpressionAxioms(){
             try{
-                return getDefinitionConcept().synchroniseFrom( queryDefinitionConcept());
+                return getDefinitionConcepts().synchroniseFrom( queryDefinitionConcept());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
