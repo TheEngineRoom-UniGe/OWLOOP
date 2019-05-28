@@ -38,10 +38,15 @@ compile group: 'com.github.owloop', name: 'owloop-api', version: '1.0'
 To explain the usage of OWLOOP, we present in this repository's [wiki](https://github.com/EmaroLab/owloop/wiki):
 
 - The overall [structure of the OWLOOP project](https://github.com/EmaroLab/owloop/wiki/1.-OWLOOP:-Project-Structure-&-JavaDoc#project-structure) and its [JavaDoc](https://github.com/EmaroLab/owloop/wiki/1.-OWLOOP:-Project-Structure-&-JavaDoc#javadoc).
+
 - The [Descriptor](https://github.com/EmaroLab/owloop/wiki/2.-The-OWLOOP-Descriptor#what-is-a-descriptor), its [types](https://github.com/EmaroLab/owloop/wiki/2.-The-OWLOOP-Descriptor#what-are-the-types-of-descriptors), the possible [expressions](https://github.com/EmaroLab/owloop/wiki/2.-The-OWLOOP-Descriptor#descriptor-expressions) that each type can implement and the useful [methods](https://github.com/EmaroLab/owloop/wiki/2.-The-OWLOOP-Descriptor#descriptor-methods) it provides.
+
 - [Examples](https://github.com/EmaroLab/owloop/wiki/3.-Example:-Creating-a-Simple-or-a-Compound-Descriptor) that show construction of a [simple descriptor](https://github.com/EmaroLab/owloop/wiki/3.-Example:-Creating-a-Simple-or-a-Compound-Descriptor#a-simple-concept-descriptor) vs a [compound descriptor](https://github.com/EmaroLab/owloop/wiki/3.-Example:-Creating-a-Simple-or-a-Compound-Descriptor#a-compound-concept-descriptor).
+
 - An [example](https://github.com/EmaroLab/owloop/wiki/4.-Example:-Adding-Axioms-to-an-Ontology) that shows how to add axioms to an ontology, using descriptors.
+
 - An [example](https://github.com/EmaroLab/owloop/wiki/5.-Example:-Inferring-Axioms-from-an-Ontology) that shows how to infer some knowledge (i.e., axioms) from axioms already present in an ontology, and the particular usefulness of the [descriptor build method](https://github.com/EmaroLab/owloop/wiki/5.-Example:-Inferring-Axioms-from-an-Ontology#descriptor-build-method).
+
 - An [example](https://github.com/EmaroLab/owloop/wiki/6.-Example:-Removing-Axioms-from-an-Ontology) that shows how to remove axioms from an ontology, using descriptors.
 
 ## 4. License
