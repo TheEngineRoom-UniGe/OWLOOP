@@ -80,3 +80,5 @@ public class DefSubConceptDesc
                 NL + "}" + NL;
     }
 }
+
+// todo: (i) rename entitySet objects properly (ii) rename the methods related to those variables properly (iii) modification in toString() (iv) fix spaces and comments.
