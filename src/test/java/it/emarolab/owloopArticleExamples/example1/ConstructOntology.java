@@ -18,9 +18,10 @@ public class ConstructOntology {
     @Before
     public void beforeTest() {
 
+        // Disables printing of amor logs
         it.emarolab.amor.owlDebugger.Logger.setPrintOnConsole( false);
 
-        // newOWLReferencesCreatedWithPellet() creates a new ontology
+        // To create a new ontologyReference. The ontology file need not be pre-existing.
         ontoRef = OWLReferencesInterface.OWLReferencesContainer.newOWLReferencesCreatedWithPellet(
                 "robotAtHomeOnto", // ontology reference name
                 "src/test/resources/robotAtHomeOntology.owl", // the ontology file path
@@ -48,14 +49,14 @@ public class ConstructOntology {
         robotIndividual_Desc.addObject( "isIn", getRobotPosition()); // consider that the assertion is made based on some computation
         robotIndividual_Desc.writeExpressionAxioms();
 
-        // Add/Modify ObjectProperty (and their descriptions) to the ontology
+        // Add/Modify ObjectProperty, to the Ontology
         DomainRangeObjectPropertyDesc hasDoor_Desc = new DomainRangeObjectPropertyDesc( "hasDoor", ontoRef);
         hasDoor_Desc.addDomainClassRestriction( "LOCATION");
         hasDoor_Desc.addRangeClassRestriction( "DOOR");
         hasDoor_Desc.writeExpressionAxioms();
 
+        // Adding descriptions of the ObjectProperties, to the Ontology
         DomainRangeObjectPropertyDesc isLinkedTo_Desc = new DomainRangeObjectPropertyDesc( "isLinkedTo", ontoRef);
-
         isLinkedTo_Desc.addDomainClassRestriction( "CORRIDOR");
         isLinkedTo_Desc.addRangeClassRestriction( "ROOM");
         isLinkedTo_Desc.writeExpressionAxioms();
@@ -75,7 +76,7 @@ public class ConstructOntology {
     @After
     public void afterTest() {
 
+        // This method works for ontologyReference instantiated with the method newOWLReferencesCreatedWithPellet()
         ontoRef.saveOntology();
     }
-
 }

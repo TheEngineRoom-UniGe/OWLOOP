@@ -18,5 +18,4 @@ public class CorridorConceptDesc
         definition.setCardinality( 2);
         return definition;
     }
-
 }
