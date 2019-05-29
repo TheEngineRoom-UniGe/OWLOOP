@@ -9,7 +9,6 @@ public class RoomConceptDesc
     public RoomConceptDesc(OWLReferences onto) {
 
         super("ROOM", onto);
-        addDefinitionRestriction( new SemanticRestriction.ClassRestrictedOnSomeObject()); // adding with Some-restriction
     }
 
     // overriding with a MaxCardinality-restriction

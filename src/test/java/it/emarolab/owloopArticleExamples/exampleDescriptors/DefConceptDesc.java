@@ -21,23 +21,11 @@ public abstract class DefConceptDesc
 
     private DescriptorEntitySet.Restrictions newDefRestrictions = new DescriptorEntitySet.Restrictions();
 
-    protected DefConceptDesc(String instanceName, OWLReferences onto) { // constructor called from derived classes
-        super(instanceName, onto);                                      // grounds the Concept having a 'name', with respect to an 'onto'
-        addDefinitionRestriction( getRestriction());                    // adds definition with a restriction
-    }
-
-    // To make the warning go away, add the types explicitly:
-    void addDefinitionRestriction( SemanticRestriction.ApplyingPropertyRestriction defRestrictions){
-        defRestrictions.setSubject( getGround().getGroundInstance());
-        defRestrictions.setProperty( getOWLObjectProperty( "hasDoor"));
-        defRestrictions.setValue( getOWLClass( "DOOR"));
-        getDefinitionConcepts().add( defRestrictions);
-        writeExpressionAxioms();
+    DefConceptDesc(String instanceName, OWLReferences onto) {
+        super(instanceName, onto);  // grounds the Concept having a 'name', with respect to an 'onto'
     }
 
     abstract protected SemanticRestriction.ApplyingPropertyRestriction getRestriction();
-
-    // inherit read/write Expression Axioms from the only simple descriptor `ConceptExpression.Definition`
 
     @Override
     public DescriptorEntitySet.Restrictions getDefinitionConcepts() {
@@ -51,4 +39,3 @@ public abstract class DefConceptDesc
 }
 
 // todo: (i) rename entitySet objects properly (ii) rename the methods related to those variables properly (iii) modification in toString() (iv) fix spaces and comments.
-// todo: shift the method addDefRestriction() to LocationDesc .. more meaningful that way.

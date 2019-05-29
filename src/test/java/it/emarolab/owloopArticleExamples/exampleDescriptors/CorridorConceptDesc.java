@@ -4,14 +4,14 @@ import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.amor.owlInterface.SemanticRestriction;
 
 public class CorridorConceptDesc
-        extends DefConceptDesc {
+        extends LocationConceptDesc {
 
     public CorridorConceptDesc(OWLReferences onto) {
 
         super("CORRIDOR", onto);
     }
 
-    // implementing with a MinCardinality-restriction
+    // overriding with a MinCardinality-restriction
     @Override
     protected SemanticRestriction.ClassRestrictedOnMinObject getRestriction(){
         SemanticRestriction.ClassRestrictedOnMinObject definition = new SemanticRestriction.ClassRestrictedOnMinObject();
