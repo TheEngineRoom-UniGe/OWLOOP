@@ -3,7 +3,8 @@ package it.emarolab.owloopArticleExamples.exampleDescriptors;
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.amor.owlInterface.SemanticRestriction;
 
-public class CorridorConceptDesc extends DefConceptDesc {
+public class CorridorConceptDesc
+        extends DefConceptDesc {
 
     public CorridorConceptDesc(OWLReferences onto) {
 
