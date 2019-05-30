@@ -63,7 +63,7 @@ public class TypeIndividualDesc
     // equals() and hashCode() is based on DescriptorGround<?> which considers only the ground
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "{" +
+        return getClass().getSimpleName() + "{\n" +
                 NL + "\t\t\t" + getGround() +
                 "," + NL + "\t∈ " + individualTypes +
                 NL + "}" + NL;

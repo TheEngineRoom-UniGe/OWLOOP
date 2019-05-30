@@ -28,43 +28,53 @@ public class UseDescriptorBuild {
                 "robotAtHomeOnto", // ontology reference name
                 "src/test/resources/robotAtHomeOntology.owl", // the ontology file path
                 "http://www.semanticweb.org/emaroLab/robotAtHomeOntology", // the ontology IRI path
-                true
+                true // if (true) you must synchronize the reasoner manually. Else, it synchronizes itself.
         );
     }
 
     @Test
     public void useDescriptorBuilding() {
 
-        // Considering that the Robot's position is saved in the ontology after running ExampleOne
+        // Considering that the Robot's position is saved in the ontology after running Example1
 
-        ObjectLinkIndividualDesc d1 = new ObjectLinkIndividualDesc( "Robot1", ontoRef); // Initialize a DESC with ground as Robot1
-        d1.addObject( "isIn",true);                              // To read knowledge specific to the property "isIn"
-        d1.readExpressionAxioms();                                               // READ
-        System.out.println( d1);                                                 // PRINT to see on console
-        OWLNamedIndividual robotPosition = d1.getObject( "isIn");    // getObject("isIn")
+        ObjectLinkIndividualDesc d1 = new ObjectLinkIndividualDesc( "Robot1", ontoRef);
+        d1.addObject( "isIn",true); // to be able to read knowledge (only) specific to the property "isIn"
+        d1.readExpressionAxioms(); // read all axioms (related to this descriptor) from the ontology
+        System.out.println( d1); // printing to check the axioms represented by this descriptor
+        OWLNamedIndividual robotPosition = d1.getObject( "isIn"); // get knowledge from the internal state of the Descriptor
 
-        TypeIndividualDesc d2 = new TypeIndividualDesc( robotPosition, ontoRef); // Initialize a DESC with ground as Corridor1
-        d2.readExpressionAxioms();                                               // READ
+        TypeIndividualDesc d2 = new TypeIndividualDesc( robotPosition, ontoRef); // here, robotPosition = "Corridor1"
+        d2.readExpressionAxioms();
 
-        System.out.println( d2);                                                 // PRINT to see on console
-        Set<DefSubConceptDesc> setOfTypes = d2.buildTypeIndividual();            // BUILD Type of an Individual --> CORRIDOR,LOCATION,Top
-        for( DefSubConceptDesc d3 : setOfTypes ){
+        System.out.println( d2); // printing
+        Set<DefSubConceptDesc> setOfConceptTypes = d2.buildTypeIndividual(); // (Descriptor.buildTypeIndividual()) here, gets the Type/s (i.e., Concept/s) of the Individual "Corridor1", as grounded Descriptors
 
-            Set<FullConceptDesc> setOfSubTypes = d3.buildSubConcept();     // BUILD Sub of a Concept --> we have the sub-classes of all the 3 above
+        for( DefSubConceptDesc d3 : setOfConceptTypes ){
 
-            if( setOfSubTypes.size() <= 1 ) {                                    // If less than or equal to 1 (owl:Nothing is always there )
+            Set<FullConceptDesc> setOfSubConcepts = d3.buildSubConcept(); // (Descriptor.buildSubConcept()) here, gets the subConcept/s of a Concept, as grounded Descriptors
 
-                System.out.print("'" + d2.getInstanceName() + "'" + " is of Type " + "'" + d3.getInstanceName() + "' \n"); // PRINT
-                DescriptorEntitySet.Restrictions restrictions = d3.getDefinitionConcepts(); //GET DEFINITION
+            if( setOfSubConcepts.size() == 1 ) { // to get to the root Concept, because it has max. 1 subConcept, i.e., owl:Nothing
+
+                System.out.println( "'" + d3.getInstanceName() + "' is the root Concept among: "); // printing
+
+                for( DefSubConceptDesc conceptType : setOfConceptTypes ){
+
+                    System.out.println( "\t\t\t'" + conceptType.getInstanceName() + "'"); // printing
+                }
+
+                System.out.print( "\n'" + d2.getInstanceName() + "'" + " is of Type " + "'" + d3.getInstanceName() + "' \n"); // printing
+                DescriptorEntitySet.Restrictions restrictions = d3.getDefinitionConcepts();
+
                 for( SemanticRestriction rest : restrictions ){
 
                     if( rest instanceof SemanticRestriction.ClassRestrictedOnExactObject ){
 
-                        System.out.println( "\n" + "'" + d3.getInstanceName() + "'" + " is defined with Exact Cardinality Restriction " + "'" + rest + "'"); // PRINT to see on console
+                        System.out.println( "\n" + "'" + d3.getInstanceName() + "'" + " is defined with Exact Cardinality Restriction " + "'" + rest + "'"); // printing
                     }
+
                     else if( rest instanceof SemanticRestriction.ClassRestrictedOnMinObject ){
 
-                        System.out.println( "\n" + "'" + d3.getInstanceName() + "'" + " is defined with Min Cardinality Restriction " + "'" + rest + "'"); // PRINT to see on console
+                        System.out.println( "\n" + "'" + d3.getInstanceName() + "'" + " is defined with Min Cardinality Restriction " + "'" + rest + "'"); // printing
                     }
                 }
             }

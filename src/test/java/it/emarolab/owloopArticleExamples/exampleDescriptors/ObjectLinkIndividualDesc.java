@@ -10,7 +10,7 @@ import it.emarolab.owloop.descriptor.utility.objectPropertyDescriptor.FullObject
 import java.util.List;
 
 /**
- * A 'simple' Individual Descriptor which implements 1 {@link IndividualExpression}s.
+ * A 'simple' Individual Descriptor which implements 1 {@link IndividualExpression}.
  * <ul>
  * <li><b>{@link IndividualExpression.ObjectLink}</b>:   to describe an ObjectProperty and Individuals related via that ObjectProperty, for an Individual.</li>
  * </ul>
@@ -59,11 +59,11 @@ public class ObjectLinkIndividualDesc
     // equals() and hashCode() is based on DescriptorGround<?> which considers only the ground
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "{" +
+        return getClass().getSimpleName() + "{\n" +
                 NL + "\t\t\t" + getGround() +
                 "," + NL + "\t⊨ " + objectLinks +
                 NL + "}" + NL;
     }
 }
 
-// todo: (i) rename entitySet objects properly (ii) rename the methods related to those variables properly (iii) modification in toString() (iv) fix spaces and comments.
+// todo: (i) rename entitySet objects properly (ii) rename the methods related to those variables properly (iii) modification in toString() + add \n remove \t (iv) fix spaces and comments.

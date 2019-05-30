@@ -26,36 +26,36 @@ public class ConstructOntology {
                 "robotAtHomeOnto", // ontology reference name
                 "src/test/resources/robotAtHomeOntology.owl", // the ontology file path
                 "http://www.semanticweb.org/emaroLab/robotAtHomeOntology", // the ontology IRI path
-                true
+                true // if (true) you must synchronize the reasoner manually. Else, it synchronizes itself.
         );
     }
 
     @Test
     public void constructOntology() {
 
-        // Add Classes (and their descriptions) to the ontology
+        // Add Class Expression Axioms to the ontology
         LocationConceptDesc locationConcept_Desc = new LocationConceptDesc( ontoRef);
         CorridorConceptDesc corridorConcept_Desc = new CorridorConceptDesc( ontoRef);
         RoomConceptDesc roomConcept_Desc = new RoomConceptDesc( ontoRef);
 
-        // Add Individuals (and their assertions) to the ontology
-        ObjectLinkIndividualDesc corridorIndividual_Desc = new ObjectLinkIndividualDesc( "Corridor1", ontoRef);
+        // Add Individual Expression Axioms (i.e., Assertions) to the ontology
+        ObjectLinkIndividualDesc corridorIndividual_Desc = new ObjectLinkIndividualDesc( "Corridor1", ontoRef); // Instantiate ObjectLinkIndividualDesc with ground as "Corridor1" and ontology reference as ontoRef
         ObjectLinkIndividualDesc robotIndividual_Desc = new ObjectLinkIndividualDesc( "Robot1", ontoRef);
 
         corridorIndividual_Desc.addObject( "isLinkedTo", "Room1");
         corridorIndividual_Desc.addObject( "isLinkedTo", "Room2");
-        corridorIndividual_Desc.writeExpressionAxioms();
+        corridorIndividual_Desc.writeExpressionAxioms(); // write all axioms (represented in this descriptor) to the ontology
 
-        robotIndividual_Desc.addObject( "isIn", getRobotPosition()); // consider that the assertion is made based on some computation
+        robotIndividual_Desc.addObject( "isIn", getRobotPosition()); // consider that we get robot's position after some computation
         robotIndividual_Desc.writeExpressionAxioms();
 
-        // Add/Modify ObjectProperty, to the Ontology
+        // Adding ObjectProperty Expression Axioms to the Ontology
         DomainRangeObjectPropertyDesc hasDoor_Desc = new DomainRangeObjectPropertyDesc( "hasDoor", ontoRef);
         hasDoor_Desc.addDomainClassRestriction( "LOCATION");
         hasDoor_Desc.addRangeClassRestriction( "DOOR");
         hasDoor_Desc.writeExpressionAxioms();
 
-        // Adding descriptions of the ObjectProperties, to the Ontology
+
         DomainRangeObjectPropertyDesc isLinkedTo_Desc = new DomainRangeObjectPropertyDesc( "isLinkedTo", ontoRef);
         isLinkedTo_Desc.addDomainClassRestriction( "CORRIDOR");
         isLinkedTo_Desc.addRangeClassRestriction( "ROOM");
@@ -69,14 +69,15 @@ public class ConstructOntology {
 
     private String getRobotPosition() {
 
-        // ... consider that this method does some computation and returns the robot's position
+        // ... consider that this method does some computation and finally returns the robot's position
+        // ...
         return "Corridor1";
     }
 
     @After
     public void afterTest() {
 
-        // This method works for ontologyReference instantiated with the method newOWLReferencesCreatedWithPellet()
+        // saveOntology() works for ontologyReference instantiated with the method newOWLReferencesCreatedWithPellet()
         ontoRef.saveOntology();
     }
 }

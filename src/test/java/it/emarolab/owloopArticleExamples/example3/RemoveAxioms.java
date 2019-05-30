@@ -19,7 +19,7 @@ public class RemoveAxioms {
                 "robotAtHomeOnto", // ontology reference name
                 "src/test/resources/robotAtHomeOntology.owl", // the ontology file path
                 "http://www.semanticweb.org/emaroLab/robotAtHomeOntology", // the ontology IRI path
-                true
+                true // if (true) you must synchronize the reasoner manually. Else, it synchronizes itself.
         );
     }
 
