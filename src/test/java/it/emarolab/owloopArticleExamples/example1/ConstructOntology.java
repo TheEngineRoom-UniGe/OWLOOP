@@ -38,6 +38,8 @@ public class ConstructOntology {
         CorridorConceptDesc corridorConcept_Desc = new CorridorConceptDesc( ontoRef);
         RoomConceptDesc roomConcept_Desc = new RoomConceptDesc( ontoRef);
 
+        System.out.println(locationConcept_Desc);
+
         // Add Individual Expression Axioms (i.e., Assertions) to the ontology
         ObjectLinkIndividualDesc corridorIndividual_Desc = new ObjectLinkIndividualDesc( "Corridor1", ontoRef); // Instantiate ObjectLinkIndividualDesc with ground as "Corridor1" and ontology reference as ontoRef
         ObjectLinkIndividualDesc robotIndividual_Desc = new ObjectLinkIndividualDesc( "Robot1", ontoRef);

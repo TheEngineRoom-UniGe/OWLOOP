@@ -39,3 +39,5 @@ public abstract class DefConceptDesc
 }
 
 // todo: (i) rename entitySet objects properly (ii) rename the methods related to those variables properly (iii) modification in toString() (iv) fix spaces and comments.
+// todo: Replace NL with \n everywhere
+// todo: Replace other stuff with this.getClass().getSimpleName() everywhere
