@@ -16,14 +16,14 @@ import java.util.List;
  * <li><b>{@link ConceptExpression.Sub}</b>:         to describe that a Class subsumes another Class.</li>
  * </ul>
  * <p>
- *     Doing build() with this Descriptor returns another descriptor of type {@link FullConceptDesc}.
+ *     Doing build() with this Descriptor returns the descriptor of type {@link DefSubConceptDesc}.
  * </p>
  * See {@link FullConceptDesc} for an example of a 'compound' Concept Descriptor that implements all ConceptExpressions.
  */
 public class DefSubConceptDesc
         extends ConceptGround
         implements ConceptExpression.Definition,
-        ConceptExpression.Sub<FullConceptDesc>{
+        ConceptExpression.Sub<DefSubConceptDesc>{
 
     private DescriptorEntitySet.Restrictions restrictions = new DescriptorEntitySet.Restrictions();
     private DescriptorEntitySet.Concepts subConcept = new DescriptorEntitySet.Concepts();
@@ -59,8 +59,8 @@ public class DefSubConceptDesc
 
     // implementations for ConceptExpression.Super
     @Override // called during build...() you can change the returning type to any implementations of ConceptExpression
-    public FullConceptDesc getSubConceptDescriptor(OWLClass instance, OWLReferences ontology) {
-        return new FullConceptDesc( instance, ontology);
+    public DefSubConceptDesc getSubConceptDescriptor(OWLClass instance, OWLReferences ontology) {
+        return new DefSubConceptDesc( instance, ontology);
     }
 
     @Override
@@ -82,3 +82,4 @@ public class DefSubConceptDesc
 }
 
 // todo: (i) rename entitySet objects properly (ii) rename the methods related to those variables properly (iii) modification in toString() (iv) fix spaces and comments.
+// todo: in main javadoc say "implements 2 some expression interfaces

@@ -21,6 +21,7 @@ public class UseDescriptorBuild {
     @Before
     public void beforeTest() {
 
+        // Disables printing of amor logs
         it.emarolab.amor.owlDebugger.Logger.setPrintOnConsole( false);
 
         // Ontology reference, newOWLReferencesCreatedWithPellet() allows to create a new ontology which does not exist
@@ -51,9 +52,9 @@ public class UseDescriptorBuild {
 
         for( DefSubConceptDesc d3 : setOfConceptTypes ){
 
-            Set<FullConceptDesc> setOfSubConcepts = d3.buildSubConcept(); // (Descriptor.buildSubConcept()) here, gets the subConcept/s of a Concept, as grounded Descriptors
+            Set<DefSubConceptDesc> setOfSubConcepts = d3.buildSubConcept(); // (Descriptor.buildSubConcept()) here, gets the subConcept/s of a Concept, as grounded Descriptors
 
-            if( setOfSubConcepts.size() == 1 ) { // to get to the root Concept, because it has max. 1 subConcept, i.e., owl:Nothing
+            if( setOfSubConcepts.size() == 1 ) { // to find the root Concept, because it has max. 1 subConcept, i.e., owl:Nothing
 
                 System.out.println( "'" + d3.getInstanceName() + "' is the root Concept among: "); // printing
 

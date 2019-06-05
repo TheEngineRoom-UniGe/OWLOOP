@@ -3,6 +3,7 @@ package it.emarolab.owloopArticleExamples.example3;
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.amor.owlInterface.OWLReferencesInterface;
 import it.emarolab.owloop.descriptor.utility.individualDescriptor.FullIndividualDesc;
+import it.emarolab.owloopArticleExamples.exampleDescriptors.ObjectLinkIndividualDesc;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,6 +14,7 @@ public class RemoveAxioms {
     @Before
     public void beforeTest() {
 
+        // Disables printing of amor logs
         it.emarolab.amor.owlDebugger.Logger.setPrintOnConsole( false);
 
         ontoRef = OWLReferencesInterface.OWLReferencesContainer.newOWLReferenceFromFileWithPellet(
@@ -25,6 +27,8 @@ public class RemoveAxioms {
 
     @Test
     public void removeStuff() {
+
+        /* THE CODE TO DEBUG WITH LUCA */
 
         // robot individual
         FullIndividualDesc robot_Desc = new FullIndividualDesc( "Robot1", ontoRef);
@@ -62,3 +66,35 @@ public class RemoveAxioms {
     }
 
 }
+
+/* THE CODE IN GITHUB WIKI */
+
+//        // robot individual
+//        ObjectLinkIndividualDesc robot_Desc1 = new ObjectLinkIndividualDesc( "Robot1", ontoRef);
+//
+//        // synchronize axioms from the Ontology to the internal state of the Descriptor
+//        robot_Desc1.readExpressionAxioms();
+//
+//        // print the Descriptor
+//        System.out.println(robot_Desc1);
+//
+//        // remove Object Property associated to the Individual Descriptor (i.e., from Descriptor's internal state)
+//        robot_Desc1.removeObject("isIn");
+//
+//        // synchronize axioms from the internal state of the Descriptor and Ontology
+//        robot_Desc1.writeExpressionAxioms();
+//
+//        // synchronize reasoner of the ontology, so that its axioms are updated with inferences based on latest assertions
+//        ontoRef.synchronizeReasoner();
+//
+//        // save the current state of the ontology
+//        robot_Desc1.saveOntology(ontoRef.getFilePath());
+//
+//        // A new Descriptor associated to the same individual as before
+//        ObjectLinkIndividualDesc robot_Desc2 = new ObjectLinkIndividualDesc( "Robot1", ontoRef);
+//
+//        // synchronize axioms from the Ontology to the internal state of the Descriptor
+//        robot_Desc2.readExpressionAxioms();
+//
+//        // print the Descriptor
+//        System.out.println(robot_Desc2);
