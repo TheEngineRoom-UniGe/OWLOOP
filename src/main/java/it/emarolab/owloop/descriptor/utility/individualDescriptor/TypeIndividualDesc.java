@@ -22,7 +22,7 @@ public class TypeIndividualDesc
         extends IndividualGround
         implements IndividualExpression.Type<HierarchicalConceptDesc>{
 
-    private DescriptorEntitySet.Concepts individualTypes = new DescriptorEntitySet.Concepts();
+    private DescriptorEntitySet.Concepts concepts = new DescriptorEntitySet.Concepts();
 
     // constructors for IndividualGround
 
@@ -66,20 +66,20 @@ public class TypeIndividualDesc
     // implementations for IndividualExpression.Type
 
     @Override //called during build...() you can change the returning type to any implementations of ConceptExpression
-    public HierarchicalConceptDesc getNewTypeIndividual(OWLClass instance, OWLReferences ontology) {
+    public HierarchicalConceptDesc getNewIndividualType(OWLClass instance, OWLReferences ontology) {
         return new HierarchicalConceptDesc( instance, ontology);
     }
 
     @Override
-    public DescriptorEntitySet.Concepts getTypeIndividual() {
-        return individualTypes;
+    public DescriptorEntitySet.Concepts getIndividualTypes() {
+        return concepts;
     }
 
     @Override
     public String toString() {
         return "FullObjectPropertyDesc{" +
                 NL + "\t\t\t" + getGround() +
-                ":" + NL + "\t ∈ " + individualTypes +
+                ":" + NL + "\t ∈ " + concepts +
                 NL + "}";
     }
 }

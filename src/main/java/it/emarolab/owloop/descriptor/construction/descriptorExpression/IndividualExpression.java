@@ -62,7 +62,7 @@ public interface IndividualExpression
      * </p>
      *
      * @param <D> the type of the {@link ConceptExpression} descriptors instantiated during
-     *           {@link #buildTypeIndividual()} through {@link #getNewTypeIndividual(Object, Object)}.
+     *           {@link #buildTypeIndividual()} through {@link #getNewIndividualType(Object, Object)}.
      */
     interface Type<D extends ConceptExpression>
             extends Individual.Type<OWLReferences, OWLNamedIndividual, OWLClass,D>,
@@ -70,53 +70,53 @@ public interface IndividualExpression
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getTypeIndividual()}.add( {@link #getOntology()}.getOWLClass( className))}
+         * {@code {@link #getIndividualTypes()}.add( {@link #getOntology()}.getOWLClass( className))}
          * in order to add a new class (given by name) in the {@link EntitySet} list.
          * @param className the class name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
         default boolean addTypeIndividual(String className){
-            return getTypeIndividual().add( getOntology().getOWLClass( className));
+            return getIndividualTypes().add( getOntology().getOWLClass( className));
         }
         /**
          * It is an helper that just calls:
-         * {@code {@link #getTypeIndividual()}.add( cl)}
+         * {@code {@link #getIndividualTypes()}.add( cl)}
          * in order to add a new class in the {@link EntitySet} list.
          * @param cl the class to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
         default boolean addTypeIndividual(OWLClass cl){
-            return getTypeIndividual().add( cl);
+            return getIndividualTypes().add( cl);
         }
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getTypeIndividual()}.remove( {@link #getOntology()}.getOWLClass( className))}
+         * {@code {@link #getIndividualTypes()}.remove( {@link #getOntology()}.getOWLClass( className))}
          * in order to remove a class (given by name) from the {@link EntitySet} list.
          * @param className the class name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeTypeIndividual(String className){
-            return getTypeIndividual().remove( getOntology().getOWLClass( className));
+            return getIndividualTypes().remove( getOntology().getOWLClass( className));
         }
         /**
          * It is an helper that just calls:
-         * {@code {@link #getTypeIndividual()}.remove( individualDescriptor)}
+         * {@code {@link #getIndividualTypes()}.remove( individualDescriptor)}
          * in order to remove a class in the {@link EntitySet} list.
          * @param cl the class to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeTypeIndividual(OWLClass cl){
-            return getTypeIndividual().remove( cl);
+            return getIndividualTypes().remove( cl);
         }
 
         @Override
-        DescriptorEntitySet.Concepts getTypeIndividual();
+        DescriptorEntitySet.Concepts getIndividualTypes();
 
         @Override // see super classes for documentation
         default DescriptorEntitySet.Concepts queryTypeIndividual(){
             DescriptorEntitySet.Concepts set = new DescriptorEntitySet.Concepts(getOntology().getIndividualClasses(getInstance()));
-            set.setSingleton( getTypeIndividual().isSingleton());
+            set.setSingleton( getIndividualTypes().isSingleton());
             return set;
         }
 
@@ -155,54 +155,54 @@ public interface IndividualExpression
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getDisjointIndividual()}.add( {@link #getOntology()}.getOWLIndividual( individualName))}
+         * {@code {@link #getDisjointIndividuals()}.add( {@link #getOntology()}.getOWLIndividual( individualName))}
          * in order to add a new individualDescriptor (given by name) in the {@link EntitySet} list.
          * @param individualName the individualDescriptor name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
         default boolean addDisjointIndividual( String individualName){
-            return getDisjointIndividual().add( getOntology().getOWLIndividual( individualName));
+            return getDisjointIndividuals().add( getOntology().getOWLIndividual( individualName));
         }
         /**
          * It is an helper that just calls:
-         * {@code {@link #getDisjointIndividual()}.add( individualDescriptor)}
+         * {@code {@link #getDisjointIndividuals()}.add( individualDescriptor)}
          * in order to add a new individualDescriptor in the {@link EntitySet} list.
          * @param individual the individualDescriptor to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
         default boolean addDisjointIndividual( OWLNamedIndividual individual){
-            return getDisjointIndividual().add( individual);
+            return getDisjointIndividuals().add( individual);
         }
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getDisjointIndividual()}.remove( {@link #getOntology()}.getOWLIndividual( individualName))}
+         * {@code {@link #getDisjointIndividuals()}.remove( {@link #getOntology()}.getOWLIndividual( individualName))}
          * in order to remove an individualDescriptor (given by name) from the {@link EntitySet} list.
          * @param individualName the individualDescriptor name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeDisjointIndividual( String individualName){
-            return getDisjointIndividual().remove( getOntology().getOWLIndividual( individualName));
+            return getDisjointIndividuals().remove( getOntology().getOWLIndividual( individualName));
         }
         /**
          * It is an helper that just calls:
-         * {@code {@link #getDisjointIndividual()}.remove( property)}
+         * {@code {@link #getDisjointIndividuals()}.remove( property)}
          * in order to remove a class in the {@link EntitySet} list.
          * @param individual the individualDescriptor to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeDisjointIndividual( OWLNamedIndividual individual){
-            return getDisjointIndividual().remove( individual);
+            return getDisjointIndividuals().remove( individual);
         }
 
         @Override
-        DescriptorEntitySet.Individuals getDisjointIndividual();
+        DescriptorEntitySet.Individuals getDisjointIndividuals();
 
         @Override // see super classes for documentation
         default DescriptorEntitySet.Individuals queryDisjointIndividual(){
             DescriptorEntitySet.Individuals set = new DescriptorEntitySet.Individuals(getOntology().getDisjointIndividuals(getInstance()));
             set.remove( getInstance());
-            set.setSingleton( getDisjointIndividual().isSingleton());
+            set.setSingleton( getDisjointIndividuals().isSingleton());
             return set;
         }
 
@@ -249,54 +249,54 @@ public interface IndividualExpression
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getEquivalentIndividual()}.add( {@link #getOntology()}.getOWLIndividual( individualName))}
+         * {@code {@link #getEquivalentIndividuals()}.add( {@link #getOntology()}.getOWLIndividual( individualName))}
          * in order to add a new individualDescriptor (given by name) in the {@link EntitySet} list.
          * @param individualName the individualDescriptor name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
         default boolean addEquivalentIndividual( String individualName){
-            return getEquivalentIndividual().add( getOntology().getOWLIndividual( individualName));
+            return getEquivalentIndividuals().add( getOntology().getOWLIndividual( individualName));
         }
         /**
          * It is an helper that just calls:
-         * {@code {@link #getEquivalentIndividual()}.add( individualDescriptor)}
+         * {@code {@link #getEquivalentIndividuals()}.add( individualDescriptor)}
          * in order to add a new individualDescriptor in the {@link EntitySet} list.
          * @param individual the individualDescriptor to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
         default boolean addEquivalentIndividual( OWLNamedIndividual individual){
-            return getEquivalentIndividual().add( individual);
+            return getEquivalentIndividuals().add( individual);
         }
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getEquivalentIndividual()}.remove( {@link #getOntology()}.getOWLIndividual( individualName))}
+         * {@code {@link #getEquivalentIndividuals()}.remove( {@link #getOntology()}.getOWLIndividual( individualName))}
          * in order to remove an individualDescriptor (given by name) from the {@link EntitySet} list.
          * @param individualName the individualDescriptor name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeEquivalentIndividual( String individualName){
-            return getEquivalentIndividual().remove( getOntology().getOWLIndividual( individualName));
+            return getEquivalentIndividuals().remove( getOntology().getOWLIndividual( individualName));
         }
         /**
          * It is an helper that just calls:
-         * {@code {@link #getEquivalentIndividual()}.remove( individualDescriptor)}
+         * {@code {@link #getEquivalentIndividuals()}.remove( individualDescriptor)}
          * in order to remove a class in the {@link EntitySet} list.
          * @param individual the individualDescriptor to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeEquivalentIndividual( OWLNamedIndividual individual){
-            return getEquivalentIndividual().remove( individual);
+            return getEquivalentIndividuals().remove( individual);
         }
 
         @Override
-        DescriptorEntitySet.Individuals getEquivalentIndividual();
+        DescriptorEntitySet.Individuals getEquivalentIndividuals();
 
         @Override // see super classes for documentation
         default DescriptorEntitySet.Individuals queryEquivalentIndividual(){
             DescriptorEntitySet.Individuals set = new DescriptorEntitySet.Individuals(getOntology().getEquivalentIndividuals(getInstance()));
             set.remove( getInstance());
-            set.setSingleton( getEquivalentIndividual().isSingleton());
+            set.setSingleton( getEquivalentIndividuals().isSingleton());
             return set;
         }
 
@@ -343,7 +343,7 @@ public interface IndividualExpression
      * </p>
      *
      * @param <D> the type of the {@link DataPropertyExpression} descriptors instantiated during
-     *           {@link #buildDataIndividual()} through {@link #getNewDataIndividual(ExpressionEntity, Object)}.
+     *           {@link #buildDataIndividual()} through {@link #getNewIndividualDataProperty(ExpressionEntity, Object)}.
      */
     interface DataLink<D extends DataPropertyExpression>
             extends Individual.DataLink<OWLReferences, OWLNamedIndividual, DescriptorEntitySet.DataLinks, OWLDataProperty, D>,
@@ -353,7 +353,7 @@ public interface IndividualExpression
          * Remove the {@link ExpressionEntity} of the given semantic ({@link DescriptorEntitySet.DataLinks#getExpression()})
          * from the {@link Descriptor}. This call may remove multiple value attached to that
          * semantic. It will no longer be used during {@link #readExpressionAxioms()} and {@link #writeExpressionAxioms()}.
-         * @param property a data property name contained in an element of {@link #getDataExpressionAxioms()} to be removed.
+         * @param property a data property name contained in an element of {@link #getIndividualDataProperties()} to be removed.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeData( String property){
@@ -363,13 +363,13 @@ public interface IndividualExpression
          * Remove the {@link ExpressionEntity} of the given semantic ({@link DescriptorEntitySet.DataLinks#getExpression()})
          * from the {@link Descriptor}. This call may remove multiple value attached to that
          * semantic. It will no longer be used during {@link #readExpressionAxioms()} and {@link #writeExpressionAxioms()}.
-         * @param property a data property contained in an element of {@link #getDataExpressionAxioms()} to be removed.
+         * @param property a data property contained in an element of {@link #getIndividualDataProperties()} to be removed.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeData( OWLDataProperty property){
-            for (DescriptorEntitySet.DataLinks d : getDataExpressionAxioms())
+            for (DescriptorEntitySet.DataLinks d : getIndividualDataProperties())
                 if( d.getExpression().equals( property))
-                    return getDataExpressionAxioms().remove( d);
+                    return getIndividualDataProperties().remove( d);
             return false;
         }
 
@@ -379,7 +379,7 @@ public interface IndividualExpression
          * repopulate (or completely removed) by calling: {@link #readExpressionAxioms()}.
          * The class of the specified value represents its data type, supported {@link OWLLiteral} are:
          * {@link Integer}, {@link Boolean}, {@link Double}, {@link Float} and {@link Long} (see {@link #getOWLLiteral(Object)}).
-         * @param property the name of the data property which value, contained in {@link #getDataExpressionAxioms()}, will be removed.
+         * @param property the name of the data property which value, contained in {@link #getIndividualDataProperties()}, will be removed.
          * @param value the property value to be removed from the {@link DescriptorEntitySet.DataLinks#getValues()} set.
          * @return {@code true} if an element was removed as a result of this call.
          */
@@ -390,12 +390,12 @@ public interface IndividualExpression
          * Remove the {@link ExpressionEntity#getExpression()} of the given property, with a specific value, from {@code this}
          * {@link Descriptor}. This call does not remove the semantic from this object, and it may be
          * repopulate (or completely removed) by calling: {@link #readExpressionAxioms()}.
-         * @param property the data property which value, contained in {@link #getDataExpressionAxioms()}, will be removed.
+         * @param property the data property which value, contained in {@link #getIndividualDataProperties()}, will be removed.
          * @param value the specific property literal to be removed from the {@link DescriptorEntitySet.DataLinks#getValues()} set.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeData( OWLDataProperty property, OWLLiteral value){
-            for (DescriptorEntitySet.DataLinks d : getDataExpressionAxioms())
+            for (DescriptorEntitySet.DataLinks d : getIndividualDataProperties())
                 if ( d.getExpression().equals( property))
                     return d.getValues().remove(value);
             return false;
@@ -403,7 +403,7 @@ public interface IndividualExpression
         default boolean removeData( OWLDataProperty property, Set<OWLLiteral> values){
             DescriptorEntitySet.DataLinks dataSemantic = new DescriptorEntitySet.DataLinks(property);
             dataSemantic.getValues().addAll( values);
-            return getDataExpressionAxioms().remove( dataSemantic);
+            return getIndividualDataProperties().remove( dataSemantic);
         }
 
         /**
@@ -460,7 +460,7 @@ public interface IndividualExpression
          * (a change of singleton value is not considered).
          */
         default boolean addData( OWLDataProperty property, boolean singleton){
-            for (DescriptorEntitySet.DataLinks d : getDataExpressionAxioms()) {
+            for (DescriptorEntitySet.DataLinks d : getIndividualDataProperties()) {
                 if (d.getExpression().equals(property)) {
                     d.getValues().setSingleton( singleton);
                     return false;
@@ -469,7 +469,7 @@ public interface IndividualExpression
 
             DescriptorEntitySet.DataLinks data = new DescriptorEntitySet.DataLinks(property);
             data.getValues().setSingleton( singleton);
-            return getDataExpressionAxioms().add(data);
+            return getIndividualDataProperties().add(data);
         }
 
         /**
@@ -517,7 +517,7 @@ public interface IndividualExpression
          * Add a new semantic (i.e.: data property) to this {@link Descriptor} with a particular value.
          * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * value to specified boolean anyway.
-         * If {@link #getDataExpressionAxioms()} represents a singleton set this call clear the
+         * If {@link #getIndividualDataProperties()} represents a singleton set this call clear the
          * previous contents.
          * @param property the data property to synchronise.
          * @param value the specific property literal to be added to the {@link DescriptorEntitySet.DataLinks#getValues()} set.
@@ -526,7 +526,7 @@ public interface IndividualExpression
          * (a change of singleton value is not considered).
          */
         default boolean addData( OWLDataProperty property, OWLLiteral value, boolean singleton){
-            for (DescriptorEntitySet.DataLinks d : getDataExpressionAxioms())
+            for (DescriptorEntitySet.DataLinks d : getIndividualDataProperties())
                 if( d.getExpression().equals( property)){
                     if ( singleton)
                         d.getValues().clear();
@@ -537,13 +537,13 @@ public interface IndividualExpression
             DescriptorEntitySet.DataLinks data = new DescriptorEntitySet.DataLinks(property);
             data.getValues().add(value);
             data.getValues().setSingleton( singleton);
-            return getDataExpressionAxioms().add(data);
+            return getIndividualDataProperties().add(data);
         }
         /**
          * Add a new semantic (i.e.: data property) to this {@link Descriptor} with a particular set of values.
          * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * value to specified boolean anyway.
-         * If {@link #getDataExpressionAxioms()} represents a singleton set this call clear the
+         * If {@link #getIndividualDataProperties()} represents a singleton set this call clear the
          * previous contents.
          * @param property the data property to synchronise.
          * @param values the specific set of property literal to be added to the {@link DescriptorEntitySet.DataLinks#getValues()} set.
@@ -555,13 +555,13 @@ public interface IndividualExpression
             DescriptorEntitySet.DataLinks objectSemantic = new DescriptorEntitySet.DataLinks(property);
             objectSemantic.getValues().addAll( values);
             objectSemantic.getValues().setSingleton( singleton);
-            return getDataExpressionAxioms().add( objectSemantic);
+            return getIndividualDataProperties().add( objectSemantic);
         }
         /**
          * Add a new semantic (i.e.: data property) to this {@link Descriptor} with a particular set of values.
          * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * value to specified boolean anyway.
-         * If {@link #getDataExpressionAxioms()} represents a singleton set this call clear the
+         * If {@link #getIndividualDataProperties()} represents a singleton set this call clear the
          * previous contents.
          * This call, automatically sets the {@code singleton} flag to false.
          * @param property the data property to synchronise.
@@ -575,40 +575,40 @@ public interface IndividualExpression
 
 
         @Override
-        DescriptorEntitySet.DataLinksSet getDataExpressionAxioms();
+        DescriptorEntitySet.DataLinksSet getIndividualDataProperties();
 
         /**
-         * A shortcut for {@code getDataExpressionAxioms().getLink( semantic)}
+         * A shortcut for {@code getIndividualDataProperties().getLink( semantic)}
          * @param semantic the data property to look for its values.
          * @return a value of the given data property. {@code Null} if is not available.
          */
         default OWLLiteral getLiteral( OWLDataProperty semantic){
-            return getDataExpressionAxioms().getLink( semantic);
+            return getIndividualDataProperties().getLink( semantic);
         }
         /**
-         * A shortcut for {@code getDataExpressionAxioms().getLink( getOntology().getOWLDataProperty( semanticName)}
+         * A shortcut for {@code getIndividualDataProperties().getLink( getOntology().getOWLDataProperty( semanticName)}
          * @param semanticName the name of the data property to look for its values.
          * @return a value of the given data property. {@code Null} if is not available.
          */
         default OWLLiteral getLiteral( String semanticName){
-            return getDataExpressionAxioms().getLink( getOntology().getOWLDataProperty( semanticName));
+            return getIndividualDataProperties().getLink( getOntology().getOWLDataProperty( semanticName));
         }
 
         /**
-         * A shortcut for {@code getDataExpressionAxioms().getLinks( semantic)}
+         * A shortcut for {@code getIndividualDataProperties().getLinks( semantic)}
          * @param semantic the data property to look for its values.
          * @return all the values of the given data property. An {@code empty} {@link HashSet} if is not available.
          */
         default EntitySet<OWLLiteral> getLiterals(OWLDataProperty semantic){
-            return getDataExpressionAxioms().getLinks( semantic);
+            return getIndividualDataProperties().getLinks( semantic);
         }
         /**
-         * A shortcut for {@code getDataExpressionAxioms().getLinks( getOntology().getOWLDataProperty( semanticName))}
+         * A shortcut for {@code getIndividualDataProperties().getLinks( getOntology().getOWLDataProperty( semanticName))}
          * @param semanticName the name of the data property to look for its values.
          * @return all the values of the given data property. An {@code empty} {@link HashSet} if is not available.
          */
         default EntitySet<OWLLiteral> getLiterals(String semanticName){
-            return getDataExpressionAxioms().getLinks( getOntology().getOWLDataProperty( semanticName));
+            return getIndividualDataProperties().getLinks( getOntology().getOWLDataProperty( semanticName));
         }
 
 
@@ -616,11 +616,11 @@ public interface IndividualExpression
         @Override // see super classes for documentation
         default DescriptorEntitySet.DataLinksSet queryDataIndividual(){
             DescriptorEntitySet.DataLinksSet dataSet = new DescriptorEntitySet.DataLinksSet();
-            dataSet.setSingleton( getDataExpressionAxioms().isSingleton());
+            dataSet.setSingleton( getIndividualDataProperties().isSingleton());
             for (DataPropertyRelations r :  getOntology().getDataPropertyB2Individual(getInstance())){
                 DescriptorEntitySet.DataLinks data = new DescriptorEntitySet.DataLinks( r.getProperty());
                 data.getValues().addAll( r.getValues());
-                for (DescriptorEntitySet.DataLinks w : getDataExpressionAxioms())
+                for (DescriptorEntitySet.DataLinks w : getIndividualDataProperties())
                     if ( data.equals( w)){
                         data.getValues().setSingleton( w.getValues().isSingleton());
                         break;
@@ -667,7 +667,7 @@ public interface IndividualExpression
      * </p>
      *
      * @param <D> the type of the {@link DataPropertyExpression} descriptors instantiated during
-     *           {@link #buildObjectIndividual()} through {@link #getNewObjectIndividual(ExpressionEntity, Object)}.
+     *           {@link #buildObjectIndividual()} through {@link #getNewIndividualObjectProperty(ExpressionEntity, Object)}.
      */
     interface ObjectLink<D extends ObjectPropertyExpression>
             extends Individual.ObjectLink<OWLReferences, OWLNamedIndividual, DescriptorEntitySet.ObjectLinks, OWLObjectProperty, D>,
@@ -677,7 +677,7 @@ public interface IndividualExpression
          * Remove the {@link ExpressionEntity} of the given semantic ({@link DescriptorEntitySet.ObjectLinks#getExpression()})
          * from the {@link Descriptor}. This call may remove multiple value attached to that
          * semantic. It will no longer be used during {@link #readExpressionAxioms()} and {@link #writeExpressionAxioms()}.
-         * @param property an object property name contained in an element of {@link #getObjectExpressionAxioms()} to be removed.
+         * @param property an object property name contained in an element of {@link #getIndividualObjectProperties()} to be removed.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeObject( String property){
@@ -687,18 +687,18 @@ public interface IndividualExpression
          * Remove the {@link ExpressionEntity} of the given semantic ({@link DescriptorEntitySet.ObjectLinks#getExpression()})
          * from the {@link Descriptor}. This call may remove multiple value attached to that
          * semantic. It will no longer be used during {@link #readExpressionAxioms()} and {@link #writeExpressionAxioms()}.
-         * @param property an object property contained in an element of {@link #getObjectExpressionAxioms()} to be removed.
+         * @param property an object property contained in an element of {@link #getIndividualObjectProperties()} to be removed.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeObject( OWLObjectProperty property){
-            return getObjectExpressionAxioms().remove( property);
+            return getIndividualObjectProperties().remove( property);
         }
 
         /**
          * Remove the {@link ExpressionEntity#getExpression()} of the given property, with a specific value, from {@code this}
          * {@link Descriptor}. This call does not remove the semantic from this object, and it may be
          * repopulate (or completely removed) by calling: {@link #readExpressionAxioms()}.
-         * @param property the name of the object property which value, contained in {@link #getObjectExpressionAxioms()}, will be removed.
+         * @param property the name of the object property which value, contained in {@link #getIndividualObjectProperties()}, will be removed.
          * @param value the property value to be removed from the {@link DescriptorEntitySet.ObjectLinks#getValues()} set.
          * @return {@code true} if an element was removed as a result of this call.
          */
@@ -709,27 +709,27 @@ public interface IndividualExpression
          * Remove the {@link ExpressionEntity#getExpression()} of the given property, with a specific value, from {@code this}
          * {@link Descriptor}. This call does not remove the semantic from this object, and it may be
          * repopulate (or completely removed) by calling: {@link #readExpressionAxioms()}.
-         * @param property the object property which value, contained in {@link #getObjectExpressionAxioms()}, will be removed.
+         * @param property the object property which value, contained in {@link #getIndividualObjectProperties()}, will be removed.
          * @param value the specific property literal to be removed from the {@link DescriptorEntitySet.ObjectLinks#getValues()} set.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeObject( OWLObjectProperty property, OWLNamedIndividual value){
             DescriptorEntitySet.ObjectLinks objectSemantic = new DescriptorEntitySet.ObjectLinks(property);
             objectSemantic.getValues().add( value);
-            return getObjectExpressionAxioms().remove( objectSemantic);
+            return getIndividualObjectProperties().remove( objectSemantic);
         }
         /**
          * Remove the {@link ExpressionEntity#getExpression()} of the given property, with specific values, from {@code this}
          * {@link Descriptor}. This call does not remove the semantic from this object, and it may be
          * repopulate (or completely removed) by calling: {@link #readExpressionAxioms()}.
-         * @param property the object property which value, contained in {@link #getObjectExpressionAxioms()}, will be removed.
+         * @param property the object property which value, contained in {@link #getIndividualObjectProperties()}, will be removed.
          * @param values the specific set of property literal to be removed from the {@link DescriptorEntitySet.ObjectLinks#getValues()} set.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeObject( OWLObjectProperty property, Set<OWLNamedIndividual> values){
             DescriptorEntitySet.ObjectLinks objectSemantic = new DescriptorEntitySet.ObjectLinks(property);
             objectSemantic.getValues().addAll( values);
-            return getObjectExpressionAxioms().remove( objectSemantic);
+            return getIndividualObjectProperties().remove( objectSemantic);
         }
 
 
@@ -789,7 +789,7 @@ public interface IndividualExpression
         default boolean addObject( OWLObjectProperty property, boolean singleton){
             DescriptorEntitySet.ObjectLinks objectSemantic = new DescriptorEntitySet.ObjectLinks(property);
             objectSemantic.getValues().setSingleton( singleton);
-            return getObjectExpressionAxioms().add( objectSemantic);
+            return getIndividualObjectProperties().add( objectSemantic);
         }
 
         /**
@@ -835,7 +835,7 @@ public interface IndividualExpression
          * Add a new semantic (i.e.: object property) to this {@link Descriptor} with a particular value.
          * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * value to specified boolean anyway.
-         * If {@link #getObjectExpressionAxioms()} represents a singleton set this call clear the
+         * If {@link #getIndividualObjectProperties()} represents a singleton set this call clear the
          * previous contents.
          * @param property the object property to synchronise.
          * @param value the specific property literal to be added to the {@link DescriptorEntitySet.ObjectLinks#getValues()} set.
@@ -847,13 +847,13 @@ public interface IndividualExpression
             DescriptorEntitySet.ObjectLinks objectSemantic = new DescriptorEntitySet.ObjectLinks(property);
             objectSemantic.getValues().add( value);
             objectSemantic.getValues().setSingleton( singleton);
-            return getObjectExpressionAxioms().add( objectSemantic);
+            return getIndividualObjectProperties().add( objectSemantic);
         }
         /**
          * Add a new semantic (i.e.: object property) to this {@link Descriptor} with a particular set of values.
          * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * value to specified boolean anyway.
-         * If {@link #getObjectExpressionAxioms()} represents a singleton set this call clear the
+         * If {@link #getIndividualObjectProperties()} represents a singleton set this call clear the
          * previous contents.
          * @param property the object property to synchronise.
          * @param values the specific set of property literal to be added to the {@link DescriptorEntitySet.ObjectLinks#getValues()} set.
@@ -865,13 +865,13 @@ public interface IndividualExpression
             DescriptorEntitySet.ObjectLinks objectSemantic = new DescriptorEntitySet.ObjectLinks(property);
             objectSemantic.getValues().addAll( values);
             objectSemantic.getValues().setSingleton( singleton);
-            return getObjectExpressionAxioms().add( objectSemantic);
+            return getIndividualObjectProperties().add( objectSemantic);
         }
         /**
          * Add a new semantic (i.e.: object property) to this {@link Descriptor} with a particular set of values.
          * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * value to specified boolean anyway.
-         * If {@link #getObjectExpressionAxioms()} represents a singleton set this call clear the
+         * If {@link #getIndividualObjectProperties()} represents a singleton set this call clear the
          * previous contents.
          * This call, automatically sets the {@code singleton} flag to false.
          * @param property the object property to synchronise.
@@ -884,50 +884,50 @@ public interface IndividualExpression
         }
 
         @Override
-        DescriptorEntitySet.ObjectLinksSet getObjectExpressionAxioms();
+        DescriptorEntitySet.ObjectLinksSet getIndividualObjectProperties();
 
         /**
-         * A shortcut for {@code getObjectExpressionAxioms().getLink( semantic)}
+         * A shortcut for {@code getIndividualObjectProperties().getLink( semantic)}
          * @param semantic the object property to look for its values.
          * @return a value of the given object property. {@code Null} if is not available.
          */
         default OWLNamedIndividual getObject( OWLObjectProperty semantic){
-            return getObjectExpressionAxioms().getLink( semantic);
+            return getIndividualObjectProperties().getLink( semantic);
         }
         /**
-         * A shortcut for {@code getObjectExpressionAxioms().getLink( getOntology().getOWLObjectProperty( semanticName)}
+         * A shortcut for {@code getIndividualObjectProperties().getLink( getOntology().getOWLObjectProperty( semanticName)}
          * @param semanticName the name of the object property to look for its values.
          * @return a value of the given object property. {@code Null} if is not available.
          */
         default OWLNamedIndividual getObject( String semanticName){
-            return getObjectExpressionAxioms().getLink( getOntology().getOWLObjectProperty( semanticName));
+            return getIndividualObjectProperties().getLink( getOntology().getOWLObjectProperty( semanticName));
         }
 
         /**
-         * A shortcut for {@code getObjectExpressionAxioms().getLinks( semantic)}
+         * A shortcut for {@code getIndividualObjectProperties().getLinks( semantic)}
          * @param semantic the object property to look for its values.
          * @return all the values of the given object property. An {@code empty} {@link HashSet} if is not available.
          */
         default EntitySet<OWLNamedIndividual> getObjects(OWLObjectProperty semantic){
-            return getObjectExpressionAxioms().getLinks( semantic);
+            return getIndividualObjectProperties().getLinks( semantic);
         }
         /**
-         * A shortcut for {@code getObjectExpressionAxioms().getLinks( getOntology().getOWLObjectProperty( semanticName))}
+         * A shortcut for {@code getIndividualObjectProperties().getLinks( getOntology().getOWLObjectProperty( semanticName))}
          * @param semanticName the name of the object property to look for its values.
          * @return all the values of the given object property. {@code Null} if is not available.
          */
         default EntitySet<OWLNamedIndividual> getObjects(String semanticName){
-            return getObjectExpressionAxioms().getLinks( getOntology().getOWLObjectProperty( semanticName));
+            return getIndividualObjectProperties().getLinks( getOntology().getOWLObjectProperty( semanticName));
         }
 
         @Override // see super classes for documentation
         default DescriptorEntitySet.ObjectLinksSet queryObject(){
             DescriptorEntitySet.ObjectLinksSet objectSet = new DescriptorEntitySet.ObjectLinksSet();
-            objectSet.setSingleton( getObjectExpressionAxioms().isSingleton());
+            objectSet.setSingleton( getIndividualObjectProperties().isSingleton());
             for (ObjectPropertyRelations r :  getOntology().getObjectPropertyB2Individual(getInstance())){
                 DescriptorEntitySet.ObjectLinks object = new DescriptorEntitySet.ObjectLinks( r.getProperty());
                 object.getValues().addAll( r.getValues());
-                for (DescriptorEntitySet.ObjectLinks w : getObjectExpressionAxioms())
+                for (DescriptorEntitySet.ObjectLinks w : getIndividualObjectProperties())
                     if ( object.equals( w)){
                         object.getValues().setSingleton( w.getValues().isSingleton());
                         break;

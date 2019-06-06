@@ -136,53 +136,53 @@ public interface ObjectPropertyExpression
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getInverseObjectProperty()}.add( {@link #getOntology()}.getOWLObjectProperty( propertyName))}
+         * {@code {@link #getInverseObjectProperties()}.add( {@link #getOntology()}.getOWLObjectProperty( propertyName))}
          * in order to add a new object property (given by name) in the {@link EntitySet} list.
          * @param propertyName the property name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
         default boolean addInverseObjectProperty( String propertyName){
-            return getInverseObjectProperty().add( getOntology().getOWLObjectProperty( propertyName));
+            return getInverseObjectProperties().add( getOntology().getOWLObjectProperty( propertyName));
         }
         /**
          * It is an helper that just calls:
-         * {@code {@link #getInverseObjectProperty()}.add( property)}
+         * {@code {@link #getInverseObjectProperties()}.add( property)}
          * in order to add a new object property in the {@link EntitySet} list.
          * @param property the property to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
         default boolean addInverseObjectProperty( OWLObjectProperty property){
-            return getInverseObjectProperty().add( property);
+            return getInverseObjectProperties().add( property);
         }
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getInverseObjectProperty()}.remove( {@link #getOntology()}.getOWLObjectProperty( propertyName))}
+         * {@code {@link #getInverseObjectProperties()}.remove( {@link #getOntology()}.getOWLObjectProperty( propertyName))}
          * in order to remove an object property (given by name) from the {@link EntitySet} list.
          * @param propertyName the property name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeInverseObjectProperty( String propertyName){
-            return getInverseObjectProperty().remove( getOntology().getOWLObjectProperty( propertyName));
+            return getInverseObjectProperties().remove( getOntology().getOWLObjectProperty( propertyName));
         }
         /**
          * It is an helper that just calls:
-         * {@code {@link #getInverseObjectProperty()}.remove( property)}
+         * {@code {@link #getInverseObjectProperties()}.remove( property)}
          * in order to remove an object property in the {@link EntitySet} list.
          * @param property the property to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeInverseObjectProperty( OWLObjectProperty property){
-            return getInverseObjectProperty().remove( property);
+            return getInverseObjectProperties().remove( property);
         }
 
         @Override
-        DescriptorEntitySet.ObjectProperties getInverseObjectProperty();
+        DescriptorEntitySet.ObjectProperties getInverseObjectProperties();
 
         @Override // see super class for documentation
         default DescriptorEntitySet.ObjectProperties queryInverseObjectProperty(){
             DescriptorEntitySet.ObjectProperties set = new DescriptorEntitySet.ObjectProperties(getOntology().getInverseProperty(getInstance()));
-            set.setSingleton( getInverseObjectProperty().isSingleton());
+            set.setSingleton( getInverseObjectProperties().isSingleton());
             return set;
         }
 
@@ -221,54 +221,54 @@ public interface ObjectPropertyExpression
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getDisjointObjectProperty()}.add( {@link #getOntology()}.getOWLObjectProperty( propertyName))}
+         * {@code {@link #getDisjointObjectProperties()}.add( {@link #getOntology()}.getOWLObjectProperty( propertyName))}
          * in order to add a new object property (given by name) in the {@link EntitySet} list.
          * @param propertyName the property name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
         default boolean addDisjointObjectProperty( String propertyName){
-            return getDisjointObjectProperty().add( getOntology().getOWLObjectProperty( propertyName));
+            return getDisjointObjectProperties().add( getOntology().getOWLObjectProperty( propertyName));
         }
         /**
          * It is an helper that just calls:
-         * {@code {@link #getDisjointObjectProperty()}.add( property)}
+         * {@code {@link #getDisjointObjectProperties()}.add( property)}
          * in order to add a new object property in the {@link EntitySet} list.
          * @param property the property to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
         default boolean addDisjointObjectProperty( OWLObjectProperty property){
-            return getDisjointObjectProperty().add( property);
+            return getDisjointObjectProperties().add( property);
         }
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getDisjointObjectProperty()}.remove( {@link #getOntology()}.getOWLObjectProperty( propertyName))}
+         * {@code {@link #getDisjointObjectProperties()}.remove( {@link #getOntology()}.getOWLObjectProperty( propertyName))}
          * in order to remove an object property (given by name) from the {@link EntitySet} list.
          * @param propertyName the property name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeDisjointObjectProperty( String propertyName){
-            return getDisjointObjectProperty().remove( getOntology().getOWLObjectProperty( propertyName));
+            return getDisjointObjectProperties().remove( getOntology().getOWLObjectProperty( propertyName));
         }
         /**
          * It is an helper that just calls:
-         * {@code {@link #getDisjointObjectProperty()}.remove( property)}
+         * {@code {@link #getDisjointObjectProperties()}.remove( property)}
          * in order to remove an object property in the {@link EntitySet} list.
          * @param property the property to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeDisjointObjectProperty( OWLObjectProperty property){
-            return getDisjointObjectProperty().remove( property);
+            return getDisjointObjectProperties().remove( property);
         }
 
         @Override
-        DescriptorEntitySet.ObjectProperties getDisjointObjectProperty();
+        DescriptorEntitySet.ObjectProperties getDisjointObjectProperties();
 
         @Override // see super class for documentation
         default DescriptorEntitySet.ObjectProperties queryDisjointObjectProperty(){
             DescriptorEntitySet.ObjectProperties set = new DescriptorEntitySet.ObjectProperties(getOntology().getDisjointObjectProperty(getInstance()));
             set.remove( getInstance());
-            set.setSingleton( getDisjointObjectProperty().isSingleton());
+            set.setSingleton( getDisjointObjectProperties().isSingleton());
             return set;
         }
 
@@ -315,54 +315,54 @@ public interface ObjectPropertyExpression
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getEquivalentObjectProperty()}.add( {@link #getOntology()}.getOWLObjectProperty( propertyName))}
+         * {@code {@link #getEquivalentObjectProperties()}.add( {@link #getOntology()}.getOWLObjectProperty( propertyName))}
          * in order to add a new object property (given by name) in the {@link EntitySet} list.
          * @param propertyName the property name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
         default boolean addEquivalentObjectProperty( String propertyName){
-            return getEquivalentObjectProperty().add( getOntology().getOWLObjectProperty( propertyName));
+            return getEquivalentObjectProperties().add( getOntology().getOWLObjectProperty( propertyName));
         }
         /**
          * It is an helper that just calls:
-         * {@code {@link #getEquivalentObjectProperty()}.add( property)}
+         * {@code {@link #getEquivalentObjectProperties()}.add( property)}
          * in order to add a new object property in the {@link EntitySet} list.
          * @param property the property to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
         default boolean addEquivalentObjectProperty( OWLObjectProperty property){
-            return getEquivalentObjectProperty().add( property);
+            return getEquivalentObjectProperties().add( property);
         }
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getEquivalentObjectProperty()}.remove( {@link #getOntology()}.getOWLObjectProperty( propertyName))}
+         * {@code {@link #getEquivalentObjectProperties()}.remove( {@link #getOntology()}.getOWLObjectProperty( propertyName))}
          * in order to remove an object property (given by name) from the {@link EntitySet} list.
          * @param propertyName the property name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeEquivalentObjectProperty( String propertyName){
-            return getEquivalentObjectProperty().remove( getOntology().getOWLObjectProperty( propertyName));
+            return getEquivalentObjectProperties().remove( getOntology().getOWLObjectProperty( propertyName));
         }
         /**
          * It is an helper that just calls:
-         * {@code {@link #getEquivalentObjectProperty()}.remove( property)}
+         * {@code {@link #getEquivalentObjectProperties()}.remove( property)}
          * in order to remove an object property in the {@link EntitySet} list.
          * @param property the property to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeEquivalentObjectProperty( OWLObjectProperty property){
-            return getEquivalentObjectProperty().remove( property);
+            return getEquivalentObjectProperties().remove( property);
         }
 
         @Override
-        DescriptorEntitySet.ObjectProperties getEquivalentObjectProperty();
+        DescriptorEntitySet.ObjectProperties getEquivalentObjectProperties();
 
         @Override // see super class for documentation
         default DescriptorEntitySet.ObjectProperties queryEquivalentObjectProperty(){
             DescriptorEntitySet.ObjectProperties set = new DescriptorEntitySet.ObjectProperties(getOntology().getEquivalentObjectProperty(getInstance()));
             set.remove( getInstance());
-            set.setSingleton( getEquivalentObjectProperty().isSingleton());
+            set.setSingleton( getEquivalentObjectProperties().isSingleton());
             return set;
         }
 
@@ -401,7 +401,7 @@ public interface ObjectPropertyExpression
      * </p>
      *
      * @param <D> the type of the {@link ObjectPropertyExpression} descriptor instantiated during
-     *           {@link #buildSubObjectProperty()}  through {@link #getSubObjectProperty()}.
+     *           {@link #buildSubObjectProperty()}  through {@link #getSubObjectProperties()}.
      */
     interface Sub<D extends ObjectPropertyExpression>
             extends ObjectProperty.Sub<OWLReferences, OWLObjectProperty,D>,
@@ -409,53 +409,53 @@ public interface ObjectPropertyExpression
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getSubObjectProperty()}.add( {@link #getOntology()}.getOWLObjectProperty( propertyName))}
+         * {@code {@link #getSubObjectProperties()}.add( {@link #getOntology()}.getOWLObjectProperty( propertyName))}
          * in order to add a new object property (given by name) in the {@link EntitySet} list.
          * @param propertyName the property name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
         default boolean addSubObjectProperty( String propertyName){
-            return getSubObjectProperty().add( getOntology().getOWLObjectProperty( propertyName));
+            return getSubObjectProperties().add( getOntology().getOWLObjectProperty( propertyName));
         }
         /**
          * It is an helper that just calls:
-         * {@code {@link #getSubObjectProperty()}.add( property)}
+         * {@code {@link #getSubObjectProperties()}.add( property)}
          * in order to add a new object property in the {@link EntitySet} list.
          * @param property the property to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
         default boolean addSubObjectProperty( OWLObjectProperty property){
-            return getSubObjectProperty().add( property);
+            return getSubObjectProperties().add( property);
         }
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getSubObjectProperty()}.remove( {@link #getOntology()}.getOWLObjectProperty( propertyName))}
+         * {@code {@link #getSubObjectProperties()}.remove( {@link #getOntology()}.getOWLObjectProperty( propertyName))}
          * in order to remove an object property (given by name) from the {@link EntitySet} list.
          * @param propertyName the property name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeSubObjectProperty( String propertyName){
-            return getSubObjectProperty().remove( getOntology().getOWLObjectProperty( propertyName));
+            return getSubObjectProperties().remove( getOntology().getOWLObjectProperty( propertyName));
         }
         /**
          * It is an helper that just calls:
-         * {@code {@link #getSubObjectProperty()}.remove( property)}
+         * {@code {@link #getSubObjectProperties()}.remove( property)}
          * in order to remove an object property in the {@link EntitySet} list.
          * @param property the property to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeSubObjectProperty( OWLObjectProperty property){
-            return getSubObjectProperty().remove( property);
+            return getSubObjectProperties().remove( property);
         }
 
         @Override
-        DescriptorEntitySet.ObjectProperties getSubObjectProperty();
+        DescriptorEntitySet.ObjectProperties getSubObjectProperties();
 
         @Override // see super class for documentation
         default DescriptorEntitySet.ObjectProperties querySubObjectProperty(){
             DescriptorEntitySet.ObjectProperties set = new DescriptorEntitySet.ObjectProperties(getOntology().getSubObjectPropertyOf(getInstance()));
-            set.setSingleton( getSubObjectProperty().isSingleton());
+            set.setSingleton( getSubObjectProperties().isSingleton());
             return set;
         }
 
@@ -486,7 +486,7 @@ public interface ObjectPropertyExpression
      * </p>
      *
      * @param <D> the type of the {@link ObjectPropertyExpression} descriptor instantiated during
-     *           {@link #buildSuperObjectProperty()}  through {@link #getSuperObjectProperty()}.
+     *           {@link #buildSuperObjectProperty()}  through {@link #getSuperObjectProperties()}.
      */
     interface Super<D extends ObjectPropertyExpression>
             extends ObjectProperty.Super<OWLReferences, OWLObjectProperty, D>,
@@ -495,53 +495,53 @@ public interface ObjectPropertyExpression
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getSuperObjectProperty()}.add( {@link #getOntology()}.getOWLObjectProperty( propertyName))}
+         * {@code {@link #getSuperObjectProperties()}.add( {@link #getOntology()}.getOWLObjectProperty( propertyName))}
          * in order to add a new object property (given by name) in the {@link EntitySet} list.
          * @param propertyName the property name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
         default boolean addSuperObjectProperty( String propertyName){
-            return getSuperObjectProperty().add( getOntology().getOWLObjectProperty( propertyName));
+            return getSuperObjectProperties().add( getOntology().getOWLObjectProperty( propertyName));
         }
         /**
          * It is an helper that just calls:
-         * {@code {@link #getSuperObjectProperty()}.add( property)}
+         * {@code {@link #getSuperObjectProperties()}.add( property)}
          * in order to add a new object property in the {@link EntitySet} list.
          * @param property the property to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
         default boolean addSuperObjectProperty( OWLObjectProperty property){
-            return getSuperObjectProperty().add( property);
+            return getSuperObjectProperties().add( property);
         }
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getSuperObjectProperty()}.remove( {@link #getOntology()}.getOWLObjectProperty( propertyName))}
+         * {@code {@link #getSuperObjectProperties()}.remove( {@link #getOntology()}.getOWLObjectProperty( propertyName))}
          * in order to remove an object property (given by name) from the {@link EntitySet} list.
          * @param propertyName the property name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeSuperObjectProperty( String propertyName){
-            return getSuperObjectProperty().remove( getOntology().getOWLObjectProperty( propertyName));
+            return getSuperObjectProperties().remove( getOntology().getOWLObjectProperty( propertyName));
         }
         /**
          * It is an helper that just calls:
-         * {@code {@link #getSuperObjectProperty()}.remove( property)}
+         * {@code {@link #getSuperObjectProperties()}.remove( property)}
          * in order to remove an object property in the {@link EntitySet} list.
          * @param property the property to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeSuperObjectProperty( OWLObjectProperty property){
-            return getSuperObjectProperty().remove( property);
+            return getSuperObjectProperties().remove( property);
         }
 
         @Override
-        DescriptorEntitySet.ObjectProperties getSuperObjectProperty();
+        DescriptorEntitySet.ObjectProperties getSuperObjectProperties();
 
         @Override // see super class for documentation
         default DescriptorEntitySet.ObjectProperties querySuperObjectProperty(){
             DescriptorEntitySet.ObjectProperties set = new DescriptorEntitySet.ObjectProperties(getOntology().getSuperObjectPropertyOf(getInstance()));
-            set.setSingleton( getSuperObjectProperty().isSingleton());
+            set.setSingleton( getSuperObjectProperties().isSingleton());
             return set;
         }
 
@@ -602,7 +602,7 @@ public interface ObjectPropertyExpression
             return new ObjectDomainRestrictedOnMinData( getInstance(), getOWLDataType( dataType), property, cardinality);
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDomainObjectProperty()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()})
          * based on {@link #domainMinDataRestriction(String, int, Class)}.
          * @param property the name of the restricting data property.
          * @param cardinality the cardinality for the minimal property restriction.
@@ -610,10 +610,10 @@ public interface ObjectPropertyExpression
          * @return {@code true} if a new restriction has been added to the {@link ObjectProperty.Domain}.
          */
         default boolean addDomainMinDataRestriction(String property, int cardinality, Class dataType){
-            return getDomainObjectProperty().add( domainMinDataRestriction( property, cardinality, dataType));
+            return getObjectPropertyDomainConcepts().add( domainMinDataRestriction( property, cardinality, dataType));
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDomainObjectProperty()}
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()}
          * based on {@link #domainMinDataRestriction(OWLDataProperty, int, Class)}.
          * @param property the restricting data property.
          * @param cardinality the cardinality for the minimal property restriction.
@@ -621,10 +621,10 @@ public interface ObjectPropertyExpression
          * @return {@code true} if a new restriction has been added to the {@link ObjectProperty.Domain}.
          */
         default boolean addDomainMinDataRestriction(OWLDataProperty property, int cardinality, Class dataType){
-            return getDomainObjectProperty().add( domainMinDataRestriction( property, cardinality, dataType));
+            return getObjectPropertyDomainConcepts().add( domainMinDataRestriction( property, cardinality, dataType));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDomainObjectProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()})
          * based on {@link #domainMinDataRestriction(String, int, Class)}.
          * @param property the name of the restricting data property.
          * @param cardinality the cardinality for the minimal property restriction.
@@ -632,10 +632,10 @@ public interface ObjectPropertyExpression
          * @return {@code true} if a restriction has been removed from the {@link ObjectProperty.Domain}.
          */
         default boolean removeDomainMinDataRestriction(String property, int cardinality, Class dataType){
-            return getDomainObjectProperty().remove( domainMinDataRestriction( property, cardinality, dataType));
+            return getObjectPropertyDomainConcepts().remove( domainMinDataRestriction( property, cardinality, dataType));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDomainObjectProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()})
          * based on {@link #domainMinDataRestriction(OWLDataProperty, int, Class)}.
          * @param property the restricting data property.
          * @param cardinality the cardinality for the minimal property restriction.
@@ -643,7 +643,7 @@ public interface ObjectPropertyExpression
          * @return {@code true} if a restriction has been removed from the {@link ObjectProperty.Domain}.
          */
         default boolean removeDomainMinDataRestriction(OWLDataProperty property, int cardinality, Class dataType){
-            return getDomainObjectProperty().remove( domainMinDataRestriction( property, cardinality, dataType));
+            return getObjectPropertyDomainConcepts().remove( domainMinDataRestriction( property, cardinality, dataType));
         }
 
         /**
@@ -673,7 +673,7 @@ public interface ObjectPropertyExpression
             return new ObjectDomainRestrictedOnMaxData( getInstance(), getOWLDataType( dataType), property, cardinality);
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDomainObjectProperty()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()})
          * based on {@link #domainMaxDataRestriction(String, int, Class)}.
          * @param property the name of the restricting data property.
          * @param cardinality the cardinality for the maximal property restriction.
@@ -681,10 +681,10 @@ public interface ObjectPropertyExpression
          * @return {@code true} if a new restriction has been added to the {@link ObjectProperty.Domain}.
          */
         default boolean addDomainMaxDataRestriction(String property, int cardinality, Class dataType){
-            return getDomainObjectProperty().add( domainMaxDataRestriction( property, cardinality, dataType));
+            return getObjectPropertyDomainConcepts().add( domainMaxDataRestriction( property, cardinality, dataType));
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDomainObjectProperty()}
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()}
          * based on {@link #domainMaxDataRestriction(OWLDataProperty, int, Class)}.
          * @param property the restricting data property.
          * @param cardinality the cardinality for the maximal property restriction.
@@ -692,10 +692,10 @@ public interface ObjectPropertyExpression
          * @return {@code true} if a new restriction has been added to the {@link ObjectProperty.Domain}.
          */
         default boolean addDomainMaxDataRestriction(OWLDataProperty property, int cardinality, Class dataType){
-            return getDomainObjectProperty().add( domainMaxDataRestriction( property, cardinality, dataType));
+            return getObjectPropertyDomainConcepts().add( domainMaxDataRestriction( property, cardinality, dataType));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDomainObjectProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()})
          * based on {@link #domainMaxDataRestriction(String, int, Class)}.
          * @param property the name of the restricting data property.
          * @param cardinality the cardinality for the maximal property restriction.
@@ -703,10 +703,10 @@ public interface ObjectPropertyExpression
          * @return {@code true} if a restriction has been removed from the {@link ObjectProperty.Domain}.
          */
         default boolean removeDomainMaxDataRestriction(String property, int cardinality, Class dataType){
-            return getDomainObjectProperty().remove( domainMaxDataRestriction( property, cardinality, dataType));
+            return getObjectPropertyDomainConcepts().remove( domainMaxDataRestriction( property, cardinality, dataType));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDomainObjectProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()})
          * based on {@link #domainMaxDataRestriction(OWLDataProperty, int, Class)}.
          * @param property the restricting data property.
          * @param cardinality the cardinality for the maximal property restriction.
@@ -714,7 +714,7 @@ public interface ObjectPropertyExpression
          * @return {@code true} if a restriction has been removed from the {@link ObjectProperty.Domain}.
          */
         default boolean removeDomainMaxDataRestriction(OWLDataProperty property, int cardinality, Class dataType){
-            return getDomainObjectProperty().remove( domainMaxDataRestriction( property, cardinality, dataType));
+            return getObjectPropertyDomainConcepts().remove( domainMaxDataRestriction( property, cardinality, dataType));
         }
 
         /**
@@ -744,7 +744,7 @@ public interface ObjectPropertyExpression
             return new ObjectDomainRestrictedOnExactData( getInstance(), getOWLDataType( dataType), property, cardinality);
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDomainObjectProperty()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()})
          * based on {@link #domainExactDataRestriction(String, int, Class)}.
          * @param property the name of the restricting data property.
          * @param cardinality the cardinality for the exact property restriction.
@@ -752,10 +752,10 @@ public interface ObjectPropertyExpression
          * @return {@code true} if a new restriction has been added to the {@link ObjectProperty.Domain}.
          */
         default boolean addDomainExactDataRestriction(String property, int cardinality, Class dataType){
-            return getDomainObjectProperty().add( domainExactDataRestriction( property, cardinality, dataType));
+            return getObjectPropertyDomainConcepts().add( domainExactDataRestriction( property, cardinality, dataType));
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDomainObjectProperty()}
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()}
          * based on {@link #domainExactDataRestriction(OWLDataProperty, int, Class)}.
          * @param property the restricting data property.
          * @param cardinality the cardinality for the exact property restriction.
@@ -763,10 +763,10 @@ public interface ObjectPropertyExpression
          * @return {@code true} if a new restriction has been added to the {@link ObjectProperty.Domain}.
          */
         default boolean addDomainExactDataRestriction(OWLDataProperty property, int cardinality, Class dataType){
-            return getDomainObjectProperty().add( domainExactDataRestriction( property, cardinality, dataType));
+            return getObjectPropertyDomainConcepts().add( domainExactDataRestriction( property, cardinality, dataType));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDomainObjectProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()})
          * based on {@link #domainExactDataRestriction(String, int, Class)}.
          * @param property the name of the restricting data property.
          * @param cardinality the cardinality for the exact property restriction.
@@ -774,10 +774,10 @@ public interface ObjectPropertyExpression
          * @return {@code true} if a restriction has been removed from the {@link ObjectProperty.Domain}.
          */
         default boolean removeDomainExactDataRestriction(String property, int cardinality, Class dataType){
-            return getDomainObjectProperty().remove( domainExactDataRestriction( property, cardinality, dataType));
+            return getObjectPropertyDomainConcepts().remove( domainExactDataRestriction( property, cardinality, dataType));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDomainObjectProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()})
          * based on {@link #domainExactDataRestriction(OWLDataProperty, int, Class)}.
          * @param property the restricting data property.
          * @param cardinality the cardinality for the exact property restriction.
@@ -785,7 +785,7 @@ public interface ObjectPropertyExpression
          * @return {@code true} if a restriction has been removed from the {@link ObjectProperty.Domain}.
          */
         default boolean removeDomainExactDataRestriction(OWLDataProperty property, int cardinality, Class dataType){
-            return getDomainObjectProperty().remove( domainExactDataRestriction( property, cardinality, dataType));
+            return getObjectPropertyDomainConcepts().remove( domainExactDataRestriction( property, cardinality, dataType));
         }
 
         /**
@@ -813,44 +813,44 @@ public interface ObjectPropertyExpression
             return new ObjectDomainRestrictedOnSomeData( getInstance(), getOWLDataType( dataType), property);
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDomainObjectProperty()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()})
          * based on {@link #domainSomeDataRestriction(String, Class)}.
          * @param property the name of the restricting data property.
          * @param dataType the data type of the restriction.
          * @return {@code true} if a new restriction has been added to the {@link ObjectProperty.Domain}.
          */
         default boolean addDomainSomeDataRestriction(String property, Class dataType){
-            return getDomainObjectProperty().add( domainSomeDataRestriction( property, dataType));
+            return getObjectPropertyDomainConcepts().add( domainSomeDataRestriction( property, dataType));
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDomainObjectProperty()}
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()}
          * based on {@link #domainSomeDataRestriction(OWLDataProperty, Class)}.
          * @param property the restricting data property.
          * @param dataType the data type of the restriction.
          * @return {@code true} if a new restriction has been added to the {@link ObjectProperty.Domain}.
          */
         default boolean addDomainSomeDataRestriction(OWLDataProperty property, Class dataType){
-            return getDomainObjectProperty().add( domainSomeDataRestriction( property, dataType));
+            return getObjectPropertyDomainConcepts().add( domainSomeDataRestriction( property, dataType));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDomainObjectProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()})
          * based on {@link #domainSomeDataRestriction(String, Class)}.
          * @param property the name of the restricting data property.
          * @param dataType the data type of the restriction.
          * @return {@code true} if a restriction has been removed from the {@link ObjectProperty.Domain}.
          */
         default boolean removeDomainSomeDataRestriction(String property, Class dataType){
-            return getDomainObjectProperty().remove( domainSomeDataRestriction( property, dataType));
+            return getObjectPropertyDomainConcepts().remove( domainSomeDataRestriction( property, dataType));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDomainObjectProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()})
          * based on {@link #domainSomeDataRestriction(OWLDataProperty, Class)}.
          * @param property the restricting data property.
          * @param dataType the data type of the restriction.
          * @return {@code true} if a restriction has been removed from the {@link ObjectProperty.Domain}.
          */
         default boolean removeDomainSomeDataRestriction(OWLDataProperty property, Class dataType){
-            return getDomainObjectProperty().remove( domainSomeDataRestriction( property, dataType));
+            return getObjectPropertyDomainConcepts().remove( domainSomeDataRestriction( property, dataType));
         }
 
         /**
@@ -878,44 +878,44 @@ public interface ObjectPropertyExpression
             return new ObjectDomainRestrictedOnAllData( getInstance(), getOWLDataType( dataType), property);
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDomainObjectProperty()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()})
          * based on {@link #domainOnlyDataRestriction(String, Class)}.
          * @param property the name of the restricting data property.
          * @param dataType the data type of the restriction.
          * @return {@code true} if a new restriction has been added to the {@link ObjectProperty.Domain}.
          */
         default boolean addDomainOnlyDataRestriction(String property, Class dataType){
-            return getDomainObjectProperty().add( domainOnlyDataRestriction( property, dataType));
+            return getObjectPropertyDomainConcepts().add( domainOnlyDataRestriction( property, dataType));
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDomainObjectProperty()}
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()}
          * based on {@link #domainOnlyDataRestriction(OWLDataProperty, Class)}.
          * @param property the restricting data property.
          * @param dataType the data type of the restriction.
          * @return {@code true} if a new restriction has been added to the {@link ObjectProperty.Domain}.
          */
         default boolean addDomainOnlyDataRestriction(OWLDataProperty property, Class dataType){
-            return getDomainObjectProperty().add( domainOnlyDataRestriction( property, dataType));
+            return getObjectPropertyDomainConcepts().add( domainOnlyDataRestriction( property, dataType));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDomainObjectProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()})
          * based on {@link #domainOnlyDataRestriction(String, Class)}.
          * @param property the name of the restricting data property.
          * @param dataType the data type of the restriction.
          * @return {@code true} if a restriction has been removed from the {@link ObjectProperty.Domain}.
          */
         default boolean removeDomainOnlyDataRestriction(String property, Class dataType){
-            return getDomainObjectProperty().remove( domainOnlyDataRestriction( property, dataType));
+            return getObjectPropertyDomainConcepts().remove( domainOnlyDataRestriction( property, dataType));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDomainObjectProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()})
          * based on {@link #domainOnlyDataRestriction(OWLDataProperty, Class)}.
          * @param property the restricting data property.
          * @param dataType the data type of the restriction.
          * @return {@code true} if a restriction has been removed from the {@link ObjectProperty.Domain}.
          */
         default boolean removeDomainOnlyDataRestriction(OWLDataProperty property, Class dataType){
-            return getDomainObjectProperty().remove( domainOnlyDataRestriction( property, dataType));
+            return getObjectPropertyDomainConcepts().remove( domainOnlyDataRestriction( property, dataType));
         }
 
         /**
@@ -945,7 +945,7 @@ public interface ObjectPropertyExpression
             return new ObjectDomainRestrictedOnMinObject( getInstance(), cl, property, cardinality);
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDomainObjectProperty()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()})
          * based on {@link #domainMinObjectRestriction(String, int, String)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
          * to be perfectly aligned with the {@link #queryDomainObjectProperty()},
@@ -956,10 +956,10 @@ public interface ObjectPropertyExpression
          * @return {@code true} if a new restriction has been added to the {@link ObjectProperty.Domain}.
          */
         default boolean addDomainMinObjectRestriction(String property, int cardinality, String cl){
-            return getDomainObjectProperty().add( domainMinObjectRestriction( property, cardinality, cl));
+            return getObjectPropertyDomainConcepts().add( domainMinObjectRestriction( property, cardinality, cl));
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDomainObjectProperty()}
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()}
          * based on {@link #domainMinObjectRestriction(OWLObjectProperty, int, OWLClass)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
          * to be perfectly aligned with the {@link #queryDomainObjectProperty()},
@@ -970,10 +970,10 @@ public interface ObjectPropertyExpression
          * @return {@code true} if a new restriction has been added to the {@link ObjectProperty.Domain}.
          */
         default boolean addDomainMinObjectRestriction(OWLObjectProperty property, int cardinality, OWLClass cl){
-            return getDomainObjectProperty().add( domainMinObjectRestriction( property, cardinality, cl));
+            return getObjectPropertyDomainConcepts().add( domainMinObjectRestriction( property, cardinality, cl));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDomainObjectProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()})
          * based on {@link #domainMinObjectRestriction(String, int, String)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
          * to be perfectly aligned with the {@link #queryDomainObjectProperty()},
@@ -984,10 +984,10 @@ public interface ObjectPropertyExpression
          * @return {@code true} if a restriction has been removed from the {@link ObjectProperty.Domain}.
          */
         default boolean removeDomainMinObjectRestriction(String property, int cardinality, String cl){
-            return getDomainObjectProperty().remove( domainMinObjectRestriction( property, cardinality, cl));
+            return getObjectPropertyDomainConcepts().remove( domainMinObjectRestriction( property, cardinality, cl));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDomainObjectProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()})
          * based on {@link #domainMinObjectRestriction(OWLObjectProperty, int, OWLClass)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
          * to be perfectly aligned with the {@link #queryDomainObjectProperty()},
@@ -998,7 +998,7 @@ public interface ObjectPropertyExpression
          * @return {@code true} if a restriction has been removed from the {@link ObjectProperty.Domain}.
          */
         default boolean removeDomainMinObjectRestriction(OWLObjectProperty property, int cardinality, OWLClass cl){
-            return getDomainObjectProperty().remove( domainMinObjectRestriction( property, cardinality, cl));
+            return getObjectPropertyDomainConcepts().remove( domainMinObjectRestriction( property, cardinality, cl));
         }
 
         /**
@@ -1028,7 +1028,7 @@ public interface ObjectPropertyExpression
             return new ObjectDomainRestrictedOnMaxObject( getInstance(), cl, property, cardinality);
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDomainObjectProperty()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()})
          * based on {@link #domainMaxObjectRestriction(String, int, String)}.
          * @param property the name of the restricting object property.
          * @param cardinality the cardinality for the maximal property restriction.
@@ -1036,10 +1036,10 @@ public interface ObjectPropertyExpression
          * @return {@code true} if a new restriction has been added to the {@link ObjectProperty.Domain}.
          */
         default boolean addDomainMaxObjectRestriction(String property, int cardinality, String cl){
-            return getDomainObjectProperty().add( domainMaxObjectRestriction( property, cardinality, cl));
+            return getObjectPropertyDomainConcepts().add( domainMaxObjectRestriction( property, cardinality, cl));
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDomainObjectProperty()}
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()}
          * based on {@link #domainMaxObjectRestriction(OWLObjectProperty, int, OWLClass)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
          * to be perfectly aligned with the {@link #queryDomainObjectProperty()},
@@ -1050,10 +1050,10 @@ public interface ObjectPropertyExpression
          * @return {@code true} if a new restriction has been added to the {@link ObjectProperty.Domain}.
          */
         default boolean addDomainMaxObjectRestriction(OWLObjectProperty property, int cardinality, OWLClass cl){
-            return getDomainObjectProperty().add( domainMaxObjectRestriction( property, cardinality, cl));
+            return getObjectPropertyDomainConcepts().add( domainMaxObjectRestriction( property, cardinality, cl));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDomainObjectProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()})
          * based on {@link #domainMaxObjectRestriction(String, int, String)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
          * to be perfectly aligned with the {@link #queryDomainObjectProperty()},
@@ -1064,10 +1064,10 @@ public interface ObjectPropertyExpression
          * @return {@code true} if a restriction has been removed from the {@link ObjectProperty.Domain}.
          */
         default boolean removeDomainMaxObjectRestriction(String property, int cardinality, String cl){
-            return getDomainObjectProperty().remove( domainMaxObjectRestriction( property, cardinality, cl));
+            return getObjectPropertyDomainConcepts().remove( domainMaxObjectRestriction( property, cardinality, cl));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDomainObjectProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()})
          * based on {@link #domainMaxObjectRestriction(OWLObjectProperty, int, OWLClass)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
          * to be perfectly aligned with the {@link #queryDomainObjectProperty()},
@@ -1078,7 +1078,7 @@ public interface ObjectPropertyExpression
          * @return {@code true} if a restriction has been removed from the {@link ObjectProperty.Domain}.
          */
         default boolean removeDomainMaxObjectRestriction(OWLObjectProperty property, int cardinality, OWLClass cl){
-            return getDomainObjectProperty().remove( domainMaxObjectRestriction( property, cardinality, cl));
+            return getObjectPropertyDomainConcepts().remove( domainMaxObjectRestriction( property, cardinality, cl));
         }
 
         /**
@@ -1108,7 +1108,7 @@ public interface ObjectPropertyExpression
             return new ObjectDomainRestrictedOnExactObject( getInstance(), cl, property, cardinality);
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDomainObjectProperty()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()})
          * based on {@link #domainExactObjectRestriction(String, int, String)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
          * to be perfectly aligned with the {@link #queryDomainObjectProperty()},
@@ -1119,10 +1119,10 @@ public interface ObjectPropertyExpression
          * @return {@code true} if a new restriction has been added to the {@link ObjectProperty.Domain}.
          */
         default boolean addDomainExactObjectRestriction(String property, int cardinality, String cl){
-            return getDomainObjectProperty().add( domainExactObjectRestriction( property, cardinality, cl));
+            return getObjectPropertyDomainConcepts().add( domainExactObjectRestriction( property, cardinality, cl));
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDomainObjectProperty()}
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()}
          * based on {@link #domainExactObjectRestriction(OWLObjectProperty, int, OWLClass)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
          * to be perfectly aligned with the {@link #queryDomainObjectProperty()},
@@ -1133,10 +1133,10 @@ public interface ObjectPropertyExpression
          * @return {@code true} if a new restriction has been added to the {@link ObjectProperty.Domain}.
          */
         default boolean addDomainExactObjectRestriction(OWLObjectProperty property, int cardinality, OWLClass cl){
-            return getDomainObjectProperty().add( domainExactObjectRestriction( property, cardinality, cl));
+            return getObjectPropertyDomainConcepts().add( domainExactObjectRestriction( property, cardinality, cl));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDomainObjectProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()})
          * based on {@link #domainExactObjectRestriction(String, int, String)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
          * to be perfectly aligned with the {@link #queryDomainObjectProperty()},
@@ -1147,10 +1147,10 @@ public interface ObjectPropertyExpression
          * @return {@code true} if a restriction has been removed from the {@link ObjectProperty.Domain}.
          */
         default boolean removeDomainExactObjectRestriction(String property, int cardinality, String cl){
-            return getDomainObjectProperty().remove( domainExactObjectRestriction( property, cardinality, cl));
+            return getObjectPropertyDomainConcepts().remove( domainExactObjectRestriction( property, cardinality, cl));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDomainObjectProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()})
          * based on {@link #domainExactObjectRestriction(OWLObjectProperty, int, OWLClass)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
          * to be perfectly aligned with the {@link #queryDomainObjectProperty()},
@@ -1161,7 +1161,7 @@ public interface ObjectPropertyExpression
          * @return {@code true} if a restriction has been removed from the {@link ObjectProperty.Domain}.
          */
         default boolean removeDomainExactObjectRestriction(OWLObjectProperty property, int cardinality, OWLClass cl){
-            return getDomainObjectProperty().remove( domainExactObjectRestriction( property, cardinality, cl));
+            return getObjectPropertyDomainConcepts().remove( domainExactObjectRestriction( property, cardinality, cl));
         }
 
         /**
@@ -1189,44 +1189,44 @@ public interface ObjectPropertyExpression
             return new ObjectDomainRestrictedOnSomeObject( getInstance(), cl, property);
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDomainObjectProperty()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()})
          * based on {@link #domainSomeObjectRestriction(String, String)}.
          * @param property the name of the restricting object property.
          * @param cl the name of the class range restriction.
          * @return {@code true} if a new restriction has been added to the {@link ObjectProperty.Domain}.
          */
         default boolean addDomainSomeObjectRestriction(String property, String cl){
-            return getDomainObjectProperty().add( domainSomeObjectRestriction( property, cl));
+            return getObjectPropertyDomainConcepts().add( domainSomeObjectRestriction( property, cl));
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDomainObjectProperty()}
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()}
          * based on {@link #domainSomeObjectRestriction(OWLObjectProperty, OWLClass)}.
          * @param property the restricting object property.
          * @param cl the class range restriction.
          * @return {@code true} if a new restriction has been added to the {@link ObjectProperty.Domain}.
          */
         default boolean addDomainSomeObjectRestriction(OWLObjectProperty property, OWLClass cl){
-            return getDomainObjectProperty().add( domainSomeObjectRestriction( property, cl));
+            return getObjectPropertyDomainConcepts().add( domainSomeObjectRestriction( property, cl));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDomainObjectProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()})
          * based on {@link #domainSomeObjectRestriction(String, String)}.
          * @param property the name of the restricting object property.
          * @param cl the name of the class range restriction.
          * @return {@code true} if a restriction has been removed from the {@link ObjectProperty.Domain}.
          */
         default boolean removeDomainSomeObjectRestriction(String property, String cl){
-            return getDomainObjectProperty().remove( domainSomeObjectRestriction( property, cl));
+            return getObjectPropertyDomainConcepts().remove( domainSomeObjectRestriction( property, cl));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDomainObjectProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()})
          * based on {@link #domainSomeObjectRestriction(OWLObjectProperty, OWLClass)}.
          * @param property the restricting object property.
          * @param cl the class range restriction.
          * @return {@code true} if a restriction has been removed from the {@link ObjectProperty.Domain}.
          */
         default boolean removeDomainSomeObjectRestriction(OWLObjectProperty property, OWLClass cl){
-            return getDomainObjectProperty().remove( domainSomeObjectRestriction( property, cl));
+            return getObjectPropertyDomainConcepts().remove( domainSomeObjectRestriction( property, cl));
         }
 
         /**
@@ -1254,44 +1254,44 @@ public interface ObjectPropertyExpression
             return new ObjectDomainRestrictedOnAllObject( getInstance(), cl, property);
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDomainObjectProperty()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()})
          * based on {@link #domainOnlyObjectRestriction(String, String)}.
          * @param property the name of the restricting object property.
          * @param cl the name of the class range restriction.
          * @return {@code true} if a new restriction has been added to the {@link ObjectProperty.Domain}.
          */
         default boolean addDomainOnlyObjectRestriction(String property, String cl){
-            return getDomainObjectProperty().add( domainOnlyObjectRestriction( property, cl));
+            return getObjectPropertyDomainConcepts().add( domainOnlyObjectRestriction( property, cl));
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDomainObjectProperty()}
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()}
          * based on {@link #domainOnlyObjectRestriction(OWLObjectProperty, OWLClass)}.
          * @param property the restricting object property.
          * @param cl the class range restriction.
          * @return {@code true} if a new restriction has been added to the {@link ObjectProperty.Domain}.
          */
         default boolean addDomainOnlyObjectRestriction(OWLObjectProperty property, OWLClass cl){
-            return getDomainObjectProperty().add( domainOnlyObjectRestriction( property, cl));
+            return getObjectPropertyDomainConcepts().add( domainOnlyObjectRestriction( property, cl));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDomainObjectProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()})
          * based on {@link #domainOnlyObjectRestriction(String, String)}.
          * @param property the name of the restricting object property.
          * @param cl the name of the class range restriction.
          * @return {@code true} if a restriction has been removed from the {@link ObjectProperty.Domain}.
          */
         default boolean removeDomainOnlyObjectRestriction(String property, String cl){
-            return getDomainObjectProperty().remove( domainOnlyObjectRestriction( property, cl));
+            return getObjectPropertyDomainConcepts().remove( domainOnlyObjectRestriction( property, cl));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDomainObjectProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()})
          * based on {@link #domainOnlyObjectRestriction(OWLObjectProperty, OWLClass)}.
          * @param property the restricting object property.
          * @param cl the class range restriction.
          * @return {@code true} if a restriction has been removed from the {@link ObjectProperty.Domain}.
          */
         default boolean removeDomainOnlyObjectRestriction(OWLObjectProperty property, OWLClass cl){
-            return getDomainObjectProperty().remove( domainOnlyObjectRestriction( property, cl));
+            return getObjectPropertyDomainConcepts().remove( domainOnlyObjectRestriction( property, cl));
         }
 
         /**
@@ -1316,57 +1316,57 @@ public interface ObjectPropertyExpression
         }
         /**
          * Adds a new restriction to the described {@link EntitySet}
-         * (i.e.: {@link #getDomainObjectProperty()})
+         * (i.e.: {@link #getObjectPropertyDomainConcepts()})
          * based on {@link #domainClassRestriction(String)}.
          * @param className the name of the range class of the restriction.
          * @return {@code true} if a new restriction has been added to the
          * {@link ObjectProperty.Domain}.
          */
         default boolean addDomainClassRestriction(String className){
-            return getDomainObjectProperty().add( domainClassRestriction( className));
+            return getObjectPropertyDomainConcepts().add( domainClassRestriction( className));
         }
         /**
          * Adds a new restriction to the described {@link EntitySet}
-         * (i.e.: {@link #getDomainObjectProperty()})
+         * (i.e.: {@link #getObjectPropertyDomainConcepts()})
          * based on {@link #domainClassRestriction(String)}.
          * @param cl the range class of the restriction.
          * @return {@code true} if a new restriction has been added to the
          * {@link ObjectProperty.Domain}.
          */
         default boolean addDomainClassRestriction(OWLClass cl){
-            return getDomainObjectProperty().add( domainClassRestriction( cl));
+            return getObjectPropertyDomainConcepts().add( domainClassRestriction( cl));
         }
         /**
          * Removes a restriction to the described {@link EntitySet}
-         * (i.e.: {@link #getDomainObjectProperty()})
+         * (i.e.: {@link #getObjectPropertyDomainConcepts()})
          * based on {@link #domainClassRestriction(String)}.
          * @param className the name of the range class of the restriction.
          * @return {@code true} if a new restriction has been added to the
          * {@link ObjectProperty.Domain}.
          */
         default boolean removeDomainClassRestriction(String className){
-            return getDomainObjectProperty().remove( domainClassRestriction( className));
+            return getObjectPropertyDomainConcepts().remove( domainClassRestriction( className));
         }
         /**
          * Removes a restriction to the described {@link EntitySet}
-         * (i.e.: {@link #getDomainObjectProperty()})
+         * (i.e.: {@link #getObjectPropertyDomainConcepts()})
          * based on {@link #domainClassRestriction(String)}.
          * @param cl the range class of the restriction.
          * @return {@code true} if a new restriction has been added to the
          * {@link ObjectProperty.Domain}.
          */
         default boolean removeDomainClassRestriction(OWLClass cl){
-            return getDomainObjectProperty().remove( domainClassRestriction( cl));
+            return getObjectPropertyDomainConcepts().remove( domainClassRestriction( cl));
         }
 
 
         @Override
-        DescriptorEntitySet.Restrictions getDomainObjectProperty();
+        DescriptorEntitySet.Restrictions getObjectPropertyDomainConcepts();
 
         @Override // see super class for documentation
         default DescriptorEntitySet.Restrictions queryDomainObjectProperty(){
             DescriptorEntitySet.Restrictions set = new DescriptorEntitySet.Restrictions(getOntology().getDomainRestriction(getInstance()));
-            set.setSingleton( getDomainObjectProperty().isSingleton());
+            set.setSingleton( getObjectPropertyDomainConcepts().isSingleton());
             return set;
         }
 
@@ -1426,7 +1426,7 @@ public interface ObjectPropertyExpression
             return new ObjectRangeRestrictedOnMinData( getInstance(), getOWLDataType( dataType), property, cardinality);
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getRangeObjectProperty()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()})
          * based on {@link #rangeMinDataRestriction(String, int, Class)}.
          * @param property the name of the restricting data property.
          * @param cardinality the cardinality for the minimal property restriction.
@@ -1434,10 +1434,10 @@ public interface ObjectPropertyExpression
          * @return {@code true} if a new restriction has been added to the {@link ObjectProperty.Range}.
          */
         default boolean addRangeMinDataRestriction(String property, int cardinality, Class dataType){
-            return getRangeObjectProperty().add( rangeMinDataRestriction( property, cardinality, dataType));
+            return getObjectPropertyRangeConcepts().add( rangeMinDataRestriction( property, cardinality, dataType));
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getRangeObjectProperty()}
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()}
          * based on {@link #rangeMinDataRestriction(OWLDataProperty, int, Class)}.
          * @param property the restricting data property.
          * @param cardinality the cardinality for the minimal property restriction.
@@ -1445,10 +1445,10 @@ public interface ObjectPropertyExpression
          * @return {@code true} if a new restriction has been added to the {@link ObjectProperty.Range}.
          */
         default boolean addRangeMinDataRestriction(OWLDataProperty property, int cardinality, Class dataType){
-            return getRangeObjectProperty().add( rangeMinDataRestriction( property, cardinality, dataType));
+            return getObjectPropertyRangeConcepts().add( rangeMinDataRestriction( property, cardinality, dataType));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getRangeObjectProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()})
          * based on {@link #rangeMinDataRestriction(String, int, Class)}.
          * @param property the name of the restricting data property.
          * @param cardinality the cardinality for the minimal property restriction.
@@ -1456,10 +1456,10 @@ public interface ObjectPropertyExpression
          * @return {@code true} if a restriction has been removed from the {@link ObjectProperty.Range}.
          */
         default boolean removeRangeMinDataRestriction(String property, int cardinality, Class dataType){
-            return getRangeObjectProperty().remove( rangeMinDataRestriction( property, cardinality, dataType));
+            return getObjectPropertyRangeConcepts().remove( rangeMinDataRestriction( property, cardinality, dataType));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getRangeObjectProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()})
          * based on {@link #rangeMinDataRestriction(OWLDataProperty, int, Class)}.
          * @param property the restricting data property.
          * @param cardinality the cardinality for the minimal property restriction.
@@ -1467,7 +1467,7 @@ public interface ObjectPropertyExpression
          * @return {@code true} if a restriction has been removed from the {@link ObjectProperty.Range}.
          */
         default boolean removeRangeMinDataRestriction(OWLDataProperty property, int cardinality, Class dataType){
-            return getRangeObjectProperty().remove( rangeMinDataRestriction( property, cardinality, dataType));
+            return getObjectPropertyRangeConcepts().remove( rangeMinDataRestriction( property, cardinality, dataType));
         }
 
         /**
@@ -1497,7 +1497,7 @@ public interface ObjectPropertyExpression
             return new ObjectRangeRestrictedOnMaxData( getInstance(), getOWLDataType( dataType), property, cardinality);
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getRangeObjectProperty()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()})
          * based on {@link #rangeMaxDataRestriction(String, int, Class)}.
          * @param property the name of the restricting data property.
          * @param cardinality the cardinality for the maximal property restriction.
@@ -1505,10 +1505,10 @@ public interface ObjectPropertyExpression
          * @return {@code true} if a new restriction has been added to the {@link ObjectProperty.Range}.
          */
         default boolean addRangeMaxDataRestriction(String property, int cardinality, Class dataType){
-            return getRangeObjectProperty().add( rangeMaxDataRestriction( property, cardinality, dataType));
+            return getObjectPropertyRangeConcepts().add( rangeMaxDataRestriction( property, cardinality, dataType));
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getRangeObjectProperty()}
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()}
          * based on {@link #rangeMaxDataRestriction(OWLDataProperty, int, Class)}.
          * @param property the restricting data property.
          * @param cardinality the cardinality for the maximal property restriction.
@@ -1516,10 +1516,10 @@ public interface ObjectPropertyExpression
          * @return {@code true} if a new restriction has been added to the {@link ObjectProperty.Range}.
          */
         default boolean addRangeMaxDataRestriction(OWLDataProperty property, int cardinality, Class dataType){
-            return getRangeObjectProperty().add( rangeMaxDataRestriction( property, cardinality, dataType));
+            return getObjectPropertyRangeConcepts().add( rangeMaxDataRestriction( property, cardinality, dataType));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getRangeObjectProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()})
          * based on {@link #rangeMaxDataRestriction(String, int, Class)}.
          * @param property the name of the restricting data property.
          * @param cardinality the cardinality for the maximal property restriction.
@@ -1527,10 +1527,10 @@ public interface ObjectPropertyExpression
          * @return {@code true} if a restriction has been removed from the {@link ObjectProperty.Range}.
          */
         default boolean removeRangeMaxDataRestriction(String property, int cardinality, Class dataType){
-            return getRangeObjectProperty().remove( rangeMaxDataRestriction( property, cardinality, dataType));
+            return getObjectPropertyRangeConcepts().remove( rangeMaxDataRestriction( property, cardinality, dataType));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getRangeObjectProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()})
          * based on {@link #rangeMaxDataRestriction(OWLDataProperty, int, Class)}.
          * @param property the restricting data property.
          * @param cardinality the cardinality for the maximal property restriction.
@@ -1538,7 +1538,7 @@ public interface ObjectPropertyExpression
          * @return {@code true} if a restriction has been removed from the {@link ObjectProperty.Range}.
          */
         default boolean removeRangeMaxDataRestriction(OWLDataProperty property, int cardinality, Class dataType){
-            return getRangeObjectProperty().remove( rangeMaxDataRestriction( property, cardinality, dataType));
+            return getObjectPropertyRangeConcepts().remove( rangeMaxDataRestriction( property, cardinality, dataType));
         }
 
         /**
@@ -1568,7 +1568,7 @@ public interface ObjectPropertyExpression
             return new ObjectRangeRestrictedOnExactData( getInstance(), getOWLDataType( dataType), property, cardinality);
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getRangeObjectProperty()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()})
          * based on {@link #rangeExactDataRestriction(String, int, Class)}.
          * @param property the name of the restricting data property.
          * @param cardinality the cardinality for the exact property restriction.
@@ -1576,10 +1576,10 @@ public interface ObjectPropertyExpression
          * @return {@code true} if a new restriction has been added to the {@link ObjectProperty.Range}.
          */
         default boolean addRangeExactDataRestriction(String property, int cardinality, Class dataType){
-            return getRangeObjectProperty().add( rangeExactDataRestriction( property, cardinality, dataType));
+            return getObjectPropertyRangeConcepts().add( rangeExactDataRestriction( property, cardinality, dataType));
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getRangeObjectProperty()}
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()}
          * based on {@link #rangeExactDataRestriction(OWLDataProperty, int, Class)}.
          * @param property the restricting data property.
          * @param cardinality the cardinality for the exact property restriction.
@@ -1587,10 +1587,10 @@ public interface ObjectPropertyExpression
          * @return {@code true} if a new restriction has been added to the {@link ObjectProperty.Range}.
          */
         default boolean addRangeExactDataRestriction(OWLDataProperty property, int cardinality, Class dataType){
-            return getRangeObjectProperty().add( rangeExactDataRestriction( property, cardinality, dataType));
+            return getObjectPropertyRangeConcepts().add( rangeExactDataRestriction( property, cardinality, dataType));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getRangeObjectProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()})
          * based on {@link #rangeExactDataRestriction(String, int, Class)}.
          * @param property the name of the restricting data property.
          * @param cardinality the cardinality for the exact property restriction.
@@ -1598,10 +1598,10 @@ public interface ObjectPropertyExpression
          * @return {@code true} if a restriction has been removed from the {@link ObjectProperty.Range}.
          */
         default boolean removeRangeExactDataRestriction(String property, int cardinality, Class dataType){
-            return getRangeObjectProperty().remove( rangeExactDataRestriction( property, cardinality, dataType));
+            return getObjectPropertyRangeConcepts().remove( rangeExactDataRestriction( property, cardinality, dataType));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getRangeObjectProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()})
          * based on {@link #rangeExactDataRestriction(OWLDataProperty, int, Class)}.
          * @param property the restricting data property.
          * @param cardinality the cardinality for the exact property restriction.
@@ -1609,7 +1609,7 @@ public interface ObjectPropertyExpression
          * @return {@code true} if a restriction has been removed from the {@link ObjectProperty.Range}.
          */
         default boolean removeRangeExactDataRestriction(OWLDataProperty property, int cardinality, Class dataType){
-            return getRangeObjectProperty().remove( rangeExactDataRestriction( property, cardinality, dataType));
+            return getObjectPropertyRangeConcepts().remove( rangeExactDataRestriction( property, cardinality, dataType));
         }
 
         /**
@@ -1637,44 +1637,44 @@ public interface ObjectPropertyExpression
             return new ObjectRangeRestrictedOnSomeData( getInstance(), getOWLDataType( dataType), property);
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getRangeObjectProperty()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()})
          * based on {@link #rangeSomeDataRestriction(String, Class)}.
          * @param property the name of the restricting data property.
          * @param dataType the data type of the restriction.
          * @return {@code true} if a new restriction has been added to the {@link ObjectProperty.Range}.
          */
         default boolean addRangeSomeDataRestriction(String property, Class dataType){
-            return getRangeObjectProperty().add( rangeSomeDataRestriction( property, dataType));
+            return getObjectPropertyRangeConcepts().add( rangeSomeDataRestriction( property, dataType));
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getRangeObjectProperty()}
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()}
          * based on {@link #rangeSomeDataRestriction(OWLDataProperty, Class)}.
          * @param property the restricting data property.
          * @param dataType the data type of the restriction.
          * @return {@code true} if a new restriction has been added to the {@link ObjectProperty.Range}.
          */
         default boolean addRangeSomeDataRestriction(OWLDataProperty property, Class dataType){
-            return getRangeObjectProperty().add( rangeSomeDataRestriction( property, dataType));
+            return getObjectPropertyRangeConcepts().add( rangeSomeDataRestriction( property, dataType));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getRangeObjectProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()})
          * based on {@link #rangeSomeDataRestriction(String, Class)}.
          * @param property the name of the restricting data property.
          * @param dataType the data type of the restriction.
          * @return {@code true} if a restriction has been removed from the {@link ObjectProperty.Range}.
          */
         default boolean removeRangeSomeDataRestriction(String property, Class dataType){
-            return getRangeObjectProperty().remove( rangeSomeDataRestriction( property, dataType));
+            return getObjectPropertyRangeConcepts().remove( rangeSomeDataRestriction( property, dataType));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getRangeObjectProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()})
          * based on {@link #rangeSomeDataRestriction(OWLDataProperty, Class)}.
          * @param property the restricting data property.
          * @param dataType the data type of the restriction.
          * @return {@code true} if a restriction has been removed from the {@link ObjectProperty.Range}.
          */
         default boolean removeRangeSomeDataRestriction(OWLDataProperty property, Class dataType){
-            return getRangeObjectProperty().remove( rangeSomeDataRestriction( property, dataType));
+            return getObjectPropertyRangeConcepts().remove( rangeSomeDataRestriction( property, dataType));
         }
 
         /**
@@ -1702,44 +1702,44 @@ public interface ObjectPropertyExpression
             return new ObjectRangeRestrictedOnAllData( getInstance(), getOWLDataType( dataType), property);
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getRangeObjectProperty()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()})
          * based on {@link #rangeOnlyDataRestriction(String, Class)}.
          * @param property the name of the restricting data property.
          * @param dataType the data type of the restriction.
          * @return {@code true} if a new restriction has been added to the {@link ObjectProperty.Range}.
          */
         default boolean addRangeOnlyDataRestriction(String property, Class dataType){
-            return getRangeObjectProperty().add( rangeOnlyDataRestriction( property, dataType));
+            return getObjectPropertyRangeConcepts().add( rangeOnlyDataRestriction( property, dataType));
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getRangeObjectProperty()}
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()}
          * based on {@link #rangeOnlyDataRestriction(OWLDataProperty, Class)}.
          * @param property the restricting data property.
          * @param dataType the data type of the restriction.
          * @return {@code true} if a new restriction has been added to the {@link ObjectProperty.Range}.
          */
         default boolean addRangeOnlyDataRestriction(OWLDataProperty property, Class dataType){
-            return getRangeObjectProperty().add( rangeOnlyDataRestriction( property, dataType));
+            return getObjectPropertyRangeConcepts().add( rangeOnlyDataRestriction( property, dataType));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getRangeObjectProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()})
          * based on {@link #rangeOnlyDataRestriction(String, Class)}.
          * @param property the name of the restricting data property.
          * @param dataType the data type of the restriction.
          * @return {@code true} if a restriction has been removed from the {@link ObjectProperty.Range}.
          */
         default boolean removeRangeOnlyDataRestriction(String property, Class dataType){
-            return getRangeObjectProperty().remove( rangeOnlyDataRestriction( property, dataType));
+            return getObjectPropertyRangeConcepts().remove( rangeOnlyDataRestriction( property, dataType));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getRangeObjectProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()})
          * based on {@link #rangeOnlyDataRestriction(OWLDataProperty, Class)}.
          * @param property the restricting data property.
          * @param dataType the data type of the restriction.
          * @return {@code true} if a restriction has been removed from the {@link ObjectProperty.Range}.
          */
         default boolean removeRangeOnlyDataRestriction(OWLDataProperty property, Class dataType){
-            return getRangeObjectProperty().remove( rangeOnlyDataRestriction( property, dataType));
+            return getObjectPropertyRangeConcepts().remove( rangeOnlyDataRestriction( property, dataType));
         }
 
         /**
@@ -1769,7 +1769,7 @@ public interface ObjectPropertyExpression
             return new ObjectRangeRestrictedOnMinObject( getInstance(), cl, property, cardinality);
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getRangeObjectProperty()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()})
          * based on {@link #rangeMinObjectRestriction(String, int, String)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
          * to be perfectly aligned with the {@link #queryRangeObjectProperty()},
@@ -1780,10 +1780,10 @@ public interface ObjectPropertyExpression
          * @return {@code true} if a new restriction has been added to the {@link ObjectProperty.Range}.
          */
         default boolean addRangeMinObjectRestriction(String property, int cardinality, String cl){
-            return getRangeObjectProperty().add( rangeMinObjectRestriction( property, cardinality, cl));
+            return getObjectPropertyRangeConcepts().add( rangeMinObjectRestriction( property, cardinality, cl));
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getRangeObjectProperty()}
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()}
          * based on {@link #rangeMinObjectRestriction(OWLObjectProperty, int, OWLClass)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
          * to be perfectly aligned with the {@link #queryRangeObjectProperty()},
@@ -1794,10 +1794,10 @@ public interface ObjectPropertyExpression
          * @return {@code true} if a new restriction has been added to the {@link ObjectProperty.Range}.
          */
         default boolean addRangeMinObjectRestriction(OWLObjectProperty property, int cardinality, OWLClass cl){
-            return getRangeObjectProperty().add( rangeMinObjectRestriction( property, cardinality, cl));
+            return getObjectPropertyRangeConcepts().add( rangeMinObjectRestriction( property, cardinality, cl));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getRangeObjectProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()})
          * based on {@link #rangeMinObjectRestriction(String, int, String)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
          * to be perfectly aligned with the {@link #queryRangeObjectProperty()},
@@ -1808,10 +1808,10 @@ public interface ObjectPropertyExpression
          * @return {@code true} if a restriction has been removed from the {@link ObjectProperty.Range}.
          */
         default boolean removeRangeMinObjectRestriction(String property, int cardinality, String cl){
-            return getRangeObjectProperty().remove( rangeMinObjectRestriction( property, cardinality, cl));
+            return getObjectPropertyRangeConcepts().remove( rangeMinObjectRestriction( property, cardinality, cl));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getRangeObjectProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()})
          * based on {@link #rangeMinObjectRestriction(OWLObjectProperty, int, OWLClass)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
          * to be perfectly aligned with the {@link #queryRangeObjectProperty()},
@@ -1822,7 +1822,7 @@ public interface ObjectPropertyExpression
          * @return {@code true} if a restriction has been removed from the {@link ObjectProperty.Range}.
          */
         default boolean removeRangeMinObjectRestriction(OWLObjectProperty property, int cardinality, OWLClass cl){
-            return getRangeObjectProperty().remove( rangeMinObjectRestriction( property, cardinality, cl));
+            return getObjectPropertyRangeConcepts().remove( rangeMinObjectRestriction( property, cardinality, cl));
         }
 
         /**
@@ -1852,7 +1852,7 @@ public interface ObjectPropertyExpression
             return new ObjectRangeRestrictedOnMaxObject( getInstance(), cl, property, cardinality);
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getRangeObjectProperty()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()})
          * based on {@link #rangeMaxObjectRestriction(String, int, String)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
          * to be perfectly aligned with the {@link #queryRangeObjectProperty()},
@@ -1863,10 +1863,10 @@ public interface ObjectPropertyExpression
          * @return {@code true} if a new restriction has been added to the {@link ObjectProperty.Range}.
          */
         default boolean addRangeMaxObjectRestriction(String property, int cardinality, String cl){
-            return getRangeObjectProperty().add( rangeMaxObjectRestriction( property, cardinality, cl));
+            return getObjectPropertyRangeConcepts().add( rangeMaxObjectRestriction( property, cardinality, cl));
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getRangeObjectProperty()}
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()}
          * based on {@link #rangeMaxObjectRestriction(OWLObjectProperty, int, OWLClass)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
          * to be perfectly aligned with the {@link #queryRangeObjectProperty()},
@@ -1877,10 +1877,10 @@ public interface ObjectPropertyExpression
          * @return {@code true} if a new restriction has been added to the {@link ObjectProperty.Range}.
          */
         default boolean addRangeMaxObjectRestriction(OWLObjectProperty property, int cardinality, OWLClass cl){
-            return getRangeObjectProperty().add( rangeMaxObjectRestriction( property, cardinality, cl));
+            return getObjectPropertyRangeConcepts().add( rangeMaxObjectRestriction( property, cardinality, cl));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getRangeObjectProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()})
          * based on {@link #rangeMaxObjectRestriction(String, int, String)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
          * to be perfectly aligned with the {@link #queryRangeObjectProperty()},
@@ -1891,10 +1891,10 @@ public interface ObjectPropertyExpression
          * @return {@code true} if a restriction has been removed from the {@link ObjectProperty.Range}.
          */
         default boolean removeRangeMaxObjectRestriction(String property, int cardinality, String cl){
-            return getRangeObjectProperty().remove( rangeMaxObjectRestriction( property, cardinality, cl));
+            return getObjectPropertyRangeConcepts().remove( rangeMaxObjectRestriction( property, cardinality, cl));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getRangeObjectProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()})
          * based on {@link #rangeMaxObjectRestriction(OWLObjectProperty, int, OWLClass)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
          * to be perfectly aligned with the {@link #queryRangeObjectProperty()},
@@ -1905,7 +1905,7 @@ public interface ObjectPropertyExpression
          * @return {@code true} if a restriction has been removed from the {@link ObjectProperty.Range}.
          */
         default boolean removeRangeMaxObjectRestriction(OWLObjectProperty property, int cardinality, OWLClass cl){
-            return getRangeObjectProperty().remove( rangeMaxObjectRestriction( property, cardinality, cl));
+            return getObjectPropertyRangeConcepts().remove( rangeMaxObjectRestriction( property, cardinality, cl));
         }
 
         /**
@@ -1935,7 +1935,7 @@ public interface ObjectPropertyExpression
             return new ObjectRangeRestrictedOnExactObject( getInstance(), cl, property, cardinality);
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getRangeObjectProperty()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()})
          * based on {@link #rangeExactObjectRestriction(String, int, String)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
          * to be perfectly aligned with the {@link #queryRangeObjectProperty()},
@@ -1946,10 +1946,10 @@ public interface ObjectPropertyExpression
          * @return {@code true} if a new restriction has been added to the {@link ObjectProperty.Range}.
          */
         default boolean addRangeExactObjectRestriction(String property, int cardinality, String cl){
-            return getRangeObjectProperty().add( rangeExactObjectRestriction( property, cardinality, cl));
+            return getObjectPropertyRangeConcepts().add( rangeExactObjectRestriction( property, cardinality, cl));
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getRangeObjectProperty()}
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()}
          * based on {@link #rangeExactObjectRestriction(OWLObjectProperty, int, OWLClass)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
          * to be perfectly aligned with the {@link #queryRangeObjectProperty()},
@@ -1960,10 +1960,10 @@ public interface ObjectPropertyExpression
          * @return {@code true} if a new restriction has been added to the {@link ObjectProperty.Range}.
          */
         default boolean addRangeExactObjectRestriction(OWLObjectProperty property, int cardinality, OWLClass cl){
-            return getRangeObjectProperty().add( rangeExactObjectRestriction( property, cardinality, cl));
+            return getObjectPropertyRangeConcepts().add( rangeExactObjectRestriction( property, cardinality, cl));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getRangeObjectProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()})
          * based on {@link #rangeExactObjectRestriction(String, int, String)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
          * to be perfectly aligned with the {@link #queryRangeObjectProperty()},
@@ -1974,10 +1974,10 @@ public interface ObjectPropertyExpression
          * @return {@code true} if a restriction has been removed from the {@link ObjectProperty.Range}.
          */
         default boolean removeRangeExactObjectRestriction(String property, int cardinality, String cl){
-            return getRangeObjectProperty().remove( rangeExactObjectRestriction( property, cardinality, cl));
+            return getObjectPropertyRangeConcepts().remove( rangeExactObjectRestriction( property, cardinality, cl));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getRangeObjectProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()})
          * based on {@link #rangeExactObjectRestriction(OWLObjectProperty, int, OWLClass)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
          * to be perfectly aligned with the {@link #queryRangeObjectProperty()},
@@ -1988,7 +1988,7 @@ public interface ObjectPropertyExpression
          * @return {@code true} if a restriction has been removed from the {@link ObjectProperty.Range}.
          */
         default boolean removeRangeExactObjectRestriction(OWLObjectProperty property, int cardinality, OWLClass cl){
-            return getRangeObjectProperty().remove( rangeExactObjectRestriction( property, cardinality, cl));
+            return getObjectPropertyRangeConcepts().remove( rangeExactObjectRestriction( property, cardinality, cl));
         }
 
         /**
@@ -2016,44 +2016,44 @@ public interface ObjectPropertyExpression
             return new ObjectRangeRestrictedOnSomeObject( getInstance(), cl, property);
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getRangeObjectProperty()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()})
          * based on {@link #rangeSomeObjectRestriction(String, String)}.
          * @param property the name of the restricting object property.
          * @param cl the name of the class range restriction.
          * @return {@code true} if a new restriction has been added to the {@link ObjectProperty.Range}.
          */
         default boolean addRangeSomeObjectRestriction(String property, String cl){
-            return getRangeObjectProperty().add( rangeSomeObjectRestriction( property, cl));
+            return getObjectPropertyRangeConcepts().add( rangeSomeObjectRestriction( property, cl));
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getRangeObjectProperty()}
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()}
          * based on {@link #rangeSomeObjectRestriction(OWLObjectProperty, OWLClass)}.
          * @param property the restricting object property.
          * @param cl the class range restriction.
          * @return {@code true} if a new restriction has been added to the {@link ObjectProperty.Range}.
          */
         default boolean addRangeSomeObjectRestriction(OWLObjectProperty property, OWLClass cl){
-            return getRangeObjectProperty().add( rangeSomeObjectRestriction( property, cl));
+            return getObjectPropertyRangeConcepts().add( rangeSomeObjectRestriction( property, cl));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getRangeObjectProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()})
          * based on {@link #rangeSomeObjectRestriction(String, String)}.
          * @param property the name of the restricting object property.
          * @param cl the name of the class range restriction.
          * @return {@code true} if a restriction has been removed from the {@link ObjectProperty.Range}.
          */
         default boolean removeRangeSomeObjectRestriction(String property, String cl){
-            return getRangeObjectProperty().remove( rangeSomeObjectRestriction( property, cl));
+            return getObjectPropertyRangeConcepts().remove( rangeSomeObjectRestriction( property, cl));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getRangeObjectProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()})
          * based on {@link #rangeSomeObjectRestriction(OWLObjectProperty, OWLClass)}.
          * @param property the restricting object property.
          * @param cl the class range restriction.
          * @return {@code true} if a restriction has been removed from the {@link ObjectProperty.Range}.
          */
         default boolean removeRangeSomeObjectRestriction(OWLObjectProperty property, OWLClass cl){
-            return getRangeObjectProperty().remove( rangeSomeObjectRestriction( property, cl));
+            return getObjectPropertyRangeConcepts().remove( rangeSomeObjectRestriction( property, cl));
         }
 
         /**
@@ -2081,44 +2081,44 @@ public interface ObjectPropertyExpression
             return new ObjectRangeRestrictedOnAllObject( getInstance(), cl, property);
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getRangeObjectProperty()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()})
          * based on {@link #rangeOnlyObjectRestriction(String, String)}.
          * @param property the name of the restricting object property.
          * @param cl the name of the class range restriction.
          * @return {@code true} if a new restriction has been added to the {@link ObjectProperty.Range}.
          */
         default boolean addRangeOnlyObjectRestriction(String property, String cl){
-            return getRangeObjectProperty().add( rangeOnlyObjectRestriction( property, cl));
+            return getObjectPropertyRangeConcepts().add( rangeOnlyObjectRestriction( property, cl));
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getRangeObjectProperty()}
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()}
          * based on {@link #rangeOnlyObjectRestriction(OWLObjectProperty, OWLClass)}.
          * @param property the restricting object property.
          * @param cl the class range restriction.
          * @return {@code true} if a new restriction has been added to the {@link ObjectProperty.Range}.
          */
         default boolean addRangeOnlyObjectRestriction(OWLObjectProperty property, OWLClass cl){
-            return getRangeObjectProperty().add( rangeOnlyObjectRestriction( property, cl));
+            return getObjectPropertyRangeConcepts().add( rangeOnlyObjectRestriction( property, cl));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getRangeObjectProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()})
          * based on {@link #rangeOnlyObjectRestriction(String, String)}.
          * @param property the name of the restricting object property.
          * @param cl the name of the class range restriction.
          * @return {@code true} if a restriction has been removed from the {@link ObjectProperty.Range}.
          */
         default boolean removeRangeOnlyObjectRestriction(String property, String cl){
-            return getRangeObjectProperty().remove( rangeOnlyObjectRestriction( property, cl));
+            return getObjectPropertyRangeConcepts().remove( rangeOnlyObjectRestriction( property, cl));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getRangeObjectProperty()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()})
          * based on {@link #rangeOnlyObjectRestriction(OWLObjectProperty, OWLClass)}.
          * @param property the restricting object property.
          * @param cl the class range restriction.
          * @return {@code true} if a restriction has been removed from the {@link ObjectProperty.Range}.
          */
         default boolean removeRangeOnlyObjectRestriction(OWLObjectProperty property, OWLClass cl){
-            return getRangeObjectProperty().remove( rangeOnlyObjectRestriction( property, cl));
+            return getObjectPropertyRangeConcepts().remove( rangeOnlyObjectRestriction( property, cl));
         }
 
         /**
@@ -2143,56 +2143,56 @@ public interface ObjectPropertyExpression
         }
         /**
          * Adds a new restriction to the described {@link EntitySet}
-         * (i.e.: {@link #getRangeObjectProperty()})
+         * (i.e.: {@link #getObjectPropertyRangeConcepts()})
          * based on {@link #rangeClassRestriction(String)}.
          * @param className the name of the range class of the restriction.
          * @return {@code true} if a new restriction has been added to the
          * {@link ObjectProperty.Range}.
          */
         default boolean addRangeClassRestriction(String className){
-            return getRangeObjectProperty().add( rangeClassRestriction( className));
+            return getObjectPropertyRangeConcepts().add( rangeClassRestriction( className));
         }
         /**
          * Adds a new restriction to the described {@link EntitySet}
-         * (i.e.: {@link #getRangeObjectProperty()})
+         * (i.e.: {@link #getObjectPropertyRangeConcepts()})
          * based on {@link #rangeClassRestriction(String)}.
          * @param className the range class of the restriction.
          * @return {@code true} if a new restriction has been added to the
          * {@link ObjectProperty.Range}.
          */
         default boolean addRangeClassRestriction(OWLClass className){
-            return getRangeObjectProperty().add( rangeClassRestriction( className));
+            return getObjectPropertyRangeConcepts().add( rangeClassRestriction( className));
         }
         /**
          * Removes a restriction to the described {@link EntitySet}
-         * (i.e.: {@link #getRangeObjectProperty()})
+         * (i.e.: {@link #getObjectPropertyRangeConcepts()})
          * based on {@link #rangeClassRestriction(String)}.
          * @param className the name of the range class of the restriction.
          * @return {@code true} if a new restriction has been added to the
          * {@link ObjectProperty.Range}.
          */
         default boolean removeRangeClassRestriction(String className){
-            return getRangeObjectProperty().remove( rangeClassRestriction( className));
+            return getObjectPropertyRangeConcepts().remove( rangeClassRestriction( className));
         }
         /**
          * Removes a restriction to the described {@link EntitySet}
-         * (i.e.: {@link #getRangeObjectProperty()})
+         * (i.e.: {@link #getObjectPropertyRangeConcepts()})
          * based on {@link #rangeClassRestriction(String)}.
          * @param className the range class of the restriction.
          * @return {@code true} if a new restriction has been added to the
          * {@link ObjectProperty.Range}.
          */
         default boolean removeRangeClassRestriction(OWLClass className){
-            return getRangeObjectProperty().remove( rangeClassRestriction( className));
+            return getObjectPropertyRangeConcepts().remove( rangeClassRestriction( className));
         }
 
         @Override
-        DescriptorEntitySet.Restrictions getRangeObjectProperty();
+        DescriptorEntitySet.Restrictions getObjectPropertyRangeConcepts();
 
         @Override // see super class for documentation
         default DescriptorEntitySet.Restrictions queryRangeObjectProperty(){
             DescriptorEntitySet.Restrictions set = new DescriptorEntitySet.Restrictions(getOntology().getRangeRestriction(getInstance()));
-            set.setSingleton( getRangeObjectProperty().isSingleton());
+            set.setSingleton( getObjectPropertyRangeConcepts().isSingleton());
             return set;
         }
 

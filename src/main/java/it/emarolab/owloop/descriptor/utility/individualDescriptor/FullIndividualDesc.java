@@ -45,7 +45,7 @@ public class FullIndividualDesc
 
     private DescriptorEntitySet.Individuals disjointIndividual = new DescriptorEntitySet.Individuals();
     private DescriptorEntitySet.Individuals equivalentIndividual = new DescriptorEntitySet.Individuals();
-    private DescriptorEntitySet.Concepts individualTypes = new DescriptorEntitySet.Concepts();
+    private DescriptorEntitySet.Concepts concepts = new DescriptorEntitySet.Concepts();
     private DescriptorEntitySet.ObjectLinksSet objectLinks = new DescriptorEntitySet.ObjectLinksSet();
     private DescriptorEntitySet.DataLinksSet dataLinks = new DescriptorEntitySet.DataLinksSet();
 
@@ -108,7 +108,7 @@ public class FullIndividualDesc
     }
 
     @Override
-    public DescriptorEntitySet.Individuals getDisjointIndividual() {
+    public DescriptorEntitySet.Individuals getDisjointIndividuals() {
         return disjointIndividual;
     }
 
@@ -120,43 +120,43 @@ public class FullIndividualDesc
     }
 
     @Override
-    public DescriptorEntitySet.Individuals getEquivalentIndividual() {
+    public DescriptorEntitySet.Individuals getEquivalentIndividuals() {
         return equivalentIndividual;
     }
 
     // Implementations for: IndividualExpression.Type
 
     @Override //called during build...() you can change the returning type to any implementations of ConceptExpression
-    public FullConceptDesc getNewTypeIndividual(OWLClass instance, OWLReferences ontology) {
+    public FullConceptDesc getNewIndividualType(OWLClass instance, OWLReferences ontology) {
         return new FullConceptDesc( instance, ontology);
     }
 
     @Override
-    public DescriptorEntitySet.Concepts getTypeIndividual() {
-        return individualTypes;
+    public DescriptorEntitySet.Concepts getIndividualTypes() {
+        return concepts;
     }
 
     // Implementations for: IndividualExpression.ObjectLink
 
     @Override //called during build...() you can change the returning type to any implementations of ObjectPropertyExpression
-    public FullObjectPropertyDesc getNewObjectIndividual(DescriptorEntitySet.ObjectLinks instance, OWLReferences ontology) {
+    public FullObjectPropertyDesc getNewIndividualObjectProperty(DescriptorEntitySet.ObjectLinks instance, OWLReferences ontology) {
         return new FullObjectPropertyDesc( instance.getExpression(), ontology);
     }
 
     @Override
-    public DescriptorEntitySet.ObjectLinksSet getObjectExpressionAxioms() {
+    public DescriptorEntitySet.ObjectLinksSet getIndividualObjectProperties() {
         return objectLinks;
     }
 
     // Implementations for: IndividualExpression.DataLink
 
     @Override //called during build...() you can change the returning type to any implementations of DataPropertyExpression
-    public FullDataPropertyDesc getNewDataIndividual(DescriptorEntitySet.DataLinks instance, OWLReferences ontology) {
+    public FullDataPropertyDesc getNewIndividualDataProperty(DescriptorEntitySet.DataLinks instance, OWLReferences ontology) {
         return new FullDataPropertyDesc( instance.getExpression(), ontology);
     }
 
     @Override
-    public DescriptorEntitySet.DataLinksSet getDataExpressionAxioms() {
+    public DescriptorEntitySet.DataLinksSet getIndividualDataProperties() {
         return dataLinks;
     }
 
@@ -164,14 +164,16 @@ public class FullIndividualDesc
 
     @Override
     public String toString() {
-        return "FullObjectPropertyDesc{" +
-                NL + "\t\t\t" + getGround() +
-                ":" + NL + "\t≠ " + disjointIndividual +
-                "," + NL + "\t≡ " + equivalentIndividual +
-                "," + NL + "\t∈ " + individualTypes +
-                "," + NL + "\t⊨ " + objectLinks +
-                "," + NL + "\t⊢ " + dataLinks +
-                NL + "}";
+        return getClass().getSimpleName() + "{" + "\n" +
+                "\n" +
+                "\t" + getGround() + ":" + "\n" +
+                "\n" +
+                "\t\t≠ " + disjointIndividual + "\n" +
+                "\t\t≡ " + equivalentIndividual + "\n" +
+                "\t\t∈ " + concepts + "\n" +
+                "\t\t⊨ " + objectLinks + "\n" +
+                "\t\t⊢ " + dataLinks + "\n" +
+                "}" + "\n";
     }
 }
 

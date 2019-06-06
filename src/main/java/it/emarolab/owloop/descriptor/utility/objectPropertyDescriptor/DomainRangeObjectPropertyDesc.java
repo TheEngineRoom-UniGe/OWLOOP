@@ -10,7 +10,7 @@ import org.semanticweb.owlapi.model.OWLObjectProperty;
 import java.util.List;
 
 /**
- * This is an example of a 'compound' ObjectProperty Descriptor which implements 2 {@link ObjectPropertyExpression}s.
+ * This is an example of b {@link ObjectPropertyExpression}s.
  * <ul>
  * <li><b>{@link ObjectPropertyExpression.Domain}</b>:       to describe the domain restrictions of an ObjectProperty.</li>
  * <li><b>{@link ObjectPropertyExpression.Range}</b>:        to describe the range restrictions of an ObjectProperty.</li>
@@ -22,8 +22,8 @@ public class DomainRangeObjectPropertyDesc
         implements ObjectPropertyExpression.Domain,
         ObjectPropertyExpression.Range {
 
-    private DescriptorEntitySet.Restrictions domainRestriction = new DescriptorEntitySet.Restrictions();
-    private DescriptorEntitySet.Restrictions rangeRestriction = new DescriptorEntitySet.Restrictions();
+    private DescriptorEntitySet.Restrictions domainConceptRestrictions = new DescriptorEntitySet.Restrictions();
+    private DescriptorEntitySet.Restrictions rangeConceptRestrictions = new DescriptorEntitySet.Restrictions();
 
     // constructors for ObjectPropertyGround
 
@@ -71,22 +71,22 @@ public class DomainRangeObjectPropertyDesc
     // implementations for ObjectPropertyExpression.Domain
 
     @Override
-    public DescriptorEntitySet.Restrictions getDomainObjectProperty() {
-        return domainRestriction;
+    public DescriptorEntitySet.Restrictions getObjectPropertyDomainConcepts() {
+        return domainConceptRestrictions;
     }
 
     // implementations for ObjectPropertyExpression.Range
 
     @Override
-    public DescriptorEntitySet.Restrictions getRangeObjectProperty() {
-        return rangeRestriction;
+    public DescriptorEntitySet.Restrictions getObjectPropertyRangeConcepts() {
+        return rangeConceptRestrictions;
     }
 
     public String toString() {
         return "FullObjectPropertyDesc{" +
                 NL + "\t\t\t" + getGround() +
-                "," + NL + "\t→ " + domainRestriction +
-                "," + NL + "\t← " + rangeRestriction +
+                "," + NL + "\t→ " + domainConceptRestrictions +
+                "," + NL + "\t← " + rangeConceptRestrictions +
                 NL + "}";
     }
 }

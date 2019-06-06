@@ -22,8 +22,8 @@ public class DomainRangeDataPropertyDesc
         implements DataPropertyExpression.Domain,
         DataPropertyExpression.Range {
 
-    private DescriptorEntitySet.Restrictions domainRestriction = new DescriptorEntitySet.Restrictions();
-    private DescriptorEntitySet.Restrictions rangeRestriction = new DescriptorEntitySet.Restrictions();
+    private DescriptorEntitySet.Restrictions domainConceptRestrictions = new DescriptorEntitySet.Restrictions();
+    private DescriptorEntitySet.Restrictions rangeConceptRestrictions = new DescriptorEntitySet.Restrictions();
 
     // constructors for DataPropertyGround
 
@@ -70,14 +70,14 @@ public class DomainRangeDataPropertyDesc
 
     // implementations for DataPropertyExpression.Domain
     @Override
-    public DescriptorEntitySet.Restrictions getDomainDataProperty() {
-        return domainRestriction;
+    public DescriptorEntitySet.Restrictions getDataPropertyDomainConcepts() {
+        return domainConceptRestrictions;
     }
 
     // implementations for DataPropertyExpression.Range
     @Override
-    public DescriptorEntitySet.Restrictions getRangeDataProperty() {
-        return rangeRestriction;
+    public DescriptorEntitySet.Restrictions getDataPropertyRangeConcepts() {
+        return rangeConceptRestrictions;
     }
 
     // implementation for standard object interface
@@ -87,8 +87,8 @@ public class DomainRangeDataPropertyDesc
     public String toString() {
         return "FullObjectPropertyDesc{" +
                 NL + "\t\t\t" + getGround() +
-                "," + NL + "\t→ " + domainRestriction +
-                "," + NL + "\t← " + rangeRestriction +
+                "," + NL + "\t→ " + domainConceptRestrictions +
+                "," + NL + "\t← " + rangeConceptRestrictions +
                 NL + "}";
     }
 }

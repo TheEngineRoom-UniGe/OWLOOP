@@ -72,24 +72,24 @@ public class LinkIndividualDesc
     // implementations for IndividualExpression.ObjectLink
 
     @Override  //called during build...() you can change the returning type to any implementations of ObjectPropertyExpression
-    public FullObjectPropertyDesc getNewObjectIndividual(DescriptorEntitySet.ObjectLinks instance, OWLReferences ontology) {
+    public FullObjectPropertyDesc getNewIndividualObjectProperty(DescriptorEntitySet.ObjectLinks instance, OWLReferences ontology) {
         return new FullObjectPropertyDesc( instance.getExpression(), ontology);
     }
 
     @Override
-    public DescriptorEntitySet.ObjectLinksSet getObjectExpressionAxioms() {
+    public DescriptorEntitySet.ObjectLinksSet getIndividualObjectProperties() {
         return objectLinks;
     }
 
     // implementations for IndividualExpression.DataLink
 
     @Override  //called during build...() you can change the returning type to any implementations of DataPropertyExpression
-    public FullDataPropertyDesc getNewDataIndividual(DescriptorEntitySet.DataLinks instance, OWLReferences ontology) {
+    public FullDataPropertyDesc getNewIndividualDataProperty(DescriptorEntitySet.DataLinks instance, OWLReferences ontology) {
         return new FullDataPropertyDesc( instance.getExpression(), ontology);
     }
 
     @Override
-    public DescriptorEntitySet.DataLinksSet getDataExpressionAxioms() {
+    public DescriptorEntitySet.DataLinksSet getIndividualDataProperties() {
         return dataLinks;
     }
 

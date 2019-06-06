@@ -21,8 +21,8 @@ public class HierarchicalObjectPropertyDesc
         implements ObjectPropertyExpression.Sub<HierarchicalObjectPropertyDesc>,
         ObjectPropertyExpression.Super<HierarchicalObjectPropertyDesc>{
 
-    private DescriptorEntitySet.ObjectProperties subProperties = new DescriptorEntitySet.ObjectProperties();
-    private DescriptorEntitySet.ObjectProperties superProperties = new DescriptorEntitySet.ObjectProperties();
+    private DescriptorEntitySet.ObjectProperties subObjectProperties = new DescriptorEntitySet.ObjectProperties();
+    private DescriptorEntitySet.ObjectProperties superObjectProperties = new DescriptorEntitySet.ObjectProperties();
 
     // constructors for ObjectPropertyGround
 
@@ -75,8 +75,8 @@ public class HierarchicalObjectPropertyDesc
     }
 
     @Override
-    public DescriptorEntitySet.ObjectProperties getSubObjectProperty() {
-        return subProperties;
+    public DescriptorEntitySet.ObjectProperties getSubObjectProperties() {
+        return subObjectProperties;
     }
 
     // implementations for ObjectPropertyExpression.Super
@@ -87,15 +87,15 @@ public class HierarchicalObjectPropertyDesc
     }
 
     @Override
-    public DescriptorEntitySet.ObjectProperties getSuperObjectProperty() {
-        return superProperties;
+    public DescriptorEntitySet.ObjectProperties getSuperObjectProperties() {
+        return superObjectProperties;
     }
 
     public String toString() {
         return "FullObjectPropertyDesc{" +
                 NL + "\t\t\t" + getGround() +
-                "," + NL + "\t⊃ " + subProperties +
-                "," + NL + "\t⊂ " + superProperties +
+                "," + NL + "\t⊃ " + subObjectProperties +
+                "," + NL + "\t⊂ " + superObjectProperties +
                 NL + "}";
     }
 }

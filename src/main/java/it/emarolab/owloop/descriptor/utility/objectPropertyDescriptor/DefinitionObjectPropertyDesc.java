@@ -24,9 +24,9 @@ public class DefinitionObjectPropertyDesc
         ObjectPropertyExpression.Equivalent<DefinitionObjectPropertyDesc>,
         ObjectPropertyExpression.Inverse<DefinitionObjectPropertyDesc> {
 
-    private DescriptorEntitySet.ObjectProperties disjointProperties = new DescriptorEntitySet.ObjectProperties();
-    private DescriptorEntitySet.ObjectProperties equivalentProperties = new DescriptorEntitySet.ObjectProperties();
-    private DescriptorEntitySet.ObjectProperties inverseProperties = new DescriptorEntitySet.ObjectProperties();
+    private DescriptorEntitySet.ObjectProperties disjointObjectProperties = new DescriptorEntitySet.ObjectProperties();
+    private DescriptorEntitySet.ObjectProperties equivalentObjectProperties = new DescriptorEntitySet.ObjectProperties();
+    private DescriptorEntitySet.ObjectProperties inverseObjectProperties = new DescriptorEntitySet.ObjectProperties();
 
     // constructors for ObjectPropertyGround
 
@@ -81,8 +81,8 @@ public class DefinitionObjectPropertyDesc
     }
 
     @Override
-    public DescriptorEntitySet.ObjectProperties getDisjointObjectProperty() {
-        return disjointProperties;
+    public DescriptorEntitySet.ObjectProperties getDisjointObjectProperties() {
+        return disjointObjectProperties;
     }
 
     // implementations for ObjectPropertyExpression.Equivalent
@@ -93,8 +93,8 @@ public class DefinitionObjectPropertyDesc
     }
 
     @Override
-    public DescriptorEntitySet.ObjectProperties getEquivalentObjectProperty() {
-        return equivalentProperties;
+    public DescriptorEntitySet.ObjectProperties getEquivalentObjectProperties() {
+        return equivalentObjectProperties;
     }
 
     // implementations for ObjectPropertyExpression.Inverse
@@ -105,16 +105,16 @@ public class DefinitionObjectPropertyDesc
     }
 
     @Override
-    public DescriptorEntitySet.ObjectProperties getInverseObjectProperty() {
-        return inverseProperties;
+    public DescriptorEntitySet.ObjectProperties getInverseObjectProperties() {
+        return inverseObjectProperties;
     }
 
     public String toString() {
         return "FullObjectPropertyDesc{" +
                 NL + "\t\t\t" + getGround() +
-                ":" + NL + "\t≠ " + disjointProperties +
-                "," + NL + "\t≡ " + equivalentProperties +
-                "," + NL + "\t↔ " + inverseProperties +
+                ":" + NL + "\t≠ " + disjointObjectProperties +
+                "," + NL + "\t≡ " + equivalentObjectProperties +
+                "," + NL + "\t↔ " + inverseObjectProperties +
                 NL + "}";
     }
 

@@ -24,10 +24,10 @@ public class HierarchicalConceptDesc
         implements ConceptExpression.Sub<HierarchicalConceptDesc>,
         ConceptExpression.Super<HierarchicalConceptDesc>{
 
-    private DescriptorEntitySet.Concepts subConcept = new DescriptorEntitySet.Concepts();
-    private DescriptorEntitySet.Concepts superConcept = new DescriptorEntitySet.Concepts();
+    private DescriptorEntitySet.Concepts subConcepts = new DescriptorEntitySet.Concepts();
+    private DescriptorEntitySet.Concepts superConcepts = new DescriptorEntitySet.Concepts();
 
-    // constructors for ConceptGround
+    // Constructors from class: ConceptGround
 
     public HierarchicalConceptDesc(OWLClass instance, OWLReferences onto) {
         super(instance, onto);
@@ -54,15 +54,17 @@ public class HierarchicalConceptDesc
         super(instanceName, ontoName, filePath, iriPath, bufferingChanges);
     }
 
-    // implementations for Axiom.descriptor
+    // Overriding methods in class: ConceptGround
 
+
+    // To read axioms from an ontology
     @Override
     public List<MappingIntent> readExpressionAxioms() {
         List<MappingIntent> r = ConceptExpression.Sub.super.readExpressionAxioms();
         r.addAll( ConceptExpression.Super.super.readExpressionAxioms());
         return r;
     }
-
+    // To write axioms to an ontology
     @Override
     public List<MappingIntent> writeExpressionAxioms() {
         List<MappingIntent> r = ConceptExpression.Sub.super.writeExpressionAxioms();
@@ -70,41 +72,37 @@ public class HierarchicalConceptDesc
         return r;
     }
 
+    // Overriding methods in classes: Concept and ConceptExpression
 
 
-    // implementations for ConceptExpression.Super
-
-    @Override //called during build...() you can change the returning type to any implementations of ConceptExpression
+    @Override
     public HierarchicalConceptDesc getSubConceptDescriptor(OWLClass instance, OWLReferences ontology) {
         return new HierarchicalConceptDesc( instance, ontology);
     }
-
     @Override
     public DescriptorEntitySet.Concepts getSubConcepts() {
-        return subConcept;
+        return subConcepts;
     }
 
-
-
-    // implementations for ConceptExpression.Sub
-
-    @Override // called during build...() you can change the returning type to any implementations of ConceptExpression
+    @Override
     public HierarchicalConceptDesc getSuperConceptDescriptor(OWLClass instance, OWLReferences ontology) {
         return new HierarchicalConceptDesc( instance, ontology);
     }
-
     @Override
     public DescriptorEntitySet.Concepts getSuperConcepts() {
-        return superConcept;
+        return superConcepts;
     }
 
+    // Overriding method in class: Object
 
+
+    // To show internal state of the Descriptor
     @Override
     public String toString() {
         return "FullObjectPropertyDesc{" +
                 NL + "\t\t\t" + getGround() +
-                "," + NL + "\t⊃ " + subConcept +
-                "," + NL + "\t⊂ " + superConcept +
+                "," + NL + "\t⊃ " + subConcepts +
+                "," + NL + "\t⊂ " + superConcepts +
                 NL + "}";
     }
 }

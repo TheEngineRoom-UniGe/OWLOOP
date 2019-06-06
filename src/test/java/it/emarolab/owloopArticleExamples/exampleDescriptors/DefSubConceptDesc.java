@@ -25,8 +25,8 @@ public class DefSubConceptDesc
         implements ConceptExpression.Definition,
         ConceptExpression.Sub<DefSubConceptDesc>{
 
-    private DescriptorEntitySet.Restrictions restrictions = new DescriptorEntitySet.Restrictions();
-    private DescriptorEntitySet.Concepts subConcept = new DescriptorEntitySet.Concepts();
+    private DescriptorEntitySet.Restrictions conceptRestrictions = new DescriptorEntitySet.Restrictions();
+    private DescriptorEntitySet.Concepts subConcepts = new DescriptorEntitySet.Concepts();
 
     // constructors for ConceptGround
     public DefSubConceptDesc(OWLClass instance, OWLReferences onto) {
@@ -51,7 +51,7 @@ public class DefSubConceptDesc
     // implementations for ConceptExpression.Definition
     @Override
     public DescriptorEntitySet.Restrictions getDefinitionConcepts() {
-        return restrictions;
+        return conceptRestrictions;
     }
 
     // you cannot build Definition (based on Restrictions)
@@ -65,19 +65,20 @@ public class DefSubConceptDesc
 
     @Override
     public DescriptorEntitySet.Concepts getSubConcepts() {
-        return subConcept;
+        return subConcepts;
     }
 
 
-    // implementation for standard object interface
-    // equals() and hashCode() is based on DescriptorGround<?> which considers only the ground
+    // To show internal state of the Descriptor
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "{" +
-                NL + "\t\t\t" + getGround() +
-                "," + NL + "\t= " + restrictions +
-                "," + NL + "\t⊃ " + subConcept +
-                NL + "}" + NL;
+        return getClass().getSimpleName() + "{" + "\n" +
+                "\n" +
+                "\t" + getGround() + ":" + "\n" +
+                "\n" +
+                "\t\t≐ " + conceptRestrictions + "\n" +
+                "\t\t⊃ " + subConcepts + "\n" +
+                "}" + "\n";
     }
 }
 

@@ -22,8 +22,8 @@ public class DefinitionIndividualDesc
         implements IndividualExpression.Disjoint<DefinitionIndividualDesc>,
         IndividualExpression.Equivalent<DefinitionIndividualDesc>{
 
-    private DescriptorEntitySet.Individuals disjointIndividual = new DescriptorEntitySet.Individuals();
-    private DescriptorEntitySet.Individuals equivalentIndividual = new DescriptorEntitySet.Individuals();
+    private DescriptorEntitySet.Individuals disjointIndividuals = new DescriptorEntitySet.Individuals();
+    private DescriptorEntitySet.Individuals equivalentIndividuals = new DescriptorEntitySet.Individuals();
 
     // constructors for IndividualGround
 
@@ -76,8 +76,8 @@ public class DefinitionIndividualDesc
     }
 
     @Override
-    public DescriptorEntitySet.Individuals getDisjointIndividual() {
-        return disjointIndividual;
+    public DescriptorEntitySet.Individuals getDisjointIndividuals() {
+        return disjointIndividuals;
     }
 
     // implementations for IndividualExpression.Equivalent
@@ -88,16 +88,16 @@ public class DefinitionIndividualDesc
     }
 
     @Override
-    public DescriptorEntitySet.Individuals getEquivalentIndividual() {
-        return equivalentIndividual;
+    public DescriptorEntitySet.Individuals getEquivalentIndividuals() {
+        return equivalentIndividuals;
     }
 
     @Override
     public String toString() {
         return "FullObjectPropertyDesc{" +
                 NL + "\t\t\t" + getGround() +
-                ":" + NL + "\t≠ " + disjointIndividual +
-                "," + NL + "\t≡ " + equivalentIndividual +
+                ":" + NL + "\t≠ " + disjointIndividuals +
+                "," + NL + "\t≡ " + equivalentIndividuals +
                 NL + "}";
     }
 }

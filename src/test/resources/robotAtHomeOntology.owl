@@ -168,7 +168,9 @@
     <!-- http://www.semanticweb.org/emaroLab/robotAtHomeOntology#Robot1 -->
 
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/emaroLab/robotAtHomeOntology#Robot1"/>
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/emaroLab/robotAtHomeOntology#Robot1">
+        <isIn rdf:resource="http://www.semanticweb.org/emaroLab/robotAtHomeOntology#Corridor1"/>
+    </owl:NamedIndividual>
     
 
 

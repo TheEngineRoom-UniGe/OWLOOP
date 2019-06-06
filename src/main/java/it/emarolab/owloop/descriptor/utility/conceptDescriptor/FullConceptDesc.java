@@ -42,12 +42,12 @@ public class FullConceptDesc
         ConceptExpression.Super<FullConceptDesc>,
         ConceptExpression.Instance<LinkIndividualDesc> {
 
-    private DescriptorEntitySet.Restrictions restrictions = new DescriptorEntitySet.Restrictions();
+    private DescriptorEntitySet.Restrictions conceptRestrictions = new DescriptorEntitySet.Restrictions();
     private DescriptorEntitySet.Concepts disjointConcepts = new DescriptorEntitySet.Concepts();
     private DescriptorEntitySet.Concepts equivalentConcepts = new DescriptorEntitySet.Concepts();
     private DescriptorEntitySet.Concepts subConcepts = new DescriptorEntitySet.Concepts();
     private DescriptorEntitySet.Concepts superConcepts = new DescriptorEntitySet.Concepts();
-    private DescriptorEntitySet.Individuals classAssertedIndividuals = new DescriptorEntitySet.Individuals();
+    private DescriptorEntitySet.Individuals individuals = new DescriptorEntitySet.Individuals();
 
     // Constructors from class: ConceptGround
 
@@ -108,7 +108,7 @@ public class FullConceptDesc
     // It returns the definitionConcepts from the EntitySet (after being read from the ontology)
     @Override
     public DescriptorEntitySet.Restrictions getDefinitionConcepts() {
-        return restrictions;
+        return conceptRestrictions;
     }
 
     // Is used by the descriptors's build() method. It's possible to change the return type based on need.
@@ -163,23 +163,25 @@ public class FullConceptDesc
     // It returns the Individuals from the EntitySet (after being read from the ontology)
     @Override
     public DescriptorEntitySet.Individuals getIndividualInstances() {
-        return classAssertedIndividuals;
+        return individuals;
     }
 
     // Overriding method in class: Object
 
 
-    // To print particularly useful info., if the object of this class is printed.
+    // To show internal state of the Descriptor
     @Override
     public String toString() {
-        return "FullConceptDesc{" +
-                NL + "\t\t\t" + getGround() +
-                ":" + NL + "\t≠ " + disjointConcepts +
-                "," + NL + "\t≡ " + equivalentConcepts +
-                "," + NL + "\t⇐ " + classAssertedIndividuals +
-                "," + NL + "\t= " + restrictions +
-                "," + NL + "\t⊃ " + subConcepts +
-                "," + NL + "\t⊂ " + superConcepts +
-                NL + "}";
+        return getClass().getSimpleName() + "{" + "\n" +
+                "\n" +
+                "\t" + getGround() + ":" + "\n" +
+                "\n" +
+                "\t\t≠ " + disjointConcepts + "\n" +
+                "\t\t≡ " + equivalentConcepts + "\n" +
+                "\t\t⇐ " + individuals + "\n" +
+                "\t\t≐ " + conceptRestrictions + "\n" +
+                "\t\t⊃ " + subConcepts + "\n" +
+                "\t\t⊂ " + superConcepts + "\n" +
+                "}" + "\n";
     }
 }

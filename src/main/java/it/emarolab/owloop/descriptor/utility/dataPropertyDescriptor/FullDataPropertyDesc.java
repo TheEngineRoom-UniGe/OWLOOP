@@ -42,12 +42,12 @@ public class FullDataPropertyDesc
         DataPropertyExpression.Domain,
         DataPropertyExpression.Range{
 
-    private DescriptorEntitySet.DataProperties disjointProperties = new DescriptorEntitySet.DataProperties();
-    private DescriptorEntitySet.DataProperties equivalentProperties = new DescriptorEntitySet.DataProperties();
-    private DescriptorEntitySet.DataProperties subProperties = new DescriptorEntitySet.DataProperties();
-    private DescriptorEntitySet.DataProperties superProperties = new DescriptorEntitySet.DataProperties();
-    private DescriptorEntitySet.Restrictions domainRestriction = new DescriptorEntitySet.Restrictions();
-    private DescriptorEntitySet.Restrictions rangeRestriction = new DescriptorEntitySet.Restrictions();
+    private DescriptorEntitySet.DataProperties disjointDataProperties = new DescriptorEntitySet.DataProperties();
+    private DescriptorEntitySet.DataProperties equivalentDataProperties = new DescriptorEntitySet.DataProperties();
+    private DescriptorEntitySet.DataProperties subDataProperties = new DescriptorEntitySet.DataProperties();
+    private DescriptorEntitySet.DataProperties superDataProperties = new DescriptorEntitySet.DataProperties();
+    private DescriptorEntitySet.Restrictions domainConceptRestrictions = new DescriptorEntitySet.Restrictions();
+    private DescriptorEntitySet.Restrictions rangeConceptRestrictions = new DescriptorEntitySet.Restrictions();
 
     // Constructors from the abstract class: DataPropertyGround
 
@@ -110,8 +110,8 @@ public class FullDataPropertyDesc
     }
 
     @Override
-    public DescriptorEntitySet.DataProperties getDisjointDataProperty() {
-        return disjointProperties;
+    public DescriptorEntitySet.DataProperties getDisjointDataProperties() {
+        return disjointDataProperties;
     }
 
     // Implementations for: DataPropertyExpression.Equivalent
@@ -127,22 +127,22 @@ public class FullDataPropertyDesc
     }
 
     @Override
-    public DescriptorEntitySet.DataProperties getEquivalentDataProperty() {
-        return equivalentProperties;
+    public DescriptorEntitySet.DataProperties getEquivalentDataProperties() {
+        return equivalentDataProperties;
     }
 
     // Implementations for: DataPropertyExpression.Domain
 
     @Override
-    public DescriptorEntitySet.Restrictions getDomainDataProperty() {
-        return domainRestriction;
+    public DescriptorEntitySet.Restrictions getDataPropertyDomainConcepts() {
+        return domainConceptRestrictions;
     }
 
     // Implementations for: DataPropertyExpression.Range
 
     @Override
-    public DescriptorEntitySet.Restrictions getRangeDataProperty() {
-        return rangeRestriction;
+    public DescriptorEntitySet.Restrictions getDataPropertyRangeConcepts() {
+        return rangeConceptRestrictions;
     }
 
     // Implementations for: DataPropertyExpression.Super
@@ -153,8 +153,8 @@ public class FullDataPropertyDesc
     }
 
     @Override
-    public DescriptorEntitySet.DataProperties getSubDataProperty() {
-        return subProperties;
+    public DescriptorEntitySet.DataProperties getSubDataProperties() {
+        return subDataProperties;
     }
 
     // Implementations for: DataPropertyExpression.Super
@@ -165,23 +165,25 @@ public class FullDataPropertyDesc
     }
 
     @Override
-    public DescriptorEntitySet.DataProperties getSuperDataProperty() {
-        return superProperties;
+    public DescriptorEntitySet.DataProperties getSuperDataProperties() {
+        return superDataProperties;
     }
 
     // Implementations for: standard object interface
 
     @Override
     public String toString() {
-        return "FullObjectPropertyDesc{" +
-                NL + "\t\t\t" + getGround() +
-                ":" + NL + "\t≠ " + disjointProperties +
-                "," + NL + "\t≡ " + equivalentProperties +
-                "," + NL + "\t→ " + domainRestriction +
-                "," + NL + "\t← " + rangeRestriction +
-                "," + NL + "\t⊃ " + subProperties +
-                "," + NL + "\t⊂ " + superProperties +
-                NL + "}";
+        return getClass().getSimpleName() + "{" + "\n" +
+                "\n" +
+                "\t" + getGround() + ":" + "\n" +
+                "\n" +
+                "\t\t≠ " +        disjointDataProperties + "\n" +
+                "\t\t≡ " +        equivalentDataProperties + "\n" +
+                "\t\t[≐,--] " +   domainConceptRestrictions + "\n" +
+                "\t\t[--,≐] " +   rangeConceptRestrictions + "\n" +
+                "\t\t⊃ " +        subDataProperties + "\n" +
+                "\t\t⊂ " +        superDataProperties + "\n" +
+                "}" + "\n";
     }
 }
 

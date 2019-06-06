@@ -46,23 +46,24 @@ public class ObjectLinkIndividualDesc
 
     // implementations for IndividualExpression.ObjectLink
     @Override //called during build...() you can change the returning type to any implementations of ObjectPropertyExpression
-    public FullObjectPropertyDesc getNewObjectIndividual(DescriptorEntitySet.ObjectLinks instance, OWLReferences ontology) {
+    public FullObjectPropertyDesc getNewIndividualObjectProperty(DescriptorEntitySet.ObjectLinks instance, OWLReferences ontology) {
         return new FullObjectPropertyDesc( instance.getExpression(), ontology);
     }
 
     @Override
-    public DescriptorEntitySet.ObjectLinksSet getObjectExpressionAxioms() {
+    public DescriptorEntitySet.ObjectLinksSet getIndividualObjectProperties() {
         return objectLinks;
     }
 
-    // implementation for standard object interface
-    // equals() and hashCode() is based on DescriptorGround<?> which considers only the ground
+    // To show internal state of the Descriptor
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "{\n" +
-                NL + "\t\t\t" + getGround() +
-                "," + NL + "\t⊨ " + objectLinks +
-                NL + "}" + NL;
+        return getClass().getSimpleName() + "{" + "\n" +
+                "\n" +
+                "\t" + getGround() + ":" + "\n" +
+                "\n" +
+                "\t\t⊨ " + objectLinks + "\n" +
+                "}" + "\n";
     }
 }
 

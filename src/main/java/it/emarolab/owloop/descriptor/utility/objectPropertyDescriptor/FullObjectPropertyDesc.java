@@ -43,13 +43,13 @@ public class FullObjectPropertyDesc
         ObjectPropertyExpression.Domain,
         ObjectPropertyExpression.Range{
 
-    private DescriptorEntitySet.ObjectProperties disjointProperties = new DescriptorEntitySet.ObjectProperties();
-    private DescriptorEntitySet.ObjectProperties equivalentProperties = new DescriptorEntitySet.ObjectProperties();
-    private DescriptorEntitySet.ObjectProperties inverseProperties = new DescriptorEntitySet.ObjectProperties();
-    private DescriptorEntitySet.ObjectProperties subProperties = new DescriptorEntitySet.ObjectProperties();
-    private DescriptorEntitySet.ObjectProperties superProperties = new DescriptorEntitySet.ObjectProperties();
-    private DescriptorEntitySet.Restrictions domainRestriction = new DescriptorEntitySet.Restrictions();
-    private DescriptorEntitySet.Restrictions rangeRestriction = new DescriptorEntitySet.Restrictions();
+    private DescriptorEntitySet.ObjectProperties disjointObjectProperties = new DescriptorEntitySet.ObjectProperties();
+    private DescriptorEntitySet.ObjectProperties equivalentObjectProperties = new DescriptorEntitySet.ObjectProperties();
+    private DescriptorEntitySet.ObjectProperties inverseObjectProperties = new DescriptorEntitySet.ObjectProperties();
+    private DescriptorEntitySet.ObjectProperties subObjectProperties = new DescriptorEntitySet.ObjectProperties();
+    private DescriptorEntitySet.ObjectProperties superObjectProperties = new DescriptorEntitySet.ObjectProperties();
+    private DescriptorEntitySet.Restrictions domainConceptRestrictions = new DescriptorEntitySet.Restrictions();
+    private DescriptorEntitySet.Restrictions rangeConceptRestrictions = new DescriptorEntitySet.Restrictions();
 
     // constructors for DataPropertyGround
 
@@ -114,8 +114,8 @@ public class FullObjectPropertyDesc
     }
 
     @Override
-    public DescriptorEntitySet.ObjectProperties getDisjointObjectProperty() {
-        return disjointProperties;
+    public DescriptorEntitySet.ObjectProperties getDisjointObjectProperties() {
+        return disjointObjectProperties;
     }
 
     // implementations for: ObjectPropertyExpression.Equivalent
@@ -126,22 +126,22 @@ public class FullObjectPropertyDesc
     }
 
     @Override
-    public DescriptorEntitySet.ObjectProperties getEquivalentObjectProperty() {
-        return equivalentProperties;
+    public DescriptorEntitySet.ObjectProperties getEquivalentObjectProperties() {
+        return equivalentObjectProperties;
     }
 
     // implementations for: ObjectPropertyExpression.Domain
 
     @Override
-    public DescriptorEntitySet.Restrictions getDomainObjectProperty() {
-        return domainRestriction;
+    public DescriptorEntitySet.Restrictions getObjectPropertyDomainConcepts() {
+        return domainConceptRestrictions;
     }
 
     // implementations for: ObjectPropertyExpression.Range
 
     @Override
-    public DescriptorEntitySet.Restrictions getRangeObjectProperty() {
-        return rangeRestriction;
+    public DescriptorEntitySet.Restrictions getObjectPropertyRangeConcepts() {
+        return rangeConceptRestrictions;
     }
 
     // implementations for: ObjectPropertyExpression.Sub
@@ -152,8 +152,8 @@ public class FullObjectPropertyDesc
     }
 
     @Override
-    public DescriptorEntitySet.ObjectProperties getSubObjectProperty() {
-        return subProperties;
+    public DescriptorEntitySet.ObjectProperties getSubObjectProperties() {
+        return subObjectProperties;
     }
 
     // implementations for: ObjectPropertyExpression.Super
@@ -164,8 +164,8 @@ public class FullObjectPropertyDesc
     }
 
     @Override
-    public DescriptorEntitySet.ObjectProperties getSuperObjectProperty() {
-        return superProperties;
+    public DescriptorEntitySet.ObjectProperties getSuperObjectProperties() {
+        return superObjectProperties;
     }
 
     // implementations for: ObjectPropertyExpression.Inverse
@@ -176,24 +176,26 @@ public class FullObjectPropertyDesc
     }
 
     @Override
-    public DescriptorEntitySet.ObjectProperties getInverseObjectProperty() {
-        return inverseProperties;
+    public DescriptorEntitySet.ObjectProperties getInverseObjectProperties() {
+        return inverseObjectProperties;
     }
 
     // implementations for: standard object interface
 
     @Override
     public String toString() {
-        return "FullObjectPropertyDesc{" +
-                NL + "\t\t\t" + getGround() +
-                ":" + NL + "\t≠ " + disjointProperties +
-                "," + NL + "\t≡ " + equivalentProperties +
-                "," + NL + "\t→ " + domainRestriction +
-                "," + NL + "\t← " + rangeRestriction +
-                "," + NL + "\t⊃ " + subProperties +
-                "," + NL + "\t⊂ " + superProperties +
-                "," + NL + "\t↔ " + inverseProperties +
-                NL + "}";
+        return getClass().getSimpleName() + "{" + "\n" +
+                "\n" +
+                "\t" + getGround() + ":" + "\n" +
+                "\n" +
+                "\t\t≠ " +      disjointObjectProperties + "\n" +
+                "\t\t≡ " +      equivalentObjectProperties + "\n" +
+                "\t\t[≐,--] " + domainConceptRestrictions + "\n" +
+                "\t\t[--,≐] " + rangeConceptRestrictions + "\n" +
+                "\t\t⊃ " +      subObjectProperties + "\n" +
+                "\t\t⊂ " +      superObjectProperties + "\n" +
+                "\t\t↔ " +      inverseObjectProperties + "\n" +
+                "}" + "\n";
     }
 }
 

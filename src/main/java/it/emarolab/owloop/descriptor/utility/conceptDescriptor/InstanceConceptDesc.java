@@ -23,7 +23,7 @@ public class InstanceConceptDesc
         extends ConceptGround
         implements ConceptExpression.Instance<LinkIndividualDesc> {
 
-    private DescriptorEntitySet.Individuals classAssertedIndividuals = new DescriptorEntitySet.Individuals();
+    private DescriptorEntitySet.Individuals individuals = new DescriptorEntitySet.Individuals();
 
     // Constructors from class: ConceptGround
 
@@ -52,7 +52,7 @@ public class InstanceConceptDesc
         super(instanceName, ontoName, filePath, iriPath, bufferingChanges);
     }
 
-    // Overriding methods in classes: Concept and ConceptExpression
+    // Overriding methods in class: ConceptGround
 
 
     // To read axioms from an ontology
@@ -60,33 +60,33 @@ public class InstanceConceptDesc
     public List<MappingIntent> readExpressionAxioms() {
         return Instance.super.readExpressionAxioms();
     }
-
     // To write axioms to an ontology
     @Override
     public List<MappingIntent> writeExpressionAxioms() {
         return Instance.super.writeExpressionAxioms();
     }
 
-    // Is used by the descriptors's build() method. It's possible to change the return type based on need.
+    // Overriding methods in classes: Concept and ConceptExpression
+
+
     @Override
     public LinkIndividualDesc getIndividualDescriptor(OWLNamedIndividual instance, OWLReferences ontology) {
         return new LinkIndividualDesc( instance, ontology);
     }
-    // It returns the Individuals from the EntitySet (after being read from the ontology)
     @Override
     public DescriptorEntitySet.Individuals getIndividualInstances() {
-        return classAssertedIndividuals;
+        return individuals;
     }
 
     // Overriding method in class: Object
 
 
-    // To print particularly useful info., if the object of this class is printed.
+    // To show internal state of the Descriptor
     @Override
     public String toString() {
         return "InstanceConceptDesc{" +
                 NL + "\t\t\t" + getGround() +
-                "," + NL + "\t⇐ " + classAssertedIndividuals +
+                "," + NL + "\t⇐ " + individuals +
                 NL + "}";
     }
 }

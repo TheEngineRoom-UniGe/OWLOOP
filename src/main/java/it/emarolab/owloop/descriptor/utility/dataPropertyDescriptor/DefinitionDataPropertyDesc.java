@@ -22,8 +22,8 @@ public class DefinitionDataPropertyDesc
         implements DataPropertyExpression.Disjoint<DefinitionDataPropertyDesc>,
         DataPropertyExpression.Equivalent<DefinitionDataPropertyDesc> {
 
-    private DescriptorEntitySet.DataProperties disjointProperties = new DescriptorEntitySet.DataProperties();
-    private DescriptorEntitySet.DataProperties equivalentProperties = new DescriptorEntitySet.DataProperties();
+    private DescriptorEntitySet.DataProperties disjointDataProperties = new DescriptorEntitySet.DataProperties();
+    private DescriptorEntitySet.DataProperties equivalentDataProperties = new DescriptorEntitySet.DataProperties();
 
     // constructors for DataPropertyGround
 
@@ -76,8 +76,8 @@ public class DefinitionDataPropertyDesc
     }
 
     @Override
-    public DescriptorEntitySet.DataProperties getDisjointDataProperty() {
-        return disjointProperties;
+    public DescriptorEntitySet.DataProperties getDisjointDataProperties() {
+        return disjointDataProperties;
     }
 
     // implementations for DataPropertyExpression.Equivalent
@@ -88,16 +88,16 @@ public class DefinitionDataPropertyDesc
     }
 
     @Override
-    public DescriptorEntitySet.DataProperties getEquivalentDataProperty() {
-        return equivalentProperties;
+    public DescriptorEntitySet.DataProperties getEquivalentDataProperties() {
+        return equivalentDataProperties;
     }
 
     @Override
     public String toString() {
         return "FullObjectPropertyDesc{" +
                 NL + "\t\t\t" + getGround() +
-                ":" + NL + "\t≠ " + disjointProperties +
-                "," + NL + "\t≡ " + equivalentProperties +
+                ":" + NL + "\t≠ " + disjointDataProperties +
+                "," + NL + "\t≡ " + equivalentDataProperties +
                 NL + "}";
     }
 }

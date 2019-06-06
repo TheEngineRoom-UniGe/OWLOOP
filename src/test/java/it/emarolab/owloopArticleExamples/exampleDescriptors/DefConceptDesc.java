@@ -19,7 +19,7 @@ public abstract class DefConceptDesc
         extends ConceptGround
         implements ConceptExpression.Definition {
 
-    private DescriptorEntitySet.Restrictions newDefRestrictions = new DescriptorEntitySet.Restrictions();
+    private DescriptorEntitySet.Restrictions conceptRestrictions = new DescriptorEntitySet.Restrictions();
 
     DefConceptDesc(String instanceName, OWLReferences onto) {
         super(instanceName, onto);  // grounds the Concept having a 'name', with respect to an 'onto'
@@ -29,12 +29,18 @@ public abstract class DefConceptDesc
 
     @Override
     public DescriptorEntitySet.Restrictions getDefinitionConcepts() {
-        return newDefRestrictions;
+        return conceptRestrictions;
     }
 
+    // To show internal state of the Descriptor
     @Override
     public String toString() {
-        return this.getClass().getSimpleName()  + "{" + NL + "\t" + getGround() + NL + "\t= " + newDefRestrictions + NL + "}";
+        return getClass().getSimpleName() + "{" + "\n" +
+                "\n" +
+                "\t" + getGround() + ":" + "\n" +
+                "\n" +
+                "\t\t≐ " + conceptRestrictions + "\n" +
+                "}" + "\n";
     }
 }
 

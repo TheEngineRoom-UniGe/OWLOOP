@@ -29,12 +29,12 @@ public class DefinitionConceptDesc
         ConceptExpression.Equivalent<DefinitionConceptDesc>,
         ConceptExpression.Instance<LinkIndividualDesc> {
 
-    private DescriptorEntitySet.Concepts disjointConcept = new DescriptorEntitySet.Concepts();
-    private DescriptorEntitySet.Concepts equivalentConcept = new DescriptorEntitySet.Concepts();
+    private DescriptorEntitySet.Concepts disjointConcepts = new DescriptorEntitySet.Concepts();
+    private DescriptorEntitySet.Concepts equivalentConcepts = new DescriptorEntitySet.Concepts();
     private DescriptorEntitySet.Restrictions restrictions = new DescriptorEntitySet.Restrictions();
-    private DescriptorEntitySet.Individuals classAssertedIndividuals = new DescriptorEntitySet.Individuals();
+    private DescriptorEntitySet.Individuals individuals = new DescriptorEntitySet.Individuals();
 
-    // constructors for ConceptGround
+    // Constructors from class: ConceptGround
     
     public DefinitionConceptDesc(OWLClass instance, OWLReferences onto) {
         super(instance, onto);
@@ -61,8 +61,10 @@ public class DefinitionConceptDesc
         super(instanceName, ontoName, filePath, iriPath, bufferingChanges);
     }
 
-    // implementations for Axiom.descriptor
+    // Overriding methods in class: ConceptGround
 
+
+    // To read axioms from an ontology
     @Override
     public List<MappingIntent> readExpressionAxioms() {
         List<MappingIntent> r = ConceptExpression.Disjoint.super.readExpressionAxioms();
@@ -71,7 +73,7 @@ public class DefinitionConceptDesc
         r.addAll( Instance.super.readExpressionAxioms());
         return r;
     }
-
+    // To write axioms to an ontology
     @Override
     public List<MappingIntent> writeExpressionAxioms() {
         List<MappingIntent> r = ConceptExpression.Disjoint.super.writeExpressionAxioms();
@@ -81,56 +83,52 @@ public class DefinitionConceptDesc
         return r;
     }
 
-    // implementations for ConceptExpression.Disjoint
+    // Overriding methods in classes: Concept and ConceptExpression
 
-    @Override  // called during build...() you can change the returning type to any implementations of ConceptExpression
-    public DefinitionConceptDesc getDisjointConceptDescriptor(OWLClass instance, OWLReferences ontology) {
-        return new DefinitionConceptDesc( instance, ontology);
-    }
-
-    @Override
-    public DescriptorEntitySet.Concepts getDisjointConcepts() {
-        return disjointConcept;
-    }
-
-    // implementations for ConceptExpression.Equivalent
-
-    @Override // called during build...() you can change the returning type to any implementations of ConceptExpression
-    public DefinitionConceptDesc getEquivalentConceptDescriptor(OWLClass instance, OWLReferences ontology) {
-        return new DefinitionConceptDesc( instance, ontology);
-    }
-
-    @Override
-    public DescriptorEntitySet.Concepts getEquivalentConcepts() {
-        return equivalentConcept;
-    }
-
-    // implementations for ConceptExpression.Definition
 
     @Override
     public DescriptorEntitySet.Restrictions getDefinitionConcepts() {
         return restrictions;
     }
 
-    // implementations for ConceptExpression.Classifier
-
-    @Override  // called during build...() you can change the returning type to any implementations of ConceptExpression
-    public LinkIndividualDesc getIndividualDescriptor(OWLNamedIndividual instance, OWLReferences ontology) {
-        return new LinkIndividualDesc( instance, ontology);
+    @Override
+    public DefinitionConceptDesc getDisjointConceptDescriptor(OWLClass instance, OWLReferences ontology) {
+        return new DefinitionConceptDesc( instance, ontology);
+    }
+    @Override
+    public DescriptorEntitySet.Concepts getDisjointConcepts() {
+        return disjointConcepts;
     }
 
     @Override
-    public DescriptorEntitySet.Individuals getIndividualInstances() {
-        return classAssertedIndividuals;
+    public DefinitionConceptDesc getEquivalentConceptDescriptor(OWLClass instance, OWLReferences ontology) {
+        return new DefinitionConceptDesc( instance, ontology);
+    }
+    @Override
+    public DescriptorEntitySet.Concepts getEquivalentConcepts() {
+        return equivalentConcepts;
     }
 
+    @Override
+    public LinkIndividualDesc getIndividualDescriptor(OWLNamedIndividual instance, OWLReferences ontology) {
+        return new LinkIndividualDesc( instance, ontology);
+    }
+    @Override
+    public DescriptorEntitySet.Individuals getIndividualInstances() {
+        return individuals;
+    }
+
+    // Overriding method in class: Object
+
+
+    // To show internal state of the Descriptor
     @Override
     public String toString() {
         return "FullObjectPropertyDesc{" +
                 NL + "\t\t\t" + getGround() +
-                ":" + NL + "\t≠ " + disjointConcept +
-                "," + NL + "\t≡ " + equivalentConcept +
-                "," + NL + "\t⇐ " + classAssertedIndividuals +
+                ":" + NL + "\t≠ " + disjointConcepts +
+                "," + NL + "\t≡ " + equivalentConcepts +
+                "," + NL + "\t⇐ " + individuals +
                 "," + NL + "\t= " + restrictions +
                 NL + "}";
     }

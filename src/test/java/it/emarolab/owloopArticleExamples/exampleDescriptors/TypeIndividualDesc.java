@@ -26,7 +26,7 @@ public class TypeIndividualDesc
         extends IndividualGround
         implements IndividualExpression.Type<DefSubConceptDesc> {
 
-    private DescriptorEntitySet.Concepts individualTypes = new DescriptorEntitySet.Concepts();
+    private DescriptorEntitySet.Concepts concepts = new DescriptorEntitySet.Concepts();
 
     // constructors for IndividualGround
     public TypeIndividualDesc(OWLNamedIndividual instance, OWLReferences onto) {
@@ -49,24 +49,25 @@ public class TypeIndividualDesc
 
     // implementations for IndividualExpression.Type
     @Override //called during build...() you can change the returning type to any implementations of ConceptExpression
-    public DefSubConceptDesc getNewTypeIndividual(OWLClass instance, OWLReferences ontology) {
+    public DefSubConceptDesc getNewIndividualType(OWLClass instance, OWLReferences ontology) {
         return new DefSubConceptDesc( instance, ontology);
     }
 
     @Override
-    public DescriptorEntitySet.Concepts getTypeIndividual() {
-        return individualTypes;
+    public DescriptorEntitySet.Concepts getIndividualTypes() {
+        return concepts;
     }
 
 
-    // implementation for standard object interface
-    // equals() and hashCode() is based on DescriptorGround<?> which considers only the ground
+    // To show internal state of the Descriptor
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "{\n" +
-                NL + "\t\t\t" + getGround() +
-                "," + NL + "\t∈ " + individualTypes +
-                NL + "}" + NL;
+        return getClass().getSimpleName() + "{" + "\n" +
+                "\n" +
+                "\t" + getGround() + ":" + "\n" +
+                "\n" +
+                "\t\t∈ " + concepts + "\n" +
+                "}" + "\n";
     }
 }
 
