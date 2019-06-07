@@ -31,10 +31,10 @@ public class DefinitionConceptDesc
 
     private DescriptorEntitySet.Concepts disjointConcepts = new DescriptorEntitySet.Concepts();
     private DescriptorEntitySet.Concepts equivalentConcepts = new DescriptorEntitySet.Concepts();
-    private DescriptorEntitySet.Restrictions restrictions = new DescriptorEntitySet.Restrictions();
+    private DescriptorEntitySet.Restrictions conceptRestrictions = new DescriptorEntitySet.Restrictions();
     private DescriptorEntitySet.Individuals individuals = new DescriptorEntitySet.Individuals();
 
-    // Constructors from class: ConceptGround
+    /* Constructors from class: ConceptGround */
     
     public DefinitionConceptDesc(OWLClass instance, OWLReferences onto) {
         super(instance, onto);
@@ -61,7 +61,7 @@ public class DefinitionConceptDesc
         super(instanceName, ontoName, filePath, iriPath, bufferingChanges);
     }
 
-    // Overriding methods in class: ConceptGround
+    /* Overriding methods in class: ConceptGround */
 
 
     // To read axioms from an ontology
@@ -83,42 +83,49 @@ public class DefinitionConceptDesc
         return r;
     }
 
-    // Overriding methods in classes: Concept and ConceptExpression
+    /* Overriding methods in classes: Concept and ConceptExpression */
 
 
+    // It returns conceptRestrictions from the EntitySet (after being read from the ontology)
     @Override
     public DescriptorEntitySet.Restrictions getDefinitionConcepts() {
-        return restrictions;
+        return conceptRestrictions;
     }
 
+    // Is used by the descriptors's build() method. It's possible to change the return type based on need.
     @Override
     public DefinitionConceptDesc getDisjointConceptDescriptor(OWLClass instance, OWLReferences ontology) {
         return new DefinitionConceptDesc( instance, ontology);
     }
+    // It returns disjointConcepts from the EntitySet (after being read from the ontology)
     @Override
     public DescriptorEntitySet.Concepts getDisjointConcepts() {
         return disjointConcepts;
     }
 
+    // Is used by the descriptors's build() method. It's possible to change the return type based on need.
     @Override
     public DefinitionConceptDesc getEquivalentConceptDescriptor(OWLClass instance, OWLReferences ontology) {
         return new DefinitionConceptDesc( instance, ontology);
     }
+    // It returns equivalentConcepts from the EntitySet (after being read from the ontology)
     @Override
     public DescriptorEntitySet.Concepts getEquivalentConcepts() {
         return equivalentConcepts;
     }
 
+    // Is used by the descriptors's build() method. It's possible to change the return type based on need.
     @Override
     public LinkIndividualDesc getIndividualDescriptor(OWLNamedIndividual instance, OWLReferences ontology) {
         return new LinkIndividualDesc( instance, ontology);
     }
+    // It returns Individuals from the EntitySet (after being read from the ontology)
     @Override
     public DescriptorEntitySet.Individuals getIndividualInstances() {
         return individuals;
     }
 
-    // Overriding method in class: Object
+    /* Overriding method in class: Object */
 
 
     // To show internal state of the Descriptor
@@ -129,7 +136,7 @@ public class DefinitionConceptDesc
                 ":" + NL + "\t≠ " + disjointConcepts +
                 "," + NL + "\t≡ " + equivalentConcepts +
                 "," + NL + "\t⇐ " + individuals +
-                "," + NL + "\t= " + restrictions +
+                "," + NL + "\t= " + conceptRestrictions +
                 NL + "}";
     }
 }

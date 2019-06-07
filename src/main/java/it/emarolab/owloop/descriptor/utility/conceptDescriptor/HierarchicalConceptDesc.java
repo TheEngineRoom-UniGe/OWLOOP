@@ -5,7 +5,9 @@ import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.ConceptGround;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.ConceptExpression;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
+import it.emarolab.owloop.descriptor.utility.individualDescriptor.LinkIndividualDesc;
 import org.semanticweb.owlapi.model.OWLClass;
+import org.semanticweb.owlapi.model.OWLNamedIndividual;
 
 import java.util.List;
 
@@ -27,7 +29,7 @@ public class HierarchicalConceptDesc
     private DescriptorEntitySet.Concepts subConcepts = new DescriptorEntitySet.Concepts();
     private DescriptorEntitySet.Concepts superConcepts = new DescriptorEntitySet.Concepts();
 
-    // Constructors from class: ConceptGround
+    /* Constructors from class: ConceptGround */
 
     public HierarchicalConceptDesc(OWLClass instance, OWLReferences onto) {
         super(instance, onto);
@@ -54,7 +56,7 @@ public class HierarchicalConceptDesc
         super(instanceName, ontoName, filePath, iriPath, bufferingChanges);
     }
 
-    // Overriding methods in class: ConceptGround
+    /* Overriding methods in class: ConceptGround */
 
 
     // To read axioms from an ontology
@@ -72,28 +74,32 @@ public class HierarchicalConceptDesc
         return r;
     }
 
-    // Overriding methods in classes: Concept and ConceptExpression
+    /* Overriding methods in classes: Concept and ConceptExpression */
 
 
+    // Is used by the descriptors's build() method. It's possible to change the return type based on need.
     @Override
     public HierarchicalConceptDesc getSubConceptDescriptor(OWLClass instance, OWLReferences ontology) {
         return new HierarchicalConceptDesc( instance, ontology);
     }
+    // It returns subConcepts from the EntitySet (after being read from the ontology)
     @Override
     public DescriptorEntitySet.Concepts getSubConcepts() {
         return subConcepts;
     }
 
+    // Is used by the descriptors's build() method. It's possible to change the return type based on need.
     @Override
     public HierarchicalConceptDesc getSuperConceptDescriptor(OWLClass instance, OWLReferences ontology) {
         return new HierarchicalConceptDesc( instance, ontology);
     }
+    // It returns superConcepts from the EntitySet (after being read from the ontology)
     @Override
     public DescriptorEntitySet.Concepts getSuperConcepts() {
         return superConcepts;
     }
 
-    // Overriding method in class: Object
+    /* Overriding method in class: Object */
 
 
     // To show internal state of the Descriptor

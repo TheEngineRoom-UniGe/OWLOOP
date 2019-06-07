@@ -25,35 +25,44 @@ public class ObjectLinkIndividualDesc
 
     private DescriptorEntitySet.ObjectLinksSet objectLinks = new DescriptorEntitySet.ObjectLinksSet();
 
-    // constructors for IndividualGround
+    /* Constructors from class: IndividualGround */
+
     public ObjectLinkIndividualDesc(String instanceName, OWLReferences onto) {
         super(instanceName, onto);
     }
 
-    // implementations for Axiom.descriptor
+    /* Overriding methods in class: IndividualGround */
+
+
+    // To read axioms from an ontology
     @Override
     public List<MappingIntent> readExpressionAxioms() {
         List<MappingIntent> r = ObjectLink.super.readExpressionAxioms();
         return r;
     }
-
+    // To write axioms to an ontology
     @Override
     public List<MappingIntent> writeExpressionAxioms() {
         List<MappingIntent> r = ObjectLink.super.writeExpressionAxioms();
         return r;
     }
 
+    /* Overriding methods in classes: Individual and IndividualExpression */
 
-    // implementations for IndividualExpression.ObjectLink
-    @Override //called during build...() you can change the returning type to any implementations of ObjectPropertyExpression
+
+    // Is used by the descriptors's build() method. It's possible to change the return type based on need.
+    @Override
     public FullObjectPropertyDesc getNewIndividualObjectProperty(DescriptorEntitySet.ObjectLinks instance, OWLReferences ontology) {
         return new FullObjectPropertyDesc( instance.getExpression(), ontology);
     }
-
+    // It returns objectLinks from the EntitySet (after being read from the ontology)
     @Override
     public DescriptorEntitySet.ObjectLinksSet getIndividualObjectProperties() {
         return objectLinks;
     }
+
+    /* Overriding method in class: Object */
+
 
     // To show internal state of the Descriptor
     @Override

@@ -43,13 +43,13 @@ public class FullIndividualDesc
         IndividualExpression.ObjectLink<FullObjectPropertyDesc>,
         IndividualExpression.DataLink<FullDataPropertyDesc> {
 
-    private DescriptorEntitySet.Individuals disjointIndividual = new DescriptorEntitySet.Individuals();
-    private DescriptorEntitySet.Individuals equivalentIndividual = new DescriptorEntitySet.Individuals();
+    private DescriptorEntitySet.Individuals disjointIndividuals = new DescriptorEntitySet.Individuals();
+    private DescriptorEntitySet.Individuals equivalentIndividuals = new DescriptorEntitySet.Individuals();
     private DescriptorEntitySet.Concepts concepts = new DescriptorEntitySet.Concepts();
     private DescriptorEntitySet.ObjectLinksSet objectLinks = new DescriptorEntitySet.ObjectLinksSet();
     private DescriptorEntitySet.DataLinksSet dataLinks = new DescriptorEntitySet.DataLinksSet();
 
-    // Constructors from the abstract class: IndividualGround
+    /* Constructors from class: IndividualGround */
 
     public FullIndividualDesc(OWLNamedIndividual instance, OWLReferences onto) {
         super(instance, onto);
@@ -76,8 +76,10 @@ public class FullIndividualDesc
         super(instanceName, ontoName, filePath, iriPath, bufferingChanges);
     }
 
-    // Implementation of readExpressionAxioms()
+    /* Overriding methods in class: IndividualGround */
 
+
+    // To read axioms from an ontology
     @Override
     public List<MappingIntent> readExpressionAxioms() {
         List<MappingIntent> r = IndividualExpression.Equivalent.super.readExpressionAxioms();
@@ -87,9 +89,7 @@ public class FullIndividualDesc
         r.addAll( IndividualExpression.DataLink.super.readExpressionAxioms());
         return r;
     }
-
-    // Implementation of writeExpressionAxioms()
-
+    // To write axioms to an ontology
     @Override
     public List<MappingIntent> writeExpressionAxioms() {
         List<MappingIntent> r = IndividualExpression.Equivalent.super.writeExpressionAxioms();
@@ -100,76 +100,76 @@ public class FullIndividualDesc
         return r;
     }
 
-    // implementations for: IndividualExpression.Disjoint
+    /* Overriding methods in classes: Individual and IndividualExpression */
 
-    @Override //called during build...() you can change the returning type to any implementations of IndividualExpression
+
+    // Is used by the descriptors's build() method. It's possible to change the return type based on need.
+    @Override
     public FullIndividualDesc getNewDisjointIndividual(OWLNamedIndividual instance, OWLReferences ontology) {
         return new FullIndividualDesc( instance, ontology);
     }
-
+    // It returns disjointIndividuals from the EntitySet (after being read from the ontology)
     @Override
     public DescriptorEntitySet.Individuals getDisjointIndividuals() {
-        return disjointIndividual;
+        return disjointIndividuals;
     }
 
-    // Implementations for: IndividualExpression.Equivalent
-
-    @Override //called during build...() you can change the returning type to any implementations of IndividualExpression
+    // Is used by the descriptors's build() method. It's possible to change the return type based on need.
+    @Override
     public FullIndividualDesc getNewEquivalentIndividual(OWLNamedIndividual instance, OWLReferences ontology) {
         return new FullIndividualDesc( instance, ontology);
     }
-
+    // It returns equivalentIndividuals from the EntitySet (after being read from the ontology)
     @Override
     public DescriptorEntitySet.Individuals getEquivalentIndividuals() {
-        return equivalentIndividual;
+        return equivalentIndividuals;
     }
 
-    // Implementations for: IndividualExpression.Type
-
-    @Override //called during build...() you can change the returning type to any implementations of ConceptExpression
+    // Is used by the descriptors's build() method. It's possible to change the return type based on need.
+    @Override
     public FullConceptDesc getNewIndividualType(OWLClass instance, OWLReferences ontology) {
         return new FullConceptDesc( instance, ontology);
     }
-
+    // It returns concepts from the EntitySet (after being read from the ontology)
     @Override
     public DescriptorEntitySet.Concepts getIndividualTypes() {
         return concepts;
     }
 
-    // Implementations for: IndividualExpression.ObjectLink
-
-    @Override //called during build...() you can change the returning type to any implementations of ObjectPropertyExpression
+    // Is used by the descriptors's build() method. It's possible to change the return type based on need.
+    @Override
     public FullObjectPropertyDesc getNewIndividualObjectProperty(DescriptorEntitySet.ObjectLinks instance, OWLReferences ontology) {
         return new FullObjectPropertyDesc( instance.getExpression(), ontology);
     }
-
+    // It returns objectLinks from the EntitySet (after being read from the ontology)
     @Override
     public DescriptorEntitySet.ObjectLinksSet getIndividualObjectProperties() {
         return objectLinks;
     }
 
-    // Implementations for: IndividualExpression.DataLink
-
-    @Override //called during build...() you can change the returning type to any implementations of DataPropertyExpression
+    // Is used by the descriptors's build() method. It's possible to change the return type based on need.
+    @Override
     public FullDataPropertyDesc getNewIndividualDataProperty(DescriptorEntitySet.DataLinks instance, OWLReferences ontology) {
         return new FullDataPropertyDesc( instance.getExpression(), ontology);
     }
-
+    // It returns dataLinks from the EntitySet (after being read from the ontology)
     @Override
     public DescriptorEntitySet.DataLinksSet getIndividualDataProperties() {
         return dataLinks;
     }
 
-    // Implementations for: standard object interface
+    /* Overriding method in class: Object */
 
+
+    // To show internal state of the Descriptor
     @Override
     public String toString() {
         return getClass().getSimpleName() + "{" + "\n" +
                 "\n" +
                 "\t" + getGround() + ":" + "\n" +
                 "\n" +
-                "\t\t≠ " + disjointIndividual + "\n" +
-                "\t\t≡ " + equivalentIndividual + "\n" +
+                "\t\t≠ " + disjointIndividuals + "\n" +
+                "\t\t≡ " + equivalentIndividuals + "\n" +
                 "\t\t∈ " + concepts + "\n" +
                 "\t\t⊨ " + objectLinks + "\n" +
                 "\t\t⊢ " + dataLinks + "\n" +

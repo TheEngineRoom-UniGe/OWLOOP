@@ -25,7 +25,7 @@ public class InstanceConceptDesc
 
     private DescriptorEntitySet.Individuals individuals = new DescriptorEntitySet.Individuals();
 
-    // Constructors from class: ConceptGround
+    /* Constructors from class: ConceptGround */
 
     public InstanceConceptDesc(OWLClass instance, OWLReferences onto) {
         super(instance, onto);
@@ -52,7 +52,7 @@ public class InstanceConceptDesc
         super(instanceName, ontoName, filePath, iriPath, bufferingChanges);
     }
 
-    // Overriding methods in class: ConceptGround
+    /* Overriding methods in class: ConceptGround */
 
 
     // To read axioms from an ontology
@@ -66,19 +66,21 @@ public class InstanceConceptDesc
         return Instance.super.writeExpressionAxioms();
     }
 
-    // Overriding methods in classes: Concept and ConceptExpression
+    /* Overriding methods in classes: Concept and ConceptExpression */
 
 
+    // Is used by the descriptors's build() method. It's possible to change the return type based on need.
     @Override
     public LinkIndividualDesc getIndividualDescriptor(OWLNamedIndividual instance, OWLReferences ontology) {
         return new LinkIndividualDesc( instance, ontology);
     }
+    // It returns Individuals from the EntitySet (after being read from the ontology)
     @Override
     public DescriptorEntitySet.Individuals getIndividualInstances() {
         return individuals;
     }
 
-    // Overriding method in class: Object
+    /* Overriding method in class: Object */
 
 
     // To show internal state of the Descriptor

@@ -51,7 +51,7 @@ public class FullObjectPropertyDesc
     private DescriptorEntitySet.Restrictions domainConceptRestrictions = new DescriptorEntitySet.Restrictions();
     private DescriptorEntitySet.Restrictions rangeConceptRestrictions = new DescriptorEntitySet.Restrictions();
 
-    // constructors for DataPropertyGround
+    /* Constructors from class: ObjectPropertyGround */
 
     public FullObjectPropertyDesc(OWLObjectProperty instance, OWLReferences onto) {
         super(instance, onto);
@@ -78,8 +78,10 @@ public class FullObjectPropertyDesc
         super(instanceName, ontoName, filePath, iriPath, bufferingChanges);
     }
 
-    // Implementation of readExpressionAxioms()
+    /* Overriding methods in class: ObjectPropertyGround */
 
+
+    // To read axioms from an ontology
     @Override
     public List<MappingIntent> readExpressionAxioms() {
         List<MappingIntent> r = ObjectPropertyExpression.Disjoint.super.readExpressionAxioms();
@@ -91,9 +93,7 @@ public class FullObjectPropertyDesc
         r.addAll( ObjectPropertyExpression.Inverse.super.readExpressionAxioms());
         return r;
     }
-
-    // Implementation of writeExpressionAxioms()
-
+    // To write axioms to an ontology
     @Override
     public List<MappingIntent> writeExpressionAxioms() {
         List<MappingIntent> r = ObjectPropertyExpression.Disjoint.super.writeExpressionAxioms();
@@ -106,82 +106,80 @@ public class FullObjectPropertyDesc
         return r;
     }
 
-    // implementations for: ObjectPropertyExpression.Disjoint
+    /* Overriding methods in classes: ObjectProperty and ObjectPropertyExpression */
 
-    @Override //called during build...() you can change the returning type to any implementations of ObjectPropertyExpression
-    public FullObjectPropertyDesc getNewDisjointObjectProperty(OWLObjectProperty instance, OWLReferences ontology) {
-        return new FullObjectPropertyDesc( instance, ontology);
-    }
 
-    @Override
-    public DescriptorEntitySet.ObjectProperties getDisjointObjectProperties() {
-        return disjointObjectProperties;
-    }
-
-    // implementations for: ObjectPropertyExpression.Equivalent
-
-    @Override //called during build...() you can change the returning type to any implementations of ObjectPropertyExpression
-    public FullObjectPropertyDesc getNewEquivalentObjectProperty(OWLObjectProperty instance, OWLReferences ontology) {
-        return new FullObjectPropertyDesc( instance, ontology);
-    }
-
-    @Override
-    public DescriptorEntitySet.ObjectProperties getEquivalentObjectProperties() {
-        return equivalentObjectProperties;
-    }
-
-    // implementations for: ObjectPropertyExpression.Domain
-
+    // It returns domainConceptRestrictions from the EntitySet (after being read from the ontology)
     @Override
     public DescriptorEntitySet.Restrictions getObjectPropertyDomainConcepts() {
         return domainConceptRestrictions;
     }
 
-    // implementations for: ObjectPropertyExpression.Range
-
+    // It returns rangeConceptRestrictions from the EntitySet (after being read from the ontology)
     @Override
     public DescriptorEntitySet.Restrictions getObjectPropertyRangeConcepts() {
         return rangeConceptRestrictions;
     }
 
-    // implementations for: ObjectPropertyExpression.Sub
+    // Is used by the descriptors's build() method. It's possible to change the return type based on need.
+    @Override
+    public FullObjectPropertyDesc getNewDisjointObjectProperty(OWLObjectProperty instance, OWLReferences ontology) {
+        return new FullObjectPropertyDesc( instance, ontology);
+    }
+    // It returns disjointObjectProperties from the EntitySet (after being read from the ontology)
+    @Override
+    public DescriptorEntitySet.ObjectProperties getDisjointObjectProperties() {
+        return disjointObjectProperties;
+    }
 
-    @Override //called during build...() you can change the returning type to any implementations of ObjectPropertyExpression
+    // Is used by the descriptors's build() method. It's possible to change the return type based on need.
+    @Override
+    public FullObjectPropertyDesc getNewEquivalentObjectProperty(OWLObjectProperty instance, OWLReferences ontology) {
+        return new FullObjectPropertyDesc( instance, ontology);
+    }
+    // It returns equivalentObjectProperties from the EntitySet (after being read from the ontology)
+    @Override
+    public DescriptorEntitySet.ObjectProperties getEquivalentObjectProperties() {
+        return equivalentObjectProperties;
+    }
+
+    // Is used by the descriptors's build() method. It's possible to change the return type based on need.
+    @Override
     public FullObjectPropertyDesc getNewSubObjectProperty(OWLObjectProperty instance, OWLReferences ontology) {
         return new FullObjectPropertyDesc( instance, ontology);
     }
-
+    // It returns subObjectProperties from the EntitySet (after being read from the ontology)
     @Override
     public DescriptorEntitySet.ObjectProperties getSubObjectProperties() {
         return subObjectProperties;
     }
 
-    // implementations for: ObjectPropertyExpression.Super
-
-    @Override //called during build...() you can change the returning type to any implementations of ObjectPropertyExpression
+    // Is used by the descriptors's build() method. It's possible to change the return type based on need.
+    @Override
     public FullObjectPropertyDesc getNewSuperObjectProperty(OWLObjectProperty instance, OWLReferences ontology) {
         return new FullObjectPropertyDesc( instance, ontology);
     }
-
+    // It returns superObjectProperties from the EntitySet (after being read from the ontology)
     @Override
     public DescriptorEntitySet.ObjectProperties getSuperObjectProperties() {
         return superObjectProperties;
     }
 
-    // implementations for: ObjectPropertyExpression.Inverse
-
-    @Override //called during build...() you can change the returning type to any implementations of ObjectPropertyExpression
+    // Is used by the descriptors's build() method. It's possible to change the return type based on need.
+    @Override
     public FullObjectPropertyDesc getNewInverseObjectProperty(OWLObjectProperty instance, OWLReferences ontology) {
         return new FullObjectPropertyDesc( instance, ontology);
     }
-
+    // It returns inverseObjectProperties from the EntitySet (after being read from the ontology)
     @Override
     public DescriptorEntitySet.ObjectProperties getInverseObjectProperties() {
         return inverseObjectProperties;
     }
 
-    // implementations for: standard object interface
+    /* Overriding method in class: Object */
 
+
+    // To show internal state of the Descriptor
     @Override
     public String toString() {
         return getClass().getSimpleName() + "{" + "\n" +

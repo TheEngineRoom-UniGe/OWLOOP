@@ -49,7 +49,7 @@ public class FullConceptDesc
     private DescriptorEntitySet.Concepts superConcepts = new DescriptorEntitySet.Concepts();
     private DescriptorEntitySet.Individuals individuals = new DescriptorEntitySet.Individuals();
 
-    // Constructors from class: ConceptGround
+    /* Constructors from class: ConceptGround */
 
     public FullConceptDesc(OWLClass instance, OWLReferences onto) {
         super(instance, onto);
@@ -76,7 +76,7 @@ public class FullConceptDesc
         super(instanceName, ontoName, filePath, iriPath, bufferingChanges);
     }
 
-    // Overriding methods in class: ConceptGround
+    /* Overriding methods in class: ConceptGround */
 
 
     // To read axioms from an ontology
@@ -102,10 +102,10 @@ public class FullConceptDesc
         return r;
     }
 
-    // Overriding methods in classes: Concept and ConceptExpression
+    /* Overriding methods in classes: Concept and ConceptExpression */
 
 
-    // It returns the definitionConcepts from the EntitySet (after being read from the ontology)
+    // It returns conceptRestrictions from the EntitySet (after being read from the ontology)
     @Override
     public DescriptorEntitySet.Restrictions getDefinitionConcepts() {
         return conceptRestrictions;
@@ -116,7 +116,7 @@ public class FullConceptDesc
     public FullConceptDesc getDisjointConceptDescriptor(OWLClass instance, OWLReferences ontology) {
         return new FullConceptDesc( instance, ontology);
     }
-    // It returns the disjointConcepts from the EntitySet (after being read from the ontology)
+    // It returns disjointConcepts from the EntitySet (after being read from the ontology)
     @Override
     public DescriptorEntitySet.Concepts getDisjointConcepts() {
         return disjointConcepts;
@@ -127,7 +127,7 @@ public class FullConceptDesc
     public FullConceptDesc getEquivalentConceptDescriptor(OWLClass instance, OWLReferences ontology) {
         return new FullConceptDesc( instance, ontology);
     }
-    // It returns the equivalentConcepts from the EntitySet (after being read from the ontology)
+    // It returns equivalentConcepts from the EntitySet (after being read from the ontology)
     @Override
     public DescriptorEntitySet.Concepts getEquivalentConcepts() {
         return equivalentConcepts;
@@ -138,7 +138,7 @@ public class FullConceptDesc
     public FullConceptDesc getSubConceptDescriptor(OWLClass instance, OWLReferences ontology) {
         return new FullConceptDesc( instance, ontology);
     }
-    // It returns the subConcepts from the EntitySet (after being read from the ontology)
+    // It returns subConcepts from the EntitySet (after being read from the ontology)
     @Override
     public DescriptorEntitySet.Concepts getSubConcepts() {
         return subConcepts;
@@ -149,7 +149,7 @@ public class FullConceptDesc
     public FullConceptDesc getSuperConceptDescriptor(OWLClass instance, OWLReferences ontology) {
         return new FullConceptDesc( instance, ontology);
     }
-    // It returns the superConcepts from the EntitySet (after being read from the ontology)
+    // It returns superConcepts from the EntitySet (after being read from the ontology)
     @Override
     public DescriptorEntitySet.Concepts getSuperConcepts() {
         return superConcepts;
@@ -160,13 +160,13 @@ public class FullConceptDesc
     public LinkIndividualDesc getIndividualDescriptor(OWLNamedIndividual instance, OWLReferences ontology) {
         return new LinkIndividualDesc( instance, ontology);
     }
-    // It returns the Individuals from the EntitySet (after being read from the ontology)
+    // It returns Individuals from the EntitySet (after being read from the ontology)
     @Override
     public DescriptorEntitySet.Individuals getIndividualInstances() {
         return individuals;
     }
 
-    // Overriding method in class: Object
+    /* Overriding method in class: Object */
 
 
     // To show internal state of the Descriptor

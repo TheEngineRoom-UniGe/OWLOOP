@@ -49,7 +49,7 @@ public class FullDataPropertyDesc
     private DescriptorEntitySet.Restrictions domainConceptRestrictions = new DescriptorEntitySet.Restrictions();
     private DescriptorEntitySet.Restrictions rangeConceptRestrictions = new DescriptorEntitySet.Restrictions();
 
-    // Constructors from the abstract class: DataPropertyGround
+    /* Constructors from class: DataPropertyGround */
 
     public FullDataPropertyDesc(OWLDataProperty instance, OWLReferences onto) {
         super(instance, onto);
@@ -76,8 +76,10 @@ public class FullDataPropertyDesc
         super(instanceName, ontoName, filePath, iriPath, bufferingChanges);
     }
 
-    // Implementation of readExpressionAxioms()
+    /* Overriding methods in class: DataPropertyGround */
 
+
+    // To read axioms from an ontology
     @Override
     public List<MappingIntent> readExpressionAxioms() {
         List<MappingIntent> r = DataPropertyExpression.Disjoint.super.readExpressionAxioms();
@@ -88,9 +90,7 @@ public class FullDataPropertyDesc
         r.addAll( DataPropertyExpression.Super.super.readExpressionAxioms());
         return r;
     }
-
-    // Implementation of writeExpressionAxioms()
-
+    // To write axioms to an ontology
     @Override
     public List<MappingIntent> writeExpressionAxioms() {
         List<MappingIntent> r = DataPropertyExpression.Disjoint.super.writeExpressionAxioms();
@@ -102,75 +102,68 @@ public class FullDataPropertyDesc
         return r;
     }
 
-    // Implementations for: DataPropertyExpression.Disjoint
+    /* Overriding methods in classes: DataProperty and DataPropertyExpression */
 
-    @Override // you can change the returning type to any implementations of DataPropertyExpression
-    public FullDataPropertyDesc getNewDisjointDataProperty(OWLDataProperty instance, OWLReferences ontology) {
-        return new FullDataPropertyDesc( instance, ontology);
-    }
-
-    @Override
-    public DescriptorEntitySet.DataProperties getDisjointDataProperties() {
-        return disjointDataProperties;
-    }
-
-    // Implementations for: DataPropertyExpression.Equivalent
-
-    @Override // returns a set with elements of the same type of getNewDisjointDataProperty()
-    public Set<FullDataPropertyDesc> buildEquivalentDataProperty() {
-        return DataPropertyExpression.Equivalent.super.buildEquivalentDataProperty();
-    }
-
-    @Override // you can change the returning type to any implementations of DataPropertyExpression
-    public FullDataPropertyDesc getNewEquivalentDataProperty(OWLDataProperty instance, OWLReferences ontology) {
-        return new FullDataPropertyDesc( instance, ontology);
-    }
-
-    @Override
-    public DescriptorEntitySet.DataProperties getEquivalentDataProperties() {
-        return equivalentDataProperties;
-    }
-
-    // Implementations for: DataPropertyExpression.Domain
-
+    // It returns domainConceptRestrictions from the EntitySet (after being read from the ontology)
     @Override
     public DescriptorEntitySet.Restrictions getDataPropertyDomainConcepts() {
         return domainConceptRestrictions;
     }
 
-    // Implementations for: DataPropertyExpression.Range
-
+    // It returns rangeConceptRestrictions from the EntitySet (after being read from the ontology)
     @Override
     public DescriptorEntitySet.Restrictions getDataPropertyRangeConcepts() {
         return rangeConceptRestrictions;
     }
 
-    // Implementations for: DataPropertyExpression.Super
+    // Is used by the descriptors's build() method. It's possible to change the return type based on need.
+    @Override
+    public FullDataPropertyDesc getNewDisjointDataProperty(OWLDataProperty instance, OWLReferences ontology) {
+        return new FullDataPropertyDesc( instance, ontology);
+    }
+    // It returns disjointDataProperties from the EntitySet (after being read from the ontology)
+    @Override
+    public DescriptorEntitySet.DataProperties getDisjointDataProperties() {
+        return disjointDataProperties;
+    }
 
-    @Override //called during build...() you can change the returning type to any implementations of DataPropertyExpression
+    // Is used by the descriptors's build() method. It's possible to change the return type based on need.
+    @Override
+    public FullDataPropertyDesc getNewEquivalentDataProperty(OWLDataProperty instance, OWLReferences ontology) {
+        return new FullDataPropertyDesc( instance, ontology);
+    }
+    // It returns equivalentDataProperties from the EntitySet (after being read from the ontology)
+    @Override
+    public DescriptorEntitySet.DataProperties getEquivalentDataProperties() {
+        return equivalentDataProperties;
+    }
+
+    // Is used by the descriptors's build() method. It's possible to change the return type based on need.
+    @Override
     public FullDataPropertyDesc getNewSubDataProperty(OWLDataProperty instance, OWLReferences ontology) {
         return new FullDataPropertyDesc( instance, ontology);
     }
-
+    // It returns subDataProperties from the EntitySet (after being read from the ontology)
     @Override
     public DescriptorEntitySet.DataProperties getSubDataProperties() {
         return subDataProperties;
     }
 
-    // Implementations for: DataPropertyExpression.Super
-
-    @Override //called during build...() you can change the returning type to any implementations of DataPropertyExpression
+    // Is used by the descriptors's build() method. It's possible to change the return type based on need.
+    @Override
     public FullDataPropertyDesc getNewSuperDataProperty(OWLDataProperty instance, OWLReferences ontology) {
         return new FullDataPropertyDesc( instance, ontology);
     }
-
+    // It returns superDataProperties from the EntitySet (after being read from the ontology)
     @Override
     public DescriptorEntitySet.DataProperties getSuperDataProperties() {
         return superDataProperties;
     }
 
-    // Implementations for: standard object interface
+    /* Overriding method in class: Object */
 
+
+    // To show internal state of the Descriptor
     @Override
     public String toString() {
         return getClass().getSimpleName() + "{" + "\n" +

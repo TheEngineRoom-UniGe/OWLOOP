@@ -28,35 +28,43 @@ public class TypeIndividualDesc
 
     private DescriptorEntitySet.Concepts concepts = new DescriptorEntitySet.Concepts();
 
-    // constructors for IndividualGround
+    /* Constructors from class: IndividualGround */
+
     public TypeIndividualDesc(OWLNamedIndividual instance, OWLReferences onto) {
         super(instance, onto);
     }
 
-    // implementations for Axiom.descriptor
+    /* Overriding methods in class: IndividualGround */
+
+
+    // To read axioms from an ontology
     @Override
     public List<MappingIntent> readExpressionAxioms() {
         List<MappingIntent> r = Type.super.readExpressionAxioms();
         return r;
     }
-
+    // To write axioms to an ontology
     @Override
     public List<MappingIntent> writeExpressionAxioms() {
         List<MappingIntent> r = Type.super.writeExpressionAxioms();
         return r;
     }
 
+    /* Overriding methods in classes: Individual and IndividualExpression */
 
-    // implementations for IndividualExpression.Type
-    @Override //called during build...() you can change the returning type to any implementations of ConceptExpression
+
+    // Is used by the descriptors's build() method. It's possible to change the return type based on need.
+    @Override
     public DefSubConceptDesc getNewIndividualType(OWLClass instance, OWLReferences ontology) {
         return new DefSubConceptDesc( instance, ontology);
     }
-
+    // It returns concepts from the EntitySet (after being read from the ontology)
     @Override
     public DescriptorEntitySet.Concepts getIndividualTypes() {
         return concepts;
     }
+
+    /* Overriding method in class: Object */
 
 
     // To show internal state of the Descriptor
