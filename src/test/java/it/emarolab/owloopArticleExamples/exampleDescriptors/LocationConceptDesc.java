@@ -3,6 +3,12 @@ package it.emarolab.owloopArticleExamples.exampleDescriptors;
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.amor.owlInterface.SemanticRestriction;
 
+/**
+ *  <p>
+ *      Extends DefConceptDesc.
+ *  </p>
+ *  Adds some-restriction on the concept "LOCATION", i.e, LOCATION hasDoor some DOOR
+ */
 public class LocationConceptDesc
         extends DefConceptDesc {
 

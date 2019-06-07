@@ -3,6 +3,13 @@ package it.emarolab.owloopArticleExamples.exampleDescriptors;
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.amor.owlInterface.SemanticRestriction;
 
+/**
+ *  <p>
+ *      Extends LocationConceptDesc.
+ *  </p>
+ *  Adds some-restriction on the concept "CORRIDOR", i.e, CORRIDOR hasDoor some DOOR.
+ *  Furthermore, adds min-cardinality-restriction, i.e., CORRIDOR hasDoor min 2 DOOR.
+ */
 public class CorridorConceptDesc
         extends LocationConceptDesc {
 
