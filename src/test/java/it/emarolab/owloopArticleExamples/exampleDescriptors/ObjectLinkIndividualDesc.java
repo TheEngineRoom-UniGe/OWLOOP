@@ -10,7 +10,7 @@ import it.emarolab.owloop.descriptor.utility.objectPropertyDescriptor.FullObject
 import java.util.List;
 
 /**
- * A 'simple' Individual Descriptor which implements 1 {@link IndividualExpression}.
+ * A 'simple' Individual Descriptor which implements 1 {@link IndividualExpression} interface:
  * <ul>
  * <li><b>{@link IndividualExpression.ObjectLink}</b>:   to describe an ObjectProperty and Individuals related via that ObjectProperty, for an Individual.</li>
  * </ul>
@@ -75,5 +75,3 @@ public class ObjectLinkIndividualDesc
                 "}" + "\n";
     }
 }
-
-// todo: (i) rename entitySet objects properly (ii) rename the methods related to those variables properly (iii) modification in toString() + add \n remove \t (iv) fix spaces and comments.

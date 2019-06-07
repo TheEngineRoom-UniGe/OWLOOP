@@ -12,7 +12,7 @@ import java.util.List;
 
 
 /**
- * This is an example of a 'simple' Concept Descriptor that implements 1 ClassExpressions (aka {@link ConceptExpression}):
+ * This is an example of a 'simple' Concept Descriptor that implements 1 ClassExpression (aka {@link ConceptExpression}) interface:
  * <ul>
  * <li><b>{@link ConceptExpression.Instance}</b>:    to describe an Individual of a Class.</li>
  * </ul>

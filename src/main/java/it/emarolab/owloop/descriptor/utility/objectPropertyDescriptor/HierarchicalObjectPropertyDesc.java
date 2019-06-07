@@ -9,7 +9,7 @@ import org.semanticweb.owlapi.model.OWLObjectProperty;
 import java.util.List;
 
 /**
- * This is an example of a 'compound' ObjectProperty Descriptor which implements 2 {@link ObjectPropertyExpression}s.
+ * This is an example of a 'compound' ObjectProperty Descriptor which implements 2 {@link ObjectPropertyExpression} interfaces:
  * <ul>
  * <li><b>{@link ObjectPropertyExpression.Sub}</b>:          to describe that an ObjectProperty subsumes another ObjectProperty.</li>
  * <li><b>{@link ObjectPropertyExpression.Super}</b>:        to describe that an ObjectProperty super-sumes another ObjectProperty.</li>
@@ -24,7 +24,7 @@ public class HierarchicalObjectPropertyDesc
     private DescriptorEntitySet.ObjectProperties subObjectProperties = new DescriptorEntitySet.ObjectProperties();
     private DescriptorEntitySet.ObjectProperties superObjectProperties = new DescriptorEntitySet.ObjectProperties();
 
-    // constructors for ObjectPropertyGround
+    /* Constructors from class: ObjectPropertyGround */
 
     public HierarchicalObjectPropertyDesc(OWLObjectProperty instance, OWLReferences onto) {
         super(instance, onto);
@@ -51,15 +51,17 @@ public class HierarchicalObjectPropertyDesc
         super(instanceName, ontoName, filePath, iriPath, bufferingChanges);
     }
 
-    // implementations for Axiom.descriptor
+    /* Overriding methods in class: ObjectPropertyGround */
 
+
+    // To read axioms from an ontology
     @Override
     public List<MappingIntent> readExpressionAxioms() {
         List<MappingIntent> r = ObjectPropertyExpression.Sub.super.readExpressionAxioms();
         r.addAll( ObjectPropertyExpression.Super.super.readExpressionAxioms());
         return r;
     }
-
+    // To write axioms to an ontology
     @Override
     public List<MappingIntent> writeExpressionAxioms() {
         List<MappingIntent> r = ObjectPropertyExpression.Sub.super.writeExpressionAxioms();
@@ -67,30 +69,35 @@ public class HierarchicalObjectPropertyDesc
         return r;
     }
 
-    // implementations for ObjectPropertyExpression.Super
+    /* Overriding methods in classes: ObjectProperty and ObjectPropertyExpression */
 
-    @Override //called during build...() you can change the returning type to any implementations of ObjectPropertyExpression
+
+    // Is used by the descriptors's build() method. It's possible to change the return type based on need.
+    @Override
     public HierarchicalObjectPropertyDesc getNewSubObjectProperty(OWLObjectProperty instance, OWLReferences ontology) {
         return new HierarchicalObjectPropertyDesc( instance, ontology);
     }
-
+    // It returns subObjectProperties from the EntitySet (after being read from the ontology)
     @Override
     public DescriptorEntitySet.ObjectProperties getSubObjectProperties() {
         return subObjectProperties;
     }
 
-    // implementations for ObjectPropertyExpression.Super
-
-    @Override  //called during build...() you can change the returning type to any implementations of ObjectPropertyExpression
+    // Is used by the descriptors's build() method. It's possible to change the return type based on need.
+    @Override
     public HierarchicalObjectPropertyDesc getNewSuperObjectProperty(OWLObjectProperty instance, OWLReferences ontology) {
         return new HierarchicalObjectPropertyDesc( instance, ontology);
     }
-
+    // It returns superObjectProperties from the EntitySet (after being read from the ontology)
     @Override
     public DescriptorEntitySet.ObjectProperties getSuperObjectProperties() {
         return superObjectProperties;
     }
 
+    /* Overriding method in class: Object */
+
+
+    // To show internal state of the Descriptor
     public String toString() {
         return "FullObjectPropertyDesc{" +
                 NL + "\t\t\t" + getGround() +

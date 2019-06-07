@@ -10,7 +10,7 @@ import java.util.List;
 
 
 /**
- * This is an example of a 'compound' DataProperty Descriptor which implements 2 {@link DataPropertyExpression}s.
+ * This is an example of a 'compound' DataProperty Descriptor which implements 2 {@link DataPropertyExpression} interfaces:
  * <ul>
  * <li><b>{@link DataPropertyExpression.Equivalent}</b>:   to describe that a DataProperty is equivalent to another DataProperty.</li>
  * <li><b>{@link DataPropertyExpression.Disjoint}</b>:     to describe that a DataProperty is disjoint to another DataProperty.</li>
@@ -25,7 +25,7 @@ public class DefinitionDataPropertyDesc
     private DescriptorEntitySet.DataProperties disjointDataProperties = new DescriptorEntitySet.DataProperties();
     private DescriptorEntitySet.DataProperties equivalentDataProperties = new DescriptorEntitySet.DataProperties();
 
-    // constructors for DataPropertyGround
+    /* Constructors from class: DataPropertyGround */
 
     public DefinitionDataPropertyDesc(OWLDataProperty instance, OWLReferences onto) {
         super(instance, onto);
@@ -52,15 +52,17 @@ public class DefinitionDataPropertyDesc
         super(instanceName, ontoName, filePath, iriPath, bufferingChanges);
     }
 
-    // implementations for Axiom.descriptor
+    /* Overriding methods in class: DataPropertyGround */
 
+
+    // To read axioms from an ontology
     @Override
     public List<MappingIntent> readExpressionAxioms() {
         List<MappingIntent> r = DataPropertyExpression.Disjoint.super.readExpressionAxioms();
         r.addAll( DataPropertyExpression.Equivalent.super.readExpressionAxioms());
         return r;
     }
-
+    // To write axioms to an ontology
     @Override
     public List<MappingIntent> writeExpressionAxioms() {
         List<MappingIntent> r = DataPropertyExpression.Disjoint.super.writeExpressionAxioms();
@@ -68,30 +70,35 @@ public class DefinitionDataPropertyDesc
         return r;
     }
 
-    // implementations for DataPropertyExpression.Disjoint
+    /* Overriding methods in classes: DataProperty and DataPropertyExpression */
 
-    @Override  // called during build...()you can change the returning type to any implementations of DataPropertyExpression
+
+    // Is used by the descriptors's build() method. It's possible to change the return type based on need.
+    @Override
     public DefinitionDataPropertyDesc getNewDisjointDataProperty(OWLDataProperty instance, OWLReferences ontology) {
         return new DefinitionDataPropertyDesc( instance, ontology);
     }
-
+    // It returns disjointDataProperties from the EntitySet (after being read from the ontology)
     @Override
     public DescriptorEntitySet.DataProperties getDisjointDataProperties() {
         return disjointDataProperties;
     }
 
-    // implementations for DataPropertyExpression.Equivalent
-
-    @Override // called during build...() you can change the returning type to any implementations of DataPropertyExpression
+    // Is used by the descriptors's build() method. It's possible to change the return type based on need.
+    @Override
     public DefinitionDataPropertyDesc getNewEquivalentDataProperty(OWLDataProperty instance, OWLReferences ontology) {
         return new DefinitionDataPropertyDesc( instance, ontology);
     }
-
+    // It returns equivalentDataProperties from the EntitySet (after being read from the ontology)
     @Override
     public DescriptorEntitySet.DataProperties getEquivalentDataProperties() {
         return equivalentDataProperties;
     }
 
+    /* Overriding method in class: Object */
+
+
+    // To show internal state of the Descriptor
     @Override
     public String toString() {
         return "FullObjectPropertyDesc{" +

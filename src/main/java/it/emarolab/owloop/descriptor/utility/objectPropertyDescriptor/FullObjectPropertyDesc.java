@@ -10,7 +10,7 @@ import org.semanticweb.owlapi.model.OWLObjectProperty;
 import java.util.List;
 
 /**
- * This is an example of a 'compound' ObjectProperty Descriptor as it implements more than one {@link ObjectPropertyExpression}.
+ * This is an example of a 'compound' ObjectProperty Descriptor as it implements more than one {@link ObjectPropertyExpression} interfaces.
  * Axioms in this descriptor's internal state (i.e., OWLOOP representation) can be synchronized to/from an OWL ontology.
  * {@link FullObjectPropertyDesc} can synchronize all the axioms, that are based on the following ObjectPropertyExpressions:
  *
@@ -196,5 +196,3 @@ public class FullObjectPropertyDesc
                 "}" + "\n";
     }
 }
-
-// todo: (i) rename entitySet objects properly (ii) rename the methods related to those variables properly (iii) modification in toString() (iv) fix spaces and comments.

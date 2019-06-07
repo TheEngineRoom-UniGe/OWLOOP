@@ -11,7 +11,7 @@ import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import java.util.List;
 
 /**
- * This is an example of a 'compound' Concept Descriptor as it implements more than one ClassExpression (aka {@link ConceptExpression}).
+ * This is an example of a 'compound' Concept Descriptor as it implements more than one ClassExpression (aka {@link ConceptExpression}) interfaces.
  * Axioms in this descriptor's internal state (i.e., OWLOOP representation) can be synchronized to/from an OWL ontology.
  * {@link FullConceptDesc} can synchronize all the axioms, that are based on the following ClassExpressions:
  *

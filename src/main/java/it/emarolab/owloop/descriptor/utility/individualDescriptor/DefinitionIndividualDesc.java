@@ -10,7 +10,7 @@ import java.util.List;
 
 
 /**
- * This is an example of a 'compound' Individual Descriptor which implements 2 {@link IndividualExpression}s.
+ * This is an example of a 'compound' Individual Descriptor which implements 2 {@link IndividualExpression} interfaces:
  * <ul>
  * <li><b>{@link IndividualExpression.Equivalent}</b>:   to describe an Individual same-as another Individual.</li>
  * <li><b>{@link IndividualExpression.Disjoint}</b>:     to describe an Individual different from another Individual.</li>
@@ -25,7 +25,7 @@ public class DefinitionIndividualDesc
     private DescriptorEntitySet.Individuals disjointIndividuals = new DescriptorEntitySet.Individuals();
     private DescriptorEntitySet.Individuals equivalentIndividuals = new DescriptorEntitySet.Individuals();
 
-    // constructors for IndividualGround
+    /* Constructors from class: IndividualGround */
 
     public DefinitionIndividualDesc(OWLNamedIndividual instance, OWLReferences onto) {
         super(instance, onto);
@@ -52,15 +52,17 @@ public class DefinitionIndividualDesc
         super(instanceName, ontoName, filePath, iriPath, bufferingChanges);
     }
 
-    // implementations for Axiom.descriptor
+    /* Overriding methods in class: IndividualGround */
 
+
+    // To read axioms from an ontology
     @Override
     public List<MappingIntent> readExpressionAxioms() {
         List<MappingIntent> r = IndividualExpression.Equivalent.super.readExpressionAxioms();
         r.addAll( IndividualExpression.Disjoint.super.readExpressionAxioms());
         return r;
     }
-
+    // To write axioms to an ontology
     @Override
     public List<MappingIntent> writeExpressionAxioms() {
         List<MappingIntent> r = IndividualExpression.Equivalent.super.writeExpressionAxioms();
@@ -68,30 +70,35 @@ public class DefinitionIndividualDesc
         return r;
     }
 
-    // implementations for IndividualExpression.Disjoint
+    /* Overriding methods in classes: Individual and IndividualExpression */
 
-    @Override //called during build...() you can change the returning type to any implementations of IndividualExpression
+
+    // Is used by the descriptors's build() method. It's possible to change the return type based on need.
+    @Override
     public DefinitionIndividualDesc getNewDisjointIndividual(OWLNamedIndividual instance, OWLReferences ontology) {
         return new DefinitionIndividualDesc( instance, ontology);
     }
-
+    // It returns disjointIndividuals from the EntitySet (after being read from the ontology)
     @Override
     public DescriptorEntitySet.Individuals getDisjointIndividuals() {
         return disjointIndividuals;
     }
 
-    // implementations for IndividualExpression.Equivalent
-
-    @Override //called during build...() you can change the returning type to any implementations of IndividualExpression
+    // Is used by the descriptors's build() method. It's possible to change the return type based on need.
+    @Override
     public DefinitionIndividualDesc getNewEquivalentIndividual(OWLNamedIndividual instance, OWLReferences ontology) {
         return new DefinitionIndividualDesc( instance, ontology);
     }
-
+    // It returns equivalentIndividuals from the EntitySet (after being read from the ontology)
     @Override
     public DescriptorEntitySet.Individuals getEquivalentIndividuals() {
         return equivalentIndividuals;
     }
 
+    /* Overriding method in class: Object */
+
+
+    // To show internal state of the Descriptor
     @Override
     public String toString() {
         return "FullObjectPropertyDesc{" +

@@ -4,6 +4,7 @@ import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.IndividualGround;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.IndividualExpression;
+import it.emarolab.owloop.descriptor.utility.conceptDescriptor.FullConceptDesc;
 import it.emarolab.owloop.descriptor.utility.conceptDescriptor.HierarchicalConceptDesc;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
@@ -12,7 +13,7 @@ import java.util.List;
 
 
 /**
- * This is an example of a 'simple' Individual Descriptor which implements 1 {@link IndividualExpression}s.
+ * This is an example of a 'simple' Individual Descriptor which implements 1 {@link IndividualExpression} interfaces:
  * <ul>
  * <li><b>{@link IndividualExpression.Type}</b>: to describe the Type/s (i.e., class/es) of an Individual.</li>
  * </ul>
@@ -24,7 +25,7 @@ public class TypeIndividualDesc
 
     private DescriptorEntitySet.Concepts concepts = new DescriptorEntitySet.Concepts();
 
-    // constructors for IndividualGround
+    /* Constructors from class: IndividualGround */
 
     public TypeIndividualDesc(OWLNamedIndividual instance, OWLReferences onto) {
         super(instance, onto);
@@ -51,30 +52,38 @@ public class TypeIndividualDesc
         super(instanceName, ontoName, filePath, iriPath, bufferingChanges);
     }
 
-    // implementations for Axiom.descriptor
+    /* Overriding methods in class: IndividualGround */
 
+
+    // To read axioms from an ontology
     @Override
     public List<MappingIntent> readExpressionAxioms() {
         return IndividualExpression.Type.super.readExpressionAxioms();
     }
-
+    // To write axioms to an ontology
     @Override
     public List<MappingIntent> writeExpressionAxioms() {
         return IndividualExpression.Type.super.writeExpressionAxioms();
     }
 
-    // implementations for IndividualExpression.Type
+    /* Overriding methods in classes: Individual and IndividualExpression */
 
-    @Override //called during build...() you can change the returning type to any implementations of ConceptExpression
+
+    // Is used by the descriptors's build() method. It's possible to change the return type based on need.
+    @Override
     public HierarchicalConceptDesc getNewIndividualType(OWLClass instance, OWLReferences ontology) {
         return new HierarchicalConceptDesc( instance, ontology);
     }
-
+    // It returns concepts from the EntitySet (after being read from the ontology)
     @Override
     public DescriptorEntitySet.Concepts getIndividualTypes() {
         return concepts;
     }
 
+    /* Overriding method in class: Object */
+
+
+    // To show internal state of the Descriptor
     @Override
     public String toString() {
         return "FullObjectPropertyDesc{" +

@@ -10,7 +10,7 @@ import org.semanticweb.owlapi.model.OWLObjectProperty;
 import java.util.List;
 
 /**
- * This is an example of b {@link ObjectPropertyExpression}s.
+ * This is an example of a 'compound' ObjectProperty Descriptor which implements 2 {@link ObjectPropertyExpression} interfaces:
  * <ul>
  * <li><b>{@link ObjectPropertyExpression.Domain}</b>:       to describe the domain restrictions of an ObjectProperty.</li>
  * <li><b>{@link ObjectPropertyExpression.Range}</b>:        to describe the range restrictions of an ObjectProperty.</li>
@@ -25,7 +25,7 @@ public class DomainRangeObjectPropertyDesc
     private DescriptorEntitySet.Restrictions domainConceptRestrictions = new DescriptorEntitySet.Restrictions();
     private DescriptorEntitySet.Restrictions rangeConceptRestrictions = new DescriptorEntitySet.Restrictions();
 
-    // constructors for ObjectPropertyGround
+    /* Constructors from class: ObjectPropertyGround */
 
     public DomainRangeObjectPropertyDesc(OWLObjectProperty instance, OWLReferences onto) {
         super(instance, onto);
@@ -52,15 +52,17 @@ public class DomainRangeObjectPropertyDesc
         super(instanceName, ontoName, filePath, iriPath, bufferingChanges);
     }
 
-    // implementations for Axiom.descriptor
+    /* Overriding methods in class: ObjectPropertyGround */
 
+
+    // To read axioms from an ontology
     @Override
     public List<MappingIntent> readExpressionAxioms() {
         List<MappingIntent> r = ObjectPropertyExpression.Domain.super.readExpressionAxioms();
         r.addAll( ObjectPropertyExpression.Range.super.readExpressionAxioms());
         return r;
     }
-
+    // To write axioms to an ontology
     @Override
     public List<MappingIntent> writeExpressionAxioms() {
         List<MappingIntent> r = ObjectPropertyExpression.Domain.super.writeExpressionAxioms();
@@ -68,20 +70,25 @@ public class DomainRangeObjectPropertyDesc
         return r;
     }
 
-    // implementations for ObjectPropertyExpression.Domain
+    /* Overriding methods in classes: ObjectProperty and ObjectPropertyExpression */
 
+
+    // It returns domainConceptRestrictions from the EntitySet (after being read from the ontology)
     @Override
     public DescriptorEntitySet.Restrictions getObjectPropertyDomainConcepts() {
         return domainConceptRestrictions;
     }
 
-    // implementations for ObjectPropertyExpression.Range
-
+    // It returns rangeConceptRestrictions from the EntitySet (after being read from the ontology)
     @Override
     public DescriptorEntitySet.Restrictions getObjectPropertyRangeConcepts() {
         return rangeConceptRestrictions;
     }
 
+    /* Overriding method in class: Object */
+
+
+    // To show internal state of the Descriptor
     public String toString() {
         return "FullObjectPropertyDesc{" +
                 NL + "\t\t\t" + getGround() +

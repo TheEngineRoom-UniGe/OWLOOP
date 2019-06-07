@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * This is an example of a 'compound' DataProperty Descriptor as it implements more than one {@link DataPropertyExpression}s.
+ * This is an example of a 'compound' DataProperty Descriptor as it implements more than one {@link DataPropertyExpression} interfaces.
  * Axioms in this descriptor's internal state (i.e., OWLOOP representation) can be synchronized to/from an OWL ontology.
  * {@link FullDataPropertyDesc} can synchronize all the axioms, that are based on the following DataPropertyExpressions:
  *
@@ -104,6 +104,7 @@ public class FullDataPropertyDesc
 
     /* Overriding methods in classes: DataProperty and DataPropertyExpression */
 
+
     // It returns domainConceptRestrictions from the EntitySet (after being read from the ontology)
     @Override
     public DescriptorEntitySet.Restrictions getDataPropertyDomainConcepts() {
@@ -179,5 +180,3 @@ public class FullDataPropertyDesc
                 "}" + "\n";
     }
 }
-
-// todo: (i) rename entitySet objects properly (ii) rename the methods related to those variables properly (iii) modification in toString() (iv) fix spaces and comments.

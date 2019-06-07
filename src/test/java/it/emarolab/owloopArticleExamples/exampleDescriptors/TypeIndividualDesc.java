@@ -12,7 +12,7 @@ import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import java.util.List;
 
 /**
- * A 'simple' Individual Descriptor which implements 1 {@link IndividualExpression}s.
+ * A 'simple' Individual Descriptor which implements 1 {@link IndividualExpression} interfaces:
  * <ul>
  * <li><b>{@link IndividualExpression.Type}</b>:         to describe the Type/s (i.e., class/es) of an Individual.</li>
  * </ul>
@@ -78,5 +78,3 @@ public class TypeIndividualDesc
                 "}" + "\n";
     }
 }
-
-// todo: (i) rename entitySet objects properly (ii) rename the methods related to those variables properly (iii) modification in toString() (iv) fix spaces and comments.

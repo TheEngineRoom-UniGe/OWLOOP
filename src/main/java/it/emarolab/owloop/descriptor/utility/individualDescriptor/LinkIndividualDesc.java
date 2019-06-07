@@ -11,7 +11,7 @@ import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import java.util.List;
 
 /**
- * This is an example of a 'compound' Individual Descriptor which implements 2 {@link IndividualExpression}s.
+ * This is an example of a 'compound' Individual Descriptor which implements 2 {@link IndividualExpression} interfaces:
  * <ul>
  * <li><b>{@link IndividualExpression.ObjectLink}</b>:   to describe an ObjectProperty and Individuals related via that ObjectProperty, for an Individual.</li>
  * <li><b>{@link IndividualExpression.DataLink}</b>:     to describe an DataProperty and Individuals related via that DataProperty, for an Individual.</li>
@@ -26,7 +26,7 @@ public class LinkIndividualDesc
     private DescriptorEntitySet.ObjectLinksSet objectLinks = new DescriptorEntitySet.ObjectLinksSet();
     private DescriptorEntitySet.DataLinksSet dataLinks = new DescriptorEntitySet.DataLinksSet();
 
-    // constructors for IndividualGround
+    /* Constructors from class: IndividualGround */
 
     public LinkIndividualDesc(OWLNamedIndividual instance, OWLReferences onto) {
         super(instance, onto);
@@ -53,15 +53,17 @@ public class LinkIndividualDesc
         super(instanceName, ontoName, filePath, iriPath, bufferingChanges);
     }
 
-    // implementations for Axiom.descriptor
+    /* Overriding methods in class: IndividualGround */
 
+
+    // To read axioms from an ontology
     @Override
     public List<MappingIntent> readExpressionAxioms() {
         List<MappingIntent> r = IndividualExpression.ObjectLink.super.readExpressionAxioms();
         r.addAll( IndividualExpression.DataLink.super.readExpressionAxioms());
         return r;
     }
-
+    // To write axioms to an ontology
     @Override
     public List<MappingIntent> writeExpressionAxioms() {
         List<MappingIntent> r = ObjectLink.super.writeExpressionAxioms();
@@ -69,30 +71,35 @@ public class LinkIndividualDesc
         return r;
     }
 
-    // implementations for IndividualExpression.ObjectLink
+    /* Overriding methods in classes: Individual and IndividualExpression */
 
-    @Override  //called during build...() you can change the returning type to any implementations of ObjectPropertyExpression
+
+    // Is used by the descriptors's build() method. It's possible to change the return type based on need.
+    @Override
     public FullObjectPropertyDesc getNewIndividualObjectProperty(DescriptorEntitySet.ObjectLinks instance, OWLReferences ontology) {
         return new FullObjectPropertyDesc( instance.getExpression(), ontology);
     }
-
+    // It returns objectLinks from the EntitySet (after being read from the ontology)
     @Override
     public DescriptorEntitySet.ObjectLinksSet getIndividualObjectProperties() {
         return objectLinks;
     }
 
-    // implementations for IndividualExpression.DataLink
-
-    @Override  //called during build...() you can change the returning type to any implementations of DataPropertyExpression
+    // Is used by the descriptors's build() method. It's possible to change the return type based on need.
+    @Override
     public FullDataPropertyDesc getNewIndividualDataProperty(DescriptorEntitySet.DataLinks instance, OWLReferences ontology) {
         return new FullDataPropertyDesc( instance.getExpression(), ontology);
     }
-
+    // It returns dataLinks from the EntitySet (after being read from the ontology)
     @Override
     public DescriptorEntitySet.DataLinksSet getIndividualDataProperties() {
         return dataLinks;
     }
 
+    /* Overriding method in class: Object */
+
+
+    // To show internal state of the Descriptor
     @Override
     public String toString() {
         return "FullObjectPropertyDesc{" +

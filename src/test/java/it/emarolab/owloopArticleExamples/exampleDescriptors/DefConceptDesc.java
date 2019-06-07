@@ -10,7 +10,7 @@ import it.emarolab.owloop.descriptor.construction.descriptorExpression.ConceptEx
 import java.util.List;
 
 /**
- * A 'simple' Concept Descriptor that implements 1 ClassExpression (aka {@link ConceptExpression}):
+ * A 'simple' Concept Descriptor that implements 1 ClassExpression (aka {@link ConceptExpression}) interface:
  * <ul>
  * <li><b>{@link ConceptExpression.Definition}</b>:  to describe the definition of a Class..</li>
  * </ul>
@@ -68,7 +68,3 @@ public abstract class DefConceptDesc
                 "}" + "\n";
     }
 }
-
-// todo: (i) rename entitySet objects properly (ii) rename the methods related to those variables properly (iii) modification in toString() (iv) fix spaces and comments.
-// todo: Replace NL with \n everywhere
-// todo: Replace other stuff with this.getClass().getSimpleName() everywhere

@@ -57,7 +57,6 @@ public class ConstructOntology {
         hasDoor_Desc.addRangeClassRestriction( "DOOR");
         hasDoor_Desc.writeExpressionAxioms();
 
-
         DomainRangeObjectPropertyDesc isLinkedTo_Desc = new DomainRangeObjectPropertyDesc( "isLinkedTo", ontoRef);
         isLinkedTo_Desc.addDomainClassRestriction( "CORRIDOR");
         isLinkedTo_Desc.addRangeClassRestriction( "ROOM");

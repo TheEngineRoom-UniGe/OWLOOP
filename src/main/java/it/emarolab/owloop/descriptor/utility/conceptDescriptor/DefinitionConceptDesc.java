@@ -12,7 +12,7 @@ import java.util.List;
 
 
 /**
- * This is an example of a 'compound' Concept Descriptor that implements 4 ClassExpressions (aka {@link ConceptExpression}):
+ * This is an example of a 'compound' Concept Descriptor that implements 4 ClassExpression (aka {@link ConceptExpression}) interfaces:
  * <ul>
  * <li><b>{@link ConceptExpression.Equivalent}</b>:  to describe that a Class is equivalent to another Class.</li>
  * <li><b>{@link ConceptExpression.Disjoint}</b>:    to describe that a Class is disjoint to another Class.</li>
@@ -140,5 +140,3 @@ public class DefinitionConceptDesc
                 NL + "}";
     }
 }
-
-// todo: (i) rename entitySet objects properly (ii) rename the methods related to those variables properly (iii) modification in toString() (iv) fix spaces and comments.

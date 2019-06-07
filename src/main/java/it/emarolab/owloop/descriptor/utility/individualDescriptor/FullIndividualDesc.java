@@ -14,7 +14,7 @@ import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import java.util.List;
 
 /**
- * This is an example of a 'compound' Individual Descriptor as it implements more than one {@link IndividualExpression}.
+ * This is an example of a 'compound' Individual Descriptor as it implements more than one {@link IndividualExpression} interfaces.
  * Axioms in this descriptor's internal state (i.e., OWLOOP representation) can be synchronized to/from an OWL ontology.
  * {@link FullIndividualDesc} can synchronize all the axioms, that are based on the following IndividualExpressions:
  *
@@ -176,5 +176,3 @@ public class FullIndividualDesc
                 "}" + "\n";
     }
 }
-
-// todo: (i) rename entitySet objects properly (ii) rename the methods related to those variables properly (iii) modification in toString() (iv) fix spaces and comments.

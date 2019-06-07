@@ -10,7 +10,7 @@ import org.semanticweb.owlapi.model.OWLClass;
 import java.util.List;
 
 /**
- * This is an example of a 'compound' Concept Descriptor which implements 2 {@link ConceptExpression}s.
+ * This is an example of a 'compound' Concept Descriptor which implements 2 {@link ConceptExpression} interfaces:
  * <ul>
  * <li><b>{@link ConceptExpression.Definition}</b>:  to describe the definition of a Class..</li>
  * <li><b>{@link ConceptExpression.Sub}</b>:         to describe that a Class subsumes another Class.</li>
@@ -81,6 +81,3 @@ public class DefSubConceptDesc
                 "}" + "\n";
     }
 }
-
-// todo: (i) rename entitySet objects properly (ii) rename the methods related to those variables properly (iii) modification in toString() (iv) fix spaces and comments.
-// todo: in main javadoc say "implements 2 some expression interfaces

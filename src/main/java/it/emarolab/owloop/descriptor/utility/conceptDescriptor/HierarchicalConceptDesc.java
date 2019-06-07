@@ -13,7 +13,7 @@ import java.util.List;
 
 
 /**
- * This is an example of a 'compound' Concept Descriptor that implements 2 ClassExpressions (aka {@link ConceptExpression}):
+ * This is an example of a 'compound' Concept Descriptor that implements 2 ClassExpression (aka {@link ConceptExpression}) interfaces:
  * <ul>
  * <li><b>{@link ConceptExpression.Sub}</b>:         to describe that a Class subsumes another Class.</li>
  * <li><b>{@link ConceptExpression.Super}</b>:       to describe that a Class is a super-class of another Class.</li>
@@ -112,5 +112,3 @@ public class HierarchicalConceptDesc
                 NL + "}";
     }
 }
-
-// todo: (i) rename entitySet objects properly (ii) rename the methods related to those variables properly (iii) modification in toString() (iv) fix spaces and comments.

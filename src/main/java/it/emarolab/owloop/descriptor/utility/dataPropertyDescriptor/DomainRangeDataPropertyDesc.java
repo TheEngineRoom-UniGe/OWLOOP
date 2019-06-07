@@ -10,7 +10,7 @@ import org.semanticweb.owlapi.model.OWLDataProperty;
 import java.util.List;
 
 /**
- * This is an example of a 'compound' DataProperty Descriptor which implements 2 {@link DataPropertyExpression}s.
+ * This is an example of a 'compound' DataProperty Descriptor which implements 2 {@link DataPropertyExpression} interfaces:
  * <ul>
  * <li><b>{@link DataPropertyExpression.Domain}</b>:       to describe the domain restrictions of a DataProperty.</li>
  * <li><b>{@link DataPropertyExpression.Range}</b>:        to describe the range restrictions of a DataProperty.</li>
@@ -25,7 +25,7 @@ public class DomainRangeDataPropertyDesc
     private DescriptorEntitySet.Restrictions domainConceptRestrictions = new DescriptorEntitySet.Restrictions();
     private DescriptorEntitySet.Restrictions rangeConceptRestrictions = new DescriptorEntitySet.Restrictions();
 
-    // constructors for DataPropertyGround
+    /* Constructors from class: DataPropertyGround */
 
     public DomainRangeDataPropertyDesc(OWLDataProperty instance, OWLReferences onto) {
         super(instance, onto);
@@ -52,15 +52,17 @@ public class DomainRangeDataPropertyDesc
         super(instanceName, ontoName, filePath, iriPath, bufferingChanges);
     }
 
-    // implementations for Axiom.descriptor
+    /* Overriding methods in class: DataPropertyGround */
 
+
+    // To read axioms from an ontology
     @Override
     public List<MappingIntent> readExpressionAxioms() {
         List<MappingIntent> r = DataPropertyExpression.Domain.super.readExpressionAxioms();
         r.addAll( DataPropertyExpression.Range.super.readExpressionAxioms());
         return r;
     }
-
+    // To write axioms to an ontology
     @Override
     public List<MappingIntent> writeExpressionAxioms() {
         List<MappingIntent> r = DataPropertyExpression.Range.super.writeExpressionAxioms();
@@ -68,21 +70,24 @@ public class DomainRangeDataPropertyDesc
         return r;
     }
 
-    // implementations for DataPropertyExpression.Domain
+    /* Overriding methods in classes: DataProperty and DataPropertyExpression */
+
+
+    // It returns domainConceptRestrictions from the EntitySet (after being read from the ontology)
     @Override
     public DescriptorEntitySet.Restrictions getDataPropertyDomainConcepts() {
         return domainConceptRestrictions;
     }
-
-    // implementations for DataPropertyExpression.Range
+    // It returns rangeConceptRestrictions from the EntitySet (after being read from the ontology)
     @Override
     public DescriptorEntitySet.Restrictions getDataPropertyRangeConcepts() {
         return rangeConceptRestrictions;
     }
 
-    // implementation for standard object interface
-    // equals() and hashCode() is based on DescriptorGround<?> which considers only the ground
+    /* Overriding method in class: Object */
 
+
+    // To show internal state of the Descriptor
     @Override
     public String toString() {
         return "FullObjectPropertyDesc{" +
