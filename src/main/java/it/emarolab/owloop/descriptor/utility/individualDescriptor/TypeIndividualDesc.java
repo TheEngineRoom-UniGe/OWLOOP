@@ -86,9 +86,11 @@ public class TypeIndividualDesc
     // To show internal state of the Descriptor
     @Override
     public String toString() {
-        return "FullObjectPropertyDesc{" +
-                NL + "\t\t\t" + getGround() +
-                ":" + NL + "\t ∈ " + concepts +
-                NL + "}";
+        return getClass().getSimpleName() + "{" + "\n" +
+                "\n" +
+                "\t" + getGround() + ":" + "\n" +
+                "\n" +
+                "\t\t∈ " + concepts + "\n" +
+                "}" + "\n";
     }
 }

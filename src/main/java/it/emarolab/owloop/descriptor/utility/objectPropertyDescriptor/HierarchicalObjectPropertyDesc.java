@@ -99,10 +99,12 @@ public class HierarchicalObjectPropertyDesc
 
     // To show internal state of the Descriptor
     public String toString() {
-        return "FullObjectPropertyDesc{" +
-                NL + "\t\t\t" + getGround() +
-                "," + NL + "\t⊃ " + subObjectProperties +
-                "," + NL + "\t⊂ " + superObjectProperties +
-                NL + "}";
+        return getClass().getSimpleName() + "{" + "\n" +
+                "\n" +
+                "\t" + getGround() + ":" + "\n" +
+                "\n" +
+                "\t\t⊃ " +      subObjectProperties + "\n" +
+                "\t\t⊂ " +      superObjectProperties + "\n" +
+                "}" + "\n";
     }
 }

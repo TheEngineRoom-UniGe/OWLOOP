@@ -101,10 +101,12 @@ public class DefinitionIndividualDesc
     // To show internal state of the Descriptor
     @Override
     public String toString() {
-        return "FullObjectPropertyDesc{" +
-                NL + "\t\t\t" + getGround() +
-                ":" + NL + "\t≠ " + disjointIndividuals +
-                "," + NL + "\t≡ " + equivalentIndividuals +
-                NL + "}";
+        return getClass().getSimpleName() + "{" + "\n" +
+                "\n" +
+                "\t" + getGround() + ":" + "\n" +
+                "\n" +
+                "\t\t≠ " + disjointIndividuals + "\n" +
+                "\t\t≡ " + equivalentIndividuals + "\n" +
+                "}" + "\n";
     }
 }

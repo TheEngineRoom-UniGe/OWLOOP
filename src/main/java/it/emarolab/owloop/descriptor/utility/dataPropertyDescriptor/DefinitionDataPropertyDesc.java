@@ -101,10 +101,12 @@ public class DefinitionDataPropertyDesc
     // To show internal state of the Descriptor
     @Override
     public String toString() {
-        return "FullObjectPropertyDesc{" +
-                NL + "\t\t\t" + getGround() +
-                ":" + NL + "\t≠ " + disjointDataProperties +
-                "," + NL + "\t≡ " + equivalentDataProperties +
-                NL + "}";
+        return getClass().getSimpleName() + "{" + "\n" +
+                "\n" +
+                "\t" + getGround() + ":" + "\n" +
+                "\n" +
+                "\t\t≠ " +        disjointDataProperties + "\n" +
+                "\t\t≡ " +        equivalentDataProperties + "\n" +
+                "}" + "\n";
     }
 }

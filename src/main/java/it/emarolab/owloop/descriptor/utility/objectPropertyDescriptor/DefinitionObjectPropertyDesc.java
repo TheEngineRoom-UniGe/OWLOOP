@@ -116,11 +116,13 @@ public class DefinitionObjectPropertyDesc
 
     // To show internal state of the Descriptor
     public String toString() {
-        return "FullObjectPropertyDesc{" +
-                NL + "\t\t\t" + getGround() +
-                ":" + NL + "\t≠ " + disjointObjectProperties +
-                "," + NL + "\t≡ " + equivalentObjectProperties +
-                "," + NL + "\t↔ " + inverseObjectProperties +
-                NL + "}";
+        return getClass().getSimpleName() + "{" + "\n" +
+                "\n" +
+                "\t" + getGround() + ":" + "\n" +
+                "\n" +
+                "\t\t≠ " +      disjointObjectProperties + "\n" +
+                "\t\t≡ " +      equivalentObjectProperties + "\n" +
+                "\t\t↔ " +      inverseObjectProperties + "\n" +
+                "}" + "\n";
     }
 }

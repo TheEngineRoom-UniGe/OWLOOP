@@ -102,10 +102,12 @@ public class LinkIndividualDesc
     // To show internal state of the Descriptor
     @Override
     public String toString() {
-        return "FullObjectPropertyDesc{" +
-                NL + "\t\t\t" + getGround() +
-                "," + NL + "\t⊨ " + objectLinks +
-                "," + NL + "\t⊢ " + dataLinks +
-                NL + "}";
+        return getClass().getSimpleName() + "{" + "\n" +
+                "\n" +
+                "\t" + getGround() + ":" + "\n" +
+                "\n" +
+                "\t\t⊨ " + objectLinks + "\n" +
+                "\t\t⊢ " + dataLinks + "\n" +
+                "}" + "\n";
     }
 }

@@ -100,10 +100,12 @@ public class HierarchicalDataPropertyDesc
     // To show internal state of the Descriptor
     @Override
     public String toString() {
-        return "FullObjectPropertyDesc{" +
-                NL + "\t\t\t" + getGround() +
-                "," + NL + "\t⊃ " + subDataProperties +
-                "," + NL + "\t⊂ " + superDataProperties +
-                NL + "}";
+        return getClass().getSimpleName() + "{" + "\n" +
+                "\n" +
+                "\t" + getGround() + ":" + "\n" +
+                "\n" +
+                "\t\t⊃ " +        subDataProperties + "\n" +
+                "\t\t⊂ " +        superDataProperties + "\n" +
+                "}" + "\n";
     }
 }

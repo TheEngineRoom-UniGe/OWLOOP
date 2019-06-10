@@ -105,10 +105,12 @@ public class HierarchicalConceptDesc
     // To show internal state of the Descriptor
     @Override
     public String toString() {
-        return "FullObjectPropertyDesc{" +
-                NL + "\t\t\t" + getGround() +
-                "," + NL + "\t⊃ " + subConcepts +
-                "," + NL + "\t⊂ " + superConcepts +
-                NL + "}";
+        return getClass().getSimpleName() + "{" + "\n" +
+                "\n" +
+                "\t" + getGround() + ":" + "\n" +
+                "\n" +
+                "\t\t⊃ " + subConcepts + "\n" +
+                "\t\t⊂ " + superConcepts + "\n" +
+                "}" + "\n";
     }
 }

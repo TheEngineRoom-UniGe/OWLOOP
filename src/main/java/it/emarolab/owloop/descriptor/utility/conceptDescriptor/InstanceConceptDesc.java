@@ -86,9 +86,11 @@ public class InstanceConceptDesc
     // To show internal state of the Descriptor
     @Override
     public String toString() {
-        return "InstanceConceptDesc{" +
-                NL + "\t\t\t" + getGround() +
-                "," + NL + "\t⇐ " + individuals +
-                NL + "}";
+        return getClass().getSimpleName() + "{" + "\n" +
+                "\n" +
+                "\t" + getGround() + ":" + "\n" +
+                "\n" +
+                "\t\t⇐ " + individuals + "\n" +
+                "}" + "\n";
     }
 }

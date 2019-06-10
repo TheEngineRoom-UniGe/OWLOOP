@@ -90,11 +90,13 @@ public class DomainRangeDataPropertyDesc
     // To show internal state of the Descriptor
     @Override
     public String toString() {
-        return "FullObjectPropertyDesc{" +
-                NL + "\t\t\t" + getGround() +
-                "," + NL + "\t→ " + domainConceptRestrictions +
-                "," + NL + "\t← " + rangeConceptRestrictions +
-                NL + "}";
+        return getClass().getSimpleName() + "{" + "\n" +
+                "\n" +
+                "\t" + getGround() + ":" + "\n" +
+                "\n" +
+                "\t\t[≐,--] " +   domainConceptRestrictions + "\n" +
+                "\t\t[--,≐] " +   rangeConceptRestrictions + "\n" +
+                "}" + "\n";
     }
 }
 

@@ -131,12 +131,14 @@ public class DefinitionConceptDesc
     // To show internal state of the Descriptor
     @Override
     public String toString() {
-        return "FullObjectPropertyDesc{" +
-                NL + "\t\t\t" + getGround() +
-                ":" + NL + "\t≠ " + disjointConcepts +
-                "," + NL + "\t≡ " + equivalentConcepts +
-                "," + NL + "\t⇐ " + individuals +
-                "," + NL + "\t= " + conceptRestrictions +
-                NL + "}";
+        return getClass().getSimpleName() + "{" + "\n" +
+                "\n" +
+                "\t" + getGround() + ":" + "\n" +
+                "\n" +
+                "\t\t≠ " + disjointConcepts + "\n" +
+                "\t\t≡ " + equivalentConcepts + "\n" +
+                "\t\t⇐ " + individuals + "\n" +
+                "\t\t≐ " + conceptRestrictions + "\n" +
+                "}" + "\n";
     }
 }
