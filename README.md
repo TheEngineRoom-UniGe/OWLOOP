@@ -79,8 +79,8 @@ For any information or support, please do not hesitate to contact us through thi
 
 ## 8. Check List Before Publishing Repo on Maven Central
 
-- [] Update the JavaDoc in /documentation directory. (Because you might have updated the comments in the code)
-- [] Add the UML in /documentation directory.
-- [] Fix the bug of removing axioms (probably its in AMOR)
-- [] Finalize a plan for AMOR dependency
-- [] Make OWLOOP as a release 2.0
+- [ ] Update the JavaDoc in /documentation directory. (Because you might have updated the comments in the code)
+- [ ] Add the UML in /documentation directory.
+- [ ] Fix the bug of removing axioms (probably its in AMOR)
+- [ ] Finalize a plan for AMOR dependency
+- [ ] Make OWLOOP as a release 2.0
