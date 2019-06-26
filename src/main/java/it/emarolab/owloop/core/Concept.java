@@ -614,10 +614,10 @@ public interface Concept<O,J>
          * @return a new {@link EntitySet} contained the class definition to
          * the OWL structure of {@link #getInstance()}.
          */
-        EntitySet<Y> queryDefinitionConcept();
+        EntitySet<Y> queryDefinitionConcepts();
 
         /**
-         * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryDefinitionConcept()}
+         * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryDefinitionConcepts()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getDefinitionConcepts()}. This should
          * be done by {@link #writeExpressionAxioms()}.
@@ -626,7 +626,7 @@ public interface Concept<O,J>
          */
         default EntitySet.SynchronisationIntent<Y> synchroniseDefinitionConceptToExpressionAxioms(){
             try {
-                return getDefinitionConcepts().synchroniseTo( queryDefinitionConcept());
+                return getDefinitionConcepts().synchroniseTo( queryDefinitionConcepts());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -634,7 +634,7 @@ public interface Concept<O,J>
         }
 
         /**
-         * It calls {@link EntitySet#synchroniseFrom(EntitySet)} with {@link #queryDefinitionConcept()}
+         * It calls {@link EntitySet#synchroniseFrom(EntitySet)} with {@link #queryDefinitionConcepts()}
          * as input parameter. This computes the changes to be performed into the {@link #getDefinitionConcepts()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readExpressionAxioms()}.
@@ -643,7 +643,7 @@ public interface Concept<O,J>
          */
         default EntitySet.SynchronisationIntent<Y> synchroniseDefinitionConceptFromExpressionAxioms(){
             try{
-                return getDefinitionConcepts().synchroniseFrom( queryDefinitionConcept());
+                return getDefinitionConcepts().synchroniseFrom( queryDefinitionConcepts());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;

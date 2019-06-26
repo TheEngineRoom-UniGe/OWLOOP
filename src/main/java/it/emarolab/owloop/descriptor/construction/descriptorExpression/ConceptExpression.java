@@ -501,7 +501,7 @@ public interface ConceptExpression
     /**
      * The {@link Concept.Definition} expression for a {@link Descriptor} whose ground is {@link OWLClass}.
      * <p>
-     *     It specifies how to {@link #queryDefinitionConcept()} and {@link #writeExpressionAxioms()} for
+     *     It specifies how to {@link #queryDefinitionConcepts()} and {@link #writeExpressionAxioms()} for
      *     definition (i.e.: {@link SemanticRestriction}) of the ground Class ({@link #getInstance()).
      *     All the restrictions managed by this Class are considered to be a unique class definition
      *     made by their intersection.
@@ -1245,7 +1245,7 @@ public interface ConceptExpression
         DescriptorEntitySet.Restrictions getDefinitionConcepts();
 
         @Override // see super classes for documentation
-        default DescriptorEntitySet.Restrictions queryDefinitionConcept(){
+        default DescriptorEntitySet.Restrictions queryDefinitionConcepts(){
             Set<ApplyingRestriction> restrictions = getOntology().getRestrictions(getInstance());
             for ( ApplyingRestriction a : restrictions)
                 if ( a.getRestrictionType().isRestrictionOnClass())
