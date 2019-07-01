@@ -373,6 +373,20 @@ public interface Axiom {
                         sync.addSynchronised(new SynchronisationIntent<>( a.getValues(), null), a);
                     return sync;
                 } else {
+                    // compute interaction between a1 and a2
+                    Set<F> a2copy = new HashSet<>();
+                    for (F b2 : a2) {
+                        boolean found = false;
+                        for (F b1 : a1){
+                            if (b2.getExpression().equals(b1.getExpression())) {
+                                found = true;
+                                break;
+                            }
+                        }
+                        if ( ! found)
+                            a2copy.add(b2);
+                    }
+
                     for (F b1 : a1) {
                         boolean matched = false;
                         for (F b2 : a2) {
@@ -381,26 +395,37 @@ public interface Axiom {
                                 sync.addSynchronised(new SynchronisationIntent<>(b1.getValues(), b2.getValues()), b1);
                                 matched = true;
                             }
-                            if (a2.isSingleton()) {
-                                if (a2.size() > 1) {
-                                    System.out.println("\t!a singleton with size: " + a2.size() + " found.");
-                                    System.out.println("\t!Only element " + b2 + " has been considered on set: " + a2);
-                                }
+                            if ( checkSingletton( a2, b2))
                                 break;
-                            }
                         }
+
+                        // add in case of writing where a2 contains cells not in a1
                         if ( !matched & !reading)
                             sync.addSynchronised(new SynchronisationIntent<>(b1.getValues(), null), b1);
-                        if (a1.isSingleton()) {
-                            if (a1.size() > 1) {
-                                System.out.println("\t!a singleton with size: " + a1.size() + " found.");
-                                System.out.println("\t!Only element " + b1 + " has been considered on set: " + a1);
-                            }
+                        if ( checkSingletton( a1, b1))
                             break;
-                        }
                     }
+
+                    // add in case of writing where a1 contains cells not in a2
+                    if( !reading)
+                        for ( F x : a2copy)
+                            sync.addSynchronised(new SynchronisationIntent<>( null, x.getValues()), x);
+
+                    a2.removeAll( a1);
                 }
                 return sync;
+            }
+
+
+            private boolean checkSingletton( EntitySet<F> a, F b){
+                if (a.isSingleton()) {
+                    if (a.size() > 1) {
+                        System.out.println("\t!a singleton with size: " + a.size() + " found.");
+                        System.out.println("\t!Only element " + b + " has been considered on set: " + a);
+                    }
+                    return true;
+                }
+                return false;
             }
         }
 

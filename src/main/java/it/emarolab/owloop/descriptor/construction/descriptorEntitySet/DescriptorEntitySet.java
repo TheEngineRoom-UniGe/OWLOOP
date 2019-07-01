@@ -260,6 +260,12 @@ public interface DescriptorEntitySet extends Axiom {
                     return super.remove(d);
                 if (d.getExpression().equals(o))
                     return super.remove(d);
+                if( o instanceof  ObjectLinks) {
+                    ObjectLinks objLink = (ObjectLinks) o;
+                    if (d.getExpression().equals( objLink.getExpression())) {
+                        return d.getValues().removeAll( objLink.getValues());
+                    }
+                }
             }
             return false;
         }
