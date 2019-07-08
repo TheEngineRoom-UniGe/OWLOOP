@@ -75,7 +75,7 @@ For any information or support, please do not hesitate to contact us through thi
 [luca.buoncompagni@edu.unige.it](mailto:luca.buoncompagni@edu.unige.it),
 [kareem.syed.yusha@dibris.unige.it](mailto:kareem.syed.yusha@dibris.unige.it).
 
-# Notes to self:
+# Notes to self
 
 ## 8. Check List Before Publishing Repo on Maven Central
 
