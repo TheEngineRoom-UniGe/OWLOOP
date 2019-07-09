@@ -13,6 +13,10 @@
 
     <buildtool_depend>catkin</buildtool_depend>
     <build_depend>rosjava_build_tools</build_depend>
+
+    <build_depend>multi_ontology_reference</build_depend>
+    <run_depend>multi_ontology_reference</run_depend>
+
 <!--
     <build_depend>ros_java_msgs</build_depend>
     <run_depend>ros_java_msgs</run_depend>
