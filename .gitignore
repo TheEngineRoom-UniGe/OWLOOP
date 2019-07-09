@@ -116,6 +116,8 @@ Temporary Items
 !owloop-1.0.jar
 !owloop-1.0-with-dependecies.jar
 
+!gradle-wrapper.jar
+
 !build.gradle
 
 catalog-v001.xml

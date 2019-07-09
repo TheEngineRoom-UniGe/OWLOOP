@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package>
+    <name>owloop_pkg</name>
+    <version>0.1.0</version>
+  <description>The ROSJava package template messages</description>
+
+    <maintainer email="luca.buoncompagni@edu.unige.it">Luca Buoncompagni</maintainer>
+    <author email="luca.buoncompagni@edu.unige.it">Luca Buoncompagni</author>
+    <url type="website">https://gitlab.com/buoncubi/ros_java_template_pkg</url>
+    <license>GNUv3</license>
+
+
+
+    <buildtool_depend>catkin</buildtool_depend>
+    <build_depend>rosjava_build_tools</build_depend>
+<!--
+    <build_depend>ros_java_msgs</build_depend>
+    <run_depend>ros_java_msgs</run_depend>
+-->
+    <!-- The export tag contains other, unspecified, tags -->
+    <export>
+        <!-- Other tools can request additional information be placed here -->
+
+    </export>
+</package>
