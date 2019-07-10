@@ -357,8 +357,8 @@ public interface Axiom {
             private SynchroniseContainedIntent(){} // not instantiable outside of this file
 
             // hp: not null inputs
-            // write -> a1: atom,    a2: queried
-            // read  -> a1: queried, a2: atom
+            // write -> a1: internal state,  a2: queried.
+            // read  -> a1: queried,         a2: internal state.
             private SynchronisationMultiIntent<F,?> expressionAxiomsSync(EntitySet<F> a1, EntitySet<F> a2, boolean reading){
                 SynchronisationMultiIntent<F,Y> sync = new SynchronisationMultiIntent<>();
                 // it could be faster ....
@@ -368,51 +368,56 @@ public interface Axiom {
                     for (F a : a2)
                         sync.addSynchronised(new SynchronisationIntent<>(null, a.getValues()), a);
                     return sync;
-                } else if ( a2.isEmpty()) {
+                } 
+                if ( a2.isEmpty()) {
                     for (F a : a1)
                         sync.addSynchronised(new SynchronisationIntent<>( a.getValues(), null), a);
                     return sync;
-                } else {
-                    // compute interaction between a1 and a2
-                    Set<F> a2copy = new HashSet<>();
-                    for (F b2 : a2) {
-                        boolean found = false;
-                        for (F b1 : a1){
-                            if (b2.getExpression().equals(b1.getExpression())) {
-                                found = true;
-                                break;
-                            }
+                }
+                
+                // compute interaction between a1 and a2
+                /*Set<F> a2copy = new HashSet<>();
+                for (F b2 : a2) {
+                    boolean found = false;
+                    for (F b1 : a1){
+                        if (b2.getExpression().equals(b1.getExpression())) {
+                            found = true;
+                            break;
                         }
-                        if ( ! found)
-                            a2copy.add(b2);
                     }
+                    if ( ! found)
+                        a2copy.add(b2);
+                }*/
 
-                    for (F b1 : a1) {
-                        boolean matched = false;
-                        for (F b2 : a2) {
-                            // you may want to add here something to sync all properties
-                            if (b1.getExpression().equals(b2.getExpression())) {
-                                sync.addSynchronised(new SynchronisationIntent<>(b1.getValues(), b2.getValues()), b1);
-                                matched = true;
-                            }
-                            if ( checkSingletton( a2, b2))
-                                break;
+                for (F b1 : a1) {
+                    boolean matched = false;
+                    for (F b2 : a2) {
+                        // you may want to add here something to sync all properties
+                        if (b1.getExpression().equals(b2.getExpression())) {
+                            sync.addSynchronised(new SynchronisationIntent<>(b1.getValues(), b2.getValues()), b1);
+                            matched = true;
                         }
-
-                        // add in case of writing where a2 contains cells not in a1
-                        if ( !matched & !reading)
-                            sync.addSynchronised(new SynchronisationIntent<>(b1.getValues(), null), b1);
-                        if ( checkSingletton( a1, b1))
+                        if ( checkSingletton( a2, b2))
                             break;
                     }
 
-                    // add in case of writing where a1 contains cells not in a2
-                    if( !reading)
-                        for ( F x : a2copy)
-                            sync.addSynchronised(new SynchronisationIntent<>( null, x.getValues()), x);
-
-                    a2.removeAll( a1);
+                    // add in case of writing where a2 contains cells not in a1
+                    if ( !matched) {//
+                        //if ( ! reading)
+                            sync.addSynchronised(new SynchronisationIntent<>(b1.getValues(), null), b1); // remove from a2
+                    }
+                    if ( checkSingletton( a1, b1))
+                        break;
                 }
+
+                // add in case of writing where a1 contains cells not in a2
+                /*for ( F x : a2copy) {
+                    if (!reading)
+                        sync.addSynchronised(new SynchronisationIntent<>(null, x.getValues()), x);
+                    else
+                }
+
+                a2.removeAll( a1);*/
                 return sync;
             }
 
