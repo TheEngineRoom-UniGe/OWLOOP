@@ -57,7 +57,7 @@ public interface IndividualExpression
     /**
      * The {@link Individual.Type} expression for a {@link Descriptor} whose ground is {@link OWLNamedIndividual}.
      * <p>
-     *     It specifies how to {@link #queryTypeIndividual()} and {@link #writeExpressionAxioms()} for the
+     *     It specifies how to {@link #queryIndividualTypes()} and {@link #writeExpressionAxioms()} for the
      *     types (i.e.: {@link OWLClass}) of the ground Individual ({@link #getInstance()}).
      * </p>
      *
@@ -114,7 +114,7 @@ public interface IndividualExpression
         DescriptorEntitySet.Concepts getIndividualTypes();
 
         @Override // see super classes for documentation
-        default DescriptorEntitySet.Concepts queryTypeIndividual(){
+        default DescriptorEntitySet.Concepts queryIndividualTypes(){
             DescriptorEntitySet.Concepts set = new DescriptorEntitySet.Concepts(getOntology().getIndividualClasses(getInstance()));
             set.setSingleton( getIndividualTypes().isSingleton());
             return set;
@@ -142,7 +142,7 @@ public interface IndividualExpression
     /**
      * The {@link Individual.Disjoint} expression for a {@link Descriptor} whose ground is {@link OWLNamedIndividual}.
      * <p>
-     *     It specifies how to {@link #queryDisjointIndividual()} and {@link #writeExpressionAxioms()} for the
+     *     It specifies how to {@link #queryDisjointIndividuals()} and {@link #writeExpressionAxioms()} for the
      *     individuals disjoint with the ground Individual ({@link #getInstance()}).
      * </p>
      *
@@ -199,7 +199,7 @@ public interface IndividualExpression
         DescriptorEntitySet.Individuals getDisjointIndividuals();
 
         @Override // see super classes for documentation
-        default DescriptorEntitySet.Individuals queryDisjointIndividual(){
+        default DescriptorEntitySet.Individuals queryDisjointIndividuals(){
             DescriptorEntitySet.Individuals set = new DescriptorEntitySet.Individuals(getOntology().getDisjointIndividuals(getInstance()));
             set.remove( getInstance());
             set.setSingleton( getDisjointIndividuals().isSingleton());
@@ -236,7 +236,7 @@ public interface IndividualExpression
     /**
      * The {@link Individual.Equivalent} expression for a {@link Descriptor} whose ground is {@link OWLNamedIndividual}.
      * <p>
-     *     It specifies how to {@link #queryEquivalentIndividual()} and {@link #writeExpressionAxioms()} for the
+     *     It specifies how to {@link #queryEquivalentIndividuals()} and {@link #writeExpressionAxioms()} for the
      *     individuals equivalent to the ground Individual ({@link #getInstance()}).
      * </p>
      *
@@ -293,7 +293,7 @@ public interface IndividualExpression
         DescriptorEntitySet.Individuals getEquivalentIndividuals();
 
         @Override // see super classes for documentation
-        default DescriptorEntitySet.Individuals queryEquivalentIndividual(){
+        default DescriptorEntitySet.Individuals queryEquivalentIndividuals(){
             DescriptorEntitySet.Individuals set = new DescriptorEntitySet.Individuals(getOntology().getEquivalentIndividuals(getInstance()));
             set.remove( getInstance());
             set.setSingleton( getEquivalentIndividuals().isSingleton());
@@ -330,7 +330,7 @@ public interface IndividualExpression
     /**
      * The {@link Individual.DataLink} expression for a {@link Descriptor} whose ground is {@link OWLNamedIndividual}.
      * <p>
-     *     It specifies how to {@link #queryDataIndividual()} and {@link #writeExpressionAxioms()} for the
+     *     It specifies how to {@link #queryIndividualDataProperties()} and {@link #writeExpressionAxioms()} for the
      *     data properties associated to the ground Individual {@link #getInstance()}.
      *     It also implements common function to populate the {@link ExpressionEntitySet}
      *     (of type {@link DescriptorEntitySet.DataLinks}) that specify the data properties of this individualDescriptor
@@ -614,7 +614,7 @@ public interface IndividualExpression
 
 
         @Override // see super classes for documentation
-        default DescriptorEntitySet.DataLinksSet queryDataIndividual(){
+        default DescriptorEntitySet.DataLinksSet queryIndividualDataProperties(){
             DescriptorEntitySet.DataLinksSet dataSet = new DescriptorEntitySet.DataLinksSet();
             dataSet.setSingleton( getIndividualDataProperties().isSingleton());
             for (DataPropertyRelations r :  getOntology().getDataPropertyB2Individual(getInstance())){
@@ -654,7 +654,7 @@ public interface IndividualExpression
     /**
      * The {@link Individual.ObjectLink} expression for a {@link Descriptor} whose ground is {@link OWLNamedIndividual}.
      * <p>
-     *     It specifies how to {@link #queryObject()} and {@link #writeExpressionAxioms()} for the
+     *     It specifies how to {@link #queryIndividualObjectProperties()} and {@link #writeExpressionAxioms()} for the
      *     object properties associated to the ground Individual {@link #getInstance()}.
      *     It also implements common function to populate the {@link ExpressionEntitySet}
      *     (of type {@link DescriptorEntitySet.ObjectLinks}) that specify the object properties of this individualDescriptor
@@ -921,7 +921,7 @@ public interface IndividualExpression
         }
 
         @Override // see super classes for documentation
-        default DescriptorEntitySet.ObjectLinksSet queryObject(){
+        default DescriptorEntitySet.ObjectLinksSet queryIndividualObjectProperties(){
             DescriptorEntitySet.ObjectLinksSet objectSet = new DescriptorEntitySet.ObjectLinksSet();
             objectSet.setSingleton( getIndividualObjectProperties().isSingleton());
             for (ObjectPropertyRelations r :  getOntology().getObjectPropertyB2Individual(getInstance())){

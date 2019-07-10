@@ -1,12 +1,12 @@
-package it.emarolab.owloopArticleExamples.example1;
+package it.emarolab.owloop.articleExamples.example1;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.amor.owlInterface.OWLReferencesInterface;
+import it.emarolab.owloop.articleExamples.exampleDescriptors.CorridorConceptDesc;
+import it.emarolab.owloop.articleExamples.exampleDescriptors.ObjectLinkIndividualDesc;
+import it.emarolab.owloop.articleExamples.exampleDescriptors.RoomConceptDesc;
 import it.emarolab.owloop.descriptor.utility.objectPropertyDescriptor.DomainRangeObjectPropertyDesc;
-import it.emarolab.owloopArticleExamples.exampleDescriptors.CorridorConceptDesc;
-import it.emarolab.owloopArticleExamples.exampleDescriptors.LocationConceptDesc;
-import it.emarolab.owloopArticleExamples.exampleDescriptors.ObjectLinkIndividualDesc;
-import it.emarolab.owloopArticleExamples.exampleDescriptors.RoomConceptDesc;
+import it.emarolab.owloop.articleExamples.exampleDescriptors.LocationConceptDesc;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

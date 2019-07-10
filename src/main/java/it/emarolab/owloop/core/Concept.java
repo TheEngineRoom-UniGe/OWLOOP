@@ -102,10 +102,10 @@ public interface Concept<O,J>
          * @return a new {@link EntitySet} contained the equivalent classes to
          * the OWL structure of {@link #getInstance()}.
          */
-        EntitySet<J> queryEquivalentConcept();
+        EntitySet<J> queryEquivalentConcepts();
 
         /**
-         * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryEquivalentConcept()}
+         * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryEquivalentConcepts()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getEquivalentConcepts()}. This should
          * be done by {@link #writeExpressionAxioms()}.
@@ -114,7 +114,7 @@ public interface Concept<O,J>
          */
         default EntitySet.SynchronisationIntent<J> synchroniseEquivalentConceptToExpressionAxioms(){
             try {
-                return getEquivalentConcepts().synchroniseTo( queryEquivalentConcept());
+                return getEquivalentConcepts().synchroniseTo( queryEquivalentConcepts());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -122,7 +122,7 @@ public interface Concept<O,J>
         }
 
         /**
-         * It calls {@link EntitySet#synchroniseFrom(EntitySet)} with {@link #queryEquivalentConcept()}
+         * It calls {@link EntitySet#synchroniseFrom(EntitySet)} with {@link #queryEquivalentConcepts()}
          * as input parameter. This computes the changes to be performed into the {@link #getEquivalentConcepts()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readExpressionAxioms()}.
@@ -131,7 +131,7 @@ public interface Concept<O,J>
          */
         default EntitySet.SynchronisationIntent<J> synchroniseEquivalentConceptFromExpressionAxioms(){
             try{
-                return getEquivalentConcepts().synchroniseFrom( queryEquivalentConcept());
+                return getEquivalentConcepts().synchroniseFrom( queryEquivalentConcepts());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -208,10 +208,10 @@ public interface Concept<O,J>
          * @return a new {@link EntitySet} contained the disjointed classes from
          * the OWL structure of {@link #getInstance()}.
          */
-        EntitySet<J> queryDisjointConcept();
+        EntitySet<J> queryDisjointConcepts();
 
         /**
-         * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryDisjointConcept()}
+         * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryDisjointConcepts()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getDisjointConcepts()}. This should
          * be done by {@link #writeExpressionAxioms()}.
@@ -220,7 +220,7 @@ public interface Concept<O,J>
          */
         default EntitySet.SynchronisationIntent<J> synchroniseDisjointConceptToExpressionAxioms(){
             try {
-                return getDisjointConcepts().synchroniseTo( queryDisjointConcept());
+                return getDisjointConcepts().synchroniseTo( queryDisjointConcepts());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -228,7 +228,7 @@ public interface Concept<O,J>
         }
 
         /**
-         * It calls {@link EntitySet#synchroniseFrom(EntitySet)} with {@link #queryDisjointConcept()}
+         * It calls {@link EntitySet#synchroniseFrom(EntitySet)} with {@link #queryDisjointConcepts()}
          * as input parameter. This computes the changes to be performed into the {@link #getDisjointConcepts()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readExpressionAxioms()}.
@@ -237,7 +237,7 @@ public interface Concept<O,J>
          */
         default EntitySet.SynchronisationIntent<J> synchroniseDisjointConceptFromExpressionAxioms(){
             try{
-                return getDisjointConcepts().synchroniseFrom( queryDisjointConcept());
+                return getDisjointConcepts().synchroniseFrom( queryDisjointConcepts());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -313,10 +313,10 @@ public interface Concept<O,J>
          * @return a new {@link EntitySet} contained the sub classes to
          * the OWL structure of {@link #getInstance()}.
          */
-        EntitySet<J> querySubConcept();
+        EntitySet<J> querySubConcepts();
 
         /**
-         * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #querySubConcept()}
+         * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #querySubConcepts()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getSubConcepts()}. This should
          * be done by {@link #writeExpressionAxioms()}.
@@ -325,7 +325,7 @@ public interface Concept<O,J>
          */
         default EntitySet.SynchronisationIntent<J> synchroniseSubConceptToExpressionAxioms(){
             try {
-                return getSubConcepts().synchroniseTo( querySubConcept());
+                return getSubConcepts().synchroniseTo( querySubConcepts());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -333,7 +333,7 @@ public interface Concept<O,J>
         }
 
         /**
-         * It calls {@link EntitySet#synchroniseFrom(EntitySet)} with {@link #querySubConcept()}
+         * It calls {@link EntitySet#synchroniseFrom(EntitySet)} with {@link #querySubConcepts()}
          * as input parameter. This computes the changes to be performed into the {@link #getSubConcepts()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readExpressionAxioms()}.
@@ -342,7 +342,7 @@ public interface Concept<O,J>
          */
         default EntitySet.SynchronisationIntent<J> synchroniseSubConceptFromExpressionAxioms(){
             try{
-                return getSubConcepts().synchroniseFrom( querySubConcept());
+                return getSubConcepts().synchroniseFrom( querySubConcepts());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -418,10 +418,10 @@ public interface Concept<O,J>
          * @return a new {@link EntitySet} contained the super classes to
          * the OWL structure of {@link #getInstance()}.
          */
-        EntitySet<J> querySuperConcept();
+        EntitySet<J> querySuperConcepts();
 
         /**
-         * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #querySuperConcept()}
+         * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #querySuperConcepts()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getSuperConcepts()}. This should
          * be done by {@link #writeExpressionAxioms()}.
@@ -430,7 +430,7 @@ public interface Concept<O,J>
          */
         default EntitySet.SynchronisationIntent<J> synchroniseSuperConceptToExpressionAxioms(){
             try {
-                return getSuperConcepts().synchroniseTo( querySuperConcept());
+                return getSuperConcepts().synchroniseTo( querySuperConcepts());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -438,7 +438,7 @@ public interface Concept<O,J>
         }
 
         /**
-         * It calls {@link EntitySet#synchroniseFrom(EntitySet)} with {@link #querySuperConcept()}
+         * It calls {@link EntitySet#synchroniseFrom(EntitySet)} with {@link #querySuperConcepts()}
          * as input parameter. This computes the changes to be performed into the {@link #getSuperConcepts()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readExpressionAxioms()}.
@@ -447,7 +447,7 @@ public interface Concept<O,J>
          */
         default EntitySet.SynchronisationIntent<J> synchroniseSuperConceptFromExpressionAxioms(){
             try{
-                return getSuperConcepts().synchroniseFrom( querySuperConcept());
+                return getSuperConcepts().synchroniseFrom( querySuperConcepts());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;

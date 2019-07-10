@@ -103,10 +103,10 @@ public interface Individual<O,J>
          * @return a new {@link EntitySet} contained the classes in which {@link #getInstance()}
          * is belonging to, into the OWL structure.
          */
-        EntitySet<Y> queryTypeIndividual();
+        EntitySet<Y> queryIndividualTypes();
 
         /**
-         * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryTypeIndividual()}
+         * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryIndividualTypes()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getIndividualTypes()}. This should
          * be done by {@link #writeExpressionAxioms()}.
@@ -115,7 +115,7 @@ public interface Individual<O,J>
          */
         default EntitySet.SynchronisationIntent<Y> synchroniseTypeIndividualToExpressionAxioms(){
             try {
-                return getIndividualTypes().synchroniseTo( queryTypeIndividual());
+                return getIndividualTypes().synchroniseTo( queryIndividualTypes());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -123,7 +123,7 @@ public interface Individual<O,J>
         }
 
         /**
-         * It calls {@link EntitySet#synchroniseFrom(EntitySet)} with {@link #queryTypeIndividual()}
+         * It calls {@link EntitySet#synchroniseFrom(EntitySet)} with {@link #queryIndividualTypes()}
          * as input parameter. This computes the changes to be performed into the {@link #getIndividualTypes()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readExpressionAxioms()}.
@@ -132,7 +132,7 @@ public interface Individual<O,J>
          */
         default EntitySet.SynchronisationIntent<Y> synchroniseTypeIndividualFromExpressionAxioms(){
             try{
-                return getIndividualTypes().synchroniseFrom( queryTypeIndividual());
+                return getIndividualTypes().synchroniseFrom( queryIndividualTypes());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -208,10 +208,10 @@ public interface Individual<O,J>
          * @return a new {@link EntitySet} contained the individuals different from {@link #getInstance()};
          * into the OWL structure.
          */
-        EntitySet<J> queryDisjointIndividual();
+        EntitySet<J> queryDisjointIndividuals();
 
         /**
-         * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryDisjointIndividual()}
+         * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryDisjointIndividuals()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getDisjointIndividuals()}. This should
          * be done by {@link #writeExpressionAxioms()}.
@@ -220,7 +220,7 @@ public interface Individual<O,J>
          */
         default EntitySet.SynchronisationIntent<J> synchroniseDisjointIndividualToExpressionAxioms(){
             try {
-                return getDisjointIndividuals().synchroniseTo( queryDisjointIndividual());
+                return getDisjointIndividuals().synchroniseTo( queryDisjointIndividuals());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -228,7 +228,7 @@ public interface Individual<O,J>
         }
 
         /**
-         * It calls {@link EntitySet#synchroniseFrom(EntitySet)} with {@link #queryDisjointIndividual()}
+         * It calls {@link EntitySet#synchroniseFrom(EntitySet)} with {@link #queryDisjointIndividuals()}
          * as input parameter. This computes the changes to be performed into the {@link #getDisjointIndividuals()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readExpressionAxioms()}.
@@ -237,7 +237,7 @@ public interface Individual<O,J>
          */
         default EntitySet.SynchronisationIntent<J> synchroniseDisjointIndividualFromExpressionAxioms(){
             try{
-                return getDisjointIndividuals().synchroniseFrom( queryDisjointIndividual());
+                return getDisjointIndividuals().synchroniseFrom( queryDisjointIndividuals());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -311,10 +311,10 @@ public interface Individual<O,J>
          * @return a new {@link EntitySet} contained the individuals equivalent from {@link #getInstance()};
          * into the OWL structure.
          */
-        EntitySet<J> queryEquivalentIndividual();
+        EntitySet<J> queryEquivalentIndividuals();
 
         /**
-         * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryEquivalentIndividual()}
+         * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryEquivalentIndividuals()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getEquivalentIndividuals()}. This should
          * be done by {@link #writeExpressionAxioms()}.
@@ -323,7 +323,7 @@ public interface Individual<O,J>
          */
         default EntitySet.SynchronisationIntent<J> synchroniseEquivalentIndividualToExpressionAxioms(){
             try {
-                return getEquivalentIndividuals().synchroniseTo( queryEquivalentIndividual());
+                return getEquivalentIndividuals().synchroniseTo( queryEquivalentIndividuals());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -331,7 +331,7 @@ public interface Individual<O,J>
         }
 
         /**
-         * It calls {@link EntitySet#synchroniseFrom(EntitySet)} with {@link #queryEquivalentIndividual()}
+         * It calls {@link EntitySet#synchroniseFrom(EntitySet)} with {@link #queryEquivalentIndividuals()}
          * as input parameter. This computes the changes to be performed into the {@link #getEquivalentIndividuals()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readExpressionAxioms()}.
@@ -340,7 +340,7 @@ public interface Individual<O,J>
          */
         default EntitySet.SynchronisationIntent<J> synchroniseEquivalentIndividualFromExpressionAxioms(){
             try{
-                return getEquivalentIndividuals().synchroniseFrom( queryEquivalentIndividual());
+                return getEquivalentIndividuals().synchroniseFrom( queryEquivalentIndividuals());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -427,10 +427,10 @@ public interface Individual<O,J>
          * @return a new {@link ExpressionEntitySet} contained the data properties of {@link #getInstance()};
          * into the OWL structure.
          */
-        EntitySet<Y> queryDataIndividual();
+        EntitySet<Y> queryIndividualDataProperties();
 
         /**
-         * It calls {@link ExpressionEntitySet#synchroniseTo(EntitySet)} with {@link #queryDataIndividual()}
+         * It calls {@link ExpressionEntitySet#synchroniseTo(EntitySet)} with {@link #queryIndividualDataProperties()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getIndividualDataProperties()}. This should
          * be done by {@link #writeExpressionAxioms()}.
@@ -439,7 +439,7 @@ public interface Individual<O,J>
          */
         default EntitySet.SynchronisationIntent<Y> synchroniseDataIndividualToExpressionAxioms(){
             try {
-                return getIndividualDataProperties().synchroniseTo( queryDataIndividual());
+                return getIndividualDataProperties().synchroniseTo( queryIndividualDataProperties());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -447,7 +447,7 @@ public interface Individual<O,J>
         }
 
         /**
-         * It calls {@link ExpressionEntitySet#synchroniseFrom(EntitySet)} with {@link #queryDataIndividual()}
+         * It calls {@link ExpressionEntitySet#synchroniseFrom(EntitySet)} with {@link #queryIndividualDataProperties()}
          * as input parameter. This computes the changes to be performed into the {@link #getIndividualDataProperties()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readExpressionAxioms()}.
@@ -456,7 +456,7 @@ public interface Individual<O,J>
          */
         default EntitySet.SynchronisationIntent<Y> synchroniseDataIndividualFromExpressionAxioms(){
             try{
-                return getIndividualDataProperties().synchroniseFrom( queryDataIndividual());
+                return getIndividualDataProperties().synchroniseFrom( queryIndividualDataProperties());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -543,10 +543,10 @@ public interface Individual<O,J>
          * @return a new {@link ExpressionEntitySet} contained the object properties of {@link #getInstance()};
          * into the OWL structure.
          */
-        EntitySet<Y> queryObject();
+        EntitySet<Y> queryIndividualObjectProperties();
 
         /**
-         * It calls {@link ExpressionEntitySet#synchroniseTo(EntitySet)} with {@link #queryObject()}
+         * It calls {@link ExpressionEntitySet#synchroniseTo(EntitySet)} with {@link #queryIndividualObjectProperties()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getIndividualObjectProperties()}. This should
          * be done by {@link #writeExpressionAxioms()}.
@@ -555,7 +555,7 @@ public interface Individual<O,J>
          */
         default EntitySet.SynchronisationIntent<Y> synchroniseObjectIndividualToExpressionAxioms(){
             try {
-                return getIndividualObjectProperties().synchroniseTo( queryObject());
+                return getIndividualObjectProperties().synchroniseTo( queryIndividualObjectProperties());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -563,7 +563,7 @@ public interface Individual<O,J>
         }
 
         /**
-         * It calls {@link ExpressionEntitySet#synchroniseFrom(EntitySet)} with {@link #queryObject()}
+         * It calls {@link ExpressionEntitySet#synchroniseFrom(EntitySet)} with {@link #queryIndividualObjectProperties()}
          * as input parameter. This computes the changes to be performed into the {@link #getIndividualObjectProperties()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readExpressionAxioms()}.
@@ -572,7 +572,7 @@ public interface Individual<O,J>
          */
         default EntitySet.SynchronisationIntent<Y> synchroniseObjectIndividualFromExpressionAxioms(){
             try{
-                return getIndividualObjectProperties().synchroniseFrom( queryObject());
+                return getIndividualObjectProperties().synchroniseFrom( queryIndividualObjectProperties());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;

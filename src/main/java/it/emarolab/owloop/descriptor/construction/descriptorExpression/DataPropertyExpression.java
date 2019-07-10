@@ -71,7 +71,7 @@ public interface DataPropertyExpression
     /**
      * The {@link DataProperty.Disjoint} expression for a {@link Descriptor} whose ground is {@link OWLDataProperty}.
      * <p>
-     *     It specifies how to {@link #queryDisjointDataProperty()} and {@link #writeExpressionAxioms()} for the
+     *     It specifies how to {@link #queryDisjointDataProperties()} and {@link #writeExpressionAxioms()} for the
      *     DataProperties disjoint to the ground DataProperty (i.e.: {@link OWLDataProperty}).
      * </p>
      *
@@ -128,7 +128,7 @@ public interface DataPropertyExpression
         DescriptorEntitySet.DataProperties getDisjointDataProperties();
 
         @Override // see super class for documentation
-        default DescriptorEntitySet.DataProperties queryDisjointDataProperty(){
+        default DescriptorEntitySet.DataProperties queryDisjointDataProperties(){
             DescriptorEntitySet.DataProperties set = new DescriptorEntitySet.DataProperties(getOntology().getDisjointDataProperty(getInstance()));
             set.remove( getInstance());
             set.setSingleton( getDisjointDataProperties().isSingleton());
@@ -165,7 +165,7 @@ public interface DataPropertyExpression
     /**
      * The {@link DataProperty.Equivalent} expression for a {@link Descriptor} whose ground is {@link OWLDataProperty}.
      * <p>
-     *     It specifies how to {@link #queryEquivalentDataProperty()} and {@link #writeExpressionAxioms()} for the
+     *     It specifies how to {@link #queryEquivalentDataProperties()} and {@link #writeExpressionAxioms()} for the
      *     DataProperties equivalent to the ground DataProperty (i.e.: {@link OWLDataProperty}).
      * </p>
      *
@@ -222,7 +222,7 @@ public interface DataPropertyExpression
         DescriptorEntitySet.DataProperties getEquivalentDataProperties();
 
         @Override // see super class for documentation
-        default DescriptorEntitySet.DataProperties queryEquivalentDataProperty(){
+        default DescriptorEntitySet.DataProperties queryEquivalentDataProperties(){
             DescriptorEntitySet.DataProperties set = new DescriptorEntitySet.DataProperties(getOntology().getEquivalentDataProperty(getInstance()));
             set.remove( getInstance());
             set.setSingleton( getEquivalentDataProperties().isSingleton());
@@ -259,7 +259,7 @@ public interface DataPropertyExpression
     /**
      * The {@link DataProperty.Sub} expression for a {@link Descriptor} whose ground is {@link OWLDataProperty}.
      * <p>
-     *     It specifies how to {@link #querySubDataProperty()} and {@link #writeExpressionAxioms()} for the
+     *     It specifies how to {@link #querySubDataProperties()} and {@link #writeExpressionAxioms()} for the
      *     DataProperties subsumed by the ground DataProperty (i.e.: {@link OWLDataProperty}).
      * </p>
      *
@@ -313,7 +313,7 @@ public interface DataPropertyExpression
         }
 
         @Override // see super class for documentation
-        default DescriptorEntitySet.DataProperties querySubDataProperty(){
+        default DescriptorEntitySet.DataProperties querySubDataProperties(){
             DescriptorEntitySet.DataProperties set = new DescriptorEntitySet.DataProperties(getOntology().getSubDataPropertyOf(getInstance()));
             set.setSingleton( getSubDataProperties().isSingleton());
             return set;
@@ -341,7 +341,7 @@ public interface DataPropertyExpression
     /**
      * The {@link DataProperty.Super} expression for a {@link Descriptor} whose ground is {@link OWLDataProperty}.
      * <p>
-     *     It specifies how to {@link #querySuperDataProperty()} and {@link #writeExpressionAxioms()} for the
+     *     It specifies how to {@link #querySuperDataProperties()} and {@link #writeExpressionAxioms()} for the
      *     DataProperties super over by the ground DataProperty (i.e.: {@link OWLDataProperty}).
      * </p>
      *
@@ -398,7 +398,7 @@ public interface DataPropertyExpression
         DescriptorEntitySet.DataProperties getSuperDataProperties();
 
         @Override // see super class for documentation
-        default DescriptorEntitySet.DataProperties querySuperDataProperty(){
+        default DescriptorEntitySet.DataProperties querySuperDataProperties(){
             DescriptorEntitySet.DataProperties set = new DescriptorEntitySet.DataProperties(getOntology().getSuperDataPropertyOf(getInstance()));
             set.setSingleton( getSuperDataProperties().isSingleton());
             return set;
@@ -426,7 +426,7 @@ public interface DataPropertyExpression
     /**
      * The {@link DataProperty.Domain} expression for a {@link Descriptor} whose ground is {@link OWLDataProperty}.
      * <p>
-     *     It specifies how to {@link #queryDomainDataProperty()} and {@link #writeExpressionAxioms()} for the
+     *     It specifies how to {@link #queryDomainDataProperties()} and {@link #writeExpressionAxioms()} for the
      *     domain restriction of the ground DataProperty (i.e.: {@link SemanticRestriction}).
      * </p>
      */
@@ -821,8 +821,8 @@ public interface DataPropertyExpression
          * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDataPropertyDomainConcepts()}
          * based on {@link #domainMinObjectRestriction(OWLObjectProperty, int, OWLClass)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
-         * to be perfectly aligned with the {@link #queryDomainDataProperty()},
-         * to be perfectly aligned with the {@link #queryDomainDataProperty()},
+         * to be perfectly aligned with the {@link #queryDomainDataProperties()},
+         * to be perfectly aligned with the {@link #queryDomainDataProperties()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the restricting object property.
          * @param cardinality the cardinality for the minimal property restriction.
@@ -836,7 +836,7 @@ public interface DataPropertyExpression
          * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDataPropertyDomainConcepts()})
          * based on {@link #domainMinObjectRestriction(String, int, String)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
-         * to be perfectly aligned with the {@link #queryDomainDataProperty()},
+         * to be perfectly aligned with the {@link #queryDomainDataProperties()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the name of the restricting object property.
          * @param cardinality the cardinality for the minimal property restriction.
@@ -850,7 +850,7 @@ public interface DataPropertyExpression
          * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDataPropertyDomainConcepts()})
          * based on {@link #domainMinObjectRestriction(OWLObjectProperty, int, OWLClass)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
-         * to be perfectly aligned with the {@link #queryDomainDataProperty()},
+         * to be perfectly aligned with the {@link #queryDomainDataProperties()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the restricting object property.
          * @param cardinality the cardinality for the minimal property restriction.
@@ -891,7 +891,7 @@ public interface DataPropertyExpression
          * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDataPropertyDomainConcepts()})
          * based on {@link #domainMaxObjectRestriction(String, int, String)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
-         * to be perfectly aligned with the {@link #queryDomainDataProperty()},
+         * to be perfectly aligned with the {@link #queryDomainDataProperties()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the name of the restricting object property.
          * @param cardinality the cardinality for the maximal property restriction.
@@ -905,7 +905,7 @@ public interface DataPropertyExpression
          * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDataPropertyDomainConcepts()}
          * based on {@link #domainMaxObjectRestriction(OWLObjectProperty, int, OWLClass)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
-         * to be perfectly aligned with the {@link #queryDomainDataProperty()},
+         * to be perfectly aligned with the {@link #queryDomainDataProperties()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the restricting object property.
          * @param cardinality the cardinality for the maximal property restriction.
@@ -919,7 +919,7 @@ public interface DataPropertyExpression
          * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDataPropertyDomainConcepts()})
          * based on {@link #domainMaxObjectRestriction(String, int, String)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
-         * to be perfectly aligned with the {@link #queryDomainDataProperty()},
+         * to be perfectly aligned with the {@link #queryDomainDataProperties()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the name of the restricting object property.
          * @param cardinality the cardinality for the maximal property restriction.
@@ -933,7 +933,7 @@ public interface DataPropertyExpression
          * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDataPropertyDomainConcepts()})
          * based on {@link #domainMaxObjectRestriction(OWLObjectProperty, int, OWLClass)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
-         * to be perfectly aligned with the {@link #queryDomainDataProperty()},
+         * to be perfectly aligned with the {@link #queryDomainDataProperties()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the restricting object property.
          * @param cardinality the cardinality for the maximal property restriction.
@@ -974,7 +974,7 @@ public interface DataPropertyExpression
          * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDataPropertyDomainConcepts()})
          * based on {@link #domainExactObjectRestriction(String, int, String)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
-         * to be perfectly aligned with the {@link #queryDomainDataProperty()},
+         * to be perfectly aligned with the {@link #queryDomainDataProperties()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the name of the restricting object property.
          * @param cardinality the cardinality for the exact property restriction.
@@ -988,7 +988,7 @@ public interface DataPropertyExpression
          * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDataPropertyDomainConcepts()}
          * based on {@link #domainExactObjectRestriction(OWLObjectProperty, int, OWLClass)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
-         * to be perfectly aligned with the {@link #queryDomainDataProperty()},
+         * to be perfectly aligned with the {@link #queryDomainDataProperties()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the restricting object property.
          * @param cardinality the cardinality for the exact property restriction.
@@ -1002,7 +1002,7 @@ public interface DataPropertyExpression
          * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDataPropertyDomainConcepts()})
          * based on {@link #domainExactObjectRestriction(String, int, String)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
-         * to be perfectly aligned with the {@link #queryDomainDataProperty()},
+         * to be perfectly aligned with the {@link #queryDomainDataProperties()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the name of the restricting object property.
          * @param cardinality the cardinality for the exact property restriction.
@@ -1016,7 +1016,7 @@ public interface DataPropertyExpression
          * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDataPropertyDomainConcepts()})
          * based on {@link #domainExactObjectRestriction(OWLObjectProperty, int, OWLClass)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
-         * to be perfectly aligned with the {@link #queryDomainDataProperty()},
+         * to be perfectly aligned with the {@link #queryDomainDataProperties()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the restricting object property.
          * @param cardinality the cardinality for the exact property restriction.
@@ -1226,7 +1226,7 @@ public interface DataPropertyExpression
         DescriptorEntitySet.Restrictions getDataPropertyDomainConcepts();
 
         @Override // see super class for documentation
-        default DescriptorEntitySet.Restrictions queryDomainDataProperty(){
+        default DescriptorEntitySet.Restrictions queryDomainDataProperties(){
             DescriptorEntitySet.Restrictions set = new DescriptorEntitySet.Restrictions(getOntology().getDomainRestriction(getInstance()));
             set.setSingleton( getDataPropertyDomainConcepts().isSingleton());
             return set;
@@ -1252,7 +1252,7 @@ public interface DataPropertyExpression
     /**
      * The {@link DataProperty.Range} expression for a {@link Descriptor} whose ground is {@link OWLDataProperty}.
      * <p>
-     *     It specifies how to {@link #queryRangeDataProperty()} and {@link #writeExpressionAxioms()} for the
+     *     It specifies how to {@link #queryRangeDataProperties()} and {@link #writeExpressionAxioms()} for the
      *     range restriction of the ground DataProperty (i.e.: {@link SemanticRestriction}).
      * </p>
      */
@@ -1297,7 +1297,7 @@ public interface DataPropertyExpression
         DescriptorEntitySet.Restrictions getDataPropertyRangeConcepts();
 
         @Override // see super class for documentation
-        default DescriptorEntitySet.Restrictions queryRangeDataProperty(){
+        default DescriptorEntitySet.Restrictions queryRangeDataProperties(){
             DescriptorEntitySet.Restrictions set = new DescriptorEntitySet.Restrictions(getOntology().getRangeRestriction(getInstance()));
             set.setSingleton( getDataPropertyRangeConcepts().isSingleton());
             return set;

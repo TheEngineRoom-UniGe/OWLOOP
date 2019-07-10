@@ -1,13 +1,12 @@
-package it.emarolab.owloopArticleExamples.example2;
+package it.emarolab.owloop.articleExamples.example2;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.amor.owlInterface.OWLReferencesInterface;
 import it.emarolab.amor.owlInterface.SemanticRestriction;
+import it.emarolab.owloop.articleExamples.exampleDescriptors.DefSubConceptDesc;
+import it.emarolab.owloop.articleExamples.exampleDescriptors.ObjectLinkIndividualDesc;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
-import it.emarolab.owloop.descriptor.utility.conceptDescriptor.FullConceptDesc;
-import it.emarolab.owloopArticleExamples.exampleDescriptors.DefSubConceptDesc;
-import it.emarolab.owloopArticleExamples.exampleDescriptors.TypeIndividualDesc;
-import it.emarolab.owloopArticleExamples.exampleDescriptors.ObjectLinkIndividualDesc;
+import it.emarolab.owloop.articleExamples.exampleDescriptors.TypeIndividualDesc;
 import org.junit.Before;
 import org.junit.Test;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;

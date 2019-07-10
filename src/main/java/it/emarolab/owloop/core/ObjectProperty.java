@@ -167,10 +167,10 @@ public interface ObjectProperty<O,J>
          * @return a new {@link EntitySet} contained the inverse properties of {@link #getInstance()},
          * into the OWL structure.
          */
-        EntitySet<J> queryInverseObjectProperty();
+        EntitySet<J> queryInverseObjectProperties();
 
         /**
-         * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryInverseObjectProperty()}
+         * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryInverseObjectProperties()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getInverseObjectProperties()}. This should
          * be done by {@link #writeExpressionAxioms()}.
@@ -179,7 +179,7 @@ public interface ObjectProperty<O,J>
          */
         default EntitySet.SynchronisationIntent<J> synchroniseInverseObjectPropertyToExpressionAxioms(){
             try {
-                return getInverseObjectProperties().synchroniseTo( queryInverseObjectProperty());
+                return getInverseObjectProperties().synchroniseTo( queryInverseObjectProperties());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -187,7 +187,7 @@ public interface ObjectProperty<O,J>
         }
 
         /**
-         * It calls {@link ExpressionEntitySet#synchroniseFrom(EntitySet)} with {@link #queryInverseObjectProperty()}
+         * It calls {@link ExpressionEntitySet#synchroniseFrom(EntitySet)} with {@link #queryInverseObjectProperties()}
          * as input parameter. This computes the changes to be performed into the {@link #getInverseObjectProperties()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readExpressionAxioms()}.
@@ -196,7 +196,7 @@ public interface ObjectProperty<O,J>
          */
         default EntitySet.SynchronisationIntent<J> synchroniseInverseObjectPropertyFromExpressionAxioms(){
             try{
-                return getInverseObjectProperties().synchroniseFrom( queryInverseObjectProperty());
+                return getInverseObjectProperties().synchroniseFrom( queryInverseObjectProperties());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -272,10 +272,10 @@ public interface ObjectProperty<O,J>
          * @return a new {@link EntitySet} contained the disjoint properties of {@link #getInstance()},
          * into the OWL structure.
          */
-        EntitySet<J> queryDisjointObjectProperty();
+        EntitySet<J> queryDisjointObjectProperties();
 
         /**
-         * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryDisjointObjectProperty()}
+         * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryDisjointObjectProperties()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getDisjointObjectProperties()}. This should
          * be done by {@link #writeExpressionAxioms()}.
@@ -284,7 +284,7 @@ public interface ObjectProperty<O,J>
          */
         default EntitySet.SynchronisationIntent<J> synchroniseDisjointObjectPropertyToExpressionAxioms(){
             try {
-                return getDisjointObjectProperties().synchroniseTo( queryDisjointObjectProperty());
+                return getDisjointObjectProperties().synchroniseTo( queryDisjointObjectProperties());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -292,7 +292,7 @@ public interface ObjectProperty<O,J>
         }
 
         /**
-         * It calls {@link ExpressionEntitySet#synchroniseFrom(EntitySet)} with {@link #queryDisjointObjectProperty()}
+         * It calls {@link ExpressionEntitySet#synchroniseFrom(EntitySet)} with {@link #queryDisjointObjectProperties()}
          * as input parameter. This computes the changes to be performed into the {@link #getDisjointObjectProperties()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readExpressionAxioms()}.
@@ -301,7 +301,7 @@ public interface ObjectProperty<O,J>
          */
         default EntitySet.SynchronisationIntent<J> synchroniseDisjointObjectPropertyFromExpressionAxioms(){
             try{
-                return getDisjointObjectProperties().synchroniseFrom( queryDisjointObjectProperty());
+                return getDisjointObjectProperties().synchroniseFrom( queryDisjointObjectProperties());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -377,10 +377,10 @@ public interface ObjectProperty<O,J>
          * @return a new {@link EntitySet} contained the equivalent properties of {@link #getInstance()},
          * into the OWL structure.
          */
-        EntitySet<J> queryEquivalentObjectProperty();
+        EntitySet<J> queryEquivalentObjectProperties();
 
         /**
-         * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryEquivalentObjectProperty()}
+         * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryEquivalentObjectProperties()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getEquivalentObjectProperties()}. This should
          * be done by {@link #writeExpressionAxioms()}.
@@ -389,7 +389,7 @@ public interface ObjectProperty<O,J>
          */
         default EntitySet.SynchronisationIntent<J> synchroniseEquivalentObjectPropertyToExpressionAxioms(){
             try {
-                return getEquivalentObjectProperties().synchroniseTo( queryEquivalentObjectProperty());
+                return getEquivalentObjectProperties().synchroniseTo( queryEquivalentObjectProperties());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -397,7 +397,7 @@ public interface ObjectProperty<O,J>
         }
 
         /**
-         * It calls {@link ExpressionEntitySet#synchroniseFrom(EntitySet)} with {@link #queryEquivalentObjectProperty()}
+         * It calls {@link ExpressionEntitySet#synchroniseFrom(EntitySet)} with {@link #queryEquivalentObjectProperties()}
          * as input parameter. This computes the changes to be performed into the {@link #getEquivalentObjectProperties()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readExpressionAxioms()}.
@@ -406,7 +406,7 @@ public interface ObjectProperty<O,J>
          */
         default EntitySet.SynchronisationIntent<J> synchroniseEquivalentObjectPropertyFromExpressionAxioms(){
             try{
-                return getEquivalentObjectProperties().synchroniseFrom( queryEquivalentObjectProperty());
+                return getEquivalentObjectProperties().synchroniseFrom( queryEquivalentObjectProperties());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -482,10 +482,10 @@ public interface ObjectProperty<O,J>
          * @return a new {@link EntitySet} contained the sub properties of {@link #getInstance()},
          * into the OWL structure.
          */
-        EntitySet<J> querySubObjectProperty();
+        EntitySet<J> querySubObjectProperties();
 
         /**
-         * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #querySubObjectProperty()}
+         * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #querySubObjectProperties()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getSubObjectProperties()}. This should
          * be done by {@link #writeExpressionAxioms()}.
@@ -494,7 +494,7 @@ public interface ObjectProperty<O,J>
          */
         default EntitySet.SynchronisationIntent<J> synchroniseSubObjectPropertyToExpressionAxioms(){
             try {
-                return getSubObjectProperties().synchroniseTo( querySubObjectProperty());
+                return getSubObjectProperties().synchroniseTo( querySubObjectProperties());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -502,7 +502,7 @@ public interface ObjectProperty<O,J>
         }
 
         /**
-         * It calls {@link ExpressionEntitySet#synchroniseFrom(EntitySet)} with {@link #querySubObjectProperty()}
+         * It calls {@link ExpressionEntitySet#synchroniseFrom(EntitySet)} with {@link #querySubObjectProperties()}
          * as input parameter. This computes the changes to be performed into the {@link #getSubObjectProperties()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readExpressionAxioms()}.
@@ -511,7 +511,7 @@ public interface ObjectProperty<O,J>
          */
         default EntitySet.SynchronisationIntent<J> synchroniseSubObjectPropertyFromExpressionAxioms(){
             try{
-                return getSubObjectProperties().synchroniseFrom( querySubObjectProperty());
+                return getSubObjectProperties().synchroniseFrom( querySubObjectProperties());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -587,10 +587,10 @@ public interface ObjectProperty<O,J>
          * @return a new {@link EntitySet} contained the super properties of {@link #getInstance()},
          * into the OWL structure.
          */
-        EntitySet<J> querySuperObjectProperty();
+        EntitySet<J> querySuperObjectProperties();
 
         /**
-         * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #querySuperObjectProperty()}
+         * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #querySuperObjectProperties()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getSuperObjectProperties()}. This should
          * be done by {@link #writeExpressionAxioms()}.
@@ -599,7 +599,7 @@ public interface ObjectProperty<O,J>
          */
         default EntitySet.SynchronisationIntent<J> synchroniseSuperObjectPropertyToExpressionAxioms(){
             try {
-                return getSuperObjectProperties().synchroniseTo( querySuperObjectProperty());
+                return getSuperObjectProperties().synchroniseTo( querySuperObjectProperties());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -607,7 +607,7 @@ public interface ObjectProperty<O,J>
         }
 
         /**
-         * It calls {@link ExpressionEntitySet#synchroniseFrom(EntitySet)} with {@link #querySuperObjectProperty()}
+         * It calls {@link ExpressionEntitySet#synchroniseFrom(EntitySet)} with {@link #querySuperObjectProperties()}
          * as input parameter. This computes the changes to be performed into the {@link #getSuperObjectProperties()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readExpressionAxioms()}.
@@ -616,7 +616,7 @@ public interface ObjectProperty<O,J>
          */
         default EntitySet.SynchronisationIntent<J> synchroniseSuperObjectPropertyFromExpressionAxioms(){
             try{
-                return getSuperObjectProperties().synchroniseFrom( querySuperObjectProperty());
+                return getSuperObjectProperties().synchroniseFrom( querySuperObjectProperties());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -677,10 +677,10 @@ public interface ObjectProperty<O,J>
          * @return a new {@link EntitySet} contained the domain restrictions of {@link #getInstance()},
          * into the OWL structure.
          */
-        EntitySet<Y> queryDomainObjectProperty();
+        EntitySet<Y> queryObjectPropertyDomainConcepts();
 
         /**
-         * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryDomainObjectProperty()}
+         * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryObjectPropertyDomainConcepts()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getObjectPropertyDomainConcepts()}. This should
          * be done by {@link #writeExpressionAxioms()}.
@@ -689,7 +689,7 @@ public interface ObjectProperty<O,J>
          */
         default EntitySet.SynchronisationIntent<Y> synchroniseDomainObjectPropertyToExpressionAxioms(){
             try {
-                return getObjectPropertyDomainConcepts().synchroniseTo( queryDomainObjectProperty());
+                return getObjectPropertyDomainConcepts().synchroniseTo( queryObjectPropertyDomainConcepts());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -697,7 +697,7 @@ public interface ObjectProperty<O,J>
         }
 
         /**
-         * It calls {@link ExpressionEntitySet#synchroniseFrom(EntitySet)} with {@link #queryDomainObjectProperty()}
+         * It calls {@link ExpressionEntitySet#synchroniseFrom(EntitySet)} with {@link #queryObjectPropertyDomainConcepts()}
          * as input parameter. This computes the changes to be performed into the {@link #getObjectPropertyDomainConcepts()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readExpressionAxioms()}.
@@ -706,7 +706,7 @@ public interface ObjectProperty<O,J>
          */
         default EntitySet.SynchronisationIntent<Y> synchroniseDomainObjectPropertyFromExpressionAxioms(){
             try{
-                return getObjectPropertyDomainConcepts().synchroniseFrom( queryDomainObjectProperty());
+                return getObjectPropertyDomainConcepts().synchroniseFrom( queryObjectPropertyDomainConcepts());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -769,10 +769,10 @@ public interface ObjectProperty<O,J>
          * @return a new {@link EntitySet} contained the range restrictions of {@link #getInstance()},
          * into the OWL structure.
          */
-        EntitySet<Y> queryRangeObjectProperty();
+        EntitySet<Y> queryObjectPropertyRangeConcepts();
 
         /**
-         * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryRangeObjectProperty()}
+         * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryObjectPropertyRangeConcepts()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getObjectPropertyRangeConcepts()}. This should
          * be done by {@link #writeExpressionAxioms()}.
@@ -781,7 +781,7 @@ public interface ObjectProperty<O,J>
          */
         default EntitySet.SynchronisationIntent<Y> synchroniseRangeObjectPropertyToExpressionAxioms(){
             try {
-                return getObjectPropertyRangeConcepts().synchroniseTo( queryRangeObjectProperty());
+                return getObjectPropertyRangeConcepts().synchroniseTo( queryObjectPropertyRangeConcepts());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -789,7 +789,7 @@ public interface ObjectProperty<O,J>
         }
 
         /**
-         * It calls {@link ExpressionEntitySet#synchroniseFrom(EntitySet)} with {@link #queryRangeObjectProperty()}
+         * It calls {@link ExpressionEntitySet#synchroniseFrom(EntitySet)} with {@link #queryObjectPropertyRangeConcepts()}
          * as input parameter. This computes the changes to be performed into the {@link #getObjectPropertyRangeConcepts()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readExpressionAxioms()}.
@@ -798,7 +798,7 @@ public interface ObjectProperty<O,J>
          */
         default EntitySet.SynchronisationIntent<Y> synchroniseRangeObjectPropertyFromExpressionAxioms(){
             try{
-                return getObjectPropertyRangeConcepts().synchroniseFrom( queryRangeObjectProperty());
+                return getObjectPropertyRangeConcepts().synchroniseFrom( queryObjectPropertyRangeConcepts());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;

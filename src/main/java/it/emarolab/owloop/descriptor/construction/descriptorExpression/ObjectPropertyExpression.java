@@ -123,7 +123,7 @@ public interface ObjectPropertyExpression
     /**
      * The {@link ObjectProperty.Inverse} expression for a {@link Descriptor} whose ground is {@link OWLObjectProperty}.
      * <p>
-     *     It specifies how to {@link #queryInverseObjectProperty()} and {@link #writeExpressionAxioms()} for the
+     *     It specifies how to {@link #queryInverseObjectProperties()} and {@link #writeExpressionAxioms()} for the
      *     ObjectProperties inverse to the ground ObjectProperty (i.e.: {@link #getInstance()}).
      * </p>
      *
@@ -180,7 +180,7 @@ public interface ObjectPropertyExpression
         DescriptorEntitySet.ObjectProperties getInverseObjectProperties();
 
         @Override // see super class for documentation
-        default DescriptorEntitySet.ObjectProperties queryInverseObjectProperty(){
+        default DescriptorEntitySet.ObjectProperties queryInverseObjectProperties(){
             DescriptorEntitySet.ObjectProperties set = new DescriptorEntitySet.ObjectProperties(getOntology().getInverseProperty(getInstance()));
             set.setSingleton( getInverseObjectProperties().isSingleton());
             return set;
@@ -208,7 +208,7 @@ public interface ObjectPropertyExpression
     /**
      * The {@link ObjectProperty.Disjoint} expression for a {@link Descriptor} whose ground is {@link OWLObjectProperty}.
      * <p>
-     *     It specifies how to {@link #queryDisjointObjectProperty()} and {@link #writeExpressionAxioms()} for the
+     *     It specifies how to {@link #queryDisjointObjectProperties()} and {@link #writeExpressionAxioms()} for the
      *     ObjectProperties disjoint to the ground ObjectProperty (i.e.: {@link OWLObjectProperty}).
      * </p>
      *
@@ -265,7 +265,7 @@ public interface ObjectPropertyExpression
         DescriptorEntitySet.ObjectProperties getDisjointObjectProperties();
 
         @Override // see super class for documentation
-        default DescriptorEntitySet.ObjectProperties queryDisjointObjectProperty(){
+        default DescriptorEntitySet.ObjectProperties queryDisjointObjectProperties(){
             DescriptorEntitySet.ObjectProperties set = new DescriptorEntitySet.ObjectProperties(getOntology().getDisjointObjectProperty(getInstance()));
             set.remove( getInstance());
             set.setSingleton( getDisjointObjectProperties().isSingleton());
@@ -302,7 +302,7 @@ public interface ObjectPropertyExpression
     /**
      * The {@link ObjectProperty.Equivalent} expression for a {@link Descriptor} whose ground is {@link OWLObjectProperty}.
      * <p>
-     *     It specifies how to {@link #queryEquivalentObjectProperty()} ()} and {@link #writeExpressionAxioms()} for the
+     *     It specifies how to {@link #queryEquivalentObjectProperties()} ()} and {@link #writeExpressionAxioms()} for the
      *     ObjectProperties equivalent to the ground ObjectProperty (i.e.: {@link OWLObjectProperty}).
      * </p>
      *
@@ -359,7 +359,7 @@ public interface ObjectPropertyExpression
         DescriptorEntitySet.ObjectProperties getEquivalentObjectProperties();
 
         @Override // see super class for documentation
-        default DescriptorEntitySet.ObjectProperties queryEquivalentObjectProperty(){
+        default DescriptorEntitySet.ObjectProperties queryEquivalentObjectProperties(){
             DescriptorEntitySet.ObjectProperties set = new DescriptorEntitySet.ObjectProperties(getOntology().getEquivalentObjectProperty(getInstance()));
             set.remove( getInstance());
             set.setSingleton( getEquivalentObjectProperties().isSingleton());
@@ -396,7 +396,7 @@ public interface ObjectPropertyExpression
     /**
      * The {@link ObjectProperty.Sub} expression for a {@link Descriptor} whose ground is {@link OWLObjectProperty}.
      * <p>
-     *     It specifies how to {@link #querySubObjectProperty()} and {@link #writeExpressionAxioms()} for the
+     *     It specifies how to {@link #querySubObjectProperties()} and {@link #writeExpressionAxioms()} for the
      *     ObjectProperties subsumed by the ground ObjectProperty(i.e.: {@link OWLObjectProperty}).
      * </p>
      *
@@ -453,7 +453,7 @@ public interface ObjectPropertyExpression
         DescriptorEntitySet.ObjectProperties getSubObjectProperties();
 
         @Override // see super class for documentation
-        default DescriptorEntitySet.ObjectProperties querySubObjectProperty(){
+        default DescriptorEntitySet.ObjectProperties querySubObjectProperties(){
             DescriptorEntitySet.ObjectProperties set = new DescriptorEntitySet.ObjectProperties(getOntology().getSubObjectPropertyOf(getInstance()));
             set.setSingleton( getSubObjectProperties().isSingleton());
             return set;
@@ -481,7 +481,7 @@ public interface ObjectPropertyExpression
     /**
      * The {@link ObjectProperty.Super} expression for a {@link Descriptor} whose ground is {@link OWLObjectProperty}.
      * <p>
-     *     It specifies how to {@link #querySuperObjectProperty()} and {@link #writeExpressionAxioms()} for the
+     *     It specifies how to {@link #querySuperObjectProperties()} and {@link #writeExpressionAxioms()} for the
      *     ObjectProperties super over the ground ObjectProperty (i.e.: {@link OWLObjectProperty}).
      * </p>
      *
@@ -539,7 +539,7 @@ public interface ObjectPropertyExpression
         DescriptorEntitySet.ObjectProperties getSuperObjectProperties();
 
         @Override // see super class for documentation
-        default DescriptorEntitySet.ObjectProperties querySuperObjectProperty(){
+        default DescriptorEntitySet.ObjectProperties querySuperObjectProperties(){
             DescriptorEntitySet.ObjectProperties set = new DescriptorEntitySet.ObjectProperties(getOntology().getSuperObjectPropertyOf(getInstance()));
             set.setSingleton( getSuperObjectProperties().isSingleton());
             return set;
@@ -567,7 +567,7 @@ public interface ObjectPropertyExpression
     /**
      * The {@link ObjectProperty.Domain} expression for a {@link Descriptor} whose ground is {@link OWLObjectProperty}.
      * <p>
-     *     It specifies how to {@link #queryDomainObjectProperty()} and {@link #writeExpressionAxioms()} for the
+     *     It specifies how to {@link #queryObjectPropertyDomainConcepts()} and {@link #writeExpressionAxioms()} for the
      *     domain restriction of the ground ObjectProperty (i.e.: {@link SemanticRestriction}).
      * </p>
      */
@@ -948,7 +948,7 @@ public interface ObjectPropertyExpression
          * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()})
          * based on {@link #domainMinObjectRestriction(String, int, String)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
-         * to be perfectly aligned with the {@link #queryDomainObjectProperty()},
+         * to be perfectly aligned with the {@link #queryObjectPropertyDomainConcepts()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the name of the restricting object property.
          * @param cardinality the cardinality for the minimal property restriction.
@@ -962,7 +962,7 @@ public interface ObjectPropertyExpression
          * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()}
          * based on {@link #domainMinObjectRestriction(OWLObjectProperty, int, OWLClass)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
-         * to be perfectly aligned with the {@link #queryDomainObjectProperty()},
+         * to be perfectly aligned with the {@link #queryObjectPropertyDomainConcepts()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the restricting object property.
          * @param cardinality the cardinality for the minimal property restriction.
@@ -976,7 +976,7 @@ public interface ObjectPropertyExpression
          * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()})
          * based on {@link #domainMinObjectRestriction(String, int, String)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
-         * to be perfectly aligned with the {@link #queryDomainObjectProperty()},
+         * to be perfectly aligned with the {@link #queryObjectPropertyDomainConcepts()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the name of the restricting object property.
          * @param cardinality the cardinality for the minimal property restriction.
@@ -990,7 +990,7 @@ public interface ObjectPropertyExpression
          * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()})
          * based on {@link #domainMinObjectRestriction(OWLObjectProperty, int, OWLClass)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
-         * to be perfectly aligned with the {@link #queryDomainObjectProperty()},
+         * to be perfectly aligned with the {@link #queryObjectPropertyDomainConcepts()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the restricting object property.
          * @param cardinality the cardinality for the minimal property restriction.
@@ -1042,7 +1042,7 @@ public interface ObjectPropertyExpression
          * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()}
          * based on {@link #domainMaxObjectRestriction(OWLObjectProperty, int, OWLClass)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
-         * to be perfectly aligned with the {@link #queryDomainObjectProperty()},
+         * to be perfectly aligned with the {@link #queryObjectPropertyDomainConcepts()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the restricting object property.
          * @param cardinality the cardinality for the maximal property restriction.
@@ -1056,7 +1056,7 @@ public interface ObjectPropertyExpression
          * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()})
          * based on {@link #domainMaxObjectRestriction(String, int, String)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
-         * to be perfectly aligned with the {@link #queryDomainObjectProperty()},
+         * to be perfectly aligned with the {@link #queryObjectPropertyDomainConcepts()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the name of the restricting object property.
          * @param cardinality the cardinality for the maximal property restriction.
@@ -1070,7 +1070,7 @@ public interface ObjectPropertyExpression
          * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()})
          * based on {@link #domainMaxObjectRestriction(OWLObjectProperty, int, OWLClass)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
-         * to be perfectly aligned with the {@link #queryDomainObjectProperty()},
+         * to be perfectly aligned with the {@link #queryObjectPropertyDomainConcepts()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the restricting object property.
          * @param cardinality the cardinality for the maximal property restriction.
@@ -1111,7 +1111,7 @@ public interface ObjectPropertyExpression
          * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()})
          * based on {@link #domainExactObjectRestriction(String, int, String)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
-         * to be perfectly aligned with the {@link #queryDomainObjectProperty()},
+         * to be perfectly aligned with the {@link #queryObjectPropertyDomainConcepts()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the name of the restricting object property.
          * @param cardinality the cardinality for the exact property restriction.
@@ -1125,7 +1125,7 @@ public interface ObjectPropertyExpression
          * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()}
          * based on {@link #domainExactObjectRestriction(OWLObjectProperty, int, OWLClass)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
-         * to be perfectly aligned with the {@link #queryDomainObjectProperty()},
+         * to be perfectly aligned with the {@link #queryObjectPropertyDomainConcepts()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the restricting object property.
          * @param cardinality the cardinality for the exact property restriction.
@@ -1139,7 +1139,7 @@ public interface ObjectPropertyExpression
          * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()})
          * based on {@link #domainExactObjectRestriction(String, int, String)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
-         * to be perfectly aligned with the {@link #queryDomainObjectProperty()},
+         * to be perfectly aligned with the {@link #queryObjectPropertyDomainConcepts()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the name of the restricting object property.
          * @param cardinality the cardinality for the exact property restriction.
@@ -1153,7 +1153,7 @@ public interface ObjectPropertyExpression
          * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()})
          * based on {@link #domainExactObjectRestriction(OWLObjectProperty, int, OWLClass)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
-         * to be perfectly aligned with the {@link #queryDomainObjectProperty()},
+         * to be perfectly aligned with the {@link #queryObjectPropertyDomainConcepts()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the restricting object property.
          * @param cardinality the cardinality for the exact property restriction.
@@ -1364,7 +1364,7 @@ public interface ObjectPropertyExpression
         DescriptorEntitySet.Restrictions getObjectPropertyDomainConcepts();
 
         @Override // see super class for documentation
-        default DescriptorEntitySet.Restrictions queryDomainObjectProperty(){
+        default DescriptorEntitySet.Restrictions queryObjectPropertyDomainConcepts(){
             DescriptorEntitySet.Restrictions set = new DescriptorEntitySet.Restrictions(getOntology().getDomainRestriction(getInstance()));
             set.setSingleton( getObjectPropertyDomainConcepts().isSingleton());
             return set;
@@ -1392,7 +1392,7 @@ public interface ObjectPropertyExpression
     /**
      * The {@link ObjectProperty.Range} expression for a {@link Descriptor} whose ground is {@link OWLObjectProperty}.
      * <p>
-     *     It specifies how to {@link #queryRangeObjectProperty()} and {@link #writeExpressionAxioms()} for the
+     *     It specifies how to {@link #queryObjectPropertyRangeConcepts()} and {@link #writeExpressionAxioms()} for the
      *     range restriction of the ground ObjectProperty (i.e.: {@link SemanticRestriction}).
      */
     interface Range
@@ -1772,7 +1772,7 @@ public interface ObjectPropertyExpression
          * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()})
          * based on {@link #rangeMinObjectRestriction(String, int, String)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
-         * to be perfectly aligned with the {@link #queryRangeObjectProperty()},
+         * to be perfectly aligned with the {@link #queryObjectPropertyRangeConcepts()},
          * since the reasoner infers also an {@link #rangeClassRestriction(OWLClass)}.
          * @param property the name of the restricting object property.
          * @param cardinality the cardinality for the minimal property restriction.
@@ -1786,7 +1786,7 @@ public interface ObjectPropertyExpression
          * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()}
          * based on {@link #rangeMinObjectRestriction(OWLObjectProperty, int, OWLClass)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
-         * to be perfectly aligned with the {@link #queryRangeObjectProperty()},
+         * to be perfectly aligned with the {@link #queryObjectPropertyRangeConcepts()},
          * since the reasoner infers also an {@link #rangeClassRestriction(OWLClass)}.
          * @param property the restricting object property.
          * @param cardinality the cardinality for the minimal property restriction.
@@ -1800,7 +1800,7 @@ public interface ObjectPropertyExpression
          * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()})
          * based on {@link #rangeMinObjectRestriction(String, int, String)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
-         * to be perfectly aligned with the {@link #queryRangeObjectProperty()},
+         * to be perfectly aligned with the {@link #queryObjectPropertyRangeConcepts()},
          * since the reasoner infers also an {@link #rangeClassRestriction(OWLClass)}.
          * @param property the name of the restricting object property.
          * @param cardinality the cardinality for the minimal property restriction.
@@ -1814,7 +1814,7 @@ public interface ObjectPropertyExpression
          * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()})
          * based on {@link #rangeMinObjectRestriction(OWLObjectProperty, int, OWLClass)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
-         * to be perfectly aligned with the {@link #queryRangeObjectProperty()},
+         * to be perfectly aligned with the {@link #queryObjectPropertyRangeConcepts()},
          * since the reasoner infers also an {@link #rangeClassRestriction(OWLClass)}.
          * @param property the restricting object property.
          * @param cardinality the cardinality for the minimal property restriction.
@@ -1855,7 +1855,7 @@ public interface ObjectPropertyExpression
          * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()})
          * based on {@link #rangeMaxObjectRestriction(String, int, String)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
-         * to be perfectly aligned with the {@link #queryRangeObjectProperty()},
+         * to be perfectly aligned with the {@link #queryObjectPropertyRangeConcepts()},
          * since the reasoner infers also an {@link #rangeClassRestriction(OWLClass)}.
          * @param property the name of the restricting object property.
          * @param cardinality the cardinality for the maximal property restriction.
@@ -1869,7 +1869,7 @@ public interface ObjectPropertyExpression
          * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()}
          * based on {@link #rangeMaxObjectRestriction(OWLObjectProperty, int, OWLClass)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
-         * to be perfectly aligned with the {@link #queryRangeObjectProperty()},
+         * to be perfectly aligned with the {@link #queryObjectPropertyRangeConcepts()},
          * since the reasoner infers also an {@link #rangeClassRestriction(OWLClass)}.
          * @param property the restricting object property.
          * @param cardinality the cardinality for the maximal property restriction.
@@ -1883,7 +1883,7 @@ public interface ObjectPropertyExpression
          * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()})
          * based on {@link #rangeMaxObjectRestriction(String, int, String)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
-         * to be perfectly aligned with the {@link #queryRangeObjectProperty()},
+         * to be perfectly aligned with the {@link #queryObjectPropertyRangeConcepts()},
          * since the reasoner infers also an {@link #rangeClassRestriction(OWLClass)}.
          * @param property the name of the restricting object property.
          * @param cardinality the cardinality for the maximal property restriction.
@@ -1897,7 +1897,7 @@ public interface ObjectPropertyExpression
          * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()})
          * based on {@link #rangeMaxObjectRestriction(OWLObjectProperty, int, OWLClass)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
-         * to be perfectly aligned with the {@link #queryRangeObjectProperty()},
+         * to be perfectly aligned with the {@link #queryObjectPropertyRangeConcepts()},
          * since the reasoner infers also an {@link #rangeClassRestriction(OWLClass)}.
          * @param property the restricting object property.
          * @param cardinality the cardinality for the maximal property restriction.
@@ -1938,7 +1938,7 @@ public interface ObjectPropertyExpression
          * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()})
          * based on {@link #rangeExactObjectRestriction(String, int, String)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
-         * to be perfectly aligned with the {@link #queryRangeObjectProperty()},
+         * to be perfectly aligned with the {@link #queryObjectPropertyRangeConcepts()},
          * since the reasoner infers also an {@link #rangeClassRestriction(OWLClass)}.
          * @param property the name of the restricting object property.
          * @param cardinality the cardinality for the exact property restriction.
@@ -1952,7 +1952,7 @@ public interface ObjectPropertyExpression
          * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()}
          * based on {@link #rangeExactObjectRestriction(OWLObjectProperty, int, OWLClass)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
-         * to be perfectly aligned with the {@link #queryRangeObjectProperty()},
+         * to be perfectly aligned with the {@link #queryObjectPropertyRangeConcepts()},
          * since the reasoner infers also an {@link #rangeClassRestriction(OWLClass)}.
          * @param property the restricting object property.
          * @param cardinality the cardinality for the exact property restriction.
@@ -1966,7 +1966,7 @@ public interface ObjectPropertyExpression
          * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()})
          * based on {@link #rangeExactObjectRestriction(String, int, String)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
-         * to be perfectly aligned with the {@link #queryRangeObjectProperty()},
+         * to be perfectly aligned with the {@link #queryObjectPropertyRangeConcepts()},
          * since the reasoner infers also an {@link #rangeClassRestriction(OWLClass)}.
          * @param property the name of the restricting object property.
          * @param cardinality the cardinality for the exact property restriction.
@@ -1980,7 +1980,7 @@ public interface ObjectPropertyExpression
          * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()})
          * based on {@link #rangeExactObjectRestriction(OWLObjectProperty, int, OWLClass)}.
          * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
-         * to be perfectly aligned with the {@link #queryRangeObjectProperty()},
+         * to be perfectly aligned with the {@link #queryObjectPropertyRangeConcepts()},
          * since the reasoner infers also an {@link #rangeClassRestriction(OWLClass)}.
          * @param property the restricting object property.
          * @param cardinality the cardinality for the exact property restriction.
@@ -2190,7 +2190,7 @@ public interface ObjectPropertyExpression
         DescriptorEntitySet.Restrictions getObjectPropertyRangeConcepts();
 
         @Override // see super class for documentation
-        default DescriptorEntitySet.Restrictions queryRangeObjectProperty(){
+        default DescriptorEntitySet.Restrictions queryObjectPropertyRangeConcepts(){
             DescriptorEntitySet.Restrictions set = new DescriptorEntitySet.Restrictions(getOntology().getRangeRestriction(getInstance()));
             set.setSingleton( getObjectPropertyRangeConcepts().isSingleton());
             return set;

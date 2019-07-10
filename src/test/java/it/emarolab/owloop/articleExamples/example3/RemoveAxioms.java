@@ -1,14 +1,10 @@
-package it.emarolab.owloopArticleExamples.example3;
+package it.emarolab.owloop.articleExamples.example3;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.amor.owlInterface.OWLReferencesInterface;
-import it.emarolab.owloop.core.Axiom;
-import it.emarolab.owloop.descriptor.utility.individualDescriptor.FullIndividualDesc;
-import it.emarolab.owloopArticleExamples.exampleDescriptors.ObjectLinkIndividualDesc;
+import it.emarolab.owloop.articleExamples.exampleDescriptors.ObjectLinkIndividualDesc;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.List;
 
 public class RemoveAxioms {
 

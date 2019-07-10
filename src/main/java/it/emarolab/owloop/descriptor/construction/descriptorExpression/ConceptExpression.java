@@ -137,7 +137,7 @@ public interface ConceptExpression
     /**
      * The {@link Concept.Disjoint} expression for a {@link Descriptor} whose ground is {@link OWLClass}.
      * <p>
-     *     It specifies how to {@link #queryDisjointConcept()} and {@link #writeExpressionAxioms()} for the
+     *     It specifies how to {@link #queryDisjointConcepts()} and {@link #writeExpressionAxioms()} for the
      *     classes disjoint to the ground Class ({@link #getInstance()).
      * </p>
      *
@@ -200,7 +200,7 @@ public interface ConceptExpression
 
 
         @Override // see super classes for documentation
-        default DescriptorEntitySet.Concepts queryDisjointConcept(){
+        default DescriptorEntitySet.Concepts queryDisjointConcepts(){
             DescriptorEntitySet.Concepts set = new DescriptorEntitySet.Concepts(getOntology().getDisjointClasses(getInstance()));
             set.remove( getInstance());
             set.setSingleton( getDisjointConcepts().isSingleton());
@@ -237,7 +237,7 @@ public interface ConceptExpression
     /**
      * The {@link Concept.Equivalent} expression for a {@link Descriptor} whose ground is {@link OWLClass}.
      * <p>
-     *     It specifies how to {@link #queryEquivalentConcept()} and {@link #writeExpressionAxioms()} for the
+     *     It specifies how to {@link #queryEquivalentConcepts()} and {@link #writeExpressionAxioms()} for the
      *     classes equivalent to the ground Class ({@link #getInstance()).
      * </p>
      *
@@ -291,7 +291,7 @@ public interface ConceptExpression
         }
 
         @Override // see super classes for documentation
-        default DescriptorEntitySet.Concepts queryEquivalentConcept(){
+        default DescriptorEntitySet.Concepts queryEquivalentConcepts(){
             DescriptorEntitySet.Concepts set = new DescriptorEntitySet.Concepts(getOntology().getEquivalentClasses(getInstance()));
             set.remove( getInstance());
             set.setSingleton( getEquivalentConcepts().isSingleton());
@@ -328,7 +328,7 @@ public interface ConceptExpression
     /**
      * The {@link Concept.Sub} expression for a {@link Descriptor} whose ground is {@link OWLClass}.
      * <p>
-     *     It specifies how to {@link #querySubConcept()} and {@link #writeExpressionAxioms()} for the
+     *     It specifies how to {@link #querySubConcepts()} and {@link #writeExpressionAxioms()} for the
      *     sub-classes of the ground Class ({@link #getInstance()).
      * </p>
      *
@@ -382,7 +382,7 @@ public interface ConceptExpression
         }
 
         @Override // see super classes for documentation
-        default DescriptorEntitySet.Concepts querySubConcept(){
+        default DescriptorEntitySet.Concepts querySubConcepts(){
             DescriptorEntitySet.Concepts set = new DescriptorEntitySet.Concepts(getOntology().getSubClassOf(getInstance()));
             set.setSingleton( getSubConcepts().isSingleton());
             return set;
@@ -410,7 +410,7 @@ public interface ConceptExpression
     /**
      * The {@link Concept.Super} expression for a {@link Descriptor} whose ground is {@link OWLClass}.
      * <p>
-     *     It specifies how to {@link #querySuperConcept()} and {@link #writeExpressionAxioms()} for the
+     *     It specifies how to {@link #querySuperConcepts()} and {@link #writeExpressionAxioms()} for the
      *     super-classes of the ground Class ({@link #getInstance()).
      * </p>
      *
@@ -473,7 +473,7 @@ public interface ConceptExpression
 
 
         @Override // see super classes for documentation
-        default DescriptorEntitySet.Concepts querySuperConcept(){
+        default DescriptorEntitySet.Concepts querySuperConcepts(){
             DescriptorEntitySet.Concepts set = new DescriptorEntitySet.Concepts(getOntology().getSuperClassOf(getInstance()));
             set.setSingleton( getSuperConcepts().isSingleton());
             return set;
