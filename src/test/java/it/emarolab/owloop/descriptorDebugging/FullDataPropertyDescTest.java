@@ -1,5 +1,6 @@
-package it.emarolab.owloop.descriptor.utility.dataPropertyDescriptor;
+package it.emarolab.owloop.descriptorDebugging;
 
+import it.emarolab.owloop.descriptor.utility.dataPropertyDescriptor.FullDataPropertyDesc;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,12 +21,14 @@ import static org.junit.Assert.assertEquals;
  */
 public class FullDataPropertyDescTest {
 
-    public static String DEBUGGING_PATH = "src/test/resources/tests/";
+    public static String DEBUGGING_PATH = "src/test/resources/debug/";
 
     private static FullDataPropertyDesc dataProperty;
 
+    // TODO test with changes on FullConceptDescrTest made the 12/07/2019
+
     @Before // called a before every @Test
-    void setUp() throws Exception {
+    public void setUp() throws Exception {
         dataProperty = new FullDataPropertyDesc(
                 "has_time", // the ground instance name
                 "ontoName", // ontology reference name
@@ -35,13 +38,13 @@ public class FullDataPropertyDescTest {
     }
 
     @AfterClass // called after all @Test-s
-    static void save() throws Exception{
+    public static void save() throws Exception{
         dataProperty.saveOntology( DEBUGGING_PATH + "dataPropertyTest.owl");
     }
 
 
     @Test
-    void subTest() throws Exception {
+    public void subTest() throws Exception {
         dataProperty.readExpressionAxioms();
         assertSemantic();
         dataProperty.addSubDataProperty( "hasSubProperty");
@@ -198,17 +201,17 @@ public class FullDataPropertyDescTest {
         assertSemantic();
         dataProperty.addDomainExactObjectRestriction( "hasDomainProperty", 3, "Plane");
         dataProperty.addDomainExactObjectRestriction( "hasDomainProperty", 3, "Plane");
-        dataProperty.writeExpressionAxiomsInconsistencySafe(); // the reasoner always infers here
+        dataProperty.writeReadExpressionAxioms(); // the reasoner always infers here
         assertSemantic();
         dataProperty.removeDomainExactObjectRestriction( "hasDomainProperty", 3, "Plane");
         dataProperty.readExpressionAxioms();
         assertSemantic();
         dataProperty.removeDomainExactObjectRestriction( "hasDomainProperty", 3, "Plane");
-        dataProperty.writeExpressionAxiomsInconsistencySafe(); // the reasoner always infers here
+        dataProperty.writeReadExpressionAxioms(); // the reasoner always infers here
         assertSemantic();
 
         dataProperty.addDomainMaxObjectRestriction( "hasDomainDataPropertyTest", 2, "Cone");
-        dataProperty.writeExpressionAxiomsInconsistencySafe(); // the reasoner always infers here
+        dataProperty.writeReadExpressionAxioms(); // the reasoner always infers here
         assertSemantic();
 
         System.out.println( "described data property, domain test: " + dataProperty.getDataPropertyDomainConcepts());
@@ -232,12 +235,12 @@ public class FullDataPropertyDescTest {
         assertSemantic();
         dataProperty.removeRangeDataRestriction( Long.class);
         // the reasoner infer no more disjoint here since there is no more range restriction
-        dataProperty.writeExpressionAxiomsInconsistencySafe();
+        dataProperty.writeReadExpressionAxioms();
         assertSemantic();
 
         dataProperty.addRangeDataRestriction( Long.class);
         // the reasoner infer disjoint here since there is a range restriction
-        dataProperty.writeExpressionAxiomsInconsistencySafe();
+        dataProperty.writeReadExpressionAxioms();
         assertSemantic();
 
         System.out.println( "described object property, range test: " + dataProperty.getDataPropertyRangeConcepts());

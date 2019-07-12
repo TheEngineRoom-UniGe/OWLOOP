@@ -1,6 +1,7 @@
-package it.emarolab.owloop.descriptor.utility.individualDescriptor;
+package it.emarolab.owloop.descriptorDebugging;
 
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
+import it.emarolab.owloop.descriptor.utility.individualDescriptor.FullIndividualDesc;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,7 +21,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class FullIndividualDescTest {
 
-    public static String DEBUGGING_PATH = "src/test/resources/tests/";
+    public static String DEBUGGING_PATH = "src/test/resources/debug/";
 
     private static FullIndividualDesc individual;
 
@@ -81,7 +82,7 @@ public class FullIndividualDescTest {
         assertSemantic();
         individual.removeEquivalentIndividual( "Equivalent-Individual");
         // the reasoner may infers other disjoint individuals
-        individual.writeExpressionAxiomsInconsistencySafe();
+        individual.writeReadExpressionAxioms();
         assertSemantic();
 
         individual.addEquivalentIndividual( "Equivalent-Individual-To-Build");
@@ -97,20 +98,20 @@ public class FullIndividualDescTest {
         individual.addTypeIndividual( "Sphere");
         individual.readExpressionAxioms();
         assertSemantic();
-        individual.writeExpressionAxiomsInconsistencySafe(); // reasoner infers shape properties
+        individual.writeReadExpressionAxioms(); // reasoner infers shape properties
         assertSemantic();
         individual.addTypeIndividual( "Sphere");
-        individual.writeExpressionAxiomsInconsistencySafe(); // reasoner infers shape properties
+        individual.writeReadExpressionAxioms(); // reasoner infers shape properties
         assertSemantic();
         individual.removeTypeIndividual( "Sphere");
         individual.readExpressionAxioms();
         assertSemantic();
         individual.removeTypeIndividual( "Sphere");
-        individual.writeExpressionAxiomsInconsistencySafe(); // reasoner infers shape properties
+        individual.writeReadExpressionAxioms(); // reasoner infers shape properties
         assertSemantic();
 
         individual.addTypeIndividual( "Individual-Type-To-Build");
-        individual.writeExpressionAxiomsInconsistencySafe(); // reasoner infers shape properties
+        individual.writeReadExpressionAxioms(); // reasoner infers shape properties
         assertSemantic();
         System.out.println( "described individual, type test: " + individual.buildTypeIndividual());
     }
@@ -128,17 +129,18 @@ public class FullIndividualDescTest {
         // here is not equal to the ontology since there aro not values but it keeps listen for that property
         //assertSemantic();
         individual.addObject( "isRightOf", "Individual-B");
-        individual.writeExpressionAxiomsInconsistencySafe(); // reasoner infers shape properties
+        individual.addObject( "isRightOf", "Individual-C");
+        individual.writeReadExpressionAxioms(); // reasoner infers shape properties
         assertSemantic();
         individual.removeObject( "isRightOf", "Individual-C");
         individual.writeExpressionAxioms();
         assertSemantic();
         individual.removeObject( "isRightOf", "Individual-B");
-        individual.writeExpressionAxiomsInconsistencySafe(); // reasoner infers shape properties
+        individual.writeReadExpressionAxioms(); // reasoner infers shape properties
         // here is not equal to the ontology since there aro not values but keep listen for that property
         //assertSemantic();
 
-        individual.writeExpressionAxiomsInconsistencySafe(); // reasoner infers shape properties
+        individual.writeReadExpressionAxioms(); // reasoner infers shape properties
         System.out.println( "described individual, multi object test: " + individual.buildObjectIndividual());
 
         System.out.println( "synchronised object properties: " + individual.getObjects( "isRightOf"));
@@ -160,18 +162,18 @@ public class FullIndividualDescTest {
         individual.addObject( "isRightOf", "Individual-D",true);
       //  for(DescriptorEntitySet.ObjectLinks i : individual.getIndividualObjectProperties())
       //      assertEquals( i.getValues().size(), 1);
-        individual.writeExpressionAxiomsInconsistencySafe(); // reasoner infers shape properties
+        individual.writeReadExpressionAxioms(); // reasoner infers shape properties
         assertSemantic();
         individual.removeObject( "isRightOf", "Individual-C");
         individual.writeExpressionAxioms();
         assertSemantic();
         individual.removeObject( "isRightOf", "Individual-B");
-        individual.writeExpressionAxiomsInconsistencySafe(); // reasoner infers shape properties
+        individual.writeReadExpressionAxioms(); // reasoner infers shape properties
         // here is not equal to the ontology since there aro not values but keep listen for that property
         //assertSemantic();
 
         individual.addObject( "isLeftOf", "Individual-B", true);
-        individual.writeExpressionAxiomsInconsistencySafe(); // reasoner infers shape properties
+        individual.writeReadExpressionAxioms(); // reasoner infers shape properties
         System.out.println( "described individual, multi object test: " + individual.buildObjectIndividual());
 
         System.out.println( "synchronised object properties: " + individual.getObject( "isRightOf"));
@@ -180,6 +182,21 @@ public class FullIndividualDescTest {
 
     @Test
     public void dataLinkTest() throws Exception{
+
+        individual.addData( "has-geometric_centerX", 0.1);
+        individual.addData( "has-geometric_centerY", 0.2);
+        individual.addData( "has-geometric_centerZ", 0.3);
+        individual.addData( "has-sphere_radius", 0.01);
+        individual.writeExpressionAxioms();
+        //assertSemantic(); // here it fails because the reasoner infer new axiom that should be read. (**)
+        individual.readExpressionAxioms();
+        assertSemantic();
+
+        individual.removeData( "has-sphere_radius", 0.01);
+        // same case as above (**), use shortcut for reading and writing by manually update the reasoning
+        individual.writeReadExpressionAxioms();
+        assertSemantic();
+
         individual.readExpressionAxioms();
         assertSemantic();
         individual.addData( "hasProp");
@@ -191,19 +208,19 @@ public class FullIndividualDescTest {
         // here is not equal to the ontology since there aro not values but it keeps listen for that property
         //assertSemantic();
         individual.addData( "hasProp", 2.3);
-        individual.writeExpressionAxiomsInconsistencySafe(); // reasoner infers shape properties
+        individual.writeReadExpressionAxioms(); // reasoner infers shape properties
         assertSemantic();
         individual.removeData( "hasProp", "string");
         individual.writeExpressionAxioms();
         assertSemantic();
         individual.removeData( "hasProp", 2.3);
-        individual.writeExpressionAxiomsInconsistencySafe(); // reasoner infers shape properties
+        individual.writeReadExpressionAxioms(); // reasoner infers shape properties
         // here is not equal to the ontology since there aro not values but keep listen for that property
         //assertSemantic();
 
         individual.addData( "has-cone_height", 3.6);
         individual.addData( "has-geometric_height");
-        individual.writeExpressionAxiomsInconsistencySafe(); // reasoner infers shape properties
+        individual.writeReadExpressionAxioms(); // reasoner infers shape properties
         System.out.println( "described individual, multi object test: " + individual.buildDataIndividual());
 
         System.out.println( "synchronised object properties: " + individual.getLiterals( "has-cone_height"));
@@ -225,26 +242,27 @@ public class FullIndividualDescTest {
         individual.addData( "hasProp", 5.7, true);
         for(DescriptorEntitySet.DataLinks i : individual.getIndividualDataProperties())
             assertEquals( i.getValues().size(), 1);
-        individual.writeExpressionAxiomsInconsistencySafe(); // reasoner infers shape properties
+        individual.writeReadExpressionAxioms(); // reasoner infers shape properties
         assertSemantic();
         individual.removeData( "hasProp", "string");
         individual.writeExpressionAxioms();
         assertSemantic();
         individual.removeData( "hasProp", 5.7);
-        individual.writeExpressionAxiomsInconsistencySafe(); // reasoner infers shape properties
+        individual.writeReadExpressionAxioms(); // reasoner infers shape properties
         // here is not equal to the ontology since there aro not values but keep listen for that property
         //assertSemantic();
 
         individual.addData( "has-cone_height", 3.6, true);
         individual.addData( "has-geometric_height");
-        individual.writeExpressionAxiomsInconsistencySafe(); // reasoner infers shape properties
+        individual.writeReadExpressionAxioms(); // reasoner infers shape properties
         System.out.println( "described individual, multi object test: " + individual.buildDataIndividual());
 
         System.out.println( "synchronised object properties: " + individual.getLiteral( "has-cone_height"));
     }
 
-
+    int cnt = 0;
     public void assertSemantic(){ // asserts that the state of the java representation is equal to the state of the ontology
+        System.out.println( ++cnt + " ->   " + individual);
         assertEquals( individual.getDisjointIndividuals(), individual.queryDisjointIndividuals());
         assertEquals( individual.getEquivalentIndividuals(), individual.queryEquivalentIndividuals());
         assertEquals( individual.getIndividualTypes(), individual.queryIndividualTypes());

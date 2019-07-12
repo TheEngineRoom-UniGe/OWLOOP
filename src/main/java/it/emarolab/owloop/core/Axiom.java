@@ -361,6 +361,7 @@ public interface Axiom {
             // read  -> a1: queried,         a2: internal state.
             private SynchronisationMultiIntent<F,?> expressionAxiomsSync(EntitySet<F> a1, EntitySet<F> a2, boolean reading){
                 SynchronisationMultiIntent<F,Y> sync = new SynchronisationMultiIntent<>();
+
                 // it could be faster ....
                 if ( a1.isEmpty() & a2.isEmpty())
                     return sync;
@@ -374,50 +375,39 @@ public interface Axiom {
                         sync.addSynchronised(new SynchronisationIntent<>( a.getValues(), null), a);
                     return sync;
                 }
-                
-                // compute interaction between a1 and a2
-                /*Set<F> a2copy = new HashSet<>();
-                for (F b2 : a2) {
-                    boolean found = false;
-                    for (F b1 : a1){
-                        if (b2.getExpression().equals(b1.getExpression())) {
-                            found = true;
-                            break;
-                        }
-                    }
-                    if ( ! found)
-                        a2copy.add(b2);
-                }*/
 
                 for (F b1 : a1) {
-                    boolean matched = false;
+                    boolean found = false;
                     for (F b2 : a2) {
                         // you may want to add here something to sync all properties
                         if (b1.getExpression().equals(b2.getExpression())) {
                             sync.addSynchronised(new SynchronisationIntent<>(b1.getValues(), b2.getValues()), b1);
-                            matched = true;
+                            found = true;
+                            break;
                         }
                         if ( checkSingletton( a2, b2))
                             break;
                     }
 
-                    // add in case of writing where a2 contains cells not in a1
-                    if ( !matched) {//
-                        //if ( ! reading)
-                            sync.addSynchronised(new SynchronisationIntent<>(b1.getValues(), null), b1); // remove from a2
-                    }
+                    // add in case of writing (remove in case of reading) where a1 contains elements not in a2
+                    if ( ! found)
+                        sync.addSynchronised(new SynchronisationIntent<>(b1.getValues(), null), b1);
                     if ( checkSingletton( a1, b1))
                         break;
                 }
 
-                // add in case of writing where a1 contains cells not in a2
-                /*for ( F x : a2copy) {
-                    if (!reading)
-                        sync.addSynchronised(new SynchronisationIntent<>(null, x.getValues()), x);
-                    else
+                for (F b2 : a2) {
+                    boolean found = false;
+                    for (F b1 : a1) {
+                        if (b1.getExpression().equals(b2.getExpression())) {
+                            found = true;
+                            break;
+                        }
+                    }
+                    // add in case of reading (remove in case of writing) where a2 contains element not in a1
+                    if ( !found)
+                        sync.addSynchronised(new SynchronisationIntent<>(null, b2.getValues()), b2);
                 }
-
-                a2.removeAll( a1);*/
                 return sync;
             }
 
@@ -512,7 +502,7 @@ public interface Axiom {
         /**
          * @return the instance of the ground within the ontology, as a String.
          */
-        String getInstanceName();
+        String getGroundInstanceName();
 
         /**
          * This method synchronise the reasoner of the ontology (with which the descriptor is interacting). <p>
@@ -556,12 +546,12 @@ public interface Axiom {
          *
          * @return the changes made by the {@link #writeExpressionAxioms()} and {@link #readExpressionAxioms()} operations.
          */
-        default List< MappingIntent> writeExpressionAxiomsInconsistencySafe(boolean reason){
+        default List< MappingIntent> writeReadExpressionAxioms(boolean reason){
             //r.addAll( readExpressionAxioms()); read also before????
             List<MappingIntent> intent = writeExpressionAxioms();
             if(reason)
                 groundReason();
-            intent.addAll(readExpressionAxioms());
+            intent.addAll( readExpressionAxioms());
             return intent;
         }
 
@@ -575,7 +565,7 @@ public interface Axiom {
          *
          * @return the changes made by the {@link #writeExpressionAxioms()} and {@link #readExpressionAxioms()} operations.
          */
-        default List< MappingIntent> writeExpressionAxiomsInconsistencySafe(){return writeExpressionAxiomsInconsistencySafe(false);}
+        default List< MappingIntent> writeReadExpressionAxioms(){return writeReadExpressionAxioms(true);}
 
         /**
          * It instantiates a lists of {@link MappingIntent} with the

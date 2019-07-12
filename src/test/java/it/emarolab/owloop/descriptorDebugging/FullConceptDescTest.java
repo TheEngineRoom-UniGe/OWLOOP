@@ -1,8 +1,8 @@
-package it.emarolab.owloop.descriptor.utility.conceptDescriptor;
+package it.emarolab.owloop.descriptorDebugging;
 
+import it.emarolab.owloop.descriptor.utility.conceptDescriptor.FullConceptDesc;
 import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -20,9 +20,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class FullConceptDescTest {
 
-    public static String DEBUGGING_PATH = "src/test/resources/tests/";
-
-    // todo solve problem on concept definition
+    public static String DEBUGGING_PATH = "src/test/resources/debug/";
 
     private static FullConceptDesc concept;
 
@@ -77,19 +75,19 @@ public class FullConceptDescTest {
         assertSemantic();
         concept.addSuperConcept( "SuperClass");
         // super class affect class definition during reasoning
-        concept.writeExpressionAxiomsInconsistencySafe();
+        concept.writeReadExpressionAxioms();
         assertSemantic();
         concept.removeSuperConcept( "SuperClass");
         concept.readExpressionAxioms();
         assertSemantic();
         concept.removeSuperConcept( "SuperClass");
         // super class affect class definition during reasoning
-        concept.writeExpressionAxiomsInconsistencySafe();
+        concept.writeReadExpressionAxioms();
         assertSemantic();
 
         concept.addSuperConcept( "Object");
         // super class affect class definition during reasoning
-        concept.writeExpressionAxiomsInconsistencySafe();
+        concept.writeReadExpressionAxioms();
         assertSemantic();
         System.out.println( "described concept, super test: " + concept.buildSuperConcept());
     }
@@ -104,13 +102,13 @@ public class FullConceptDescTest {
         concept.writeExpressionAxioms();
         assertSemantic();
         concept.addDisjointConcept( "DisjointClass");
-        concept.writeExpressionAxiomsInconsistencySafe();
+        concept.writeReadExpressionAxioms();
         assertSemantic();
         concept.removeDisjointConcept( "DisjointClass");
         concept.readExpressionAxioms();
         assertSemantic();
         concept.removeDisjointConcept( "DisjointClass");
-        concept.writeExpressionAxiomsInconsistencySafe();
+        concept.writeReadExpressionAxioms();
         assertSemantic();
 
         concept.addDisjointConcept( "Scene");
@@ -143,86 +141,76 @@ public class FullConceptDescTest {
 
         concept.addEquivalentConcept( "EquivalentClass");
         // equivalent class affect sub classes during reasoning
-        concept.writeExpressionAxiomsInconsistencySafe();
+        concept.writeReadExpressionAxioms();
         assertSemantic();
         System.out.println( "described concept, equivalent test: " + concept.buildEquivalentConcept());
     }
 
-    @Test @Ignore
-    public void defineTest() throws Exception{
+    @Test
+    public void defineTest() throws Exception {
 
-        concept.setInstance( "ToRestrict");
+        concept.setGroundInstance( "ToRestrict");
 
-        concept.readExpressionAxioms();
-        assertSemantic();
-        concept.addClassRestriction( "ClassRestriction");
-        concept.readExpressionAxioms();
-        assertSemantic();
-        concept.writeExpressionAxiomsInconsistencySafe(); // the reasoner considers also all super class as equivalent classes
-        assertSemantic();
-        concept.addClassRestriction( "ClassRestriction");
-        concept.writeExpressionAxiomsInconsistencySafe(); // the reasoner considers also all super class as equivalent classes
-        assertSemantic();
-        concept.addClassRestriction( "ClassRestriction");
-        concept.readExpressionAxioms();
-        assertSemantic();
-        concept.addClassRestriction( "ClassRestriction");
-        concept.writeExpressionAxiomsInconsistencySafe(); // the reasoner considers also all super class as equivalent classes
+        concept.addExactDataRestriction( "defines-th_parallelism", 1, Float.class);
+        concept.writeReadExpressionAxioms();
         assertSemantic();
 
-        concept.addClassRestriction( "ClassRestriction");
-        concept.writeExpressionAxiomsInconsistencySafe(); // the reasoner considers also all super class as equivalent classes
+        concept.clearAll();
+        concept.writeExpressionAxioms();
         assertSemantic();
 
-
-
-        concept.readExpressionAxioms();
-        assertSemantic();
-        concept.addExactDataRestriction( "hasRestrictionProperty", 3, Long.class);
-        concept.readExpressionAxioms();
-        assertSemantic();
-        concept.writeExpressionAxiomsInconsistencySafe(); // the reasoner considers also all super class as equivalent classes
-        assertSemantic();
-        concept.addExactDataRestriction( "hasRestrictionProperty", 3, Long.class);
-        concept.writeExpressionAxiomsInconsistencySafe(); // the reasoner considers also all super class as equivalent classes
-        assertSemantic();
-        concept.addExactDataRestriction( "hasRestrictionProperty", 3, Long.class);
-        concept.readExpressionAxioms();
-        assertSemantic();
-        concept.addExactDataRestriction( "hasRestrictionProperty", 3, Long.class);
-        concept.writeExpressionAxiomsInconsistencySafe(); // the reasoner considers also all super class as equivalent classes
-        concept.removeExactDataRestriction( "hasRestrictionProperty", 3, Long.class);
-        concept.writeExpressionAxiomsInconsistencySafe(); // the reasoner considers also all super class as equivalent classes
+        concept.addSomeObjectRestrcition( "isAboveOf", "Cone");
+        concept.writeReadExpressionAxioms(false); // bug when saving on file but fine at runtime
         assertSemantic();
 
-        concept.addExactDataRestriction( "hasRestrictionPropertyTest", 3, Double.class);
-        concept.writeExpressionAxiomsInconsistencySafe(); // the reasoner considers also all super class as equivalent classes
+        concept.addClassRestriction( "Parameter");
+        concept.writeReadExpressionAxioms( false);
         assertSemantic();
 
-
-
-        concept.readExpressionAxioms();
-        assertSemantic();
-        concept.addMinObjectRestriction( "hasRestrictionProperty", 3, "Restricting");
-        concept.readExpressionAxioms();
-        assertSemantic();
-        concept.writeExpressionAxiomsInconsistencySafe(); // the reasoner considers also all super class as equivalent classes
-        assertSemantic();
-        concept.addMinObjectRestriction( "hasRestrictionProperty", 3, "Restricting");
-        concept.addMinObjectRestriction( "hasRestrictionProperty", 3, "Restricting");
-        concept.writeExpressionAxiomsInconsistencySafe(); // the reasoner always infers here
-        assertSemantic();
-        concept.addMinObjectRestriction( "hasRestrictionProperty", 3, "Restricting");
-        concept.readExpressionAxioms();
-        assertSemantic();
-        concept.addMinObjectRestriction( "hasRestrictionProperty", 3, "Restricting");
-        concept.writeExpressionAxiomsInconsistencySafe(); // the reasoner always infers here
+        concept.removeClassRestriction( "Parameter");
+        concept.writeReadExpressionAxioms( false);
         assertSemantic();
 
-        concept.addMaxObjectRestriction( "hasRestrictionPropertyTest", 2, "Restricting");
-        concept.writeExpressionAxiomsInconsistencySafe(); // the reasoner always infers here
+        concept.addExactDataRestriction( "defines-th_parallelism", 1, Float.class);
+        concept.addClassRestriction( "AA");
+        concept.writeReadExpressionAxioms( false);
         assertSemantic();
-        System.out.println( "described concept, definition test: " + concept.getDefinitionConcepts());
+
+        concept.removeSomeObjectRestrcition( "isAboveOf", "Cone");
+        concept.writeReadExpressionAxioms(false); // bug when saving on file but fine at runtime
+        assertSemantic();
+
+        concept.addMaxDataRestriction( "hasPropTest", 5, Integer.class);
+        concept.addClassRestriction( "AA");
+        concept.writeReadExpressionAxioms( false);
+        assertSemantic();
+
+        concept.clearAll();
+        concept.addClassRestriction( "Scene");
+        concept.addMinDataRestriction( "hasPropTest", 5, String.class);
+        concept.writeReadExpressionAxioms(false);
+        assertSemantic();
+
+        concept.addEquivalentConcept( "EE");
+        concept.addClassRestriction( "Scene1");
+        concept.addOnlyDataRestriction( "hasPropTest2", Boolean.class);
+        concept.writeReadExpressionAxioms(false);
+        assertSemantic();
+
+        for( FullConceptDesc d : concept.buildEquivalentConcept())
+            // you can use also: d = concept.buildEquivalentConcept().toArray()[0]
+            if ( d.getGroundInstanceName().equals( "EE")) {
+                d.addDisjointConcept(concept.getInstance());
+                d.getEquivalentConcepts().clear();
+                d.writeExpressionAxioms();
+            }
+
+        concept.removeClassRestriction( "Scene1");
+        concept.removeClassRestriction( "Scene");// TODO remove scene from sub class
+        concept.removeEquivalentConcept( "EE");
+        concept.writeReadExpressionAxioms(false);
+        assertSemantic();
+
     }
 
     @Test
@@ -246,13 +234,15 @@ public class FullConceptDescTest {
         concept.writeExpressionAxioms();
         assertSemantic();
 
-        concept.setInstance( "Parameter");
+        concept.setGroundInstance( "Parameter");
         concept.readExpressionAxioms();
         System.out.println( "described concept, equivalent test: " + concept.buildIndividualInstances());
 
     }
 
+    int cnt = 0;
     public void assertSemantic(){ // asserts that the state of the java representation is equal to the state of the ontology
+        System.out.println( ++cnt + " ->   " + concept);
         assertEquals( concept.getSubConcepts(), concept.querySubConcepts());
         assertEquals( concept.getSuperConcepts(), concept.querySuperConcepts());
         assertEquals( concept.getDisjointConcepts(), concept.queryDisjointConcepts());

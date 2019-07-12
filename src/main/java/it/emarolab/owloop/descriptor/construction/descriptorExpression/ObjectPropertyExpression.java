@@ -947,7 +947,7 @@ public interface ObjectPropertyExpression
         /**
          * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()})
          * based on {@link #domainMinObjectRestriction(String, int, String)}.
-         * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
+         * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
          * to be perfectly aligned with the {@link #queryObjectPropertyDomainConcepts()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the name of the restricting object property.
@@ -961,7 +961,7 @@ public interface ObjectPropertyExpression
         /**
          * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()}
          * based on {@link #domainMinObjectRestriction(OWLObjectProperty, int, OWLClass)}.
-         * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
+         * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
          * to be perfectly aligned with the {@link #queryObjectPropertyDomainConcepts()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the restricting object property.
@@ -975,7 +975,7 @@ public interface ObjectPropertyExpression
         /**
          * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()})
          * based on {@link #domainMinObjectRestriction(String, int, String)}.
-         * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
+         * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
          * to be perfectly aligned with the {@link #queryObjectPropertyDomainConcepts()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the name of the restricting object property.
@@ -989,7 +989,7 @@ public interface ObjectPropertyExpression
         /**
          * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()})
          * based on {@link #domainMinObjectRestriction(OWLObjectProperty, int, OWLClass)}.
-         * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
+         * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
          * to be perfectly aligned with the {@link #queryObjectPropertyDomainConcepts()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the restricting object property.
@@ -1041,7 +1041,7 @@ public interface ObjectPropertyExpression
         /**
          * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()}
          * based on {@link #domainMaxObjectRestriction(OWLObjectProperty, int, OWLClass)}.
-         * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
+         * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
          * to be perfectly aligned with the {@link #queryObjectPropertyDomainConcepts()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the restricting object property.
@@ -1055,7 +1055,7 @@ public interface ObjectPropertyExpression
         /**
          * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()})
          * based on {@link #domainMaxObjectRestriction(String, int, String)}.
-         * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
+         * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
          * to be perfectly aligned with the {@link #queryObjectPropertyDomainConcepts()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the name of the restricting object property.
@@ -1069,7 +1069,7 @@ public interface ObjectPropertyExpression
         /**
          * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()})
          * based on {@link #domainMaxObjectRestriction(OWLObjectProperty, int, OWLClass)}.
-         * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
+         * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
          * to be perfectly aligned with the {@link #queryObjectPropertyDomainConcepts()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the restricting object property.
@@ -1110,7 +1110,7 @@ public interface ObjectPropertyExpression
         /**
          * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()})
          * based on {@link #domainExactObjectRestriction(String, int, String)}.
-         * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
+         * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
          * to be perfectly aligned with the {@link #queryObjectPropertyDomainConcepts()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the name of the restricting object property.
@@ -1124,7 +1124,7 @@ public interface ObjectPropertyExpression
         /**
          * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()}
          * based on {@link #domainExactObjectRestriction(OWLObjectProperty, int, OWLClass)}.
-         * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
+         * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
          * to be perfectly aligned with the {@link #queryObjectPropertyDomainConcepts()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the restricting object property.
@@ -1138,7 +1138,7 @@ public interface ObjectPropertyExpression
         /**
          * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()})
          * based on {@link #domainExactObjectRestriction(String, int, String)}.
-         * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
+         * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
          * to be perfectly aligned with the {@link #queryObjectPropertyDomainConcepts()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the name of the restricting object property.
@@ -1152,7 +1152,7 @@ public interface ObjectPropertyExpression
         /**
          * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyDomainConcepts()})
          * based on {@link #domainExactObjectRestriction(OWLObjectProperty, int, OWLClass)}.
-         * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
+         * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
          * to be perfectly aligned with the {@link #queryObjectPropertyDomainConcepts()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the restricting object property.
@@ -1771,7 +1771,7 @@ public interface ObjectPropertyExpression
         /**
          * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()})
          * based on {@link #rangeMinObjectRestriction(String, int, String)}.
-         * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
+         * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
          * to be perfectly aligned with the {@link #queryObjectPropertyRangeConcepts()},
          * since the reasoner infers also an {@link #rangeClassRestriction(OWLClass)}.
          * @param property the name of the restricting object property.
@@ -1785,7 +1785,7 @@ public interface ObjectPropertyExpression
         /**
          * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()}
          * based on {@link #rangeMinObjectRestriction(OWLObjectProperty, int, OWLClass)}.
-         * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
+         * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
          * to be perfectly aligned with the {@link #queryObjectPropertyRangeConcepts()},
          * since the reasoner infers also an {@link #rangeClassRestriction(OWLClass)}.
          * @param property the restricting object property.
@@ -1799,7 +1799,7 @@ public interface ObjectPropertyExpression
         /**
          * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()})
          * based on {@link #rangeMinObjectRestriction(String, int, String)}.
-         * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
+         * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
          * to be perfectly aligned with the {@link #queryObjectPropertyRangeConcepts()},
          * since the reasoner infers also an {@link #rangeClassRestriction(OWLClass)}.
          * @param property the name of the restricting object property.
@@ -1813,7 +1813,7 @@ public interface ObjectPropertyExpression
         /**
          * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()})
          * based on {@link #rangeMinObjectRestriction(OWLObjectProperty, int, OWLClass)}.
-         * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
+         * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
          * to be perfectly aligned with the {@link #queryObjectPropertyRangeConcepts()},
          * since the reasoner infers also an {@link #rangeClassRestriction(OWLClass)}.
          * @param property the restricting object property.
@@ -1854,7 +1854,7 @@ public interface ObjectPropertyExpression
         /**
          * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()})
          * based on {@link #rangeMaxObjectRestriction(String, int, String)}.
-         * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
+         * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
          * to be perfectly aligned with the {@link #queryObjectPropertyRangeConcepts()},
          * since the reasoner infers also an {@link #rangeClassRestriction(OWLClass)}.
          * @param property the name of the restricting object property.
@@ -1868,7 +1868,7 @@ public interface ObjectPropertyExpression
         /**
          * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()}
          * based on {@link #rangeMaxObjectRestriction(OWLObjectProperty, int, OWLClass)}.
-         * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
+         * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
          * to be perfectly aligned with the {@link #queryObjectPropertyRangeConcepts()},
          * since the reasoner infers also an {@link #rangeClassRestriction(OWLClass)}.
          * @param property the restricting object property.
@@ -1882,7 +1882,7 @@ public interface ObjectPropertyExpression
         /**
          * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()})
          * based on {@link #rangeMaxObjectRestriction(String, int, String)}.
-         * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
+         * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
          * to be perfectly aligned with the {@link #queryObjectPropertyRangeConcepts()},
          * since the reasoner infers also an {@link #rangeClassRestriction(OWLClass)}.
          * @param property the name of the restricting object property.
@@ -1896,7 +1896,7 @@ public interface ObjectPropertyExpression
         /**
          * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()})
          * based on {@link #rangeMaxObjectRestriction(OWLObjectProperty, int, OWLClass)}.
-         * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
+         * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
          * to be perfectly aligned with the {@link #queryObjectPropertyRangeConcepts()},
          * since the reasoner infers also an {@link #rangeClassRestriction(OWLClass)}.
          * @param property the restricting object property.
@@ -1937,7 +1937,7 @@ public interface ObjectPropertyExpression
         /**
          * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()})
          * based on {@link #rangeExactObjectRestriction(String, int, String)}.
-         * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
+         * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
          * to be perfectly aligned with the {@link #queryObjectPropertyRangeConcepts()},
          * since the reasoner infers also an {@link #rangeClassRestriction(OWLClass)}.
          * @param property the name of the restricting object property.
@@ -1951,7 +1951,7 @@ public interface ObjectPropertyExpression
         /**
          * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()}
          * based on {@link #rangeExactObjectRestriction(OWLObjectProperty, int, OWLClass)}.
-         * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
+         * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
          * to be perfectly aligned with the {@link #queryObjectPropertyRangeConcepts()},
          * since the reasoner infers also an {@link #rangeClassRestriction(OWLClass)}.
          * @param property the restricting object property.
@@ -1965,7 +1965,7 @@ public interface ObjectPropertyExpression
         /**
          * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()})
          * based on {@link #rangeExactObjectRestriction(String, int, String)}.
-         * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
+         * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
          * to be perfectly aligned with the {@link #queryObjectPropertyRangeConcepts()},
          * since the reasoner infers also an {@link #rangeClassRestriction(OWLClass)}.
          * @param property the name of the restricting object property.
@@ -1979,7 +1979,7 @@ public interface ObjectPropertyExpression
         /**
          * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getObjectPropertyRangeConcepts()})
          * based on {@link #rangeExactObjectRestriction(OWLObjectProperty, int, OWLClass)}.
-         * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
+         * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
          * to be perfectly aligned with the {@link #queryObjectPropertyRangeConcepts()},
          * since the reasoner infers also an {@link #rangeClassRestriction(OWLClass)}.
          * @param property the restricting object property.

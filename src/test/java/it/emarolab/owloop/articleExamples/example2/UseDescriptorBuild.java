@@ -55,26 +55,26 @@ public class UseDescriptorBuild {
 
             if( setOfSubConcepts.size() == 1 ) { // to find the root Concept, because it has max. 1 subConcept, i.e., owl:Nothing
 
-                System.out.println( "'" + d3.getInstanceName() + "' is the root Concept among: "); // printing
+                System.out.println( "'" + d3.getGroundInstanceName() + "' is the root Concept among: "); // printing
 
                 for( DefSubConceptDesc conceptType : setOfConceptTypes ){
 
-                    System.out.println( "\t\t\t'" + conceptType.getInstanceName() + "'"); // printing
+                    System.out.println( "\t\t\t'" + conceptType.getGroundInstanceName() + "'"); // printing
                 }
 
-                System.out.print( "\n'" + d2.getInstanceName() + "'" + " is of Type " + "'" + d3.getInstanceName() + "' \n"); // printing
+                System.out.print( "\n'" + d2.getGroundInstanceName() + "'" + " is of Type " + "'" + d3.getGroundInstanceName() + "' \n"); // printing
                 DescriptorEntitySet.Restrictions restrictions = d3.getDefinitionConcepts();
 
                 for( SemanticRestriction rest : restrictions ){
 
                     if( rest instanceof SemanticRestriction.ClassRestrictedOnExactObject ){
 
-                        System.out.println( "\n" + "'" + d3.getInstanceName() + "'" + " is defined with Exact Cardinality Restriction " + "'" + rest + "'"); // printing
+                        System.out.println( "\n" + "'" + d3.getGroundInstanceName() + "'" + " is defined with Exact Cardinality Restriction " + "'" + rest + "'"); // printing
                     }
 
                     else if( rest instanceof SemanticRestriction.ClassRestrictedOnMinObject ){
 
-                        System.out.println( "\n" + "'" + d3.getInstanceName() + "'" + " is defined with Min Cardinality Restriction " + "'" + rest + "'"); // printing
+                        System.out.println( "\n" + "'" + d3.getGroundInstanceName() + "'" + " is defined with Min Cardinality Restriction " + "'" + rest + "'"); // printing
                     }
                 }
             }

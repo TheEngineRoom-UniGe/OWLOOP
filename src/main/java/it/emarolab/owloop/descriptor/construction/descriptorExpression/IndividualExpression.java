@@ -8,10 +8,7 @@ import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.Descriptor
 import it.emarolab.owloop.descriptor.construction.descriptorGround.DescriptorGroundInterface;
 import org.semanticweb.owlapi.model.*;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * This interface extends all the interfaces in {@link Individual}.
@@ -395,10 +392,16 @@ public interface IndividualExpression
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeData( OWLDataProperty property, OWLLiteral value){
-            for (DescriptorEntitySet.DataLinks d : getIndividualDataProperties())
-                if ( d.getExpression().equals( property))
-                    return d.getValues().remove(value);
-            return false;
+            boolean out = false;
+            HashSet<OWLDataProperty> toRemove = new HashSet<>();
+            for (DescriptorEntitySet.DataLinks d : getIndividualDataProperties()) {
+                if (d.getExpression().equals(property))
+                    out = d.getValues().remove(value);
+                if ( d.getValues().isEmpty())
+                    toRemove.add( d.getExpression());
+            }
+            getIndividualDataProperties().removeAll( toRemove);
+            return out;
         }
         default boolean removeData( OWLDataProperty property, Set<OWLLiteral> values){
             DescriptorEntitySet.DataLinks dataSemantic = new DescriptorEntitySet.DataLinks(property);
@@ -716,7 +719,9 @@ public interface IndividualExpression
         default boolean removeObject( OWLObjectProperty property, OWLNamedIndividual value){
             DescriptorEntitySet.ObjectLinks objectSemantic = new DescriptorEntitySet.ObjectLinks(property);
             objectSemantic.getValues().add( value);
-            return getIndividualObjectProperties().remove( objectSemantic);
+            boolean out = getIndividualObjectProperties().remove( objectSemantic);
+            removeEmptyDataProprtySet();
+            return out;
         }
         /**
          * Remove the {@link ExpressionEntity#getExpression()} of the given property, with specific values, from {@code this}
@@ -729,7 +734,17 @@ public interface IndividualExpression
         default boolean removeObject( OWLObjectProperty property, Set<OWLNamedIndividual> values){
             DescriptorEntitySet.ObjectLinks objectSemantic = new DescriptorEntitySet.ObjectLinks(property);
             objectSemantic.getValues().addAll( values);
-            return getIndividualObjectProperties().remove( objectSemantic);
+            boolean out = getIndividualObjectProperties().remove( objectSemantic);
+            removeEmptyDataProprtySet();
+            return out;
+        }
+        default void removeEmptyDataProprtySet(){
+            HashSet<OWLObjectProperty> toRemove = new HashSet<>();
+            for (DescriptorEntitySet.ObjectLinks d : getIndividualObjectProperties()) {
+                if ( d.getValues().isEmpty())
+                    toRemove.add( d.getExpression());
+            }
+            getIndividualObjectProperties().removeAll( toRemove);
         }
 
 

@@ -79,12 +79,21 @@ public class FullConceptDesc
     /* Overriding methods in class: ConceptGround */
 
 
+    public void clearAll() { // clear all internal state
+        conceptRestrictions.clear();
+        disjointConcepts.clear();
+        equivalentConcepts.clear();
+        subConcepts.clear();
+        superConcepts.clear();
+        individuals.clear();
+    }
+
     // To read axioms from an ontology
     @Override
     public List<MappingIntent> readExpressionAxioms() {
-        List<MappingIntent> r = ConceptExpression.Disjoint.super.readExpressionAxioms();
+        List<MappingIntent> r = Definition.super.readExpressionAxioms(); // call this before all
         r.addAll( ConceptExpression.Equivalent.super.readExpressionAxioms());
-        r.addAll( Definition.super.readExpressionAxioms()); // call this before Sub or Super !!!
+        r.addAll( ConceptExpression.Disjoint.super.readExpressionAxioms());
         r.addAll( ConceptExpression.Sub.super.readExpressionAxioms());
         r.addAll( ConceptExpression.Super.super.readExpressionAxioms());
         r.addAll( Instance.super.readExpressionAxioms());
@@ -93,11 +102,11 @@ public class FullConceptDesc
     // To write axioms to an ontology
     @Override
     public List<MappingIntent> writeExpressionAxioms() {
-        List<MappingIntent> r = ConceptExpression.Disjoint.super.writeExpressionAxioms();
+        List<MappingIntent> r = ConceptExpression.Super.super.writeExpressionAxioms();
+        r.addAll( Definition.super.writeExpressionAxioms());// call this before all and after super
         r.addAll( ConceptExpression.Equivalent.super.writeExpressionAxioms());
-        r.addAll( Definition.super.writeExpressionAxioms()); // call this before Sub or Super !!!
+        r.addAll( ConceptExpression.Disjoint.super.writeExpressionAxioms());
         r.addAll( ConceptExpression.Sub.super.writeExpressionAxioms());
-        r.addAll( ConceptExpression.Super.super.writeExpressionAxioms());
         r.addAll( Instance.super.writeExpressionAxioms());
         return r;
     }
@@ -184,4 +193,5 @@ public class FullConceptDesc
                 "\t\t⊂ " + superConcepts + "\n" +
                 "}" + "\n";
     }
+
 }

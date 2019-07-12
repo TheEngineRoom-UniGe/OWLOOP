@@ -7,11 +7,11 @@ import it.emarolab.owloop.core.Concept;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.DescriptorGroundInterface;
 import org.semanticweb.owlapi.model.*;
+import org.semanticweb.owlapi.search.EntitySearcher;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * This interface extends all the interfaces in {@link Concept}.
@@ -152,7 +152,7 @@ public interface ConceptExpression
          * It is an helper that just calls:
          * {@code {@link #getDisjointConcepts()}.add( {@link #getOntology()}.getOWLClass( propertyName))}
          * in order to add a new class (given by name) in the {@link EntitySet} list.
-         * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
+         * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
          * to be perfectly aligned with the ontology, since it affects {@link ConceptExpression.Sub} {@link EntitySet}.
          * @param className the class name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
@@ -164,7 +164,7 @@ public interface ConceptExpression
          * It is an helper that just calls:
          * {@code {@link #getDisjointConcepts()}.add( cl)}
          * in order to add a new class in the {@link EntitySet} list.
-         * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
+         * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
          * to be perfectly aligned with the ontology, since it affects {@link ConceptExpression.Sub} {@link EntitySet}.
          * @param cl the class to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
@@ -177,7 +177,7 @@ public interface ConceptExpression
          * It is an helper that just calls:
          * {@code {@link #getDisjointConcepts()}.remove( {@link #getOntology()}.getOWLClass( propertyName))}
          * in order to remove a class (given by name) from the {@link EntitySet} list.
-         * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
+         * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
          * to be perfectly aligned with the ontology, since it affects {@link ConceptExpression.Sub} {@link EntitySet}.
          * @param className the class name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
@@ -189,7 +189,7 @@ public interface ConceptExpression
          * It is an helper that just calls:
          * {@code {@link #getDisjointConcepts()}.remove( cl)}
          * in order to remove a class in the {@link EntitySet} list.
-         * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
+         * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
          * to be perfectly aligned with the ontology, since it affects {@link ConceptExpression.Sub} {@link EntitySet}.
          * @param cl the class to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
@@ -203,6 +203,7 @@ public interface ConceptExpression
         default DescriptorEntitySet.Concepts queryDisjointConcepts(){
             DescriptorEntitySet.Concepts set = new DescriptorEntitySet.Concepts(getOntology().getDisjointClasses(getInstance()));
             set.remove( getInstance());
+            //set.remove( getOntology().getOWLFactory().getOWLNothing());
             set.setSingleton( getDisjointConcepts().isSingleton());
             return set;
         }
@@ -214,12 +215,13 @@ public interface ConceptExpression
                 if ( to == null)
                     return getIntent( null);
                 List<OWLOntologyChange> changes = new ArrayList<>();
-                for( OWLClass a : to.getToAdd()){
-                    Set<OWLClass> s = new HashSet<>();
-                    s.add( getInstance());
-                    s.add( a);
-                    changes.add( getOntology().makeDisjointClasses( s));
-                }
+                for( OWLClass a : to.getToAdd())
+                    if ( ! a.isOWLNothing()){
+                        Set<OWLClass> s = new HashSet<>();
+                        s.add( getInstance());
+                        s.add( a);
+                        changes.add( getOntology().makeDisjointClasses( s));
+                    }
                 for( OWLClass r : to.getToRemove()){
                     Set<OWLClass> s = new HashSet<>();
                     s.add( getInstance());
@@ -294,6 +296,7 @@ public interface ConceptExpression
         default DescriptorEntitySet.Concepts queryEquivalentConcepts(){
             DescriptorEntitySet.Concepts set = new DescriptorEntitySet.Concepts(getOntology().getEquivalentClasses(getInstance()));
             set.remove( getInstance());
+            //set.remove( getOntology().getOWLFactory().getOWLNothing());
             set.setSingleton( getEquivalentConcepts().isSingleton());
             return set;
         }
@@ -305,12 +308,13 @@ public interface ConceptExpression
                 if ( to == null)
                     return getIntent( null);
                 List<OWLOntologyChange> changes = new ArrayList<>();
-                for( OWLClass a : to.getToAdd()){
-                    Set<OWLClass> s = new HashSet<>();
-                    s.add( getInstance());
-                    s.add( a);
-                    changes.add( getOntology().makeEquivalentClasses( s));
-                }
+                for( OWLClass a : to.getToAdd())
+                    if ( ! a.isOWLNothing()){
+                        Set<OWLClass> s = new HashSet<>();
+                        s.add( getInstance());
+                        s.add( a);
+                        changes.add( getOntology().makeEquivalentClasses( s));
+                    }
                 for( OWLClass r : to.getToRemove()){
                     Set<OWLClass> s = new HashSet<>();
                     s.add( getInstance());
@@ -384,6 +388,7 @@ public interface ConceptExpression
         @Override // see super classes for documentation
         default DescriptorEntitySet.Concepts querySubConcepts(){
             DescriptorEntitySet.Concepts set = new DescriptorEntitySet.Concepts(getOntology().getSubClassOf(getInstance()));
+            //set.remove( getOntology().getOWLFactory().getOWLNothing());
             set.setSingleton( getSubConcepts().isSingleton());
             return set;
         }
@@ -396,7 +401,8 @@ public interface ConceptExpression
                     return getIntent( null);
                 List<OWLOntologyChange> changes = new ArrayList<>();
                 for (OWLClass a : to.getToAdd())
-                    changes.add(getOntology().addSubClassOf(getInstance(), a));
+                    if ( ! a.isOWLNothing())
+                        changes.add(getOntology().addSubClassOf(getInstance(), a));
                 for (OWLClass r : to.getToRemove())
                     changes.add(getOntology().removeSubClassOf(getInstance(), r));
                 return getChangingIntent(to, changes);
@@ -425,7 +431,7 @@ public interface ConceptExpression
          * It is an helper that just calls:
          * {@code {@link #getSuperConcepts()}.add( {@link #getOntology()}.getOWLClass( propertyName))}
          * in order to add a new class (given by name) in the {@link EntitySet} list.
-         * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
+         * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
          * to be perfectly aligned with the ontology, since it affects {@link ConceptExpression.Definition} {@link EntitySet}.
          * @param className the class name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
@@ -437,7 +443,7 @@ public interface ConceptExpression
          * It is an helper that just calls:
          * {@code {@link #getSuperConcepts()}.add( cl)}
          * in order to add a new class in the {@link EntitySet} list.
-         * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
+         * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
          * to be perfectly aligned with the ontology, since it affects {@link ConceptExpression.Definition} {@link EntitySet}.
          * @param cl the class to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
@@ -450,7 +456,7 @@ public interface ConceptExpression
          * It is an helper that just calls:
          * {@code {@link #getSuperConcepts()}.remove( {@link #getOntology()}.getOWLClass( propertyName))}
          * in order to remove a class (given by name) from the {@link EntitySet} list.
-         * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
+         * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
          * to be perfectly aligned with the ontology, since it affects {@link ConceptExpression.Definition} {@link EntitySet}.
          * @param className the class name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
@@ -462,7 +468,7 @@ public interface ConceptExpression
          * It is an helper that just calls:
          * {@code {@link #getSuperConcepts()}.remove( cl)}
          * in order to remove a class in the {@link EntitySet} list.
-         * This method should be always synchronised with {@link #writeExpressionAxiomsInconsistencySafe()}
+         * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
          * to be perfectly aligned with the ontology, since it affects {@link ConceptExpression.Definition} {@link EntitySet}.
          * @param cl the class to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
@@ -474,10 +480,52 @@ public interface ConceptExpression
 
         @Override // see super classes for documentation
         default DescriptorEntitySet.Concepts querySuperConcepts(){
-            DescriptorEntitySet.Concepts set = new DescriptorEntitySet.Concepts(getOntology().getSuperClassOf(getInstance()));
+            DescriptorEntitySet.Concepts set = new DescriptorEntitySet.Concepts( getSuperClassOf( getInstance()));//getOntology().getSuperClassOf(getInstance()));
             set.setSingleton( getSuperConcepts().isSingleton());
             return set;
         }
+
+
+
+
+        // todo move to armor
+        default Set<OWLClass> getSuperClassOf( OWLClass cl){
+            long initialTime = System.nanoTime();
+            Set<OWLClass> classes = new HashSet< OWLClass>();
+
+            //Set< OWLClassExpression> set = cl.getSuperClasses( ontoRef.getOWLOntology());
+            Stream<OWLClassExpression> stream = EntitySearcher.getSuperClasses( cl, getOntology().getOWLOntology());
+            Set<OWLClassExpression> set = stream.collect( Collectors.toSet());
+
+            for (OWLClassExpression s : set) {
+                if ( s instanceof OWLClass)
+                    classes.add( s.asOWLClass());
+            }
+
+            //if( set != null)
+            //    classes.addAll(set.stream().map(AsOWLClass::asOWLClass).collect(Collectors.toList()));
+
+            //if( isIncludingInferences()) {
+                //try {
+                    //Stream<OWLClass> streamReasoned = getOntology().getOWLReasoner().getSuperClasses(cl, ! isReturningCompleteDescription()).entities();
+                    Stream<OWLClass> streamReasoned = getOntology().getOWLReasoner().getSuperClasses(cl, false).entities();
+                    Set<OWLClass> reasoned = streamReasoned.collect(Collectors.toSet());
+                    if (reasoned != null)
+                        classes.addAll(reasoned.stream().map(AsOWLClass::asOWLClass).collect(Collectors.toList()));
+                //} catch (InconsistentOntologyException e) {
+                //    getOntology().logInconsistency();
+                //}
+            //}
+            classes.remove( getOntology().getOWLFactory().getOWLThing());
+            //logger.addDebugString( "get super classes of given in: " + (System.nanoTime() - initialTime) + " [ns]");
+            return( classes);
+        }
+
+
+
+
+
+
 
         @Override // see super classes for documentation
         default List<MappingIntent> writeExpressionAxioms(){
@@ -487,7 +535,8 @@ public interface ConceptExpression
                     return getIntent( null);
                 List<OWLOntologyChange> changes = new ArrayList<>();
                 for (OWLClass a : to.getToAdd())
-                    changes.add(getOntology().addSubClassOf(a, getInstance()));
+                    if( ! a.isOWLNothing())
+                        changes.add(getOntology().addSubClassOf(a, getInstance()));
                 for (OWLClass r : to.getToRemove())
                     changes.add(getOntology().removeSubClassOf(r, getInstance()));
                 return getChangingIntent(to, changes);
@@ -1246,7 +1295,16 @@ public interface ConceptExpression
 
         @Override // see super classes for documentation
         default DescriptorEntitySet.Restrictions queryDefinitionConcepts(){
-            Set<ApplyingRestriction> restrictions = getOntology().getRestrictions(getInstance());
+            Set< Set<ApplyingRestriction>> restrictionsSet = getRestriction(getInstance());//getOntology().getRestrictions(getInstance());// TODO pput in amor!!!!
+            Set<ApplyingRestriction> restrictions = new HashSet<>();
+            for ( Set<ApplyingRestriction> r : restrictionsSet){
+                restrictions = r;
+                break;
+            }
+            if ( restrictionsSet.size() > 1)
+                System.err.println( "WARNING: all the restriction that define a concept should be contained in a single axiom." +
+                        "Only axiom \'" + restrictions + "\' is considered in \'" + restrictionsSet + "\'");
+            // remove self
             for ( ApplyingRestriction a : restrictions)
                 if ( a.getRestrictionType().isRestrictionOnClass())
                     if ( a.getValue().equals( getInstance())){
@@ -1257,6 +1315,75 @@ public interface ConceptExpression
             set.setSingleton( getDefinitionConcepts().isSingleton());
             return set;
         }
+
+
+
+
+// TODO punt in documentation that a class can be equivalent only to one axiom made of "class and restriction and ..."
+        default Set< Set<ApplyingRestriction>> getRestriction(OWLClass cl){
+            Set< Set< ApplyingRestriction>> outs = new HashSet<>();
+                Stream< OWLClassAxiom> axiomStream = getOntology().getOWLOntology().axioms( cl);
+                for (OWLClassAxiom ax :  (Iterable<OWLClassAxiom>) axiomStream::iterator) {
+                   if( ax instanceof OWLEquivalentClassesAxiom){ // TODO pput in amor!!!!
+                       boolean validRestriction = false;
+                       Set< ApplyingRestriction> out = new HashSet<>();
+                       Stream<OWLClassExpression> nestedClassStream = ax.nestedClassExpressions();
+                        for( OWLClassExpression e : (Iterable<OWLClassExpression>) nestedClassStream::iterator) {
+                            if (e.getClassExpressionType() == ClassExpressionType.OBJECT_MIN_CARDINALITY) {
+                                out.add(new ClassRestrictedOnMinObject(cl, (OWLObjectMinCardinality) e));
+                                validRestriction = true;
+                            } else if (e.getClassExpressionType() == ClassExpressionType.OBJECT_MAX_CARDINALITY) {
+                                out.add(new ClassRestrictedOnMaxObject(cl, (OWLObjectMaxCardinality) e));
+                                validRestriction = true;
+                            } else if (e.getClassExpressionType() == ClassExpressionType.OBJECT_EXACT_CARDINALITY) {
+                                out.add(new ClassRestrictedOnExactObject(cl, (OWLObjectExactCardinality) e));
+                                validRestriction = true;
+                            } else if (e.getClassExpressionType() == ClassExpressionType.OBJECT_ALL_VALUES_FROM) {
+                                out.add(new ClassRestrictedOnAllObject(cl, (OWLObjectAllValuesFrom) e));
+                                validRestriction = true;
+                            } else if (e.getClassExpressionType() == ClassExpressionType.OBJECT_SOME_VALUES_FROM) {
+                                out.add(new ClassRestrictedOnSomeObject(cl, (OWLObjectSomeValuesFrom) e));
+                                validRestriction = true;
+                            } else if (e.getClassExpressionType() == ClassExpressionType.DATA_MIN_CARDINALITY) {
+                                out.add(new ClassRestrictedOnMinData(cl, (OWLDataMinCardinality) e));
+                                validRestriction = true;
+                            } else if (e.getClassExpressionType() == ClassExpressionType.DATA_MAX_CARDINALITY) {
+                                out.add(new ClassRestrictedOnMaxData(cl, (OWLDataMaxCardinality) e));
+                                validRestriction = true;
+                            } else if (e.getClassExpressionType() == ClassExpressionType.DATA_EXACT_CARDINALITY) {
+                                out.add(new ClassRestrictedOnExactData(cl, (OWLDataExactCardinality) e));
+                                validRestriction = true;
+                            } else if (e.getClassExpressionType() == ClassExpressionType.DATA_ALL_VALUES_FROM) {
+                                out.add(new ClassRestrictedOnAllData(cl, (OWLDataAllValuesFrom) e));
+                                validRestriction = true;
+                            } else if (e.getClassExpressionType() == ClassExpressionType.DATA_SOME_VALUES_FROM) {
+                                out.add(new ClassRestrictedOnSomeData(cl, (OWLDataSomeValuesFrom) e));
+                                validRestriction = true;
+                            } else if (e.getClassExpressionType() == ClassExpressionType.OWL_CLASS)
+                                if( ! e.asOWLClass().equals( cl))
+                                    out.add(new ClassRestrictedOnClass(cl, e.asOWLClass()));
+                        }
+                        if ( validRestriction)
+                            outs.add( out);
+                    }
+
+                }
+
+                // reason about other equivalent classes
+                /*if( isIncludingInferences()) {
+                    Stream<OWLClass> streamReasoned = getOntology().getOWLReasoner().getEquivalentClasses(cl).entities();
+                    for (OWLClass a : (Iterable<OWLClass>) streamReasoned::iterator)
+                        if ( ! a.isOWLThing())
+                            new ClassRestrictedOnClass(cl, a.asOWLClass());
+                }*/
+                return outs;
+        }
+
+
+
+
+
+
 
         @Override // see super classes for documentation
         default List<MappingIntent> writeExpressionAxioms(){
@@ -1269,15 +1396,19 @@ public interface ConceptExpression
                 if ( to.getToAdd().size() > 0 | to.getToRemove().size() > 0){
                     //noinspection unchecked
                     changes.addAll( getOntology().convertEquivalentClassesToSuperClasses( getInstance()));
-                    for (SemanticRestriction r : to.getToRemove())
-                        changes.add( getOntology().removeRestriction( r));
+                    for (SemanticRestriction r : to.getToRemove()) {
+                        changes.add( getOntology().removeRestriction(r));
+                        if( r instanceof ClassRestrictedOnClass)
+                            changes.add( getOntology().removeSubClassOf( (OWLClass) r.getSubject(), (OWLClass) r.getValue()));
+                    }
 
                     for (SemanticRestriction a : to.getToAdd())
                         changes.add(getOntology().addRestriction(a));
 
-                    changes.addAll(getOntology().convertSuperClassesToEquivalentClass(getInstance(),
-                            getDefinitionConcepts()));
+                    if ( ! getDefinitionConcepts().isEmpty())
+                        changes.addAll(getOntology().convertSuperClassesToEquivalentClass(getInstance()));//getDefinitionConcepts()));
                 }
+
                 return getChangingIntent(to, changes);
             } catch (Exception e){
                 e.printStackTrace();

@@ -108,7 +108,7 @@ abstract public class DescriptorGround<J extends OWLObject>
      * It sets a new instance in the same {@link #getOntology()}.
      * @param instance the new instance to be ground.
      */
-    public void setInstance(J instance){
+    public void setGroundInstance(J instance){
         this.ground.setInstance( instance);
     }
 
@@ -116,7 +116,7 @@ abstract public class DescriptorGround<J extends OWLObject>
      * It sets a new instance in the same {@link #getOntology()}.
      * @param instanceName the new instance name to be ground.
      */
-    public void setInstance(String instanceName){
+    public void setGroundInstance(String instanceName){
         this.ground.setInstance( instanceName);
     }
 
@@ -138,7 +138,7 @@ abstract public class DescriptorGround<J extends OWLObject>
     abstract protected GroundInstance<J> getNewGround(OWLReferences ontology, String instance);
 
     /** Returns the Ground instance's name as a String*/
-    public String getInstanceName() {
+    public String getGroundInstanceName() {
         return getOntology().getOWLObjectName(getGroundInstance());
     }
 

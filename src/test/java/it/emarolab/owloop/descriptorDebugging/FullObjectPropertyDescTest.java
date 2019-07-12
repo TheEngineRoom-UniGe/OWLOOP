@@ -1,5 +1,6 @@
-package it.emarolab.owloop.descriptor.utility.objectPropertyDescriptor;
+package it.emarolab.owloop.descriptorDebugging;
 
+import it.emarolab.owloop.descriptor.utility.objectPropertyDescriptor.FullObjectPropertyDesc;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,16 +20,18 @@ import static org.junit.Assert.assertEquals;
  */
 public class FullObjectPropertyDescTest {
 
-    public static String DEBUGGING_PATH = "src/test/resources/tests/";
+    public static String DEBUGGING_PATH = "src/test/resources/debug/";
 
     private static FullObjectPropertyDesc objectProperty;
+
+    // TODO test with changes on FullConceptDescrTest made the 12/07/2019
 
     @Before // called a before every @Test
     public void setUp() throws Exception {
         objectProperty = new FullObjectPropertyDesc(
                 "isAboveOf", // the ground instance name
                 "ontoName", // ontology reference name
-                DEBUGGING_PATH + "tboxTest.owl", // the ontology file path
+                DEBUGGING_PATH + "ontology4debugging.owl", // the ontology file path
                 "http://www.semanticweb.org/emaroLab/luca-buoncompagni/sit" // the ontology IRI path
         );
     }
@@ -81,7 +84,7 @@ public class FullObjectPropertyDescTest {
         objectProperty.readExpressionAxioms();
         assertSemantic();
         objectProperty.removeSuperObjectProperty( "hasSuperProperty");
-        objectProperty.writeExpressionAxiomsInconsistencySafe(); // this is necessary when only test runs in series
+        objectProperty.writeReadExpressionAxioms(); // this is necessary when only test runs in series
         assertSemantic();
 
         objectProperty.addSuperObjectProperty( "superPropertyToBuild");
@@ -222,17 +225,17 @@ public class FullObjectPropertyDescTest {
         assertSemantic();
         objectProperty.addDomainExactObjectRestriction( "hasDomainProperty", 3, "Plane");
         objectProperty.addDomainExactObjectRestriction( "hasDomainProperty", 3, "Plane");
-        objectProperty.writeExpressionAxiomsInconsistencySafe(); // the reasoner always infers here
+        objectProperty.writeReadExpressionAxioms(); // the reasoner always infers here
         assertSemantic();
         objectProperty.removeDomainExactObjectRestriction( "hasDomainProperty", 3, "Plane");
         objectProperty.readExpressionAxioms();
         assertSemantic();
         objectProperty.removeDomainExactObjectRestriction( "hasDomainProperty", 3, "Plane");
-        objectProperty.writeExpressionAxiomsInconsistencySafe(); // the reasoner always infers here
+        objectProperty.writeReadExpressionAxioms(); // the reasoner always infers here
         assertSemantic();
 
         objectProperty.addDomainMaxObjectRestriction( "hasDomainPropertyTest", 2, "Cone");
-        objectProperty.writeExpressionAxiomsInconsistencySafe(); // the reasoner always infers here
+        objectProperty.writeReadExpressionAxioms(); // the reasoner always infers here
         assertSemantic();
 
         System.out.println( "described object property, domain test: " + objectProperty.getObjectPropertyDomainConcepts());
@@ -296,17 +299,17 @@ public class FullObjectPropertyDescTest {
         assertSemantic();
         objectProperty.addRangeExactObjectRestriction( "hasRangeProperty", 3, "Plane");
         objectProperty.addRangeExactObjectRestriction( "hasRangeProperty", 3, "Plane");
-        objectProperty.writeExpressionAxiomsInconsistencySafe(); // the reasoner always infers here
+        objectProperty.writeReadExpressionAxioms(); // the reasoner always infers here
         assertSemantic();
         objectProperty.removeRangeExactObjectRestriction( "hasRangeProperty", 3, "Plane");
         objectProperty.readExpressionAxioms();
         assertSemantic();
         objectProperty.removeRangeExactObjectRestriction( "hasRangeProperty", 3, "Plane");
-        objectProperty.writeExpressionAxiomsInconsistencySafe(); // the reasoner always infers here
+        objectProperty.writeReadExpressionAxioms(); // the reasoner always infers here
         assertSemantic();
 
         objectProperty.addRangeMaxObjectRestriction( "hasRangePropertyTest", 2, "Cone");
-        objectProperty.writeExpressionAxiomsInconsistencySafe(); // the reasoner always infers here
+        objectProperty.writeReadExpressionAxioms(); // the reasoner always infers here
         assertSemantic();
 
         System.out.println( "described object property, range test: " + objectProperty.getObjectPropertyRangeConcepts());
