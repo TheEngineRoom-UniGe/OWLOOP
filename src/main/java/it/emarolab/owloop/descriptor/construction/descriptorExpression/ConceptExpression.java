@@ -7,11 +7,11 @@ import it.emarolab.owloop.core.Concept;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.DescriptorGroundInterface;
 import org.semanticweb.owlapi.model.*;
-import org.semanticweb.owlapi.search.EntitySearcher;
 
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * This interface extends all the interfaces in {@link Concept}.
@@ -56,7 +56,7 @@ public interface ConceptExpression
      * The {@link Concept.Instance} expression for a {@link Descriptor} whose ground is {@link OWLClass}.
      * <p>
      *     It specifies how to {@link #queryIndividualInstances()} and {@link #writeExpressionAxioms()} for the
-     *     individuals of the ground Class ({@link #getInstance()).
+     *     individuals of the ground Class ({@link #getGroundInstance()}).
      * </p>
      *
      * @param <D> the type of the {@link IndividualExpression} descriptor instantiated during
@@ -138,7 +138,7 @@ public interface ConceptExpression
      * The {@link Concept.Disjoint} expression for a {@link Descriptor} whose ground is {@link OWLClass}.
      * <p>
      *     It specifies how to {@link #queryDisjointConcepts()} and {@link #writeExpressionAxioms()} for the
-     *     classes disjoint to the ground Class ({@link #getInstance()).
+     *     classes disjoint to the ground Class ({@link #getGroundInstance()}).
      * </p>
      *
      * @param <D> the type of the {@link ConceptExpression} descriptor instantiated during
@@ -240,7 +240,7 @@ public interface ConceptExpression
      * The {@link Concept.Equivalent} expression for a {@link Descriptor} whose ground is {@link OWLClass}.
      * <p>
      *     It specifies how to {@link #queryEquivalentConcepts()} and {@link #writeExpressionAxioms()} for the
-     *     classes equivalent to the ground Class ({@link #getInstance()).
+     *     classes equivalent to the ground Class ({@link #getGroundInstance()}) .
      * </p>
      *
      * @param <D> the type of the {@link ConceptExpression} descriptor instantiated during
@@ -333,7 +333,7 @@ public interface ConceptExpression
      * The {@link Concept.Sub} expression for a {@link Descriptor} whose ground is {@link OWLClass}.
      * <p>
      *     It specifies how to {@link #querySubConcepts()} and {@link #writeExpressionAxioms()} for the
-     *     sub-classes of the ground Class ({@link #getInstance()).
+     *     sub-classes of the ground Class ({@link #getGroundInstanceName()}).
      * </p>
      *
      * @param <D> the type of the {@link ConceptExpression} descriptor instantiated during
@@ -417,7 +417,7 @@ public interface ConceptExpression
      * The {@link Concept.Super} expression for a {@link Descriptor} whose ground is {@link OWLClass}.
      * <p>
      *     It specifies how to {@link #querySuperConcepts()} and {@link #writeExpressionAxioms()} for the
-     *     super-classes of the ground Class ({@link #getInstance()).
+     *     super-classes of the ground Class ({@link #getGroundInstance()}).
      * </p>
      *
      * @param <D> the type of the {@link ConceptExpression} descriptor instantiated during
@@ -432,7 +432,7 @@ public interface ConceptExpression
          * {@code {@link #getSuperConcepts()}.add( {@link #getOntology()}.getOWLClass( propertyName))}
          * in order to add a new class (given by name) in the {@link EntitySet} list.
          * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
-         * to be perfectly aligned with the ontology, since it affects {@link ConceptExpression.Definition} {@link EntitySet}.
+         * to be perfectly aligned with the ontology, since it affects {@link ConceptExpression.Restriction} {@link EntitySet}.
          * @param className the class name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
@@ -444,7 +444,7 @@ public interface ConceptExpression
          * {@code {@link #getSuperConcepts()}.add( cl)}
          * in order to add a new class in the {@link EntitySet} list.
          * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
-         * to be perfectly aligned with the ontology, since it affects {@link ConceptExpression.Definition} {@link EntitySet}.
+         * to be perfectly aligned with the ontology, since it affects {@link ConceptExpression.Restriction} {@link EntitySet}.
          * @param cl the class to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
@@ -457,7 +457,7 @@ public interface ConceptExpression
          * {@code {@link #getSuperConcepts()}.remove( {@link #getOntology()}.getOWLClass( propertyName))}
          * in order to remove a class (given by name) from the {@link EntitySet} list.
          * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
-         * to be perfectly aligned with the ontology, since it affects {@link ConceptExpression.Definition} {@link EntitySet}.
+         * to be perfectly aligned with the ontology, since it affects {@link ConceptExpression.Restriction} {@link EntitySet}.
          * @param className the class name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
@@ -469,7 +469,7 @@ public interface ConceptExpression
          * {@code {@link #getSuperConcepts()}.remove( cl)}
          * in order to remove a class in the {@link EntitySet} list.
          * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
-         * to be perfectly aligned with the ontology, since it affects {@link ConceptExpression.Definition} {@link EntitySet}.
+         * to be perfectly aligned with the ontology, since it affects {@link ConceptExpression.Restriction} {@link EntitySet}.
          * @param cl the class to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
@@ -477,55 +477,12 @@ public interface ConceptExpression
             return getSuperConcepts().remove( cl);
         }
 
-
         @Override // see super classes for documentation
         default DescriptorEntitySet.Concepts querySuperConcepts(){
-            DescriptorEntitySet.Concepts set = new DescriptorEntitySet.Concepts( getSuperClassOf( getInstance()));//getOntology().getSuperClassOf(getInstance()));
+            DescriptorEntitySet.Concepts set = new DescriptorEntitySet.Concepts( getOntology().getSuperClassOf(getInstance()));
             set.setSingleton( getSuperConcepts().isSingleton());
             return set;
         }
-
-
-
-
-        // todo move to armor
-        default Set<OWLClass> getSuperClassOf( OWLClass cl){
-            long initialTime = System.nanoTime();
-            Set<OWLClass> classes = new HashSet< OWLClass>();
-
-            //Set< OWLClassExpression> set = cl.getSuperClasses( ontoRef.getOWLOntology());
-            Stream<OWLClassExpression> stream = EntitySearcher.getSuperClasses( cl, getOntology().getOWLOntology());
-            Set<OWLClassExpression> set = stream.collect( Collectors.toSet());
-
-            for (OWLClassExpression s : set) {
-                if ( s instanceof OWLClass)
-                    classes.add( s.asOWLClass());
-            }
-
-            //if( set != null)
-            //    classes.addAll(set.stream().map(AsOWLClass::asOWLClass).collect(Collectors.toList()));
-
-            //if( isIncludingInferences()) {
-                //try {
-                    //Stream<OWLClass> streamReasoned = getOntology().getOWLReasoner().getSuperClasses(cl, ! isReturningCompleteDescription()).entities();
-                    Stream<OWLClass> streamReasoned = getOntology().getOWLReasoner().getSuperClasses(cl, false).entities();
-                    Set<OWLClass> reasoned = streamReasoned.collect(Collectors.toSet());
-                    if (reasoned != null)
-                        classes.addAll(reasoned.stream().map(AsOWLClass::asOWLClass).collect(Collectors.toList()));
-                //} catch (InconsistentOntologyException e) {
-                //    getOntology().logInconsistency();
-                //}
-            //}
-            classes.remove( getOntology().getOWLFactory().getOWLThing());
-            //logger.addDebugString( "get super classes of given in: " + (System.nanoTime() - initialTime) + " [ns]");
-            return( classes);
-        }
-
-
-
-
-
-
 
         @Override // see super classes for documentation
         default List<MappingIntent> writeExpressionAxioms(){
@@ -548,10 +505,10 @@ public interface ConceptExpression
     }
 
     /**
-     * The {@link Concept.Definition} expression for a {@link Descriptor} whose ground is {@link OWLClass}.
+     * The {@link Concept.Restriction} expression for a {@link Descriptor} whose ground is {@link OWLClass}.
      * <p>
-     *     It specifies how to {@link #queryDefinitionConcepts()} and {@link #writeExpressionAxioms()} for
-     *     definition (i.e.: {@link SemanticRestriction}) of the ground Class ({@link #getInstance()).
+     *     It specifies how to {@link #queryRestrictionConcepts()} and {@link #writeExpressionAxioms()} for
+     *     definition (i.e.: {@link SemanticRestriction}) of the ground Class ({@link #getGroundInstance()}).
      *     All the restrictions managed by this Class are considered to be a unique class definition
      *     made by their intersection.
      *     <br>
@@ -560,14 +517,14 @@ public interface ConceptExpression
      *     and {@link org.semanticweb.owlapi.change.ConvertEquivalentClassesToSuperClasses}.
      *     It may affect {@link ConceptExpression.Super} or {@link ConceptExpression.Sub} descriptors.
      *     Call always this first!!
+     *     <b>REMARK</b>: the actual implementation allow the definition of a signe restriction axiom.
+     *     This can be the union of `class` expression, and `min`, `max`, `exactly`, `some`, `any`
+     *     data or property restriction expression
      * </p>
      */
-    interface Definition
-            extends Concept.Definition<OWLReferences, OWLClass, SemanticRestriction>,
+    interface Restriction
+            extends Concept.Restriction<OWLReferences, OWLClass, SemanticRestriction>,
             ConceptExpression {
-
-        // todo make manipulating a Set<SemanticRestriction> to manage with restrictions that are
-        // in intersection or in conjunctions
 
         /**
          * Creates a new class equivalence restriction (to be in conjunction with the others in the specific {@link EntitySet})
@@ -594,48 +551,48 @@ public interface ConceptExpression
             return new ClassRestrictedOnMinData( getInstance(), getOWLDataType( dataType), property, cardinality);
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcepts()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getRestrictionConcepts()})
          * based on {@link #createMinDataRestriction(OWLDataProperty, int, Class)}.
          * @param property the restricting data property.
          * @param cardinality the cardinality for the minimal property restriction.
          * @param dataType the data type of the restriction.
-         * @return {@code true} if a new restriction has been added to the {@link Concept.Definition}.
+         * @return {@code true} if a new restriction has been added to the {@link Concept.Restriction}.
          */
         default boolean addMinDataRestriction( OWLDataProperty property, int cardinality, Class dataType){
-            return getDefinitionConcepts().add( createMinDataRestriction( property, cardinality, dataType));
+            return getRestrictionConcepts().add( createMinDataRestriction( property, cardinality, dataType));
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcepts()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getRestrictionConcepts()})
          * based on {@link #createMinDataRestriction(String, int, Class)}.
          * @param property the name of the restricting data property.
          * @param cardinality the cardinality for the minimal property restriction.
          * @param dataType the data type of the restriction.
-         * @return {@code true} if a new restriction has been added to the {@link Concept.Definition}.
+         * @return {@code true} if a new restriction has been added to the {@link Concept.Restriction}.
          */
         default boolean addMinDataRestriction( String property, int cardinality, Class dataType){
-            return getDefinitionConcepts().add( createMinDataRestriction( property, cardinality, dataType));
+            return getRestrictionConcepts().add( createMinDataRestriction( property, cardinality, dataType));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcepts()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getRestrictionConcepts()})
          * based on {@link #createMinDataRestriction(OWLDataProperty, int, Class)}.
          * @param property the restricting data property.
          * @param cardinality the cardinality for the minimal property restriction.
          * @param dataType the data type of the restriction.
-         * @return {@code true} if a restriction has been removed from the {@link Concept.Definition}.
+         * @return {@code true} if a restriction has been removed from the {@link Concept.Restriction}.
          */
         default boolean removeMinDataRestriction( OWLDataProperty property, int cardinality, Class dataType){
-            return getDefinitionConcepts().remove( createMinDataRestriction( property, cardinality, dataType));
+            return getRestrictionConcepts().remove( createMinDataRestriction( property, cardinality, dataType));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcepts()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getRestrictionConcepts()})
          * based on {@link #createMinDataRestriction(String, int, Class)}.
          * @param property the name of the restricting data property.
          * @param cardinality the cardinality for the minimal property restriction.
          * @param dataType the data type of the restriction.
-         * @return {@code true} if a restriction has been removed from the {@link Concept.Definition}.
+         * @return {@code true} if a restriction has been removed from the {@link Concept.Restriction}.
          */
         default boolean removeMinDataRestriction( String property, int cardinality, Class dataType){
-            return getDefinitionConcepts().remove( createMinDataRestriction( property, cardinality, dataType));
+            return getRestrictionConcepts().remove( createMinDataRestriction( property, cardinality, dataType));
         }
 
         /**
@@ -663,48 +620,48 @@ public interface ConceptExpression
             return new ClassRestrictedOnMaxData( getInstance(), getOWLDataType( dataType), property, cardinality);
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcepts()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getRestrictionConcepts()})
          * based on {@link #createMaxDataRestriction(OWLDataProperty, int, Class)}.
          * @param property the restricting data property.
          * @param cardinality the cardinality for the maximal property restriction.
          * @param dataType the data type of the restriction.
-         * @return {@code true} if a new restriction has been added to the {@link Concept.Definition}.
+         * @return {@code true} if a new restriction has been added to the {@link Concept.Restriction}.
          */
         default boolean addMaxDataRestriction( OWLDataProperty property, int cardinality, Class dataType){
-            return getDefinitionConcepts().add( createMaxDataRestriction( property, cardinality, dataType));
+            return getRestrictionConcepts().add( createMaxDataRestriction( property, cardinality, dataType));
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcepts()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getRestrictionConcepts()})
          * based on {@link #createMaxDataRestriction(String, int, Class)}.
          * @param property the name of the restricting data property.
          * @param cardinality the cardinality for the maximal property restriction.
          * @param dataType the data type of the restriction.
-         * @return {@code true} if a new restriction has been added to the {@link Concept.Definition}.
+         * @return {@code true} if a new restriction has been added to the {@link Concept.Restriction}.
          */
         default boolean addMaxDataRestriction( String property, int cardinality, Class dataType){
-            return getDefinitionConcepts().add( createMaxDataRestriction( property, cardinality, dataType));
+            return getRestrictionConcepts().add( createMaxDataRestriction( property, cardinality, dataType));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcepts()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getRestrictionConcepts()})
          * based on {@link #createMaxDataRestriction(OWLDataProperty, int, Class)}.
          * @param property the restricting data property.
          * @param cardinality the cardinality for the maximal property restriction.
          * @param dataType the data type of the restriction.
-         * @return {@code true} if a restriction has been removed from the {@link Concept.Definition}.
+         * @return {@code true} if a restriction has been removed from the {@link Concept.Restriction}.
          */
         default boolean removeMaxDataRestriction( OWLDataProperty property, int cardinality, Class dataType){
-            return getDefinitionConcepts().remove( createMaxDataRestriction( property, cardinality, dataType));
+            return getRestrictionConcepts().remove( createMaxDataRestriction( property, cardinality, dataType));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcepts()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getRestrictionConcepts()})
          * based on {@link #createMaxDataRestriction(String, int, Class)}.
          * @param property the name of the restricting data property.
          * @param cardinality the cardinality for the maximal property restriction.
          * @param dataType the data type of the restriction.
-         * @return {@code true} if a restriction has been removed from the {@link Concept.Definition}.
+         * @return {@code true} if a restriction has been removed from the {@link Concept.Restriction}.
          */
         default boolean removeMaxDataRestriction( String property, int cardinality, Class dataType){
-            return getDefinitionConcepts().remove( createMaxDataRestriction( property, cardinality, dataType));
+            return getRestrictionConcepts().remove( createMaxDataRestriction( property, cardinality, dataType));
         }
 
         /**
@@ -732,48 +689,48 @@ public interface ConceptExpression
             return new ClassRestrictedOnExactData( getInstance(), getOWLDataType( dataType), property, cardinality);
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcepts()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getRestrictionConcepts()})
          * based on {@link #createExactDataRestriction(OWLDataProperty, int, Class)}.
          * @param property the restricting data property.
          * @param cardinality the cardinality for the exact property restriction.
          * @param dataType the data type of the restriction.
-         * @return {@code true} if a new restriction has been added to the {@link Concept.Definition}.
+         * @return {@code true} if a new restriction has been added to the {@link Concept.Restriction}.
          */
         default boolean addExactDataRestriction( OWLDataProperty property, int cardinality, Class dataType){
-            return getDefinitionConcepts().add( createExactDataRestriction( property, cardinality, dataType));
+            return getRestrictionConcepts().add( createExactDataRestriction( property, cardinality, dataType));
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcepts()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getRestrictionConcepts()})
          * based on {@link #createExactDataRestriction(String, int, Class)}.
          * @param property the name of the restricting data property.
          * @param cardinality the cardinality for the exact property restriction.
          * @param dataType the data type of the restriction.
-         * @return {@code true} if a new restriction has been added to the {@link Concept.Definition}.
+         * @return {@code true} if a new restriction has been added to the {@link Concept.Restriction}.
          */
         default boolean addExactDataRestriction( String property, int cardinality, Class dataType){
-            return getDefinitionConcepts().add( createExactDataRestriction( property, cardinality, dataType));
+            return getRestrictionConcepts().add( createExactDataRestriction( property, cardinality, dataType));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcepts()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getRestrictionConcepts()})
          * based on {@link #createExactDataRestriction(OWLDataProperty, int, Class)}.
          * @param property the restricting data property.
          * @param cardinality the cardinality for the exact property restriction.
          * @param dataType the data type of the restriction.
-         * @return {@code true} if a restriction has been removed from the {@link Concept.Definition}.
+         * @return {@code true} if a restriction has been removed from the {@link Concept.Restriction}.
          */
         default boolean removeExactDataRestriction( OWLDataProperty property, int cardinality, Class dataType){
-            return getDefinitionConcepts().remove( createExactDataRestriction( property, cardinality, dataType));
+            return getRestrictionConcepts().remove( createExactDataRestriction( property, cardinality, dataType));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcepts()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getRestrictionConcepts()})
          * based on {@link #createExactDataRestriction(String, int, Class)}.
          * @param property the name of the restricting data property.
          * @param cardinality the cardinality for the exact property restriction.
          * @param dataType the data type of the restriction.
-         * @return {@code true} if a restriction has been removed from the {@link Concept.Definition}.
+         * @return {@code true} if a restriction has been removed from the {@link Concept.Restriction}.
          */
         default boolean removeExactDataRestriction( String property, int cardinality, Class dataType){
-            return getDefinitionConcepts().remove( createExactDataRestriction( property, cardinality, dataType));
+            return getRestrictionConcepts().remove( createExactDataRestriction( property, cardinality, dataType));
         }
 
         /**
@@ -799,44 +756,44 @@ public interface ConceptExpression
             return new ClassRestrictedOnSomeData( getInstance(), getOWLDataType( dataType), property);
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcepts()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getRestrictionConcepts()})
          * based on {@link #createSomeDataRestriction(OWLDataProperty, Class)}.
          * @param property the restricting data property.
          * @param dataType the data type of the restriction.
-         * @return {@code true} if a new restriction has been added to the {@link Concept.Definition}.
+         * @return {@code true} if a new restriction has been added to the {@link Concept.Restriction}.
          */
         default boolean addSomeDataRestriction( String property, Class dataType){
-            return getDefinitionConcepts().add( createSomeDataRestriction( property, dataType));
+            return getRestrictionConcepts().add( createSomeDataRestriction( property, dataType));
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcepts()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getRestrictionConcepts()})
          * based on {@link #createSomeDataRestriction(String, Class)}.
          * @param property the name of the restricting data property.
          * @param dataType the data type of the restriction.
-         * @return {@code true} if a new restriction has been added to the {@link Concept.Definition}.
+         * @return {@code true} if a new restriction has been added to the {@link Concept.Restriction}.
          */
         default boolean addSomeDataRestriction( OWLDataProperty property, Class dataType){
-            return getDefinitionConcepts().add( createSomeDataRestriction( property, dataType));
+            return getRestrictionConcepts().add( createSomeDataRestriction( property, dataType));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcepts()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getRestrictionConcepts()})
          * based on {@link #createSomeDataRestriction(OWLDataProperty, Class)}.
          * @param property the restricting data property.
          * @param dataType the data type of the restriction.
-         * @return {@code true} if a restriction has been removed from the {@link Concept.Definition}.
+         * @return {@code true} if a restriction has been removed from the {@link Concept.Restriction}.
          */
         default boolean removeSomeDataRestriction( String property, Class dataType){
-            return getDefinitionConcepts().remove( createSomeDataRestriction( property, dataType));
+            return getRestrictionConcepts().remove( createSomeDataRestriction( property, dataType));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcepts()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getRestrictionConcepts()})
          * based on {@link #createSomeDataRestriction(String, Class)}.
          * @param property the name of the restricting data property.
          * @param dataType the data type of the restriction.
-         * @return {@code true} if a restriction has been removed from the {@link Concept.Definition}.
+         * @return {@code true} if a restriction has been removed from the {@link Concept.Restriction}.
          */
         default boolean removeSomeDataRestriction( OWLDataProperty property, Class dataType){
-            return getDefinitionConcepts().remove( createSomeDataRestriction( property, dataType));
+            return getRestrictionConcepts().remove( createSomeDataRestriction( property, dataType));
         }
 
         /**
@@ -862,44 +819,44 @@ public interface ConceptExpression
             return new ClassRestrictedOnAllData( getInstance(), getOWLDataType( dataType), property);
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcepts()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getRestrictionConcepts()})
          * based on {@link #createOnlyDataRestriction(OWLDataProperty, Class)}.
          * @param property the restricting data property.
          * @param dataType the data type of the restriction.
-         * @return {@code true} if a new restriction has been added to the {@link Concept.Definition}.
+         * @return {@code true} if a new restriction has been added to the {@link Concept.Restriction}.
          */
         default boolean addOnlyDataRestriction( String property, Class dataType){
-            return getDefinitionConcepts().add( createOnlyDataRestriction( property, dataType));
+            return getRestrictionConcepts().add( createOnlyDataRestriction( property, dataType));
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcepts()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getRestrictionConcepts()})
          * based on {@link #createOnlyDataRestriction(String, Class)}.
          * @param property the name of the restricting data property.
          * @param dataType the data type of the restriction.
-         * @return {@code true} if a new restriction has been added to the {@link Concept.Definition}.
+         * @return {@code true} if a new restriction has been added to the {@link Concept.Restriction}.
          */
         default boolean addOnlyDataRestriction( OWLDataProperty property, Class dataType){
-            return getDefinitionConcepts().add( createOnlyDataRestriction( property, dataType));
+            return getRestrictionConcepts().add( createOnlyDataRestriction( property, dataType));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcepts()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getRestrictionConcepts()})
          * based on {@link #createOnlyDataRestriction(OWLDataProperty, Class)}.
          * @param property the restricting data property.
          * @param dataType the data type of the restriction.
-         * @return {@code true} if a restriction has been removed from the {@link Concept.Definition}.
+         * @return {@code true} if a restriction has been removed from the {@link Concept.Restriction}.
          */
         default boolean removeOnlyDataRestriction( String property, Class dataType){
-            return getDefinitionConcepts().remove( createOnlyDataRestriction( property, dataType));
+            return getRestrictionConcepts().remove( createOnlyDataRestriction( property, dataType));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcepts()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getRestrictionConcepts()})
          * based on {@link #createOnlyDataRestriction(String, Class)}.
          * @param property the name of the restricting data property.
          * @param dataType the data type of the restriction.
-         * @return {@code true} if a restriction has been removed from the {@link Concept.Definition}.
+         * @return {@code true} if a restriction has been removed from the {@link Concept.Restriction}.
          */
         default boolean removeOnlyDataRestriction( OWLDataProperty property, Class dataType){
-            return getDefinitionConcepts().remove( createOnlyDataRestriction( property, dataType));
+            return getRestrictionConcepts().remove( createOnlyDataRestriction( property, dataType));
         }
 
         /**
@@ -927,48 +884,48 @@ public interface ConceptExpression
             return new ClassRestrictedOnMinObject( getInstance(), cl, property, cardinality);
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcepts()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getRestrictionConcepts()})
          * based on {@link #createMinObjectRestriction(OWLObjectProperty, int, OWLClass)}.
          * @param property the restricting object property.
          * @param cardinality the cardinality for the minimal property restriction.
          * @param cl the range class of the restriction.
-         * @return {@code true} if a new restriction has been added to the {@link Concept.Definition}.
+         * @return {@code true} if a new restriction has been added to the {@link Concept.Restriction}.
          */
         default boolean addMinObjectRestriction( OWLObjectProperty property, int cardinality, OWLClass cl){
-            return getDefinitionConcepts().add( createMinObjectRestriction( property, cardinality, cl));
+            return getRestrictionConcepts().add( createMinObjectRestriction( property, cardinality, cl));
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcepts()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getRestrictionConcepts()})
          * based on {@link #createMinObjectRestriction(String, int, String)}.
          * @param property the name of the restricting object property.
          * @param cardinality the cardinality for the minimal property restriction.
          * @param cl the name of the range class of the restriction.
-         * @return {@code true} if a new restriction has been added to the {@link Concept.Definition}.
+         * @return {@code true} if a new restriction has been added to the {@link Concept.Restriction}.
          */
         default boolean addMinObjectRestriction( String property, int cardinality, String cl){
-            return getDefinitionConcepts().add( createMinObjectRestriction( property, cardinality, cl));
+            return getRestrictionConcepts().add( createMinObjectRestriction( property, cardinality, cl));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcepts()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getRestrictionConcepts()})
          * based on {@link #createMinObjectRestriction(OWLObjectProperty, int, OWLClass)}.
          * @param property the restricting object property.
          * @param cardinality the cardinality for the minimal property restriction.
          * @param cl of the range class of the restriction.
-         * @return {@code true} if a restriction has been removed from the {@link Concept.Definition}.
+         * @return {@code true} if a restriction has been removed from the {@link Concept.Restriction}.
          */
         default boolean removeMinObjectRestriction( OWLObjectProperty property, int cardinality, OWLClass cl){
-            return getDefinitionConcepts().remove( createMinObjectRestriction( property, cardinality, cl));
+            return getRestrictionConcepts().remove( createMinObjectRestriction( property, cardinality, cl));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcepts()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getRestrictionConcepts()})
          * based on {@link #createMinObjectRestriction(String, int, String)}.
          * @param property the name of the restricting object property.
          * @param cardinality the cardinality for the minimal property restriction.
          * @param cl the name of the range class of the restriction.
-         * @return {@code true} if a restriction has been removed from the {@link Concept.Definition}.
+         * @return {@code true} if a restriction has been removed from the {@link Concept.Restriction}.
          */
         default boolean removeMinObjectRestriction( String property, int cardinality, String cl){
-            return getDefinitionConcepts().remove( createMinObjectRestriction( property, cardinality, cl));
+            return getRestrictionConcepts().remove( createMinObjectRestriction( property, cardinality, cl));
         }
 
         /**
@@ -996,48 +953,48 @@ public interface ConceptExpression
             return new ClassRestrictedOnMaxObject( getInstance(), cl, property, cardinality);
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcepts()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getRestrictionConcepts()})
          * based on {@link #createMaxObjectRestriction(OWLObjectProperty, int, OWLClass)}.
          * @param property the restricting object property.
          * @param cardinality the cardinality for the maximal property restriction.
          * @param cl the range class of the restriction.
-         * @return {@code true} if a new restriction has been added to the {@link Concept.Definition}.
+         * @return {@code true} if a new restriction has been added to the {@link Concept.Restriction}.
          */
         default boolean addMaxObjectRestriction( OWLObjectProperty property, int cardinality, OWLClass cl){
-            return getDefinitionConcepts().add( createMaxObjectRestriction( property, cardinality, cl));
+            return getRestrictionConcepts().add( createMaxObjectRestriction( property, cardinality, cl));
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcepts()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getRestrictionConcepts()})
          * based on {@link #createMaxObjectRestriction(String, int, String)}.
          * @param property the name of the restricting object property.
          * @param cardinality the cardinality for the maximal property restriction.
          * @param cl the name of the range class of the restriction.
-         * @return {@code true} if a new restriction has been added to the {@link Concept.Definition}.
+         * @return {@code true} if a new restriction has been added to the {@link Concept.Restriction}.
          */
         default boolean addMaxObjectRestriction( String property, int cardinality, String cl){
-            return getDefinitionConcepts().add( createMaxObjectRestriction( property, cardinality, cl));
+            return getRestrictionConcepts().add( createMaxObjectRestriction( property, cardinality, cl));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcepts()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getRestrictionConcepts()})
          * based on {@link #createMaxObjectRestriction(OWLObjectProperty, int, OWLClass)}.
          * @param property the restricting object property.
          * @param cardinality the cardinality for the maximal property restriction.
          * @param cl of the range class of the restriction.
-         * @return {@code true} if a restriction has been removed from the {@link Concept.Definition}.
+         * @return {@code true} if a restriction has been removed from the {@link Concept.Restriction}.
          */
         default boolean removeMaxObjectRestriction( OWLObjectProperty property, int cardinality, OWLClass cl){
-            return getDefinitionConcepts().remove( createMaxObjectRestriction( property, cardinality, cl));
+            return getRestrictionConcepts().remove( createMaxObjectRestriction( property, cardinality, cl));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcepts()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getRestrictionConcepts()})
          * based on {@link #createMaxObjectRestriction(String, int, String)}.
          * @param property the name of the restricting object property.
          * @param cardinality the cardinality for the maximal property restriction.
          * @param cl the name of the range class of the restriction.
-         * @return {@code true} if a restriction has been removed from the {@link Concept.Definition}.
+         * @return {@code true} if a restriction has been removed from the {@link Concept.Restriction}.
          */
         default boolean removeMaxObjectRestriction( String property, int cardinality, String cl){
-            return getDefinitionConcepts().remove( createMaxObjectRestriction( property, cardinality, cl));
+            return getRestrictionConcepts().remove( createMaxObjectRestriction( property, cardinality, cl));
         }
 
         /**
@@ -1065,48 +1022,48 @@ public interface ConceptExpression
             return new ClassRestrictedOnMaxObject( getInstance(), cl, property, cardinality);
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcepts()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getRestrictionConcepts()})
          * based on {@link #createExactObjectRestriction(OWLObjectProperty, int, OWLClass)}.
          * @param property the restricting object property.
          * @param cardinality the cardinality for the exact property restriction.
          * @param cl the range class of the restriction.
-         * @return {@code true} if a new restriction has been added to the {@link Concept.Definition}.
+         * @return {@code true} if a new restriction has been added to the {@link Concept.Restriction}.
          */
         default boolean addExactObjectRestriction( OWLObjectProperty property, int cardinality, OWLClass cl){
-            return getDefinitionConcepts().add( createExactObjectRestriction( property, cardinality, cl));
+            return getRestrictionConcepts().add( createExactObjectRestriction( property, cardinality, cl));
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcepts()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getRestrictionConcepts()})
          * based on {@link #createExactObjectRestriction(String, int, String)}.
          * @param property the name of the restricting object property.
          * @param cardinality the cardinality for the exact property restriction.
          * @param cl the name of the range class of the restriction.
-         * @return {@code true} if a new restriction has been added to the {@link Concept.Definition}.
+         * @return {@code true} if a new restriction has been added to the {@link Concept.Restriction}.
          */
         default boolean addExactObjectRestriction( String property, int cardinality, String cl){
-            return getDefinitionConcepts().add( createExactObjectRestriction( property, cardinality, cl));
+            return getRestrictionConcepts().add( createExactObjectRestriction( property, cardinality, cl));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcepts()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getRestrictionConcepts()})
          * based on {@link #createExactObjectRestriction(OWLObjectProperty, int, OWLClass)}.
          * @param property the restricting object property.
          * @param cardinality the cardinality for the exact property restriction.
          * @param cl of the range class of the restriction.
-         * @return {@code true} if a restriction has been removed from the {@link Concept.Definition}.
+         * @return {@code true} if a restriction has been removed from the {@link Concept.Restriction}.
          */
         default boolean removeExactObjectRestriction( OWLObjectProperty property, int cardinality, OWLClass cl){
-            return getDefinitionConcepts().remove( createExactObjectRestriction( property, cardinality, cl));
+            return getRestrictionConcepts().remove( createExactObjectRestriction( property, cardinality, cl));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcepts()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getRestrictionConcepts()})
          * based on {@link #createExactObjectRestriction(String, int, String)}.
          * @param property the name of the restricting object property.
          * @param cardinality the cardinality for the exact property restriction.
          * @param cl the name of the range class of the restriction.
-         * @return {@code true} if a restriction has been removed from the {@link Concept.Definition}.
+         * @return {@code true} if a restriction has been removed from the {@link Concept.Restriction}.
          */
         default boolean removeExactObjectRestriction( String property, int cardinality, String cl){
-            return getDefinitionConcepts().remove( createExactObjectRestriction( property, cardinality, cl));
+            return getRestrictionConcepts().remove( createExactObjectRestriction( property, cardinality, cl));
         }
 
         /**
@@ -1132,44 +1089,44 @@ public interface ConceptExpression
             return new ClassRestrictedOnSomeObject( getInstance(), cl, property);
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcepts()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getRestrictionConcepts()})
          * based on {@link #createSomeObjectRestriction(OWLObjectProperty, OWLClass)}.
          * @param property the restricting object property.
          * @param cl the range class of the restriction.
-         * @return {@code true} if a new restriction has been added to the {@link Concept.Definition}.
+         * @return {@code true} if a new restriction has been added to the {@link Concept.Restriction}.
          */
         default boolean addSomeObjectRestrcition( String property, String cl){
-            return getDefinitionConcepts().add( createSomeObjectRestriction( property, cl));
+            return getRestrictionConcepts().add( createSomeObjectRestriction( property, cl));
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcepts()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getRestrictionConcepts()})
          * based on {@link #createSomeObjectRestriction(String, String)}.
          * @param property the name of the restricting object property.
          * @param cl the name of the range class of the restriction.
-         * @return {@code true} if a new restriction has been added to the {@link Concept.Definition}.
+         * @return {@code true} if a new restriction has been added to the {@link Concept.Restriction}.
          */
         default boolean addSomeObjectRestrcition( OWLObjectProperty property, OWLClass cl){
-            return getDefinitionConcepts().add( createSomeObjectRestriction( property, cl));
+            return getRestrictionConcepts().add( createSomeObjectRestriction( property, cl));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcepts()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getRestrictionConcepts()})
          * based on {@link #createSomeObjectRestriction(OWLObjectProperty, OWLClass)}.
          * @param property the restricting object property.
          * @param cl of the range class of the restriction.
-         * @return {@code true} if a restriction has been removed from the {@link Concept.Definition}.
+         * @return {@code true} if a restriction has been removed from the {@link Concept.Restriction}.
          */
         default boolean removeSomeObjectRestrcition( String property, String cl){
-            return getDefinitionConcepts().remove( createSomeObjectRestriction( property, cl));
+            return getRestrictionConcepts().remove( createSomeObjectRestriction( property, cl));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcepts()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getRestrictionConcepts()})
          * based on {@link #createSomeObjectRestriction(String, String)}.
          * @param property the name of the restricting object property.
          * @param cl the name of the range class of the restriction.
-         * @return {@code true} if a restriction has been removed from the {@link Concept.Definition}.
+         * @return {@code true} if a restriction has been removed from the {@link Concept.Restriction}.
          */
         default boolean removeSomeObjectRestrcition( OWLObjectProperty property, OWLClass cl){
-            return getDefinitionConcepts().remove( createSomeObjectRestriction( property, cl));
+            return getRestrictionConcepts().remove( createSomeObjectRestriction( property, cl));
         }
 
         /**
@@ -1195,44 +1152,44 @@ public interface ConceptExpression
             return new ClassRestrictedOnAllObject( getInstance(), cl, property);
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcepts()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getRestrictionConcepts()})
          * based on {@link #createOnlyObjectRestriction(OWLObjectProperty, OWLClass)}.
          * @param property the restricting object property.
          * @param cl the range class of the restriction.
-         * @return {@code true} if a new restriction has been added to the {@link Concept.Definition}.
+         * @return {@code true} if a new restriction has been added to the {@link Concept.Restriction}.
          */
         default boolean addOnlyObjectRestrcition( String property, String cl){
-            return getDefinitionConcepts().add( createOnlyObjectRestriction( property, cl));
+            return getRestrictionConcepts().add( createOnlyObjectRestriction( property, cl));
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcepts()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getRestrictionConcepts()})
          * based on {@link #createOnlyObjectRestriction(String, String)}.
          * @param property the name of the restricting object property.
          * @param cl the name of the range class of the restriction.
-         * @return {@code true} if a new restriction has been added to the {@link Concept.Definition}.
+         * @return {@code true} if a new restriction has been added to the {@link Concept.Restriction}.
          */
         default boolean addOnlyObjectRestrcition( OWLObjectProperty property, OWLClass cl){
-            return getDefinitionConcepts().add( createOnlyObjectRestriction( property, cl));
+            return getRestrictionConcepts().add( createOnlyObjectRestriction( property, cl));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcepts()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getRestrictionConcepts()})
          * based on {@link #createOnlyObjectRestriction(OWLObjectProperty, OWLClass)}.
          * @param property the restricting object property.
          * @param cl of the range class of the restriction.
-         * @return {@code true} if a restriction has been removed from the {@link Concept.Definition}.
+         * @return {@code true} if a restriction has been removed from the {@link Concept.Restriction}.
          */
         default boolean removeOnlyObjectRestrcition( String property, String cl){
-            return getDefinitionConcepts().remove( createOnlyObjectRestriction( property, cl));
+            return getRestrictionConcepts().remove( createOnlyObjectRestriction( property, cl));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcepts()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getRestrictionConcepts()})
          * based on {@link #createOnlyObjectRestriction(String, String)}.
          * @param property the name of the restricting object property.
          * @param cl the name of the range class of the restriction.
-         * @return {@code true} if a restriction has been removed from the {@link Concept.Definition}.
+         * @return {@code true} if a restriction has been removed from the {@link Concept.Restriction}.
          */
         default boolean removeOnlyObjectRestrcition( OWLObjectProperty property, OWLClass cl){
-            return getDefinitionConcepts().remove( createOnlyObjectRestriction( property, cl));
+            return getRestrictionConcepts().remove( createOnlyObjectRestriction( property, cl));
         }
 
         /**
@@ -1254,48 +1211,48 @@ public interface ConceptExpression
             return new ClassRestrictedOnClass( getInstance(), cl);
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcepts()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getRestrictionConcepts()})
          * based on {@link #createClassRestriction(String)}.
          * @param className the name of the range class of the restriction.
-         * @return {@code true} if a new restriction has been added to the {@link Concept.Definition}.
+         * @return {@code true} if a new restriction has been added to the {@link Concept.Restriction}.
          */
         default boolean addClassRestriction(String className){
-            return getDefinitionConcepts().add( createClassRestriction( className));
+            return getRestrictionConcepts().add( createClassRestriction( className));
         }
         /**
-         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcepts()})
+         * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getRestrictionConcepts()})
          * based on {@link #createClassRestriction(String)}.
          * @param cl the range class of the restriction.
-         * @return {@code true} if a new restriction has been added to the {@link Concept.Definition}.
+         * @return {@code true} if a new restriction has been added to the {@link Concept.Restriction}.
          */
         default boolean addClassRestriction(OWLClass cl){
-            return getDefinitionConcepts().add( createClassRestriction( cl));
+            return getRestrictionConcepts().add( createClassRestriction( cl));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcepts()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getRestrictionConcepts()})
          * based on {@link #createClassRestriction(String)}.
          * @param cl the name of the range class of the restriction.
-         * @return {@code true} if a new restriction has been added to the {@link Concept.Definition}.
+         * @return {@code true} if a new restriction has been added to the {@link Concept.Restriction}.
          */
         default boolean removeClassRestriction(String cl){
-            return getDefinitionConcepts().remove( createClassRestriction( cl));
+            return getRestrictionConcepts().remove( createClassRestriction( cl));
         }
         /**
-         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDefinitionConcepts()})
+         * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getRestrictionConcepts()})
          * based on {@link #createClassRestriction(String)}.
          * @param cl the range class of the restriction.
-         * @return {@code true} if a new restriction has been added to the {@link Concept.Definition}.
+         * @return {@code true} if a new restriction has been added to the {@link Concept.Restriction}.
          */
         default boolean remvoveClassRestriction(OWLClass cl){
-            return getDefinitionConcepts().remove( createClassRestriction( cl));
+            return getRestrictionConcepts().remove( createClassRestriction( cl));
         }
 
         @Override
-        DescriptorEntitySet.Restrictions getDefinitionConcepts();
+        DescriptorEntitySet.Restrictions getRestrictionConcepts();
 
         @Override // see super classes for documentation
-        default DescriptorEntitySet.Restrictions queryDefinitionConcepts(){
-            Set< Set<ApplyingRestriction>> restrictionsSet = getRestriction(getInstance());//getOntology().getRestrictions(getInstance());// TODO pput in amor!!!!
+        default DescriptorEntitySet.Restrictions queryRestrictionConcepts(){
+            Set< Set<ApplyingRestriction>> restrictionsSet = getOntology().getRestrictions(getInstance());
             Set<ApplyingRestriction> restrictions = new HashSet<>();
             for ( Set<ApplyingRestriction> r : restrictionsSet){
                 restrictions = r;
@@ -1312,83 +1269,14 @@ public interface ConceptExpression
                         break;
                     }
             DescriptorEntitySet.Restrictions set = new DescriptorEntitySet.Restrictions( restrictions);
-            set.setSingleton( getDefinitionConcepts().isSingleton());
+            set.setSingleton( getRestrictionConcepts().isSingleton());
             return set;
         }
-
-
-
-
-// TODO punt in documentation that a class can be equivalent only to one axiom made of "class and restriction and ..."
-        default Set< Set<ApplyingRestriction>> getRestriction(OWLClass cl){
-            Set< Set< ApplyingRestriction>> outs = new HashSet<>();
-                Stream< OWLClassAxiom> axiomStream = getOntology().getOWLOntology().axioms( cl);
-                for (OWLClassAxiom ax :  (Iterable<OWLClassAxiom>) axiomStream::iterator) {
-                   if( ax instanceof OWLEquivalentClassesAxiom){ // TODO pput in amor!!!!
-                       boolean validRestriction = false;
-                       Set< ApplyingRestriction> out = new HashSet<>();
-                       Stream<OWLClassExpression> nestedClassStream = ax.nestedClassExpressions();
-                        for( OWLClassExpression e : (Iterable<OWLClassExpression>) nestedClassStream::iterator) {
-                            if (e.getClassExpressionType() == ClassExpressionType.OBJECT_MIN_CARDINALITY) {
-                                out.add(new ClassRestrictedOnMinObject(cl, (OWLObjectMinCardinality) e));
-                                validRestriction = true;
-                            } else if (e.getClassExpressionType() == ClassExpressionType.OBJECT_MAX_CARDINALITY) {
-                                out.add(new ClassRestrictedOnMaxObject(cl, (OWLObjectMaxCardinality) e));
-                                validRestriction = true;
-                            } else if (e.getClassExpressionType() == ClassExpressionType.OBJECT_EXACT_CARDINALITY) {
-                                out.add(new ClassRestrictedOnExactObject(cl, (OWLObjectExactCardinality) e));
-                                validRestriction = true;
-                            } else if (e.getClassExpressionType() == ClassExpressionType.OBJECT_ALL_VALUES_FROM) {
-                                out.add(new ClassRestrictedOnAllObject(cl, (OWLObjectAllValuesFrom) e));
-                                validRestriction = true;
-                            } else if (e.getClassExpressionType() == ClassExpressionType.OBJECT_SOME_VALUES_FROM) {
-                                out.add(new ClassRestrictedOnSomeObject(cl, (OWLObjectSomeValuesFrom) e));
-                                validRestriction = true;
-                            } else if (e.getClassExpressionType() == ClassExpressionType.DATA_MIN_CARDINALITY) {
-                                out.add(new ClassRestrictedOnMinData(cl, (OWLDataMinCardinality) e));
-                                validRestriction = true;
-                            } else if (e.getClassExpressionType() == ClassExpressionType.DATA_MAX_CARDINALITY) {
-                                out.add(new ClassRestrictedOnMaxData(cl, (OWLDataMaxCardinality) e));
-                                validRestriction = true;
-                            } else if (e.getClassExpressionType() == ClassExpressionType.DATA_EXACT_CARDINALITY) {
-                                out.add(new ClassRestrictedOnExactData(cl, (OWLDataExactCardinality) e));
-                                validRestriction = true;
-                            } else if (e.getClassExpressionType() == ClassExpressionType.DATA_ALL_VALUES_FROM) {
-                                out.add(new ClassRestrictedOnAllData(cl, (OWLDataAllValuesFrom) e));
-                                validRestriction = true;
-                            } else if (e.getClassExpressionType() == ClassExpressionType.DATA_SOME_VALUES_FROM) {
-                                out.add(new ClassRestrictedOnSomeData(cl, (OWLDataSomeValuesFrom) e));
-                                validRestriction = true;
-                            } else if (e.getClassExpressionType() == ClassExpressionType.OWL_CLASS)
-                                if( ! e.asOWLClass().equals( cl))
-                                    out.add(new ClassRestrictedOnClass(cl, e.asOWLClass()));
-                        }
-                        if ( validRestriction)
-                            outs.add( out);
-                    }
-
-                }
-
-                // reason about other equivalent classes
-                /*if( isIncludingInferences()) {
-                    Stream<OWLClass> streamReasoned = getOntology().getOWLReasoner().getEquivalentClasses(cl).entities();
-                    for (OWLClass a : (Iterable<OWLClass>) streamReasoned::iterator)
-                        if ( ! a.isOWLThing())
-                            new ClassRestrictedOnClass(cl, a.asOWLClass());
-                }*/
-                return outs;
-        }
-
-
-
-
-
-
 
         @Override // see super classes for documentation
         default List<MappingIntent> writeExpressionAxioms(){
             try {
-                EntitySet.SynchronisationIntent<SemanticRestriction> to = synchroniseDefinitionConceptToExpressionAxioms();
+                EntitySet.SynchronisationIntent<SemanticRestriction> to = synchroniseRestrictionConceptToExpressionAxioms();
                 if ( to == null)
                     return getIntent( null);
                 List<OWLOntologyChange> changes = new ArrayList<>();
@@ -1405,8 +1293,8 @@ public interface ConceptExpression
                     for (SemanticRestriction a : to.getToAdd())
                         changes.add(getOntology().addRestriction(a));
 
-                    if ( ! getDefinitionConcepts().isEmpty())
-                        changes.addAll(getOntology().convertSuperClassesToEquivalentClass(getInstance()));//getDefinitionConcepts()));
+                    if ( ! getRestrictionConcepts().isEmpty())
+                        changes.addAll(getOntology().convertSuperClassesToEquivalentClass(getInstance()));//getRestrictionConcepts()));
                 }
 
                 return getChangingIntent(to, changes);

@@ -248,6 +248,6 @@ public class FullConceptDescTest {
         assertEquals( concept.getDisjointConcepts(), concept.queryDisjointConcepts());
         assertEquals( concept.getEquivalentConcepts(), concept.queryEquivalentConcepts());
         assertEquals( concept.getIndividualInstances(), concept.queryIndividualInstances());
-        assertEquals( concept.getDefinitionConcepts(), concept.queryDefinitionConcepts());
+        assertEquals( concept.getRestrictionConcepts(), concept.queryRestrictionConcepts());
     }
 }

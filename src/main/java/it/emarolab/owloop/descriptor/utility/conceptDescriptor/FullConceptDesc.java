@@ -1,9 +1,9 @@
 package it.emarolab.owloop.descriptor.utility.conceptDescriptor;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
-import it.emarolab.owloop.descriptor.construction.descriptorGround.ConceptGround;
-import it.emarolab.owloop.descriptor.construction.descriptorExpression.ConceptExpression;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
+import it.emarolab.owloop.descriptor.construction.descriptorExpression.ConceptExpression;
+import it.emarolab.owloop.descriptor.construction.descriptorGround.ConceptGround;
 import it.emarolab.owloop.descriptor.utility.individualDescriptor.LinkIndividualDesc;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
@@ -21,7 +21,7 @@ import java.util.List;
  * <li><b>{@link ConceptExpression.Sub}</b>:         to describe that a Class subsumes another Class.</li>
  * <li><b>{@link ConceptExpression.Super}</b>:       to describe that a Class is a super-class of another Class.</li>
  * <li><b>{@link ConceptExpression.Instance}</b>:    to describe an Individual of a Class.</li>
- * <li><b>{@link ConceptExpression.Definition}</b>:  to describe the definition of a Class..</li>
+ * <li><b>{@link Restriction}</b>:  to describe the definition of a Class..</li>
  * </ul>
  *
  * <p>
@@ -35,7 +35,7 @@ import java.util.List;
  */
 public class FullConceptDesc
         extends ConceptGround
-        implements ConceptExpression.Definition,
+        implements ConceptExpression.Restriction,
         ConceptExpression.Disjoint<FullConceptDesc>,
         ConceptExpression.Equivalent<FullConceptDesc>,
         ConceptExpression.Sub<FullConceptDesc>,
@@ -91,7 +91,7 @@ public class FullConceptDesc
     // To read axioms from an ontology
     @Override
     public List<MappingIntent> readExpressionAxioms() {
-        List<MappingIntent> r = Definition.super.readExpressionAxioms(); // call this before all
+        List<MappingIntent> r = Restriction.super.readExpressionAxioms(); // call this before all
         r.addAll( ConceptExpression.Equivalent.super.readExpressionAxioms());
         r.addAll( ConceptExpression.Disjoint.super.readExpressionAxioms());
         r.addAll( ConceptExpression.Sub.super.readExpressionAxioms());
@@ -103,7 +103,7 @@ public class FullConceptDesc
     @Override
     public List<MappingIntent> writeExpressionAxioms() {
         List<MappingIntent> r = ConceptExpression.Super.super.writeExpressionAxioms();
-        r.addAll( Definition.super.writeExpressionAxioms());// call this before all and after super
+        r.addAll( Restriction.super.writeExpressionAxioms());// call this before all and after super
         r.addAll( ConceptExpression.Equivalent.super.writeExpressionAxioms());
         r.addAll( ConceptExpression.Disjoint.super.writeExpressionAxioms());
         r.addAll( ConceptExpression.Sub.super.writeExpressionAxioms());
@@ -116,7 +116,7 @@ public class FullConceptDesc
 
     // It returns conceptRestrictions from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.Restrictions getDefinitionConcepts() {
+    public DescriptorEntitySet.Restrictions getRestrictionConcepts() {
         return conceptRestrictions;
     }
 

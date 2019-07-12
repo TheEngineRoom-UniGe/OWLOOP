@@ -29,7 +29,7 @@ public class LocationConceptDesc
         defRestrictions.setSubject( getGround().getGroundInstance());
         defRestrictions.setProperty( getOWLObjectProperty( "hasDoor"));
         defRestrictions.setValue( getOWLClass( "DOOR"));
-        getDefinitionConcepts().add( defRestrictions);
+        getRestrictionConcepts().add( defRestrictions);
         writeExpressionAxioms();
     }
 

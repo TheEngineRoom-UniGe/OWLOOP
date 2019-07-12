@@ -24,8 +24,6 @@ public class FullObjectPropertyDescTest {
 
     private static FullObjectPropertyDesc objectProperty;
 
-    // TODO test with changes on FullConceptDescrTest made the 12/07/2019
-
     @Before // called a before every @Test
     public void setUp() throws Exception {
         objectProperty = new FullObjectPropertyDesc(

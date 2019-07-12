@@ -335,13 +335,13 @@ public interface Axiom {
         @Override // see documentation in the super method
         default SynchronisationIntent<F> synchroniseFrom(EntitySet<F> queried) {
             // synchronise from ontology (read)
-            return new SynchroniseContainedIntent<F,Y>().expressionAxiomsSync( queried, this, true);
+            return new SynchroniseContainedIntent<F,Y>().expressionAxiomsSync( queried, this); // reading
         }
 
         @Override // see documentation in the super method
         default SynchronisationIntent<F> synchroniseTo(EntitySet<F> queried) {
             // synchronise to ontology (write)
-            return new SynchroniseContainedIntent<F,Y>().expressionAxiomsSync( this, queried, false);
+            return new SynchroniseContainedIntent<F,Y>().expressionAxiomsSync( this, queried); // writing
         }
 
 
@@ -359,7 +359,7 @@ public interface Axiom {
             // hp: not null inputs
             // write -> a1: internal state,  a2: queried.
             // read  -> a1: queried,         a2: internal state.
-            private SynchronisationMultiIntent<F,?> expressionAxiomsSync(EntitySet<F> a1, EntitySet<F> a2, boolean reading){
+            private SynchronisationMultiIntent<F,?> expressionAxiomsSync(EntitySet<F> a1, EntitySet<F> a2){
                 SynchronisationMultiIntent<F,Y> sync = new SynchronisationMultiIntent<>();
 
                 // it could be faster ....
@@ -379,8 +379,9 @@ public interface Axiom {
                 for (F b1 : a1) {
                     boolean found = false;
                     for (F b2 : a2) {
-                        // you may want to add here something to sync all properties
+                        // you may want to add here something to sync all object/data properties (now it sync only the value of the property described in the internal state of a description )
                         if (b1.getExpression().equals(b2.getExpression())) {
+                            // sync common values between a1 and a2
                             sync.addSynchronised(new SynchronisationIntent<>(b1.getValues(), b2.getValues()), b1);
                             found = true;
                             break;
@@ -547,7 +548,6 @@ public interface Axiom {
          * @return the changes made by the {@link #writeExpressionAxioms()} and {@link #readExpressionAxioms()} operations.
          */
         default List< MappingIntent> writeReadExpressionAxioms(boolean reason){
-            //r.addAll( readExpressionAxioms()); read also before????
             List<MappingIntent> intent = writeExpressionAxioms();
             if(reason)
                 groundReason();
@@ -596,6 +596,8 @@ public interface Axiom {
          * @param sync the results of a call to {@link EntitySet#synchroniseTo(EntitySet)}.
          * @param changes the ontology changes made during writing.
          *
+         * @param <C> The `Class` representing the changes
+         *
          * @return the changes based on the input parameters.
          */
         default <C> List<MappingIntent> getChangingIntent(EntitySet.SynchronisationIntent sync, C changes){ // write
@@ -606,18 +608,6 @@ public interface Axiom {
             intents.add( new MappingIntent<>( getGround().copyGround(), synchronisationIntent, changes));
             return intents;
         }
-        /*default List<MappingIntent> getIntent(EntitySet.SynchroniseIntent sync, boolean isReading){
-            List<MappingIntent> intents = new ArrayList<>();
-            intents.add( new MappingIntent<Ground<O,J>,Void>( getGround().copyGround(),
-                    new EntitySet.SynchroniseIntent( sync), isReading));
-            return intents;
-        }
-        default <C> List<MappingIntent> getChangingIntent(EntitySet.SynchroniseIntent sync, C changes, boolean isReading){
-            List<MappingIntent> intents = new ArrayList<>();
-            intents.add( new MappingIntent<>( getGround().copyGround(),
-                    new EntitySet.SynchroniseIntent( sync), changes, isReading));
-            return intents;
-        }*/
     }
 
     /**

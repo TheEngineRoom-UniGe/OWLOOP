@@ -16,7 +16,7 @@ import java.util.Set;
  * <li><b>{@link Sub}</b>:         this expression describes that a Class subsumes another Class.</li>
  * <li><b>{@link Super}</b>:       this expression describes that a Class is a super-class of another Class.</li>
  * <li><b>{@link Instance}</b>:    this expression describes an Individual of a Class.</li>
- * <li><b>{@link Definition}</b>:  this expression describes the definition of a Class..</li>
+ * <li><b>{@link Restriction}</b>:  this expression describes the definition of a Class..</li>
  * </ul>
  *
  * <p>
@@ -562,7 +562,7 @@ public interface Concept<O,J>
     }
 
     /**
-     * Implementation of this interface enables a {@link Concept} to have the {@link Definition} expression.<p>
+     * Implementation of this interface enables a {@link Concept} to have the {@link Restriction} expression.<p>
      * Definition is defined as a conjunction of restriction properties that
      * create a super class of the described ontological class.
      * The restriction can be of the following types:
@@ -580,20 +580,24 @@ public interface Concept<O,J>
      * If this expression is used, it is not possible to use the {@code build()} operation since
      * the restrictions are not simple OWL entities like OWLClass, OWLIndividual, OWLObjectProperty and OWLDataProperty.
      *
+     * Also, the current implementation support only one restriction axiom for defining each class.
+     * The axiom can be made of a union of `class` expressions, as well as `some`, `all`, `min`, `max`,
+     * and `exact` data or object property expression.
+     *
      * @param <O> the ontology.
      * @param <J> the type of {@link Ground} and {@link EntitySet} managed by this {@link Descriptor}.
      * @param <Y> the type of restriction for the {@link EntitySet} managed by this {@link Descriptor}.
      */
-    interface Definition<O,J,Y>
+    interface Restriction<O,J,Y>
             extends Concept<O,J> {
 
         @Override // see documentation on Axiom.descriptor.readExpressionAxioms
         default List<MappingIntent> readExpressionAxioms(){
             try {
-                EntitySet.SynchronisationIntent<Y> from = synchroniseDefinitionConceptFromExpressionAxioms();
+                EntitySet.SynchronisationIntent<Y> from = synchroniseRestrictionConceptFromExpressionAxioms();
                 if ( from != null) {
-                    getDefinitionConcepts().addAll(from.getToAdd());
-                    getDefinitionConcepts().removeAll(from.getToRemove());
+                    getRestrictionConcepts().addAll(from.getToAdd());
+                    getRestrictionConcepts().removeAll(from.getToRemove());
                 }
                 return getIntent(from);
             } catch (Exception e){
@@ -607,26 +611,26 @@ public interface Concept<O,J>
          * {@code this} {@link Concept} from a no OOP point of view.
          * @return the entities describing {@code this} class.
          */
-        EntitySet<Y> getDefinitionConcepts();
+        EntitySet<Y> getRestrictionConcepts();
 
         /**
          * Queries to the OWL representation for the definition of {@code this} class.
          * @return a new {@link EntitySet} contained the class definition to
          * the OWL structure of {@link #getInstance()}.
          */
-        EntitySet<Y> queryDefinitionConcepts();
+        EntitySet<Y> queryRestrictionConcepts();
 
         /**
-         * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryDefinitionConcepts()}
+         * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryRestrictionConcepts()}
          * as input parameter. This computes the changes to be performed in the OWL representation
-         * for synchronise it with respect to {@link #getDefinitionConcepts()}. This should
+         * for synchronise it with respect to {@link #getRestrictionConcepts()}. This should
          * be done by {@link #writeExpressionAxioms()}.
          * @return the changes to be done to synchronise {@code this} structure with
          * the class definition of an OWL class.
          */
-        default EntitySet.SynchronisationIntent<Y> synchroniseDefinitionConceptToExpressionAxioms(){
+        default EntitySet.SynchronisationIntent<Y> synchroniseRestrictionConceptToExpressionAxioms(){
             try {
-                return getDefinitionConcepts().synchroniseTo( queryDefinitionConcepts());
+                return getRestrictionConcepts().synchroniseTo( queryRestrictionConcepts());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -634,16 +638,16 @@ public interface Concept<O,J>
         }
 
         /**
-         * It calls {@link EntitySet#synchroniseFrom(EntitySet)} with {@link #queryDefinitionConcepts()}
-         * as input parameter. This computes the changes to be performed into the {@link #getDefinitionConcepts()}
+         * It calls {@link EntitySet#synchroniseFrom(EntitySet)} with {@link #queryRestrictionConcepts()}
+         * as input parameter. This computes the changes to be performed into the {@link #getRestrictionConcepts()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readExpressionAxioms()}.
          * @return the changes to be done to synchronise the class definition of an OWL class
          * with {@code this} structure.
          */
-        default EntitySet.SynchronisationIntent<Y> synchroniseDefinitionConceptFromExpressionAxioms(){
+        default EntitySet.SynchronisationIntent<Y> synchroniseRestrictionConceptFromExpressionAxioms(){
             try{
-                return getDefinitionConcepts().synchroniseFrom( queryDefinitionConcepts());
+                return getRestrictionConcepts().synchroniseFrom( queryRestrictionConcepts());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
