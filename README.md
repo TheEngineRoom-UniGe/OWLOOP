@@ -80,9 +80,14 @@ For any information or support, please do not hesitate to contact us through thi
 ## 8. Check List Before Publishing Repo on Maven Central
 
 - [ ] Add the UML in /documentation directory
-- [ ] Create a fresh JavaDoc in /documentation directory
-- [x] Fix the bug of removing axioms. (*The problem was in /core Axiom*)
+- [ ] Create a fresh JavaDoc in /docs directory
 - [ ] Finalize a plan for AMOR dependency. (*Luca gives green signal for pushing AMOR to Maven Central*)
 - [ ] Make OWLOOP as a release 2.0
 - [ ] Add disjoint to the Classes (ROBOT disjoint with DOOR AND LOCATION) and Individuals (all disjoint to each other)
 - [ ] Merge with the master branch
+- [ ] Check doc since `define concept` become `concept restriction`
+- [ ] Add in Readme known issue
+     - read write readWrite(boolean) depends on ontology state (es: restriction myh add super classes)
+     - intent for inconsistency
+     - add test info
+- [ ] Check data/object domain/range restriction 
