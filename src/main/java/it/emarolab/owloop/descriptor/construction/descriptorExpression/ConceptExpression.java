@@ -1252,7 +1252,7 @@ public interface ConceptExpression
 
         @Override // see super classes for documentation
         default DescriptorEntitySet.Restrictions queryRestrictionConcepts(){
-            Set< Set<ApplyingRestriction>> restrictionsSet = getOntology().getRestrictions(getInstance());
+            Set< Set<ApplyingRestriction>> restrictionsSet = getOntology().getClassRestrictions(getInstance());
             Set<ApplyingRestriction> restrictions = new HashSet<>();
             for ( Set<ApplyingRestriction> r : restrictionsSet){
                 restrictions = r;
@@ -1294,7 +1294,7 @@ public interface ConceptExpression
                         changes.add(getOntology().addRestriction(a));
 
                     if ( ! getRestrictionConcepts().isEmpty())
-                        changes.addAll(getOntology().convertSuperClassesToEquivalentClass(getInstance()));//getRestrictionConcepts()));
+                        changes.addAll(getOntology().convertSuperClassesToEquivalentClass(getInstance()));
                 }
 
                 return getChangingIntent(to, changes);

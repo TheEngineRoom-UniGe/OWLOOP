@@ -237,12 +237,11 @@ public class FullConceptDescTest {
         concept.setGroundInstance( "Parameter");
         concept.readExpressionAxioms();
         System.out.println( "described concept, equivalent test: " + concept.buildIndividualInstances());
-
     }
 
     int cnt = 0;
     public void assertSemantic(){ // asserts that the state of the java representation is equal to the state of the ontology
-        System.out.println( ++cnt + " ->   " + concept);
+        System.out.println( ++cnt + " -> " + concept);
         assertEquals( concept.getSubConcepts(), concept.querySubConcepts());
         assertEquals( concept.getSuperConcepts(), concept.querySuperConcepts());
         assertEquals( concept.getDisjointConcepts(), concept.queryDisjointConcepts());

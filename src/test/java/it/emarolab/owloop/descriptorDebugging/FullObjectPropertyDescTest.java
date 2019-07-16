@@ -315,8 +315,10 @@ public class FullObjectPropertyDescTest {
 
 
 
-
+    int cnt = 0;
     public void assertSemantic(){ // asserts that the state of the java representation is equal to the state of the ontology
+        System.out.println( ++cnt + " -> " + objectProperty);
+
         assertEquals( objectProperty.getSubObjectProperties(), objectProperty.querySubObjectProperties());
         assertEquals( objectProperty.getSuperObjectProperties(), objectProperty.querySuperObjectProperties());
         assertEquals( objectProperty.getDisjointObjectProperties(), objectProperty.queryDisjointObjectProperties());

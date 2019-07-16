@@ -75,12 +75,12 @@ public class DomainRangeDataPropertyDesc
 
     // It returns domainConceptRestrictions from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.Restrictions getDataPropertyDomainConcepts() {
+    public DescriptorEntitySet.Restrictions getDataPropertyDomainRestrictions() {
         return domainConceptRestrictions;
     }
     // It returns rangeConceptRestrictions from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.Restrictions getDataPropertyRangeConcepts() {
+    public DescriptorEntitySet.Restrictions getDataPropertyRangeRestrictions() {
         return rangeConceptRestrictions;
     }
 

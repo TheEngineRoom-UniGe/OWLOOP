@@ -28,7 +28,7 @@ public class FullDataPropertyDescTest {
     @Before // called a before every @Test
     public void setUp() throws Exception {
         dataProperty = new FullDataPropertyDesc(
-                "has_time", // the ground instance name
+                "has_timoe", // the ground instance name
                 "ontoName", // ontology reference name
                 DEBUGGING_PATH + "ontology4debugging.owl", // the ontology file path
                 "http://www.semanticweb.org/emaroLab/luca-buoncompagni/sit" // the ontology IRI path
@@ -144,7 +144,7 @@ public class FullDataPropertyDescTest {
 
     @Test
     public void domainTest() throws Exception{
-        dataProperty.readExpressionAxioms();
+/*        dataProperty.readExpressionAxioms();
         assertSemantic();
         dataProperty.addDomainClassRestriction("Sphere");
         dataProperty.readExpressionAxioms();
@@ -160,14 +160,15 @@ public class FullDataPropertyDescTest {
         dataProperty.removeDomainClassRestriction( "Sphere");
         dataProperty.writeExpressionAxioms();
         assertSemantic();
-
+*/
         dataProperty.addDomainClassRestriction( "ClassRestrictionTest");
         dataProperty.writeExpressionAxioms();
         assertSemantic();
 
-
-
         dataProperty.readExpressionAxioms();
+        assertSemantic();
+        dataProperty.getDataPropertyDomainRestrictions().clear();
+        dataProperty.writeExpressionAxioms();
         assertSemantic();
         dataProperty.addDomainExactDataRestriction( "hasDomainProperty", 3, Long.class);
         dataProperty.readExpressionAxioms();
@@ -187,9 +188,12 @@ public class FullDataPropertyDescTest {
         dataProperty.addDomainMinDataRestriction( "hasDomainDataPropertyTest", 3, Double.class);
         dataProperty.writeExpressionAxioms();
         assertSemantic();
+        dataProperty.addDomainClassRestriction( "TestClass");
+        dataProperty.writeExpressionAxioms();
+        assertSemantic();
 
 
-
+/*
         dataProperty.readExpressionAxioms();
         assertSemantic();
         dataProperty.addDomainExactObjectRestriction( "hasDomainProperty", 3, "Plane");
@@ -211,8 +215,8 @@ public class FullDataPropertyDescTest {
         dataProperty.addDomainMaxObjectRestriction( "hasDomainDataPropertyTest", 2, "Cone");
         dataProperty.writeReadExpressionAxioms(); // the reasoner always infers here
         assertSemantic();
-
-        System.out.println( "described data property, domain test: " + dataProperty.getDataPropertyDomainConcepts());
+*/
+        System.out.println( "described data property, domain test: " + dataProperty.getDataPropertyDomainRestrictions());
     }
 
 
@@ -226,7 +230,7 @@ public class FullDataPropertyDescTest {
         dataProperty.writeExpressionAxioms();
         assertSemantic();
         dataProperty.addRangeDataRestriction( Long.class);
-        dataProperty.writeExpressionAxioms();
+        dataProperty.writeReadExpressionAxioms();
         assertSemantic();
         dataProperty.removeRangeDataRestriction( Long.class);
         dataProperty.readExpressionAxioms();
@@ -241,18 +245,18 @@ public class FullDataPropertyDescTest {
         dataProperty.writeReadExpressionAxioms();
         assertSemantic();
 
-        System.out.println( "described object property, range test: " + dataProperty.getDataPropertyRangeConcepts());
+        System.out.println( "described object property, range test: " + dataProperty.getDataPropertyRangeRestrictions());
     }
 
-
-
-
+    int cnt = 0;
     public void assertSemantic(){ // asserts that the state of the java representation is equal to the state of the ontology
+        System.out.println( ++cnt + " -> " + dataProperty);
+
         assertEquals( dataProperty.getSubDataProperties(), dataProperty.querySubDataProperties());
         assertEquals( dataProperty.getSuperDataProperties(), dataProperty.querySuperDataProperties());
         assertEquals( dataProperty.getDisjointDataProperties(), dataProperty.queryDisjointDataProperties());
         assertEquals( dataProperty.getEquivalentDataProperties(), dataProperty.queryEquivalentDataProperties());
-        assertEquals( dataProperty.getDataPropertyDomainConcepts(), dataProperty.queryDomainDataProperties());
-        assertEquals( dataProperty.getDataPropertyRangeConcepts(), dataProperty.queryRangeDataProperties());
+        assertEquals( dataProperty.getDataPropertyDomainRestrictions(), dataProperty.queryDomainDataProperties());
+        assertEquals( dataProperty.getDataPropertyRangeRestrictions(), dataProperty.queryRangeDataProperties());
     }
 }

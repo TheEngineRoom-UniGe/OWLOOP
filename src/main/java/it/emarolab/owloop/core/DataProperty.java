@@ -488,8 +488,8 @@ public interface DataProperty<O,J>
             try {
                 EntitySet.SynchronisationIntent<Y> from = synchroniseDomainDataPropertyFromExpressionAxioms();
                 if ( from != null) {
-                    getDataPropertyDomainConcepts().addAll(from.getToAdd());
-                    getDataPropertyDomainConcepts().removeAll(from.getToRemove());
+                    getDataPropertyDomainRestrictions().addAll(from.getToAdd());
+                    getDataPropertyDomainRestrictions().removeAll(from.getToRemove());
                 }
                 return getIntent(from);
             } catch (Exception e){
@@ -503,7 +503,7 @@ public interface DataProperty<O,J>
          * domain of the described property; from a no OOP point of view.
          * @return the restrictions describing the domain of {@code this} grounded the data property.
          */
-        EntitySet<Y> getDataPropertyDomainConcepts();
+        EntitySet<Y> getDataPropertyDomainRestrictions();
 
         /**
          * Queries to the OWL representation for the domain restrictions of {@code this} data property.
@@ -515,14 +515,14 @@ public interface DataProperty<O,J>
         /**
          * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryDomainDataProperties()}
          * as input parameter. This computes the changes to be performed in the OWL representation
-         * for synchronise it with respect to {@link #getDataPropertyDomainConcepts()}. This should
+         * for synchronise it with respect to {@link #getDataPropertyDomainRestrictions()}. This should
          * be done by {@link #writeExpressionAxioms()}.
          * @return the changes to be done to synchronise {@code this} structure with
          * the domain restriction of {@link #getInstance()}; to the OWL representation.
          */
         default EntitySet.SynchronisationIntent<Y> synchroniseDomainDataPropertyToExpressionAxioms(){
             try {
-                return getDataPropertyDomainConcepts().synchroniseTo( queryDomainDataProperties());
+                return getDataPropertyDomainRestrictions().synchroniseTo( queryDomainDataProperties());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -531,7 +531,7 @@ public interface DataProperty<O,J>
 
         /**
          * It calls {@link ExpressionEntitySet#synchroniseFrom(EntitySet)} with {@link #queryDomainDataProperties()}
-         * as input parameter. This computes the changes to be performed into the {@link #getDataPropertyDomainConcepts()}
+         * as input parameter. This computes the changes to be performed into the {@link #getDataPropertyDomainRestrictions()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readExpressionAxioms()}.
          * @return the changes to be done to synchronise the domain restrictions of {@link #getInstance()};
@@ -539,7 +539,7 @@ public interface DataProperty<O,J>
          */
         default EntitySet.SynchronisationIntent<Y> synchroniseDomainDataPropertyFromExpressionAxioms(){
             try{
-                return getDataPropertyDomainConcepts().synchroniseFrom( queryDomainDataProperties());
+                return getDataPropertyDomainRestrictions().synchroniseFrom( queryDomainDataProperties());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -580,8 +580,8 @@ public interface DataProperty<O,J>
             try {
                 EntitySet.SynchronisationIntent<Y> from = synchroniseRangeDataPropertyFromExpressionAxioms();
                 if (from != null) {
-                    getDataPropertyRangeConcepts().addAll(from.getToAdd());
-                    getDataPropertyRangeConcepts().removeAll(from.getToRemove());
+                    getDataPropertyRangeRestrictions().addAll(from.getToAdd());
+                    getDataPropertyRangeRestrictions().removeAll(from.getToRemove());
                 }
                 return getIntent(from);
             } catch ( Exception e){
@@ -595,7 +595,7 @@ public interface DataProperty<O,J>
          * range of the described property; from a no OOP point of view.
          * @return the restrictions describing the range of {@code this} grounded the data property.
          */
-        EntitySet<Y> getDataPropertyRangeConcepts();
+        EntitySet<Y> getDataPropertyRangeRestrictions();
 
         /**
          * Queries to the OWL representation for the range restrictions of {@code this} data property.
@@ -607,14 +607,14 @@ public interface DataProperty<O,J>
         /**
          * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryRangeDataProperties()}
          * as input parameter. This computes the changes to be performed in the OWL representation
-         * for synchronise it with respect to {@link #getDataPropertyRangeConcepts()}. This should
+         * for synchronise it with respect to {@link #getDataPropertyRangeRestrictions()}. This should
          * be done by {@link #writeExpressionAxioms()}.
          * @return the changes to be done to synchronise {@code this} structure with
          * the range restriction of {@link #getInstance()}; to the OWL representation.
          */
         default EntitySet.SynchronisationIntent<Y> synchroniseRangeDataPropertyToExpressionAxioms(){
             try {
-                return getDataPropertyRangeConcepts().synchroniseTo( queryRangeDataProperties());
+                return getDataPropertyRangeRestrictions().synchroniseTo( queryRangeDataProperties());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -623,7 +623,7 @@ public interface DataProperty<O,J>
 
         /**
          * It calls {@link ExpressionEntitySet#synchroniseFrom(EntitySet)} with {@link #queryRangeDataProperties()}
-         * as input parameter. This computes the changes to be performed into the {@link #getDataPropertyRangeConcepts()}
+         * as input parameter. This computes the changes to be performed into the {@link #getDataPropertyRangeRestrictions()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readExpressionAxioms()}.
          * @return the changes to be done to synchronise the range restrictions of {@link #getInstance()};
@@ -631,7 +631,7 @@ public interface DataProperty<O,J>
          */
         default EntitySet.SynchronisationIntent<Y> synchroniseRangeDataPropertyFromExpressionAxioms(){
             try{
-                return getDataPropertyRangeConcepts().synchroniseFrom( queryRangeDataProperties());
+                return getDataPropertyRangeRestrictions().synchroniseFrom( queryRangeDataProperties());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
