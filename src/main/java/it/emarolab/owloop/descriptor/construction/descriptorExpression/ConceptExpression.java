@@ -1252,7 +1252,7 @@ public interface ConceptExpression
 
         @Override // see super classes for documentation
         default DescriptorEntitySet.Restrictions queryRestrictionConcepts(){
-            Set< Set<ApplyingRestriction>> restrictionsSet = getOntology().getRestrictions(getInstance());
+            Set< Set<ApplyingRestriction>> restrictionsSet = getOntology().getRestriction(getInstance());
             Set<ApplyingRestriction> restrictions = new HashSet<>();
             for ( Set<ApplyingRestriction> r : restrictionsSet){
                 restrictions = r;

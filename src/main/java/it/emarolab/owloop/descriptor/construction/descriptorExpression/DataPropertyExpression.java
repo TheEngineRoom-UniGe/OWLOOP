@@ -1227,7 +1227,7 @@ public interface DataPropertyExpression
 
         @Override // see super class for documentation
         default DescriptorEntitySet.Restrictions queryDomainDataProperties(){
-            DescriptorEntitySet.Restrictions set = new DescriptorEntitySet.Restrictions(getOntology().getDomainRestriction(getInstance()));
+           // DescriptorEntitySet.Restrictions set = new DescriptorEntitySet.Restrictions(getOntology().getDomainRestriction(getInstance()));
             set.setSingleton( getDataPropertyDomainConcepts().isSingleton());
             return set;
         }
@@ -1298,7 +1298,7 @@ public interface DataPropertyExpression
 
         @Override // see super class for documentation
         default DescriptorEntitySet.Restrictions queryRangeDataProperties(){
-            DescriptorEntitySet.Restrictions set = new DescriptorEntitySet.Restrictions(getOntology().getRangeRestriction(getInstance()));
+         //   DescriptorEntitySet.Restrictions set = new DescriptorEntitySet.Restrictions(getOntology().getRangeRestriction(getInstance()));
             set.setSingleton( getDataPropertyRangeConcepts().isSingleton());
             return set;
         }
