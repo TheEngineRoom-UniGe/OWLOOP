@@ -1252,7 +1252,7 @@ public interface ConceptExpression
 
         @Override // see super classes for documentation
         default DescriptorEntitySet.Restrictions queryRestrictionConcepts(){
-            Set< Set<ApplyingRestriction>> restrictionsSet = getOntology().getRestriction(getInstance());
+            Set< Set<ApplyingRestriction>> restrictionsSet = getOntology().getClassRestrictions( getInstance());
             Set<ApplyingRestriction> restrictions = new HashSet<>();
             for ( Set<ApplyingRestriction> r : restrictionsSet){
                 restrictions = r;
@@ -1260,7 +1260,7 @@ public interface ConceptExpression
             }
             if ( restrictionsSet.size() > 1)
                 System.err.println( "WARNING: all the restriction that define a concept should be contained in a single axiom." +
-                        "Only axiom \'" + restrictions + "\' is considered in \'" + restrictionsSet + "\'");
+                        " Only axiom \'" + restrictions + "\' is considered in \'" + restrictionsSet + "\'");
             // remove self
             for ( ApplyingRestriction a : restrictions)
                 if ( a.getRestrictionType().isRestrictionOnClass())

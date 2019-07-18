@@ -91,3 +91,4 @@ For any information or support, please do not hesitate to contact us through thi
      - intent for inconsistency
      - add test info
 - [ ] Check data/object domain/range restriction 
+- [ ] check reasoning for data/object reange domain (probably not supported in this version: document)

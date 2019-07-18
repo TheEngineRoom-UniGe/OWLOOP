@@ -1365,7 +1365,23 @@ public interface ObjectPropertyExpression
 
         @Override // see super class for documentation
         default DescriptorEntitySet.Restrictions queryObjectPropertyDomainConcepts(){
-            DescriptorEntitySet.Restrictions set = new DescriptorEntitySet.Restrictions(getOntology().getDomainRestriction(getInstance()));
+            Set< Set<ApplyingRestriction>> restrictionsSet = getOntology().getObjectDomainRestrictions(getInstance());
+            Set<ApplyingRestriction> restrictions = new HashSet<>();
+            for ( Set<ApplyingRestriction> r : restrictionsSet){
+                restrictions = r;
+                break;
+            }
+            if ( restrictionsSet.size() > 1)
+                System.err.println( "WARNING: all the restriction that define an object domain should be contained in a single axiom." +
+                        "Only axiom \'" + restrictions + "\' is considered in \'" + restrictionsSet + "\'");
+            // remove self
+            for ( ApplyingRestriction a : restrictions)
+                if ( a.getRestrictionType().isRestrictionOnClass())
+                    if ( a.getValue().equals( getInstance())){
+                        restrictions.remove( a);
+                        break;
+                    }
+            DescriptorEntitySet.Restrictions set = new DescriptorEntitySet.Restrictions( restrictions);
             set.setSingleton( getObjectPropertyDomainConcepts().isSingleton());
             return set;
         }
@@ -2191,7 +2207,23 @@ public interface ObjectPropertyExpression
 
         @Override // see super class for documentation
         default DescriptorEntitySet.Restrictions queryObjectPropertyRangeConcepts(){
-            DescriptorEntitySet.Restrictions set = new DescriptorEntitySet.Restrictions(getOntology().getRangeRestriction(getInstance()));
+            Set< Set<ApplyingRestriction>> restrictionsSet = getOntology().getObjectRangeRestrictions(getInstance());
+            Set<ApplyingRestriction> restrictions = new HashSet<>();
+            for ( Set<ApplyingRestriction> r : restrictionsSet){
+                restrictions = r;
+                break;
+            }
+            if ( restrictionsSet.size() > 1)
+                System.err.println( "WARNING: all the restriction that define an object range should be contained in a single axiom." +
+                        "Only axiom \'" + restrictions + "\' is considered in \'" + restrictionsSet + "\'");
+            // remove self
+            for ( ApplyingRestriction a : restrictions)
+                if ( a.getRestrictionType().isRestrictionOnClass())
+                    if ( a.getValue().equals( getInstance())){
+                        restrictions.remove( a);
+                        break;
+                    }
+            DescriptorEntitySet.Restrictions set = new DescriptorEntitySet.Restrictions( restrictions);
             set.setSingleton( getObjectPropertyRangeConcepts().isSingleton());
             return set;
         }

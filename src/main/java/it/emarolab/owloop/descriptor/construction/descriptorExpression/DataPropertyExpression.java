@@ -1227,9 +1227,26 @@ public interface DataPropertyExpression
 
         @Override // see super class for documentation
         default DescriptorEntitySet.Restrictions queryDomainDataProperties(){
-           // DescriptorEntitySet.Restrictions set = new DescriptorEntitySet.Restrictions(getOntology().getDomainRestriction(getInstance()));
+            Set< Set<ApplyingRestriction>> restrictionsSet = getOntology().getDataDomainRestrictions(getInstance());
+            Set<ApplyingRestriction> restrictions = new HashSet<>();
+            for ( Set<ApplyingRestriction> r : restrictionsSet){
+                restrictions = r;
+                break;
+            }
+            if ( restrictionsSet.size() > 1)
+                System.err.println( "WARNING: all the restriction that define a data property domain should be contained in a single axiom." +
+                        " Only axiom \'" + restrictions + "\' is considered in \'" + restrictionsSet + "\'");
+            // remove self
+            for ( ApplyingRestriction a : restrictions)
+                if ( a.getRestrictionType().isRestrictionOnClass())
+                    if ( a.getValue().equals( getInstance())){
+                        restrictions.remove( a);
+                        break;
+                    }
+            DescriptorEntitySet.Restrictions set = new DescriptorEntitySet.Restrictions( restrictions);
             set.setSingleton( getDataPropertyDomainConcepts().isSingleton());
             return set;
+
         }
 
         @Override // see super class for documentation
@@ -1237,10 +1254,15 @@ public interface DataPropertyExpression
             try {
                 EntitySet.SynchronisationIntent<SemanticRestriction> to = synchroniseDomainDataPropertyToExpressionAxioms();
                 List<OWLOntologyChange> changes = new ArrayList<>();
-                for (SemanticRestriction a : to.getToAdd())
-                    changes.add(getOntology().addRestriction(a));
-                for (SemanticRestriction r : to.getToRemove())
-                    changes.add(getOntology().removeRestriction(r));
+                // not optimised: it does not sync only the changes but it removes and re-add the axiom
+                if ( ! to.getToAdd().isEmpty() || ! to.getToRemove().isEmpty()) {
+                    for( Set<ApplyingRestriction> r : getOntology().getDataDomainRestrictions( getInstance()))
+                        changes.add(getOntology().removeRestrictionAxiom ( r)); // remove all
+                    HashSet<SemanticRestriction> copy = new HashSet<>(to.getToAdd());
+                    copy.addAll( to.getUnchanged());
+                    changes.add(getOntology().addRestrictionAxiom( copy));
+                }
+
                 return getChangingIntent(to, changes);
             } catch (Exception e){
                 e.printStackTrace();
@@ -1249,6 +1271,7 @@ public interface DataPropertyExpression
         }
     }
 
+    
     /**
      * The {@link DataProperty.Range} expression for a {@link Descriptor} whose ground is {@link OWLDataProperty}.
      * <p>
@@ -1298,7 +1321,7 @@ public interface DataPropertyExpression
 
         @Override // see super class for documentation
         default DescriptorEntitySet.Restrictions queryRangeDataProperties(){
-         //   DescriptorEntitySet.Restrictions set = new DescriptorEntitySet.Restrictions(getOntology().getRangeRestriction(getInstance()));
+            DescriptorEntitySet.Restrictions set = new DescriptorEntitySet.Restrictions(getOntology().getDataRangeRestrictions(getInstance()));
             set.setSingleton( getDataPropertyRangeConcepts().isSingleton());
             return set;
         }
@@ -1307,13 +1330,15 @@ public interface DataPropertyExpression
         default List<MappingIntent> writeExpressionAxioms(){
             try {
                 EntitySet.SynchronisationIntent<SemanticRestriction> to = synchroniseRangeDataPropertyToExpressionAxioms();
-                if ( to == null)
-                    return getIntent( null);
                 List<OWLOntologyChange> changes = new ArrayList<>();
-                for (SemanticRestriction a : to.getToAdd())
-                    changes.add(getOntology().addRestriction(a));
-                for (SemanticRestriction r : to.getToRemove())
-                    changes.add(getOntology().removeRestriction(r));
+                // not optimised: it does not sync only the changes but it removes and re-add the axiom
+                if ( ! to.getToAdd().isEmpty() || ! to.getToRemove().isEmpty()) {
+                    changes.remove(getOntology().removeRestrictionAxiom(queryRangeDataProperties()));
+                    HashSet<SemanticRestriction> copy = new HashSet<>(to.getToAdd());
+                    copy.addAll( to.getUnchanged());
+                    changes.add(getOntology().addRestrictionAxiom( copy));
+                }
+
                 return getChangingIntent(to, changes);
             } catch (Exception e){
                 e.printStackTrace();
