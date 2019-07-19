@@ -80,15 +80,15 @@ For any information or support, please do not hesitate to contact us through thi
 ## 8. Check List Before Publishing Repo on Maven Central
 
 - [ ] Add the UML in /documentation directory
-- [ ] Create a fresh JavaDoc in /docs directory
-- [ ] Finalize a plan for AMOR dependency. (*Luca gives green signal for pushing AMOR to Maven Central*)
+- [ ] Create a fresh JavaDoc in **/docs** directory
+- [ ] Finalize a plan for AMOR 2.2 dependency. (*Luca gives green signal for pushing AMOR to Maven Central*)
 - [ ] Make OWLOOP as a release 2.0
 - [ ] Add disjoint to the Classes (ROBOT disjoint with DOOR AND LOCATION) and Individuals (all disjoint to each other)
-- [ ] Merge with the master branch
+- [ ] **Renbse** with the master branch
 - [ ] Check doc since `define concept` become `concept restriction`
-- [ ] Add in Readme known issue
-     - read write readWrite(boolean) depends on ontology state (es: restriction myh add super classes)
-     - intent for inconsistency
+- [ ] Add in Readme 
+     - known issue read write readWrite(boolean) depends on ontology state (eg, restriction might add super classes)
+     - intent feature for inconsistency
      - add test info
-- [ ] Check data/object domain/range restriction 
-- [ ] check reasoning for data/object reange domain (probably not supported in this version: document)
+- [ ] reasoning for data/object reange domain not supported in this version: document it.
+- [ ] check compliance copyritght with dependences
