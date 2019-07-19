@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package>
+    <name>owloop</name>
+    <version>2.0.0</version>
+  <description>OWL-OOP</description>
+
+    <maintainer email="luca.buoncompagni@edu.unige.it">Luca Buoncompagni</maintainer>
+    <author email="luca.buoncompagni@edu.unige.it">Luca Buoncompagni</author>
+    <url type="website">https://github.com/EmaroLab/owloop</url>
+    <license>GNUv3</license>
+
+
+
+    <buildtool_depend>catkin</buildtool_depend>
+    <build_depend>rosjava_build_tools</build_depend>
+    <build_depend>multi_ontology_reference</build_depend>
+    
+    <!-- The export tag contains other, unspecified, tags -->
+    <export>
+        <!-- Other tools can request additional information be placed here -->
+
+    </export>
+</package>
