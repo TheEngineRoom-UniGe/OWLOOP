@@ -6,15 +6,16 @@ import it.emarolab.amor.owlInterface.SemanticRestriction.*;
 import it.emarolab.owloop.core.ObjectProperty;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.DescriptorGroundInterface;
-import org.semanticweb.owlapi.model.OWLClass;
-import org.semanticweb.owlapi.model.OWLDataProperty;
-import org.semanticweb.owlapi.model.OWLObjectProperty;
-import org.semanticweb.owlapi.model.OWLOntologyChange;
+import org.semanticweb.owlapi.model.*;
+import org.semanticweb.owlapi.reasoner.InconsistentOntologyException;
+import uk.ac.manchester.cs.owl.owlapi.OWLObjectAllValuesFromImpl;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * This interface extends all the interfaces in {@link ObjectProperty}.
@@ -268,6 +269,7 @@ public interface ObjectPropertyExpression
         default DescriptorEntitySet.ObjectProperties queryDisjointObjectProperties(){
             DescriptorEntitySet.ObjectProperties set = new DescriptorEntitySet.ObjectProperties(getOntology().getDisjointObjectProperty(getInstance()));
             set.remove( getInstance());
+            set.remove( getOntology().getOWLFactory().getOWLBottomObjectProperty());
             set.setSingleton( getDisjointObjectProperties().isSingleton());
             return set;
         }
@@ -1388,20 +1390,24 @@ public interface ObjectPropertyExpression
 
         @Override // see super class for documentation
         default List<MappingIntent> writeExpressionAxioms(){
-            try{
+            try {
                 EntitySet.SynchronisationIntent<SemanticRestriction> to = synchroniseDomainObjectPropertyToExpressionAxioms();
-                if ( to == null)
-                    return getIntent( null);
                 List<OWLOntologyChange> changes = new ArrayList<>();
-                for( SemanticRestriction a : to.getToAdd())
-                    changes.add( getOntology().addRestriction( a));
-                for( SemanticRestriction r : to.getToRemove())
-                    changes.add( getOntology().removeRestriction( r));
-                return getChangingIntent( to, changes);
-            } catch ( Exception e){
+                // not optimised: it does not sync only the changes but it removes and re-add the axiom
+                if ( ! to.getToAdd().isEmpty() || ! to.getToRemove().isEmpty()) {
+                    for( Set<ApplyingRestriction> r : getOntology().getObjectDomainRestrictions( getInstance()))
+                        changes.add(getOntology().removeRestrictionAxiom ( r)); // remove all
+                    HashSet<SemanticRestriction> copy = new HashSet<>(to.getToAdd());
+                    copy.addAll( to.getUnchanged());
+                    changes.add(getOntology().addRestrictionAxiom( copy));
+                }
+
+                return getChangingIntent(to, changes);
+            } catch (Exception e){
                 e.printStackTrace();
                 return getIntent( null);
             }
+
         }
     }
 
@@ -2207,7 +2213,7 @@ public interface ObjectPropertyExpression
 
         @Override // see super class for documentation
         default DescriptorEntitySet.Restrictions queryObjectPropertyRangeConcepts(){
-            Set< Set<ApplyingRestriction>> restrictionsSet = getOntology().getObjectRangeRestrictions(getInstance());
+            Set< Set<ApplyingRestriction>> restrictionsSet =  getOntology().getObjectRangeRestrictions(getInstance());
             Set<ApplyingRestriction> restrictions = new HashSet<>();
             for ( Set<ApplyingRestriction> r : restrictionsSet){
                 restrictions = r;
@@ -2230,21 +2236,29 @@ public interface ObjectPropertyExpression
 
         @Override // see super class for documentation
         default List<MappingIntent> writeExpressionAxioms(){
-            try{
+            try {
                 EntitySet.SynchronisationIntent<SemanticRestriction> to = synchroniseRangeObjectPropertyToExpressionAxioms();
-                if ( to == null)
-                    return getIntent( null);
                 List<OWLOntologyChange> changes = new ArrayList<>();
-                for( SemanticRestriction a : to.getToAdd())
-                    changes.add( getOntology().addRestriction( a));
-                for( SemanticRestriction r : to.getToRemove())
-                    changes.add( getOntology().removeRestriction( r));
-                return getChangingIntent( to, changes);
-            } catch ( Exception e){
+                // not optimised: it does not sync only the changes but it removes and re-add the axiom
+                if ( ! to.getToAdd().isEmpty() || ! to.getToRemove().isEmpty()) {
+                    for( Set<ApplyingRestriction> r : getOntology().getObjectRangeRestrictions( getInstance()))
+                        changes.add(getOntology().removeRestrictionAxiom ( r)); // remove all
+                    HashSet<SemanticRestriction> copy = new HashSet<>(to.getToAdd());
+                    copy.addAll( to.getUnchanged());
+                    changes.add(getOntology().addRestrictionAxiom( copy));
+                }
+
+                return getChangingIntent(to, changes);
+            } catch (Exception e){
                 e.printStackTrace();
                 return getIntent( null);
             }
         }
+
+
+
+
+
     }
 
 }

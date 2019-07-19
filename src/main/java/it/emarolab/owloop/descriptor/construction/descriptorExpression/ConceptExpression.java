@@ -203,7 +203,7 @@ public interface ConceptExpression
         default DescriptorEntitySet.Concepts queryDisjointConcepts(){
             DescriptorEntitySet.Concepts set = new DescriptorEntitySet.Concepts(getOntology().getDisjointClasses(getInstance()));
             set.remove( getInstance());
-            //set.remove( getOntology().getOWLFactory().getOWLNothing());
+            set.remove( getOntology().getOWLFactory().getOWLNothing());
             set.setSingleton( getDisjointConcepts().isSingleton());
             return set;
         }

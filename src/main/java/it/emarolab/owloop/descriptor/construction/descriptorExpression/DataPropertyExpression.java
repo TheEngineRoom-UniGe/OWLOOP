@@ -131,6 +131,7 @@ public interface DataPropertyExpression
         default DescriptorEntitySet.DataProperties queryDisjointDataProperties(){
             DescriptorEntitySet.DataProperties set = new DescriptorEntitySet.DataProperties(getOntology().getDisjointDataProperty(getInstance()));
             set.remove( getInstance());
+            set.remove( getOntology().getOWLFactory().getOWLBottomDataProperty());
             set.setSingleton( getDisjointDataProperties().isSingleton());
             return set;
         }

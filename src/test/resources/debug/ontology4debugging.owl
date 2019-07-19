@@ -247,7 +247,6 @@
     <!-- http://www.semanticweb.org/emaroLab/luca-buoncompagni/sit#isAboveOf -->
 
     <owl:ObjectProperty rdf:about="&sit;isAboveOf">
-        <rdfs:range rdf:resource="&sit;GeometricPrimitive"/>
         <rdfs:domain rdf:resource="&sit;GeometricPrimitive"/>
         <owl:inverseOf rdf:resource="&sit;isBelowOf"/>
     </owl:ObjectProperty>
@@ -785,6 +784,12 @@
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
+    
+
+
+    <!-- http://www.semanticweb.org/emaroLab/luca-buoncompagni/sit#AAA -->
+
+    <owl:Class rdf:about="&sit;AAA"/>
     
 
 

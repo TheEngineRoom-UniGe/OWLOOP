@@ -208,7 +208,7 @@ public class FullObjectPropertyDescTest {
         objectProperty.writeExpressionAxioms();
         assertSemantic();
 
-        objectProperty.addDomainMinDataRestriction( "hasDomainPropertyTest", 3, Double.class);
+        objectProperty.addDomainMinDataRestriction( "hasDomainPropertyTest2", 3, Double.class);
         objectProperty.writeExpressionAxioms();
         assertSemantic();
 
@@ -263,8 +263,6 @@ public class FullObjectPropertyDescTest {
         objectProperty.writeExpressionAxioms();
         assertSemantic();
 
-
-
         objectProperty.readExpressionAxioms();
         assertSemantic();
         objectProperty.addRangeExactDataRestriction( "hasRangeProperty", 3, Long.class);
@@ -282,12 +280,6 @@ public class FullObjectPropertyDescTest {
         objectProperty.writeExpressionAxioms();
         assertSemantic();
 
-        objectProperty.addRangeMinDataRestriction( "hasRangePropertyTest", 3, Double.class);
-        objectProperty.writeExpressionAxioms();
-        assertSemantic();
-
-
-
         objectProperty.readExpressionAxioms();
         assertSemantic();
         objectProperty.addRangeExactObjectRestriction( "hasRangeProperty", 3, "Plane");
@@ -296,15 +288,21 @@ public class FullObjectPropertyDescTest {
         objectProperty.writeExpressionAxioms();
         assertSemantic();
         objectProperty.addRangeExactObjectRestriction( "hasRangeProperty", 3, "Plane");
-        objectProperty.addRangeExactObjectRestriction( "hasRangeProperty", 3, "Plane");
-        objectProperty.writeReadExpressionAxioms(); // the reasoner always infers here
+
+        objectProperty.removeRangeClassRestriction( "GeometricPrimitive");
+        objectProperty.writeExpressionAxioms();
         assertSemantic();
+        objectProperty.addRangeExactObjectRestriction( "hasRangeProperty", 4, "Plane");
+        objectProperty.writeReadExpressionAxioms();
+        assertSemantic();
+
         objectProperty.removeRangeExactObjectRestriction( "hasRangeProperty", 3, "Plane");
         objectProperty.readExpressionAxioms();
         assertSemantic();
-        objectProperty.removeRangeExactObjectRestriction( "hasRangeProperty", 3, "Plane");
-        objectProperty.writeReadExpressionAxioms(); // the reasoner always infers here
+        objectProperty.removeRangeExactObjectRestriction( "hasRangeProperty", 4, "Plane");
+        objectProperty.writeReadExpressionAxioms();
         assertSemantic();
+
 
         objectProperty.addRangeMaxObjectRestriction( "hasRangePropertyTest", 2, "Cone");
         objectProperty.writeReadExpressionAxioms(); // the reasoner always infers here
@@ -313,10 +311,9 @@ public class FullObjectPropertyDescTest {
         System.out.println( "described object property, range test: " + objectProperty.getObjectPropertyRangeConcepts());
     }
 
-
-
-
+    int cnt = 0;
     public void assertSemantic(){ // asserts that the state of the java representation is equal to the state of the ontology
+        System.out.println( ++cnt + " ->   " + objectProperty);
         assertEquals( objectProperty.getSubObjectProperties(), objectProperty.querySubObjectProperties());
         assertEquals( objectProperty.getSuperObjectProperties(), objectProperty.querySuperObjectProperties());
         assertEquals( objectProperty.getDisjointObjectProperties(), objectProperty.queryDisjointObjectProperties());
