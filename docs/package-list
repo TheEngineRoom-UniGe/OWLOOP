@@ -1,0 +1,8 @@
+it.emarolab.owloop.core
+it.emarolab.owloop.descriptor.construction.descriptorEntitySet
+it.emarolab.owloop.descriptor.construction.descriptorExpression
+it.emarolab.owloop.descriptor.construction.descriptorGround
+it.emarolab.owloop.descriptor.utility.conceptDescriptor
+it.emarolab.owloop.descriptor.utility.dataPropertyDescriptor
+it.emarolab.owloop.descriptor.utility.individualDescriptor
+it.emarolab.owloop.descriptor.utility.objectPropertyDescriptor
