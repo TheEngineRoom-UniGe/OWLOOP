@@ -7,6 +7,12 @@
   <version>2.0.0</version>
   <dependencies>
     <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
       <groupId>net.sourceforge.owlapi</groupId>
       <artifactId>owlapi-distribution</artifactId>
       <version>5.0.5</version>

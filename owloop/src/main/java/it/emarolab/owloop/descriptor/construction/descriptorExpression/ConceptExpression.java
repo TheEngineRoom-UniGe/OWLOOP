@@ -1293,8 +1293,8 @@ public interface ConceptExpression
                     for (SemanticRestriction a : to.getToAdd())
                         changes.add(getOntology().addRestriction(a));
 
-                    if ( ! getRestrictionConcepts().isEmpty())
-                        changes.addAll(getOntology().convertSuperClassesToEquivalentClass(getInstance()));//getRestrictionConcepts()));
+//                    if ( ! getRestrictionConcepts().isEmpty())
+                        changes.addAll(getOntology().convertSuperClassesToEquivalentClass(getInstance(), getRestrictionConcepts()));
                 }
 
                 return getChangingIntent(to, changes);
