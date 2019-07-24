@@ -17,14 +17,14 @@ import java.util.List;
  * <li><b>{@link ConceptExpression.Equivalent}</b>:  to describe that a Class is equivalent to another Class.</li>
  * <li><b>{@link ConceptExpression.Disjoint}</b>:    to describe that a Class is disjoint to another Class.</li>
  * <li><b>{@link ConceptExpression.Instance}</b>:    to describe an Individual of a Class.</li>
- * <li><b>{@link Restriction}</b>:  to describe the definition of a Class..</li>
+ * <li><b>{@link EquivalentRestriction}</b>:  to describe the definition of a Class..</li>
  * </ul>
  *
  *  See {@link FullConceptDesc} for an example of a 'compound' Concept Descriptor that implements all ClassExpressions (aka {@link ConceptExpression}).
  */
 public class RestrictionConceptDesc
         extends ConceptGround
-        implements ConceptExpression.Restriction,
+        implements ConceptExpression.EquivalentRestriction,
         ConceptExpression.Disjoint<RestrictionConceptDesc>,
         ConceptExpression.Equivalent<RestrictionConceptDesc>,
         ConceptExpression.Instance<LinkIndividualDesc> {
@@ -69,7 +69,7 @@ public class RestrictionConceptDesc
     public List<MappingIntent> readExpressionAxioms() {
         List<MappingIntent> r = ConceptExpression.Disjoint.super.readExpressionAxioms();
         r.addAll( ConceptExpression.Equivalent.super.readExpressionAxioms());
-        r.addAll( Restriction.super.readExpressionAxioms());
+        r.addAll( EquivalentRestriction.super.readExpressionAxioms());
         r.addAll( Instance.super.readExpressionAxioms());
         return r;
     }
@@ -78,7 +78,7 @@ public class RestrictionConceptDesc
     public List<MappingIntent> writeExpressionAxioms() {
         List<MappingIntent> r = ConceptExpression.Disjoint.super.writeExpressionAxioms();
         r.addAll( ConceptExpression.Equivalent.super.writeExpressionAxioms());
-        r.addAll( Restriction.super.writeExpressionAxioms());
+        r.addAll( EquivalentRestriction.super.writeExpressionAxioms());
         r.addAll( Instance.super.writeExpressionAxioms());
         return r;
     }

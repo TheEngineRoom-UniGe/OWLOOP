@@ -69,12 +69,12 @@ public class UseDescriptorBuild {
 
                     if( rest instanceof SemanticRestriction.ClassRestrictedOnExactObject ){
 
-                        System.out.println( "\n" + "'" + d3.getGroundInstanceName() + "'" + " is defined with Exact Cardinality Restriction " + "'" + rest + "'"); // printing
+                        System.out.println( "\n" + "'" + d3.getGroundInstanceName() + "'" + " is defined with Exact Cardinality EquivalentRestriction " + "'" + rest + "'"); // printing
                     }
 
                     else if( rest instanceof SemanticRestriction.ClassRestrictedOnMinObject ){
 
-                        System.out.println( "\n" + "'" + d3.getGroundInstanceName() + "'" + " is defined with Min Cardinality Restriction " + "'" + rest + "'"); // printing
+                        System.out.println( "\n" + "'" + d3.getGroundInstanceName() + "'" + " is defined with Min Cardinality EquivalentRestriction " + "'" + rest + "'"); // printing
                     }
                 }
             }

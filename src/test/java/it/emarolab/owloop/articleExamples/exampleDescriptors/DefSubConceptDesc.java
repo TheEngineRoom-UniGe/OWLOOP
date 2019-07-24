@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * This is an example of a 'compound' Concept Descriptor which implements 2 {@link ConceptExpression} interfaces:
  * <ul>
- * <li><b>{@link Restriction}</b>:  to describe the definition of a Class..</li>
+ * <li><b>{@link EquivalentRestriction}</b>:  to describe the definition of a Class..</li>
  * <li><b>{@link ConceptExpression.Sub}</b>:         to describe that a Class subsumes another Class.</li>
  * </ul>
  * <p>
@@ -22,7 +22,7 @@ import java.util.List;
  */
 public class DefSubConceptDesc
         extends ConceptGround
-        implements ConceptExpression.Restriction,
+        implements ConceptExpression.EquivalentRestriction,
         ConceptExpression.Sub<DefSubConceptDesc>{
 
     private DescriptorEntitySet.Restrictions conceptRestrictions = new DescriptorEntitySet.Restrictions();
@@ -36,7 +36,7 @@ public class DefSubConceptDesc
     // implementations for Axiom.descriptor
     @Override
     public List<MappingIntent> readExpressionAxioms() {
-        List<MappingIntent> r = Restriction.super.readExpressionAxioms(); // call this before Sub or Super !!!
+        List<MappingIntent> r = EquivalentRestriction.super.readExpressionAxioms(); // call this before Sub or Super !!!
         r.addAll( Sub.super.readExpressionAxioms());
         return r;
     }
@@ -44,7 +44,7 @@ public class DefSubConceptDesc
     @Override
     public List<MappingIntent> writeExpressionAxioms() {
         List<MappingIntent> r = Sub.super.writeExpressionAxioms();
-        r.addAll( Restriction.super.writeExpressionAxioms()); // call this before Sub or Super !!!
+        r.addAll( EquivalentRestriction.super.writeExpressionAxioms()); // call this before Sub or Super !!!
         return r;
     }
 

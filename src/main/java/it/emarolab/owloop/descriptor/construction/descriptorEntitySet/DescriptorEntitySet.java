@@ -20,7 +20,7 @@ import java.util.Set;
  * <li><b>{@link Literals}</b>:         type to describe a set of: [OWL-Literal] (i.e., data values).</li>
  * <li><b>{@link DataProperties}</b>:   type to describe a set of: [OWL-DataProperty].</li>
  * <li><b>{@link ObjectProperties}</b>: type to describe a set of: [OWL-ObjectProperty].</li>
- * <li><b>{@link Restrictions}</b>:     type to describe a set of: [OWL-Restriction].</li>
+ * <li><b>{@link Restrictions}</b>:     type to describe a set of: [OWL-EquivalentRestriction].</li>
  * <li><b>{@link DataLinks}</b>:        type to describe a set of: [An Expression along with an OWL-Literal] .</li>
  * <li><b>{@link ObjectLinks}</b>:      type to describe a set of: [An Expression along with an OWL Individual].</li>
  * </ul>

@@ -432,7 +432,7 @@ public interface ConceptExpression
          * {@code {@link #getSuperConcepts()}.add( {@link #getOntology()}.getOWLClass( propertyName))}
          * in order to add a new class (given by name) in the {@link EntitySet} list.
          * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
-         * to be perfectly aligned with the ontology, since it affects {@link ConceptExpression.Restriction} {@link EntitySet}.
+         * to be perfectly aligned with the ontology, since it affects {@link EquivalentRestriction} {@link EntitySet}.
          * @param className the class name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
@@ -444,7 +444,7 @@ public interface ConceptExpression
          * {@code {@link #getSuperConcepts()}.add( cl)}
          * in order to add a new class in the {@link EntitySet} list.
          * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
-         * to be perfectly aligned with the ontology, since it affects {@link ConceptExpression.Restriction} {@link EntitySet}.
+         * to be perfectly aligned with the ontology, since it affects {@link EquivalentRestriction} {@link EntitySet}.
          * @param cl the class to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
@@ -457,7 +457,7 @@ public interface ConceptExpression
          * {@code {@link #getSuperConcepts()}.remove( {@link #getOntology()}.getOWLClass( propertyName))}
          * in order to remove a class (given by name) from the {@link EntitySet} list.
          * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
-         * to be perfectly aligned with the ontology, since it affects {@link ConceptExpression.Restriction} {@link EntitySet}.
+         * to be perfectly aligned with the ontology, since it affects {@link EquivalentRestriction} {@link EntitySet}.
          * @param className the class name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
@@ -469,7 +469,7 @@ public interface ConceptExpression
          * {@code {@link #getSuperConcepts()}.remove( cl)}
          * in order to remove a class in the {@link EntitySet} list.
          * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
-         * to be perfectly aligned with the ontology, since it affects {@link ConceptExpression.Restriction} {@link EntitySet}.
+         * to be perfectly aligned with the ontology, since it affects {@link EquivalentRestriction} {@link EntitySet}.
          * @param cl the class to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
@@ -522,7 +522,7 @@ public interface ConceptExpression
      *     data or property restriction expression
      * </p>
      */
-    interface Restriction
+    interface EquivalentRestriction
             extends Concept.Restriction<OWLReferences, OWLClass, SemanticRestriction>,
             ConceptExpression {
 

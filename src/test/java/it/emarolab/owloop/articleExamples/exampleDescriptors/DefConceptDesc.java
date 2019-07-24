@@ -12,14 +12,14 @@ import java.util.List;
 /**
  * A 'simple' Concept Descriptor that implements 1 ClassExpression (aka {@link ConceptExpression}) interface:
  * <ul>
- * <li><b>{@link Restriction}</b>:  to describe the definition of a Class..</li>
+ * <li><b>{@link EquivalentRestriction}</b>:  to describe the definition of a Class..</li>
  * </ul>
  *
  *  See {@link FullConceptDesc} for an example of a 'compound' Concept Descriptor that implements all ClassExpressions (aka {@link ConceptExpression}).
  */
 public abstract class DefConceptDesc
         extends ConceptGround
-        implements ConceptExpression.Restriction {
+        implements ConceptExpression.EquivalentRestriction {
 
     private DescriptorEntitySet.Restrictions conceptRestrictions = new DescriptorEntitySet.Restrictions();
 
@@ -35,13 +35,13 @@ public abstract class DefConceptDesc
     // To read axioms from an ontology
     @Override
     public List<MappingIntent> readExpressionAxioms() {
-        List<MappingIntent> r = Restriction.super.readExpressionAxioms(); // call this before Sub or Super !!!
+        List<MappingIntent> r = EquivalentRestriction.super.readExpressionAxioms(); // call this before Sub or Super !!!
         return r;
     }
     // To write axioms to an ontology
     @Override
     public List<MappingIntent> writeExpressionAxioms() {
-        List<MappingIntent> r = Restriction.super.writeExpressionAxioms(); // call this before Sub or Super !!!
+        List<MappingIntent> r = EquivalentRestriction.super.writeExpressionAxioms(); // call this before Sub or Super !!!
         return r;
     }
 
