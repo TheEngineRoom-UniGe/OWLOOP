@@ -17,38 +17,38 @@ import java.util.List;
  * </ul>
  * See {@link FullIndividualDesc} for an example of a 'compound' Individual Descriptor that implements all IndividualExpressions.
  */
-public class DefinitionIndividualDesc
+public class RestrictionIndividualDesc
         extends IndividualGround
-        implements IndividualExpression.Disjoint<DefinitionIndividualDesc>,
-        IndividualExpression.Equivalent<DefinitionIndividualDesc>{
+        implements IndividualExpression.Disjoint<RestrictionIndividualDesc>,
+        IndividualExpression.Equivalent<RestrictionIndividualDesc>{
 
     private DescriptorEntitySet.Individuals disjointIndividuals = new DescriptorEntitySet.Individuals();
     private DescriptorEntitySet.Individuals equivalentIndividuals = new DescriptorEntitySet.Individuals();
 
     /* Constructors from class: IndividualGround */
 
-    public DefinitionIndividualDesc(OWLNamedIndividual instance, OWLReferences onto) {
+    public RestrictionIndividualDesc(OWLNamedIndividual instance, OWLReferences onto) {
         super(instance, onto);
     }
-    public DefinitionIndividualDesc(String instanceName, OWLReferences onto) {
+    public RestrictionIndividualDesc(String instanceName, OWLReferences onto) {
         super(instanceName, onto);
     }
-    public DefinitionIndividualDesc(OWLNamedIndividual instance, String ontoName) {
+    public RestrictionIndividualDesc(OWLNamedIndividual instance, String ontoName) {
         super(instance, ontoName);
     }
-    public DefinitionIndividualDesc(OWLNamedIndividual instance, String ontoName, String filePath, String iriPath) {
+    public RestrictionIndividualDesc(OWLNamedIndividual instance, String ontoName, String filePath, String iriPath) {
         super(instance, ontoName, filePath, iriPath);
     }
-    public DefinitionIndividualDesc(OWLNamedIndividual instance, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
+    public RestrictionIndividualDesc(OWLNamedIndividual instance, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
         super(instance, ontoName, filePath, iriPath, bufferingChanges);
     }
-    public DefinitionIndividualDesc(String instanceName, String ontoName) {
+    public RestrictionIndividualDesc(String instanceName, String ontoName) {
         super(instanceName, ontoName);
     }
-    public DefinitionIndividualDesc(String instanceName, String ontoName, String filePath, String iriPath) {
+    public RestrictionIndividualDesc(String instanceName, String ontoName, String filePath, String iriPath) {
         super(instanceName, ontoName, filePath, iriPath);
     }
-    public DefinitionIndividualDesc(String instanceName, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
+    public RestrictionIndividualDesc(String instanceName, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
         super(instanceName, ontoName, filePath, iriPath, bufferingChanges);
     }
 
@@ -75,8 +75,8 @@ public class DefinitionIndividualDesc
 
     // Is used by the descriptors's build() method. It's possible to change the return type based on need.
     @Override
-    public DefinitionIndividualDesc getNewDisjointIndividual(OWLNamedIndividual instance, OWLReferences ontology) {
-        return new DefinitionIndividualDesc( instance, ontology);
+    public RestrictionIndividualDesc getNewDisjointIndividual(OWLNamedIndividual instance, OWLReferences ontology) {
+        return new RestrictionIndividualDesc( instance, ontology);
     }
     // It returns disjointIndividuals from the EntitySet (after being read from the ontology)
     @Override
@@ -86,8 +86,8 @@ public class DefinitionIndividualDesc
 
     // Is used by the descriptors's build() method. It's possible to change the return type based on need.
     @Override
-    public DefinitionIndividualDesc getNewEquivalentIndividual(OWLNamedIndividual instance, OWLReferences ontology) {
-        return new DefinitionIndividualDesc( instance, ontology);
+    public RestrictionIndividualDesc getNewEquivalentIndividual(OWLNamedIndividual instance, OWLReferences ontology) {
+        return new RestrictionIndividualDesc( instance, ontology);
     }
     // It returns equivalentIndividuals from the EntitySet (after being read from the ontology)
     @Override

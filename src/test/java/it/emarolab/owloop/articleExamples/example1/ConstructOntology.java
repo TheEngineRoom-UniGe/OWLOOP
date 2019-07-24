@@ -5,6 +5,8 @@ import it.emarolab.amor.owlInterface.OWLReferencesInterface;
 import it.emarolab.owloop.articleExamples.exampleDescriptors.CorridorConceptDesc;
 import it.emarolab.owloop.articleExamples.exampleDescriptors.ObjectLinkIndividualDesc;
 import it.emarolab.owloop.articleExamples.exampleDescriptors.RoomConceptDesc;
+import it.emarolab.owloop.descriptor.utility.conceptDescriptor.RestrictionConceptDesc;
+import it.emarolab.owloop.descriptor.utility.individualDescriptor.RestrictionIndividualDesc;
 import it.emarolab.owloop.descriptor.utility.objectPropertyDescriptor.DomainRangeObjectPropertyDesc;
 import it.emarolab.owloop.articleExamples.exampleDescriptors.LocationConceptDesc;
 import org.junit.After;
@@ -66,6 +68,23 @@ public class ConstructOntology {
         isIn_Desc.addDomainClassRestriction( "ROBOT");
         isIn_Desc.addRangeClassRestriction( "LOCATION");
         isIn_Desc.writeExpressionAxioms();
+
+        // Adding some more details into the ontology
+
+        // ROBOT concept disjoint with DOOR and LOCATION concepts
+        RestrictionConceptDesc robotConcept_Desc = new RestrictionConceptDesc( "ROBOT", ontoRef);
+
+        robotConcept_Desc.addDisjointConcept( "LOCATION");
+        robotConcept_Desc.addDisjointConcept( "DOOR");
+        robotConcept_Desc.writeExpressionAxioms();
+
+        // All individuals are different from each other
+        RestrictionIndividualDesc corridorIndividualRestriction_Desc = new RestrictionIndividualDesc( "Corridor1", ontoRef);
+
+        corridorIndividualRestriction_Desc.addDisjointIndividual( "Robot1");
+        corridorIndividualRestriction_Desc.addDisjointIndividual( "Room1");
+        corridorIndividualRestriction_Desc.addDisjointIndividual( "Room2");
+        corridorIndividualRestriction_Desc.writeExpressionAxioms();
     }
 
     private String getRobotPosition() {

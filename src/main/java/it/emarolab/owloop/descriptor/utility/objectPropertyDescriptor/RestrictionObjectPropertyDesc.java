@@ -18,11 +18,11 @@ import java.util.List;
  * </ul>
  * See {@link FullObjectPropertyDesc} for an example of a 'compound' Individual Descriptor that implements all ObjectPropertyExpressions.
  */
-public class DefinitionObjectPropertyDesc
+public class RestrictionObjectPropertyDesc
         extends ObjectPropertyGround
-        implements ObjectPropertyExpression.Disjoint<DefinitionObjectPropertyDesc>,
-        ObjectPropertyExpression.Equivalent<DefinitionObjectPropertyDesc>,
-        ObjectPropertyExpression.Inverse<DefinitionObjectPropertyDesc> {
+        implements ObjectPropertyExpression.Disjoint<RestrictionObjectPropertyDesc>,
+        ObjectPropertyExpression.Equivalent<RestrictionObjectPropertyDesc>,
+        ObjectPropertyExpression.Inverse<RestrictionObjectPropertyDesc> {
 
     private DescriptorEntitySet.ObjectProperties disjointObjectProperties = new DescriptorEntitySet.ObjectProperties();
     private DescriptorEntitySet.ObjectProperties equivalentObjectProperties = new DescriptorEntitySet.ObjectProperties();
@@ -30,28 +30,28 @@ public class DefinitionObjectPropertyDesc
 
     /* Constructors from class: ObjectPropertyGround */
 
-    public DefinitionObjectPropertyDesc(OWLObjectProperty instance, OWLReferences onto) {
+    public RestrictionObjectPropertyDesc(OWLObjectProperty instance, OWLReferences onto) {
         super(instance, onto);
     }
-    public DefinitionObjectPropertyDesc(String instanceName, OWLReferences onto) {
+    public RestrictionObjectPropertyDesc(String instanceName, OWLReferences onto) {
         super(instanceName, onto);
     }
-    public DefinitionObjectPropertyDesc(OWLObjectProperty instance, String ontoName) {
+    public RestrictionObjectPropertyDesc(OWLObjectProperty instance, String ontoName) {
         super(instance, ontoName);
     }
-    public DefinitionObjectPropertyDesc(OWLObjectProperty instance, String ontoName, String filePath, String iriPath) {
+    public RestrictionObjectPropertyDesc(OWLObjectProperty instance, String ontoName, String filePath, String iriPath) {
         super(instance, ontoName, filePath, iriPath);
     }
-    public DefinitionObjectPropertyDesc(OWLObjectProperty instance, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
+    public RestrictionObjectPropertyDesc(OWLObjectProperty instance, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
         super(instance, ontoName, filePath, iriPath, bufferingChanges);
     }
-    public DefinitionObjectPropertyDesc(String instanceName, String ontoName) {
+    public RestrictionObjectPropertyDesc(String instanceName, String ontoName) {
         super(instanceName, ontoName);
     }
-    public DefinitionObjectPropertyDesc(String instanceName, String ontoName, String filePath, String iriPath) {
+    public RestrictionObjectPropertyDesc(String instanceName, String ontoName, String filePath, String iriPath) {
         super(instanceName, ontoName, filePath, iriPath);
     }
-    public DefinitionObjectPropertyDesc(String instanceName, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
+    public RestrictionObjectPropertyDesc(String instanceName, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
         super(instanceName, ontoName, filePath, iriPath, bufferingChanges);
     }
 
@@ -80,8 +80,8 @@ public class DefinitionObjectPropertyDesc
 
     // Is used by the descriptors's build() method. It's possible to change the return type based on need.
     @Override
-    public DefinitionObjectPropertyDesc getNewDisjointObjectProperty(OWLObjectProperty instance, OWLReferences ontology) {
-        return new DefinitionObjectPropertyDesc( instance, ontology);
+    public RestrictionObjectPropertyDesc getNewDisjointObjectProperty(OWLObjectProperty instance, OWLReferences ontology) {
+        return new RestrictionObjectPropertyDesc( instance, ontology);
     }
     // It returns disjointObjectProperties from the EntitySet (after being read from the ontology)
     @Override
@@ -91,8 +91,8 @@ public class DefinitionObjectPropertyDesc
 
     // Is used by the descriptors's build() method. It's possible to change the return type based on need.
     @Override
-    public DefinitionObjectPropertyDesc getNewEquivalentObjectProperty(OWLObjectProperty instance, OWLReferences ontology) {
-        return new DefinitionObjectPropertyDesc( instance, ontology);
+    public RestrictionObjectPropertyDesc getNewEquivalentObjectProperty(OWLObjectProperty instance, OWLReferences ontology) {
+        return new RestrictionObjectPropertyDesc( instance, ontology);
     }
     // It returns equivalentObjectProperties from the EntitySet (after being read from the ontology)
     @Override
@@ -102,8 +102,8 @@ public class DefinitionObjectPropertyDesc
 
     // Is used by the descriptors's build() method. It's possible to change the return type based on need.
     @Override
-    public DefinitionObjectPropertyDesc getNewInverseObjectProperty(OWLObjectProperty instance, OWLReferences ontology) {
-        return new DefinitionObjectPropertyDesc( instance, ontology);
+    public RestrictionObjectPropertyDesc getNewInverseObjectProperty(OWLObjectProperty instance, OWLReferences ontology) {
+        return new RestrictionObjectPropertyDesc( instance, ontology);
     }
     // It returns inverseObjectProperties from the EntitySet (after being read from the ontology)
     @Override

@@ -91,7 +91,9 @@
     <!-- http://www.semanticweb.org/emaroLab/robotAtHomeOntology#DOOR -->
 
 
-    <owl:Class rdf:about="http://www.semanticweb.org/emaroLab/robotAtHomeOntology#DOOR"/>
+    <owl:Class rdf:about="http://www.semanticweb.org/emaroLab/robotAtHomeOntology#DOOR">
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/emaroLab/robotAtHomeOntology#ROBOT"/>
+    </owl:Class>
     
 
 
@@ -109,6 +111,7 @@
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/emaroLab/robotAtHomeOntology#ROBOT"/>
     </owl:Class>
     
 
@@ -168,7 +171,9 @@
     <!-- http://www.semanticweb.org/emaroLab/robotAtHomeOntology#Robot1 -->
 
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/emaroLab/robotAtHomeOntology#Robot1"/>
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/emaroLab/robotAtHomeOntology#Robot1">
+        <isIn rdf:resource="http://www.semanticweb.org/emaroLab/robotAtHomeOntology#Corridor1"/>
+    </owl:NamedIndividual>
     
 
 
@@ -183,6 +188,39 @@
 
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/emaroLab/robotAtHomeOntology#Room2"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDifferent"/>
+        <owl:distinctMembers rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/emaroLab/robotAtHomeOntology#Corridor1"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/emaroLab/robotAtHomeOntology#Robot1"/>
+        </owl:distinctMembers>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDifferent"/>
+        <owl:distinctMembers rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/emaroLab/robotAtHomeOntology#Corridor1"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/emaroLab/robotAtHomeOntology#Room1"/>
+        </owl:distinctMembers>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDifferent"/>
+        <owl:distinctMembers rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/emaroLab/robotAtHomeOntology#Corridor1"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/emaroLab/robotAtHomeOntology#Room2"/>
+        </owl:distinctMembers>
+    </rdf:Description>
 </rdf:RDF>
 
 

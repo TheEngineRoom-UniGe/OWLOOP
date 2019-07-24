@@ -17,38 +17,38 @@ import java.util.List;
  * </ul>
  * See {@link FullDataPropertyDesc} for an example of a 'compound' DataProperty Descriptor that implements all DataPropertyExpressions.
  */
-public class DefinitionDataPropertyDesc
+public class RestrictionDataPropertyDesc
         extends DataPropertyGround
-        implements DataPropertyExpression.Disjoint<DefinitionDataPropertyDesc>,
-        DataPropertyExpression.Equivalent<DefinitionDataPropertyDesc> {
+        implements DataPropertyExpression.Disjoint<RestrictionDataPropertyDesc>,
+        DataPropertyExpression.Equivalent<RestrictionDataPropertyDesc> {
 
     private DescriptorEntitySet.DataProperties disjointDataProperties = new DescriptorEntitySet.DataProperties();
     private DescriptorEntitySet.DataProperties equivalentDataProperties = new DescriptorEntitySet.DataProperties();
 
     /* Constructors from class: DataPropertyGround */
 
-    public DefinitionDataPropertyDesc(OWLDataProperty instance, OWLReferences onto) {
+    public RestrictionDataPropertyDesc(OWLDataProperty instance, OWLReferences onto) {
         super(instance, onto);
     }
-    public DefinitionDataPropertyDesc(String instanceName, OWLReferences onto) {
+    public RestrictionDataPropertyDesc(String instanceName, OWLReferences onto) {
         super(instanceName, onto);
     }
-    public DefinitionDataPropertyDesc(OWLDataProperty instance, String ontoName) {
+    public RestrictionDataPropertyDesc(OWLDataProperty instance, String ontoName) {
         super(instance, ontoName);
     }
-    public DefinitionDataPropertyDesc(OWLDataProperty instance, String ontoName, String filePath, String iriPath) {
+    public RestrictionDataPropertyDesc(OWLDataProperty instance, String ontoName, String filePath, String iriPath) {
         super(instance, ontoName, filePath, iriPath);
     }
-    public DefinitionDataPropertyDesc(OWLDataProperty instance, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
+    public RestrictionDataPropertyDesc(OWLDataProperty instance, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
         super(instance, ontoName, filePath, iriPath, bufferingChanges);
     }
-    public DefinitionDataPropertyDesc(String instanceName, String ontoName) {
+    public RestrictionDataPropertyDesc(String instanceName, String ontoName) {
         super(instanceName, ontoName);
     }
-    public DefinitionDataPropertyDesc(String instanceName, String ontoName, String filePath, String iriPath) {
+    public RestrictionDataPropertyDesc(String instanceName, String ontoName, String filePath, String iriPath) {
         super(instanceName, ontoName, filePath, iriPath);
     }
-    public DefinitionDataPropertyDesc(String instanceName, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
+    public RestrictionDataPropertyDesc(String instanceName, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
         super(instanceName, ontoName, filePath, iriPath, bufferingChanges);
     }
 
@@ -75,8 +75,8 @@ public class DefinitionDataPropertyDesc
 
     // Is used by the descriptors's build() method. It's possible to change the return type based on need.
     @Override
-    public DefinitionDataPropertyDesc getNewDisjointDataProperty(OWLDataProperty instance, OWLReferences ontology) {
-        return new DefinitionDataPropertyDesc( instance, ontology);
+    public RestrictionDataPropertyDesc getNewDisjointDataProperty(OWLDataProperty instance, OWLReferences ontology) {
+        return new RestrictionDataPropertyDesc( instance, ontology);
     }
     // It returns disjointDataProperties from the EntitySet (after being read from the ontology)
     @Override
@@ -86,8 +86,8 @@ public class DefinitionDataPropertyDesc
 
     // Is used by the descriptors's build() method. It's possible to change the return type based on need.
     @Override
-    public DefinitionDataPropertyDesc getNewEquivalentDataProperty(OWLDataProperty instance, OWLReferences ontology) {
-        return new DefinitionDataPropertyDesc( instance, ontology);
+    public RestrictionDataPropertyDesc getNewEquivalentDataProperty(OWLDataProperty instance, OWLReferences ontology) {
+        return new RestrictionDataPropertyDesc( instance, ontology);
     }
     // It returns equivalentDataProperties from the EntitySet (after being read from the ontology)
     @Override
