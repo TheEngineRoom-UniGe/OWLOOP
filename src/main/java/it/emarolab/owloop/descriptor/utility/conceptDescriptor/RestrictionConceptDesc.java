@@ -17,7 +17,7 @@ import java.util.List;
  * <li><b>{@link ConceptExpression.Equivalent}</b>:  to describe that a Class is equivalent to another Class.</li>
  * <li><b>{@link ConceptExpression.Disjoint}</b>:    to describe that a Class is disjoint to another Class.</li>
  * <li><b>{@link ConceptExpression.Instance}</b>:    to describe an Individual of a Class.</li>
- * <li><b>{@link EquivalentRestriction}</b>:  to describe the definition of a Class..</li>
+ * <li><b>{@link EquivalentRestriction}</b>:  to describe the EquivalentTo restrictions of a Class..</li>
  * </ul>
  *
  *  See {@link FullConceptDesc} for an example of a 'compound' Concept Descriptor that implements all ClassExpressions (aka {@link ConceptExpression}).

@@ -81,12 +81,12 @@ For any information or support, please do not hesitate to contact us through thi
 
 - [ ] Add the UML in /documentation directory
 - [ ] Finalize a plan for AMOR 2.2 dependency. (*Luca gives green signal for pushing AMOR to Maven Central*)
-- [ ] Add disjoint to the Classes (ROBOT disjoint with DOOR AND LOCATION) and Individuals (all disjoint to each other)
-- [ ] Check doc since `define concept` become `concept restriction`
+- [x] Add disjoint to the Classes (ROBOT disjoint with DOOR AND LOCATION) and Individuals (all disjoint to each other)
+- [x] Check doc since `define concept` become `concept restriction`
 - [ ] Add in Readme 
      - known issue read write readWrite(boolean) depends on ontology state (eg, restriction might add super classes)
      - intent feature for inconsistency
      - add test info
-- [ ] reasoning for data/object reange domain not supported in this version: document it.
-- [ ] check compliance copyritght with dependences
+- [ ] reasoning for data/object range domain not supported in this version: document it.
+- [ ] check compliance copyright with dependencies
 - [ ] simplify use of data and object property for descriptor's users
