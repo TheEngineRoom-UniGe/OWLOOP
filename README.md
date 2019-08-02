@@ -90,3 +90,4 @@ For any information or support, please do not hesitate to contact us through thi
 - [ ] reasoning for data/object reange domain not supported in this version: document it.
 - [ ] check compliance copyritght with dependences
 - [ ] simplify use of data and object property for descriptor's users
+- [ ] check mismatch name on `build` for functions `getNew...`
