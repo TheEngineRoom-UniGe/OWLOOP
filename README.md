@@ -91,3 +91,4 @@ For any information or support, please do not hesitate to contact us through thi
 - [ ] check compliance copyritght with dependences
 - [ ] simplify use of data and object property for descriptor's users
 - [ ] check mismatch name on `build` for functions `getNew...`
+     - Regarding the above functions and much more, major refactoring done by yusha, check latest commit on branch SafePoint2.0
