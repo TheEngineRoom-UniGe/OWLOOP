@@ -5,15 +5,15 @@ import it.emarolab.amor.owlInterface.SemanticRestriction;
 
 /**
  *  <p>
- *      Extends LocationConceptDesc.
+ *      Extends LocationClassDesc.
  *  </p>
  *  Adds some-restriction on the concept "CORRIDOR", i.e, CORRIDOR hasDoor some DOOR.
  *  Furthermore, adds min-cardinality-restriction, i.e., CORRIDOR hasDoor min 2 DOOR.
  */
-public class CorridorConceptDesc
-        extends LocationConceptDesc {
+public class CorridorClassDesc
+        extends LocationClassDesc {
 
-    public CorridorConceptDesc(OWLReferences onto) {
+    public CorridorClassDesc(OWLReferences onto) {
 
         super("CORRIDOR", onto);
     }

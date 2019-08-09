@@ -1,6 +1,6 @@
 package it.emarolab.owloop.descriptorDebugging;
 
-import it.emarolab.owloop.descriptor.utility.conceptDescriptor.FullConceptDesc;
+import it.emarolab.owloop.descriptor.utility.conceptDescriptor.FullClassDesc;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,15 +18,15 @@ import static org.junit.Assert.assertEquals;
  * <b>date</b>:        10/07/19 <br>
  * </small></div>
  */
-public class FullConceptDescTest {
+public class FullClassDescTest {
 
     public static String DEBUGGING_PATH = "src/test/resources/debug/";
 
-    private static FullConceptDesc concept;
+    private static FullClassDesc concept;
 
     @Before // called a before every @Test
     public void setUp() throws Exception {
-        concept = new FullConceptDesc(
+        concept = new FullClassDesc(
                 "Sphere", // the ground instance name
                 "ontoName", // ontology reference name
                 DEBUGGING_PATH + "ontology4debugging.owl", // the ontology file path
@@ -61,7 +61,7 @@ public class FullConceptDescTest {
         concept.addSubConcept( "Plane");
         concept.writeExpressionAxioms();
         assertSemantic();
-        System.out.println( "described concept, sub test: " + concept.buildSubConcept());
+        System.out.println( "described concept, sub test: " + concept.buildSubClasses());
     }
 
     @Test
@@ -89,7 +89,7 @@ public class FullConceptDescTest {
         // super class affect class definition during reasoning
         concept.writeReadExpressionAxioms();
         assertSemantic();
-        System.out.println( "described concept, super test: " + concept.buildSuperConcept());
+        System.out.println( "described concept, super test: " + concept.buildSuperClasses());
     }
 
     @Test
@@ -115,7 +115,7 @@ public class FullConceptDescTest {
         // disjoint class affect sub classes during reasoning
         concept.writeExpressionAxioms();
         assertSemantic();
-        System.out.println( "described concept, disjoint test: " + concept.buildDisjointConcept());
+        System.out.println( "described concept, disjoint test: " + concept.buildDisjointClasses());
     }
 
     @Test
@@ -143,7 +143,7 @@ public class FullConceptDescTest {
         // equivalent class affect sub classes during reasoning
         concept.writeReadExpressionAxioms();
         assertSemantic();
-        System.out.println( "described concept, equivalent test: " + concept.buildEquivalentConcept());
+        System.out.println( "described concept, equivalent test: " + concept.buildEquivalentClasses());
     }
 
     @Test
@@ -197,11 +197,11 @@ public class FullConceptDescTest {
         concept.writeReadExpressionAxioms(false);
         assertSemantic();
 
-        for( FullConceptDesc d : concept.buildEquivalentConcept())
-            // you can use also: d = concept.buildEquivalentConcept().toArray()[0]
+        for( FullClassDesc d : concept.buildEquivalentClasses())
+            // you can use also: d = concept.buildEquivalentClasses().toArray()[0]
             if ( d.getGroundInstanceName().equals( "EE")) {
                 d.addDisjointConcept(concept.getInstance());
-                d.getEquivalentConcepts().clear();
+                d.getEquivalentClasses().clear();
                 d.writeExpressionAxioms();
             }
 
@@ -236,18 +236,18 @@ public class FullConceptDescTest {
 
         concept.setGroundInstance( "Parameter");
         concept.readExpressionAxioms();
-        System.out.println( "described concept, equivalent test: " + concept.buildIndividualInstances());
+        System.out.println( "described concept, equivalent test: " + concept.buildIndividuals());
 
     }
 
     int cnt = 0;
     public void assertSemantic(){ // asserts that the state of the java representation is equal to the state of the ontology
         System.out.println( ++cnt + " ->   " + concept);
-        assertEquals( concept.getSubConcepts(), concept.querySubConcepts());
-        assertEquals( concept.getSuperConcepts(), concept.querySuperConcepts());
-        assertEquals( concept.getDisjointConcepts(), concept.queryDisjointConcepts());
-        assertEquals( concept.getEquivalentConcepts(), concept.queryEquivalentConcepts());
-        assertEquals( concept.getIndividualInstances(), concept.queryIndividualInstances());
-        assertEquals( concept.getRestrictionConcepts(), concept.queryRestrictionConcepts());
+        assertEquals( concept.getSubClasses(), concept.querySubClasses());
+        assertEquals( concept.getSuperClasses(), concept.querySuperClasses());
+        assertEquals( concept.getDisjointClasses(), concept.queryDisjointClasses());
+        assertEquals( concept.getEquivalentClasses(), concept.queryEquivalentClasses());
+        assertEquals( concept.getIndividuals(), concept.queryIndividuals());
+        assertEquals( concept.getEquivalentRestrictions(), concept.queryEquivalentRestrictions());
     }
 }

@@ -63,7 +63,7 @@ public class FullDataPropertyDescTest {
         dataProperty.addSubDataProperty( "subDataPropertyToBuild");
         dataProperty.writeExpressionAxioms();
         assertSemantic();
-        System.out.println( "described data property, sub test: " + dataProperty.buildSubDataProperty());
+        System.out.println( "described data property, sub test: " + dataProperty.buildSubDataProperties());
     }
 
 
@@ -89,7 +89,7 @@ public class FullDataPropertyDescTest {
         dataProperty.addSuperDataProperty( "superDataPropertyToBuild");
         dataProperty.writeExpressionAxioms();
         assertSemantic();
-        System.out.println( "described data property, super test: " + dataProperty.buildSuperDataProperty());
+        System.out.println( "described data property, super test: " + dataProperty.buildSuperDataProperties());
     }
 
     @Test
@@ -114,7 +114,7 @@ public class FullDataPropertyDescTest {
         dataProperty.addDisjointDataProperty( "disjointDataPropertyToBuild");
         dataProperty.writeExpressionAxioms();
         assertSemantic();
-        System.out.println( "described data property, disjoint test: " + dataProperty.buildDisjointDataProperty());
+        System.out.println( "described data property, disjoint test: " + dataProperty.buildDisjointDataProperties());
     }
 
     @Test
@@ -139,14 +139,14 @@ public class FullDataPropertyDescTest {
         dataProperty.addEquivalentDataProperty( "equivalentDataPropertyToBuild");
         dataProperty.writeExpressionAxioms();
         assertSemantic();
-        System.out.println( "described data property, equivalent test: " + dataProperty.buildEquivalentDataProperty());
+        System.out.println( "described data property, equivalent test: " + dataProperty.buildEquivalentDataProperties());
     }
 
     @Test
     public void domainTest() throws Exception{
 
         dataProperty.readExpressionAxioms();
-        dataProperty.getDataPropertyDomainConcepts().clear();
+        dataProperty.getDomainRestrictions().clear();
         dataProperty.writeExpressionAxioms();
 
         dataProperty.addDomainClassRestriction("Sphere");
@@ -229,7 +229,7 @@ public class FullDataPropertyDescTest {
         dataProperty.addDomainMaxObjectRestriction( "hasDomainDataPropertyTest1", 2, "Cone");
         dataProperty.writeReadExpressionAxioms(); // the reasoner always infers here
        assertSemantic();
-        System.out.println( "described data property, domain test: " + dataProperty.getDataPropertyDomainConcepts());
+        System.out.println( "described data property, domain test: " + dataProperty.getDomainRestrictions());
 
     }
 
@@ -261,7 +261,7 @@ public class FullDataPropertyDescTest {
         dataProperty.writeReadExpressionAxioms();
         assertSemantic();
 
-        System.out.println( "described object property, range test: " + dataProperty.getDataPropertyRangeConcepts());
+        System.out.println( "described object property, range test: " + dataProperty.getRangeRestrictions());
     }
 
     int cnt = 0;
@@ -271,7 +271,7 @@ public class FullDataPropertyDescTest {
         assertEquals( dataProperty.getSuperDataProperties(), dataProperty.querySuperDataProperties());
         assertEquals( dataProperty.getDisjointDataProperties(), dataProperty.queryDisjointDataProperties());
         assertEquals( dataProperty.getEquivalentDataProperties(), dataProperty.queryEquivalentDataProperties());
-        assertEquals( dataProperty.getDataPropertyDomainConcepts(), dataProperty.queryDomainDataProperties());
-        assertEquals( dataProperty.getDataPropertyRangeConcepts(), dataProperty.queryRangeDataProperties());
+        assertEquals( dataProperty.getDomainRestrictions(), dataProperty.queryDomainRestrictions());
+        assertEquals( dataProperty.getRangeRestrictions(), dataProperty.queryRangeRestrictions());
     }
 }

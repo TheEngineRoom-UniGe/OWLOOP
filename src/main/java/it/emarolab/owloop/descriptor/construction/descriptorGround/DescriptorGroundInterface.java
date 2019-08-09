@@ -2,7 +2,7 @@ package it.emarolab.owloop.descriptor.construction.descriptorGround;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.core.Axiom;
-import it.emarolab.owloop.descriptor.construction.descriptorExpression.ConceptExpression;
+import it.emarolab.owloop.descriptor.construction.descriptorExpression.ClassExpression;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.DataPropertyExpression;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.IndividualExpression;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.ObjectPropertyExpression;
@@ -13,14 +13,14 @@ import java.util.Set;
 
 /**
  * This interface implements {@link Axiom.Ground} and allows grounding of Descriptors of the type
- * {@link ConceptExpression}, {@link IndividualExpression}, {@link DataPropertyExpression} and
+ * {@link ClassExpression}, {@link IndividualExpression}, {@link DataPropertyExpression} and
  * {@link ObjectPropertyExpression}).
  * A Ground associates to an Ontology using {@link OWLReferences}.
  * The following classes implement {@link DescriptorGroundInterface}:
  *     <ul>
  *     <li><b>{@link GroundInstance}</b>:       an abstract class of all the classes below.</li>
  *     <li><b>{@link IndividualGroundInstance}</b>:   class to ground axioms of type {@link IndividualExpression}.</li>
- *     <li><b>{@link ConceptGroundInstance}</b>:      class to ground axioms of type {@link ConceptExpression}.</li>
+ *     <li><b>{@link ConceptGroundInstance}</b>:      class to ground axioms of type {@link ClassExpression}.</li>
  *     <li><b>{@link DataGroundInstance}</b>:         class to ground axioms of type {@link DataPropertyExpression}.</li>
  *     <li><b>{@link ObjectGroundInstance}</b>:       class to ground axioms of type {@link ObjectPropertyExpression}.</li>
  *     </ul>
@@ -172,7 +172,7 @@ public interface DescriptorGroundInterface<J extends OWLObject>
     }
 
     /**
-     * The {@link Axiom.Ground} for a {@link ConceptExpression}.
+     * The {@link Axiom.Ground} for a {@link ClassExpression}.
      * It sets the entity parameter of {@link DescriptorGroundInterface} to be an {@link OWLClass}.
      */
     class ConceptGroundInstance

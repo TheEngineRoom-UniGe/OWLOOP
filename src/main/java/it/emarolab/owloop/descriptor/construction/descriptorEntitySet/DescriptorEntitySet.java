@@ -16,7 +16,7 @@ import java.util.Set;
  * The entity types within the OWLOOP architecture are among the following:
  * <ul>
  * <li><b>{@link Individuals}</b>:      type to describe a set of: [OWL-Individual].</li>
- * <li><b>{@link Concepts}</b>:         type to describe a set of: [OWL-Class].</li>
+ * <li><b>{@link Classes}</b>:         type to describe a set of: [OWL-Class].</li>
  * <li><b>{@link Literals}</b>:         type to describe a set of: [OWL-Literal] (i.e., data values).</li>
  * <li><b>{@link DataProperties}</b>:   type to describe a set of: [OWL-DataProperty].</li>
  * <li><b>{@link ObjectProperties}</b>: type to describe a set of: [OWL-ObjectProperty].</li>
@@ -307,18 +307,18 @@ public interface DescriptorEntitySet extends Axiom {
      *     It represent the {@link EntitySet} which contains OWL-Classes.
      * </p>
      */
-    class Concepts
+    class Classes
             extends OWLEntitySetBase<OWLClass>
             implements EntitySet<OWLClass> {
-        public Concepts() {
+        public Classes() {
         }
-        public Concepts(Collection<? extends OWLClass> c) {
+        public Classes(Collection<? extends OWLClass> c) {
             super(c);
         }
-        public Concepts(int initialCapacity, float loadFactor) {
+        public Classes(int initialCapacity, float loadFactor) {
             super(initialCapacity, loadFactor);
         }
-        public Concepts(int initialCapacity) {
+        public Classes(int initialCapacity) {
             super(initialCapacity);
         }
     }
@@ -678,19 +678,19 @@ public interface DescriptorEntitySet extends Axiom {
      *     It represents a set of OWL-DataProperties and related OWL-Literals, as a collection of {@link DataLinks}.
      * </p>
      */
-    class DataLinksSet
+    class DataLinkSet
             extends ExpressionEntitySetBase<DataLinks,OWLDataProperty,OWLLiteral>
             implements ExpressionEntitySet<DataLinks,OWLLiteral> {
 
-        public DataLinksSet() {
+        public DataLinkSet() {
         }
-        public DataLinksSet(Collection<? extends DataLinks> c) {
+        public DataLinkSet(Collection<? extends DataLinks> c) {
             super(c);
         }
-        public DataLinksSet(int initialCapacity, float loadFactor) {
+        public DataLinkSet(int initialCapacity, float loadFactor) {
             super(initialCapacity, loadFactor);
         }
-        public DataLinksSet(int initialCapacity) {
+        public DataLinkSet(int initialCapacity) {
             super(initialCapacity);
         }
 
@@ -702,19 +702,19 @@ public interface DescriptorEntitySet extends Axiom {
      *     It represents a set of OWL-ObjectProperties and related OWL-Individuals, as a collection of {@link ObjectLinks}.
      * </p>
      */
-    class ObjectLinksSet
+    class ObjectLinkSet
             extends ExpressionEntitySetBase<ObjectLinks,OWLObjectProperty,OWLNamedIndividual>
             implements ExpressionEntitySet<ObjectLinks,OWLNamedIndividual> {
 
-        public ObjectLinksSet() {
+        public ObjectLinkSet() {
         }
-        public ObjectLinksSet(Collection<? extends ObjectLinks> c) {
+        public ObjectLinkSet(Collection<? extends ObjectLinks> c) {
             super(c);
         }
-        public ObjectLinksSet(int initialCapacity, float loadFactor) {
+        public ObjectLinkSet(int initialCapacity, float loadFactor) {
             super(initialCapacity, loadFactor);
         }
-        public ObjectLinksSet(int initialCapacity) {
+        public ObjectLinkSet(int initialCapacity) {
             super(initialCapacity);
         }
 

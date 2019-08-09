@@ -23,7 +23,7 @@ public class ObjectLinkIndividualDesc
         extends IndividualGround
         implements IndividualExpression.ObjectLink<FullObjectPropertyDesc> {
 
-    private DescriptorEntitySet.ObjectLinksSet objectLinks = new DescriptorEntitySet.ObjectLinksSet();
+    private DescriptorEntitySet.ObjectLinkSet objectLinks = new DescriptorEntitySet.ObjectLinkSet();
 
     /* Constructors from class: IndividualGround */
 
@@ -52,12 +52,12 @@ public class ObjectLinkIndividualDesc
 
     // Is used by the descriptors's build() method. It's possible to change the return type based on need.
     @Override
-    public FullObjectPropertyDesc getNewIndividualObjectProperty(DescriptorEntitySet.ObjectLinks instance, OWLReferences ontology) {
+    public FullObjectPropertyDesc getNewObjectProperty(DescriptorEntitySet.ObjectLinks instance, OWLReferences ontology) {
         return new FullObjectPropertyDesc( instance.getExpression(), ontology);
     }
     // It returns objectLinks from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.ObjectLinksSet getIndividualObjectProperties() {
+    public DescriptorEntitySet.ObjectLinkSet getObjectProperties() {
         return objectLinks;
     }
 

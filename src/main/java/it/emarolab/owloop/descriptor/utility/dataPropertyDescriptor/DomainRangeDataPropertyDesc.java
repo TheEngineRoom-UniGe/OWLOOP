@@ -11,19 +11,30 @@ import java.util.List;
 
 /**
  * This is an example of a 'compound' DataProperty Descriptor which implements 2 {@link DataPropertyExpression} interfaces:
+ *
  * <ul>
  * <li><b>{@link DataPropertyExpression.Domain}</b>:       to describe the domain restrictions of a DataProperty.</li>
  * <li><b>{@link DataPropertyExpression.Range}</b>:        to describe the range restrictions of a DataProperty.</li>
  * </ul>
+ *
  * See {@link FullDataPropertyDesc} for an example of a 'compound' DataProperty Descriptor that implements all DataPropertyExpressions.
+ *
+ * <p>
+ * <div style="text-align:center;"><small>
+ * <b>File</b>:         it.emarolab.owloop.core.Axiom <br>
+ * <b>Licence</b>:      GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
+ * <b>Authors</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it), Syed Yusha Kareem (kareem.syed.yusha@dibris.unige.it) <br>
+ * <b>affiliation</b>:  EMAROLab, DIBRIS, University of Genoa. <br>
+ * <b>date</b>:         01/05/19 <br>
+ * </small></div>
  */
 public class DomainRangeDataPropertyDesc
         extends DataPropertyGround
         implements DataPropertyExpression.Domain,
         DataPropertyExpression.Range {
 
-    private DescriptorEntitySet.Restrictions domainConceptRestrictions = new DescriptorEntitySet.Restrictions();
-    private DescriptorEntitySet.Restrictions rangeConceptRestrictions = new DescriptorEntitySet.Restrictions();
+    private DescriptorEntitySet.Restrictions domainRestrictions = new DescriptorEntitySet.Restrictions();
+    private DescriptorEntitySet.Restrictions rangeRestrictions = new DescriptorEntitySet.Restrictions();
 
     /* Constructors from class: DataPropertyGround */
 
@@ -73,15 +84,15 @@ public class DomainRangeDataPropertyDesc
     /* Overriding methods in classes: DataProperty and DataPropertyExpression */
 
 
-    // It returns domainConceptRestrictions from the EntitySet (after being read from the ontology)
+    // It returns domainRestrictions from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.Restrictions getDataPropertyDomainConcepts() {
-        return domainConceptRestrictions;
+    public DescriptorEntitySet.Restrictions getDomainRestrictions() {
+        return domainRestrictions;
     }
-    // It returns rangeConceptRestrictions from the EntitySet (after being read from the ontology)
+    // It returns rangeRestrictions from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.Restrictions getDataPropertyRangeConcepts() {
-        return rangeConceptRestrictions;
+    public DescriptorEntitySet.Restrictions getRangeRestrictions() {
+        return rangeRestrictions;
     }
 
     /* Overriding method in class: Object */
@@ -94,8 +105,8 @@ public class DomainRangeDataPropertyDesc
                 "\n" +
                 "\t" + getGround() + ":" + "\n" +
                 "\n" +
-                "\t\t[≐,--] " +   domainConceptRestrictions + "\n" +
-                "\t\t[--,≐] " +   rangeConceptRestrictions + "\n" +
+                "\t\t[≐,--] " + domainRestrictions + "\n" +
+                "\t\t[--,≐] " + rangeRestrictions + "\n" +
                 "}" + "\n";
     }
 }

@@ -5,19 +5,19 @@ import it.emarolab.amor.owlInterface.SemanticRestriction;
 
 /**
  *  <p>
- *      Extends DefConceptDesc.
+ *      Extends DefClassDesc.
  *  </p>
  *  Adds some-restriction on the concept "LOCATION", i.e, LOCATION hasDoor some DOOR
  */
-public class LocationConceptDesc
-        extends DefConceptDesc {
+public class LocationClassDesc
+        extends DefClassDesc {
 
-    public LocationConceptDesc(OWLReferences onto) {
+    public LocationClassDesc(OWLReferences onto) {
 
         super("LOCATION", onto);
         addDefinitionRestriction( getRestriction());                    // adds definition with a restriction
     }
-    LocationConceptDesc(String instanceName, OWLReferences onto) {
+    LocationClassDesc(String instanceName, OWLReferences onto) {
 
         super(instanceName, onto);
         addDefinitionRestriction( new SemanticRestriction.ClassRestrictedOnSomeObject()); // adding with Some-restriction
@@ -29,7 +29,7 @@ public class LocationConceptDesc
         defRestrictions.setSubject( getGround().getGroundInstance());
         defRestrictions.setProperty( getOWLObjectProperty( "hasDoor"));
         defRestrictions.setValue( getOWLClass( "DOOR"));
-        getRestrictionConcepts().add( defRestrictions);
+        getEquivalentRestrictions().add( defRestrictions);
         writeExpressionAxioms();
     }
 

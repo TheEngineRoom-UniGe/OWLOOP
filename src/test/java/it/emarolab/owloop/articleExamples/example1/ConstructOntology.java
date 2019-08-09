@@ -2,13 +2,14 @@ package it.emarolab.owloop.articleExamples.example1;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.amor.owlInterface.OWLReferencesInterface;
-import it.emarolab.owloop.articleExamples.exampleDescriptors.CorridorConceptDesc;
-import it.emarolab.owloop.articleExamples.exampleDescriptors.ObjectLinkIndividualDesc;
-import it.emarolab.owloop.articleExamples.exampleDescriptors.RoomConceptDesc;
-import it.emarolab.owloop.descriptor.utility.conceptDescriptor.RestrictionConceptDesc;
+import it.emarolab.owloop.articleExamples.exampleDescriptors.*;
+import it.emarolab.owloop.articleExamples.exampleDescriptors.RoomClassDesc;
+import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
+import it.emarolab.owloop.descriptor.utility.conceptDescriptor.FullClassDesc;
+import it.emarolab.owloop.descriptor.utility.conceptDescriptor.RestrictionClassDesc;
 import it.emarolab.owloop.descriptor.utility.individualDescriptor.RestrictionIndividualDesc;
 import it.emarolab.owloop.descriptor.utility.objectPropertyDescriptor.DomainRangeObjectPropertyDesc;
-import it.emarolab.owloop.articleExamples.exampleDescriptors.LocationConceptDesc;
+import it.emarolab.owloop.articleExamples.exampleDescriptors.LocationClassDesc;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,9 +37,9 @@ public class ConstructOntology {
     public void constructOntology() {
 
         // Add Class Expression Axioms to the ontology
-        LocationConceptDesc locationConcept_Desc = new LocationConceptDesc( ontoRef);
-        CorridorConceptDesc corridorConcept_Desc = new CorridorConceptDesc( ontoRef);
-        RoomConceptDesc roomConcept_Desc = new RoomConceptDesc( ontoRef);
+        LocationClassDesc locationConcept_Desc = new LocationClassDesc( ontoRef);
+        CorridorClassDesc corridorConcept_Desc = new CorridorClassDesc( ontoRef);
+        RoomClassDesc roomConcept_Desc = new RoomClassDesc( ontoRef);
 
         System.out.println(locationConcept_Desc);
 
@@ -72,7 +73,7 @@ public class ConstructOntology {
         // Adding some more details into the ontology
 
         // ROBOT concept disjoint with DOOR and LOCATION concepts
-        RestrictionConceptDesc robotConcept_Desc = new RestrictionConceptDesc( "ROBOT", ontoRef);
+        RestrictionClassDesc robotConcept_Desc = new RestrictionClassDesc( "ROBOT", ontoRef);
 
         robotConcept_Desc.addDisjointConcept( "LOCATION");
         robotConcept_Desc.addDisjointConcept( "DOOR");
@@ -85,6 +86,14 @@ public class ConstructOntology {
         corridorIndividualRestriction_Desc.addDisjointIndividual( "Room1");
         corridorIndividualRestriction_Desc.addDisjointIndividual( "Room2");
         corridorIndividualRestriction_Desc.writeExpressionAxioms();
+
+        // This piece of code, is to show the error when we construct an inconsistent ontology
+//        FullClassDesc robotDesc = new FullClassDesc( "ROBOT", ontoRef);
+//        robotDesc.reason();
+//        robotDesc.readExpressionAxioms(); // does this work? (because the ontology is inconsistent)
+//        DescriptorEntitySet.Individuals a = robotDesc.queryIndividuals();
+//        System.out.println(a); // What is inside this?
+
     }
 
     private String getRobotPosition() {

@@ -62,7 +62,7 @@ public class FullObjectPropertyDescTest {
         objectProperty.addSubObjectProperty( "subPropertyToBuild");
         objectProperty.writeExpressionAxioms();
         assertSemantic();
-        System.out.println( "described object property, sub test: " + objectProperty.buildSubObjectProperty());
+        System.out.println( "described object property, sub test: " + objectProperty.buildSubObjectProperties());
     }
 
 
@@ -88,7 +88,7 @@ public class FullObjectPropertyDescTest {
         objectProperty.addSuperObjectProperty( "superPropertyToBuild");
         objectProperty.writeExpressionAxioms();
         assertSemantic();
-        System.out.println( "described object property, super test: " + objectProperty.buildSuperObjectProperty());
+        System.out.println( "described object property, super test: " + objectProperty.buildSuperObjectProperties());
     }
 
     @Test
@@ -113,7 +113,7 @@ public class FullObjectPropertyDescTest {
         objectProperty.addDisjointObjectProperty( "disjointPropertyToBuild");
         objectProperty.writeExpressionAxioms();
         assertSemantic();
-        System.out.println( "described object property, disjoint test: " + objectProperty.buildDisjointObjectProperty());
+        System.out.println( "described object property, disjoint test: " + objectProperty.buildDisjointObjectProperties());
     }
 
     @Test
@@ -138,7 +138,7 @@ public class FullObjectPropertyDescTest {
         objectProperty.addEquivalentObjectProperty( "equivalentPropertyToBuild");
         objectProperty.writeExpressionAxioms();
         assertSemantic();
-        System.out.println( "described object property, equivalent test: " + objectProperty.buildEquivalentObjectProperty());
+        System.out.println( "described object property, equivalent test: " + objectProperty.buildEquivalentObjectProperties());
     }
 
     @Test
@@ -163,7 +163,7 @@ public class FullObjectPropertyDescTest {
         objectProperty.addInverseObjectProperty( "inversePropertyToBuild");
         objectProperty.writeExpressionAxioms();
         assertSemantic();
-        System.out.println( "described object property, inverse test: " + objectProperty.buildInverseObjectProperty());
+        System.out.println( "described object property, inverse test: " + objectProperty.buildInverseObjectProperties());
     }
 
     @Test
@@ -236,7 +236,7 @@ public class FullObjectPropertyDescTest {
         objectProperty.writeReadExpressionAxioms(); // the reasoner always infers here
         assertSemantic();
 
-        System.out.println( "described object property, domain test: " + objectProperty.getObjectPropertyDomainConcepts());
+        System.out.println( "described object property, domain test: " + objectProperty.getDomainRestrictions());
     }
 
 
@@ -308,7 +308,7 @@ public class FullObjectPropertyDescTest {
         objectProperty.writeReadExpressionAxioms(); // the reasoner always infers here
         assertSemantic();
 
-        System.out.println( "described object property, range test: " + objectProperty.getObjectPropertyRangeConcepts());
+        System.out.println( "described object property, range test: " + objectProperty.getRangeRestrictions());
     }
 
     int cnt = 0;
@@ -318,8 +318,8 @@ public class FullObjectPropertyDescTest {
         assertEquals( objectProperty.getSuperObjectProperties(), objectProperty.querySuperObjectProperties());
         assertEquals( objectProperty.getDisjointObjectProperties(), objectProperty.queryDisjointObjectProperties());
         assertEquals( objectProperty.getEquivalentObjectProperties(), objectProperty.queryEquivalentObjectProperties());
-        assertEquals( objectProperty.getObjectPropertyDomainConcepts(), objectProperty.queryObjectPropertyDomainConcepts());
-        assertEquals( objectProperty.getObjectPropertyRangeConcepts(), objectProperty.queryObjectPropertyRangeConcepts());
+        assertEquals( objectProperty.getDomainRestrictions(), objectProperty.queryDomainRestrictions());
+        assertEquals( objectProperty.getRangeRestrictions(), objectProperty.queryRangeRestrictions());
         assertEquals( objectProperty.getInverseObjectProperties(), objectProperty.queryInverseObjectProperties());
     }
 }

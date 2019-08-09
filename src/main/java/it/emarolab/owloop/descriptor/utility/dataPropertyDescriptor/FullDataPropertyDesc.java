@@ -8,7 +8,6 @@ import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.Descriptor
 import org.semanticweb.owlapi.model.OWLDataProperty;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * This is an example of a 'compound' DataProperty Descriptor as it implements more than one {@link DataPropertyExpression} interfaces.
@@ -46,8 +45,8 @@ public class FullDataPropertyDesc
     private DescriptorEntitySet.DataProperties equivalentDataProperties = new DescriptorEntitySet.DataProperties();
     private DescriptorEntitySet.DataProperties subDataProperties = new DescriptorEntitySet.DataProperties();
     private DescriptorEntitySet.DataProperties superDataProperties = new DescriptorEntitySet.DataProperties();
-    private DescriptorEntitySet.Restrictions domainConceptRestrictions = new DescriptorEntitySet.Restrictions();
-    private DescriptorEntitySet.Restrictions rangeConceptRestrictions = new DescriptorEntitySet.Restrictions();
+    private DescriptorEntitySet.Restrictions domainRestrictions = new DescriptorEntitySet.Restrictions();
+    private DescriptorEntitySet.Restrictions rangeRestrictions = new DescriptorEntitySet.Restrictions();
 
     /* Constructors from class: DataPropertyGround */
 
@@ -102,19 +101,19 @@ public class FullDataPropertyDesc
         return r;
     }
 
-    /* Overriding methods in classes: DataProperty and DataPropertyExpression */
+    /* Overriding methods in classes: DataProperty and DataPropertyExpression --*/
 
 
-    // It returns domainConceptRestrictions from the EntitySet (after being read from the ontology)
+    // It returns domainRestrictions from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.Restrictions getDataPropertyDomainConcepts() {
-        return domainConceptRestrictions;
+    public DescriptorEntitySet.Restrictions getDomainRestrictions() {
+        return domainRestrictions;
     }
 
-    // It returns rangeConceptRestrictions from the EntitySet (after being read from the ontology)
+    // It returns rangeRestrictions from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.Restrictions getDataPropertyRangeConcepts() {
-        return rangeConceptRestrictions;
+    public DescriptorEntitySet.Restrictions getRangeRestrictions() {
+        return rangeRestrictions;
     }
 
     // Is used by the descriptors's build() method. It's possible to change the return type based on need.
@@ -173,8 +172,8 @@ public class FullDataPropertyDesc
                 "\n" +
                 "\t\t≠ " +        disjointDataProperties + "\n" +
                 "\t\t≡ " +        equivalentDataProperties + "\n" +
-                "\t\t[≐,--] " +   domainConceptRestrictions + "\n" +
-                "\t\t[--,≐] " +   rangeConceptRestrictions + "\n" +
+                "\t\t[≐,--] " + domainRestrictions + "\n" +
+                "\t\t[--,≐] " + rangeRestrictions + "\n" +
                 "\t\t⊃ " +        subDataProperties + "\n" +
                 "\t\t⊂ " +        superDataProperties + "\n" +
                 "}" + "\n";

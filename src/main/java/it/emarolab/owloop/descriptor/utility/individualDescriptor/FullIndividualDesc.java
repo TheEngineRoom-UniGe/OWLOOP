@@ -4,7 +4,7 @@ import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.IndividualGround;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.IndividualExpression;
-import it.emarolab.owloop.descriptor.utility.conceptDescriptor.FullConceptDesc;
+import it.emarolab.owloop.descriptor.utility.conceptDescriptor.FullClassDesc;
 import it.emarolab.owloop.descriptor.utility.dataPropertyDescriptor.FullDataPropertyDesc;
 import it.emarolab.owloop.descriptor.utility.objectPropertyDescriptor.FullObjectPropertyDesc;
 import org.semanticweb.owlapi.model.OWLClass;
@@ -38,15 +38,15 @@ public class FullIndividualDesc
         extends IndividualGround
         implements IndividualExpression.Disjoint<FullIndividualDesc>,
         IndividualExpression.Equivalent<FullIndividualDesc>,
-        IndividualExpression.Type<FullConceptDesc>,
+        IndividualExpression.Type<FullClassDesc>,
         IndividualExpression.ObjectLink<FullObjectPropertyDesc>,
         IndividualExpression.DataLink<FullDataPropertyDesc> {
 
     private DescriptorEntitySet.Individuals disjointIndividuals = new DescriptorEntitySet.Individuals();
     private DescriptorEntitySet.Individuals equivalentIndividuals = new DescriptorEntitySet.Individuals();
-    private DescriptorEntitySet.Concepts concepts = new DescriptorEntitySet.Concepts();
-    private DescriptorEntitySet.ObjectLinksSet objectLinks = new DescriptorEntitySet.ObjectLinksSet();
-    private DescriptorEntitySet.DataLinksSet dataLinks = new DescriptorEntitySet.DataLinksSet();
+    private DescriptorEntitySet.Classes classes = new DescriptorEntitySet.Classes();
+    private DescriptorEntitySet.ObjectLinkSet objectLinks = new DescriptorEntitySet.ObjectLinkSet();
+    private DescriptorEntitySet.DataLinkSet dataLinks = new DescriptorEntitySet.DataLinkSet();
 
     /* Constructors from class: IndividualGround */
 
@@ -126,34 +126,34 @@ public class FullIndividualDesc
 
     // Is used by the descriptors's build() method. It's possible to change the return type based on need.
     @Override
-    public FullConceptDesc getNewIndividualType(OWLClass instance, OWLReferences ontology) {
-        return new FullConceptDesc( instance, ontology);
+    public FullClassDesc getNewType(OWLClass instance, OWLReferences ontology) {
+        return new FullClassDesc( instance, ontology);
     }
-    // It returns concepts from the EntitySet (after being read from the ontology)
+    // It returns classes from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.Concepts getIndividualTypes() {
-        return concepts;
+    public DescriptorEntitySet.Classes getTypes() {
+        return classes;
     }
 
     // Is used by the descriptors's build() method. It's possible to change the return type based on need.
     @Override
-    public FullObjectPropertyDesc getNewIndividualObjectProperty(DescriptorEntitySet.ObjectLinks instance, OWLReferences ontology) {
+    public FullObjectPropertyDesc getNewObjectProperty(DescriptorEntitySet.ObjectLinks instance, OWLReferences ontology) {
         return new FullObjectPropertyDesc( instance.getExpression(), ontology);
     }
     // It returns objectLinks from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.ObjectLinksSet getIndividualObjectProperties() {
+    public DescriptorEntitySet.ObjectLinkSet getObjectProperties() {
         return objectLinks;
     }
 
     // Is used by the descriptors's build() method. It's possible to change the return type based on need.
     @Override
-    public FullDataPropertyDesc getNewIndividualDataProperty(DescriptorEntitySet.DataLinks instance, OWLReferences ontology) {
+    public FullDataPropertyDesc getNewDataProperty(DescriptorEntitySet.DataLinks instance, OWLReferences ontology) {
         return new FullDataPropertyDesc( instance.getExpression(), ontology);
     }
     // It returns dataLinks from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.DataLinksSet getIndividualDataProperties() {
+    public DescriptorEntitySet.DataLinkSet getDataProperties() {
         return dataLinks;
     }
 
@@ -169,7 +169,7 @@ public class FullIndividualDesc
                 "\n" +
                 "\t\t≠ " + disjointIndividuals + "\n" +
                 "\t\t≡ " + equivalentIndividuals + "\n" +
-                "\t\t∈ " + concepts + "\n" +
+                "\t\t∈ " + classes + "\n" +
                 "\t\t⊨ " + objectLinks + "\n" +
                 "\t\t⊢ " + dataLinks + "\n" +
                 "}" + "\n";

@@ -62,7 +62,7 @@ public class FullIndividualDescTest {
         individual.addDisjointIndividual( "Disjoint-Individual-To-Build");
         individual.writeExpressionAxioms();
         assertSemantic();
-        System.out.println( "described individual, disjoint test: " + individual.buildDisjointIndividual());
+        System.out.println( "described individual, disjoint test: " + individual.buildDisjointIndividuals());
     }
 
     @Test
@@ -88,7 +88,7 @@ public class FullIndividualDescTest {
         individual.addEquivalentIndividual( "Equivalent-Individual-To-Build");
         individual.writeExpressionAxioms();
         assertSemantic();
-        System.out.println( "described individual, equivalent test: " + individual.buildEquivalentIndividual());
+        System.out.println( "described individual, equivalent test: " + individual.buildEquivalentIndividuals());
     }
 
     @Test
@@ -113,7 +113,7 @@ public class FullIndividualDescTest {
         individual.addTypeIndividual( "Individual-Type-To-Build");
         individual.writeReadExpressionAxioms(); // reasoner infers shape properties
         assertSemantic();
-        System.out.println( "described individual, type test: " + individual.buildTypeIndividual());
+        System.out.println( "described individual, type test: " + individual.buildTypes());
     }
 
     @Test
@@ -141,9 +141,9 @@ public class FullIndividualDescTest {
         //assertSemantic();
 
         individual.writeReadExpressionAxioms(); // reasoner infers shape properties
-        System.out.println( "described individual, multi object test: " + individual.buildObjectIndividual());
+        System.out.println( "described individual, multi object test: " + individual.buildObjectProperties());
 
-        System.out.println( "synchronised object properties: " + individual.getObjects( "isRightOf"));
+        System.out.println( "synchronised object properties: " + individual.getIndividualsFromObjectProperty( "isRightOf"));
     }
 
     @Test
@@ -160,7 +160,7 @@ public class FullIndividualDescTest {
         //assertSemantic();
         individual.addObject( "isRightOf", "Individual-B", true);
         individual.addObject( "isRightOf", "Individual-D",true);
-      //  for(DescriptorEntitySet.ObjectLinks i : individual.getIndividualObjectProperties())
+      //  for(DescriptorEntitySet.ObjectLinks i : individual.getObjectProperties())
       //      assertEquals( i.getValues().size(), 1);
         individual.writeReadExpressionAxioms(); // reasoner infers shape properties
         assertSemantic();
@@ -174,9 +174,9 @@ public class FullIndividualDescTest {
 
         individual.addObject( "isLeftOf", "Individual-B", true);
         individual.writeReadExpressionAxioms(); // reasoner infers shape properties
-        System.out.println( "described individual, multi object test: " + individual.buildObjectIndividual());
+        System.out.println( "described individual, multi object test: " + individual.buildObjectProperties());
 
-        System.out.println( "synchronised object properties: " + individual.getObject( "isRightOf"));
+        System.out.println( "synchronised object properties: " + individual.getIndividualFromObjectProperty( "isRightOf"));
 
     }
 
@@ -221,9 +221,9 @@ public class FullIndividualDescTest {
         individual.addData( "has-cone_height", 3.6);
         individual.addData( "has-geometric_height");
         individual.writeReadExpressionAxioms(); // reasoner infers shape properties
-        System.out.println( "described individual, multi object test: " + individual.buildDataIndividual());
+        System.out.println( "described individual, multi object test: " + individual.buildDataProperties());
 
-        System.out.println( "synchronised object properties: " + individual.getLiterals( "has-cone_height"));
+        System.out.println( "synchronised object properties: " + individual.getLiteralsFromDataProperty( "has-cone_height"));
     }
 
     @Test
@@ -240,7 +240,7 @@ public class FullIndividualDescTest {
         //assertSemantic();
         individual.addData( "hasProp", 2.3, true);
         individual.addData( "hasProp", 5.7, true);
-        for(DescriptorEntitySet.DataLinks i : individual.getIndividualDataProperties())
+        for(DescriptorEntitySet.DataLinks i : individual.getDataProperties())
             assertEquals( i.getValues().size(), 1);
         individual.writeReadExpressionAxioms(); // reasoner infers shape properties
         assertSemantic();
@@ -255,9 +255,9 @@ public class FullIndividualDescTest {
         individual.addData( "has-cone_height", 3.6, true);
         individual.addData( "has-geometric_height");
         individual.writeReadExpressionAxioms(); // reasoner infers shape properties
-        System.out.println( "described individual, multi object test: " + individual.buildDataIndividual());
+        System.out.println( "described individual, multi object test: " + individual.buildDataProperties());
 
-        System.out.println( "synchronised object properties: " + individual.getLiteral( "has-cone_height"));
+        System.out.println( "synchronised object properties: " + individual.getLiteralFromDataProperty( "has-cone_height"));
     }
 
     int cnt = 0;
@@ -265,8 +265,8 @@ public class FullIndividualDescTest {
         System.out.println( ++cnt + " ->   " + individual);
         assertEquals( individual.getDisjointIndividuals(), individual.queryDisjointIndividuals());
         assertEquals( individual.getEquivalentIndividuals(), individual.queryEquivalentIndividuals());
-        assertEquals( individual.getIndividualTypes(), individual.queryIndividualTypes());
-        assertEquals( individual.getIndividualObjectProperties(), individual.queryIndividualObjectProperties());
-        assertEquals( individual.getIndividualDataProperties(), individual.queryIndividualDataProperties());
+        assertEquals( individual.getTypes(), individual.queryTypes());
+        assertEquals( individual.getObjectProperties(), individual.queryObjectProperties());
+        assertEquals( individual.getDataProperties(), individual.queryIndividualDataProperties());
     }
 }

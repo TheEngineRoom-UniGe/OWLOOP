@@ -48,8 +48,8 @@ public class FullObjectPropertyDesc
     private DescriptorEntitySet.ObjectProperties inverseObjectProperties = new DescriptorEntitySet.ObjectProperties();
     private DescriptorEntitySet.ObjectProperties subObjectProperties = new DescriptorEntitySet.ObjectProperties();
     private DescriptorEntitySet.ObjectProperties superObjectProperties = new DescriptorEntitySet.ObjectProperties();
-    private DescriptorEntitySet.Restrictions domainConceptRestrictions = new DescriptorEntitySet.Restrictions();
-    private DescriptorEntitySet.Restrictions rangeConceptRestrictions = new DescriptorEntitySet.Restrictions();
+    private DescriptorEntitySet.Restrictions domainRestrictions = new DescriptorEntitySet.Restrictions();
+    private DescriptorEntitySet.Restrictions rangeRestrictions = new DescriptorEntitySet.Restrictions();
 
     /* Constructors from class: ObjectPropertyGround */
 
@@ -109,16 +109,16 @@ public class FullObjectPropertyDesc
     /* Overriding methods in classes: ObjectProperty and ObjectPropertyExpression */
 
 
-    // It returns domainConceptRestrictions from the EntitySet (after being read from the ontology)
+    // It returns domainRestrictions from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.Restrictions getObjectPropertyDomainConcepts() {
-        return domainConceptRestrictions;
+    public DescriptorEntitySet.Restrictions getDomainRestrictions() {
+        return domainRestrictions;
     }
 
-    // It returns rangeConceptRestrictions from the EntitySet (after being read from the ontology)
+    // It returns rangeRestrictions from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.Restrictions getObjectPropertyRangeConcepts() {
-        return rangeConceptRestrictions;
+    public DescriptorEntitySet.Restrictions getRangeRestrictions() {
+        return rangeRestrictions;
     }
 
     // Is used by the descriptors's build() method. It's possible to change the return type based on need.
@@ -188,8 +188,8 @@ public class FullObjectPropertyDesc
                 "\n" +
                 "\t\t≠ " +      disjointObjectProperties + "\n" +
                 "\t\t≡ " +      equivalentObjectProperties + "\n" +
-                "\t\t[≐,--] " + domainConceptRestrictions + "\n" +
-                "\t\t[--,≐] " + rangeConceptRestrictions + "\n" +
+                "\t\t[≐,--] " + domainRestrictions + "\n" +
+                "\t\t[--,≐] " + rangeRestrictions + "\n" +
                 "\t\t⊃ " +      subObjectProperties + "\n" +
                 "\t\t⊂ " +      superObjectProperties + "\n" +
                 "\t\t↔ " +      inverseObjectProperties + "\n" +

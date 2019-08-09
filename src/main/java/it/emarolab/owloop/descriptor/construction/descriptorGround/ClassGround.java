@@ -1,12 +1,12 @@
 package it.emarolab.owloop.descriptor.construction.descriptorGround;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
-import it.emarolab.owloop.descriptor.construction.descriptorExpression.ConceptExpression;
+import it.emarolab.owloop.descriptor.construction.descriptorExpression.ClassExpression;
 import org.semanticweb.owlapi.model.OWLClass;
 
 /**
  * This abstract class is used to instantiate a {@link DescriptorGround} for a {@link ConceptGroundInstance}
- * linked to {@link ConceptExpression}s.
+ * linked to {@link ClassExpression}s.
  *
  * <p>
  * <div style="text-align:center;"><small>
@@ -17,32 +17,32 @@ import org.semanticweb.owlapi.model.OWLClass;
  * <b>date</b>:         01/05/19 <br>
  * </small></div>
  */
-abstract public class ConceptGround
+abstract public class ClassGround
         extends DescriptorGround<OWLClass>
-        implements ConceptExpression {
+        implements ClassExpression {
 
-    public ConceptGround(OWLClass instance, OWLReferences onto) {
+    public ClassGround(OWLClass instance, OWLReferences onto) {
         super(instance, onto);
     }
-    public ConceptGround(String instanceName, OWLReferences onto) {
+    public ClassGround(String instanceName, OWLReferences onto) {
         super(instanceName, onto);
     }
-    public ConceptGround(OWLClass instance, String ontoName) {
+    public ClassGround(OWLClass instance, String ontoName) {
         super(instance, ontoName);
     }
-    public ConceptGround(OWLClass instance, String ontoName, String filePath, String iriPath) {
+    public ClassGround(OWLClass instance, String ontoName, String filePath, String iriPath) {
         super(instance, ontoName, filePath, iriPath);
     }
-    public ConceptGround(OWLClass instance, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
+    public ClassGround(OWLClass instance, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
         super(instance, ontoName, filePath, iriPath, bufferingChanges);
     }
-    public ConceptGround(String instanceName, String ontoName) {
+    public ClassGround(String instanceName, String ontoName) {
         super(instanceName, ontoName);
     }
-    public ConceptGround(String instanceName, String ontoName, String filePath, String iriPath) {
+    public ClassGround(String instanceName, String ontoName, String filePath, String iriPath) {
         super(instanceName, ontoName, filePath, iriPath);
     }
-    public ConceptGround(String instanceName, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
+    public ClassGround(String instanceName, String ontoName, String filePath, String iriPath, boolean bufferingChanges) {
         super(instanceName, ontoName, filePath, iriPath, bufferingChanges);
     }
 

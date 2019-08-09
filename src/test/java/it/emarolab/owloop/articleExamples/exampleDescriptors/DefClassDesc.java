@@ -3,33 +3,33 @@ package it.emarolab.owloop.articleExamples.exampleDescriptors;
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.amor.owlInterface.SemanticRestriction;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
-import it.emarolab.owloop.descriptor.construction.descriptorExpression.ConceptExpression;
-import it.emarolab.owloop.descriptor.construction.descriptorGround.ConceptGround;
-import it.emarolab.owloop.descriptor.utility.conceptDescriptor.FullConceptDesc;
+import it.emarolab.owloop.descriptor.construction.descriptorExpression.ClassExpression;
+import it.emarolab.owloop.descriptor.construction.descriptorGround.ClassGround;
+import it.emarolab.owloop.descriptor.utility.conceptDescriptor.FullClassDesc;
 
 import java.util.List;
 
 /**
- * A 'simple' Concept Descriptor that implements 1 ClassExpression (aka {@link ConceptExpression}) interface:
+ * A 'simple' Class Descriptor that implements 1 ClassExpression (aka {@link ClassExpression}) interface:
  * <ul>
  * <li><b>{@link EquivalentRestriction}</b>:  to describe the definition of a Class..</li>
  * </ul>
  *
- *  See {@link FullConceptDesc} for an example of a 'compound' Concept Descriptor that implements all ClassExpressions (aka {@link ConceptExpression}).
+ *  See {@link FullClassDesc} for an example of a 'compound' Class Descriptor that implements all ClassExpressions (aka {@link ClassExpression}).
  */
-public abstract class DefConceptDesc
-        extends ConceptGround
-        implements ConceptExpression.EquivalentRestriction {
+public abstract class DefClassDesc
+        extends ClassGround
+        implements ClassExpression.EquivalentRestriction {
 
-    private DescriptorEntitySet.Restrictions conceptRestrictions = new DescriptorEntitySet.Restrictions();
+    private DescriptorEntitySet.Restrictions restrictions = new DescriptorEntitySet.Restrictions();
 
-    /* Constructors from class: ConceptGround */
+    /* Constructors from class: ClassGround */
 
-    DefConceptDesc(String instanceName, OWLReferences onto) {
-        super(instanceName, onto);  // grounds the Concept having a 'name', with respect to an 'onto'
+    DefClassDesc(String instanceName, OWLReferences onto) {
+        super(instanceName, onto);  // grounds the Class having a 'name', with respect to an 'onto'
     }
 
-    /* Overriding methods in class: ConceptGround */
+    /* Overriding methods in class: ClassGround */
 
 
     // To read axioms from an ontology
@@ -48,13 +48,13 @@ public abstract class DefConceptDesc
     // To get a restriction to be added to the definition
     abstract protected SemanticRestriction.ApplyingPropertyRestriction getRestriction();
 
-    /* Overriding methods in classes: Concept and ConceptExpression */
+    /* Overriding methods in classes: Class and ClassExpression */
 
 
-    // It returns conceptRestrictions from the EntitySet (after being read from the ontology)
+    // It returns restrictions from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.Restrictions getRestrictionConcepts() {
-        return conceptRestrictions;
+    public DescriptorEntitySet.Restrictions getEquivalentRestrictions() {
+        return restrictions;
     }
 
     // To show internal state of the Descriptor
@@ -64,7 +64,7 @@ public abstract class DefConceptDesc
                 "\n" +
                 "\t" + getGround() + ":" + "\n" +
                 "\n" +
-                "\t\t≐ " + conceptRestrictions + "\n" +
+                "\t\t≐ " + restrictions + "\n" +
                 "}" + "\n";
     }
 }
