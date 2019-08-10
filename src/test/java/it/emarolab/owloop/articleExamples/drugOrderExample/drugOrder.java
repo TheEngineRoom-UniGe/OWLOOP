@@ -48,5 +48,12 @@ public class drugOrder {
             total_cost[0] += value.parseInteger();
         });
         System.out.println(total_cost[0]);
+
+        FullClassDesc ORDER = new FullClassDesc("ORDER", ontoRef);
+        FullIndividualDesc order = new FullIndividualDesc("order", ontoRef);
+        FullObjectPropertyDesc hasDrug = new FullObjectPropertyDesc("hasDrug", ontoRef);
+        FullDataPropertyDesc hasPrice = new FullDataPropertyDesc("hasPrice", ontoRef);
+
+
     }
 }

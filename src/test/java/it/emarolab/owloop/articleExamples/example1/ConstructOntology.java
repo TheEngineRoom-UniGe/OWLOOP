@@ -4,8 +4,6 @@ import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.amor.owlInterface.OWLReferencesInterface;
 import it.emarolab.owloop.articleExamples.exampleDescriptors.*;
 import it.emarolab.owloop.articleExamples.exampleDescriptors.RoomClassDesc;
-import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
-import it.emarolab.owloop.descriptor.utility.conceptDescriptor.FullClassDesc;
 import it.emarolab.owloop.descriptor.utility.conceptDescriptor.RestrictionClassDesc;
 import it.emarolab.owloop.descriptor.utility.individualDescriptor.RestrictionIndividualDesc;
 import it.emarolab.owloop.descriptor.utility.objectPropertyDescriptor.DomainRangeObjectPropertyDesc;
@@ -75,8 +73,8 @@ public class ConstructOntology {
         // ROBOT concept disjoint with DOOR and LOCATION concepts
         RestrictionClassDesc robotConcept_Desc = new RestrictionClassDesc( "ROBOT", ontoRef);
 
-        robotConcept_Desc.addDisjointConcept( "LOCATION");
-        robotConcept_Desc.addDisjointConcept( "DOOR");
+        robotConcept_Desc.addDisjointClass( "LOCATION");
+        robotConcept_Desc.addDisjointClass( "DOOR");
         robotConcept_Desc.writeExpressionAxioms();
 
         // All individuals are different from each other

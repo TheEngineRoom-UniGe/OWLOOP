@@ -79,11 +79,11 @@ public interface IndividualExpression
          * It is an helper that just calls:
          * {@code {@link #getTypes()}.add( cl)}
          * in order to add a new class in the {@link EntitySet} list.
-         * @param cl the class to add for synchronisation.
+         * @param instance the class to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
-        default boolean addTypeIndividual(OWLClass cl){
-            return getTypes().add( cl);
+        default boolean addTypeIndividual(OWLClass instance){
+            return getTypes().add( instance);
         }
 
         /**
@@ -100,11 +100,11 @@ public interface IndividualExpression
          * It is an helper that just calls:
          * {@code {@link #getTypes()}.remove( individualDescriptor)}
          * in order to remove a class in the {@link EntitySet} list.
-         * @param cl the class to remove for synchronisation.
+         * @param instance the class to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
-        default boolean removeTypeIndividual(OWLClass cl){
-            return getTypes().remove( cl);
+        default boolean removeTypeIndividual(OWLClass instance){
+            return getTypes().remove( instance);
         }
 
         @Override
@@ -183,7 +183,7 @@ public interface IndividualExpression
         }
         /**
          * It is an helper that just calls:
-         * {@code {@link #getDisjointIndividuals()}.remove( property)}
+         * {@code {@link #getDisjointIndividuals()}.remove( dataProperty)}
          * in order to remove a class in the {@link EntitySet} list.
          * @param individual the individualDescriptor to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
@@ -350,52 +350,52 @@ public interface IndividualExpression
          * Remove the {@link ExpressionEntity} of the given semantic ({@link DescriptorEntitySet.DataLinks#getExpression()})
          * from the {@link Descriptor}. This call may remove multiple value attached to that
          * semantic. It will no longer be used during {@link #readExpressionAxioms()} and {@link #writeExpressionAxioms()}.
-         * @param property a data property name contained in an element of {@link #getDataProperties()} to be removed.
+         * @param dataProperty a dataProperty name contained in an element of {@link #getDataProperties()} to be removed.
          * @return {@code true} if an element was removed as a result of this call.
          */
-        default boolean removeData( String property){
-            return removeData( getOWLDataProperty( property));
+        default boolean removeData( String dataProperty){
+            return removeData( getOWLDataProperty( dataProperty));
         }
         /**
          * Remove the {@link ExpressionEntity} of the given semantic ({@link DescriptorEntitySet.DataLinks#getExpression()})
          * from the {@link Descriptor}. This call may remove multiple value attached to that
          * semantic. It will no longer be used during {@link #readExpressionAxioms()} and {@link #writeExpressionAxioms()}.
-         * @param property a data property contained in an element of {@link #getDataProperties()} to be removed.
+         * @param dataProperty a dataProperty contained in an element of {@link #getDataProperties()} to be removed.
          * @return {@code true} if an element was removed as a result of this call.
          */
-        default boolean removeData( OWLDataProperty property){
+        default boolean removeData( OWLDataProperty dataProperty){
             for (DescriptorEntitySet.DataLinks d : getDataProperties())
-                if( d.getExpression().equals( property))
+                if( d.getExpression().equals( dataProperty))
                     return getDataProperties().remove( d);
             return false;
         }
 
         /**
-         * Remove the {@link ExpressionEntity#getExpression()} of the given property, with a specific value, from {@code this}
+         * Remove the {@link ExpressionEntity#getExpression()} of the given dataProperty, with a specific value, from {@code this}
          * {@link Descriptor}. This call does not remove the semantic from this object, and it may be
          * repopulate (or completely removed) by calling: {@link #readExpressionAxioms()}.
          * The class of the specified value represents its data type, supported {@link OWLLiteral} are:
          * {@link Integer}, {@link Boolean}, {@link Double}, {@link Float} and {@link Long} (see {@link #getOWLLiteral(Object)}).
-         * @param property the name of the data property which value, contained in {@link #getDataProperties()}, will be removed.
-         * @param value the property value to be removed from the {@link DescriptorEntitySet.DataLinks#getValues()} set.
+         * @param dataProperty the name of the dataProperty which value, contained in {@link #getDataProperties()}, will be removed.
+         * @param value the dataProperty value to be removed from the {@link DescriptorEntitySet.DataLinks#getValues()} set.
          * @return {@code true} if an element was removed as a result of this call.
          */
-        default boolean removeData( String property, Object value){
-            return removeData( getOWLDataProperty( property), getOWLLiteral( value));
+        default boolean removeData( String dataProperty, Object value){
+            return removeData( getOWLDataProperty( dataProperty), getOWLLiteral( value));
         }
         /**
-         * Remove the {@link ExpressionEntity#getExpression()} of the given property, with a specific value, from {@code this}
+         * Remove the {@link ExpressionEntity#getExpression()} of the given dataProperty, with a specific value, from {@code this}
          * {@link Descriptor}. This call does not remove the semantic from this object, and it may be
          * repopulate (or completely removed) by calling: {@link #readExpressionAxioms()}.
-         * @param property the data property which value, contained in {@link #getDataProperties()}, will be removed.
-         * @param value the specific property literal to be removed from the {@link DescriptorEntitySet.DataLinks#getValues()} set.
+         * @param dataProperty the dataProperty which value, contained in {@link #getDataProperties()}, will be removed.
+         * @param value the specific dataProperty literal to be removed from the {@link DescriptorEntitySet.DataLinks#getValues()} set.
          * @return {@code true} if an element was removed as a result of this call.
          */
-        default boolean removeData( OWLDataProperty property, OWLLiteral value){
+        default boolean removeData( OWLDataProperty dataProperty, OWLLiteral value){
             boolean out = false;
             HashSet<OWLDataProperty> toRemove = new HashSet<>();
             for (DescriptorEntitySet.DataLinks d : getDataProperties()) {
-                if (d.getExpression().equals(property))
+                if (d.getExpression().equals(dataProperty))
                     out = d.getValues().remove(value);
                 if ( d.getValues().isEmpty())
                     toRemove.add( d.getExpression());
@@ -403,177 +403,177 @@ public interface IndividualExpression
             getDataProperties().removeAll( toRemove);
             return out;
         }
-        default boolean removeData( OWLDataProperty property, Set<OWLLiteral> values){
-            DescriptorEntitySet.DataLinks dataSemantic = new DescriptorEntitySet.DataLinks(property);
+        default boolean removeData( OWLDataProperty dataProperty, Set<OWLLiteral> values){
+            DescriptorEntitySet.DataLinks dataSemantic = new DescriptorEntitySet.DataLinks(dataProperty);
             dataSemantic.getValues().addAll( values);
             return getDataProperties().remove( dataSemantic);
         }
 
         /**
-         * Add a new semantic (i.e.: data property) to this {@link Descriptor}.
+         * Add a new semantic (i.e.: data dataProperty) to this {@link Descriptor}.
          * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * value to {@code false} anyway.
          * On the other hand, it does not assign any value to the properties that are automatically
          * queried during {@link #readExpressionAxioms()}.
-         * @param property the name of the data property to synchronise.
-         * @return {@code true} if an element was added as a result of this call 
+         * @param dataProperty the name of the dataProperty to synchronise.
+         * @return {@code true} if an element was added as a result of this call
          * (a change of singleton value is not considered).
          */
-        default boolean addData( String property){
-            return addData( property, false);
+        default boolean addData( String dataProperty){
+            return addData( dataProperty, false);
         }
         /**
-         * Add a new semantic (i.e.: data property) to this {@link Descriptor}.
+         * Add a new semantic (i.e.: data dataProperty) to this {@link Descriptor}.
          * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * value to {@code false} anyway.
          * On the other hand, it does not assign any value to the properties that are automatically
          * queried during {@link #readExpressionAxioms()}.
-         * @param property the data property to synchronise.
-         * @return {@code true} if an element was added as a result of this call 
+         * @param dataProperty the dataProperty to synchronise.
+         * @return {@code true} if an element was added as a result of this call
          * (a change of singleton value is not considered).
          */
-        default boolean addData( OWLDataProperty property){
-            return addData( property, false);
+        default boolean addData( OWLDataProperty dataProperty){
+            return addData( dataProperty, false);
         }
         /**
-         * Add a new semantic (i.e.: data property) to this {@link Descriptor}.
+         * Add a new semantic (i.e.: data dataProperty) to this {@link Descriptor}.
          * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * to the specified value anyway.
          * On the other hand, it does not assign any value to the properties that are automatically
          * queried during {@link #readExpressionAxioms()}.
-         * @param property the name of the data property to synchronise.
-         * @param singleton the flag to enable the synchronisation of only one element of the set, 
+         * @param dataProperty the name of the dataProperty to synchronise.
+         * @param singleton the flag to enable the synchronisation of only one element of the set,
          *                  others will be discarded.
-         * @return {@code true} if an element was added as a result of this call 
+         * @return {@code true} if an element was added as a result of this call
          * (a change of singleton value is not considered).
          */
-        default boolean addData( String property, boolean singleton){
-            return addData( getOWLDataProperty( property), singleton);
+        default boolean addData( String dataProperty, boolean singleton){
+            return addData( getOWLDataProperty( dataProperty), singleton);
         }
         /**
-         * Add a new semantic (i.e.: data property) to this {@link Descriptor}.
+         * Add a new semantic (i.e.: data dataProperty) to this {@link Descriptor}.
          * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * to the specified value anyway.
          * On the other hand, it does not assign any value to the properties that are automatically
          * queried during {@link #readExpressionAxioms()}.
-         * @param property the data property to synchronise.
-         * @param singleton the flag to enable the synchronisation of only one element of the set, 
+         * @param dataProperty the dataProperty to synchronise.
+         * @param singleton the flag to enable the synchronisation of only one element of the set,
          *                  others will be discarded.
-         * @return {@code true} if an element was added as a result of this call 
+         * @return {@code true} if an element was added as a result of this call
          * (a change of singleton value is not considered).
          */
-        default boolean addData( OWLDataProperty property, boolean singleton){
+        default boolean addData( OWLDataProperty dataProperty, boolean singleton){
             for (DescriptorEntitySet.DataLinks d : getDataProperties()) {
-                if (d.getExpression().equals(property)) {
+                if (d.getExpression().equals(dataProperty)) {
                     d.getValues().setSingleton( singleton);
                     return false;
                 }
             }
 
-            DescriptorEntitySet.DataLinks data = new DescriptorEntitySet.DataLinks(property);
+            DescriptorEntitySet.DataLinks data = new DescriptorEntitySet.DataLinks(dataProperty);
             data.getValues().setSingleton( singleton);
             return getDataProperties().add(data);
         }
 
         /**
-         * Add a new semantic (i.e.: data property) to this {@link Descriptor} with a particular value.
+         * Add a new semantic (i.e.: data dataProperty) to this {@link Descriptor} with a particular value.
          * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * value to {@code false} anyway.
          * The class of the specified value represents its data type, supported {@link OWLLiteral} are:
          * {@link Integer}, {@link Boolean}, {@link Double}, {@link Float} and {@link Long} (see {@link #getOWLLiteral(Object)}).
-         * @param property the name of the data property to synchronise.
+         * @param dataProperty the name of the dataProperty to synchronise.
          * @param value the specific data to be added to the {@link DescriptorEntitySet.DataLinks#getValues()} set.
-         * @return {@code true} if an element was added as a result of this call 
+         * @return {@code true} if an element was added as a result of this call
          * (a change of singleton value is not considered).
          */
-        default boolean addData( String property, Object value){
-            return addData( property, value, false);
+        default boolean addData( String dataProperty, Object value){
+            return addData( dataProperty, value, false);
         }
         /**
-         * Add a new semantic (i.e.: data property) to this {@link Descriptor} with a particular value.
+         * Add a new semantic (i.e.: data dataProperty) to this {@link Descriptor} with a particular value.
          * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * value to {@code false} anyway.
-         * @param property the data property to synchronise.
+         * @param dataProperty the dataProperty to synchronise.
          * @param value the literal to be added to the {@link DescriptorEntitySet.DataLinks#getValues()} set.
          * @return {@code true} if an element was added as a result of this call
          * (a change of singleton value is not considered).
          */
-        default boolean addData( OWLDataProperty property, OWLLiteral value){
-            return addData( property, value, false);
+        default boolean addData( OWLDataProperty dataProperty, OWLLiteral value){
+            return addData( dataProperty, value, false);
         }
         /**
-         * Add a new semantic (i.e.: data property) to this {@link Descriptor} with a particular value.
+         * Add a new semantic (i.e.: data dataProperty) to this {@link Descriptor} with a particular value.
          * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * value to specified boolean anyway.
          * The class of the specified value represents its data type, supported {@link OWLLiteral} are:
          * {@link Integer}, {@link Boolean}, {@link Double}, {@link Float} and {@link Long} (see {@link #getOWLLiteral(Object)}).
-         * @param property the name of the data property to synchronise.
+         * @param dataProperty the name of the dataProperty to synchronise.
          * @param value the specific data to be added to the {@link DescriptorEntitySet.DataLinks#getValues()} set.
          * @param singleton the flag specifying if the new {@link DescriptorEntitySet.Literals} should contains only one element.
          * @return {@code true} if an element was added as a result of this call
          * (a change of singleton value is not considered).
          */
-        default boolean addData( String property, Object value, boolean singleton){
-            return addData( getOWLDataProperty( property), getOWLLiteral( value), singleton);
+        default boolean addData( String dataProperty, Object value, boolean singleton){
+            return addData( getOWLDataProperty( dataProperty), getOWLLiteral( value), singleton);
         }
         /**
-         * Add a new semantic (i.e.: data property) to this {@link Descriptor} with a particular value.
+         * Add a new semantic (i.e.: data dataProperty) to this {@link Descriptor} with a particular value.
          * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * value to specified boolean anyway.
          * If {@link #getDataProperties()} represents a singleton set this call clear the
          * previous contents.
-         * @param property the data property to synchronise.
-         * @param value the specific property literal to be added to the {@link DescriptorEntitySet.DataLinks#getValues()} set.
+         * @param dataProperty the dataProperty to synchronise.
+         * @param value the specific dataProperty literal to be added to the {@link DescriptorEntitySet.DataLinks#getValues()} set.
          * @param singleton the flag specifying if the new {@link DescriptorEntitySet.Literals} should contains only one element.
          * @return {@code true} if an element was added as a result of this call
          * (a change of singleton value is not considered).
          */
-        default boolean addData( OWLDataProperty property, OWLLiteral value, boolean singleton){
+        default boolean addData( OWLDataProperty dataProperty, OWLLiteral value, boolean singleton){
             for (DescriptorEntitySet.DataLinks d : getDataProperties())
-                if( d.getExpression().equals( property)){
+                if( d.getExpression().equals( dataProperty)){
                     if ( singleton)
                         d.getValues().clear();
                     d.getValues().setSingleton( singleton);
                     return d.getValues().add( value);
                 }
 
-            DescriptorEntitySet.DataLinks data = new DescriptorEntitySet.DataLinks(property);
+            DescriptorEntitySet.DataLinks data = new DescriptorEntitySet.DataLinks(dataProperty);
             data.getValues().add(value);
             data.getValues().setSingleton( singleton);
             return getDataProperties().add(data);
         }
         /**
-         * Add a new semantic (i.e.: data property) to this {@link Descriptor} with a particular set of values.
+         * Add a new semantic (i.e.: data dataProperty) to this {@link Descriptor} with a particular set of values.
          * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * value to specified boolean anyway.
          * If {@link #getDataProperties()} represents a singleton set this call clear the
          * previous contents.
-         * @param property the data property to synchronise.
-         * @param values the specific set of property literal to be added to the {@link DescriptorEntitySet.DataLinks#getValues()} set.
+         * @param dataProperty the dataProperty to synchronise.
+         * @param values the specific set of dataProperty literal to be added to the {@link DescriptorEntitySet.DataLinks#getValues()} set.
          * @param singleton the flag specifying if the new {@link DescriptorEntitySet.Literals} should contains only one element.
          * @return {@code true} if an element was added as a result of this call
          * (a change of singleton value is not considered).
          */
-        default boolean addObject( OWLDataProperty property, Set<OWLLiteral> values, boolean singleton){
-            DescriptorEntitySet.DataLinks objectSemantic = new DescriptorEntitySet.DataLinks(property);
+        default boolean addObject( OWLDataProperty dataProperty, Set<OWLLiteral> values, boolean singleton){
+            DescriptorEntitySet.DataLinks objectSemantic = new DescriptorEntitySet.DataLinks(dataProperty);
             objectSemantic.getValues().addAll( values);
             objectSemantic.getValues().setSingleton( singleton);
             return getDataProperties().add( objectSemantic);
         }
         /**
-         * Add a new semantic (i.e.: data property) to this {@link Descriptor} with a particular set of values.
+         * Add a new semantic (i.e.: data dataProperty) to this {@link Descriptor} with a particular set of values.
          * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * value to specified boolean anyway.
          * If {@link #getDataProperties()} represents a singleton set this call clear the
          * previous contents.
          * This call, automatically sets the {@code singleton} flag to false.
-         * @param property the data property to synchronise.
-         * @param values the specific set of property literal to be added to the {@link DescriptorEntitySet.DataLinks#getValues()} set.
+         * @param dataProperty the dataProperty to synchronise.
+         * @param values the specific set of dataProperty literal to be added to the {@link DescriptorEntitySet.DataLinks#getValues()} set.
          * @return {@code true} if an element was added as a result of this call
          * (a change of singleton value is not considered).
          */
-        default boolean addObject( OWLDataProperty property, Set<OWLLiteral> values){
-            return addObject( property, values, false);
+        default boolean addObject( OWLDataProperty dataProperty, Set<OWLLiteral> values){
+            return addObject( dataProperty, values, false);
         }
 
 
@@ -582,36 +582,36 @@ public interface IndividualExpression
 
         /**
          * A shortcut for {@code getDataProperties().getLink( semantic)}
-         * @param semantic the data property to look for its values.
-         * @return a value of the given data property. {@code Null} if is not available.
+         * @param instance the data dataProperty to look for its values.
+         * @return a value of the given data dataProperty. {@code Null} if is not available.
          */
-        default OWLLiteral getLiteralFromDataProperty(OWLDataProperty semantic){
-            return getDataProperties().getLink( semantic);
+        default OWLLiteral getLiteralFromDataProperty(OWLDataProperty instance){
+            return getDataProperties().getLink( instance);
         }
         /**
          * A shortcut for {@code getDataProperties().getLink( getOntology().getOWLDataProperty( semanticName)}
-         * @param semanticName the name of the data property to look for its values.
-         * @return a value of the given data property. {@code Null} if is not available.
+         * @param dataPropertyName the name of the data dataProperty to look for its values.
+         * @return a value of the given data dataProperty. {@code Null} if is not available.
          */
-        default OWLLiteral getLiteralFromDataProperty(String semanticName){
-            return getDataProperties().getLink( getOntology().getOWLDataProperty( semanticName));
+        default OWLLiteral getLiteralFromDataProperty(String dataPropertyName){
+            return getDataProperties().getLink( getOntology().getOWLDataProperty( dataPropertyName));
         }
 
         /**
          * A shortcut for {@code getDataProperties().getLinks( semantic)}
-         * @param semantic the data property to look for its values.
-         * @return all the values of the given data property. An {@code empty} {@link HashSet} if is not available.
+         * @param instance the data dataProperty to look for its values.
+         * @return all the values of the given data dataProperty. An {@code empty} {@link HashSet} if is not available.
          */
-        default EntitySet<OWLLiteral> getLiteralsFromDataProperty(OWLDataProperty semantic){
-            return getDataProperties().getLinks( semantic);
+        default EntitySet<OWLLiteral> getLiteralsFromDataProperty(OWLDataProperty instance){
+            return getDataProperties().getLinks( instance);
         }
         /**
          * A shortcut for {@code getDataProperties().getLinks( getOntology().getOWLDataProperty( semanticName))}
-         * @param semanticName the name of the data property to look for its values.
-         * @return all the values of the given data property. An {@code empty} {@link HashSet} if is not available.
+         * @param dataPropertyName the name of the data dataProperty to look for its values.
+         * @return all the values of the given data dataProperty. An {@code empty} {@link HashSet} if is not available.
          */
-        default EntitySet<OWLLiteral> getLiteralsFromDataProperty(String semanticName){
-            return getDataProperties().getLinks( getOntology().getOWLDataProperty( semanticName));
+        default EntitySet<OWLLiteral> getLiteralsFromDataProperty(String dataPropertyName){
+            return getDataProperties().getLinks( getOntology().getOWLDataProperty( dataPropertyName));
         }
 
 
@@ -662,7 +662,7 @@ public interface IndividualExpression
      *     It also implements common function to populate the {@link ExpressionEntitySet}
      *     (of type {@link DescriptorEntitySet.ObjectLinks}) that specify the object properties of this individualDescriptor
      *     that are synchronised with this {@link Descriptor}. For efficiency,
-     *     this descriptor does not map all the property of an individualDescriptor but only for the
+     *     this descriptor does not map all the objectProperty of an individualDescriptor but only for the
      *     {@code Expressions} that have been initialised in the {@link ExpressionEntity}.
      *     On the other hand, if the set of {@link ExpressionEntitySet} is leaved empty during
      *     {@link #readExpressionAxioms()}, it maps all the object properties applied to the described
@@ -680,59 +680,59 @@ public interface IndividualExpression
          * Remove the {@link ExpressionEntity} of the given semantic ({@link DescriptorEntitySet.ObjectLinks#getExpression()})
          * from the {@link Descriptor}. This call may remove multiple value attached to that
          * semantic. It will no longer be used during {@link #readExpressionAxioms()} and {@link #writeExpressionAxioms()}.
-         * @param property an object property name contained in an element of {@link #getObjectProperties()} to be removed.
+         * @param objectProperty an objectProperty name contained in an element of {@link #getObjectProperties()} to be removed.
          * @return {@code true} if an element was removed as a result of this call.
          */
-        default boolean removeObject( String property){
-            return removeObject( getOWLObjectProperty( property));
+        default boolean removeObject( String objectProperty){
+            return removeObject( getOWLObjectProperty( objectProperty));
         }
         /**
          * Remove the {@link ExpressionEntity} of the given semantic ({@link DescriptorEntitySet.ObjectLinks#getExpression()})
          * from the {@link Descriptor}. This call may remove multiple value attached to that
          * semantic. It will no longer be used during {@link #readExpressionAxioms()} and {@link #writeExpressionAxioms()}.
-         * @param property an object property contained in an element of {@link #getObjectProperties()} to be removed.
+         * @param objectProperty an objectProperty contained in an element of {@link #getObjectProperties()} to be removed.
          * @return {@code true} if an element was removed as a result of this call.
          */
-        default boolean removeObject( OWLObjectProperty property){
-            return getObjectProperties().remove( property);
+        default boolean removeObject( OWLObjectProperty objectProperty){
+            return getObjectProperties().remove( objectProperty);
         }
 
         /**
-         * Remove the {@link ExpressionEntity#getExpression()} of the given property, with a specific value, from {@code this}
+         * Remove the {@link ExpressionEntity#getExpression()} of the given objectProperty, with a specific value, from {@code this}
          * {@link Descriptor}. This call does not remove the semantic from this object, and it may be
          * repopulate (or completely removed) by calling: {@link #readExpressionAxioms()}.
-         * @param property the name of the object property which value, contained in {@link #getObjectProperties()}, will be removed.
-         * @param value the property value to be removed from the {@link DescriptorEntitySet.ObjectLinks#getValues()} set.
+         * @param objectProperty the name of the objectProperty which value, contained in {@link #getObjectProperties()}, will be removed.
+         * @param value the objectProperty value to be removed from the {@link DescriptorEntitySet.ObjectLinks#getValues()} set.
          * @return {@code true} if an element was removed as a result of this call.
          */
-        default boolean removeObject( String property, String value){
-            return removeObject( getOWLObjectProperty( property), getOWLIndividual( value));
+        default boolean removeObject( String objectProperty, String value){
+            return removeObject( getOWLObjectProperty( objectProperty), getOWLIndividual( value));
         }
         /**
-         * Remove the {@link ExpressionEntity#getExpression()} of the given property, with a specific value, from {@code this}
+         * Remove the {@link ExpressionEntity#getExpression()} of the given objectProperty, with a specific value, from {@code this}
          * {@link Descriptor}. This call does not remove the semantic from this object, and it may be
          * repopulate (or completely removed) by calling: {@link #readExpressionAxioms()}.
-         * @param property the object property which value, contained in {@link #getObjectProperties()}, will be removed.
-         * @param value the specific property literal to be removed from the {@link DescriptorEntitySet.ObjectLinks#getValues()} set.
+         * @param objectProperty the objectProperty which value, contained in {@link #getObjectProperties()}, will be removed.
+         * @param value the specific objectProperty literal to be removed from the {@link DescriptorEntitySet.ObjectLinks#getValues()} set.
          * @return {@code true} if an element was removed as a result of this call.
          */
-        default boolean removeObject( OWLObjectProperty property, OWLNamedIndividual value){
-            DescriptorEntitySet.ObjectLinks objectSemantic = new DescriptorEntitySet.ObjectLinks(property);
+        default boolean removeObject( OWLObjectProperty objectProperty, OWLNamedIndividual value){
+            DescriptorEntitySet.ObjectLinks objectSemantic = new DescriptorEntitySet.ObjectLinks(objectProperty);
             objectSemantic.getValues().add( value);
             boolean out = getObjectProperties().remove( objectSemantic);
             removeEmptyDataProprtySet();
             return out;
         }
         /**
-         * Remove the {@link ExpressionEntity#getExpression()} of the given property, with specific values, from {@code this}
+         * Remove the {@link ExpressionEntity#getExpression()} of the given objectProperty, with specific values, from {@code this}
          * {@link Descriptor}. This call does not remove the semantic from this object, and it may be
          * repopulate (or completely removed) by calling: {@link #readExpressionAxioms()}.
-         * @param property the object property which value, contained in {@link #getObjectProperties()}, will be removed.
-         * @param values the specific set of property literal to be removed from the {@link DescriptorEntitySet.ObjectLinks#getValues()} set.
+         * @param objectProperty the objectProperty which value, contained in {@link #getObjectProperties()}, will be removed.
+         * @param values the specific set of objectProperty literal to be removed from the {@link DescriptorEntitySet.ObjectLinks#getValues()} set.
          * @return {@code true} if an element was removed as a result of this call.
          */
-        default boolean removeObject( OWLObjectProperty property, Set<OWLNamedIndividual> values){
-            DescriptorEntitySet.ObjectLinks objectSemantic = new DescriptorEntitySet.ObjectLinks(property);
+        default boolean removeObject( OWLObjectProperty objectProperty, Set<OWLNamedIndividual> values){
+            DescriptorEntitySet.ObjectLinks objectSemantic = new DescriptorEntitySet.ObjectLinks(objectProperty);
             objectSemantic.getValues().addAll( values);
             boolean out = getObjectProperties().remove( objectSemantic);
             removeEmptyDataProprtySet();
@@ -749,153 +749,153 @@ public interface IndividualExpression
 
 
         /**
-         * Add a new semantic (i.e.: object property) to this {@link Descriptor}.
+         * Add a new semantic (i.e.: object objectProperty) to this {@link Descriptor}.
          * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * value to {@code false} anyway.
          * On the other hand, it does not assign any value to the properties that are automatically
          * queried during {@link #readExpressionAxioms()}.
-         * @param property the name of the object property to synchronise.
+         * @param objectProperty the name of the objectProperty to synchronise.
          * @return {@code true} if an element was added as a result of this call
          * (a change of singleton value is not considered).
          */
-        default boolean addObject( String property){
-            return addObject( property, false);
+        default boolean addObject( String objectProperty){
+            return addObject( objectProperty, false);
         }
         /**
-         * Add a new semantic (i.e.: object property) to this {@link Descriptor}.
+         * Add a new semantic (i.e.: object objectProperty) to this {@link Descriptor}.
          * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * value to {@code false} anyway.
          * On the other hand, it does not assign any value to the properties that are automatically
          * queried during {@link #readExpressionAxioms()}.
-         * @param property the object property to synchronise.
+         * @param objectProperty the objectProperty to synchronise.
          * @return {@code true} if an element was added as a result of this call
          * (a change of singleton value is not considered).
          */
-        default boolean addObject( OWLObjectProperty property){
-            return addObject( property, false);
+        default boolean addObject( OWLObjectProperty objectProperty){
+            return addObject( objectProperty, false);
         }
         /**
-         * Add a new semantic (i.e.: object property) to this {@link Descriptor}.
+         * Add a new semantic (i.e.: object objectProperty) to this {@link Descriptor}.
          * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * to the specified value anyway.
          * On the other hand, it does not assign any value to the properties that are automatically
          * queried during {@link #readExpressionAxioms()}.
-         * @param property the name of the object property to synchronise.
+         * @param objectProperty the name of the objectProperty to synchronise.
          * @param singleton the flag to enable the synchronisation of only one element of the set,
          *                  others will be discarded.
          * @return {@code true} if an element was added as a result of this call
          * (a change of singleton value is not considered).
          */
-        default boolean addObject( String property, boolean singleton){
-            return addObject( getOWLObjectProperty( property), singleton);
+        default boolean addObject( String objectProperty, boolean singleton){
+            return addObject( getOWLObjectProperty( objectProperty), singleton);
         }
         /**
-         * Add a new semantic (i.e.: object property) to this {@link Descriptor}.
+         * Add a new semantic (i.e.: object objectProperty) to this {@link Descriptor}.
          * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * to the specified value anyway.
          * On the other hand, it does not assign any value to the properties that are automatically
          * queried during {@link #readExpressionAxioms()}.
-         * @param property the object property to synchronise.
+         * @param objectProperty the objectProperty to synchronise.
          * @param singleton the flag to enable the synchronisation of only one element of the set,
          *                  others will be discarded.
          * @return {@code true} if an element was added as a result of this call
          * (a change of singleton value is not considered).
          */
-        default boolean addObject( OWLObjectProperty property, boolean singleton){
-            DescriptorEntitySet.ObjectLinks objectSemantic = new DescriptorEntitySet.ObjectLinks(property);
+        default boolean addObject( OWLObjectProperty objectProperty, boolean singleton){
+            DescriptorEntitySet.ObjectLinks objectSemantic = new DescriptorEntitySet.ObjectLinks(objectProperty);
             objectSemantic.getValues().setSingleton( singleton);
             return getObjectProperties().add( objectSemantic);
         }
 
         /**
-         * Add a new semantic (i.e.: object property) to this {@link Descriptor} with a particular value.
+         * Add a new semantic (i.e.: object objectProperty) to this {@link Descriptor} with a particular value.
          * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * value to {@code false} anyway.
          * The class of the specified value represents its object type, supported {@link OWLLiteral} are:
          * {@link Integer}, {@link Boolean}, {@link Double}, {@link Float} and {@link Long} (see {@link #getOWLLiteral(Object)}).
-         * @param property the name of the object property to synchronise.
+         * @param objectProperty the name of the objectProperty to synchronise.
          * @param value the specific object to be added to the {@link DescriptorEntitySet.ObjectLinks#getValues()} set.
          * @return {@code true} if an element was added as a result of this call
          * (a change of singleton value is not considered).
          */
-        default boolean addObject( String property, String value){
-            return addObject( property, value, false);
+        default boolean addObject( String objectProperty, String value){
+            return addObject( objectProperty, value, false);
         }
         /**
-         * Add a new semantic (i.e.: object property) to this {@link Descriptor} with a particular value.
+         * Add a new semantic (i.e.: object objectProperty) to this {@link Descriptor} with a particular value.
          * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * value to {@code false} anyway.
-         * @param property the object property to synchronise.
+         * @param objectProperty the objectProperty to synchronise.
          * @param value the literal to be added to the {@link DescriptorEntitySet.ObjectLinks#getValues()} set.
          * @return {@code true} if an element was added as a result of this call
          * (a change of singleton value is not considered).
          */
-        default boolean addObject( OWLObjectProperty property, OWLNamedIndividual value){
-            return addObject( property, value, false);
+        default boolean addObject( OWLObjectProperty objectProperty, OWLNamedIndividual value){
+            return addObject( objectProperty, value, false);
         }
         /**
-         * Add a new semantic (i.e.: object property) to this {@link Descriptor} with a particular value.
+         * Add a new semantic (i.e.: object objectProperty) to this {@link Descriptor} with a particular value.
          * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * value to specified boolean anyway.
-         * @param property the name of the object property to synchronise.
+         * @param objectProperty the name of the objectProperty to synchronise.
          * @param value the specific object to be added to the {@link DescriptorEntitySet.ObjectLinks#getValues()} set.
          * @param singleton the flag specifying if the new {@link DescriptorEntitySet.Literals} should contains only one element.
          * @return {@code true} if an element was added as a result of this call
          * (a change of singleton value is not considered).
          */
-        default boolean addObject( String property, String value, boolean singleton){
-            return addObject( getOWLObjectProperty( property), getOWLIndividual( value), singleton);
+        default boolean addObject( String objectProperty, String value, boolean singleton){
+            return addObject( getOWLObjectProperty( objectProperty), getOWLIndividual( value), singleton);
         }
         /**
-         * Add a new semantic (i.e.: object property) to this {@link Descriptor} with a particular value.
+         * Add a new semantic (i.e.: object objectProperty) to this {@link Descriptor} with a particular value.
          * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * value to specified boolean anyway.
          * If {@link #getObjectProperties()} represents a singleton set this call clear the
          * previous contents.
-         * @param property the object property to synchronise.
-         * @param value the specific property literal to be added to the {@link DescriptorEntitySet.ObjectLinks#getValues()} set.
+         * @param objectProperty the objectProperty to synchronise.
+         * @param value the specific objectProperty literal to be added to the {@link DescriptorEntitySet.ObjectLinks#getValues()} set.
          * @param singleton the flag specifying if the new {@link DescriptorEntitySet.Literals} should contains only one element.
          * @return {@code true} if an element was added as a result of this call
          * (a change of singleton value is not considered).
          */
-        default boolean addObject( OWLObjectProperty property, OWLNamedIndividual value, boolean singleton){
-            DescriptorEntitySet.ObjectLinks objectSemantic = new DescriptorEntitySet.ObjectLinks(property);
+        default boolean addObject( OWLObjectProperty objectProperty, OWLNamedIndividual value, boolean singleton){
+            DescriptorEntitySet.ObjectLinks objectSemantic = new DescriptorEntitySet.ObjectLinks(objectProperty);
             objectSemantic.getValues().add( value);
             objectSemantic.getValues().setSingleton( singleton);
             return getObjectProperties().add( objectSemantic);
         }
         /**
-         * Add a new semantic (i.e.: object property) to this {@link Descriptor} with a particular set of values.
+         * Add a new semantic (i.e.: object objectProperty) to this {@link Descriptor} with a particular set of values.
          * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * value to specified boolean anyway.
          * If {@link #getObjectProperties()} represents a singleton set this call clear the
          * previous contents.
-         * @param property the object property to synchronise.
-         * @param values the specific set of property literal to be added to the {@link DescriptorEntitySet.ObjectLinks#getValues()} set.
+         * @param objectProperty the objectProperty to synchronise.
+         * @param values the specific set of objectProperty literal to be added to the {@link DescriptorEntitySet.ObjectLinks#getValues()} set.
          * @param singleton the flag specifying if the new {@link DescriptorEntitySet.Literals} should contains only one element.
          * @return {@code true} if an element was added as a result of this call
          * (a change of singleton value is not considered).
          */
-        default boolean addObject( OWLObjectProperty property, Set<OWLNamedIndividual> values, boolean singleton){
-            DescriptorEntitySet.ObjectLinks objectSemantic = new DescriptorEntitySet.ObjectLinks(property);
+        default boolean addObject( OWLObjectProperty objectProperty, Set<OWLNamedIndividual> values, boolean singleton){
+            DescriptorEntitySet.ObjectLinks objectSemantic = new DescriptorEntitySet.ObjectLinks(objectProperty);
             objectSemantic.getValues().addAll( values);
             objectSemantic.getValues().setSingleton( singleton);
             return getObjectProperties().add( objectSemantic);
         }
         /**
-         * Add a new semantic (i.e.: object property) to this {@link Descriptor} with a particular set of values.
+         * Add a new semantic (i.e.: object objectProperty) to this {@link Descriptor} with a particular set of values.
          * In case it already exists, this will set the {@link DescriptorEntitySet.Literals#isSingleton()}
          * value to specified boolean anyway.
          * If {@link #getObjectProperties()} represents a singleton set this call clear the
          * previous contents.
          * This call, automatically sets the {@code singleton} flag to false.
-         * @param property the object property to synchronise.
-         * @param values the specific set of property literal to be added to the {@link DescriptorEntitySet.ObjectLinks#getValues()} set.
+         * @param objectProperty the objectProperty to synchronise.
+         * @param values the specific set of objectProperty literal to be added to the {@link DescriptorEntitySet.ObjectLinks#getValues()} set.
          * @return {@code true} if an element was added as a result of this call
          * (a change of singleton value is not considered).
          */
-        default boolean addObject( OWLObjectProperty property, Set<OWLNamedIndividual> values){
-            return addObject( property, values, false);
+        default boolean addObject( OWLObjectProperty objectProperty, Set<OWLNamedIndividual> values){
+            return addObject( objectProperty, values, false);
         }
 
         @Override
@@ -903,36 +903,36 @@ public interface IndividualExpression
 
         /**
          * A shortcut for {@code getObjectProperties().getLink( semantic)}
-         * @param semantic the object property to look for its values.
-         * @return a value of the given object property. {@code Null} if is not available.
+         * @param instance the object objectProperty to look for its values.
+         * @return a value of the given object objectProperty. {@code Null} if is not available.
          */
-        default OWLNamedIndividual getIndividualFromObjectProperty(OWLObjectProperty semantic){
-            return getObjectProperties().getLink( semantic);
+        default OWLNamedIndividual getIndividualFromObjectProperty(OWLObjectProperty instance){
+            return getObjectProperties().getLink( instance);
         }
         /**
          * A shortcut for {@code getObjectProperties().getLink( getOntology().getOWLObjectProperty( semanticName)}
-         * @param semanticName the name of the object property to look for its values.
-         * @return a value of the given object property. {@code Null} if is not available.
+         * @param objectPropertyName the name of the objectProperty to look for its values.
+         * @return a value of the given object objectProperty. {@code Null} if is not available.
          */
-        default OWLNamedIndividual getIndividualFromObjectProperty(String semanticName){
-            return getObjectProperties().getLink( getOntology().getOWLObjectProperty( semanticName));
+        default OWLNamedIndividual getIndividualFromObjectProperty(String objectPropertyName){
+            return getObjectProperties().getLink( getOntology().getOWLObjectProperty( objectPropertyName));
         }
 
         /**
          * A shortcut for {@code getObjectProperties().getLinks( semantic)}
-         * @param semantic the object property to look for its values.
-         * @return all the values of the given object property. An {@code empty} {@link HashSet} if is not available.
+         * @param instance the object objectProperty to look for its values.
+         * @return all the values of the given object objectProperty. An {@code empty} {@link HashSet} if is not available.
          */
-        default EntitySet<OWLNamedIndividual> getIndividualsFromObjectProperty(OWLObjectProperty semantic){
-            return getObjectProperties().getLinks( semantic);
+        default EntitySet<OWLNamedIndividual> getIndividualsFromObjectProperty(OWLObjectProperty instance){
+            return getObjectProperties().getLinks( instance);
         }
         /**
          * A shortcut for {@code getObjectProperties().getLinks( getOntology().getOWLObjectProperty( semanticName))}
-         * @param semanticName the name of the object property to look for its values.
-         * @return all the values of the given object property. {@code Null} if is not available.
+         * @param objectPropertyName the name of the objectProperty to look for its values.
+         * @return all the values of the given object objectProperty. {@code Null} if is not available.
          */
-        default EntitySet<OWLNamedIndividual> getIndividualsFromObjectProperty(String semanticName){
-            return getObjectProperties().getLinks( getOntology().getOWLObjectProperty( semanticName));
+        default EntitySet<OWLNamedIndividual> getIndividualsFromObjectProperty(String objectPropertyName){
+            return getObjectProperties().getLinks( getOntology().getOWLObjectProperty( objectPropertyName));
         }
 
         @Override // see super classes for documentation

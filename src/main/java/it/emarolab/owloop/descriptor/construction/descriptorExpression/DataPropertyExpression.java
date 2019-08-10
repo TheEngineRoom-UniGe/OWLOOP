@@ -66,8 +66,6 @@ public interface DataPropertyExpression
         getOntology().removeFunctionalDataProperty( getInstance());
     }
 
-    
-    
     /**
      * The {@link DataProperty.Disjoint} expression for a {@link Descriptor} whose ground is {@link OWLDataProperty}.
      * <p>
@@ -86,42 +84,42 @@ public interface DataPropertyExpression
          * It is an helper that just calls:
          * {@code {@link #getDisjointDataProperties()}.add( {@link #getOntology()}.getOWLDataProperty( propertyName))}
          * in order to add a new data property (given by name) in the {@link EntitySet} list.
-         * @param propertyName the property name to add for synchronisation.
+         * @param dataPropertyName the property name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
-        default boolean addDisjointDataProperty( String propertyName){
-            return getDisjointDataProperties().add( getOntology().getOWLDataProperty( propertyName));
+        default boolean addDisjointDataProperty( String dataPropertyName){
+            return getDisjointDataProperties().add( getOntology().getOWLDataProperty( dataPropertyName));
         }
         /**
          * It is an helper that just calls:
          * {@code {@link #getDisjointDataProperties()}.add( property)}
          * in order to add a new data property in the {@link EntitySet} list.
-         * @param property the property to add for synchronisation.
+         * @param instance the property to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
-        default boolean addDisjointDataProperty( OWLDataProperty property){
-            return getDisjointDataProperties().add( property);
+        default boolean addDisjointDataProperty( OWLDataProperty instance){
+            return getDisjointDataProperties().add( instance);
         }
 
         /**
          * It is an helper that just calls:
          * {@code {@link #getDisjointDataProperties()}.remove( {@link #getOntology()}.getOWLDataProperty( propertyName))}
          * in order to remove a data property (given by name) from the {@link EntitySet} list.
-         * @param propertyName the property name to remove for synchronisation.
+         * @param dataPropertyName the property name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
-        default boolean removeDisjointDataProperty( String propertyName){
-            return getDisjointDataProperties().remove( getOntology().getOWLDataProperty( propertyName));
+        default boolean removeDisjointDataProperty( String dataPropertyName){
+            return getDisjointDataProperties().remove( getOntology().getOWLDataProperty( dataPropertyName));
         }
         /**
          * It is an helper that just calls:
          * {@code {@link #getDisjointDataProperties()}.remove( property)}
          * in order to remove a data property in the {@link EntitySet} list.
-         * @param property the property to remove for synchronisation.
+         * @param instance the property to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
-        default boolean removeDisjointDataProperty( OWLDataProperty property){
-            return getDisjointDataProperties().remove( property);
+        default boolean removeDisjointDataProperty( OWLDataProperty instance){
+            return getDisjointDataProperties().remove( instance);
         }
 
         @Override
@@ -181,42 +179,42 @@ public interface DataPropertyExpression
          * It is an helper that just calls:
          * {@code {@link #getEquivalentDataProperties()}.add( {@link #getOntology()}.getOWLDataProperty( propertyName))}
          * in order to add a new data property (given by name) in the {@link EntitySet} list.
-         * @param propertyName the property name to add for synchronisation.
+         * @param dataPropertyName the property name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
-        default boolean addEquivalentDataProperty( String propertyName){
-            return getEquivalentDataProperties().add( getOntology().getOWLDataProperty( propertyName));
+        default boolean addEquivalentDataProperty( String dataPropertyName){
+            return getEquivalentDataProperties().add( getOntology().getOWLDataProperty( dataPropertyName));
         }
         /**
          * It is an helper that just calls:
          * {@code {@link #getEquivalentDataProperties()}.add( property)}
          * in order to add a new data property in the {@link EntitySet} list.
-         * @param property the property to add for synchronisation.
+         * @param instance the property to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
-        default boolean addEquivalentDataProperty( OWLDataProperty property){
-            return getEquivalentDataProperties().add( property);
+        default boolean addEquivalentDataProperty( OWLDataProperty instance){
+            return getEquivalentDataProperties().add( instance);
         }
 
         /**
          * It is an helper that just calls:
          * {@code {@link #getEquivalentDataProperties()}.remove( {@link #getOntology()}.getOWLDataProperty( propertyName))}
          * in order to remove a data property (given by name) from the {@link EntitySet} list.
-         * @param propertyName the property name to remove for synchronisation.
+         * @param dataPropertyName the property name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
-        default boolean removeEquivalentDataProperty( String propertyName){
-            return getEquivalentDataProperties().remove( getOntology().getOWLDataProperty( propertyName));
+        default boolean removeEquivalentDataProperty( String dataPropertyName){
+            return getEquivalentDataProperties().remove( getOntology().getOWLDataProperty( dataPropertyName));
         }
         /**
          * It is an helper that just calls:
          * {@code {@link #getEquivalentDataProperties()}.remove( property)}
          * in order to remove a data property in the {@link EntitySet} list.
-         * @param property the property to remove for synchronisation.
+         * @param instance the property to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
-        default boolean removeEquivalentDataProperty( OWLDataProperty property){
-            return getEquivalentDataProperties().remove( property);
+        default boolean removeEquivalentDataProperty( OWLDataProperty instance){
+            return getEquivalentDataProperties().remove( instance);
         }
 
         @Override
@@ -275,42 +273,42 @@ public interface DataPropertyExpression
          * It is an helper that just calls:
          * {@code {@link #getSubDataProperties()}.add( {@link #getOntology()}.getOWLDataProperty( propertyName))}
          * in order to add a new data property (given by name) in the {@link EntitySet} list.
-         * @param propertyName the property name to add for synchronisation.
+         * @param dataPropertyName the property name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
-        default boolean addSubDataProperty( String propertyName){
-            return getSubDataProperties().add( getOntology().getOWLDataProperty( propertyName));
+        default boolean addSubDataProperty( String dataPropertyName){
+            return getSubDataProperties().add( getOntology().getOWLDataProperty( dataPropertyName));
         }
         /**
          * It is an helper that just calls:
          * {@code {@link #getSubDataProperties()}.add( property)}
          * in order to add a new data property in the {@link EntitySet} list.
-         * @param property the property to add for synchronisation.
+         * @param instance the property to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
-        default boolean addSubDataProperty( OWLDataProperty property){
-            return getSubDataProperties().add( property);
+        default boolean addSubDataProperty( OWLDataProperty instance){
+            return getSubDataProperties().add( instance);
         }
 
         /**
          * It is an helper that just calls:
          * {@code {@link #getSubDataProperties()}.remove( {@link #getOntology()}.getOWLDataProperty( propertyName))}
          * in order to remove a data property (given by name) from the {@link EntitySet} list.
-         * @param propertyName the property name to remove for synchronisation.
+         * @param dataPropertyName the property name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
-        default boolean removeSubDataProperty( String propertyName){
-            return getSubDataProperties().remove( getOntology().getOWLDataProperty( propertyName));
+        default boolean removeSubDataProperty( String dataPropertyName){
+            return getSubDataProperties().remove( getOntology().getOWLDataProperty( dataPropertyName));
         }
         /**
          * It is an helper that just calls:
          * {@code {@link #getSubDataProperties()}.remove( property)}
          * in order to remove a data property in the {@link EntitySet} list.
-         * @param property the property to remove for synchronisation.
+         * @param instance the property to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
-        default boolean removeSubDataProperty( OWLDataProperty property){
-            return getSubDataProperties().remove( property);
+        default boolean removeSubDataProperty( OWLDataProperty instance){
+            return getSubDataProperties().remove( instance);
         }
 
         @Override // see super class for documentation
@@ -357,42 +355,42 @@ public interface DataPropertyExpression
          * It is an helper that just calls:
          * {@code {@link #getSuperDataProperties()}.add( {@link #getOntology()}.getOWLDataProperty( propertyName))}
          * in order to add a new data property (given by name) in the {@link EntitySet} list.
-         * @param propertyName the property name to add for synchronisation.
+         * @param dataPropertyName the property name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
-        default boolean addSuperDataProperty( String propertyName){
-            return getSuperDataProperties().add( getOntology().getOWLDataProperty( propertyName));
+        default boolean addSuperDataProperty( String dataPropertyName){
+            return getSuperDataProperties().add( getOntology().getOWLDataProperty( dataPropertyName));
         }
         /**
          * It is an helper that just calls:
          * {@code {@link #getSuperDataProperties()}.add( property)}
          * in order to add a new data property in the {@link EntitySet} list.
-         * @param property the property to add for synchronisation.
+         * @param instance the property to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
-        default boolean addSuperDataProperty( OWLDataProperty property){
-            return getSuperDataProperties().add( property);
+        default boolean addSuperDataProperty( OWLDataProperty instance){
+            return getSuperDataProperties().add( instance);
         }
 
         /**
          * It is an helper that just calls:
          * {@code {@link #getSuperDataProperties()}.remove( {@link #getOntology()}.getOWLDataProperty( propertyName))}
          * in order to remove a data property (given by name) from the {@link EntitySet} list.
-         * @param propertyName the property name to remove for synchronisation.
+         * @param dataPropertyName the property name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
-        default boolean removeSuperDataProperty( String propertyName){
-            return getSuperDataProperties().remove( getOntology().getOWLDataProperty( propertyName));
+        default boolean removeSuperDataProperty( String dataPropertyName){
+            return getSuperDataProperties().remove( getOntology().getOWLDataProperty( dataPropertyName));
         }
         /**
          * It is an helper that just calls:
          * {@code {@link #getSuperDataProperties()}.remove( property)}
          * in order to remove a data property in the {@link EntitySet} list.
-         * @param property the property to remove for synchronisation.
+         * @param instance the property to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
-        default boolean removeSuperDataProperty( OWLDataProperty property){
-            return getSuperDataProperties().remove( property);
+        default boolean removeSuperDataProperty( OWLDataProperty instance){
+            return getSuperDataProperties().remove( instance);
         }
 
         @Override

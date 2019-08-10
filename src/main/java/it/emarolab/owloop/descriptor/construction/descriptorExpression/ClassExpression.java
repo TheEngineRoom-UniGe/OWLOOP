@@ -73,18 +73,18 @@ public interface ClassExpression
          * @param individualName the individualDescriptor name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
-        default boolean addIndividualClassified(String individualName){
+        default boolean addIndividual(String individualName){
             return getIndividuals().add( getOntology().getOWLIndividual( individualName));
         }
         /**
          * It is an helper that just calls:
          * {@code {@link #getIndividuals()}.add( individualDescriptor)}
          * in order to add a new individualDescriptor in the {@link EntitySet} list.
-         * @param individual the individualDescriptor to add for synchronisation.
+         * @param instance the individualDescriptor to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
-        default boolean addIndividualClassified(OWLNamedIndividual individual){
-            return getIndividuals().add( individual);
+        default boolean addIndividual(OWLNamedIndividual instance){
+            return getIndividuals().add( instance);
         }
 
         /**
@@ -94,18 +94,18 @@ public interface ClassExpression
          * @param individualName the individualDescriptor name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
-        default boolean removeIndividualClassified(String individualName){
+        default boolean removeIndividual(String individualName){
             return getIndividuals().remove( getOntology().getOWLIndividual( individualName));
         }
         /**
          * It is an helper that just calls:
          * {@code {@link #getIndividuals()}.remove( individualDescriptor)}
          * in order to remove an individualDescriptor in the {@link EntitySet} list.
-         * @param individual the individualDescriptor to remove for synchronisation.
+         * @param instance the individualDescriptor to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
-        default boolean removeIndividualClassified(OWLNamedIndividual individual){
-            return getIndividuals().remove( individual);
+        default boolean removeIndividual(OWLNamedIndividual instance){
+            return getIndividuals().remove( instance);
         }
 
         @Override // see super classes for documentation
@@ -157,7 +157,7 @@ public interface ClassExpression
          * @param className the class name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
-        default boolean addDisjointConcept( String className){
+        default boolean addDisjointClass(String className){
             return getDisjointClasses().add( getOntology().getOWLClass( className));
         }
         /**
@@ -166,11 +166,11 @@ public interface ClassExpression
          * in order to add a new class in the {@link EntitySet} list.
          * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
          * to be perfectly aligned with the ontology, since it affects {@link ClassExpression.Sub} {@link EntitySet}.
-         * @param cl the class to add for synchronisation.
+         * @param instance the class to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
-        default boolean addDisjointConcept( OWLClass cl){
-            return getDisjointClasses().add( cl);
+        default boolean addDisjointClass(OWLClass instance){
+            return getDisjointClasses().add( instance);
         }
 
         /**
@@ -182,7 +182,7 @@ public interface ClassExpression
          * @param className the class name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
-        default boolean removeDisjointConcept( String className){
+        default boolean removeDisjointClass(String className){
             return getDisjointClasses().remove( getOntology().getOWLClass( className));
         }
         /**
@@ -191,11 +191,11 @@ public interface ClassExpression
          * in order to remove a class in the {@link EntitySet} list.
          * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
          * to be perfectly aligned with the ontology, since it affects {@link ClassExpression.Sub} {@link EntitySet}.
-         * @param cl the class to remove for synchronisation.
+         * @param instance the class to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
-        default boolean removeDisjointConcept( OWLClass cl){
-            return getDisjointClasses().remove( cl);
+        default boolean removeDisjointClass(OWLClass instance){
+            return getDisjointClasses().remove( instance);
         }
 
 
@@ -257,18 +257,18 @@ public interface ClassExpression
          * @param className the class name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
-        default boolean addEquivalentConcept( String className){
+        default boolean addEquivalentClass(String className){
             return getEquivalentClasses().add( getOntology().getOWLClass( className));
         }
         /**
          * It is an helper that just calls:
          * {@code {@link #getEquivalentClasses()}.add( cl)}
          * in order to add a new class in the {@link EntitySet} list.
-         * @param cl the class to add for synchronisation.
+         * @param instance the class to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
-        default boolean addEquivalentConcept( OWLClass cl){
-            return getEquivalentClasses().add( cl);
+        default boolean addEquivalentClass(OWLClass instance){
+            return getEquivalentClasses().add( instance);
         }
 
         /**
@@ -278,18 +278,18 @@ public interface ClassExpression
          * @param className the class name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
-        default boolean removeEquivalentConcept( String className){
+        default boolean removeEquivalentClass(String className){
             return getEquivalentClasses().remove( getOntology().getOWLClass( className));
         }
         /**
          * It is an helper that just calls:
          * {@code {@link #getEquivalentClasses()}.remove( cl)}
          * in order to remove a class in the {@link EntitySet} list.
-         * @param cl the class to remove for synchronisation.
+         * @param instance the class to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
-        default boolean removeEquivalentConcept( OWLClass cl){
-            return getEquivalentClasses().remove( cl);
+        default boolean removeEquivalentClass(OWLClass instance){
+            return getEquivalentClasses().remove( instance);
         }
 
         @Override // see super classes for documentation
@@ -350,18 +350,18 @@ public interface ClassExpression
          * @param className the class name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
-        default boolean addSubConcept( String className){
+        default boolean addSubClass(String className){
             return getSubClasses().add( getOntology().getOWLClass( className));
         }
         /**
          * It is an helper that just calls:
          * {@code {@link #getSubClasses()}.add( cl)}
          * in order to add a new class in the {@link EntitySet} list.
-         * @param cl the class to add for synchronisation.
+         * @param instance the class to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
-        default boolean addSubConcept( OWLClass cl){
-            return getSubClasses().add( cl);
+        default boolean addSubClass(OWLClass instance){
+            return getSubClasses().add( instance);
         }
 
         /**
@@ -371,18 +371,18 @@ public interface ClassExpression
          * @param className the class name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
-        default boolean removeSubConcept( String className){
+        default boolean removeSubClass(String className){
             return getSubClasses().remove( getOntology().getOWLClass( className));
         }
         /**
          * It is an helper that just calls:
          * {@code {@link #getSubClasses()}.remove( cl)}
          * in order to remove a class in the {@link EntitySet} list.
-         * @param cl the class to remove for synchronisation.
+         * @param instance the class to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
-        default boolean removeSubConcept( OWLClass cl){
-            return getSubClasses().remove( cl);
+        default boolean removeSubClass(OWLClass instance){
+            return getSubClasses().remove( instance);
         }
 
         @Override // see super classes for documentation
@@ -436,7 +436,7 @@ public interface ClassExpression
          * @param className the class name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
-        default boolean addSuperConcept( String className){
+        default boolean addSuperClass(String className){
             return getSuperClasses().add( getOntology().getOWLClass( className));
         }
         /**
@@ -445,11 +445,11 @@ public interface ClassExpression
          * in order to add a new class in the {@link EntitySet} list.
          * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
          * to be perfectly aligned with the ontology, since it affects {@link EquivalentRestriction} {@link EntitySet}.
-         * @param cl the class to add for synchronisation.
+         * @param instance the class to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
-        default boolean addSuperConcept( OWLClass cl){
-            return getSuperClasses().add( cl);
+        default boolean addSuperClass(OWLClass instance){
+            return getSuperClasses().add( instance);
         }
 
         /**
@@ -461,7 +461,7 @@ public interface ClassExpression
          * @param className the class name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
-        default boolean removeSuperConcept( String className){
+        default boolean removeSuperClass(String className){
             return getSuperClasses().remove( getOntology().getOWLClass( className));
         }
         /**
@@ -470,11 +470,11 @@ public interface ClassExpression
          * in order to remove a class in the {@link EntitySet} list.
          * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
          * to be perfectly aligned with the ontology, since it affects {@link EquivalentRestriction} {@link EntitySet}.
-         * @param cl the class to remove for synchronisation.
+         * @param instance the class to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
-        default boolean removeSuperConcept( OWLClass cl){
-            return getSuperClasses().remove( cl);
+        default boolean removeSuperClass(OWLClass instance){
+            return getSuperClasses().remove( instance);
         }
 
         @Override // see super classes for documentation
@@ -1259,7 +1259,7 @@ public interface ClassExpression
                 break;
             }
             if ( restrictionsSet.size() > 1)
-                System.err.println( "WARNING: all the restriction that define a concept should be contained in a single axiom." +
+                System.err.println( "WARNING: all the restrictions that define a class should be contained in a single axiom." +
                         " Only axiom \'" + restrictions + "\' is considered in \'" + restrictionsSet + "\'");
             // remove self
             for ( ApplyingRestriction a : restrictions)

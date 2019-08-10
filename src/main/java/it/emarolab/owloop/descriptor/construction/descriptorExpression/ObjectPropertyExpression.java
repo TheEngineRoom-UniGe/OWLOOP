@@ -133,44 +133,44 @@ public interface ObjectPropertyExpression
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getInverseObjectProperties()}.add( {@link #getOntology()}.getOWLObjectProperty( propertyName))}
+         * {@code {@link #getInverseObjectProperties()}.add( {@link #getOntology()}.getOWLObjectProperty( objectPropertyName))}
          * in order to add a new object property (given by name) in the {@link EntitySet} list.
-         * @param propertyName the property name to add for synchronisation.
+         * @param objectPropertyName the property name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
-        default boolean addInverseObjectProperty( String propertyName){
-            return getInverseObjectProperties().add( getOntology().getOWLObjectProperty( propertyName));
+        default boolean addInverseObjectProperty( String objectPropertyName){
+            return getInverseObjectProperties().add( getOntology().getOWLObjectProperty( objectPropertyName));
         }
         /**
          * It is an helper that just calls:
          * {@code {@link #getInverseObjectProperties()}.add( property)}
          * in order to add a new object property in the {@link EntitySet} list.
-         * @param property the property to add for synchronisation.
+         * @param instance the property to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
-        default boolean addInverseObjectProperty( OWLObjectProperty property){
-            return getInverseObjectProperties().add( property);
+        default boolean addInverseObjectProperty( OWLObjectProperty instance){
+            return getInverseObjectProperties().add( instance);
         }
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getInverseObjectProperties()}.remove( {@link #getOntology()}.getOWLObjectProperty( propertyName))}
+         * {@code {@link #getInverseObjectProperties()}.remove( {@link #getOntology()}.getOWLObjectProperty( objectPropertyName))}
          * in order to remove an object property (given by name) from the {@link EntitySet} list.
-         * @param propertyName the property name to remove for synchronisation.
+         * @param objectPropertyName the property name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
-        default boolean removeInverseObjectProperty( String propertyName){
-            return getInverseObjectProperties().remove( getOntology().getOWLObjectProperty( propertyName));
+        default boolean removeInverseObjectProperty( String objectPropertyName){
+            return getInverseObjectProperties().remove( getOntology().getOWLObjectProperty( objectPropertyName));
         }
         /**
          * It is an helper that just calls:
          * {@code {@link #getInverseObjectProperties()}.remove( property)}
          * in order to remove an object property in the {@link EntitySet} list.
-         * @param property the property to remove for synchronisation.
+         * @param instance the property to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
-        default boolean removeInverseObjectProperty( OWLObjectProperty property){
-            return getInverseObjectProperties().remove( property);
+        default boolean removeInverseObjectProperty( OWLObjectProperty instance){
+            return getInverseObjectProperties().remove( instance);
         }
 
         @Override
@@ -218,44 +218,44 @@ public interface ObjectPropertyExpression
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getDisjointObjectProperties()}.add( {@link #getOntology()}.getOWLObjectProperty( propertyName))}
+         * {@code {@link #getDisjointObjectProperties()}.add( {@link #getOntology()}.getOWLObjectProperty( objectPropertyName))}
          * in order to add a new object property (given by name) in the {@link EntitySet} list.
-         * @param propertyName the property name to add for synchronisation.
+         * @param objectPropertyName the property name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
-        default boolean addDisjointObjectProperty( String propertyName){
-            return getDisjointObjectProperties().add( getOntology().getOWLObjectProperty( propertyName));
+        default boolean addDisjointObjectProperty( String objectPropertyName){
+            return getDisjointObjectProperties().add( getOntology().getOWLObjectProperty( objectPropertyName));
         }
         /**
          * It is an helper that just calls:
          * {@code {@link #getDisjointObjectProperties()}.add( property)}
          * in order to add a new object property in the {@link EntitySet} list.
-         * @param property the property to add for synchronisation.
+         * @param instance the property to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
-        default boolean addDisjointObjectProperty( OWLObjectProperty property){
-            return getDisjointObjectProperties().add( property);
+        default boolean addDisjointObjectProperty( OWLObjectProperty instance){
+            return getDisjointObjectProperties().add( instance);
         }
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getDisjointObjectProperties()}.remove( {@link #getOntology()}.getOWLObjectProperty( propertyName))}
+         * {@code {@link #getDisjointObjectProperties()}.remove( {@link #getOntology()}.getOWLObjectProperty( objectPropertyName))}
          * in order to remove an object property (given by name) from the {@link EntitySet} list.
-         * @param propertyName the property name to remove for synchronisation.
+         * @param objectPropertyName the property name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
-        default boolean removeDisjointObjectProperty( String propertyName){
-            return getDisjointObjectProperties().remove( getOntology().getOWLObjectProperty( propertyName));
+        default boolean removeDisjointObjectProperty( String objectPropertyName){
+            return getDisjointObjectProperties().remove( getOntology().getOWLObjectProperty( objectPropertyName));
         }
         /**
          * It is an helper that just calls:
          * {@code {@link #getDisjointObjectProperties()}.remove( property)}
          * in order to remove an object property in the {@link EntitySet} list.
-         * @param property the property to remove for synchronisation.
+         * @param instance the property to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
-        default boolean removeDisjointObjectProperty( OWLObjectProperty property){
-            return getDisjointObjectProperties().remove( property);
+        default boolean removeDisjointObjectProperty( OWLObjectProperty instance){
+            return getDisjointObjectProperties().remove( instance);
         }
 
         @Override
@@ -313,44 +313,44 @@ public interface ObjectPropertyExpression
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getEquivalentObjectProperties()}.add( {@link #getOntology()}.getOWLObjectProperty( propertyName))}
+         * {@code {@link #getEquivalentObjectProperties()}.add( {@link #getOntology()}.getOWLObjectProperty( objectPropertyName))}
          * in order to add a new object property (given by name) in the {@link EntitySet} list.
-         * @param propertyName the property name to add for synchronisation.
+         * @param objectPropertyName the property name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
-        default boolean addEquivalentObjectProperty( String propertyName){
-            return getEquivalentObjectProperties().add( getOntology().getOWLObjectProperty( propertyName));
+        default boolean addEquivalentObjectProperty( String objectPropertyName){
+            return getEquivalentObjectProperties().add( getOntology().getOWLObjectProperty( objectPropertyName));
         }
         /**
          * It is an helper that just calls:
          * {@code {@link #getEquivalentObjectProperties()}.add( property)}
          * in order to add a new object property in the {@link EntitySet} list.
-         * @param property the property to add for synchronisation.
+         * @param instance the property to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
-        default boolean addEquivalentObjectProperty( OWLObjectProperty property){
-            return getEquivalentObjectProperties().add( property);
+        default boolean addEquivalentObjectProperty( OWLObjectProperty instance){
+            return getEquivalentObjectProperties().add( instance);
         }
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getEquivalentObjectProperties()}.remove( {@link #getOntology()}.getOWLObjectProperty( propertyName))}
+         * {@code {@link #getEquivalentObjectProperties()}.remove( {@link #getOntology()}.getOWLObjectProperty( objectPropertyName))}
          * in order to remove an object property (given by name) from the {@link EntitySet} list.
-         * @param propertyName the property name to remove for synchronisation.
+         * @param objectPropertyName the property name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
-        default boolean removeEquivalentObjectProperty( String propertyName){
-            return getEquivalentObjectProperties().remove( getOntology().getOWLObjectProperty( propertyName));
+        default boolean removeEquivalentObjectProperty( String objectPropertyName){
+            return getEquivalentObjectProperties().remove( getOntology().getOWLObjectProperty( objectPropertyName));
         }
         /**
          * It is an helper that just calls:
          * {@code {@link #getEquivalentObjectProperties()}.remove( property)}
          * in order to remove an object property in the {@link EntitySet} list.
-         * @param property the property to remove for synchronisation.
+         * @param instance the property to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
-        default boolean removeEquivalentObjectProperty( OWLObjectProperty property){
-            return getEquivalentObjectProperties().remove( property);
+        default boolean removeEquivalentObjectProperty( OWLObjectProperty instance){
+            return getEquivalentObjectProperties().remove( instance);
         }
 
         @Override
@@ -407,44 +407,44 @@ public interface ObjectPropertyExpression
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getSubObjectProperties()}.add( {@link #getOntology()}.getOWLObjectProperty( propertyName))}
+         * {@code {@link #getSubObjectProperties()}.add( {@link #getOntology()}.getOWLObjectProperty( objectPropertyName))}
          * in order to add a new object property (given by name) in the {@link EntitySet} list.
-         * @param propertyName the property name to add for synchronisation.
+         * @param objectPropertyName the property name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
-        default boolean addSubObjectProperty( String propertyName){
-            return getSubObjectProperties().add( getOntology().getOWLObjectProperty( propertyName));
+        default boolean addSubObjectProperty( String objectPropertyName){
+            return getSubObjectProperties().add( getOntology().getOWLObjectProperty( objectPropertyName));
         }
         /**
          * It is an helper that just calls:
          * {@code {@link #getSubObjectProperties()}.add( property)}
          * in order to add a new object property in the {@link EntitySet} list.
-         * @param property the property to add for synchronisation.
+         * @param instance the property to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
-        default boolean addSubObjectProperty( OWLObjectProperty property){
-            return getSubObjectProperties().add( property);
+        default boolean addSubObjectProperty( OWLObjectProperty instance){
+            return getSubObjectProperties().add( instance);
         }
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getSubObjectProperties()}.remove( {@link #getOntology()}.getOWLObjectProperty( propertyName))}
+         * {@code {@link #getSubObjectProperties()}.remove( {@link #getOntology()}.getOWLObjectProperty( objectPropertyName))}
          * in order to remove an object property (given by name) from the {@link EntitySet} list.
-         * @param propertyName the property name to remove for synchronisation.
+         * @param objectPropertyName the property name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
-        default boolean removeSubObjectProperty( String propertyName){
-            return getSubObjectProperties().remove( getOntology().getOWLObjectProperty( propertyName));
+        default boolean removeSubObjectProperty( String objectPropertyName){
+            return getSubObjectProperties().remove( getOntology().getOWLObjectProperty( objectPropertyName));
         }
         /**
          * It is an helper that just calls:
          * {@code {@link #getSubObjectProperties()}.remove( property)}
          * in order to remove an object property in the {@link EntitySet} list.
-         * @param property the property to remove for synchronisation.
+         * @param instance the property to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
-        default boolean removeSubObjectProperty( OWLObjectProperty property){
-            return getSubObjectProperties().remove( property);
+        default boolean removeSubObjectProperty( OWLObjectProperty instance){
+            return getSubObjectProperties().remove( instance);
         }
 
         @Override
@@ -493,44 +493,44 @@ public interface ObjectPropertyExpression
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getSuperObjectProperties()}.add( {@link #getOntology()}.getOWLObjectProperty( propertyName))}
+         * {@code {@link #getSuperObjectProperties()}.add( {@link #getOntology()}.getOWLObjectProperty( objectPropertyName))}
          * in order to add a new object property (given by name) in the {@link EntitySet} list.
-         * @param propertyName the property name to add for synchronisation.
+         * @param objectPropertyName the property name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
-        default boolean addSuperObjectProperty( String propertyName){
-            return getSuperObjectProperties().add( getOntology().getOWLObjectProperty( propertyName));
+        default boolean addSuperObjectProperty( String objectPropertyName){
+            return getSuperObjectProperties().add( getOntology().getOWLObjectProperty( objectPropertyName));
         }
         /**
          * It is an helper that just calls:
          * {@code {@link #getSuperObjectProperties()}.add( property)}
          * in order to add a new object property in the {@link EntitySet} list.
-         * @param property the property to add for synchronisation.
+         * @param instance the property to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
-        default boolean addSuperObjectProperty( OWLObjectProperty property){
-            return getSuperObjectProperties().add( property);
+        default boolean addSuperObjectProperty( OWLObjectProperty instance){
+            return getSuperObjectProperties().add( instance);
         }
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getSuperObjectProperties()}.remove( {@link #getOntology()}.getOWLObjectProperty( propertyName))}
+         * {@code {@link #getSuperObjectProperties()}.remove( {@link #getOntology()}.getOWLObjectProperty( objectPropertyName))}
          * in order to remove an object property (given by name) from the {@link EntitySet} list.
-         * @param propertyName the property name to remove for synchronisation.
+         * @param objectPropertyName the property name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
-        default boolean removeSuperObjectProperty( String propertyName){
-            return getSuperObjectProperties().remove( getOntology().getOWLObjectProperty( propertyName));
+        default boolean removeSuperObjectProperty( String objectPropertyName){
+            return getSuperObjectProperties().remove( getOntology().getOWLObjectProperty( objectPropertyName));
         }
         /**
          * It is an helper that just calls:
          * {@code {@link #getSuperObjectProperties()}.remove( property)}
          * in order to remove an object property in the {@link EntitySet} list.
-         * @param property the property to remove for synchronisation.
+         * @param instance the property to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
-        default boolean removeSuperObjectProperty( OWLObjectProperty property){
-            return getSuperObjectProperties().remove( property);
+        default boolean removeSuperObjectProperty( OWLObjectProperty instance){
+            return getSuperObjectProperties().remove( instance);
         }
 
         @Override

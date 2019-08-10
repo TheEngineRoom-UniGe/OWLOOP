@@ -43,22 +43,22 @@ public class FullClassDescTest {
     public void subTest() throws Exception{
         concept.readExpressionAxioms();
         assertSemantic();
-        concept.addSubConcept( "SubClass");
+        concept.addSubClass( "SubClass");
         concept.readExpressionAxioms();
         assertSemantic();
         concept.writeExpressionAxioms();
         assertSemantic();
-        concept.addSubConcept( "SubClass");
+        concept.addSubClass( "SubClass");
         concept.writeExpressionAxioms();
         assertSemantic();
-        concept.removeSubConcept( "SubClass");
+        concept.removeSubClass( "SubClass");
         concept.readExpressionAxioms();
         assertSemantic();
-        concept.removeSubConcept( "SubClass");
+        concept.removeSubClass( "SubClass");
         concept.writeExpressionAxioms();
         assertSemantic();
 
-        concept.addSubConcept( "Plane");
+        concept.addSubClass( "Plane");
         concept.writeExpressionAxioms();
         assertSemantic();
         System.out.println( "described concept, sub test: " + concept.buildSubClasses());
@@ -68,24 +68,24 @@ public class FullClassDescTest {
     public void superTest() throws Exception{
         concept.readExpressionAxioms();
         assertSemantic();
-        concept.addSuperConcept( "SuperClass");
+        concept.addSuperClass( "SuperClass");
         concept.readExpressionAxioms();
         assertSemantic();
         concept.writeExpressionAxioms();
         assertSemantic();
-        concept.addSuperConcept( "SuperClass");
+        concept.addSuperClass( "SuperClass");
         // super class affect class definition during reasoning
         concept.writeReadExpressionAxioms();
         assertSemantic();
-        concept.removeSuperConcept( "SuperClass");
+        concept.removeSuperClass( "SuperClass");
         concept.readExpressionAxioms();
         assertSemantic();
-        concept.removeSuperConcept( "SuperClass");
+        concept.removeSuperClass( "SuperClass");
         // super class affect class definition during reasoning
         concept.writeReadExpressionAxioms();
         assertSemantic();
 
-        concept.addSuperConcept( "Object");
+        concept.addSuperClass( "Object");
         // super class affect class definition during reasoning
         concept.writeReadExpressionAxioms();
         assertSemantic();
@@ -96,22 +96,22 @@ public class FullClassDescTest {
     public void disjointTest() throws Exception{
         concept.readExpressionAxioms();
         assertSemantic();
-        concept.addDisjointConcept( "DisjointClass");
+        concept.addDisjointClass( "DisjointClass");
         concept.readExpressionAxioms();
         assertSemantic();
         concept.writeExpressionAxioms();
         assertSemantic();
-        concept.addDisjointConcept( "DisjointClass");
+        concept.addDisjointClass( "DisjointClass");
         concept.writeReadExpressionAxioms();
         assertSemantic();
-        concept.removeDisjointConcept( "DisjointClass");
+        concept.removeDisjointClass( "DisjointClass");
         concept.readExpressionAxioms();
         assertSemantic();
-        concept.removeDisjointConcept( "DisjointClass");
+        concept.removeDisjointClass( "DisjointClass");
         concept.writeReadExpressionAxioms();
         assertSemantic();
 
-        concept.addDisjointConcept( "Scene");
+        concept.addDisjointClass( "Scene");
         // disjoint class affect sub classes during reasoning
         concept.writeExpressionAxioms();
         assertSemantic();
@@ -122,24 +122,24 @@ public class FullClassDescTest {
     public void equivalentTest() throws Exception{
         concept.readExpressionAxioms();
         assertSemantic();
-        concept.addEquivalentConcept( "EquivalentClass");
+        concept.addEquivalentClass( "EquivalentClass");
         concept.readExpressionAxioms();
         assertSemantic();
         concept.writeExpressionAxioms();
         assertSemantic();
-        concept.addEquivalentConcept( "EquivalentClass");
+        concept.addEquivalentClass( "EquivalentClass");
         // equivalent class affect sub classes during reasoning
         concept.writeExpressionAxioms();
         assertSemantic();
-        concept.removeEquivalentConcept( "EquivalentClass");
+        concept.removeEquivalentClass( "EquivalentClass");
         concept.readExpressionAxioms();
         assertSemantic();
-        concept.removeEquivalentConcept( "EquivalentClass");
+        concept.removeEquivalentClass( "EquivalentClass");
         // equivalent class affect sub classes during reasoning
         concept.writeExpressionAxioms();
         assertSemantic();
 
-        concept.addEquivalentConcept( "EquivalentClass");
+        concept.addEquivalentClass( "EquivalentClass");
         // equivalent class affect sub classes during reasoning
         concept.writeReadExpressionAxioms();
         assertSemantic();
@@ -191,7 +191,7 @@ public class FullClassDescTest {
         concept.writeReadExpressionAxioms(false);
         assertSemantic();
 
-        concept.addEquivalentConcept( "EE");
+        concept.addEquivalentClass( "EE");
         concept.addClassRestriction( "Scene1");
         concept.addOnlyDataRestriction( "hasPropTest2", Boolean.class);
         concept.writeReadExpressionAxioms(false);
@@ -200,14 +200,14 @@ public class FullClassDescTest {
         for( FullClassDesc d : concept.buildEquivalentClasses())
             // you can use also: d = concept.buildEquivalentClasses().toArray()[0]
             if ( d.getGroundInstanceName().equals( "EE")) {
-                d.addDisjointConcept(concept.getInstance());
+                d.addDisjointClass(concept.getInstance());
                 d.getEquivalentClasses().clear();
                 d.writeExpressionAxioms();
             }
 
         concept.removeClassRestriction( "Scene1");
         concept.removeClassRestriction( "Scene");// TODO remove scene from sub class
-        concept.removeEquivalentConcept( "EE");
+        concept.removeEquivalentClass( "EE");
         concept.writeReadExpressionAxioms(false);
         assertSemantic();
 
@@ -217,19 +217,19 @@ public class FullClassDescTest {
     public void classifyTest() throws Exception{
         concept.readExpressionAxioms();
         assertSemantic();
-        concept.addIndividualClassified( "Individual-A");
+        concept.addIndividual( "Individual-A");
         concept.readExpressionAxioms();
         assertSemantic();
         concept.writeExpressionAxioms();
         assertSemantic();
-        concept.addIndividualClassified( "Individual-A");
+        concept.addIndividual( "Individual-A");
         // equivalent class affect sub classes during reasoning
         concept.writeExpressionAxioms();
         assertSemantic();
-        concept.removeIndividualClassified( "Individual-A");
+        concept.removeIndividual( "Individual-A");
         concept.readExpressionAxioms();
         assertSemantic();
-        concept.removeIndividualClassified( "Individual-A");
+        concept.removeIndividual( "Individual-A");
         // equivalent class affect sub classes during reasoning
         concept.writeExpressionAxioms();
         assertSemantic();

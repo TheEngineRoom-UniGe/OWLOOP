@@ -347,11 +347,11 @@ public interface DescriptorGroundInterface<J extends OWLObject>
      * Given an ontological literal within the {@link #getOWLOntology()} IRI.
      * The supported type of the input values are: {@link String}, {@link Integer},
      * {@link Float}, {@link Double} and {@link Long}.
-     * @param value the data value and type of the {@link OWLLiteral}.
+     * @param instance the data value and type of the {@link OWLLiteral}.
      * @return a new OWL data literal with the specified value and type, in the grounded ontology.
      */
-    default OWLLiteral getOWLLiteral( Object value){
-        return getGroundOntology().getOWLLiteral( value);
+    default OWLLiteral getOWLLiteral( Object instance){
+        return getGroundOntology().getOWLLiteral( instance);
     }
 
     /**
@@ -477,19 +477,19 @@ public interface DescriptorGroundInterface<J extends OWLObject>
 
     /**
      * Return a compact name of an {@link OWLObject}, by removing IRI for instance.
-     * @param obj the object to describe with a short name
+     * @param instance the object to describe with a short name
      * @return the short name of the given object.
      */
-    default String getOWLName( OWLObject obj){
-        return getGroundOntology().getOWLObjectName( obj);
+    default String getOWLName( OWLObject instance){
+        return getGroundOntology().getOWLObjectName( instance);
     }
     /**
      * Return a compact name of a {@code Set<{@link OWLObject}>}, by removing IRI for instance.
-     * @param set the set of objects to describe with related short names
+     * @param instance the set of objects to describe with related short names
      * @return the set short names of the given object set.
      */
-    default Set<String> getOWLName( Set<?> set){
-        return getGroundOntology().getOWLObjectName( set);
+    default Set<String> getOWLName( Set<?> instance){
+        return getGroundOntology().getOWLObjectName( instance);
     }
 
     /**
