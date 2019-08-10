@@ -1,3 +1,8 @@
+it.emarolab.owloop.articleExamples.drugOrderExample
+it.emarolab.owloop.articleExamples.example1
+it.emarolab.owloop.articleExamples.example2
+it.emarolab.owloop.articleExamples.example3
+it.emarolab.owloop.articleExamples.exampleDescriptors
 it.emarolab.owloop.core
 it.emarolab.owloop.descriptor.construction.descriptorEntitySet
 it.emarolab.owloop.descriptor.construction.descriptorExpression
@@ -6,3 +11,4 @@ it.emarolab.owloop.descriptor.utility.conceptDescriptor
 it.emarolab.owloop.descriptor.utility.dataPropertyDescriptor
 it.emarolab.owloop.descriptor.utility.individualDescriptor
 it.emarolab.owloop.descriptor.utility.objectPropertyDescriptor
+it.emarolab.owloop.descriptorDebugging
