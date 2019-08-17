@@ -1,6 +1,6 @@
 package it.emarolab.owloop.descriptorDebugging;
 
-import it.emarolab.owloop.descriptor.utility.conceptDescriptor.FullClassDesc;
+import it.emarolab.owloop.descriptor.utility.classDescriptor.FullClassDesc;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;

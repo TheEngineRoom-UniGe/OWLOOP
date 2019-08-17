@@ -1,4 +1,4 @@
-package it.emarolab.owloop.descriptor.utility.conceptDescriptor;
+package it.emarolab.owloop.descriptor.utility.classDescriptor;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;

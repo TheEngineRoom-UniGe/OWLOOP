@@ -4,7 +4,7 @@ import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.IndividualGround;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.IndividualExpression;
-import it.emarolab.owloop.descriptor.utility.conceptDescriptor.FullClassDesc;
+import it.emarolab.owloop.descriptor.utility.classDescriptor.FullClassDesc;
 import it.emarolab.owloop.descriptor.utility.dataPropertyDescriptor.FullDataPropertyDesc;
 import it.emarolab.owloop.descriptor.utility.objectPropertyDescriptor.FullObjectPropertyDesc;
 import org.semanticweb.owlapi.model.OWLClass;

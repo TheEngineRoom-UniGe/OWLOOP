@@ -5,7 +5,7 @@ import it.emarolab.amor.owlInterface.SemanticRestriction;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.ClassExpression;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.ClassGround;
-import it.emarolab.owloop.descriptor.utility.conceptDescriptor.FullClassDesc;
+import it.emarolab.owloop.descriptor.utility.classDescriptor.FullClassDesc;
 
 import java.util.List;
 

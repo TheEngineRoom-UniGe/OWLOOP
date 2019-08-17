@@ -2,7 +2,7 @@ package it.emarolab.owloop.articleExamples.drugOrderExample;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.amor.owlInterface.OWLReferencesInterface;
-import it.emarolab.owloop.descriptor.utility.conceptDescriptor.FullClassDesc;
+import it.emarolab.owloop.descriptor.utility.classDescriptor.FullClassDesc;
 import it.emarolab.owloop.descriptor.utility.dataPropertyDescriptor.FullDataPropertyDesc;
 import it.emarolab.owloop.descriptor.utility.individualDescriptor.FullIndividualDesc;
 import it.emarolab.owloop.descriptor.utility.objectPropertyDescriptor.FullObjectPropertyDesc;
