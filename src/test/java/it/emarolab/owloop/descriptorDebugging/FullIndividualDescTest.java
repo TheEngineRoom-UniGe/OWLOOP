@@ -1,5 +1,6 @@
 package it.emarolab.owloop.descriptorDebugging;
 
+import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DataLinks;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.utility.individualDescriptor.FullIndividualDesc;
 import org.junit.AfterClass;
@@ -240,7 +241,7 @@ public class FullIndividualDescTest {
         //assertSemantic();
         individual.addData( "hasProp", 2.3, true);
         individual.addData( "hasProp", 5.7, true);
-        for(DescriptorEntitySet.DataLinks i : individual.getDataProperties())
+        for(DataLinks i : individual.getDataProperties())
             assertEquals( i.getValues().size(), 1);
         individual.writeReadExpressionAxioms(); // reasoner infers shape properties
         assertSemantic();

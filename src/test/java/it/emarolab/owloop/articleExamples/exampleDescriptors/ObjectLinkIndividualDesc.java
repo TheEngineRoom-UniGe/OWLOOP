@@ -1,6 +1,8 @@
 package it.emarolab.owloop.articleExamples.exampleDescriptors;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
+import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.ObjectLinkSet;
+import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.ObjectLinks;
 import it.emarolab.owloop.descriptor.utility.individualDescriptor.FullIndividualDesc;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.IndividualExpression;
@@ -23,7 +25,7 @@ public class ObjectLinkIndividualDesc
         extends IndividualGround
         implements IndividualExpression.ObjectLink<FullObjectPropertyDesc> {
 
-    private DescriptorEntitySet.ObjectLinkSet objectLinks = new DescriptorEntitySet.ObjectLinkSet();
+    private ObjectLinkSet objectLinks = new ObjectLinkSet();
 
     /* Constructors from class: IndividualGround */
 
@@ -52,12 +54,12 @@ public class ObjectLinkIndividualDesc
 
     // Is used by the descriptors's build() method. It's possible to change the return type based on need.
     @Override
-    public FullObjectPropertyDesc getNewObjectProperty(DescriptorEntitySet.ObjectLinks instance, OWLReferences ontology) {
+    public FullObjectPropertyDesc getNewObjectProperty(ObjectLinks instance, OWLReferences ontology) {
         return new FullObjectPropertyDesc( instance.getExpression(), ontology);
     }
     // It returns objectLinks from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.ObjectLinkSet getObjectProperties() {
+    public ObjectLinkSet getObjectProperties() {
         return objectLinks;
     }
 

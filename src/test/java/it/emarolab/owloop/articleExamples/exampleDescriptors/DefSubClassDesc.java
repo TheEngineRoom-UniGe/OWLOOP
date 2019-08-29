@@ -1,7 +1,9 @@
 package it.emarolab.owloop.articleExamples.exampleDescriptors;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
+import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.Classes;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
+import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.Restrictions;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.ClassExpression;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.ClassGround;
 import it.emarolab.owloop.descriptor.utility.classDescriptor.FullClassDesc;
@@ -25,8 +27,8 @@ public class DefSubClassDesc
         implements ClassExpression.EquivalentRestriction,
         ClassExpression.Sub<DefSubClassDesc>{
 
-    private DescriptorEntitySet.Restrictions restrictions = new DescriptorEntitySet.Restrictions();
-    private DescriptorEntitySet.Classes subClasses = new DescriptorEntitySet.Classes();
+    private Restrictions restrictions = new Restrictions();
+    private Classes subClasses = new Classes();
 
     // constructors for ClassGround
     public DefSubClassDesc(OWLClass instance, OWLReferences onto) {
@@ -50,7 +52,7 @@ public class DefSubClassDesc
 
     // implementations for ClassExpression.Definition
     @Override
-    public DescriptorEntitySet.Restrictions getEquivalentRestrictions() {
+    public Restrictions getEquivalentRestrictions() {
         return restrictions;
     }
 
@@ -64,7 +66,7 @@ public class DefSubClassDesc
     }
 
     @Override
-    public DescriptorEntitySet.Classes getSubClasses() {
+    public Classes getSubClasses() {
         return subClasses;
     }
 

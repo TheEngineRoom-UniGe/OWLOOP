@@ -3,6 +3,7 @@ package it.emarolab.owloop.articleExamples.exampleDescriptors;
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.amor.owlInterface.SemanticRestriction;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
+import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.Restrictions;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.ClassExpression;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.ClassGround;
 import it.emarolab.owloop.descriptor.utility.classDescriptor.FullClassDesc;
@@ -21,7 +22,7 @@ public abstract class DefClassDesc
         extends ClassGround
         implements ClassExpression.EquivalentRestriction {
 
-    private DescriptorEntitySet.Restrictions restrictions = new DescriptorEntitySet.Restrictions();
+    private Restrictions restrictions = new Restrictions();
 
     /* Constructors from class: ClassGround */
 
@@ -53,7 +54,7 @@ public abstract class DefClassDesc
 
     // It returns restrictions from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.Restrictions getEquivalentRestrictions() {
+    public Restrictions getEquivalentRestrictions() {
         return restrictions;
     }
 

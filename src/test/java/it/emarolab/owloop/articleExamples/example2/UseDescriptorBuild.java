@@ -7,6 +7,7 @@ import it.emarolab.owloop.articleExamples.exampleDescriptors.DefSubClassDesc;
 import it.emarolab.owloop.articleExamples.exampleDescriptors.ObjectLinkIndividualDesc;
 import it.emarolab.owloop.articleExamples.exampleDescriptors.TypeIndividualDesc;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
+import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.Restrictions;
 import org.junit.Before;
 import org.junit.Test;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
@@ -63,7 +64,7 @@ public class UseDescriptorBuild {
                 }
 
                 System.out.print( "\n'" + d2.getGroundInstanceName() + "'" + " is of Type " + "'" + d3.getGroundInstanceName() + "' \n"); // printing
-                DescriptorEntitySet.Restrictions restrictions = d3.getEquivalentRestrictions();
+                Restrictions restrictions = d3.getEquivalentRestrictions();
 
                 for( SemanticRestriction rest : restrictions ){
 
