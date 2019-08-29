@@ -2,6 +2,7 @@ package it.emarolab.owloop.descriptor.utility.individualDescriptor;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
+import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.Individuals;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.IndividualExpression;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.IndividualGround;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
@@ -33,8 +34,8 @@ public class RestrictionIndividualDesc
         implements IndividualExpression.Disjoint<RestrictionIndividualDesc>,
         IndividualExpression.Equivalent<RestrictionIndividualDesc>{
 
-    private DescriptorEntitySet.Individuals disjointIndividuals = new DescriptorEntitySet.Individuals();
-    private DescriptorEntitySet.Individuals equivalentIndividuals = new DescriptorEntitySet.Individuals();
+    private Individuals disjointIndividuals = new Individuals();
+    private Individuals equivalentIndividuals = new Individuals();
 
     /* Constructors from class: IndividualGround */
 
@@ -91,7 +92,7 @@ public class RestrictionIndividualDesc
     }
     // It returns disjointIndividuals from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.Individuals getDisjointIndividuals() {
+    public Individuals getDisjointIndividuals() {
         return disjointIndividuals;
     }
 
@@ -102,7 +103,7 @@ public class RestrictionIndividualDesc
     }
     // It returns equivalentIndividuals from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.Individuals getEquivalentIndividuals() {
+    public Individuals getEquivalentIndividuals() {
         return equivalentIndividuals;
     }
 

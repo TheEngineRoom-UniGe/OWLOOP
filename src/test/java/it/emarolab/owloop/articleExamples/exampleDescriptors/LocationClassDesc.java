@@ -20,7 +20,7 @@ public class LocationClassDesc
     LocationClassDesc(String instanceName, OWLReferences onto) {
 
         super(instanceName, onto);
-        addDefinitionRestriction( new SemanticRestriction.ClassRestrictedOnSomeObject()); // adding with Some-restriction
+        addDefinitionRestriction( new SemanticRestriction.ClassRestrictedOnAllObject()); // adding with Some-restriction
         addDefinitionRestriction( getRestriction());                    // adds definition with a restriction
     }
 
@@ -36,7 +36,7 @@ public class LocationClassDesc
     // implementing with a Some-restriction
     @Override
     protected SemanticRestriction.ApplyingPropertyRestriction getRestriction(){
-        return new SemanticRestriction.ClassRestrictedOnSomeObject();
+        return new SemanticRestriction.ClassRestrictedOnAllObject();
     }
 
 }

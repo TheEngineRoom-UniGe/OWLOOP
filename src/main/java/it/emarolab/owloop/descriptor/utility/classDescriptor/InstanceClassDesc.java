@@ -1,6 +1,7 @@
 package it.emarolab.owloop.descriptor.utility.classDescriptor;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
+import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.Individuals;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.ClassExpression;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.ClassGround;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
@@ -31,7 +32,7 @@ public class InstanceClassDesc
         extends ClassGround
         implements ClassExpression.Instance<LinkIndividualDesc> {
 
-    private DescriptorEntitySet.Individuals individuals = new DescriptorEntitySet.Individuals();
+    private Individuals individuals = new Individuals();
 
     /* Constructors from class: ClassGround */
 
@@ -84,7 +85,7 @@ public class InstanceClassDesc
     }
     // It returns Individuals from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.Individuals getIndividuals() {
+    public Individuals getIndividuals() {
         return individuals;
     }
 

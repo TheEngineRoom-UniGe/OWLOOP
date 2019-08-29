@@ -2,6 +2,7 @@ package it.emarolab.owloop.descriptor.utility.classDescriptor;
 
 
 import it.emarolab.amor.owlInterface.OWLReferences;
+import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.Classes;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.ClassExpression;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.ClassGround;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
@@ -33,8 +34,8 @@ public class HierarchicalClassDesc
         implements ClassExpression.Sub<HierarchicalClassDesc>,
         ClassExpression.Super<HierarchicalClassDesc>{
 
-    private DescriptorEntitySet.Classes subClasses = new DescriptorEntitySet.Classes();
-    private DescriptorEntitySet.Classes superClasses = new DescriptorEntitySet.Classes();
+    private Classes subClasses = new Classes();
+    private Classes superClasses = new Classes();
 
     /* Constructors from class: ClassGround */
 
@@ -91,7 +92,7 @@ public class HierarchicalClassDesc
     }
     // It returns subClasses from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.Classes getSubClasses() {
+    public Classes getSubClasses() {
         return subClasses;
     }
 
@@ -102,7 +103,7 @@ public class HierarchicalClassDesc
     }
     // It returns superClasses from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.Classes getSuperClasses() {
+    public Classes getSuperClasses() {
         return superClasses;
     }
 

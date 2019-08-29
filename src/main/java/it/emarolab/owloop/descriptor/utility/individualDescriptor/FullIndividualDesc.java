@@ -1,8 +1,8 @@
 package it.emarolab.owloop.descriptor.utility.individualDescriptor;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
+import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.*;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.IndividualGround;
-import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.IndividualExpression;
 import it.emarolab.owloop.descriptor.utility.classDescriptor.FullClassDesc;
 import it.emarolab.owloop.descriptor.utility.dataPropertyDescriptor.FullDataPropertyDesc;
@@ -42,11 +42,11 @@ public class FullIndividualDesc
         IndividualExpression.ObjectLink<FullObjectPropertyDesc>,
         IndividualExpression.DataLink<FullDataPropertyDesc> {
 
-    private DescriptorEntitySet.Individuals disjointIndividuals = new DescriptorEntitySet.Individuals();
-    private DescriptorEntitySet.Individuals equivalentIndividuals = new DescriptorEntitySet.Individuals();
-    private DescriptorEntitySet.Classes classes = new DescriptorEntitySet.Classes();
-    private DescriptorEntitySet.ObjectLinkSet objectLinks = new DescriptorEntitySet.ObjectLinkSet();
-    private DescriptorEntitySet.DataLinkSet dataLinks = new DescriptorEntitySet.DataLinkSet();
+    private Individuals disjointIndividuals = new Individuals();
+    private Individuals equivalentIndividuals = new Individuals();
+    private Classes classes = new Classes();
+    private ObjectLinkSet objectLinks = new ObjectLinkSet();
+    private DataLinkSet dataLinks = new DataLinkSet();
 
     /* Constructors from class: IndividualGround */
 
@@ -109,7 +109,7 @@ public class FullIndividualDesc
     }
     // It returns disjointIndividuals from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.Individuals getDisjointIndividuals() {
+    public Individuals getDisjointIndividuals() {
         return disjointIndividuals;
     }
 
@@ -120,7 +120,7 @@ public class FullIndividualDesc
     }
     // It returns equivalentIndividuals from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.Individuals getEquivalentIndividuals() {
+    public Individuals getEquivalentIndividuals() {
         return equivalentIndividuals;
     }
 
@@ -131,29 +131,29 @@ public class FullIndividualDesc
     }
     // It returns classes from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.Classes getTypes() {
+    public Classes getTypes() {
         return classes;
     }
 
     // Is used by the descriptors's build() method. It's possible to change the return type based on need.
     @Override
-    public FullObjectPropertyDesc getNewObjectProperty(DescriptorEntitySet.ObjectLinks instance, OWLReferences ontology) {
+    public FullObjectPropertyDesc getNewObjectProperty(ObjectLinks instance, OWLReferences ontology) {
         return new FullObjectPropertyDesc( instance.getExpression(), ontology);
     }
     // It returns objectLinks from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.ObjectLinkSet getObjectProperties() {
+    public ObjectLinkSet getObjectProperties() {
         return objectLinks;
     }
 
     // Is used by the descriptors's build() method. It's possible to change the return type based on need.
     @Override
-    public FullDataPropertyDesc getNewDataProperty(DescriptorEntitySet.DataLinks instance, OWLReferences ontology) {
+    public FullDataPropertyDesc getNewDataProperty(DataLinks instance, OWLReferences ontology) {
         return new FullDataPropertyDesc( instance.getExpression(), ontology);
     }
     // It returns dataLinks from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.DataLinkSet getDataProperties() {
+    public DataLinkSet getDataProperties() {
         return dataLinks;
     }
 

@@ -1,7 +1,10 @@
 package it.emarolab.owloop.descriptor.utility.classDescriptor;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
+import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.Classes;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
+import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.Individuals;
+import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.Restrictions;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.ClassExpression;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.ClassGround;
 import it.emarolab.owloop.descriptor.utility.individualDescriptor.LinkIndividualDesc;
@@ -38,10 +41,10 @@ public class RestrictionClassDesc
         ClassExpression.Equivalent<RestrictionClassDesc>,
         ClassExpression.Instance<LinkIndividualDesc> {
 
-    private DescriptorEntitySet.Classes disjointClasses = new DescriptorEntitySet.Classes();
-    private DescriptorEntitySet.Classes equivalentClasses = new DescriptorEntitySet.Classes();
-    private DescriptorEntitySet.Restrictions restrictions = new DescriptorEntitySet.Restrictions();
-    private DescriptorEntitySet.Individuals individuals = new DescriptorEntitySet.Individuals();
+    private Classes disjointClasses = new Classes();
+    private Classes equivalentClasses = new Classes();
+    private Restrictions restrictions = new Restrictions();
+    private Individuals individuals = new Individuals();
 
     /* Constructors from class: ClassGround */
     
@@ -97,7 +100,7 @@ public class RestrictionClassDesc
 
     // It returns restrictions from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.Restrictions getEquivalentRestrictions() {
+    public Restrictions getEquivalentRestrictions() {
         return restrictions;
     }
 
@@ -108,7 +111,7 @@ public class RestrictionClassDesc
     }
     // It returns disjointClasses from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.Classes getDisjointClasses() {
+    public Classes getDisjointClasses() {
         return disjointClasses;
     }
 
@@ -119,7 +122,7 @@ public class RestrictionClassDesc
     }
     // It returns equivalentClasses from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.Classes getEquivalentClasses() {
+    public Classes getEquivalentClasses() {
         return equivalentClasses;
     }
 
@@ -130,7 +133,7 @@ public class RestrictionClassDesc
     }
     // It returns Individuals from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.Individuals getIndividuals() {
+    public Individuals getIndividuals() {
         return individuals;
     }
 

@@ -2,6 +2,8 @@ package it.emarolab.owloop.descriptor.utility.objectPropertyDescriptor;
 
 
 import it.emarolab.amor.owlInterface.OWLReferences;
+import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.ObjectProperties;
+import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.Restrictions;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.ObjectPropertyGround;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.ObjectPropertyExpression;
@@ -43,13 +45,13 @@ public class FullObjectPropertyDesc
         ObjectPropertyExpression.Domain,
         ObjectPropertyExpression.Range{
 
-    private DescriptorEntitySet.ObjectProperties disjointObjectProperties = new DescriptorEntitySet.ObjectProperties();
-    private DescriptorEntitySet.ObjectProperties equivalentObjectProperties = new DescriptorEntitySet.ObjectProperties();
-    private DescriptorEntitySet.ObjectProperties inverseObjectProperties = new DescriptorEntitySet.ObjectProperties();
-    private DescriptorEntitySet.ObjectProperties subObjectProperties = new DescriptorEntitySet.ObjectProperties();
-    private DescriptorEntitySet.ObjectProperties superObjectProperties = new DescriptorEntitySet.ObjectProperties();
-    private DescriptorEntitySet.Restrictions domainRestrictions = new DescriptorEntitySet.Restrictions();
-    private DescriptorEntitySet.Restrictions rangeRestrictions = new DescriptorEntitySet.Restrictions();
+    private ObjectProperties disjointObjectProperties = new ObjectProperties();
+    private ObjectProperties equivalentObjectProperties = new ObjectProperties();
+    private ObjectProperties inverseObjectProperties = new ObjectProperties();
+    private ObjectProperties subObjectProperties = new ObjectProperties();
+    private ObjectProperties superObjectProperties = new ObjectProperties();
+    private Restrictions domainRestrictions = new Restrictions();
+    private Restrictions rangeRestrictions = new Restrictions();
 
     /* Constructors from class: ObjectPropertyGround */
 
@@ -111,13 +113,13 @@ public class FullObjectPropertyDesc
 
     // It returns domainRestrictions from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.Restrictions getDomainRestrictions() {
+    public Restrictions getDomainRestrictions() {
         return domainRestrictions;
     }
 
     // It returns rangeRestrictions from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.Restrictions getRangeRestrictions() {
+    public Restrictions getRangeRestrictions() {
         return rangeRestrictions;
     }
 
@@ -128,7 +130,7 @@ public class FullObjectPropertyDesc
     }
     // It returns disjointObjectProperties from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.ObjectProperties getDisjointObjectProperties() {
+    public ObjectProperties getDisjointObjectProperties() {
         return disjointObjectProperties;
     }
 
@@ -139,7 +141,7 @@ public class FullObjectPropertyDesc
     }
     // It returns equivalentObjectProperties from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.ObjectProperties getEquivalentObjectProperties() {
+    public ObjectProperties getEquivalentObjectProperties() {
         return equivalentObjectProperties;
     }
 
@@ -150,7 +152,7 @@ public class FullObjectPropertyDesc
     }
     // It returns subObjectProperties from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.ObjectProperties getSubObjectProperties() {
+    public ObjectProperties getSubObjectProperties() {
         return subObjectProperties;
     }
 
@@ -161,7 +163,7 @@ public class FullObjectPropertyDesc
     }
     // It returns superObjectProperties from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.ObjectProperties getSuperObjectProperties() {
+    public ObjectProperties getSuperObjectProperties() {
         return superObjectProperties;
     }
 
@@ -172,7 +174,7 @@ public class FullObjectPropertyDesc
     }
     // It returns inverseObjectProperties from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.ObjectProperties getInverseObjectProperties() {
+    public ObjectProperties getInverseObjectProperties() {
         return inverseObjectProperties;
     }
 

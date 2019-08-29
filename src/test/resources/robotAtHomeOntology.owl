@@ -74,7 +74,7 @@
                 <owl:intersectionOf rdf:parseType="Collection">
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="http://www.semanticweb.org/emaroLab/robotAtHomeOntology#hasDoor"/>
-                        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/emaroLab/robotAtHomeOntology#DOOR"/>
+                        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/emaroLab/robotAtHomeOntology#DOOR"/>
                     </owl:Restriction>
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="http://www.semanticweb.org/emaroLab/robotAtHomeOntology#hasDoor"/>
@@ -106,7 +106,7 @@
                 <owl:intersectionOf rdf:parseType="Collection">
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="http://www.semanticweb.org/emaroLab/robotAtHomeOntology#hasDoor"/>
-                        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/emaroLab/robotAtHomeOntology#DOOR"/>
+                        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/emaroLab/robotAtHomeOntology#DOOR"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
@@ -132,7 +132,7 @@
                 <owl:intersectionOf rdf:parseType="Collection">
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="http://www.semanticweb.org/emaroLab/robotAtHomeOntology#hasDoor"/>
-                        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/emaroLab/robotAtHomeOntology#DOOR"/>
+                        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/emaroLab/robotAtHomeOntology#DOOR"/>
                     </owl:Restriction>
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="http://www.semanticweb.org/emaroLab/robotAtHomeOntology#hasDoor"/>

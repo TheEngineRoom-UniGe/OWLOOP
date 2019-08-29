@@ -1,8 +1,8 @@
 package it.emarolab.owloop.descriptor.utility.individualDescriptor;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
+import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.*;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.IndividualGround;
-import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.IndividualExpression;
 import it.emarolab.owloop.descriptor.utility.dataPropertyDescriptor.FullDataPropertyDesc;
 import it.emarolab.owloop.descriptor.utility.objectPropertyDescriptor.FullObjectPropertyDesc;
@@ -33,8 +33,8 @@ public class LinkIndividualDesc
         implements IndividualExpression.ObjectLink<FullObjectPropertyDesc>,
         IndividualExpression.DataLink<FullDataPropertyDesc> {
 
-    private DescriptorEntitySet.ObjectLinkSet objectLinks = new DescriptorEntitySet.ObjectLinkSet();
-    private DescriptorEntitySet.DataLinkSet dataLinks = new DescriptorEntitySet.DataLinkSet();
+    private ObjectLinkSet objectLinks = new ObjectLinkSet();
+    private DataLinkSet dataLinks = new DataLinkSet();
 
     /* Constructors from class: IndividualGround */
 
@@ -86,23 +86,23 @@ public class LinkIndividualDesc
 
     // Is used by the descriptors's build() method. It's possible to change the return type based on need.
     @Override
-    public FullObjectPropertyDesc getNewObjectProperty(DescriptorEntitySet.ObjectLinks instance, OWLReferences ontology) {
+    public FullObjectPropertyDesc getNewObjectProperty(ObjectLinks instance, OWLReferences ontology) {
         return new FullObjectPropertyDesc( instance.getExpression(), ontology);
     }
     // It returns objectLinks from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.ObjectLinkSet getObjectProperties() {
+    public ObjectLinkSet getObjectProperties() {
         return objectLinks;
     }
 
     // Is used by the descriptors's build() method. It's possible to change the return type based on need.
     @Override
-    public FullDataPropertyDesc getNewDataProperty(DescriptorEntitySet.DataLinks instance, OWLReferences ontology) {
+    public FullDataPropertyDesc getNewDataProperty(DataLinks instance, OWLReferences ontology) {
         return new FullDataPropertyDesc( instance.getExpression(), ontology);
     }
     // It returns dataLinks from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.DataLinkSet getDataProperties() {
+    public DataLinkSet getDataProperties() {
         return dataLinks;
     }
 

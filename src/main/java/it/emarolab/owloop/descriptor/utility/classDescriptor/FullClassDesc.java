@@ -1,7 +1,10 @@
 package it.emarolab.owloop.descriptor.utility.classDescriptor;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
+import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.Classes;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
+import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.Individuals;
+import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.Restrictions;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.ClassExpression;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.ClassGround;
 import it.emarolab.owloop.descriptor.utility.individualDescriptor.LinkIndividualDesc;
@@ -42,12 +45,12 @@ public class FullClassDesc
         ClassExpression.Super<FullClassDesc>,
         ClassExpression.Instance<LinkIndividualDesc> {
 
-    private DescriptorEntitySet.Restrictions restrictions = new DescriptorEntitySet.Restrictions();
-    private DescriptorEntitySet.Classes disjointClasses = new DescriptorEntitySet.Classes();
-    private DescriptorEntitySet.Classes equivalentClasses = new DescriptorEntitySet.Classes();
-    private DescriptorEntitySet.Classes subClasses = new DescriptorEntitySet.Classes();
-    private DescriptorEntitySet.Classes superClasses = new DescriptorEntitySet.Classes();
-    private DescriptorEntitySet.Individuals individuals = new DescriptorEntitySet.Individuals();
+    private Restrictions restrictions = new Restrictions();
+    private Classes disjointClasses = new Classes();
+    private Classes equivalentClasses = new Classes();
+    private Classes subClasses = new Classes();
+    private Classes superClasses = new Classes();
+    private Individuals individuals = new Individuals();
 
     /* Constructors from class: ClassGround */
 
@@ -116,7 +119,7 @@ public class FullClassDesc
 
     // It returns restrictions from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.Restrictions getEquivalentRestrictions() {
+    public Restrictions getEquivalentRestrictions() {
         return restrictions;
     }
 
@@ -127,7 +130,7 @@ public class FullClassDesc
     }
     // It returns disjointClasses from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.Classes getDisjointClasses() {
+    public Classes getDisjointClasses() {
         return disjointClasses;
     }
 
@@ -138,7 +141,7 @@ public class FullClassDesc
     }
     // It returns equivalentClasses from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.Classes getEquivalentClasses() {
+    public Classes getEquivalentClasses() {
         return equivalentClasses;
     }
 
@@ -149,7 +152,7 @@ public class FullClassDesc
     }
     // It returns subClasses from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.Classes getSubClasses() {
+    public Classes getSubClasses() {
         return subClasses;
     }
 
@@ -160,7 +163,7 @@ public class FullClassDesc
     }
     // It returns superClasses from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.Classes getSuperClasses() {
+    public Classes getSuperClasses() {
         return superClasses;
     }
 
@@ -171,7 +174,7 @@ public class FullClassDesc
     }
     // It returns Individuals from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.Individuals getIndividuals() {
+    public Individuals getIndividuals() {
         return individuals;
     }
 

@@ -5,6 +5,8 @@ import it.emarolab.amor.owlInterface.SemanticRestriction;
 import it.emarolab.amor.owlInterface.SemanticRestriction.*;
 import it.emarolab.owloop.core.ObjectProperty;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
+import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.ObjectProperties;
+import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.Restrictions;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.DescriptorGroundInterface;
 import org.semanticweb.owlapi.model.*;
 
@@ -174,11 +176,11 @@ public interface ObjectPropertyExpression
         }
 
         @Override
-        DescriptorEntitySet.ObjectProperties getInverseObjectProperties();
+        ObjectProperties getInverseObjectProperties();
 
         @Override // see super class for documentation
-        default DescriptorEntitySet.ObjectProperties queryInverseObjectProperties(){
-            DescriptorEntitySet.ObjectProperties set = new DescriptorEntitySet.ObjectProperties(getOntology().getInverseProperty(getInstance()));
+        default ObjectProperties queryInverseObjectProperties(){
+            ObjectProperties set = new ObjectProperties(getOntology().getInverseProperty(getInstance()));
             set.setSingleton( getInverseObjectProperties().isSingleton());
             return set;
         }
@@ -259,11 +261,11 @@ public interface ObjectPropertyExpression
         }
 
         @Override
-        DescriptorEntitySet.ObjectProperties getDisjointObjectProperties();
+        ObjectProperties getDisjointObjectProperties();
 
         @Override // see super class for documentation
-        default DescriptorEntitySet.ObjectProperties queryDisjointObjectProperties(){
-            DescriptorEntitySet.ObjectProperties set = new DescriptorEntitySet.ObjectProperties(getOntology().getDisjointObjectProperty(getInstance()));
+        default ObjectProperties queryDisjointObjectProperties(){
+            ObjectProperties set = new ObjectProperties(getOntology().getDisjointObjectProperty(getInstance()));
             set.remove( getInstance());
             set.remove( getOntology().getOWLFactory().getOWLBottomObjectProperty());
             set.setSingleton( getDisjointObjectProperties().isSingleton());
@@ -354,11 +356,11 @@ public interface ObjectPropertyExpression
         }
 
         @Override
-        DescriptorEntitySet.ObjectProperties getEquivalentObjectProperties();
+        ObjectProperties getEquivalentObjectProperties();
 
         @Override // see super class for documentation
-        default DescriptorEntitySet.ObjectProperties queryEquivalentObjectProperties(){
-            DescriptorEntitySet.ObjectProperties set = new DescriptorEntitySet.ObjectProperties(getOntology().getEquivalentObjectProperty(getInstance()));
+        default ObjectProperties queryEquivalentObjectProperties(){
+            ObjectProperties set = new ObjectProperties(getOntology().getEquivalentObjectProperty(getInstance()));
             set.remove( getInstance());
             set.setSingleton( getEquivalentObjectProperties().isSingleton());
             return set;
@@ -448,11 +450,11 @@ public interface ObjectPropertyExpression
         }
 
         @Override
-        DescriptorEntitySet.ObjectProperties getSubObjectProperties();
+        ObjectProperties getSubObjectProperties();
 
         @Override // see super class for documentation
-        default DescriptorEntitySet.ObjectProperties querySubObjectProperties(){
-            DescriptorEntitySet.ObjectProperties set = new DescriptorEntitySet.ObjectProperties(getOntology().getSubObjectPropertyOf(getInstance()));
+        default ObjectProperties querySubObjectProperties(){
+            ObjectProperties set = new ObjectProperties(getOntology().getSubObjectPropertyOf(getInstance()));
             set.setSingleton( getSubObjectProperties().isSingleton());
             return set;
         }
@@ -534,11 +536,11 @@ public interface ObjectPropertyExpression
         }
 
         @Override
-        DescriptorEntitySet.ObjectProperties getSuperObjectProperties();
+        ObjectProperties getSuperObjectProperties();
 
         @Override // see super class for documentation
-        default DescriptorEntitySet.ObjectProperties querySuperObjectProperties(){
-            DescriptorEntitySet.ObjectProperties set = new DescriptorEntitySet.ObjectProperties(getOntology().getSuperObjectPropertyOf(getInstance()));
+        default ObjectProperties querySuperObjectProperties(){
+            ObjectProperties set = new ObjectProperties(getOntology().getSuperObjectPropertyOf(getInstance()));
             set.setSingleton( getSuperObjectProperties().isSingleton());
             return set;
         }
@@ -1359,10 +1361,10 @@ public interface ObjectPropertyExpression
 
 
         @Override
-        DescriptorEntitySet.Restrictions getDomainRestrictions();
+        Restrictions getDomainRestrictions();
 
         @Override // see super class for documentation
-        default DescriptorEntitySet.Restrictions queryDomainRestrictions(){
+        default Restrictions queryDomainRestrictions(){
             Set< Set<ApplyingRestriction>> restrictionsSet = getOntology().getObjectDomainRestrictions(getInstance());
             Set<ApplyingRestriction> restrictions = new HashSet<>();
             for ( Set<ApplyingRestriction> r : restrictionsSet){
@@ -1379,7 +1381,7 @@ public interface ObjectPropertyExpression
                         restrictions.remove( a);
                         break;
                     }
-            DescriptorEntitySet.Restrictions set = new DescriptorEntitySet.Restrictions( restrictions);
+            Restrictions set = new Restrictions( restrictions);
             set.setSingleton( getDomainRestrictions().isSingleton());
             return set;
         }
@@ -2205,10 +2207,10 @@ public interface ObjectPropertyExpression
         }
 
         @Override
-        DescriptorEntitySet.Restrictions getRangeRestrictions();
+        Restrictions getRangeRestrictions();
 
         @Override // see super class for documentation
-        default DescriptorEntitySet.Restrictions queryRangeRestrictions(){
+        default Restrictions queryRangeRestrictions(){
             Set< Set<ApplyingRestriction>> restrictionsSet =  getOntology().getObjectRangeRestrictions(getInstance());
             Set<ApplyingRestriction> restrictions = new HashSet<>();
             for ( Set<ApplyingRestriction> r : restrictionsSet){
@@ -2225,7 +2227,7 @@ public interface ObjectPropertyExpression
                         restrictions.remove( a);
                         break;
                     }
-            DescriptorEntitySet.Restrictions set = new DescriptorEntitySet.Restrictions( restrictions);
+            Restrictions set = new Restrictions( restrictions);
             set.setSingleton( getRangeRestrictions().isSingleton());
             return set;
         }

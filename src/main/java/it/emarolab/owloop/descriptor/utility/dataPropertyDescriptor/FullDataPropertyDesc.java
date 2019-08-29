@@ -2,6 +2,8 @@ package it.emarolab.owloop.descriptor.utility.dataPropertyDescriptor;
 
 
 import it.emarolab.amor.owlInterface.OWLReferences;
+import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DataProperties;
+import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.Restrictions;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.DataPropertyGround;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.DataPropertyExpression;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
@@ -41,12 +43,12 @@ public class FullDataPropertyDesc
         DataPropertyExpression.Domain,
         DataPropertyExpression.Range{
 
-    private DescriptorEntitySet.DataProperties disjointDataProperties = new DescriptorEntitySet.DataProperties();
-    private DescriptorEntitySet.DataProperties equivalentDataProperties = new DescriptorEntitySet.DataProperties();
-    private DescriptorEntitySet.DataProperties subDataProperties = new DescriptorEntitySet.DataProperties();
-    private DescriptorEntitySet.DataProperties superDataProperties = new DescriptorEntitySet.DataProperties();
-    private DescriptorEntitySet.Restrictions domainRestrictions = new DescriptorEntitySet.Restrictions();
-    private DescriptorEntitySet.Restrictions rangeRestrictions = new DescriptorEntitySet.Restrictions();
+    private DataProperties disjointDataProperties = new DataProperties();
+    private DataProperties equivalentDataProperties = new DataProperties();
+    private DataProperties subDataProperties = new DataProperties();
+    private DataProperties superDataProperties = new DataProperties();
+    private Restrictions domainRestrictions = new Restrictions();
+    private Restrictions rangeRestrictions = new Restrictions();
 
     /* Constructors from class: DataPropertyGround */
 
@@ -106,13 +108,13 @@ public class FullDataPropertyDesc
 
     // It returns domainRestrictions from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.Restrictions getDomainRestrictions() {
+    public Restrictions getDomainRestrictions() {
         return domainRestrictions;
     }
 
     // It returns rangeRestrictions from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.Restrictions getRangeRestrictions() {
+    public Restrictions getRangeRestrictions() {
         return rangeRestrictions;
     }
 
@@ -123,7 +125,7 @@ public class FullDataPropertyDesc
     }
     // It returns disjointDataProperties from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.DataProperties getDisjointDataProperties() {
+    public DataProperties getDisjointDataProperties() {
         return disjointDataProperties;
     }
 
@@ -134,7 +136,7 @@ public class FullDataPropertyDesc
     }
     // It returns equivalentDataProperties from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.DataProperties getEquivalentDataProperties() {
+    public DataProperties getEquivalentDataProperties() {
         return equivalentDataProperties;
     }
 
@@ -145,7 +147,7 @@ public class FullDataPropertyDesc
     }
     // It returns subDataProperties from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.DataProperties getSubDataProperties() {
+    public DataProperties getSubDataProperties() {
         return subDataProperties;
     }
 
@@ -156,7 +158,7 @@ public class FullDataPropertyDesc
     }
     // It returns superDataProperties from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.DataProperties getSuperDataProperties() {
+    public DataProperties getSuperDataProperties() {
         return superDataProperties;
     }
 

@@ -1,6 +1,7 @@
 package it.emarolab.owloop.descriptor.utility.objectPropertyDescriptor;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
+import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.ObjectProperties;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.ObjectPropertyGround;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.ObjectPropertyExpression;
@@ -32,8 +33,8 @@ public class HierarchicalObjectPropertyDesc
         implements ObjectPropertyExpression.Sub<HierarchicalObjectPropertyDesc>,
         ObjectPropertyExpression.Super<HierarchicalObjectPropertyDesc>{
 
-    private DescriptorEntitySet.ObjectProperties subObjectProperties = new DescriptorEntitySet.ObjectProperties();
-    private DescriptorEntitySet.ObjectProperties superObjectProperties = new DescriptorEntitySet.ObjectProperties();
+    private ObjectProperties subObjectProperties = new ObjectProperties();
+    private ObjectProperties superObjectProperties = new ObjectProperties();
 
     /* Constructors from class: ObjectPropertyGround */
 
@@ -90,7 +91,7 @@ public class HierarchicalObjectPropertyDesc
     }
     // It returns subObjectProperties from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.ObjectProperties getSubObjectProperties() {
+    public ObjectProperties getSubObjectProperties() {
         return subObjectProperties;
     }
 
@@ -101,7 +102,7 @@ public class HierarchicalObjectPropertyDesc
     }
     // It returns superObjectProperties from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.ObjectProperties getSuperObjectProperties() {
+    public ObjectProperties getSuperObjectProperties() {
         return superObjectProperties;
     }
 

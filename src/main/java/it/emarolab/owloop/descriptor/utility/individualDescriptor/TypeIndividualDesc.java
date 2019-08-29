@@ -1,6 +1,7 @@
 package it.emarolab.owloop.descriptor.utility.individualDescriptor;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
+import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.Classes;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.IndividualGround;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.IndividualExpression;
@@ -33,7 +34,7 @@ public class TypeIndividualDesc
         extends IndividualGround
         implements IndividualExpression.Type<HierarchicalClassDesc>{
 
-    private DescriptorEntitySet.Classes classes = new DescriptorEntitySet.Classes();
+    private Classes classes = new Classes();
 
     /* Constructors from class: IndividualGround */
 
@@ -86,7 +87,7 @@ public class TypeIndividualDesc
     }
     // It returns classes from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.Classes getTypes() {
+    public Classes getTypes() {
         return classes;
     }
 

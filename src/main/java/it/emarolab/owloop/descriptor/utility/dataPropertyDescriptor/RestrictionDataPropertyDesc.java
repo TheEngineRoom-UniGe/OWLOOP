@@ -1,6 +1,7 @@
 package it.emarolab.owloop.descriptor.utility.dataPropertyDescriptor;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
+import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DataProperties;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.DataPropertyExpression;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.DataPropertyGround;
@@ -33,8 +34,8 @@ public class RestrictionDataPropertyDesc
         implements DataPropertyExpression.Disjoint<RestrictionDataPropertyDesc>,
         DataPropertyExpression.Equivalent<RestrictionDataPropertyDesc> {
 
-    private DescriptorEntitySet.DataProperties disjointDataProperties = new DescriptorEntitySet.DataProperties();
-    private DescriptorEntitySet.DataProperties equivalentDataProperties = new DescriptorEntitySet.DataProperties();
+    private DataProperties disjointDataProperties = new DataProperties();
+    private DataProperties equivalentDataProperties = new DataProperties();
 
     /* Constructors from class: DataPropertyGround */
 
@@ -91,7 +92,7 @@ public class RestrictionDataPropertyDesc
     }
     // It returns disjointDataProperties from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.DataProperties getDisjointDataProperties() {
+    public DataProperties getDisjointDataProperties() {
         return disjointDataProperties;
     }
 
@@ -102,7 +103,7 @@ public class RestrictionDataPropertyDesc
     }
     // It returns equivalentDataProperties from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.DataProperties getEquivalentDataProperties() {
+    public DataProperties getEquivalentDataProperties() {
         return equivalentDataProperties;
     }
 

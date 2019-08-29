@@ -3,6 +3,7 @@ package it.emarolab.owloop.descriptor.utility.objectPropertyDescriptor;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
+import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.Restrictions;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.ObjectPropertyExpression;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.ObjectPropertyGround;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
@@ -33,8 +34,8 @@ public class DomainRangeObjectPropertyDesc
         implements ObjectPropertyExpression.Domain,
         ObjectPropertyExpression.Range {
 
-    private DescriptorEntitySet.Restrictions domainRestrictions = new DescriptorEntitySet.Restrictions();
-    private DescriptorEntitySet.Restrictions rangeRestrictions = new DescriptorEntitySet.Restrictions();
+    private Restrictions domainRestrictions = new Restrictions();
+    private Restrictions rangeRestrictions = new Restrictions();
 
     /* Constructors from class: ObjectPropertyGround */
 
@@ -86,13 +87,13 @@ public class DomainRangeObjectPropertyDesc
 
     // It returns domainRestrictions from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.Restrictions getDomainRestrictions() {
+    public Restrictions getDomainRestrictions() {
         return domainRestrictions;
     }
 
     // It returns rangeRestrictions from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.Restrictions getRangeRestrictions() {
+    public Restrictions getRangeRestrictions() {
 
         return rangeRestrictions;
     }

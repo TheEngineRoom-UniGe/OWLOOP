@@ -4,7 +4,10 @@ import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.amor.owlInterface.SemanticRestriction;
 import it.emarolab.amor.owlInterface.SemanticRestriction.*;
 import it.emarolab.owloop.core.Class;
+import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.Classes;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
+import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.Individuals;
+import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.Restrictions;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.DescriptorGroundInterface;
 import org.semanticweb.owlapi.model.*;
 
@@ -109,8 +112,8 @@ public interface ClassExpression
         }
 
         @Override // see super classes for documentation
-        default DescriptorEntitySet.Individuals queryIndividuals(){
-            DescriptorEntitySet.Individuals set = new DescriptorEntitySet.Individuals(getOntology().getIndividualB2Class(getInstance()));
+        default Individuals queryIndividuals(){
+            Individuals set = new Individuals(getOntology().getIndividualB2Class(getInstance()));
             set.setSingleton( getIndividuals().isSingleton());
             return set;
         }
@@ -200,8 +203,8 @@ public interface ClassExpression
 
 
         @Override // see super classes for documentation
-        default DescriptorEntitySet.Classes queryDisjointClasses(){
-            DescriptorEntitySet.Classes set = new DescriptorEntitySet.Classes(getOntology().getDisjointClasses(getInstance()));
+        default Classes queryDisjointClasses(){
+            Classes set = new Classes(getOntology().getDisjointClasses(getInstance()));
             set.remove( getInstance());
             set.remove( getOntology().getOWLFactory().getOWLNothing());
             set.setSingleton( getDisjointClasses().isSingleton());
@@ -293,8 +296,8 @@ public interface ClassExpression
         }
 
         @Override // see super classes for documentation
-        default DescriptorEntitySet.Classes queryEquivalentClasses(){
-            DescriptorEntitySet.Classes set = new DescriptorEntitySet.Classes(getOntology().getEquivalentClasses(getInstance()));
+        default Classes queryEquivalentClasses(){
+            Classes set = new Classes(getOntology().getEquivalentClasses(getInstance()));
             set.remove( getInstance());
             //set.remove( getOntology().getOWLFactory().getOWLNothing());
             set.setSingleton( getEquivalentClasses().isSingleton());
@@ -386,8 +389,8 @@ public interface ClassExpression
         }
 
         @Override // see super classes for documentation
-        default DescriptorEntitySet.Classes querySubClasses(){
-            DescriptorEntitySet.Classes set = new DescriptorEntitySet.Classes(getOntology().getSubClassOf(getInstance()));
+        default Classes querySubClasses(){
+            Classes set = new Classes(getOntology().getSubClassOf(getInstance()));
             //set.remove( getOntology().getOWLFactory().getOWLNothing());
             set.setSingleton( getSubClasses().isSingleton());
             return set;
@@ -478,8 +481,8 @@ public interface ClassExpression
         }
 
         @Override // see super classes for documentation
-        default DescriptorEntitySet.Classes querySuperClasses(){
-            DescriptorEntitySet.Classes set = new DescriptorEntitySet.Classes( getOntology().getSuperClassOf(getInstance()));
+        default Classes querySuperClasses(){
+            Classes set = new Classes( getOntology().getSuperClassOf(getInstance()));
             set.setSingleton( getSuperClasses().isSingleton());
             return set;
         }
@@ -1248,10 +1251,10 @@ public interface ClassExpression
         }
 
         @Override // did not name it as getEquivalentRestrictions because this interface implements from a more generic interface Class.Restriction
-        DescriptorEntitySet.Restrictions getEquivalentRestrictions();
+        Restrictions getEquivalentRestrictions();
 
         @Override // did not name it as getEquivalentRestrictions because this interface implements from a more generic interface Class.Restriction
-        default DescriptorEntitySet.Restrictions queryEquivalentRestrictions(){
+        default Restrictions queryEquivalentRestrictions(){
             Set< Set<ApplyingRestriction>> restrictionsSet = getOntology().getClassRestrictions( getInstance());
             Set<ApplyingRestriction> restrictions = new HashSet<>();
             for ( Set<ApplyingRestriction> r : restrictionsSet){
@@ -1268,7 +1271,7 @@ public interface ClassExpression
                         restrictions.remove( a);
                         break;
                     }
-            DescriptorEntitySet.Restrictions set = new DescriptorEntitySet.Restrictions( restrictions);
+            Restrictions set = new Restrictions( restrictions);
             set.setSingleton( getEquivalentRestrictions().isSingleton());
             return set;
         }

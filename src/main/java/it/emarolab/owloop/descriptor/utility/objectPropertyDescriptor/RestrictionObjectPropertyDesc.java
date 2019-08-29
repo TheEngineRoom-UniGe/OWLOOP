@@ -1,6 +1,7 @@
 package it.emarolab.owloop.descriptor.utility.objectPropertyDescriptor;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
+import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.ObjectProperties;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.ObjectPropertyGround;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.ObjectPropertyExpression;
@@ -35,9 +36,9 @@ public class RestrictionObjectPropertyDesc
         ObjectPropertyExpression.Equivalent<RestrictionObjectPropertyDesc>,
         ObjectPropertyExpression.Inverse<RestrictionObjectPropertyDesc> {
 
-    private DescriptorEntitySet.ObjectProperties disjointObjectProperties = new DescriptorEntitySet.ObjectProperties();
-    private DescriptorEntitySet.ObjectProperties equivalentObjectProperties = new DescriptorEntitySet.ObjectProperties();
-    private DescriptorEntitySet.ObjectProperties inverseObjectProperties = new DescriptorEntitySet.ObjectProperties();
+    private ObjectProperties disjointObjectProperties = new ObjectProperties();
+    private ObjectProperties equivalentObjectProperties = new ObjectProperties();
+    private ObjectProperties inverseObjectProperties = new ObjectProperties();
 
     /* Constructors from class: ObjectPropertyGround */
 
@@ -96,7 +97,7 @@ public class RestrictionObjectPropertyDesc
     }
     // It returns disjointObjectProperties from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.ObjectProperties getDisjointObjectProperties() {
+    public ObjectProperties getDisjointObjectProperties() {
         return disjointObjectProperties;
     }
 
@@ -107,7 +108,7 @@ public class RestrictionObjectPropertyDesc
     }
     // It returns equivalentObjectProperties from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.ObjectProperties getEquivalentObjectProperties() {
+    public ObjectProperties getEquivalentObjectProperties() {
         return equivalentObjectProperties;
     }
 
@@ -118,7 +119,7 @@ public class RestrictionObjectPropertyDesc
     }
     // It returns inverseObjectProperties from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.ObjectProperties getInverseObjectProperties() {
+    public ObjectProperties getInverseObjectProperties() {
         return inverseObjectProperties;
     }
 
