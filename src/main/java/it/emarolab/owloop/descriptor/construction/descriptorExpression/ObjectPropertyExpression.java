@@ -4,7 +4,6 @@ import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.amor.owlInterface.SemanticRestriction;
 import it.emarolab.amor.owlInterface.SemanticRestriction.*;
 import it.emarolab.owloop.core.ObjectProperty;
-import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.ObjectProperties;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.Restrictions;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.DescriptorGroundInterface;
@@ -57,65 +56,65 @@ public interface ObjectPropertyExpression
 
     @Override // see super class for documentation
     default void setFunctional(){
-        getOntology().addFunctionalObjectProperty( getInstance());
+        getOntologyReference().addFunctionalObjectProperty( getInstance());
     }
     @Override // see super class for documentation
     default void setNotFunctional(){
-        getOntology().removeFunctionalObjectProperty( getInstance());
+        getOntologyReference().removeFunctionalObjectProperty( getInstance());
     }
 
     @Override // see super class for documentation
     default void setInverseFunctional(){
-        getOntology().addInverseFunctionalObjectProperty( getInstance());
+        getOntologyReference().addInverseFunctionalObjectProperty( getInstance());
     }
     @Override // see super class for documentation
     default void setNotInverseFunctional(){
-        getOntology().removeInverseFunctionalObjectProperty( getInstance());
+        getOntologyReference().removeInverseFunctionalObjectProperty( getInstance());
     }
 
     @Override // see super class for documentation
     default void setTransitive(){
-        getOntology().addTransitiveObjectProperty( getInstance());
+        getOntologyReference().addTransitiveObjectProperty( getInstance());
     }
     @Override // see super class for documentation
     default void setNotTransitive(){
-        getOntology().removeTransitiveObjectProperty( getInstance());
+        getOntologyReference().removeTransitiveObjectProperty( getInstance());
     }
 
     @Override // see super class for documentation
     default void setSymmetric(){
-        getOntology().addSymmetricObjectProperty( getInstance());
+        getOntologyReference().addSymmetricObjectProperty( getInstance());
     }
     @Override // see super class for documentation
     default void setNotSymmetric(){
-        getOntology().removeSymmetricObjectProperty( getInstance());
+        getOntologyReference().removeSymmetricObjectProperty( getInstance());
     }
 
     @Override // see super class for documentation
     default void setAsymmetric(){
-        getOntology().addAsymmetricObjectProperty( getInstance());
+        getOntologyReference().addAsymmetricObjectProperty( getInstance());
     }
     @Override // see super class for documentation
     default void setNotAsymmetric(){
-        getOntology().removeAsymmetricObjectProperty( getInstance());
+        getOntologyReference().removeAsymmetricObjectProperty( getInstance());
     }
 
     @Override // see super class for documentation
     default void setReflexive(){
-        getOntology().addReflexiveObjectProperty( getInstance());
+        getOntologyReference().addReflexiveObjectProperty( getInstance());
     }
     @Override // see super class for documentation
     default void setNotReflexive(){
-        getOntology().removeReflexiveObjectProperty( getInstance());
+        getOntologyReference().removeReflexiveObjectProperty( getInstance());
     }
 
     @Override // see super class for documentation
     default void setIrreflexive(){
-        getOntology().addIrreflexiveObjectProperty( getInstance());
+        getOntologyReference().addIrreflexiveObjectProperty( getInstance());
     }
     @Override // see super class for documentation
     default void setNotIrreflexive(){
-        getOntology().removeIrreflexiveObjectProperty( getInstance());
+        getOntologyReference().removeIrreflexiveObjectProperty( getInstance());
     }
 
 
@@ -135,13 +134,13 @@ public interface ObjectPropertyExpression
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getInverseObjectProperties()}.add( {@link #getOntology()}.getOWLObjectProperty( objectPropertyName))}
+         * {@code {@link #getInverseObjectProperties()}.add( {@link #getOntologyReference()}.getOWLObjectProperty( objectPropertyName))}
          * in order to add a new object property (given by name) in the {@link EntitySet} list.
          * @param objectPropertyName the property name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
         default boolean addInverseObjectProperty( String objectPropertyName){
-            return getInverseObjectProperties().add( getOntology().getOWLObjectProperty( objectPropertyName));
+            return getInverseObjectProperties().add( getOntologyReference().getOWLObjectProperty( objectPropertyName));
         }
         /**
          * It is an helper that just calls:
@@ -156,13 +155,13 @@ public interface ObjectPropertyExpression
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getInverseObjectProperties()}.remove( {@link #getOntology()}.getOWLObjectProperty( objectPropertyName))}
+         * {@code {@link #getInverseObjectProperties()}.remove( {@link #getOntologyReference()}.getOWLObjectProperty( objectPropertyName))}
          * in order to remove an object property (given by name) from the {@link EntitySet} list.
          * @param objectPropertyName the property name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeInverseObjectProperty( String objectPropertyName){
-            return getInverseObjectProperties().remove( getOntology().getOWLObjectProperty( objectPropertyName));
+            return getInverseObjectProperties().remove( getOntologyReference().getOWLObjectProperty( objectPropertyName));
         }
         /**
          * It is an helper that just calls:
@@ -180,7 +179,7 @@ public interface ObjectPropertyExpression
 
         @Override // see super class for documentation
         default ObjectProperties queryInverseObjectProperties(){
-            ObjectProperties set = new ObjectProperties(getOntology().getInverseProperty(getInstance()));
+            ObjectProperties set = new ObjectProperties(getOntologyReference().getInverseProperty(getInstance()));
             set.setSingleton( getInverseObjectProperties().isSingleton());
             return set;
         }
@@ -193,9 +192,9 @@ public interface ObjectPropertyExpression
                     return getIntent( null);
                 List<OWLOntologyChange> changes = new ArrayList<>();
                 for (OWLObjectProperty a : to.getToAdd())
-                    changes.add(getOntology().addObjectPropertyInverseOf(getInstance(), a));
+                    changes.add(getOntologyReference().addObjectPropertyInverseOf(getInstance(), a));
                 for (OWLObjectProperty r : to.getToRemove())
-                    changes.add(getOntology().removeObjectPropertyInverseOf(getInstance(), r));
+                    changes.add(getOntologyReference().removeObjectPropertyInverseOf(getInstance(), r));
                 return getChangingIntent(to, changes);
             } catch ( Exception e){
                 e.printStackTrace();
@@ -220,13 +219,13 @@ public interface ObjectPropertyExpression
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getDisjointObjectProperties()}.add( {@link #getOntology()}.getOWLObjectProperty( objectPropertyName))}
+         * {@code {@link #getDisjointObjectProperties()}.add( {@link #getOntologyReference()}.getOWLObjectProperty( objectPropertyName))}
          * in order to add a new object property (given by name) in the {@link EntitySet} list.
          * @param objectPropertyName the property name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
         default boolean addDisjointObjectProperty( String objectPropertyName){
-            return getDisjointObjectProperties().add( getOntology().getOWLObjectProperty( objectPropertyName));
+            return getDisjointObjectProperties().add( getOntologyReference().getOWLObjectProperty( objectPropertyName));
         }
         /**
          * It is an helper that just calls:
@@ -241,13 +240,13 @@ public interface ObjectPropertyExpression
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getDisjointObjectProperties()}.remove( {@link #getOntology()}.getOWLObjectProperty( objectPropertyName))}
+         * {@code {@link #getDisjointObjectProperties()}.remove( {@link #getOntologyReference()}.getOWLObjectProperty( objectPropertyName))}
          * in order to remove an object property (given by name) from the {@link EntitySet} list.
          * @param objectPropertyName the property name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeDisjointObjectProperty( String objectPropertyName){
-            return getDisjointObjectProperties().remove( getOntology().getOWLObjectProperty( objectPropertyName));
+            return getDisjointObjectProperties().remove( getOntologyReference().getOWLObjectProperty( objectPropertyName));
         }
         /**
          * It is an helper that just calls:
@@ -265,9 +264,9 @@ public interface ObjectPropertyExpression
 
         @Override // see super class for documentation
         default ObjectProperties queryDisjointObjectProperties(){
-            ObjectProperties set = new ObjectProperties(getOntology().getDisjointObjectProperty(getInstance()));
+            ObjectProperties set = new ObjectProperties(getOntologyReference().getDisjointObjectProperty(getInstance()));
             set.remove( getInstance());
-            set.remove( getOntology().getOWLFactory().getOWLBottomObjectProperty());
+            set.remove( getOntologyReference().getOWLFactory().getOWLBottomObjectProperty());
             set.setSingleton( getDisjointObjectProperties().isSingleton());
             return set;
         }
@@ -283,13 +282,13 @@ public interface ObjectPropertyExpression
                     Set<OWLObjectProperty> s = new HashSet<>();
                     s.add( getInstance());
                     s.add( a);
-                    changes.add( getOntology().makeDisjointObjectProperties( s));
+                    changes.add( getOntologyReference().makeDisjointObjectProperties( s));
                 }
                 for( OWLObjectProperty r : to.getToRemove()){
                     Set<OWLObjectProperty> s = new HashSet<>();
                     s.add( getInstance());
                     s.add( r);
-                    changes.add( getOntology().removeDisjointObjectProperties( s));
+                    changes.add( getOntologyReference().removeDisjointObjectProperties( s));
                 }
                 return getChangingIntent( to, changes);
             } catch ( Exception e){
@@ -315,13 +314,13 @@ public interface ObjectPropertyExpression
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getEquivalentObjectProperties()}.add( {@link #getOntology()}.getOWLObjectProperty( objectPropertyName))}
+         * {@code {@link #getEquivalentObjectProperties()}.add( {@link #getOntologyReference()}.getOWLObjectProperty( objectPropertyName))}
          * in order to add a new object property (given by name) in the {@link EntitySet} list.
          * @param objectPropertyName the property name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
         default boolean addEquivalentObjectProperty( String objectPropertyName){
-            return getEquivalentObjectProperties().add( getOntology().getOWLObjectProperty( objectPropertyName));
+            return getEquivalentObjectProperties().add( getOntologyReference().getOWLObjectProperty( objectPropertyName));
         }
         /**
          * It is an helper that just calls:
@@ -336,13 +335,13 @@ public interface ObjectPropertyExpression
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getEquivalentObjectProperties()}.remove( {@link #getOntology()}.getOWLObjectProperty( objectPropertyName))}
+         * {@code {@link #getEquivalentObjectProperties()}.remove( {@link #getOntologyReference()}.getOWLObjectProperty( objectPropertyName))}
          * in order to remove an object property (given by name) from the {@link EntitySet} list.
          * @param objectPropertyName the property name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeEquivalentObjectProperty( String objectPropertyName){
-            return getEquivalentObjectProperties().remove( getOntology().getOWLObjectProperty( objectPropertyName));
+            return getEquivalentObjectProperties().remove( getOntologyReference().getOWLObjectProperty( objectPropertyName));
         }
         /**
          * It is an helper that just calls:
@@ -360,7 +359,7 @@ public interface ObjectPropertyExpression
 
         @Override // see super class for documentation
         default ObjectProperties queryEquivalentObjectProperties(){
-            ObjectProperties set = new ObjectProperties(getOntology().getEquivalentObjectProperty(getInstance()));
+            ObjectProperties set = new ObjectProperties(getOntologyReference().getEquivalentObjectProperty(getInstance()));
             set.remove( getInstance());
             set.setSingleton( getEquivalentObjectProperties().isSingleton());
             return set;
@@ -377,13 +376,13 @@ public interface ObjectPropertyExpression
                     Set<OWLObjectProperty> s = new HashSet<>();
                     s.add( getInstance());
                     s.add( a);
-                    changes.add( getOntology().makeEquivalentObjectProperties( s));
+                    changes.add( getOntologyReference().makeEquivalentObjectProperties( s));
                 }
                 for( OWLObjectProperty r : to.getToRemove()){
                     Set<OWLObjectProperty> s = new HashSet<>();
                     s.add( getInstance());
                     s.add( r);
-                    changes.add( getOntology().removeEquivalentObjectProperties( s));
+                    changes.add( getOntologyReference().removeEquivalentObjectProperties( s));
                 }
                 return getChangingIntent(to, changes);
             } catch (Exception e){
@@ -409,13 +408,13 @@ public interface ObjectPropertyExpression
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getSubObjectProperties()}.add( {@link #getOntology()}.getOWLObjectProperty( objectPropertyName))}
+         * {@code {@link #getSubObjectProperties()}.add( {@link #getOntologyReference()}.getOWLObjectProperty( objectPropertyName))}
          * in order to add a new object property (given by name) in the {@link EntitySet} list.
          * @param objectPropertyName the property name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
         default boolean addSubObjectProperty( String objectPropertyName){
-            return getSubObjectProperties().add( getOntology().getOWLObjectProperty( objectPropertyName));
+            return getSubObjectProperties().add( getOntologyReference().getOWLObjectProperty( objectPropertyName));
         }
         /**
          * It is an helper that just calls:
@@ -430,13 +429,13 @@ public interface ObjectPropertyExpression
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getSubObjectProperties()}.remove( {@link #getOntology()}.getOWLObjectProperty( objectPropertyName))}
+         * {@code {@link #getSubObjectProperties()}.remove( {@link #getOntologyReference()}.getOWLObjectProperty( objectPropertyName))}
          * in order to remove an object property (given by name) from the {@link EntitySet} list.
          * @param objectPropertyName the property name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeSubObjectProperty( String objectPropertyName){
-            return getSubObjectProperties().remove( getOntology().getOWLObjectProperty( objectPropertyName));
+            return getSubObjectProperties().remove( getOntologyReference().getOWLObjectProperty( objectPropertyName));
         }
         /**
          * It is an helper that just calls:
@@ -454,7 +453,7 @@ public interface ObjectPropertyExpression
 
         @Override // see super class for documentation
         default ObjectProperties querySubObjectProperties(){
-            ObjectProperties set = new ObjectProperties(getOntology().getSubObjectPropertyOf(getInstance()));
+            ObjectProperties set = new ObjectProperties(getOntologyReference().getSubObjectPropertyOf(getInstance()));
             set.setSingleton( getSubObjectProperties().isSingleton());
             return set;
         }
@@ -467,9 +466,9 @@ public interface ObjectPropertyExpression
                     return getIntent( null);
                 List<OWLOntologyChange> changes = new ArrayList<>();
                 for( OWLObjectProperty a : to.getToAdd())
-                    changes.add( getOntology().addSubObjectPropertyOf( getInstance(), a));
+                    changes.add( getOntologyReference().addSubObjectPropertyOf( getInstance(), a));
                 for( OWLObjectProperty r : to.getToRemove())
-                    changes.add( getOntology().removeSubObjectPropertyOf( getInstance(), r));
+                    changes.add( getOntologyReference().removeSubObjectPropertyOf( getInstance(), r));
                 return getChangingIntent( to, changes);
             } catch ( Exception e){
                 e.printStackTrace();
@@ -495,13 +494,13 @@ public interface ObjectPropertyExpression
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getSuperObjectProperties()}.add( {@link #getOntology()}.getOWLObjectProperty( objectPropertyName))}
+         * {@code {@link #getSuperObjectProperties()}.add( {@link #getOntologyReference()}.getOWLObjectProperty( objectPropertyName))}
          * in order to add a new object property (given by name) in the {@link EntitySet} list.
          * @param objectPropertyName the property name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
         default boolean addSuperObjectProperty( String objectPropertyName){
-            return getSuperObjectProperties().add( getOntology().getOWLObjectProperty( objectPropertyName));
+            return getSuperObjectProperties().add( getOntologyReference().getOWLObjectProperty( objectPropertyName));
         }
         /**
          * It is an helper that just calls:
@@ -516,13 +515,13 @@ public interface ObjectPropertyExpression
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getSuperObjectProperties()}.remove( {@link #getOntology()}.getOWLObjectProperty( objectPropertyName))}
+         * {@code {@link #getSuperObjectProperties()}.remove( {@link #getOntologyReference()}.getOWLObjectProperty( objectPropertyName))}
          * in order to remove an object property (given by name) from the {@link EntitySet} list.
          * @param objectPropertyName the property name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeSuperObjectProperty( String objectPropertyName){
-            return getSuperObjectProperties().remove( getOntology().getOWLObjectProperty( objectPropertyName));
+            return getSuperObjectProperties().remove( getOntologyReference().getOWLObjectProperty( objectPropertyName));
         }
         /**
          * It is an helper that just calls:
@@ -540,7 +539,7 @@ public interface ObjectPropertyExpression
 
         @Override // see super class for documentation
         default ObjectProperties querySuperObjectProperties(){
-            ObjectProperties set = new ObjectProperties(getOntology().getSuperObjectPropertyOf(getInstance()));
+            ObjectProperties set = new ObjectProperties(getOntologyReference().getSuperObjectPropertyOf(getInstance()));
             set.setSingleton( getSuperObjectProperties().isSingleton());
             return set;
         }
@@ -553,9 +552,9 @@ public interface ObjectPropertyExpression
                     return getIntent( null);
                 List<OWLOntologyChange> changes = new ArrayList<>();
                 for( OWLObjectProperty a : to.getToAdd())
-                    changes.add( getOntology().addSubObjectPropertyOf( a, getInstance()));
+                    changes.add( getOntologyReference().addSubObjectPropertyOf( a, getInstance()));
                 for( OWLObjectProperty r : to.getToRemove())
-                    changes.add( getOntology().removeSubObjectPropertyOf( r, getInstance()));
+                    changes.add( getOntologyReference().removeSubObjectPropertyOf( r, getInstance()));
                 return getChangingIntent( to, changes);
             } catch ( Exception e){
                 e.printStackTrace();
@@ -1365,7 +1364,7 @@ public interface ObjectPropertyExpression
 
         @Override // see super class for documentation
         default Restrictions queryDomainRestrictions(){
-            Set< Set<ApplyingRestriction>> restrictionsSet = getOntology().getObjectDomainRestrictions(getInstance());
+            Set< Set<ApplyingRestriction>> restrictionsSet = getOntologyReference().getObjectDomainRestrictions(getInstance());
             Set<ApplyingRestriction> restrictions = new HashSet<>();
             for ( Set<ApplyingRestriction> r : restrictionsSet){
                 restrictions = r;
@@ -1393,11 +1392,11 @@ public interface ObjectPropertyExpression
                 List<OWLOntologyChange> changes = new ArrayList<>();
                 // not optimised: it does not sync only the changes but it removes and re-add the axiom
                 if ( ! to.getToAdd().isEmpty() || ! to.getToRemove().isEmpty()) {
-                    for( Set<ApplyingRestriction> r : getOntology().getObjectDomainRestrictions( getInstance()))
-                        changes.add(getOntology().removeRestrictionAxiom ( r)); // remove all
+                    for( Set<ApplyingRestriction> r : getOntologyReference().getObjectDomainRestrictions( getInstance()))
+                        changes.add(getOntologyReference().removeRestrictionAxiom ( r)); // remove all
                     HashSet<SemanticRestriction> copy = new HashSet<>(to.getToAdd());
                     copy.addAll( to.getUnchanged());
-                    changes.add(getOntology().addRestrictionAxiom( copy));
+                    changes.add(getOntologyReference().addRestrictionAxiom( copy));
                 }
 
                 return getChangingIntent(to, changes);
@@ -2211,7 +2210,7 @@ public interface ObjectPropertyExpression
 
         @Override // see super class for documentation
         default Restrictions queryRangeRestrictions(){
-            Set< Set<ApplyingRestriction>> restrictionsSet =  getOntology().getObjectRangeRestrictions(getInstance());
+            Set< Set<ApplyingRestriction>> restrictionsSet =  getOntologyReference().getObjectRangeRestrictions(getInstance());
             Set<ApplyingRestriction> restrictions = new HashSet<>();
             for ( Set<ApplyingRestriction> r : restrictionsSet){
                 restrictions = r;
@@ -2239,11 +2238,11 @@ public interface ObjectPropertyExpression
                 List<OWLOntologyChange> changes = new ArrayList<>();
                 // not optimised: it does not sync only the changes but it removes and re-add the axiom
                 if ( ! to.getToAdd().isEmpty() || ! to.getToRemove().isEmpty()) {
-                    for( Set<ApplyingRestriction> r : getOntology().getObjectRangeRestrictions( getInstance()))
-                        changes.add(getOntology().removeRestrictionAxiom ( r)); // remove all
+                    for( Set<ApplyingRestriction> r : getOntologyReference().getObjectRangeRestrictions( getInstance()))
+                        changes.add(getOntologyReference().removeRestrictionAxiom ( r)); // remove all
                     HashSet<SemanticRestriction> copy = new HashSet<>(to.getToAdd());
                     copy.addAll( to.getUnchanged());
-                    changes.add(getOntology().addRestrictionAxiom( copy));
+                    changes.add(getOntologyReference().addRestrictionAxiom( copy));
                 }
 
                 return getChangingIntent(to, changes);

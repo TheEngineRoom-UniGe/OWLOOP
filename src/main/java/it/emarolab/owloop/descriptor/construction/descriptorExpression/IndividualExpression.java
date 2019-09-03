@@ -67,13 +67,13 @@ public interface IndividualExpression
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getTypes()}.add( {@link #getOntology()}.getOWLClass( className))}
+         * {@code {@link #getTypes()}.add( {@link #getOntologyReference()}.getOWLClass( className))}
          * in order to add a new class (given by name) in the {@link EntitySet} list.
          * @param className the class name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
         default boolean addTypeIndividual(String className){
-            return getTypes().add( getOntology().getOWLClass( className));
+            return getTypes().add( getOntologyReference().getOWLClass( className));
         }
         /**
          * It is an helper that just calls:
@@ -88,13 +88,13 @@ public interface IndividualExpression
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getTypes()}.remove( {@link #getOntology()}.getOWLClass( className))}
+         * {@code {@link #getTypes()}.remove( {@link #getOntologyReference()}.getOWLClass( className))}
          * in order to remove a class (given by name) from the {@link EntitySet} list.
          * @param className the class name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeTypeIndividual(String className){
-            return getTypes().remove( getOntology().getOWLClass( className));
+            return getTypes().remove( getOntologyReference().getOWLClass( className));
         }
         /**
          * It is an helper that just calls:
@@ -112,7 +112,7 @@ public interface IndividualExpression
 
         @Override // see super classes for documentation
         default Classes queryTypes(){
-            Classes set = new Classes(getOntology().getIndividualClasses(getInstance()));
+            Classes set = new Classes(getOntologyReference().getIndividualClasses(getInstance()));
             set.setSingleton( getTypes().isSingleton());
             return set;
         }
@@ -125,9 +125,9 @@ public interface IndividualExpression
                     return getIntent( null);
                 List<OWLOntologyChange> changes = new ArrayList<>();
                 for (OWLClass a : to.getToAdd())
-                    changes.add(getOntology().addIndividualB2Class(getInstance(), a));
+                    changes.add(getOntologyReference().addIndividualB2Class(getInstance(), a));
                 for (OWLClass b : to.getToRemove())
-                    changes.add(getOntology().removeIndividualB2Class(getInstance(), b));
+                    changes.add(getOntologyReference().removeIndividualB2Class(getInstance(), b));
                 return getChangingIntent(to, changes);
             } catch (Exception e){
                 e.printStackTrace();
@@ -152,13 +152,13 @@ public interface IndividualExpression
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getDisjointIndividuals()}.add( {@link #getOntology()}.getOWLIndividual( individualName))}
+         * {@code {@link #getDisjointIndividuals()}.add( {@link #getOntologyReference()}.getOWLIndividual( individualName))}
          * in order to add a new individualDescriptor (given by name) in the {@link EntitySet} list.
          * @param individualName the individualDescriptor name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
         default boolean addDisjointIndividual( String individualName){
-            return getDisjointIndividuals().add( getOntology().getOWLIndividual( individualName));
+            return getDisjointIndividuals().add( getOntologyReference().getOWLIndividual( individualName));
         }
         /**
          * It is an helper that just calls:
@@ -173,13 +173,13 @@ public interface IndividualExpression
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getDisjointIndividuals()}.remove( {@link #getOntology()}.getOWLIndividual( individualName))}
+         * {@code {@link #getDisjointIndividuals()}.remove( {@link #getOntologyReference()}.getOWLIndividual( individualName))}
          * in order to remove an individualDescriptor (given by name) from the {@link EntitySet} list.
          * @param individualName the individualDescriptor name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeDisjointIndividual( String individualName){
-            return getDisjointIndividuals().remove( getOntology().getOWLIndividual( individualName));
+            return getDisjointIndividuals().remove( getOntologyReference().getOWLIndividual( individualName));
         }
         /**
          * It is an helper that just calls:
@@ -197,7 +197,7 @@ public interface IndividualExpression
 
         @Override // see super classes for documentation
         default Individuals queryDisjointIndividuals(){
-            Individuals set = new Individuals(getOntology().getDisjointIndividuals(getInstance()));
+            Individuals set = new Individuals(getOntologyReference().getDisjointIndividuals(getInstance()));
             set.remove( getInstance());
             set.setSingleton( getDisjointIndividuals().isSingleton());
             return set;
@@ -214,13 +214,13 @@ public interface IndividualExpression
                     Set<OWLNamedIndividual> s = new HashSet<>();
                     s.add( getInstance());
                     s.add( a);
-                    changes.add( getOntology().makeDisjointIndividuals( s));
+                    changes.add( getOntologyReference().makeDisjointIndividuals( s));
                 }
                 for( OWLNamedIndividual r : to.getToRemove()){
                     Set<OWLNamedIndividual> s = new HashSet<>();
                     s.add( getInstance());
                     s.add( r);
-                    changes.add( getOntology().removeDisjointIndividuals( s));
+                    changes.add( getOntologyReference().removeDisjointIndividuals( s));
                 }
                 return getChangingIntent(to, changes);
             } catch (Exception e){
@@ -246,13 +246,13 @@ public interface IndividualExpression
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getEquivalentIndividuals()}.add( {@link #getOntology()}.getOWLIndividual( individualName))}
+         * {@code {@link #getEquivalentIndividuals()}.add( {@link #getOntologyReference()}.getOWLIndividual( individualName))}
          * in order to add a new individualDescriptor (given by name) in the {@link EntitySet} list.
          * @param individualName the individualDescriptor name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
         default boolean addEquivalentIndividual( String individualName){
-            return getEquivalentIndividuals().add( getOntology().getOWLIndividual( individualName));
+            return getEquivalentIndividuals().add( getOntologyReference().getOWLIndividual( individualName));
         }
         /**
          * It is an helper that just calls:
@@ -267,13 +267,13 @@ public interface IndividualExpression
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getEquivalentIndividuals()}.remove( {@link #getOntology()}.getOWLIndividual( individualName))}
+         * {@code {@link #getEquivalentIndividuals()}.remove( {@link #getOntologyReference()}.getOWLIndividual( individualName))}
          * in order to remove an individualDescriptor (given by name) from the {@link EntitySet} list.
          * @param individualName the individualDescriptor name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeEquivalentIndividual( String individualName){
-            return getEquivalentIndividuals().remove( getOntology().getOWLIndividual( individualName));
+            return getEquivalentIndividuals().remove( getOntologyReference().getOWLIndividual( individualName));
         }
         /**
          * It is an helper that just calls:
@@ -291,7 +291,7 @@ public interface IndividualExpression
 
         @Override // see super classes for documentation
         default Individuals queryEquivalentIndividuals(){
-            Individuals set = new Individuals(getOntology().getEquivalentIndividuals(getInstance()));
+            Individuals set = new Individuals(getOntologyReference().getEquivalentIndividuals(getInstance()));
             set.remove( getInstance());
             set.setSingleton( getEquivalentIndividuals().isSingleton());
             return set;
@@ -308,13 +308,13 @@ public interface IndividualExpression
                     Set<OWLNamedIndividual> s = new HashSet<>();
                     s.add( getInstance());
                     s.add( a);
-                    changes.add( getOntology().makeEquivalentIndividuals( s));
+                    changes.add( getOntologyReference().makeEquivalentIndividuals( s));
                 }
                 for( OWLNamedIndividual r : to.getToRemove()){
                     Set<OWLNamedIndividual> s = new HashSet<>();
                     s.add( getInstance());
                     s.add( r);
-                    changes.add( getOntology().removeEquivalentIndividuals( s));
+                    changes.add( getOntologyReference().removeEquivalentIndividuals( s));
                 }
                 return getChangingIntent(to, changes);
             } catch (Exception e){
@@ -594,7 +594,7 @@ public interface IndividualExpression
          * @return a value of the given data dataProperty. {@code Null} if is not available.
          */
         default OWLLiteral getLiteralFromDataProperty(String dataPropertyName){
-            return getDataProperties().getLink( getOntology().getOWLDataProperty( dataPropertyName));
+            return getDataProperties().getLink( getOntologyReference().getOWLDataProperty( dataPropertyName));
         }
 
         /**
@@ -611,7 +611,7 @@ public interface IndividualExpression
          * @return all the values of the given data dataProperty. An {@code empty} {@link HashSet} if is not available.
          */
         default EntitySet<OWLLiteral> getLiteralsFromDataProperty(String dataPropertyName){
-            return getDataProperties().getLinks( getOntology().getOWLDataProperty( dataPropertyName));
+            return getDataProperties().getLinks( getOntologyReference().getOWLDataProperty( dataPropertyName));
         }
 
 
@@ -620,7 +620,7 @@ public interface IndividualExpression
         default DataLinkSet queryDataProperties(){
             DataLinkSet dataSet = new DataLinkSet();
             dataSet.setSingleton( getDataProperties().isSingleton());
-            for (DataPropertyRelations r :  getOntology().getDataPropertyB2Individual(getInstance())){
+            for (DataPropertyRelations r :  getOntologyReference().getDataPropertyB2Individual(getInstance())){
                 DataLinks data = new DataLinks( r.getProperty());
                 data.getValues().addAll( r.getValues());
                 for (DataLinks w : getDataProperties())
@@ -642,10 +642,10 @@ public interface IndividualExpression
                 List<OWLOntologyChange> changes = new ArrayList<>();
                 for (DataLinks a : to.getToAdd())
                     for (OWLLiteral l : a.getValues())
-                        changes.add(getOntology().addDataPropertyB2Individual(getInstance(), a.getExpression(), l));
+                        changes.add(getOntologyReference().addDataPropertyB2Individual(getInstance(), a.getExpression(), l));
                 for (DataLinks r : to.getToRemove())
                     for (OWLLiteral l : r.getValues())
-                        changes.add(getOntology().removeDataPropertyB2Individual(getInstance(), r.getExpression(), l));
+                        changes.add(getOntologyReference().removeDataPropertyB2Individual(getInstance(), r.getExpression(), l));
                 return getChangingIntent(to, changes);
             }catch (Exception e){
                 e.printStackTrace();
@@ -915,7 +915,7 @@ public interface IndividualExpression
          * @return a value of the given object objectProperty. {@code Null} if is not available.
          */
         default OWLNamedIndividual getIndividualFromObjectProperty(String objectPropertyName){
-            return getObjectProperties().getLink( getOntology().getOWLObjectProperty( objectPropertyName));
+            return getObjectProperties().getLink( getOntologyReference().getOWLObjectProperty( objectPropertyName));
         }
 
         /**
@@ -932,14 +932,14 @@ public interface IndividualExpression
          * @return all the values of the given object objectProperty. {@code Null} if is not available.
          */
         default EntitySet<OWLNamedIndividual> getIndividualsFromObjectProperty(String objectPropertyName){
-            return getObjectProperties().getLinks( getOntology().getOWLObjectProperty( objectPropertyName));
+            return getObjectProperties().getLinks( getOntologyReference().getOWLObjectProperty( objectPropertyName));
         }
 
         @Override // see super classes for documentation
         default ObjectLinkSet queryObjectProperties(){
             ObjectLinkSet objectSet = new ObjectLinkSet();
             objectSet.setSingleton( getObjectProperties().isSingleton());
-            for (ObjectPropertyRelations r :  getOntology().getObjectPropertyB2Individual(getInstance())){
+            for (ObjectPropertyRelations r :  getOntologyReference().getObjectPropertyB2Individual(getInstance())){
                 ObjectLinks object = new ObjectLinks( r.getProperty());
                 object.getValues().addAll( r.getValues());
                 for (ObjectLinks w : getObjectProperties())
@@ -961,10 +961,10 @@ public interface IndividualExpression
                 List<OWLOntologyChange> changes = new ArrayList<>();
                 for (ObjectLinks a : to.getToAdd())
                     for (OWLNamedIndividual l : a.getValues())
-                        changes.add(getOntology().addObjectPropertyB2Individual(getInstance(), a.getExpression(), l));
+                        changes.add(getOntologyReference().addObjectPropertyB2Individual(getInstance(), a.getExpression(), l));
                 for (ObjectLinks r : to.getToRemove())
                     for (OWLNamedIndividual l : r.getValues())
-                        changes.add(getOntology().removeObjectPropertyB2Individual(getInstance(), r.getExpression(), l));
+                        changes.add(getOntologyReference().removeObjectPropertyB2Individual(getInstance(), r.getExpression(), l));
                 return getChangingIntent(to, changes);
             } catch ( Exception e){
                 e.printStackTrace();

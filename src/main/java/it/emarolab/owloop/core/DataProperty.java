@@ -82,7 +82,7 @@ public interface DataProperty<O,J>
         default Set<D> buildEquivalentDataProperties(){
             Set<D> out = new HashSet<>();
             for( J cl : getEquivalentDataProperties()){
-                D built = getNewEquivalentDataProperty( cl, getOntology());
+                D built = getNewEquivalentDataProperty( cl, getOntologyReference());
                 built.readExpressionAxioms();
                 out.add( built);
             }
@@ -180,7 +180,7 @@ public interface DataProperty<O,J>
         default Set< D> buildDisjointDataProperties(){
             Set<D> out = new HashSet<>();
             for( J cl : getDisjointDataProperties()){
-                D built = getNewDisjointDataProperty( cl, getOntology());
+                D built = getNewDisjointDataProperty( cl, getOntologyReference());
                 built.readExpressionAxioms();
                 out.add( built);
             }
@@ -285,7 +285,7 @@ public interface DataProperty<O,J>
         default Set< D> buildSubDataProperties(){
             Set<D> out = new HashSet<>();
             for( J cl : getSubDataProperties()){
-                D built = getNewSubDataProperty( cl, getOntology());
+                D built = getNewSubDataProperty( cl, getOntologyReference());
                 built.readExpressionAxioms();
                 out.add( built);
             }
@@ -388,7 +388,7 @@ public interface DataProperty<O,J>
         default Set< D> buildSuperDataProperties(){
             Set<D> out = new HashSet<>();
             for( J cl : getSuperDataProperties()){
-                D built = getNewSuperDataProperty( cl, getOntology());
+                D built = getNewSuperDataProperty( cl, getOntologyReference());
                 built.readExpressionAxioms();
                 out.add( built);
             }

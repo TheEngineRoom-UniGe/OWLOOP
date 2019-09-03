@@ -17,7 +17,7 @@ import org.semanticweb.owlapi.model.OWLNamedIndividual;
  */
 public class drugOrder {
 
-    private OWLReferences ontoRef;
+    OWLReferences ontoRef;
 
     @Before
     public void beforeTest() {

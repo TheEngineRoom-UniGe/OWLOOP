@@ -5,7 +5,6 @@ import it.emarolab.amor.owlInterface.SemanticRestriction;
 import it.emarolab.amor.owlInterface.SemanticRestriction.*;
 import it.emarolab.owloop.core.DataProperty;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DataProperties;
-import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.Restrictions;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.DescriptorGroundInterface;
 import org.semanticweb.owlapi.model.OWLClass;
@@ -60,12 +59,12 @@ public interface DataPropertyExpression
 
     @Override // see super class for documentation
     default void setFunctional(){
-        getOntology().addFunctionalDataProperty( getInstance());
+        getOntologyReference().addFunctionalDataProperty( getInstance());
     }
 
     @Override // see super class for documentation
     default void setNotFunctional(){
-        getOntology().removeFunctionalDataProperty( getInstance());
+        getOntologyReference().removeFunctionalDataProperty( getInstance());
     }
 
     /**
@@ -84,13 +83,13 @@ public interface DataPropertyExpression
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getDisjointDataProperties()}.add( {@link #getOntology()}.getOWLDataProperty( propertyName))}
+         * {@code {@link #getDisjointDataProperties()}.add( {@link #getOntologyReference()}.getOWLDataProperty( propertyName))}
          * in order to add a new data property (given by name) in the {@link EntitySet} list.
          * @param dataPropertyName the property name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
         default boolean addDisjointDataProperty( String dataPropertyName){
-            return getDisjointDataProperties().add( getOntology().getOWLDataProperty( dataPropertyName));
+            return getDisjointDataProperties().add( getOntologyReference().getOWLDataProperty( dataPropertyName));
         }
         /**
          * It is an helper that just calls:
@@ -105,13 +104,13 @@ public interface DataPropertyExpression
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getDisjointDataProperties()}.remove( {@link #getOntology()}.getOWLDataProperty( propertyName))}
+         * {@code {@link #getDisjointDataProperties()}.remove( {@link #getOntologyReference()}.getOWLDataProperty( propertyName))}
          * in order to remove a data property (given by name) from the {@link EntitySet} list.
          * @param dataPropertyName the property name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeDisjointDataProperty( String dataPropertyName){
-            return getDisjointDataProperties().remove( getOntology().getOWLDataProperty( dataPropertyName));
+            return getDisjointDataProperties().remove( getOntologyReference().getOWLDataProperty( dataPropertyName));
         }
         /**
          * It is an helper that just calls:
@@ -129,9 +128,9 @@ public interface DataPropertyExpression
 
         @Override // see super class for documentation
         default DataProperties queryDisjointDataProperties(){
-            DataProperties set = new DataProperties(getOntology().getDisjointDataProperty(getInstance()));
+            DataProperties set = new DataProperties(getOntologyReference().getDisjointDataProperty(getInstance()));
             set.remove( getInstance());
-            set.remove( getOntology().getOWLFactory().getOWLBottomDataProperty());
+            set.remove( getOntologyReference().getOWLFactory().getOWLBottomDataProperty());
             set.setSingleton( getDisjointDataProperties().isSingleton());
             return set;
         }
@@ -147,13 +146,13 @@ public interface DataPropertyExpression
                     Set<OWLDataProperty> s = new HashSet<>();
                     s.add( getInstance());
                     s.add( a);
-                    changes.add( getOntology().makeDisjointDataProperties( s));
+                    changes.add( getOntologyReference().makeDisjointDataProperties( s));
                 }
                 for( OWLDataProperty r : to.getToRemove()){
                     Set<OWLDataProperty> s = new HashSet<>();
                     s.add( getInstance());
                     s.add( r);
-                    changes.add( getOntology().removeDisjointDataProperties( s));
+                    changes.add( getOntologyReference().removeDisjointDataProperties( s));
                 }
                 return getChangingIntent(to, changes);
             } catch ( Exception e){
@@ -179,13 +178,13 @@ public interface DataPropertyExpression
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getEquivalentDataProperties()}.add( {@link #getOntology()}.getOWLDataProperty( propertyName))}
+         * {@code {@link #getEquivalentDataProperties()}.add( {@link #getOntologyReference()}.getOWLDataProperty( propertyName))}
          * in order to add a new data property (given by name) in the {@link EntitySet} list.
          * @param dataPropertyName the property name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
         default boolean addEquivalentDataProperty( String dataPropertyName){
-            return getEquivalentDataProperties().add( getOntology().getOWLDataProperty( dataPropertyName));
+            return getEquivalentDataProperties().add( getOntologyReference().getOWLDataProperty( dataPropertyName));
         }
         /**
          * It is an helper that just calls:
@@ -200,13 +199,13 @@ public interface DataPropertyExpression
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getEquivalentDataProperties()}.remove( {@link #getOntology()}.getOWLDataProperty( propertyName))}
+         * {@code {@link #getEquivalentDataProperties()}.remove( {@link #getOntologyReference()}.getOWLDataProperty( propertyName))}
          * in order to remove a data property (given by name) from the {@link EntitySet} list.
          * @param dataPropertyName the property name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeEquivalentDataProperty( String dataPropertyName){
-            return getEquivalentDataProperties().remove( getOntology().getOWLDataProperty( dataPropertyName));
+            return getEquivalentDataProperties().remove( getOntologyReference().getOWLDataProperty( dataPropertyName));
         }
         /**
          * It is an helper that just calls:
@@ -224,7 +223,7 @@ public interface DataPropertyExpression
 
         @Override // see super class for documentation
         default DataProperties queryEquivalentDataProperties(){
-            DataProperties set = new DataProperties(getOntology().getEquivalentDataProperty(getInstance()));
+            DataProperties set = new DataProperties(getOntologyReference().getEquivalentDataProperty(getInstance()));
             set.remove( getInstance());
             set.setSingleton( getEquivalentDataProperties().isSingleton());
             return set;
@@ -241,13 +240,13 @@ public interface DataPropertyExpression
                     Set<OWLDataProperty> s = new HashSet<>();
                     s.add( getInstance());
                     s.add( a);
-                    changes.add( getOntology().makeEquivalentDataProperties( s));
+                    changes.add( getOntologyReference().makeEquivalentDataProperties( s));
                 }
                 for( OWLDataProperty r : to.getToRemove()){
                     Set<OWLDataProperty> s = new HashSet<>();
                     s.add( getInstance());
                     s.add( r);
-                    changes.add( getOntology().removeEquivalentDataProperties( s));
+                    changes.add( getOntologyReference().removeEquivalentDataProperties( s));
                 }
                 return getChangingIntent(to, changes);
             } catch (Exception e){
@@ -273,13 +272,13 @@ public interface DataPropertyExpression
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getSubDataProperties()}.add( {@link #getOntology()}.getOWLDataProperty( propertyName))}
+         * {@code {@link #getSubDataProperties()}.add( {@link #getOntologyReference()}.getOWLDataProperty( propertyName))}
          * in order to add a new data property (given by name) in the {@link EntitySet} list.
          * @param dataPropertyName the property name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
         default boolean addSubDataProperty( String dataPropertyName){
-            return getSubDataProperties().add( getOntology().getOWLDataProperty( dataPropertyName));
+            return getSubDataProperties().add( getOntologyReference().getOWLDataProperty( dataPropertyName));
         }
         /**
          * It is an helper that just calls:
@@ -294,13 +293,13 @@ public interface DataPropertyExpression
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getSubDataProperties()}.remove( {@link #getOntology()}.getOWLDataProperty( propertyName))}
+         * {@code {@link #getSubDataProperties()}.remove( {@link #getOntologyReference()}.getOWLDataProperty( propertyName))}
          * in order to remove a data property (given by name) from the {@link EntitySet} list.
          * @param dataPropertyName the property name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeSubDataProperty( String dataPropertyName){
-            return getSubDataProperties().remove( getOntology().getOWLDataProperty( dataPropertyName));
+            return getSubDataProperties().remove( getOntologyReference().getOWLDataProperty( dataPropertyName));
         }
         /**
          * It is an helper that just calls:
@@ -315,7 +314,7 @@ public interface DataPropertyExpression
 
         @Override // see super class for documentation
         default DataProperties querySubDataProperties(){
-            DataProperties set = new DataProperties(getOntology().getSubDataPropertyOf(getInstance()));
+            DataProperties set = new DataProperties(getOntologyReference().getSubDataPropertyOf(getInstance()));
             set.setSingleton( getSubDataProperties().isSingleton());
             return set;
         }
@@ -328,9 +327,9 @@ public interface DataPropertyExpression
                     return getIntent( null);
                 List<OWLOntologyChange> changes = new ArrayList<>();
                 for (OWLDataProperty a : to.getToAdd())
-                    changes.add(getOntology().addSubDataPropertyOf(getInstance(), a));
+                    changes.add(getOntologyReference().addSubDataPropertyOf(getInstance(), a));
                 for (OWLDataProperty r : to.getToRemove())
-                    changes.add(getOntology().removeSubDataPropertyOf(getInstance(), r));
+                    changes.add(getOntologyReference().removeSubDataPropertyOf(getInstance(), r));
                 return getChangingIntent(to, changes);
             } catch (Exception e){
                 e.printStackTrace();
@@ -355,13 +354,13 @@ public interface DataPropertyExpression
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getSuperDataProperties()}.add( {@link #getOntology()}.getOWLDataProperty( propertyName))}
+         * {@code {@link #getSuperDataProperties()}.add( {@link #getOntologyReference()}.getOWLDataProperty( propertyName))}
          * in order to add a new data property (given by name) in the {@link EntitySet} list.
          * @param dataPropertyName the property name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
         default boolean addSuperDataProperty( String dataPropertyName){
-            return getSuperDataProperties().add( getOntology().getOWLDataProperty( dataPropertyName));
+            return getSuperDataProperties().add( getOntologyReference().getOWLDataProperty( dataPropertyName));
         }
         /**
          * It is an helper that just calls:
@@ -376,13 +375,13 @@ public interface DataPropertyExpression
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getSuperDataProperties()}.remove( {@link #getOntology()}.getOWLDataProperty( propertyName))}
+         * {@code {@link #getSuperDataProperties()}.remove( {@link #getOntologyReference()}.getOWLDataProperty( propertyName))}
          * in order to remove a data property (given by name) from the {@link EntitySet} list.
          * @param dataPropertyName the property name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeSuperDataProperty( String dataPropertyName){
-            return getSuperDataProperties().remove( getOntology().getOWLDataProperty( dataPropertyName));
+            return getSuperDataProperties().remove( getOntologyReference().getOWLDataProperty( dataPropertyName));
         }
         /**
          * It is an helper that just calls:
@@ -400,7 +399,7 @@ public interface DataPropertyExpression
 
         @Override // see super class for documentation
         default DataProperties querySuperDataProperties(){
-            DataProperties set = new DataProperties(getOntology().getSuperDataPropertyOf(getInstance()));
+            DataProperties set = new DataProperties(getOntologyReference().getSuperDataPropertyOf(getInstance()));
             set.setSingleton( getSuperDataProperties().isSingleton());
             return set;
         }
@@ -413,9 +412,9 @@ public interface DataPropertyExpression
                     return getIntent( null);
                 List<OWLOntologyChange> changes = new ArrayList<>();
                 for( OWLDataProperty a : to.getToAdd())
-                    changes.add( getOntology().addSubDataPropertyOf( a, getInstance()));
+                    changes.add( getOntologyReference().addSubDataPropertyOf( a, getInstance()));
                 for( OWLDataProperty r : to.getToRemove())
-                    changes.add( getOntology().removeSubDataPropertyOf( r, getInstance()));
+                    changes.add( getOntologyReference().removeSubDataPropertyOf( r, getInstance()));
                 return getChangingIntent( to, changes);
             } catch ( Exception e){
                 e.printStackTrace();
@@ -1228,7 +1227,7 @@ public interface DataPropertyExpression
 
         @Override // see super class for documentation
         default Restrictions queryDomainRestrictions(){
-            Set< Set<ApplyingRestriction>> restrictionsSet = getOntology().getDataDomainRestrictions(getInstance());
+            Set< Set<ApplyingRestriction>> restrictionsSet = getOntologyReference().getDataDomainRestrictions(getInstance());
             Set<ApplyingRestriction> restrictions = new HashSet<>();
             for ( Set<ApplyingRestriction> r : restrictionsSet){
                 restrictions = r;
@@ -1257,11 +1256,11 @@ public interface DataPropertyExpression
                 List<OWLOntologyChange> changes = new ArrayList<>();
                 // not optimised: it does not sync only the changes but it removes and re-add the axiom
                 if ( ! to.getToAdd().isEmpty() || ! to.getToRemove().isEmpty()) {
-                    for( Set<ApplyingRestriction> r : getOntology().getDataDomainRestrictions( getInstance()))
-                        changes.add(getOntology().removeRestrictionAxiom ( r)); // remove all
+                    for( Set<ApplyingRestriction> r : getOntologyReference().getDataDomainRestrictions( getInstance()))
+                        changes.add(getOntologyReference().removeRestrictionAxiom ( r)); // remove all
                     HashSet<SemanticRestriction> copy = new HashSet<>(to.getToAdd());
                     copy.addAll( to.getUnchanged());
-                    changes.add(getOntology().addRestrictionAxiom( copy));
+                    changes.add(getOntologyReference().addRestrictionAxiom( copy));
                 }
 
                 return getChangingIntent(to, changes);
@@ -1322,7 +1321,7 @@ public interface DataPropertyExpression
 
         @Override // see super class for documentation
         default Restrictions queryRangeRestrictions(){
-            Restrictions set = new Restrictions(getOntology().getDataRangeRestrictions(getInstance()));
+            Restrictions set = new Restrictions(getOntologyReference().getDataRangeRestrictions(getInstance()));
             set.setSingleton( getRangeRestrictions().isSingleton());
             return set;
         }
@@ -1334,10 +1333,10 @@ public interface DataPropertyExpression
                 List<OWLOntologyChange> changes = new ArrayList<>();
                 // not optimised: it does not sync only the changes but it removes and re-add the axiom
                 if ( ! to.getToAdd().isEmpty() || ! to.getToRemove().isEmpty()) {
-                    changes.remove(getOntology().removeRestrictionAxiom(queryRangeRestrictions()));
+                    changes.remove(getOntologyReference().removeRestrictionAxiom(queryRangeRestrictions()));
                     HashSet<SemanticRestriction> copy = new HashSet<>(to.getToAdd());
                     copy.addAll( to.getUnchanged());
-                    changes.add(getOntology().addRestrictionAxiom( copy));
+                    changes.add(getOntologyReference().addRestrictionAxiom( copy));
                 }
 
                 return getChangingIntent(to, changes);

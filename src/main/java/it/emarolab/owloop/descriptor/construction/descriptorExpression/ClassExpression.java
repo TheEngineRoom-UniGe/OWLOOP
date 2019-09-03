@@ -5,7 +5,6 @@ import it.emarolab.amor.owlInterface.SemanticRestriction;
 import it.emarolab.amor.owlInterface.SemanticRestriction.*;
 import it.emarolab.owloop.core.Class;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.Classes;
-import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.Individuals;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.Restrictions;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.DescriptorGroundInterface;
@@ -71,13 +70,13 @@ public interface ClassExpression
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getIndividuals()}.add( {@link #getOntology()}.getOWLIndividual( propertyName))}
+         * {@code {@link #getIndividuals()}.add( {@link #getOntologyReference()}.getOWLIndividual( propertyName))}
          * in order to add a new individualDescriptor (given by name) in the {@link EntitySet} list.
          * @param individualName the individualDescriptor name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
         default boolean addIndividual(String individualName){
-            return getIndividuals().add( getOntology().getOWLIndividual( individualName));
+            return getIndividuals().add( getOntologyReference().getOWLIndividual( individualName));
         }
         /**
          * It is an helper that just calls:
@@ -92,13 +91,13 @@ public interface ClassExpression
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getIndividuals()}.remove( {@link #getOntology()}.getOWLIndividual( propertyName))}
+         * {@code {@link #getIndividuals()}.remove( {@link #getOntologyReference()}.getOWLIndividual( propertyName))}
          * in order to remove an individualDescriptor (given by name) from the {@link EntitySet} list.
          * @param individualName the individualDescriptor name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeIndividual(String individualName){
-            return getIndividuals().remove( getOntology().getOWLIndividual( individualName));
+            return getIndividuals().remove( getOntologyReference().getOWLIndividual( individualName));
         }
         /**
          * It is an helper that just calls:
@@ -113,7 +112,7 @@ public interface ClassExpression
 
         @Override // see super classes for documentation
         default Individuals queryIndividuals(){
-            Individuals set = new Individuals(getOntology().getIndividualB2Class(getInstance()));
+            Individuals set = new Individuals(getOntologyReference().getIndividualB2Class(getInstance()));
             set.setSingleton( getIndividuals().isSingleton());
             return set;
         }
@@ -126,9 +125,9 @@ public interface ClassExpression
                     return getIntent(null);
                 List<OWLOntologyChange> changes = new ArrayList<>();
                 for (OWLNamedIndividual a : to.getToAdd())
-                    changes.add(getOntology().addIndividualB2Class(a, getInstance()));
+                    changes.add(getOntologyReference().addIndividualB2Class(a, getInstance()));
                 for (OWLNamedIndividual b : to.getToRemove())
-                    changes.add(getOntology().removeIndividualB2Class(b, getInstance()));
+                    changes.add(getOntologyReference().removeIndividualB2Class(b, getInstance()));
                 return getChangingIntent(to, changes);
             } catch (Exception e){
                 e.printStackTrace();
@@ -153,7 +152,7 @@ public interface ClassExpression
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getDisjointClasses()}.add( {@link #getOntology()}.getOWLClass( propertyName))}
+         * {@code {@link #getDisjointClasses()}.add( {@link #getOntologyReference()}.getOWLClass( propertyName))}
          * in order to add a new class (given by name) in the {@link EntitySet} list.
          * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
          * to be perfectly aligned with the ontology, since it affects {@link ClassExpression.Sub} {@link EntitySet}.
@@ -161,7 +160,7 @@ public interface ClassExpression
          * @return {@code true} if the axioms changed as a result of the call.
          */
         default boolean addDisjointClass(String className){
-            return getDisjointClasses().add( getOntology().getOWLClass( className));
+            return getDisjointClasses().add( getOntologyReference().getOWLClass( className));
         }
         /**
          * It is an helper that just calls:
@@ -178,7 +177,7 @@ public interface ClassExpression
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getDisjointClasses()}.remove( {@link #getOntology()}.getOWLClass( propertyName))}
+         * {@code {@link #getDisjointClasses()}.remove( {@link #getOntologyReference()}.getOWLClass( propertyName))}
          * in order to remove a class (given by name) from the {@link EntitySet} list.
          * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
          * to be perfectly aligned with the ontology, since it affects {@link ClassExpression.Sub} {@link EntitySet}.
@@ -186,7 +185,7 @@ public interface ClassExpression
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeDisjointClass(String className){
-            return getDisjointClasses().remove( getOntology().getOWLClass( className));
+            return getDisjointClasses().remove( getOntologyReference().getOWLClass( className));
         }
         /**
          * It is an helper that just calls:
@@ -204,9 +203,9 @@ public interface ClassExpression
 
         @Override // see super classes for documentation
         default Classes queryDisjointClasses(){
-            Classes set = new Classes(getOntology().getDisjointClasses(getInstance()));
+            Classes set = new Classes(getOntologyReference().getDisjointClasses(getInstance()));
             set.remove( getInstance());
-            set.remove( getOntology().getOWLFactory().getOWLNothing());
+            set.remove( getOntologyReference().getOWLFactory().getOWLNothing());
             set.setSingleton( getDisjointClasses().isSingleton());
             return set;
         }
@@ -223,13 +222,13 @@ public interface ClassExpression
                         Set<OWLClass> s = new HashSet<>();
                         s.add( getInstance());
                         s.add( a);
-                        changes.add( getOntology().makeDisjointClasses( s));
+                        changes.add( getOntologyReference().makeDisjointClasses( s));
                     }
                 for( OWLClass r : to.getToRemove()){
                     Set<OWLClass> s = new HashSet<>();
                     s.add( getInstance());
                     s.add( r);
-                    changes.add( getOntology().removeDisjointClasses( s));
+                    changes.add( getOntologyReference().removeDisjointClasses( s));
                 }
                 return getChangingIntent(to, changes);
             } catch ( Exception e){
@@ -255,13 +254,13 @@ public interface ClassExpression
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getEquivalentClasses()}.add( {@link #getOntology()}.getOWLClass( propertyName))}
+         * {@code {@link #getEquivalentClasses()}.add( {@link #getOntologyReference()}.getOWLClass( propertyName))}
          * in order to add a new class (given by name) in the {@link EntitySet} list.
          * @param className the class name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
         default boolean addEquivalentClass(String className){
-            return getEquivalentClasses().add( getOntology().getOWLClass( className));
+            return getEquivalentClasses().add( getOntologyReference().getOWLClass( className));
         }
         /**
          * It is an helper that just calls:
@@ -276,13 +275,13 @@ public interface ClassExpression
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getEquivalentClasses()}.remove( {@link #getOntology()}.getOWLClass( propertyName))}
+         * {@code {@link #getEquivalentClasses()}.remove( {@link #getOntologyReference()}.getOWLClass( propertyName))}
          * in order to remove a class (given by name) from the {@link EntitySet} list.
          * @param className the class name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeEquivalentClass(String className){
-            return getEquivalentClasses().remove( getOntology().getOWLClass( className));
+            return getEquivalentClasses().remove( getOntologyReference().getOWLClass( className));
         }
         /**
          * It is an helper that just calls:
@@ -297,7 +296,7 @@ public interface ClassExpression
 
         @Override // see super classes for documentation
         default Classes queryEquivalentClasses(){
-            Classes set = new Classes(getOntology().getEquivalentClasses(getInstance()));
+            Classes set = new Classes(getOntologyReference().getEquivalentClasses(getInstance()));
             set.remove( getInstance());
             //set.remove( getOntology().getOWLFactory().getOWLNothing());
             set.setSingleton( getEquivalentClasses().isSingleton());
@@ -316,13 +315,13 @@ public interface ClassExpression
                         Set<OWLClass> s = new HashSet<>();
                         s.add( getInstance());
                         s.add( a);
-                        changes.add( getOntology().makeEquivalentClasses( s));
+                        changes.add( getOntologyReference().makeEquivalentClasses( s));
                     }
                 for( OWLClass r : to.getToRemove()){
                     Set<OWLClass> s = new HashSet<>();
                     s.add( getInstance());
                     s.add( r);
-                    changes.add( getOntology().removeEquivalentClasses( s));
+                    changes.add( getOntologyReference().removeEquivalentClasses( s));
                 }
                 return getChangingIntent(to, changes);
             } catch ( Exception e){
@@ -348,13 +347,13 @@ public interface ClassExpression
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getSubClasses()}.add( {@link #getOntology()}.getOWLClass( propertyName))}
+         * {@code {@link #getSubClasses()}.add( {@link #getOntologyReference()}.getOWLClass( propertyName))}
          * in order to add a new class (given by name) in the {@link EntitySet} list.
          * @param className the class name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
          */
         default boolean addSubClass(String className){
-            return getSubClasses().add( getOntology().getOWLClass( className));
+            return getSubClasses().add( getOntologyReference().getOWLClass( className));
         }
         /**
          * It is an helper that just calls:
@@ -369,13 +368,13 @@ public interface ClassExpression
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getSubClasses()}.remove( {@link #getOntology()}.getOWLClass( propertyName))}
+         * {@code {@link #getSubClasses()}.remove( {@link #getOntologyReference()}.getOWLClass( propertyName))}
          * in order to remove a class (given by name) from the {@link EntitySet} list.
          * @param className the class name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeSubClass(String className){
-            return getSubClasses().remove( getOntology().getOWLClass( className));
+            return getSubClasses().remove( getOntologyReference().getOWLClass( className));
         }
         /**
          * It is an helper that just calls:
@@ -390,7 +389,7 @@ public interface ClassExpression
 
         @Override // see super classes for documentation
         default Classes querySubClasses(){
-            Classes set = new Classes(getOntology().getSubClassOf(getInstance()));
+            Classes set = new Classes(getOntologyReference().getSubClassOf(getInstance()));
             //set.remove( getOntology().getOWLFactory().getOWLNothing());
             set.setSingleton( getSubClasses().isSingleton());
             return set;
@@ -405,9 +404,9 @@ public interface ClassExpression
                 List<OWLOntologyChange> changes = new ArrayList<>();
                 for (OWLClass a : to.getToAdd())
                     if ( ! a.isOWLNothing())
-                        changes.add(getOntology().addSubClassOf(getInstance(), a));
+                        changes.add(getOntologyReference().addSubClassOf(getInstance(), a));
                 for (OWLClass r : to.getToRemove())
-                    changes.add(getOntology().removeSubClassOf(getInstance(), r));
+                    changes.add(getOntologyReference().removeSubClassOf(getInstance(), r));
                 return getChangingIntent(to, changes);
             } catch ( Exception e){
                 e.printStackTrace();
@@ -432,7 +431,7 @@ public interface ClassExpression
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getSuperClasses()}.add( {@link #getOntology()}.getOWLClass( propertyName))}
+         * {@code {@link #getSuperClasses()}.add( {@link #getOntologyReference()}.getOWLClass( propertyName))}
          * in order to add a new class (given by name) in the {@link EntitySet} list.
          * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
          * to be perfectly aligned with the ontology, since it affects {@link EquivalentRestriction} {@link EntitySet}.
@@ -440,7 +439,7 @@ public interface ClassExpression
          * @return {@code true} if the axioms changed as a result of the call.
          */
         default boolean addSuperClass(String className){
-            return getSuperClasses().add( getOntology().getOWLClass( className));
+            return getSuperClasses().add( getOntologyReference().getOWLClass( className));
         }
         /**
          * It is an helper that just calls:
@@ -457,7 +456,7 @@ public interface ClassExpression
 
         /**
          * It is an helper that just calls:
-         * {@code {@link #getSuperClasses()}.remove( {@link #getOntology()}.getOWLClass( propertyName))}
+         * {@code {@link #getSuperClasses()}.remove( {@link #getOntologyReference()}.getOWLClass( propertyName))}
          * in order to remove a class (given by name) from the {@link EntitySet} list.
          * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
          * to be perfectly aligned with the ontology, since it affects {@link EquivalentRestriction} {@link EntitySet}.
@@ -465,7 +464,7 @@ public interface ClassExpression
          * @return {@code true} if an element was removed as a result of this call.
          */
         default boolean removeSuperClass(String className){
-            return getSuperClasses().remove( getOntology().getOWLClass( className));
+            return getSuperClasses().remove( getOntologyReference().getOWLClass( className));
         }
         /**
          * It is an helper that just calls:
@@ -482,7 +481,7 @@ public interface ClassExpression
 
         @Override // see super classes for documentation
         default Classes querySuperClasses(){
-            Classes set = new Classes( getOntology().getSuperClassOf(getInstance()));
+            Classes set = new Classes( getOntologyReference().getSuperClassOf(getInstance()));
             set.setSingleton( getSuperClasses().isSingleton());
             return set;
         }
@@ -496,9 +495,9 @@ public interface ClassExpression
                 List<OWLOntologyChange> changes = new ArrayList<>();
                 for (OWLClass a : to.getToAdd())
                     if( ! a.isOWLNothing())
-                        changes.add(getOntology().addSubClassOf(a, getInstance()));
+                        changes.add(getOntologyReference().addSubClassOf(a, getInstance()));
                 for (OWLClass r : to.getToRemove())
-                    changes.add(getOntology().removeSubClassOf(r, getInstance()));
+                    changes.add(getOntologyReference().removeSubClassOf(r, getInstance()));
                 return getChangingIntent(to, changes);
             } catch ( Exception e){
                 e.printStackTrace();
@@ -1255,7 +1254,7 @@ public interface ClassExpression
 
         @Override // did not name it as getEquivalentRestrictions because this interface implements from a more generic interface Class.Restriction
         default Restrictions queryEquivalentRestrictions(){
-            Set< Set<ApplyingRestriction>> restrictionsSet = getOntology().getClassRestrictions( getInstance());
+            Set< Set<ApplyingRestriction>> restrictionsSet = getOntologyReference().getClassRestrictions( getInstance());
             Set<ApplyingRestriction> restrictions = new HashSet<>();
             for ( Set<ApplyingRestriction> r : restrictionsSet){
                 restrictions = r;
@@ -1286,18 +1285,18 @@ public interface ClassExpression
 
                 if ( to.getToAdd().size() > 0 | to.getToRemove().size() > 0){
                     //noinspection unchecked
-                    changes.addAll( getOntology().convertEquivalentClassesToSuperClasses( getInstance()));
+                    changes.addAll( getOntologyReference().convertEquivalentClassesToSuperClasses( getInstance()));
                     for (SemanticRestriction r : to.getToRemove()) {
-                        changes.add( getOntology().removeRestriction(r));
+                        changes.add( getOntologyReference().removeRestriction(r));
                         if( r instanceof ClassRestrictedOnClass)
-                            changes.add( getOntology().removeSubClassOf( (OWLClass) r.getSubject(), (OWLClass) r.getValue()));
+                            changes.add( getOntologyReference().removeSubClassOf( (OWLClass) r.getSubject(), (OWLClass) r.getValue()));
                     }
 
                     for (SemanticRestriction a : to.getToAdd())
-                        changes.add(getOntology().addRestriction(a));
+                        changes.add(getOntologyReference().addRestriction(a));
 
                     if ( ! getEquivalentRestrictions().isEmpty())
-                        changes.addAll(getOntology().convertSuperClassesToEquivalentClass(getInstance()));//getEquivalentRestrictions()));
+                        changes.addAll(getOntologyReference().convertSuperClassesToEquivalentClass(getInstance()));//getEquivalentRestrictions()));
                 }
 
                 return getChangingIntent(to, changes);

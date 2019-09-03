@@ -489,7 +489,7 @@ public interface Axiom {
         /**
          * @return the ontology.
          */
-        default O getOntology(){
+        default O getOntologyReference(){
             return getGround().getGroundOntology();
         }
 

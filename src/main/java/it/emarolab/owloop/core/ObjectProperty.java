@@ -137,7 +137,7 @@ public interface ObjectProperty<O,J>
         default Set<D> buildInverseObjectProperties(){
             Set<D> out = new HashSet<>();
             for( J cl : getInverseObjectProperties()){
-                D built = getNewInverseObjectProperty( cl, getOntology());
+                D built = getNewInverseObjectProperty( cl, getOntologyReference());
                 built.readExpressionAxioms();
                 out.add( built);
             }
@@ -242,7 +242,7 @@ public interface ObjectProperty<O,J>
         default Set< D> buildDisjointObjectProperties(){
             Set<D> out = new HashSet<>();
             for( J cl : getDisjointObjectProperties()){
-                D built = getNewDisjointObjectProperty( cl, getOntology());
+                D built = getNewDisjointObjectProperty( cl, getOntologyReference());
                 built.readExpressionAxioms();
                 out.add( built);
             }
@@ -347,7 +347,7 @@ public interface ObjectProperty<O,J>
         default Set<D> buildEquivalentObjectProperties(){
             Set<D> out = new HashSet<>();
             for( J cl : getEquivalentObjectProperties()){
-                D built = getNewEquivalentObjectProperty( cl, getOntology());
+                D built = getNewEquivalentObjectProperty( cl, getOntologyReference());
                 built.readExpressionAxioms();
                 out.add( built);
             }
@@ -452,7 +452,7 @@ public interface ObjectProperty<O,J>
         default Set<D> buildSubObjectProperties(){
             Set<D> out = new HashSet<>();
             for( J cl : getSubObjectProperties()){
-                D built = getNewSubObjectProperty( cl, getOntology());
+                D built = getNewSubObjectProperty( cl, getOntologyReference());
                 built.readExpressionAxioms();
                 out.add( built);
             }
@@ -557,7 +557,7 @@ public interface ObjectProperty<O,J>
         default Set<D> buildSuperObjectProperties(){
             Set<D> out = new HashSet<>();
             for( J cl : getSuperObjectProperties()){
-                D built = getNewSuperObjectProperty( cl, getOntology());
+                D built = getNewSuperObjectProperty( cl, getOntologyReference());
                 built.readExpressionAxioms();
                 out.add( built);
             }

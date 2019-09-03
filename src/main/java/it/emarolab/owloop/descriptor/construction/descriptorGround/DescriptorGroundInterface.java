@@ -384,7 +384,8 @@ public interface DescriptorGroundInterface<J extends OWLObject>
      * loading. It is generically used to query inferred entities in the ontology.
      * @return the reasoner of the {@link #getGroundInstance()}.
      */
-    default OWLReasoner getReasoner(){
+    @Deprecated
+    default OWLReasoner getOWLReasoner(){
         return getGroundOntology().getOWLReasoner();
     }
     /**
@@ -392,6 +393,7 @@ public interface DescriptorGroundInterface<J extends OWLObject>
      * loading. It is generically used to access asserted entities.
      * @return the base ontology (i.e.: OWL API) interface of {@link #getGroundInstance()}.
      */
+    @Deprecated
     default OWLOntology getOWLOntology(){
         return getGroundOntology().getOWLOntology();
     }
@@ -401,6 +403,7 @@ public interface DescriptorGroundInterface<J extends OWLObject>
      * in the ontology.
      * @return the base data factory (i.e.: OWL API) interface of {@link #getGroundInstance()}.
      */
+    @Deprecated
     default OWLDataFactory getOWLDataFactory(){
         return getGroundOntology().getOWLFactory();
     }

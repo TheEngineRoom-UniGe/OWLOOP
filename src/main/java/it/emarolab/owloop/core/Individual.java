@@ -73,7 +73,7 @@ public interface Individual<O,J>
         default Set<D> buildTypes(){
             Set<D> out = new HashSet<>();
             for( Y cl : getTypes()){
-                D built = getNewType( cl, getOntology());
+                D built = getNewType( cl, getOntologyReference());
                 built.readExpressionAxioms();
                 out.add( built);
             }
@@ -178,7 +178,7 @@ public interface Individual<O,J>
         default Set<D> buildDisjointIndividuals(){
             Set<D> out = new HashSet<>();
             for( J cl : getDisjointIndividuals()){
-                D built = getNewDisjointIndividual( cl, getOntology());
+                D built = getNewDisjointIndividual( cl, getOntologyReference());
                 built.readExpressionAxioms();
                 out.add( built);
             }
@@ -281,7 +281,7 @@ public interface Individual<O,J>
         default Set<D> buildEquivalentIndividuals(){
             Set<D> out = new HashSet<>();
             for( J cl : getEquivalentIndividuals()){
-                D built = getNewEquivalentIndividual( cl, getOntology());
+                D built = getNewEquivalentIndividual( cl, getOntologyReference());
                 built.readExpressionAxioms();
                 out.add( built);
             }
@@ -397,7 +397,7 @@ public interface Individual<O,J>
         default Set<D> buildDataProperties(){
             Set<D> out = new HashSet<>();
             for( Y cl : getDataProperties()){
-                D built = getNewDataProperty( cl, getOntology());
+                D built = getNewDataProperty( cl, getOntologyReference());
                 built.readExpressionAxioms();
                 out.add( built);
             }
@@ -513,7 +513,7 @@ public interface Individual<O,J>
         default Set< D> buildObjectProperties(){
             Set<D> out = new HashSet<>();
             for( Y cl : getObjectProperties()){
-                D built = getNewObjectProperty( cl, getOntology());
+                D built = getNewObjectProperty( cl, getOntologyReference());
                 built.readExpressionAxioms();
                 out.add( built);
             }

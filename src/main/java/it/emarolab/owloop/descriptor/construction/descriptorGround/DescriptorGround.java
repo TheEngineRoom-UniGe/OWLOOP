@@ -4,7 +4,6 @@ import com.clarkparsia.pellet.owlapi.PelletReasoner;
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.amor.owlInterface.OWLReferencesInterface;
 import it.emarolab.owloop.core.Axiom;
-import it.emarolab.owloop.descriptor.construction.descriptorExpression.*;
 import org.semanticweb.owlapi.model.OWLObject;
 
 /**
@@ -105,7 +104,7 @@ abstract public class DescriptorGround<J extends OWLObject>
     }
 
     /**
-     * It sets a new instance in the same {@link #getOntology()}.
+     * It sets a new instance in the same {@link #getOntologyReference()}.
      * @param instance the new instance to be ground.
      */
     public void setGroundInstance(J instance){
@@ -113,7 +112,7 @@ abstract public class DescriptorGround<J extends OWLObject>
     }
 
     /**
-     * It sets a new instance in the same {@link #getOntology()}.
+     * It sets a new instance in the same {@link #getOntologyReference()}.
      * @param instanceName the new instance name to be ground.
      */
     public void setGroundInstance(String instanceName){
@@ -139,7 +138,7 @@ abstract public class DescriptorGround<J extends OWLObject>
 
     /** Returns the Ground instance's name as a String*/
     public String getGroundInstanceName() {
-        return getOntology().getOWLObjectName(getGroundInstance());
+        return getOntologyReference().getOWLObjectName(getGroundInstance());
     }
 
     @Override // see super class for documentation

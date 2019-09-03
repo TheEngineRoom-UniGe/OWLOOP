@@ -60,3 +60,10 @@ With newOWLReferenceFromFileWithPellet(), decriptor.saveOntology(path), IS WORKI
 With newOWLReferenceFromFileWithPellet(), ontoRef.saveOntology(path), IS WORKING
 Its nice to (sync and save) after writing something to the ontology.
 */
+
+/*
+        Regarding mandatory usage of OWLReferencesContainer from aMOR
+
+        Note that: First and foremost it is important to instantiate an object such that we have reference to an ontology (OWL) file.
+        To do this Amor provides a class called OWLReferencesContainer
+*/
