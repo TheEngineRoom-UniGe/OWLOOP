@@ -427,10 +427,10 @@ public interface Individual<O,J>
          * @return a new {@link ExpressionEntitySet} contained the data properties of {@link #getInstance()};
          * into the OWL structure.
          */
-        EntitySet<Y> queryIndividualDataProperties();
+        EntitySet<Y> queryDataProperties();
 
         /**
-         * It calls {@link ExpressionEntitySet#synchroniseTo(EntitySet)} with {@link #queryIndividualDataProperties()}
+         * It calls {@link ExpressionEntitySet#synchroniseTo(EntitySet)} with {@link #queryDataProperties()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getDataProperties()}. This should
          * be done by {@link #writeExpressionAxioms()}.
@@ -439,7 +439,7 @@ public interface Individual<O,J>
          */
         default EntitySet.SynchronisationIntent<Y> synchroniseDataPropertiesToExpressionAxioms(){
             try {
-                return getDataProperties().synchroniseTo( queryIndividualDataProperties());
+                return getDataProperties().synchroniseTo( queryDataProperties());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;
@@ -447,7 +447,7 @@ public interface Individual<O,J>
         }
 
         /**
-         * It calls {@link ExpressionEntitySet#synchroniseFrom(EntitySet)} with {@link #queryIndividualDataProperties()}
+         * It calls {@link ExpressionEntitySet#synchroniseFrom(EntitySet)} with {@link #queryDataProperties()}
          * as input parameter. This computes the changes to be performed into the {@link #getDataProperties()}
          * in order to synchronise it with respect to an OWL representation. This is
          * be done by {@link #readExpressionAxioms()}.
@@ -456,7 +456,7 @@ public interface Individual<O,J>
          */
         default EntitySet.SynchronisationIntent<Y> synchroniseDataPropertiesFromExpressionAxioms(){
             try{
-                return getDataProperties().synchroniseFrom( queryIndividualDataProperties());
+                return getDataProperties().synchroniseFrom( queryDataProperties());
             } catch ( Exception e){
                 e.printStackTrace();
                 return null;

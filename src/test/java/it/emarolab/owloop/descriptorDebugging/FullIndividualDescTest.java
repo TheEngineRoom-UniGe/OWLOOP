@@ -1,7 +1,6 @@
 package it.emarolab.owloop.descriptorDebugging;
 
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DataLinks;
-import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.utility.individualDescriptor.FullIndividualDesc;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -268,6 +267,6 @@ public class FullIndividualDescTest {
         assertEquals( individual.getEquivalentIndividuals(), individual.queryEquivalentIndividuals());
         assertEquals( individual.getTypes(), individual.queryTypes());
         assertEquals( individual.getObjectProperties(), individual.queryObjectProperties());
-        assertEquals( individual.getDataProperties(), individual.queryIndividualDataProperties());
+        assertEquals( individual.getDataProperties(), individual.queryDataProperties());
     }
 }

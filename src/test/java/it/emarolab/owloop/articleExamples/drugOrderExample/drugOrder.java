@@ -38,11 +38,11 @@ public class drugOrder {
     public void orderDrugs() {
 
         final int[] total_cost = {0};
-        FullIndividualDesc order_indivDesc = new FullIndividualDesc( "order", ontoRef);
+        FullIndividualDesc order_indivDesc = new FullIndividualDesc("order", ontoRef);
         order_indivDesc.readExpressionAxioms();
         Iterable<OWLNamedIndividual> drugs_indivSet = order_indivDesc.getIndividualsFromObjectProperty("hasDrug");
-        drugs_indivSet.forEach( drug_indiv -> {
-            FullIndividualDesc drug_indivDesc = new FullIndividualDesc( drug_indiv, ontoRef);
+        drugs_indivSet.forEach(drug_indiv -> {
+            FullIndividualDesc drug_indivDesc = new FullIndividualDesc(drug_indiv, ontoRef);
             drug_indivDesc.readExpressionAxioms();
             OWLLiteral value = drug_indivDesc.getLiteralFromDataProperty("hasPrice");
             total_cost[0] += value.parseInteger();
@@ -53,7 +53,5 @@ public class drugOrder {
         FullIndividualDesc order = new FullIndividualDesc("order", ontoRef);
         FullObjectPropertyDesc hasDrug = new FullObjectPropertyDesc("hasDrug", ontoRef);
         FullDataPropertyDesc hasPrice = new FullDataPropertyDesc("hasPrice", ontoRef);
-
-
     }
 }

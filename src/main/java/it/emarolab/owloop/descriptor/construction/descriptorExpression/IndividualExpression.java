@@ -327,7 +327,7 @@ public interface IndividualExpression
     /**
      * The {@link Individual.DataLink} expression for a {@link Descriptor} whose ground is {@link OWLNamedIndividual}.
      * <p>
-     *     It specifies how to {@link #queryIndividualDataProperties()} and {@link #writeExpressionAxioms()} for the
+     *     It specifies how to {@link #queryDataProperties()} and {@link #writeExpressionAxioms()} for the
      *     data properties associated to the ground Individual {@link #getInstance()}.
      *     It also implements common function to populate the {@link ExpressionEntitySet}
      *     (of type {@link DataLinks}) that specify the data properties of this individualDescriptor
@@ -617,7 +617,7 @@ public interface IndividualExpression
 
 
         @Override // see super classes for documentation
-        default DataLinkSet queryIndividualDataProperties(){
+        default DataLinkSet queryDataProperties(){
             DataLinkSet dataSet = new DataLinkSet();
             dataSet.setSingleton( getDataProperties().isSingleton());
             for (DataPropertyRelations r :  getOntology().getDataPropertyB2Individual(getInstance())){
