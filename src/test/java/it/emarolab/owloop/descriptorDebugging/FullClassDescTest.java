@@ -41,6 +41,7 @@ public class FullClassDescTest {
 
     @Test
     public void subTest() throws Exception{
+        concept.getOntologyReference();
         concept.readExpressionAxioms();
         assertSemantic();
         concept.addSubClass( "SubClass");

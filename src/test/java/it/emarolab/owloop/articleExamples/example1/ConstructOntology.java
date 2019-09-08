@@ -1,10 +1,10 @@
 package it.emarolab.owloop.articleExamples.example1;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
-import it.emarolab.amor.owlInterface.OWLReferencesInterface;
 import it.emarolab.owloop.articleExamples.exampleDescriptors.*;
 import it.emarolab.owloop.articleExamples.exampleDescriptors.RoomClassDesc;
 import it.emarolab.owloop.descriptor.utility.classDescriptor.RestrictionClassDesc;
+import it.emarolab.owloop.descriptor.utility.helperFunctions.OntologyReference;
 import it.emarolab.owloop.descriptor.utility.individualDescriptor.RestrictionIndividualDesc;
 import it.emarolab.owloop.descriptor.utility.objectPropertyDescriptor.DomainRangeObjectPropertyDesc;
 import it.emarolab.owloop.articleExamples.exampleDescriptors.LocationClassDesc;
@@ -12,6 +12,18 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * An example to show how to add axioms, i.e, classes, objectProperties, dataProperties and individuals, to an ontology by using descriptors.
+ *
+ * <p>
+ * <div style="text-align:center;"><small>
+ * <b>File</b>:         it.emarolab.owloop.core.Axiom <br>
+ * <b>Licence</b>:      GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
+ * <b>Authors</b>:      Syed Yusha Kareem (kareem.syed.yusha@dibris.unige.it) <br>
+ * <b>affiliation</b>:  EMAROLab, DIBRIS, University of Genoa. <br>
+ * <b>date</b>:         08/09/19 <br>
+ * </small></div>
+ */
 public class ConstructOntology {
 
     private OWLReferences ontoRef;
@@ -23,7 +35,7 @@ public class ConstructOntology {
         it.emarolab.amor.owlDebugger.Logger.setPrintOnConsole( false);
 
         // To create a new ontologyReference. The ontology file need not be pre-existing.
-        ontoRef = OWLReferencesInterface.OWLReferencesContainer.newOWLReferencesCreatedWithPellet(
+        ontoRef = OntologyReference.newOWLReferencesCreatedWithPellet(
                 "robotAtHomeOnto", // ontology reference name
                 "src/test/resources/robotAtHomeOntology.owl", // the ontology file path
                 "http://www.semanticweb.org/emaroLab/robotAtHomeOntology", // the ontology IRI path

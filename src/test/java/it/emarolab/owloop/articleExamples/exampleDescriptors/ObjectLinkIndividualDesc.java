@@ -20,6 +20,15 @@ import java.util.List;
  *     Doing build() with this Descriptor returns another descriptor of type {@link FullObjectPropertyDesc}.
  * </p>
  * See {@link FullIndividualDesc} for an example of a 'compound' Individual Descriptor that implements all IndividualExpressions.
+ *
+ * <p>
+ * <div style="text-align:center;"><small>
+ * <b>File</b>:         it.emarolab.owloop.core.Axiom <br>
+ * <b>Licence</b>:      GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
+ * <b>Authors</b>:      Syed Yusha Kareem (kareem.syed.yusha@dibris.unige.it), Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
+ * <b>affiliation</b>:  EMAROLab, DIBRIS, University of Genoa. <br>
+ * <b>date</b>:         01/05/19 <br>
+ * </small></div>
  */
 public class ObjectLinkIndividualDesc
         extends IndividualGround

@@ -1,19 +1,30 @@
 package it.emarolab.owloop.articleExamples.example2;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
-import it.emarolab.amor.owlInterface.OWLReferencesInterface;
 import it.emarolab.amor.owlInterface.SemanticRestriction;
 import it.emarolab.owloop.articleExamples.exampleDescriptors.DefSubClassDesc;
 import it.emarolab.owloop.articleExamples.exampleDescriptors.ObjectLinkIndividualDesc;
 import it.emarolab.owloop.articleExamples.exampleDescriptors.TypeIndividualDesc;
-import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.Restrictions;
+import it.emarolab.owloop.descriptor.utility.helperFunctions.OntologyReference;
 import org.junit.Before;
 import org.junit.Test;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 
 import java.util.Set;
 
+/**
+ * An example to show the use of the build method provided by descriptors.
+ *
+ * <p>
+ * <div style="text-align:center;"><small>
+ * <b>File</b>:         it.emarolab.owloop.core.Axiom <br>
+ * <b>Licence</b>:      GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
+ * <b>Authors</b>:      Syed Yusha Kareem (kareem.syed.yusha@dibris.unige.it) <br>
+ * <b>affiliation</b>:  EMAROLab, DIBRIS, University of Genoa. <br>
+ * <b>date</b>:         08/09/19 <br>
+ * </small></div>
+ */
 public class UseDescriptorBuild {
 
     private OWLReferences ontoRef;
@@ -25,7 +36,7 @@ public class UseDescriptorBuild {
         it.emarolab.amor.owlDebugger.Logger.setPrintOnConsole( false);
 
         // Ontology reference, newOWLReferencesCreatedWithPellet() allows to create a new ontology which does not exist
-        ontoRef = OWLReferencesInterface.OWLReferencesContainer.newOWLReferenceFromFileWithPellet(
+        ontoRef = OntologyReference.newOWLReferenceFromFileWithPellet(
                 "robotAtHomeOnto", // ontology reference name
                 "src/test/resources/robotAtHomeOntology.owl", // the ontology file path
                 "http://www.semanticweb.org/emaroLab/robotAtHomeOntology", // the ontology IRI path

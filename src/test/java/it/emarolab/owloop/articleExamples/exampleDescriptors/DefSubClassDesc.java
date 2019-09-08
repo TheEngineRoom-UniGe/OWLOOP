@@ -21,6 +21,15 @@ import java.util.List;
  *     Doing build() with this Descriptor returns the descriptor of type {@link DefSubClassDesc}.
  * </p>
  * See {@link FullClassDesc} for an example of a 'compound' Class Descriptor that implements all ConceptExpressions.
+ *
+ * <p>
+ * <div style="text-align:center;"><small>
+ * <b>File</b>:         it.emarolab.owloop.core.Axiom <br>
+ * <b>Licence</b>:      GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
+ * <b>Authors</b>:      Syed Yusha Kareem (kareem.syed.yusha@dibris.unige.it), Buoncompagni Luca (luca.buoncompagni@edu.unige.it) <br>
+ * <b>affiliation</b>:  EMAROLab, DIBRIS, University of Genoa. <br>
+ * <b>date</b>:         01/05/19 <br>
+ * </small></div>
  */
 public class DefSubClassDesc
         extends ClassGround

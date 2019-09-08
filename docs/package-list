@@ -9,6 +9,7 @@ it.emarolab.owloop.descriptor.construction.descriptorExpression
 it.emarolab.owloop.descriptor.construction.descriptorGround
 it.emarolab.owloop.descriptor.utility.classDescriptor
 it.emarolab.owloop.descriptor.utility.dataPropertyDescriptor
+it.emarolab.owloop.descriptor.utility.helperFunctions
 it.emarolab.owloop.descriptor.utility.individualDescriptor
 it.emarolab.owloop.descriptor.utility.objectPropertyDescriptor
 it.emarolab.owloop.descriptorDebugging

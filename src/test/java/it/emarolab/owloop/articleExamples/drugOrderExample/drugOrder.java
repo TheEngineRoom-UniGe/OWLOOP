@@ -1,9 +1,9 @@
 package it.emarolab.owloop.articleExamples.drugOrderExample;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
-import it.emarolab.amor.owlInterface.OWLReferencesInterface;
 import it.emarolab.owloop.descriptor.utility.classDescriptor.FullClassDesc;
 import it.emarolab.owloop.descriptor.utility.dataPropertyDescriptor.FullDataPropertyDesc;
+import it.emarolab.owloop.descriptor.utility.helperFunctions.OntologyReference;
 import it.emarolab.owloop.descriptor.utility.individualDescriptor.FullIndividualDesc;
 import it.emarolab.owloop.descriptor.utility.objectPropertyDescriptor.FullObjectPropertyDesc;
 import org.junit.Before;
@@ -14,6 +14,15 @@ import org.semanticweb.owlapi.model.OWLNamedIndividual;
 /**
  * This example is taken from Owlready paper: https://www.archives-ouvertes.fr/hal-01592746/document
  * To compare difference in the number of lines of code written with OWL-API and OWLOOP-API
+ *
+ * <p>
+ * <div style="text-align:center;"><small>
+ * <b>File</b>:         it.emarolab.owloop.core.Axiom <br>
+ * <b>Licence</b>:      GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
+ * <b>Authors</b>:      Syed Yusha Kareem (kareem.syed.yusha@dibris.unige.it) <br>
+ * <b>affiliation</b>:  EMAROLab, DIBRIS, University of Genoa. <br>
+ * <b>date</b>:         08/09/19 <br>
+ * </small></div>
  */
 public class drugOrder {
 
@@ -26,7 +35,7 @@ public class drugOrder {
         it.emarolab.amor.owlDebugger.Logger.setPrintOnConsole( false);
 
         // To create a new ontologyReference. The ontology file need not be pre-existing.
-        ontoRef = OWLReferencesInterface.OWLReferencesContainer.newOWLReferenceFromFileWithPellet(
+        ontoRef = OntologyReference.newOWLReferenceFromFileWithPellet(
                 "drugOntology", // ontology reference name
                 "src/test/resources/drug.owl", // the ontology file path
                 "http://www.semanticweb.org/yusha/ontologies/2019/drug", // the ontology IRI path
@@ -55,3 +64,5 @@ public class drugOrder {
         FullDataPropertyDesc hasPrice = new FullDataPropertyDesc("hasPrice", ontoRef);
     }
 }
+
+//TODO: check what ontoRef reasonerexplainer does.

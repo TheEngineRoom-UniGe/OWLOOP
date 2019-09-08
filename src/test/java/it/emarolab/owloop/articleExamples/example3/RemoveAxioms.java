@@ -1,11 +1,23 @@
 package it.emarolab.owloop.articleExamples.example3;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
-import it.emarolab.amor.owlInterface.OWLReferencesInterface;
 import it.emarolab.owloop.articleExamples.exampleDescriptors.ObjectLinkIndividualDesc;
+import it.emarolab.owloop.descriptor.utility.helperFunctions.OntologyReference;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * An example to show how to remove axioms from an ontology.
+ *
+ * <p>
+ * <div style="text-align:center;"><small>
+ * <b>File</b>:         it.emarolab.owloop.core.Axiom <br>
+ * <b>Licence</b>:      GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
+ * <b>Authors</b>:      Syed Yusha Kareem (kareem.syed.yusha@dibris.unige.it) <br>
+ * <b>affiliation</b>:  EMAROLab, DIBRIS, University of Genoa. <br>
+ * <b>date</b>:         08/09/19 <br>
+ * </small></div>
+ */
 public class RemoveAxioms {
 
     private OWLReferences ontoRef;
@@ -16,7 +28,7 @@ public class RemoveAxioms {
         // Disables printing of amor logs
         it.emarolab.amor.owlDebugger.Logger.setPrintOnConsole( false);
 
-        ontoRef = OWLReferencesInterface.OWLReferencesContainer.newOWLReferenceFromFileWithPellet(
+        ontoRef = OntologyReference.newOWLReferenceFromFileWithPellet(
                 "robotAtHomeOnto", // ontology reference name
                 "src/test/resources/robotAtHomeOntology.owl", // the ontology file path
                 "http://www.semanticweb.org/emaroLab/robotAtHomeOntology", // the ontology IRI path
