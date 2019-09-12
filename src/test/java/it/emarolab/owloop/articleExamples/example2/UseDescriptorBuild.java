@@ -6,7 +6,7 @@ import it.emarolab.owloop.articleExamples.exampleDescriptors.DefSubClassDesc;
 import it.emarolab.owloop.articleExamples.exampleDescriptors.ObjectLinkIndividualDesc;
 import it.emarolab.owloop.articleExamples.exampleDescriptors.TypeIndividualDesc;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.Restrictions;
-import it.emarolab.owloop.descriptor.utility.helperFunctions.OntologyReference;
+import it.emarolab.owloop.core.Axiom.Descriptor.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;

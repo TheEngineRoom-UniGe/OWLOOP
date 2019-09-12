@@ -4,7 +4,7 @@ import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.articleExamples.exampleDescriptors.*;
 import it.emarolab.owloop.articleExamples.exampleDescriptors.RoomClassDesc;
 import it.emarolab.owloop.descriptor.utility.classDescriptor.RestrictionClassDesc;
-import it.emarolab.owloop.descriptor.utility.helperFunctions.OntologyReference;
+import it.emarolab.owloop.core.Axiom.Descriptor.*;
 import it.emarolab.owloop.descriptor.utility.individualDescriptor.RestrictionIndividualDesc;
 import it.emarolab.owloop.descriptor.utility.objectPropertyDescriptor.DomainRangeObjectPropertyDesc;
 import it.emarolab.owloop.articleExamples.exampleDescriptors.LocationClassDesc;

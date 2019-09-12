@@ -1,9 +1,10 @@
 package it.emarolab.owloop.articleExamples.drugOrderExample;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
+import it.emarolab.owloop.core.Axiom;
 import it.emarolab.owloop.descriptor.utility.classDescriptor.FullClassDesc;
 import it.emarolab.owloop.descriptor.utility.dataPropertyDescriptor.FullDataPropertyDesc;
-import it.emarolab.owloop.descriptor.utility.helperFunctions.OntologyReference;
+import it.emarolab.owloop.core.Axiom.Descriptor.*;
 import it.emarolab.owloop.descriptor.utility.individualDescriptor.FullIndividualDesc;
 import it.emarolab.owloop.descriptor.utility.objectPropertyDescriptor.FullObjectPropertyDesc;
 import org.junit.Before;
@@ -58,6 +59,7 @@ public class drugOrder {
         });
         System.out.println(total_cost[0]);
 
+        // TODO: remove these below 4 testing functions
         FullClassDesc ORDER = new FullClassDesc("ORDER", ontoRef);
         FullIndividualDesc order = new FullIndividualDesc("order", ontoRef);
         FullObjectPropertyDesc hasDrug = new FullObjectPropertyDesc("hasDrug", ontoRef);

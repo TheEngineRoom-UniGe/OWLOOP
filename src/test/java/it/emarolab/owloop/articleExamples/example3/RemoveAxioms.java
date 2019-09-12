@@ -2,7 +2,7 @@ package it.emarolab.owloop.articleExamples.example3;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.articleExamples.exampleDescriptors.ObjectLinkIndividualDesc;
-import it.emarolab.owloop.descriptor.utility.helperFunctions.OntologyReference;
+import it.emarolab.owloop.core.Axiom.Descriptor.*;
 import org.junit.Before;
 import org.junit.Test;
 
