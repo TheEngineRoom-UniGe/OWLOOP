@@ -612,6 +612,15 @@ public interface Axiom {
         }
 
         /**
+         * This method calls: {@link it.emarolab.amor.owlDebugger.Logger#setPrintOnConsole(Boolean)}
+         * with a given flag parameter.
+         * @param enable the flag for enable/disable aMOR logging.
+         */
+        default void aMORlogging( boolean enable){
+            it.emarolab.amor.owlDebugger.Logger.setPrintOnConsole( enable);
+        }
+
+        /**
          * To hide a commonly used aMOR class behind OWLOOP API.
          * It provides methods that allow to instantiate an ontology-reference object.
          *
@@ -624,7 +633,12 @@ public interface Axiom {
          * <b>date</b>:         08/09/19 <br>
          * </small></div>
          */
-        class OntologyReference extends OWLReferencesInterface.OWLReferencesContainer {}
+        class OntologyReference extends OWLReferencesInterface.OWLReferencesContainer {
+
+            public static void aMORlogging(boolean enable){
+                it.emarolab.amor.owlDebugger.Logger.setPrintOnConsole( enable);
+            }
+        }
     }
 
     /**

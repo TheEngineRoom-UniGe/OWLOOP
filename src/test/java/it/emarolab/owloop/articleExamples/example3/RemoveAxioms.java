@@ -26,7 +26,7 @@ public class RemoveAxioms {
     public void beforeTest() {
 
         // Disables printing of amor logs
-        it.emarolab.amor.owlDebugger.Logger.setPrintOnConsole( false);
+        OntologyReference.aMORlogging( false);
 
         ontoRef = OntologyReference.newOWLReferenceFromFileWithPellet(
                 "robotAtHomeOnto", // ontology reference name

@@ -1,12 +1,8 @@
 package it.emarolab.owloop.articleExamples.drugOrderExample;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
-import it.emarolab.owloop.core.Axiom;
-import it.emarolab.owloop.descriptor.utility.classDescriptor.FullClassDesc;
-import it.emarolab.owloop.descriptor.utility.dataPropertyDescriptor.FullDataPropertyDesc;
 import it.emarolab.owloop.core.Axiom.Descriptor.*;
 import it.emarolab.owloop.descriptor.utility.individualDescriptor.FullIndividualDesc;
-import it.emarolab.owloop.descriptor.utility.objectPropertyDescriptor.FullObjectPropertyDesc;
 import org.junit.Before;
 import org.junit.Test;
 import org.semanticweb.owlapi.model.OWLLiteral;
@@ -33,7 +29,7 @@ public class drugOrder {
     public void beforeTest() {
 
         // Disables printing of amor logs
-        it.emarolab.amor.owlDebugger.Logger.setPrintOnConsole( false);
+        OntologyReference.aMORlogging( false);
 
         // To create a new ontologyReference. The ontology file need not be pre-existing.
         ontoRef = OntologyReference.newOWLReferenceFromFileWithPellet(
@@ -58,12 +54,6 @@ public class drugOrder {
             total_cost[0] += value.parseInteger();
         });
         System.out.println(total_cost[0]);
-
-        // TODO: remove these below 4 testing functions
-        FullClassDesc ORDER = new FullClassDesc("ORDER", ontoRef);
-        FullIndividualDesc order = new FullIndividualDesc("order", ontoRef);
-        FullObjectPropertyDesc hasDrug = new FullObjectPropertyDesc("hasDrug", ontoRef);
-        FullDataPropertyDesc hasPrice = new FullDataPropertyDesc("hasPrice", ontoRef);
     }
 }
 

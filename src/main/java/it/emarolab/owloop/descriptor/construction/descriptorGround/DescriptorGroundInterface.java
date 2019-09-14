@@ -470,15 +470,6 @@ public interface DescriptorGroundInterface<J extends OWLObject>
     }
 
     /**
-     * This method calls: {@link it.emarolab.amor.owlDebugger.Logger#setPrintOnConsole(Boolean)}
-     * with a given flag parameter.
-     * @param enable the flag for enable/disable aMOR logging.
-     */
-    default void aMORlogging( boolean enable){
-        it.emarolab.amor.owlDebugger.Logger.setPrintOnConsole( enable);
-    }
-
-    /**
      * Return a compact name of an {@link OWLObject}, by removing IRI for instance.
      * @param instance the object to describe with a short name
      * @return the short name of the given object.

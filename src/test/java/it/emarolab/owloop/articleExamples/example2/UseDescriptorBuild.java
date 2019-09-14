@@ -33,7 +33,7 @@ public class UseDescriptorBuild {
     public void beforeTest() {
 
         // Disables printing of amor logs
-        it.emarolab.amor.owlDebugger.Logger.setPrintOnConsole( false);
+        OntologyReference.aMORlogging( false);
 
         // Ontology reference, newOWLReferencesCreatedWithPellet() allows to create a new ontology which does not exist
         ontoRef = OntologyReference.newOWLReferenceFromFileWithPellet(

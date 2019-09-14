@@ -32,7 +32,7 @@ public class ConstructOntology {
     public void beforeTest() {
 
         // Disables printing of amor logs
-        it.emarolab.amor.owlDebugger.Logger.setPrintOnConsole( false);
+        OntologyReference.aMORlogging( false);
 
         // To create a new ontologyReference. The ontology file need not be pre-existing.
         ontoRef = OntologyReference.newOWLReferencesCreatedWithPellet(
