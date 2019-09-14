@@ -64,6 +64,6 @@ Its nice to (sync and save) after writing something to the ontology.
 /*
         Regarding mandatory usage of OWLReferencesContainer from aMOR
 
-        Note that: First and foremost it is important to instantiate an object such that we have reference to an ontology (OWL) file.
-        To do this Amor provides a class called OWLReferencesContainer
+        Note that: First and foremost it is important to instantiate an object such that we load ontology into memory (An in-memory representation - Abstract Syntax Tree).
+        To do this aMOR provides a class called OWLReferencesContainer that initializes the ontology by loading it into memory and gives an OWLReference object.
 */

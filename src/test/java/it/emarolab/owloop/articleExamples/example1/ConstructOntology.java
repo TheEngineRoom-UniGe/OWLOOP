@@ -120,3 +120,5 @@ public class ConstructOntology {
         ontoRef.saveOntology();
     }
 }
+
+// TODO what happens when ontology is inconsistent (do we say something in aMORlogs or even apart from that)
