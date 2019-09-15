@@ -29,7 +29,7 @@ public class drugOrder {
     public void beforeTest() {
 
         // Disables printing of amor logs
-        OntologyReference.aMORlogging( false);
+        OntologyReference.activateAMORlogging( false);
 
         // To create a new ontologyReference. The ontology file need not be pre-existing.
         ontoRef = OntologyReference.newOWLReferenceFromFileWithPellet(

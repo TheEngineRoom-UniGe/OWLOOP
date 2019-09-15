@@ -70,7 +70,7 @@ abstract public class DescriptorGround<J extends OWLObject>
         return null;
     }
     private OWLReferences initialiseOntology( String ontoName, String filePath, String iriPath, Boolean bufferingChanges) {
-        aMORlogging( DEFAULT_AMOR_LOG);
+        activateAMORlogging( DEFAULT_AMOR_LOG);
         OWLReferences ontology;
         if (OWLReferencesInterface.OWLReferencesContainer.getOWLReferencesKeys().contains(ontoName)) {
             ontology = (OWLReferences) OWLReferencesInterface.OWLReferencesContainer.getOWLReferences(ontoName);

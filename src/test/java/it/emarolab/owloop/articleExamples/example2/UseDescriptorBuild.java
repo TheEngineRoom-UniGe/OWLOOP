@@ -33,7 +33,7 @@ public class UseDescriptorBuild {
     public void beforeTest() {
 
         // Disables printing of amor logs
-        OntologyReference.aMORlogging( false);
+        OntologyReference.activateAMORlogging( false);
 
         // Ontology reference, newOWLReferencesCreatedWithPellet() allows to create a new ontology which does not exist
         ontoRef = OntologyReference.newOWLReferenceFromFileWithPellet(

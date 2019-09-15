@@ -614,10 +614,10 @@ public interface Axiom {
         /**
          * This method calls: {@link it.emarolab.amor.owlDebugger.Logger#setPrintOnConsole(Boolean)}
          * with a given flag parameter.
-         * @param enable the flag for enable/disable aMOR logging.
+         * @param booleanFlag the flag for enable/disable aMOR logging.
          */
-        default void aMORlogging( boolean enable){
-            it.emarolab.amor.owlDebugger.Logger.setPrintOnConsole( enable);
+        default void activateAMORlogging(boolean booleanFlag){
+            it.emarolab.amor.owlDebugger.Logger.setPrintOnConsole( booleanFlag);
         }
 
         /**
@@ -635,8 +635,8 @@ public interface Axiom {
          */
         class OntologyReference extends OWLReferencesInterface.OWLReferencesContainer {
 
-            public static void aMORlogging(boolean enable){
-                it.emarolab.amor.owlDebugger.Logger.setPrintOnConsole( enable);
+            public static void activateAMORlogging(boolean booleanFlag){
+                it.emarolab.amor.owlDebugger.Logger.setPrintOnConsole( booleanFlag);
             }
         }
     }
