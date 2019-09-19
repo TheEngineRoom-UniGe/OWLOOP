@@ -5,7 +5,6 @@ import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.ObjectProperties;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.Restrictions;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.ObjectPropertyGround;
-import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.ObjectPropertyExpression;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
 
@@ -85,26 +84,26 @@ public class FullObjectPropertyDesc
 
     // To read axioms from an ontology
     @Override
-    public List<MappingIntent> readExpressionAxioms() {
-        List<MappingIntent> r = ObjectPropertyExpression.Disjoint.super.readExpressionAxioms();
-        r.addAll( ObjectPropertyExpression.Equivalent.super.readExpressionAxioms());
-        r.addAll( ObjectPropertyExpression.Range.super.readExpressionAxioms());
-        r.addAll( ObjectPropertyExpression.Domain.super.readExpressionAxioms());
-        r.addAll( ObjectPropertyExpression.Sub.super.readExpressionAxioms());
-        r.addAll( ObjectPropertyExpression.Super.super.readExpressionAxioms());
-        r.addAll( ObjectPropertyExpression.Inverse.super.readExpressionAxioms());
+    public List<MappingIntent> readAxioms() {
+        List<MappingIntent> r = ObjectPropertyExpression.Disjoint.super.readAxioms();
+        r.addAll( ObjectPropertyExpression.Equivalent.super.readAxioms());
+        r.addAll( ObjectPropertyExpression.Range.super.readAxioms());
+        r.addAll( ObjectPropertyExpression.Domain.super.readAxioms());
+        r.addAll( ObjectPropertyExpression.Sub.super.readAxioms());
+        r.addAll( ObjectPropertyExpression.Super.super.readAxioms());
+        r.addAll( ObjectPropertyExpression.Inverse.super.readAxioms());
         return r;
     }
     // To write axioms to an ontology
     @Override
-    public List<MappingIntent> writeExpressionAxioms() {
-        List<MappingIntent> r = ObjectPropertyExpression.Disjoint.super.writeExpressionAxioms();
-        r.addAll( ObjectPropertyExpression.Equivalent.super.writeExpressionAxioms());
-        r.addAll( ObjectPropertyExpression.Range.super.writeExpressionAxioms());
-        r.addAll( ObjectPropertyExpression.Domain.super.writeExpressionAxioms());
-        r.addAll( ObjectPropertyExpression.Sub.super.writeExpressionAxioms());
-        r.addAll( ObjectPropertyExpression.Super.super.writeExpressionAxioms());
-        r.addAll( ObjectPropertyExpression.Inverse.super.writeExpressionAxioms());
+    public List<MappingIntent> writeAxioms() {
+        List<MappingIntent> r = ObjectPropertyExpression.Disjoint.super.writeAxioms();
+        r.addAll( ObjectPropertyExpression.Equivalent.super.writeAxioms());
+        r.addAll( ObjectPropertyExpression.Range.super.writeAxioms());
+        r.addAll( ObjectPropertyExpression.Domain.super.writeAxioms());
+        r.addAll( ObjectPropertyExpression.Sub.super.writeAxioms());
+        r.addAll( ObjectPropertyExpression.Super.super.writeAxioms());
+        r.addAll( ObjectPropertyExpression.Inverse.super.writeAxioms());
         return r;
     }
 

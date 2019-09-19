@@ -80,22 +80,22 @@ public class FullIndividualDesc
 
     // To read axioms from an ontology
     @Override
-    public List<MappingIntent> readExpressionAxioms() {
-        List<MappingIntent> r = IndividualExpression.Equivalent.super.readExpressionAxioms();
-        r.addAll( IndividualExpression.Disjoint.super.readExpressionAxioms());
-        r.addAll( IndividualExpression.Type.super.readExpressionAxioms());
-        r.addAll( IndividualExpression.ObjectLink.super.readExpressionAxioms());
-        r.addAll( IndividualExpression.DataLink.super.readExpressionAxioms());
+    public List<MappingIntent> readAxioms() {
+        List<MappingIntent> r = IndividualExpression.Equivalent.super.readAxioms();
+        r.addAll( IndividualExpression.Disjoint.super.readAxioms());
+        r.addAll( IndividualExpression.Type.super.readAxioms());
+        r.addAll( IndividualExpression.ObjectLink.super.readAxioms());
+        r.addAll( IndividualExpression.DataLink.super.readAxioms());
         return r;
     }
     // To write axioms to an ontology
     @Override
-    public List<MappingIntent> writeExpressionAxioms() {
-        List<MappingIntent> r = IndividualExpression.Equivalent.super.writeExpressionAxioms();
-        r.addAll( IndividualExpression.Disjoint.super.writeExpressionAxioms());
-        r.addAll( IndividualExpression.Type.super.writeExpressionAxioms());
-        r.addAll( IndividualExpression.ObjectLink.super.writeExpressionAxioms());
-        r.addAll( IndividualExpression.DataLink.super.writeExpressionAxioms());
+    public List<MappingIntent> writeAxioms() {
+        List<MappingIntent> r = IndividualExpression.Equivalent.super.writeAxioms();
+        r.addAll( IndividualExpression.Disjoint.super.writeAxioms());
+        r.addAll( IndividualExpression.Type.super.writeAxioms());
+        r.addAll( IndividualExpression.ObjectLink.super.writeAxioms());
+        r.addAll( IndividualExpression.DataLink.super.writeAxioms());
         return r;
     }
 

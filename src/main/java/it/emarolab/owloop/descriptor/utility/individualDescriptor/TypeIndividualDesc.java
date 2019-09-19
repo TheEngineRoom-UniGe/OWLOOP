@@ -3,7 +3,6 @@ package it.emarolab.owloop.descriptor.utility.individualDescriptor;
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.Classes;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.IndividualGround;
-import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.IndividualExpression;
 import it.emarolab.owloop.descriptor.utility.classDescriptor.HierarchicalClassDesc;
 import org.semanticweb.owlapi.model.OWLClass;
@@ -68,13 +67,13 @@ public class TypeIndividualDesc
 
     // To read axioms from an ontology
     @Override
-    public List<MappingIntent> readExpressionAxioms() {
-        return IndividualExpression.Type.super.readExpressionAxioms();
+    public List<MappingIntent> readAxioms() {
+        return IndividualExpression.Type.super.readAxioms();
     }
     // To write axioms to an ontology
     @Override
-    public List<MappingIntent> writeExpressionAxioms() {
-        return IndividualExpression.Type.super.writeExpressionAxioms();
+    public List<MappingIntent> writeAxioms() {
+        return IndividualExpression.Type.super.writeAxioms();
     }
 
     /* Overriding methods in classes: Individual and IndividualExpression */

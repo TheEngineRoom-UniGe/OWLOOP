@@ -46,7 +46,7 @@ public interface Class<O,J>
             extends Class<O,J> {
 
         @Override  // see documentation on Axiom.descriptor.readExpressionAxioms
-        default List<MappingIntent> readExpressionAxioms(){
+        default List<MappingIntent> readAxioms(){
             try {
                 EntitySet.SynchronisationIntent<J> from = synchroniseEquivalentClassesFromExpressionAxioms();
                 if ( from != null) {
@@ -73,7 +73,7 @@ public interface Class<O,J>
             Set<D> out = new HashSet<>();
             for( J cl : getEquivalentClasses()){
                 D built = getEquivalentClassDescriptor( cl, getOntologyReference());
-                built.readExpressionAxioms();
+                built.readAxioms();
                 out.add( built);
             }
             return out;
@@ -108,7 +108,7 @@ public interface Class<O,J>
          * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryEquivalentClasses()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getEquivalentClasses()}. This should
-         * be done by {@link #writeExpressionAxioms()}.
+         * be done by {@link #writeAxioms()}.
          * @return the changes to be done to synchronise {@code this} structure with
          * the equivalent classes of an OWL class.
          */
@@ -125,7 +125,7 @@ public interface Class<O,J>
          * It calls {@link EntitySet#synchroniseFrom(EntitySet)} with {@link #queryEquivalentClasses()}
          * as input parameter. This computes the changes to be performed into the {@link #getEquivalentClasses()}
          * in order to synchronise it with respect to an OWL representation. This is
-         * be done by {@link #readExpressionAxioms()}.
+         * be done by {@link #readAxioms()}.
          * @return the changes to be done to synchronise the equivalent classes of an OWL class
          * with {@code this} structure.
          */
@@ -151,7 +151,7 @@ public interface Class<O,J>
             extends Class<O,J> {
 
         @Override // see documentation on Axiom.descriptor.readExpressionAxioms
-        default List<MappingIntent> readExpressionAxioms(){
+        default List<MappingIntent> readAxioms(){
             try {
                 EntitySet.SynchronisationIntent<J> from = synchroniseDisjointClassesFromExpressionAxioms();
                 if ( from != null) {
@@ -179,7 +179,7 @@ public interface Class<O,J>
             Set<D> out = new HashSet<>();
             for( J cl : getDisjointClasses()){
                 D built = getDisjointClassDescriptor( cl, getOntologyReference());
-                built.readExpressionAxioms();
+                built.readAxioms();
                 out.add( built);
             }
             return out;
@@ -214,7 +214,7 @@ public interface Class<O,J>
          * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryDisjointClasses()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getDisjointClasses()}. This should
-         * be done by {@link #writeExpressionAxioms()}.
+         * be done by {@link #writeAxioms()}.
          * @return the changes to be done to synchronise {@code this} structure with
          * the disjointed classes of an OWL class.
          */
@@ -231,7 +231,7 @@ public interface Class<O,J>
          * It calls {@link EntitySet#synchroniseFrom(EntitySet)} with {@link #queryDisjointClasses()}
          * as input parameter. This computes the changes to be performed into the {@link #getDisjointClasses()}
          * in order to synchronise it with respect to an OWL representation. This is
-         * be done by {@link #readExpressionAxioms()}.
+         * be done by {@link #readAxioms()}.
          * @return the changes to be done to synchronise the disjointed classes of an OWL class
          * with {@code this} structure.
          */
@@ -257,7 +257,7 @@ public interface Class<O,J>
             extends Class<O,J> {
 
         @Override // see documentation on Axiom.descriptor.readExpressionAxioms
-        default List<MappingIntent> readExpressionAxioms(){
+        default List<MappingIntent> readAxioms(){
             try {
                 EntitySet.SynchronisationIntent<J> from = synchroniseSubClassesFromExpressionAxioms();
                 if ( from != null) {
@@ -284,7 +284,7 @@ public interface Class<O,J>
             Set<D> out = new HashSet<>();
             for( J cl : getSubClasses()){
                 D built = getSubClassDescriptor( cl, getOntologyReference());
-                built.readExpressionAxioms();
+                built.readAxioms();
                 out.add( built);
             }
             return out;
@@ -319,7 +319,7 @@ public interface Class<O,J>
          * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #querySubClasses()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getSubClasses()}. This should
-         * be done by {@link #writeExpressionAxioms()}.
+         * be done by {@link #writeAxioms()}.
          * @return the changes to be done to synchronise {@code this} structure with
          * the sub classes of an OWL class.
          */
@@ -336,7 +336,7 @@ public interface Class<O,J>
          * It calls {@link EntitySet#synchroniseFrom(EntitySet)} with {@link #querySubClasses()}
          * as input parameter. This computes the changes to be performed into the {@link #getSubClasses()}
          * in order to synchronise it with respect to an OWL representation. This is
-         * be done by {@link #readExpressionAxioms()}.
+         * be done by {@link #readAxioms()}.
          * @return the changes to be done to synchronise the sub classes of an OWL class
          * with {@code this} structure.
          */
@@ -362,7 +362,7 @@ public interface Class<O,J>
             extends Class<O,J> {
 
         @Override // see documentation on Axiom.descriptor.readExpressionAxioms
-        default List<MappingIntent> readExpressionAxioms(){
+        default List<MappingIntent> readAxioms(){
             try {
                 EntitySet.SynchronisationIntent<J> from = synchroniseSuperClassesFromExpressionAxioms();
                 if ( from != null) {
@@ -389,7 +389,7 @@ public interface Class<O,J>
             Set<D> out = new HashSet<>();
             for( J cl : getSuperClasses()){
                 D built = getSuperClassDescriptor( cl, getOntologyReference());
-                built.readExpressionAxioms();
+                built.readAxioms();
                 out.add( built);
             }
             return out;
@@ -424,7 +424,7 @@ public interface Class<O,J>
          * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #querySuperClasses()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getSuperClasses()}. This should
-         * be done by {@link #writeExpressionAxioms()}.
+         * be done by {@link #writeAxioms()}.
          * @return the changes to be done to synchronise {@code this} structure with
          * the super classes of an OWL class.
          */
@@ -441,7 +441,7 @@ public interface Class<O,J>
          * It calls {@link EntitySet#synchroniseFrom(EntitySet)} with {@link #querySuperClasses()}
          * as input parameter. This computes the changes to be performed into the {@link #getSuperClasses()}
          * in order to synchronise it with respect to an OWL representation. This is
-         * be done by {@link #readExpressionAxioms()}.
+         * be done by {@link #readAxioms()}.
          * @return the changes to be done to synchronise the super classes of an OWL class
          * with {@code this} structure.
          */
@@ -468,7 +468,7 @@ public interface Class<O,J>
             extends Class<O,J> {
 
         @Override // see documentation on Axiom.descriptor.readExpressionAxioms
-        default List<MappingIntent> readExpressionAxioms(){
+        default List<MappingIntent> readAxioms(){
             try {
                 EntitySet.SynchronisationIntent<Y> from = synchroniseIndividualsFromExpressionAxioms();
                 if ( from != null) {
@@ -495,7 +495,7 @@ public interface Class<O,J>
             Set<D> out = new HashSet<>();
             for( Y cl : getIndividuals()){
                 D built = getIndividualDescriptor( cl, getOntologyReference());
-                built.readExpressionAxioms();
+                built.readAxioms();
                 out.add( built);
             }
             return out;
@@ -530,7 +530,7 @@ public interface Class<O,J>
          * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryIndividuals()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getIndividuals()}. This should
-         * be done by {@link #writeExpressionAxioms()}.
+         * be done by {@link #writeAxioms()}.
          * @return the changes to be done to synchronise {@code this} structure with
          * the individualDescriptor classified in an OWL class.
          */
@@ -547,7 +547,7 @@ public interface Class<O,J>
          * It calls {@link EntitySet#synchroniseFrom(EntitySet)} with {@link #queryIndividuals()}
          * as input parameter. This computes the changes to be performed into the {@link #getIndividuals()}
          * in order to synchronise it with respect to an OWL representation. This is
-         * be done by {@link #readExpressionAxioms()}.
+         * be done by {@link #readAxioms()}.
          * @return the changes to be done to synchronise the individualDescriptor of an OWL class
          * with {@code this} structure.
          */
@@ -592,7 +592,7 @@ public interface Class<O,J>
             extends Class<O,J> {
 
         @Override // see documentation on Axiom.descriptor.readExpressionAxioms
-        default List<MappingIntent> readExpressionAxioms(){
+        default List<MappingIntent> readAxioms(){
             try {
                 EntitySet.SynchronisationIntent<Y> from = synchroniseEquivalentRestrictionsFromExpressionAxioms();
                 if ( from != null) {
@@ -624,7 +624,7 @@ public interface Class<O,J>
          * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryEquivalentRestrictions()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getEquivalentRestrictions()}. This should
-         * be done by {@link #writeExpressionAxioms()}.
+         * be done by {@link #writeAxioms()}.
          * @return the changes to be done to synchronise {@code this} structure with
          * the class definition of an OWL class.
          */
@@ -641,7 +641,7 @@ public interface Class<O,J>
          * It calls {@link EntitySet#synchroniseFrom(EntitySet)} with {@link #queryEquivalentRestrictions()}
          * as input parameter. This computes the changes to be performed into the {@link #getEquivalentRestrictions()}
          * in order to synchronise it with respect to an OWL representation. This is
-         * be done by {@link #readExpressionAxioms()}.
+         * be done by {@link #readAxioms()}.
          * @return the changes to be done to synchronise the class definition of an OWL class
          * with {@code this} structure.
          */

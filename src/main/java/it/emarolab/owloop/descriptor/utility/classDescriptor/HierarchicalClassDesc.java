@@ -5,7 +5,6 @@ import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.Classes;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.ClassExpression;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.ClassGround;
-import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import org.semanticweb.owlapi.model.OWLClass;
 
 import java.util.List;
@@ -69,16 +68,16 @@ public class HierarchicalClassDesc
 
     // To read axioms from an ontology
     @Override
-    public List<MappingIntent> readExpressionAxioms() {
-        List<MappingIntent> r = ClassExpression.Sub.super.readExpressionAxioms();
-        r.addAll( ClassExpression.Super.super.readExpressionAxioms());
+    public List<MappingIntent> readAxioms() {
+        List<MappingIntent> r = ClassExpression.Sub.super.readAxioms();
+        r.addAll( ClassExpression.Super.super.readAxioms());
         return r;
     }
     // To write axioms to an ontology
     @Override
-    public List<MappingIntent> writeExpressionAxioms() {
-        List<MappingIntent> r = ClassExpression.Sub.super.writeExpressionAxioms();
-        r.addAll( ClassExpression.Super.super.writeExpressionAxioms());
+    public List<MappingIntent> writeAxioms() {
+        List<MappingIntent> r = ClassExpression.Sub.super.writeAxioms();
+        r.addAll( ClassExpression.Super.super.writeAxioms());
         return r;
     }
 

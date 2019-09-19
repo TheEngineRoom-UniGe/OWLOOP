@@ -4,7 +4,6 @@ import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DataProperties;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.DataPropertyGround;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.DataPropertyExpression;
-import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import org.semanticweb.owlapi.model.OWLDataProperty;
 
 import java.util.List;
@@ -68,16 +67,16 @@ public class HierarchicalDataPropertyDesc
 
     // To read axioms from an ontology
     @Override
-    public List<MappingIntent> readExpressionAxioms() {
-        List<MappingIntent> r = DataPropertyExpression.Sub.super.readExpressionAxioms();
-        r.addAll( DataPropertyExpression.Super.super.readExpressionAxioms());
+    public List<MappingIntent> readAxioms() {
+        List<MappingIntent> r = DataPropertyExpression.Sub.super.readAxioms();
+        r.addAll( DataPropertyExpression.Super.super.readAxioms());
         return r;
     }
     // To write axioms to an ontology
     @Override
-    public List<MappingIntent> writeExpressionAxioms() {
-        List<MappingIntent> r = DataPropertyExpression.Sub.super.writeExpressionAxioms();
-        r.addAll( DataPropertyExpression.Super.super.writeExpressionAxioms());
+    public List<MappingIntent> writeAxioms() {
+        List<MappingIntent> r = DataPropertyExpression.Sub.super.writeAxioms();
+        r.addAll( DataPropertyExpression.Super.super.writeAxioms());
         return r;
     }
 

@@ -2,7 +2,6 @@ package it.emarolab.owloop.descriptor.utility.classDescriptor;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.Classes;
-import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.Individuals;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.Restrictions;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.ClassExpression;
@@ -93,24 +92,24 @@ public class FullClassDesc
 
     // To read axioms from an ontology
     @Override
-    public List<MappingIntent> readExpressionAxioms() {
-        List<MappingIntent> r = EquivalentRestriction.super.readExpressionAxioms(); // call this before all
-        r.addAll( ClassExpression.Equivalent.super.readExpressionAxioms());
-        r.addAll( ClassExpression.Disjoint.super.readExpressionAxioms());
-        r.addAll( ClassExpression.Sub.super.readExpressionAxioms());
-        r.addAll( ClassExpression.Super.super.readExpressionAxioms());
-        r.addAll( Instance.super.readExpressionAxioms());
+    public List<MappingIntent> readAxioms() {
+        List<MappingIntent> r = EquivalentRestriction.super.readAxioms(); // call this before all
+        r.addAll( ClassExpression.Equivalent.super.readAxioms());
+        r.addAll( ClassExpression.Disjoint.super.readAxioms());
+        r.addAll( ClassExpression.Sub.super.readAxioms());
+        r.addAll( ClassExpression.Super.super.readAxioms());
+        r.addAll( Instance.super.readAxioms());
         return r;
     }
     // To write axioms to an ontology
     @Override
-    public List<MappingIntent> writeExpressionAxioms() {
-        List<MappingIntent> r = ClassExpression.Super.super.writeExpressionAxioms();
-        r.addAll( EquivalentRestriction.super.writeExpressionAxioms());// call this before all and after super
-        r.addAll( ClassExpression.Equivalent.super.writeExpressionAxioms());
-        r.addAll( ClassExpression.Disjoint.super.writeExpressionAxioms());
-        r.addAll( ClassExpression.Sub.super.writeExpressionAxioms());
-        r.addAll( Instance.super.writeExpressionAxioms());
+    public List<MappingIntent> writeAxioms() {
+        List<MappingIntent> r = ClassExpression.Super.super.writeAxioms();
+        r.addAll( EquivalentRestriction.super.writeAxioms());// call this before all and after super
+        r.addAll( ClassExpression.Equivalent.super.writeAxioms());
+        r.addAll( ClassExpression.Disjoint.super.writeAxioms());
+        r.addAll( ClassExpression.Sub.super.writeAxioms());
+        r.addAll( Instance.super.writeAxioms());
         return r;
     }
 

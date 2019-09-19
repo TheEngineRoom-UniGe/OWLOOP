@@ -29,7 +29,7 @@ public class FullClassDescTest {
         concept = new FullClassDesc(
                 "Sphere", // the ground instance name
                 "ontoName", // ontology reference name
-                DEBUGGING_PATH + "ontology4debugging.owl", // the ontology file path
+                DEBUGGING_PATH + "debug/ontology4debugging.owl", // the ontology file path
                 "http://www.semanticweb.org/emaroLab/luca-buoncompagni/sit" // the ontology IRI path
         );
     }
@@ -42,107 +42,107 @@ public class FullClassDescTest {
     @Test
     public void subTest() throws Exception{
         concept.getOntologyReference();
-        concept.readExpressionAxioms();
+        concept.readAxioms();
         assertSemantic();
         concept.addSubClass( "SubClass");
-        concept.readExpressionAxioms();
+        concept.readAxioms();
         assertSemantic();
-        concept.writeExpressionAxioms();
+        concept.writeAxioms();
         assertSemantic();
         concept.addSubClass( "SubClass");
-        concept.writeExpressionAxioms();
+        concept.writeAxioms();
         assertSemantic();
         concept.removeSubClass( "SubClass");
-        concept.readExpressionAxioms();
+        concept.readAxioms();
         assertSemantic();
         concept.removeSubClass( "SubClass");
-        concept.writeExpressionAxioms();
+        concept.writeAxioms();
         assertSemantic();
 
         concept.addSubClass( "Plane");
-        concept.writeExpressionAxioms();
+        concept.writeAxioms();
         assertSemantic();
         System.out.println( "described concept, sub test: " + concept.buildSubClasses());
     }
 
     @Test
     public void superTest() throws Exception{
-        concept.readExpressionAxioms();
+        concept.readAxioms();
         assertSemantic();
         concept.addSuperClass( "SuperClass");
-        concept.readExpressionAxioms();
+        concept.readAxioms();
         assertSemantic();
-        concept.writeExpressionAxioms();
+        concept.writeAxioms();
         assertSemantic();
         concept.addSuperClass( "SuperClass");
         // super class affect class definition during reasoning
-        concept.writeReadExpressionAxioms();
+        concept.writeAxiomsReasonReadAxioms();
         assertSemantic();
         concept.removeSuperClass( "SuperClass");
-        concept.readExpressionAxioms();
+        concept.readAxioms();
         assertSemantic();
         concept.removeSuperClass( "SuperClass");
         // super class affect class definition during reasoning
-        concept.writeReadExpressionAxioms();
+        concept.writeAxiomsReasonReadAxioms();
         assertSemantic();
 
         concept.addSuperClass( "Object");
         // super class affect class definition during reasoning
-        concept.writeReadExpressionAxioms();
+        concept.writeAxiomsReasonReadAxioms();
         assertSemantic();
         System.out.println( "described concept, super test: " + concept.buildSuperClasses());
     }
 
     @Test
     public void disjointTest() throws Exception{
-        concept.readExpressionAxioms();
+        concept.readAxioms();
         assertSemantic();
         concept.addDisjointClass( "DisjointClass");
-        concept.readExpressionAxioms();
+        concept.readAxioms();
         assertSemantic();
-        concept.writeExpressionAxioms();
+        concept.writeAxioms();
         assertSemantic();
         concept.addDisjointClass( "DisjointClass");
-        concept.writeReadExpressionAxioms();
+        concept.writeAxiomsReasonReadAxioms();
         assertSemantic();
         concept.removeDisjointClass( "DisjointClass");
-        concept.readExpressionAxioms();
+        concept.readAxioms();
         assertSemantic();
         concept.removeDisjointClass( "DisjointClass");
-        concept.writeReadExpressionAxioms();
+        concept.writeAxiomsReasonReadAxioms();
         assertSemantic();
 
         concept.addDisjointClass( "Scene");
         // disjoint class affect sub classes during reasoning
-        concept.writeExpressionAxioms();
+        concept.writeAxioms();
         assertSemantic();
         System.out.println( "described concept, disjoint test: " + concept.buildDisjointClasses());
     }
 
     @Test
     public void equivalentTest() throws Exception{
-        concept.readExpressionAxioms();
+        concept.readAxioms();
         assertSemantic();
         concept.addEquivalentClass( "EquivalentClass");
-        concept.readExpressionAxioms();
+        concept.readAxioms();
         assertSemantic();
-        concept.writeExpressionAxioms();
+        concept.writeAxioms();
         assertSemantic();
         concept.addEquivalentClass( "EquivalentClass");
         // equivalent class affect sub classes during reasoning
-        concept.writeExpressionAxioms();
+        concept.writeAxioms();
         assertSemantic();
         concept.removeEquivalentClass( "EquivalentClass");
-        concept.readExpressionAxioms();
+        concept.readAxioms();
         assertSemantic();
         concept.removeEquivalentClass( "EquivalentClass");
         // equivalent class affect sub classes during reasoning
-        concept.writeExpressionAxioms();
+        concept.writeAxioms();
         assertSemantic();
 
         concept.addEquivalentClass( "EquivalentClass");
         // equivalent class affect sub classes during reasoning
-        concept.writeReadExpressionAxioms();
+        concept.writeAxiomsReasonReadAxioms();
         assertSemantic();
         System.out.println( "described concept, equivalent test: " + concept.buildEquivalentClasses());
     }
@@ -153,49 +153,49 @@ public class FullClassDescTest {
         concept.setGroundInstance( "ToRestrict");
 
         concept.addExactDataRestriction( "defines-th_parallelism", 1, Float.class);
-        concept.writeReadExpressionAxioms();
+        concept.writeAxiomsReasonReadAxioms();
         assertSemantic();
 
         concept.clearAll();
-        concept.writeExpressionAxioms();
+        concept.writeAxioms();
         assertSemantic();
 
         concept.addSomeObjectRestrcition( "isAboveOf", "Cone");
-        concept.writeReadExpressionAxioms(false); // bug when saving on file but fine at runtime
+        concept.writeAxiomsReasonReadAxioms(false); // TODO: bug when saving on file but fine at runtime
         assertSemantic();
 
         concept.addClassRestriction( "Parameter");
-        concept.writeReadExpressionAxioms( false);
+        concept.writeAxiomsReasonReadAxioms( false);
         assertSemantic();
 
         concept.removeClassRestriction( "Parameter");
-        concept.writeReadExpressionAxioms( false);
+        concept.writeAxiomsReasonReadAxioms( false);
         assertSemantic();
 
         concept.addExactDataRestriction( "defines-th_parallelism", 1, Float.class);
         concept.addClassRestriction( "AA");
-        concept.writeReadExpressionAxioms( false);
+        concept.writeAxiomsReasonReadAxioms( false);
         assertSemantic();
 
         concept.removeSomeObjectRestrcition( "isAboveOf", "Cone");
-        concept.writeReadExpressionAxioms(false); // bug when saving on file but fine at runtime
+        concept.writeAxiomsReasonReadAxioms(false); // bug when saving on file but fine at runtime
         assertSemantic();
 
         concept.addMaxDataRestriction( "hasPropTest", 5, Integer.class);
         concept.addClassRestriction( "AA");
-        concept.writeReadExpressionAxioms( false);
+        concept.writeAxiomsReasonReadAxioms( false);
         assertSemantic();
 
         concept.clearAll();
         concept.addClassRestriction( "Scene");
         concept.addMinDataRestriction( "hasPropTest", 5, String.class);
-        concept.writeReadExpressionAxioms(false);
+        concept.writeAxiomsReasonReadAxioms(false);
         assertSemantic();
 
         concept.addEquivalentClass( "EE");
         concept.addClassRestriction( "Scene1");
         concept.addOnlyDataRestriction( "hasPropTest2", Boolean.class);
-        concept.writeReadExpressionAxioms(false);
+        concept.writeAxiomsReasonReadAxioms(false);
         assertSemantic();
 
         for( FullClassDesc d : concept.buildEquivalentClasses())
@@ -203,40 +203,40 @@ public class FullClassDescTest {
             if ( d.getGroundInstanceName().equals( "EE")) {
                 d.addDisjointClass(concept.getInstance());
                 d.getEquivalentClasses().clear();
-                d.writeExpressionAxioms();
+                d.writeAxioms();
             }
 
         concept.removeClassRestriction( "Scene1");
-        concept.removeClassRestriction( "Scene");// TODO remove scene from sub class
+        concept.removeClassRestriction( "Scene");// TODO: remove scene from sub class
         concept.removeEquivalentClass( "EE");
-        concept.writeReadExpressionAxioms(false);
+        concept.writeAxiomsReasonReadAxioms(false);
         assertSemantic();
 
     }
 
     @Test
     public void classifyTest() throws Exception{
-        concept.readExpressionAxioms();
+        concept.readAxioms();
         assertSemantic();
         concept.addIndividual( "Individual-A");
-        concept.readExpressionAxioms();
+        concept.readAxioms();
         assertSemantic();
-        concept.writeExpressionAxioms();
+        concept.writeAxioms();
         assertSemantic();
         concept.addIndividual( "Individual-A");
         // equivalent class affect sub classes during reasoning
-        concept.writeExpressionAxioms();
+        concept.writeAxioms();
         assertSemantic();
         concept.removeIndividual( "Individual-A");
-        concept.readExpressionAxioms();
+        concept.readAxioms();
         assertSemantic();
         concept.removeIndividual( "Individual-A");
         // equivalent class affect sub classes during reasoning
-        concept.writeExpressionAxioms();
+        concept.writeAxioms();
         assertSemantic();
 
         concept.setGroundInstance( "Parameter");
-        concept.readExpressionAxioms();
+        concept.readAxioms();
         System.out.println( "described concept, equivalent test: " + concept.buildIndividuals());
 
     }

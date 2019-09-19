@@ -2,7 +2,6 @@ package it.emarolab.owloop.descriptor.utility.classDescriptor;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.Classes;
-import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.Individuals;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.Restrictions;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.ClassExpression;
@@ -78,20 +77,20 @@ public class RestrictionClassDesc
 
     // To read axioms from an ontology
     @Override
-    public List<MappingIntent> readExpressionAxioms() {
-        List<MappingIntent> r = ClassExpression.Disjoint.super.readExpressionAxioms();
-        r.addAll( ClassExpression.Equivalent.super.readExpressionAxioms());
-        r.addAll( EquivalentRestriction.super.readExpressionAxioms());
-        r.addAll( Instance.super.readExpressionAxioms());
+    public List<MappingIntent> readAxioms() {
+        List<MappingIntent> r = ClassExpression.Disjoint.super.readAxioms();
+        r.addAll( ClassExpression.Equivalent.super.readAxioms());
+        r.addAll( EquivalentRestriction.super.readAxioms());
+        r.addAll( Instance.super.readAxioms());
         return r;
     }
     // To write axioms to an ontology
     @Override
-    public List<MappingIntent> writeExpressionAxioms() {
-        List<MappingIntent> r = ClassExpression.Disjoint.super.writeExpressionAxioms();
-        r.addAll( ClassExpression.Equivalent.super.writeExpressionAxioms());
-        r.addAll( EquivalentRestriction.super.writeExpressionAxioms());
-        r.addAll( Instance.super.writeExpressionAxioms());
+    public List<MappingIntent> writeAxioms() {
+        List<MappingIntent> r = ClassExpression.Disjoint.super.writeAxioms();
+        r.addAll( ClassExpression.Equivalent.super.writeAxioms());
+        r.addAll( EquivalentRestriction.super.writeAxioms());
+        r.addAll( Instance.super.writeAxioms());
         return r;
     }
 

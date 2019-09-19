@@ -3,7 +3,6 @@ package it.emarolab.owloop.descriptor.utility.dataPropertyDescriptor;
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DataProperties;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.DataPropertyExpression;
-import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.DataPropertyGround;
 import org.semanticweb.owlapi.model.OWLDataProperty;
 
@@ -69,16 +68,16 @@ public class RestrictionDataPropertyDesc
 
     // To read axioms from an ontology
     @Override
-    public List<MappingIntent> readExpressionAxioms() {
-        List<MappingIntent> r = DataPropertyExpression.Disjoint.super.readExpressionAxioms();
-        r.addAll( DataPropertyExpression.Equivalent.super.readExpressionAxioms());
+    public List<MappingIntent> readAxioms() {
+        List<MappingIntent> r = DataPropertyExpression.Disjoint.super.readAxioms();
+        r.addAll( DataPropertyExpression.Equivalent.super.readAxioms());
         return r;
     }
     // To write axioms to an ontology
     @Override
-    public List<MappingIntent> writeExpressionAxioms() {
-        List<MappingIntent> r = DataPropertyExpression.Disjoint.super.writeExpressionAxioms();
-        r.addAll( DataPropertyExpression.Equivalent.super.writeExpressionAxioms());
+    public List<MappingIntent> writeAxioms() {
+        List<MappingIntent> r = DataPropertyExpression.Disjoint.super.writeAxioms();
+        r.addAll( DataPropertyExpression.Equivalent.super.writeAxioms());
         return r;
     }
 

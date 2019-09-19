@@ -1,7 +1,6 @@
 package it.emarolab.owloop.descriptor.utility.individualDescriptor;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
-import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.Individuals;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.IndividualExpression;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.IndividualGround;
@@ -69,16 +68,16 @@ public class RestrictionIndividualDesc
 
     // To read axioms from an ontology
     @Override
-    public List<MappingIntent> readExpressionAxioms() {
-        List<MappingIntent> r = IndividualExpression.Equivalent.super.readExpressionAxioms();
-        r.addAll( IndividualExpression.Disjoint.super.readExpressionAxioms());
+    public List<MappingIntent> readAxioms() {
+        List<MappingIntent> r = IndividualExpression.Equivalent.super.readAxioms();
+        r.addAll( IndividualExpression.Disjoint.super.readAxioms());
         return r;
     }
     // To write axioms to an ontology
     @Override
-    public List<MappingIntent> writeExpressionAxioms() {
-        List<MappingIntent> r = IndividualExpression.Equivalent.super.writeExpressionAxioms();
-        r.addAll( IndividualExpression.Disjoint.super.writeExpressionAxioms());
+    public List<MappingIntent> writeAxioms() {
+        List<MappingIntent> r = IndividualExpression.Equivalent.super.writeAxioms();
+        r.addAll( IndividualExpression.Disjoint.super.writeAxioms());
         return r;
     }
 

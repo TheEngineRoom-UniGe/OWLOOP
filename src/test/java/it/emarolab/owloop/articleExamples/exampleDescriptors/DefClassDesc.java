@@ -2,7 +2,6 @@ package it.emarolab.owloop.articleExamples.exampleDescriptors;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.amor.owlInterface.SemanticRestriction;
-import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.Restrictions;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.ClassExpression;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.ClassGround;
@@ -44,14 +43,14 @@ public abstract class DefClassDesc
 
     // To read axioms from an ontology
     @Override
-    public List<MappingIntent> readExpressionAxioms() {
-        List<MappingIntent> r = EquivalentRestriction.super.readExpressionAxioms(); // call this before Sub or Super !!!
+    public List<MappingIntent> readAxioms() {
+        List<MappingIntent> r = EquivalentRestriction.super.readAxioms(); // call this before Sub or Super !!!
         return r;
     }
     // To write axioms to an ontology
     @Override
-    public List<MappingIntent> writeExpressionAxioms() {
-        List<MappingIntent> r = EquivalentRestriction.super.writeExpressionAxioms(); // call this before Sub or Super !!!
+    public List<MappingIntent> writeAxioms() {
+        List<MappingIntent> r = EquivalentRestriction.super.writeAxioms(); // call this before Sub or Super !!!
         return r;
     }
 

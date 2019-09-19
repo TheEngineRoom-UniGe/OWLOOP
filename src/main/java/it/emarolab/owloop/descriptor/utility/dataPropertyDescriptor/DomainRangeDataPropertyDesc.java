@@ -5,7 +5,6 @@ import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.Restrictions;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.DataPropertyGround;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.DataPropertyExpression;
-import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import org.semanticweb.owlapi.model.OWLDataProperty;
 
 import java.util.List;
@@ -69,16 +68,16 @@ public class DomainRangeDataPropertyDesc
 
     // To read axioms from an ontology
     @Override
-    public List<MappingIntent> readExpressionAxioms() {
-        List<MappingIntent> r = DataPropertyExpression.Domain.super.readExpressionAxioms();
-        r.addAll( DataPropertyExpression.Range.super.readExpressionAxioms());
+    public List<MappingIntent> readAxioms() {
+        List<MappingIntent> r = DataPropertyExpression.Domain.super.readAxioms();
+        r.addAll( DataPropertyExpression.Range.super.readAxioms());
         return r;
     }
     // To write axioms to an ontology
     @Override
-    public List<MappingIntent> writeExpressionAxioms() {
-        List<MappingIntent> r = DataPropertyExpression.Range.super.writeExpressionAxioms();
-        r.addAll( DataPropertyExpression.Domain.super.writeExpressionAxioms());
+    public List<MappingIntent> writeAxioms() {
+        List<MappingIntent> r = DataPropertyExpression.Range.super.writeAxioms();
+        r.addAll( DataPropertyExpression.Domain.super.writeAxioms());
         return r;
     }
 

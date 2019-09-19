@@ -4,7 +4,6 @@ import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.Individuals;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.ClassExpression;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.ClassGround;
-import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.utility.individualDescriptor.LinkIndividualDesc;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
@@ -66,13 +65,13 @@ public class InstanceClassDesc
 
     // To read axioms from an ontology
     @Override
-    public List<MappingIntent> readExpressionAxioms() {
-        return Instance.super.readExpressionAxioms();
+    public List<MappingIntent> readAxioms() {
+        return Instance.super.readAxioms();
     }
     // To write axioms to an ontology
     @Override
-    public List<MappingIntent> writeExpressionAxioms() {
-        return Instance.super.writeExpressionAxioms();
+    public List<MappingIntent> writeAxioms() {
+        return Instance.super.writeAxioms();
     }
 
     /* Overriding methods in classes: Class and ClassExpression */

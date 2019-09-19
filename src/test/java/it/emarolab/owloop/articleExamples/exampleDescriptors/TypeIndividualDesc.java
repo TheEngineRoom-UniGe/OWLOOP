@@ -5,7 +5,6 @@ import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.Classes;
 import it.emarolab.owloop.descriptor.utility.individualDescriptor.FullIndividualDesc;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.IndividualGround;
-import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.IndividualExpression;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
@@ -49,14 +48,14 @@ public class TypeIndividualDesc
 
     // To read axioms from an ontology
     @Override
-    public List<MappingIntent> readExpressionAxioms() {
-        List<MappingIntent> r = Type.super.readExpressionAxioms();
+    public List<MappingIntent> readAxioms() {
+        List<MappingIntent> r = Type.super.readAxioms();
         return r;
     }
     // To write axioms to an ontology
     @Override
-    public List<MappingIntent> writeExpressionAxioms() {
-        List<MappingIntent> r = Type.super.writeExpressionAxioms();
+    public List<MappingIntent> writeAxioms() {
+        List<MappingIntent> r = Type.super.writeAxioms();
         return r;
     }
 

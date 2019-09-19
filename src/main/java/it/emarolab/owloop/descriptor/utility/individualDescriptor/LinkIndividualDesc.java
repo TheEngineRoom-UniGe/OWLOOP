@@ -68,16 +68,16 @@ public class LinkIndividualDesc
 
     // To read axioms from an ontology
     @Override
-    public List<MappingIntent> readExpressionAxioms() {
-        List<MappingIntent> r = IndividualExpression.ObjectLink.super.readExpressionAxioms();
-        r.addAll( IndividualExpression.DataLink.super.readExpressionAxioms());
+    public List<MappingIntent> readAxioms() {
+        List<MappingIntent> r = IndividualExpression.ObjectLink.super.readAxioms();
+        r.addAll( IndividualExpression.DataLink.super.readAxioms());
         return r;
     }
     // To write axioms to an ontology
     @Override
-    public List<MappingIntent> writeExpressionAxioms() {
-        List<MappingIntent> r = ObjectLink.super.writeExpressionAxioms();
-        r.addAll( DataLink.super.writeExpressionAxioms());
+    public List<MappingIntent> writeAxioms() {
+        List<MappingIntent> r = ObjectLink.super.writeAxioms();
+        r.addAll( DataLink.super.writeAxioms());
         return r;
     }
 

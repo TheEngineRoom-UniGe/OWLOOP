@@ -6,7 +6,6 @@ import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DataProper
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.Restrictions;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.DataPropertyGround;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.DataPropertyExpression;
-import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import org.semanticweb.owlapi.model.OWLDataProperty;
 
 import java.util.List;
@@ -82,24 +81,24 @@ public class FullDataPropertyDesc
 
     // To read axioms from an ontology
     @Override
-    public List<MappingIntent> readExpressionAxioms() {
-        List<MappingIntent> r = DataPropertyExpression.Disjoint.super.readExpressionAxioms();
-        r.addAll( DataPropertyExpression.Equivalent.super.readExpressionAxioms());
-        r.addAll( DataPropertyExpression.Range.super.readExpressionAxioms());
-        r.addAll( DataPropertyExpression.Domain.super.readExpressionAxioms());
-        r.addAll( DataPropertyExpression.Sub.super.readExpressionAxioms());
-        r.addAll( DataPropertyExpression.Super.super.readExpressionAxioms());
+    public List<MappingIntent> readAxioms() {
+        List<MappingIntent> r = DataPropertyExpression.Disjoint.super.readAxioms();
+        r.addAll( DataPropertyExpression.Equivalent.super.readAxioms());
+        r.addAll( DataPropertyExpression.Range.super.readAxioms());
+        r.addAll( DataPropertyExpression.Domain.super.readAxioms());
+        r.addAll( DataPropertyExpression.Sub.super.readAxioms());
+        r.addAll( DataPropertyExpression.Super.super.readAxioms());
         return r;
     }
     // To write axioms to an ontology
     @Override
-    public List<MappingIntent> writeExpressionAxioms() {
-        List<MappingIntent> r = DataPropertyExpression.Disjoint.super.writeExpressionAxioms();
-        r.addAll( DataPropertyExpression.Equivalent.super.writeExpressionAxioms());
-        r.addAll( DataPropertyExpression.Range.super.writeExpressionAxioms());
-        r.addAll( DataPropertyExpression.Domain.super.writeExpressionAxioms());
-        r.addAll( DataPropertyExpression.Sub.super.writeExpressionAxioms());
-        r.addAll( DataPropertyExpression.Super.super.writeExpressionAxioms());
+    public List<MappingIntent> writeAxioms() {
+        List<MappingIntent> r = DataPropertyExpression.Disjoint.super.writeAxioms();
+        r.addAll( DataPropertyExpression.Equivalent.super.writeAxioms());
+        r.addAll( DataPropertyExpression.Range.super.writeAxioms());
+        r.addAll( DataPropertyExpression.Domain.super.writeAxioms());
+        r.addAll( DataPropertyExpression.Sub.super.writeAxioms());
+        r.addAll( DataPropertyExpression.Super.super.writeAxioms());
         return r;
     }
 

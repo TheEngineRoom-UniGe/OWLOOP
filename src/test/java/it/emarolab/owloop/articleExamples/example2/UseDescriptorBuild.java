@@ -51,12 +51,12 @@ public class UseDescriptorBuild {
 
         ObjectLinkIndividualDesc d1 = new ObjectLinkIndividualDesc( "Robot1", ontoRef);
         d1.addObject( "isIn",true); // to be able to read knowledge (only) specific to the property "isIn"
-        d1.readExpressionAxioms(); // read all axioms (related to this descriptor) from the ontology
+        d1.readAxioms(); // read all axioms (related to this descriptor) from the ontology
         System.out.println( d1); // printing to check the axioms represented by this descriptor
         OWLNamedIndividual robotPosition = d1.getIndividualFromObjectProperty( "isIn"); // get knowledge from the internal state of the Descriptor
 
         TypeIndividualDesc d2 = new TypeIndividualDesc( robotPosition, ontoRef); // here, robotPosition = "Corridor1"
-        d2.readExpressionAxioms();
+        d2.readAxioms();
 
         System.out.println( d2); // printing
         Set<DefSubClassDesc> setOfConceptTypes = d2.buildTypes(); // (Descriptor.buildTypes()) here, gets the Type/s (i.e., Class/s) of the Individual "Corridor1", as grounded Descriptors

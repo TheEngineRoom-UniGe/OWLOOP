@@ -39,7 +39,7 @@ public class LocationClassDesc
         defRestrictions.setProperty( getOWLObjectProperty( "hasDoor"));
         defRestrictions.setValue( getOWLClass( "DOOR"));
         getEquivalentRestrictions().add( defRestrictions);
-        writeExpressionAxioms();
+        writeAxioms();
     }
 
     // implementing with a Some-restriction

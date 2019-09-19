@@ -43,7 +43,7 @@ public class RemoveAxioms {
         ObjectLinkIndividualDesc robot_Desc1 = new ObjectLinkIndividualDesc( "Robot1", ontoRef);
 
         // synchronize axioms from the Ontology to the internal state of the Descriptor
-        robot_Desc1.readExpressionAxioms();
+        robot_Desc1.readAxioms();
 
         // print the Descriptor
         System.out.println(robot_Desc1);
@@ -52,7 +52,7 @@ public class RemoveAxioms {
         robot_Desc1.removeObject("isIn");
 
         // synchronize axioms from the internal state of the Descriptor and Ontology
-        robot_Desc1.writeExpressionAxioms();
+        robot_Desc1.writeAxioms();
 
         // synchronize reasoner of the ontology, so that its axioms are updated with inferences based on latest assertions
         ontoRef.synchronizeReasoner();
@@ -64,7 +64,7 @@ public class RemoveAxioms {
         ObjectLinkIndividualDesc robot_Desc2 = new ObjectLinkIndividualDesc( "Robot1", ontoRef);
 
         // synchronize axioms from the Ontology to the internal state of the Descriptor
-        robot_Desc2.readExpressionAxioms();
+        robot_Desc2.readAxioms();
 
         // print the Descriptor
         System.out.println(robot_Desc2);

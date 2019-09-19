@@ -4,7 +4,6 @@ import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.ObjectLinkSet;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.ObjectLinks;
 import it.emarolab.owloop.descriptor.utility.individualDescriptor.FullIndividualDesc;
-import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.IndividualExpression;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.IndividualGround;
 import it.emarolab.owloop.descriptor.utility.objectPropertyDescriptor.FullObjectPropertyDesc;
@@ -47,14 +46,14 @@ public class ObjectLinkIndividualDesc
 
     // To read axioms from an ontology
     @Override
-    public List<MappingIntent> readExpressionAxioms() {
-        List<MappingIntent> r = ObjectLink.super.readExpressionAxioms();
+    public List<MappingIntent> readAxioms() {
+        List<MappingIntent> r = ObjectLink.super.readAxioms();
         return r;
     }
     // To write axioms to an ontology
     @Override
-    public List<MappingIntent> writeExpressionAxioms() {
-        List<MappingIntent> r = ObjectLink.super.writeExpressionAxioms();
+    public List<MappingIntent> writeAxioms() {
+        List<MappingIntent> r = ObjectLink.super.writeAxioms();
         return r;
     }
 

@@ -2,7 +2,6 @@ package it.emarolab.owloop.articleExamples.exampleDescriptors;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.Classes;
-import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.Restrictions;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.ClassExpression;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.ClassGround;
@@ -46,16 +45,16 @@ public class DefSubClassDesc
 
     // implementations for Axiom.descriptor
     @Override
-    public List<MappingIntent> readExpressionAxioms() {
-        List<MappingIntent> r = EquivalentRestriction.super.readExpressionAxioms(); // call this before Sub or Super !!!
-        r.addAll( Sub.super.readExpressionAxioms());
+    public List<MappingIntent> readAxioms() {
+        List<MappingIntent> r = EquivalentRestriction.super.readAxioms(); // call this before Sub or Super !!!
+        r.addAll( Sub.super.readAxioms());
         return r;
     }
 
     @Override
-    public List<MappingIntent> writeExpressionAxioms() {
-        List<MappingIntent> r = Sub.super.writeExpressionAxioms();
-        r.addAll( EquivalentRestriction.super.writeExpressionAxioms()); // call this before Sub or Super !!!
+    public List<MappingIntent> writeAxioms() {
+        List<MappingIntent> r = Sub.super.writeAxioms();
+        r.addAll( EquivalentRestriction.super.writeAxioms()); // call this before Sub or Super !!!
         return r;
     }
 

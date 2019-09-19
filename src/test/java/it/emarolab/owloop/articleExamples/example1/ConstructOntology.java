@@ -12,6 +12,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+
 /**
  * An example to show how to add axioms, i.e, classes, objectProperties, dataProperties and individuals, to an ontology by using descriptors.
  *
@@ -51,64 +53,51 @@ public class ConstructOntology {
         CorridorClassDesc corridorConcept_Desc = new CorridorClassDesc( ontoRef);
         RoomClassDesc roomConcept_Desc = new RoomClassDesc( ontoRef);
 
-        System.out.println(locationConcept_Desc);
-
         // Add Individual Expression Axioms (i.e., Assertions) to the ontology
-        ObjectLinkIndividualDesc corridorIndividual_Desc = new ObjectLinkIndividualDesc( "Corridor1", ontoRef); // Instantiate ObjectLinkIndividualDesc with ground as "Corridor1" and ontology reference as ontoRef
-        ObjectLinkIndividualDesc robotIndividual_Desc = new ObjectLinkIndividualDesc( "Robot1", ontoRef);
-
+        ObjectLinkIndividualDesc corridorIndividual_Desc = new ObjectLinkIndividualDesc( "Corridor1", ontoRef);
         corridorIndividual_Desc.addObject( "isLinkedTo", "Room1");
         corridorIndividual_Desc.addObject( "isLinkedTo", "Room2");
-        corridorIndividual_Desc.writeExpressionAxioms(); // write all axioms (represented in this descriptor) to the ontology
+        corridorIndividual_Desc.writeAxioms();
 
-        robotIndividual_Desc.addObject( "isIn", getRobotPosition()); // consider that we get robot's position after some computation
-        robotIndividual_Desc.writeExpressionAxioms();
+        ObjectLinkIndividualDesc robotIndividual_Desc = new ObjectLinkIndividualDesc( "Robot1", ontoRef);
+        robotIndividual_Desc.addObject( "isIn", getRobotPosition());
+        robotIndividual_Desc.writeAxioms();
 
         // Adding ObjectProperty Expression Axioms to the Ontology
         DomainRangeObjectPropertyDesc hasDoor_Desc = new DomainRangeObjectPropertyDesc( "hasDoor", ontoRef);
         hasDoor_Desc.addDomainClassRestriction( "LOCATION");
         hasDoor_Desc.addRangeClassRestriction( "DOOR");
-        hasDoor_Desc.writeExpressionAxioms();
+        hasDoor_Desc.writeAxioms();
 
         DomainRangeObjectPropertyDesc isLinkedTo_Desc = new DomainRangeObjectPropertyDesc( "isLinkedTo", ontoRef);
         isLinkedTo_Desc.addDomainClassRestriction( "CORRIDOR");
         isLinkedTo_Desc.addRangeClassRestriction( "ROOM");
-        isLinkedTo_Desc.writeExpressionAxioms();
+        isLinkedTo_Desc.writeAxioms();
 
         DomainRangeObjectPropertyDesc isIn_Desc = new DomainRangeObjectPropertyDesc( "isIn", ontoRef);
         isIn_Desc.addDomainClassRestriction( "ROBOT");
         isIn_Desc.addRangeClassRestriction( "LOCATION");
-        isIn_Desc.writeExpressionAxioms();
+        isIn_Desc.writeAxioms();
 
         // Adding some more details into the ontology
 
         // ROBOT concept disjoint with DOOR and LOCATION concepts
         RestrictionClassDesc robotConcept_Desc = new RestrictionClassDesc( "ROBOT", ontoRef);
-
         robotConcept_Desc.addDisjointClass( "LOCATION");
         robotConcept_Desc.addDisjointClass( "DOOR");
-        robotConcept_Desc.writeExpressionAxioms();
+        robotConcept_Desc.writeAxioms();
 
         // All individuals are different from each other
         RestrictionIndividualDesc corridorIndividualRestriction_Desc = new RestrictionIndividualDesc( "Corridor1", ontoRef);
-
         corridorIndividualRestriction_Desc.addDisjointIndividual( "Robot1");
         corridorIndividualRestriction_Desc.addDisjointIndividual( "Room1");
         corridorIndividualRestriction_Desc.addDisjointIndividual( "Room2");
-        corridorIndividualRestriction_Desc.writeExpressionAxioms();
-
-        // This piece of code, is to show the error when we construct an inconsistent ontology
-//        FullClassDesc robotDesc = new FullClassDesc( "ROBOT", ontoRef);
-//        robotDesc.reason();
-//        robotDesc.readExpressionAxioms(); // does this work? (because the ontology is inconsistent)
-//        DescriptorEntitySet.Individuals a = robotDesc.queryIndividuals();
-//        System.out.println(a); // What is inside this?
-
+        corridorIndividualRestriction_Desc.writeAxioms();
     }
 
     private String getRobotPosition() {
 
-        // ... consider that this method does some computation and finally returns the robot's position
+        // ... consider that this method does some heavy computation and finally returns the robot's position
         // ...
         return "Corridor1";
     }
@@ -121,4 +110,4 @@ public class ConstructOntology {
     }
 }
 
-// TODO what happens when ontology is inconsistent (do we say something in aMORlogs or even apart from that)
+// TODO: what happens when ontology is inconsistent (do we say something in aMORlogs or even apart from that)

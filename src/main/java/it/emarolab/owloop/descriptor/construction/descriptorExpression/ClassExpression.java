@@ -17,7 +17,7 @@ import java.util.Set;
 
 /**
  * This interface extends all the interfaces in {@link Class}.
- * It allows to {@link #readExpressionAxioms()} and {@link #writeExpressionAxioms()}
+ * It allows to {@link #readAxioms()} and {@link #writeAxioms()}
  * specifically for OWL Classes.
  * It contains several expressions that can be combined in any arbitrary way as they
  * rely on the same ground ({@link ConceptGroundInstance}).
@@ -57,7 +57,7 @@ public interface ClassExpression
     /**
      * The {@link Class.Instance} expression for a {@link Descriptor} whose ground is {@link OWLClass}.
      * <p>
-     *     It specifies how to {@link #queryIndividuals()} and {@link #writeExpressionAxioms()} for the
+     *     It specifies how to {@link #queryIndividuals()} and {@link #writeAxioms()} for the
      *     individuals of the ground Class ({@link #getGroundInstance()}).
      * </p>
      *
@@ -118,7 +118,7 @@ public interface ClassExpression
         }
 
         @Override // see super classes for documentation
-        default List<MappingIntent> writeExpressionAxioms(){
+        default List<MappingIntent> writeAxioms(){
             try {
                 EntitySet.SynchronisationIntent<OWLNamedIndividual> to = synchroniseIndividualsToExpressionAxioms();
                 if (to == null)
@@ -139,7 +139,7 @@ public interface ClassExpression
     /**
      * The {@link Class.Disjoint} expression for a {@link Descriptor} whose ground is {@link OWLClass}.
      * <p>
-     *     It specifies how to {@link #queryDisjointClasses()} and {@link #writeExpressionAxioms()} for the
+     *     It specifies how to {@link #queryDisjointClasses()} and {@link #writeAxioms()} for the
      *     classes disjoint to the ground Class ({@link #getGroundInstance()}).
      * </p>
      *
@@ -154,7 +154,7 @@ public interface ClassExpression
          * It is an helper that just calls:
          * {@code {@link #getDisjointClasses()}.add( {@link #getOntologyReference()}.getOWLClass( propertyName))}
          * in order to add a new class (given by name) in the {@link EntitySet} list.
-         * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
+         * This method should be always synchronised with {@link #writeAxiomsReasonReadAxioms()}
          * to be perfectly aligned with the ontology, since it affects {@link ClassExpression.Sub} {@link EntitySet}.
          * @param className the class name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
@@ -166,7 +166,7 @@ public interface ClassExpression
          * It is an helper that just calls:
          * {@code {@link #getDisjointClasses()}.add( cl)}
          * in order to add a new class in the {@link EntitySet} list.
-         * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
+         * This method should be always synchronised with {@link #writeAxiomsReasonReadAxioms()}
          * to be perfectly aligned with the ontology, since it affects {@link ClassExpression.Sub} {@link EntitySet}.
          * @param instance the class to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
@@ -179,7 +179,7 @@ public interface ClassExpression
          * It is an helper that just calls:
          * {@code {@link #getDisjointClasses()}.remove( {@link #getOntologyReference()}.getOWLClass( propertyName))}
          * in order to remove a class (given by name) from the {@link EntitySet} list.
-         * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
+         * This method should be always synchronised with {@link #writeAxiomsReasonReadAxioms()}
          * to be perfectly aligned with the ontology, since it affects {@link ClassExpression.Sub} {@link EntitySet}.
          * @param className the class name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
@@ -191,7 +191,7 @@ public interface ClassExpression
          * It is an helper that just calls:
          * {@code {@link #getDisjointClasses()}.remove( cl)}
          * in order to remove a class in the {@link EntitySet} list.
-         * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
+         * This method should be always synchronised with {@link #writeAxiomsReasonReadAxioms()}
          * to be perfectly aligned with the ontology, since it affects {@link ClassExpression.Sub} {@link EntitySet}.
          * @param instance the class to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
@@ -211,7 +211,7 @@ public interface ClassExpression
         }
 
         @Override // see super classes for documentation
-        default List<MappingIntent> writeExpressionAxioms(){
+        default List<MappingIntent> writeAxioms(){
             try {
                 EntitySet.SynchronisationIntent<OWLClass> to = synchroniseDisjointClassesToExpressionAxioms();
                 if ( to == null)
@@ -241,7 +241,7 @@ public interface ClassExpression
     /**
      * The {@link Class.Equivalent} expression for a {@link Descriptor} whose ground is {@link OWLClass}.
      * <p>
-     *     It specifies how to {@link #queryEquivalentClasses()} and {@link #writeExpressionAxioms()} for the
+     *     It specifies how to {@link #queryEquivalentClasses()} and {@link #writeAxioms()} for the
      *     classes equivalent to the ground Class ({@link #getGroundInstance()}) .
      * </p>
      *
@@ -304,7 +304,7 @@ public interface ClassExpression
         }
 
         @Override // see super classes for documentation
-        default List<MappingIntent> writeExpressionAxioms(){
+        default List<MappingIntent> writeAxioms(){
             try {
                 EntitySet.SynchronisationIntent<OWLClass> to = synchroniseEquivalentClassesToExpressionAxioms();
                 if ( to == null)
@@ -334,7 +334,7 @@ public interface ClassExpression
     /**
      * The {@link Class.Sub} expression for a {@link Descriptor} whose ground is {@link OWLClass}.
      * <p>
-     *     It specifies how to {@link #querySubClasses()} and {@link #writeExpressionAxioms()} for the
+     *     It specifies how to {@link #querySubClasses()} and {@link #writeAxioms()} for the
      *     sub-classes of the ground Class ({@link #getGroundInstanceName()}).
      * </p>
      *
@@ -396,7 +396,7 @@ public interface ClassExpression
         }
 
         @Override // see super classes for documentation
-        default List<MappingIntent> writeExpressionAxioms(){
+        default List<MappingIntent> writeAxioms(){
             try {
                 EntitySet.SynchronisationIntent<OWLClass> to = synchroniseSubClassesToExpressionAxioms();
                 if ( to == null)
@@ -418,7 +418,7 @@ public interface ClassExpression
     /**
      * The {@link Class.Super} expression for a {@link Descriptor} whose ground is {@link OWLClass}.
      * <p>
-     *     It specifies how to {@link #querySuperClasses()} and {@link #writeExpressionAxioms()} for the
+     *     It specifies how to {@link #querySuperClasses()} and {@link #writeAxioms()} for the
      *     super-classes of the ground Class ({@link #getGroundInstance()}).
      * </p>
      *
@@ -433,7 +433,7 @@ public interface ClassExpression
          * It is an helper that just calls:
          * {@code {@link #getSuperClasses()}.add( {@link #getOntologyReference()}.getOWLClass( propertyName))}
          * in order to add a new class (given by name) in the {@link EntitySet} list.
-         * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
+         * This method should be always synchronised with {@link #writeAxiomsReasonReadAxioms()}
          * to be perfectly aligned with the ontology, since it affects {@link EquivalentRestriction} {@link EntitySet}.
          * @param className the class name to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
@@ -445,7 +445,7 @@ public interface ClassExpression
          * It is an helper that just calls:
          * {@code {@link #getSuperClasses()}.add( cl)}
          * in order to add a new class in the {@link EntitySet} list.
-         * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
+         * This method should be always synchronised with {@link #writeAxiomsReasonReadAxioms()}
          * to be perfectly aligned with the ontology, since it affects {@link EquivalentRestriction} {@link EntitySet}.
          * @param instance the class to add for synchronisation.
          * @return {@code true} if the axioms changed as a result of the call.
@@ -458,7 +458,7 @@ public interface ClassExpression
          * It is an helper that just calls:
          * {@code {@link #getSuperClasses()}.remove( {@link #getOntologyReference()}.getOWLClass( propertyName))}
          * in order to remove a class (given by name) from the {@link EntitySet} list.
-         * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
+         * This method should be always synchronised with {@link #writeAxiomsReasonReadAxioms()}
          * to be perfectly aligned with the ontology, since it affects {@link EquivalentRestriction} {@link EntitySet}.
          * @param className the class name to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
@@ -470,7 +470,7 @@ public interface ClassExpression
          * It is an helper that just calls:
          * {@code {@link #getSuperClasses()}.remove( cl)}
          * in order to remove a class in the {@link EntitySet} list.
-         * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
+         * This method should be always synchronised with {@link #writeAxiomsReasonReadAxioms()}
          * to be perfectly aligned with the ontology, since it affects {@link EquivalentRestriction} {@link EntitySet}.
          * @param instance the class to remove for synchronisation.
          * @return {@code true} if an element was removed as a result of this call.
@@ -487,7 +487,7 @@ public interface ClassExpression
         }
 
         @Override // see super classes for documentation
-        default List<MappingIntent> writeExpressionAxioms(){
+        default List<MappingIntent> writeAxioms(){
             try {
                 EntitySet.SynchronisationIntent<OWLClass> to = synchroniseSuperClassesToExpressionAxioms();
                 if ( to == null)
@@ -509,12 +509,12 @@ public interface ClassExpression
     /**
      * The {@link Class.Restriction} expression for a {@link Descriptor} whose ground is {@link OWLClass}.
      * <p>
-     *     It specifies how to {@link #queryEquivalentRestrictions()} and {@link #writeExpressionAxioms()} for
+     *     It specifies how to {@link #queryEquivalentRestrictions()} and {@link #writeAxioms()} for
      *     definition (i.e.: {@link SemanticRestriction}) of the ground Class ({@link #getGroundInstance()}).
      *     All the restrictions managed by this Class are considered to be a unique class definition
      *     made by their intersection.
      *     <br>
-     *     <b>ATTENTION</b>: the {@link #writeExpressionAxioms()} method implemented by
+     *     <b>ATTENTION</b>: the {@link #writeAxioms()} method implemented by
      *     this constructor uses {@link org.semanticweb.owlapi.change.ConvertSuperClassesToEquivalentClass}
      *     and {@link org.semanticweb.owlapi.change.ConvertEquivalentClassesToSuperClasses}.
      *     It may affect {@link ClassExpression.Super} or {@link ClassExpression.Sub} descriptors.
@@ -1276,7 +1276,7 @@ public interface ClassExpression
         }
 
         @Override // see super classes for documentation
-        default List<MappingIntent> writeExpressionAxioms(){
+        default List<MappingIntent> writeAxioms(){
             try {
                 EntitySet.SynchronisationIntent<SemanticRestriction> to = synchroniseEquivalentRestrictionsToExpressionAxioms();
                 if ( to == null)

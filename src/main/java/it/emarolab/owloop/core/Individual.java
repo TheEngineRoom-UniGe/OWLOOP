@@ -46,7 +46,7 @@ public interface Individual<O,J>
             extends Individual<O,J>{
 
         @Override // see documentation on Axiom.descriptor.readExpressionAxioms
-        default List<MappingIntent> readExpressionAxioms(){
+        default List<MappingIntent> readAxioms(){
             try {
                 EntitySet.SynchronisationIntent<Y> from = synchroniseTypesFromExpressionAxioms();
                 if ( from != null) {
@@ -74,7 +74,7 @@ public interface Individual<O,J>
             Set<D> out = new HashSet<>();
             for( Y cl : getTypes()){
                 D built = getNewType( cl, getOntologyReference());
-                built.readExpressionAxioms();
+                built.readAxioms();
                 out.add( built);
             }
             return out;
@@ -109,7 +109,7 @@ public interface Individual<O,J>
          * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryTypes()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getTypes()}. This should
-         * be done by {@link #writeExpressionAxioms()}.
+         * be done by {@link #writeAxioms()}.
          * @return the changes to be done to synchronise {@code this} structure with
          * the classes in which {@link #getInstance()} is belonging to, in the OWL representation.
          */
@@ -126,7 +126,7 @@ public interface Individual<O,J>
          * It calls {@link EntitySet#synchroniseFrom(EntitySet)} with {@link #queryTypes()}
          * as input parameter. This computes the changes to be performed into the {@link #getTypes()}
          * in order to synchronise it with respect to an OWL representation. This is
-         * be done by {@link #readExpressionAxioms()}.
+         * be done by {@link #readAxioms()}.
          * @return the changes to be done to synchronise the classes in which the {@link #getInstance()}
          * individualDescriptor is belonging to, from an OWL representation to {@code this} descriptor.
          */
@@ -152,7 +152,7 @@ public interface Individual<O,J>
             extends Individual<O,J>{
 
         @Override // see documentation on Axiom.descriptor.readExpressionAxioms
-        default List<MappingIntent> readExpressionAxioms(){
+        default List<MappingIntent> readAxioms(){
             try {
                 EntitySet.SynchronisationIntent<J> from = synchroniseDisjointIndividualsFromExpressionAxioms();
                 if ( from != null) {
@@ -179,7 +179,7 @@ public interface Individual<O,J>
             Set<D> out = new HashSet<>();
             for( J cl : getDisjointIndividuals()){
                 D built = getNewDisjointIndividual( cl, getOntologyReference());
-                built.readExpressionAxioms();
+                built.readAxioms();
                 out.add( built);
             }
             return out;
@@ -214,7 +214,7 @@ public interface Individual<O,J>
          * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryDisjointIndividuals()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getDisjointIndividuals()}. This should
-         * be done by {@link #writeExpressionAxioms()}.
+         * be done by {@link #writeAxioms()}.
          * @return the changes to be done to synchronise {@code this} structure with
          * the different individuals from {@link #getInstance()}; to the OWL representation.
          */
@@ -231,7 +231,7 @@ public interface Individual<O,J>
          * It calls {@link EntitySet#synchroniseFrom(EntitySet)} with {@link #queryDisjointIndividuals()}
          * as input parameter. This computes the changes to be performed into the {@link #getDisjointIndividuals()}
          * in order to synchronise it with respect to an OWL representation. This is
-         * be done by {@link #readExpressionAxioms()}.
+         * be done by {@link #readAxioms()}.
          * @return the changes to be done to synchronise the different individuals from {@link #getInstance()};
          * from an OWL representation to {@code this} {@link Descriptor}.
          */
@@ -257,7 +257,7 @@ public interface Individual<O,J>
             extends Individual<O,J>{
 
         @Override // see documentation on Axiom.descriptor.readExpressionAxioms
-        default List<MappingIntent> readExpressionAxioms(){
+        default List<MappingIntent> readAxioms(){
             try {
                 EntitySet.SynchronisationIntent<J> from = synchroniseEquivalentIndividualsFromExpressionAxioms();
                 getEquivalentIndividuals().addAll(from.getToAdd());
@@ -282,7 +282,7 @@ public interface Individual<O,J>
             Set<D> out = new HashSet<>();
             for( J cl : getEquivalentIndividuals()){
                 D built = getNewEquivalentIndividual( cl, getOntologyReference());
-                built.readExpressionAxioms();
+                built.readAxioms();
                 out.add( built);
             }
             return out;
@@ -317,7 +317,7 @@ public interface Individual<O,J>
          * It calls {@link EntitySet#synchroniseTo(EntitySet)} with {@link #queryEquivalentIndividuals()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getEquivalentIndividuals()}. This should
-         * be done by {@link #writeExpressionAxioms()}.
+         * be done by {@link #writeAxioms()}.
          * @return the changes to be done to synchronise {@code this} structure with
          * the equivalent individuals from {@link #getInstance()}; to the OWL representation.
          */
@@ -334,7 +334,7 @@ public interface Individual<O,J>
          * It calls {@link EntitySet#synchroniseFrom(EntitySet)} with {@link #queryEquivalentIndividuals()}
          * as input parameter. This computes the changes to be performed into the {@link #getEquivalentIndividuals()}
          * in order to synchronise it with respect to an OWL representation. This is
-         * be done by {@link #readExpressionAxioms()}.
+         * be done by {@link #readAxioms()}.
          * @return the changes to be done to synchronise the equivalent individuals from {@link #getInstance()};
          * from an OWL representation to {@code this} {@link Descriptor}.
          */
@@ -356,7 +356,7 @@ public interface Individual<O,J>
      *     <br>
      *     By default, the synchronisation occurs only for the proprieties whose expression
      *     has been initialised in the {@link ExpressionEntitySet} ({@link #getDataProperties()}.
-     *     If the {@link ExpressionEntitySet} is left empty during {@link #readExpressionAxioms()}
+     *     If the {@link ExpressionEntitySet} is left empty during {@link #readAxioms()}
      *     it maps all the data properties applied to the described individualDescriptor.
      * </p>
      *
@@ -371,7 +371,7 @@ public interface Individual<O,J>
             extends Individual<O,J>{
 
         @Override // see documentation on Axiom.descriptor.readExpressionAxioms
-        default List<MappingIntent> readExpressionAxioms(){
+        default List<MappingIntent> readAxioms(){
             try {
                 EntitySet.SynchronisationIntent<Y> from = synchroniseDataPropertiesFromExpressionAxioms();
                 if (from != null) {
@@ -398,7 +398,7 @@ public interface Individual<O,J>
             Set<D> out = new HashSet<>();
             for( Y cl : getDataProperties()){
                 D built = getNewDataProperty( cl, getOntologyReference());
-                built.readExpressionAxioms();
+                built.readAxioms();
                 out.add( built);
             }
             return out;
@@ -433,7 +433,7 @@ public interface Individual<O,J>
          * It calls {@link ExpressionEntitySet#synchroniseTo(EntitySet)} with {@link #queryDataProperties()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getDataProperties()}. This should
-         * be done by {@link #writeExpressionAxioms()}.
+         * be done by {@link #writeAxioms()}.
          * @return the changes to be done to synchronise {@code this} structure with
          * the data properties applied on {@link #getInstance()}; to the OWL representation.
          */
@@ -450,7 +450,7 @@ public interface Individual<O,J>
          * It calls {@link ExpressionEntitySet#synchroniseFrom(EntitySet)} with {@link #queryDataProperties()}
          * as input parameter. This computes the changes to be performed into the {@link #getDataProperties()}
          * in order to synchronise it with respect to an OWL representation. This is
-         * be done by {@link #readExpressionAxioms()}.
+         * be done by {@link #readAxioms()}.
          * @return the changes to be done to synchronise the data properties applied on {@link #getInstance()};
          * from an OWL representation to {@code this} {@link Descriptor}.
          */
@@ -472,7 +472,7 @@ public interface Individual<O,J>
      *     <br>
      *     By default, the synchronisation occurs only for the proprieties whose expression
      *     has been initialised in the {@link ExpressionEntitySet} ({@link #getObjectProperties()}).
-     *     If the {@link ExpressionEntitySet} is left empty during {@link #readExpressionAxioms()}
+     *     If the {@link ExpressionEntitySet} is left empty during {@link #readAxioms()}
      *     it maps all the object properties applied to the described individualDescriptor.
      * </p>
      *
@@ -487,7 +487,7 @@ public interface Individual<O,J>
             extends Individual<O,J>{
 
         @Override // see documentation on Axiom.descriptor.readExpressionAxioms
-        default List<MappingIntent> readExpressionAxioms(){
+        default List<MappingIntent> readAxioms(){
             try{
                 EntitySet.SynchronisationIntent<Y> from = synchroniseObjectPropertiesFromExpressionAxioms();
                 if (from != null) {
@@ -514,7 +514,7 @@ public interface Individual<O,J>
             Set<D> out = new HashSet<>();
             for( Y cl : getObjectProperties()){
                 D built = getNewObjectProperty( cl, getOntologyReference());
-                built.readExpressionAxioms();
+                built.readAxioms();
                 out.add( built);
             }
             return out;
@@ -549,7 +549,7 @@ public interface Individual<O,J>
          * It calls {@link ExpressionEntitySet#synchroniseTo(EntitySet)} with {@link #queryObjectProperties()}
          * as input parameter. This computes the changes to be performed in the OWL representation
          * for synchronise it with respect to {@link #getObjectProperties()}. This should
-         * be done by {@link #writeExpressionAxioms()}.
+         * be done by {@link #writeAxioms()}.
          * @return the changes to be done to synchronise {@code this} structure with
          * the object properties applied on {@link #getInstance()}; to the OWL representation.
          */
@@ -566,7 +566,7 @@ public interface Individual<O,J>
          * It calls {@link ExpressionEntitySet#synchroniseFrom(EntitySet)} with {@link #queryObjectProperties()}
          * as input parameter. This computes the changes to be performed into the {@link #getObjectProperties()}
          * in order to synchronise it with respect to an OWL representation. This is
-         * be done by {@link #readExpressionAxioms()}.
+         * be done by {@link #readAxioms()}.
          * @return the changes to be done to synchronise the object properties applied on {@link #getInstance()};
          * from an OWL representation to {@code this} {@link Descriptor}.
          */

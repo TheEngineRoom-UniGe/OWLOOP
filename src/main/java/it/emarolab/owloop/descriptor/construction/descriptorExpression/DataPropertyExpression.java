@@ -19,7 +19,7 @@ import java.util.Set;
 
 /**
  * This interface extends all the interfaces in {@link DataProperty}.
- * It allows to {@link #readExpressionAxioms()} and {@link #writeExpressionAxioms()}
+ * It allows to {@link #readAxioms()} and {@link #writeAxioms()}
  * specifically for OWL data properties.
  * It contains several expressions that can be combined in any arbitrary way as they
  * rely on the same ground ({@link DataGroundInstance}).
@@ -70,7 +70,7 @@ public interface DataPropertyExpression
     /**
      * The {@link DataProperty.Disjoint} expression for a {@link Descriptor} whose ground is {@link OWLDataProperty}.
      * <p>
-     *     It specifies how to {@link #queryDisjointDataProperties()} and {@link #writeExpressionAxioms()} for the
+     *     It specifies how to {@link #queryDisjointDataProperties()} and {@link #writeAxioms()} for the
      *     DataProperties disjoint to the ground DataProperty (i.e.: {@link OWLDataProperty}).
      * </p>
      *
@@ -136,7 +136,7 @@ public interface DataPropertyExpression
         }
 
         @Override // see super class for documentation
-        default List<MappingIntent> writeExpressionAxioms(){
+        default List<MappingIntent> writeAxioms(){
             try {
                 EntitySet.SynchronisationIntent<OWLDataProperty> to = synchroniseDisjointDataPropertiesToExpressionAxioms();
                 if ( to == null)
@@ -165,7 +165,7 @@ public interface DataPropertyExpression
     /**
      * The {@link DataProperty.Equivalent} expression for a {@link Descriptor} whose ground is {@link OWLDataProperty}.
      * <p>
-     *     It specifies how to {@link #queryEquivalentDataProperties()} and {@link #writeExpressionAxioms()} for the
+     *     It specifies how to {@link #queryEquivalentDataProperties()} and {@link #writeAxioms()} for the
      *     DataProperties equivalent to the ground DataProperty (i.e.: {@link OWLDataProperty}).
      * </p>
      *
@@ -230,7 +230,7 @@ public interface DataPropertyExpression
         }
 
         @Override // see super class for documentation
-        default List<MappingIntent> writeExpressionAxioms(){
+        default List<MappingIntent> writeAxioms(){
             try {
                 EntitySet.SynchronisationIntent<OWLDataProperty> to = synchroniseEquivalentDataPropertiesToExpressionAxioms();
                 if ( to == null)
@@ -259,7 +259,7 @@ public interface DataPropertyExpression
     /**
      * The {@link DataProperty.Sub} expression for a {@link Descriptor} whose ground is {@link OWLDataProperty}.
      * <p>
-     *     It specifies how to {@link #querySubDataProperties()} and {@link #writeExpressionAxioms()} for the
+     *     It specifies how to {@link #querySubDataProperties()} and {@link #writeAxioms()} for the
      *     DataProperties subsumed by the ground DataProperty (i.e.: {@link OWLDataProperty}).
      * </p>
      *
@@ -320,7 +320,7 @@ public interface DataPropertyExpression
         }
 
         @Override // see super class for documentation
-        default List<MappingIntent> writeExpressionAxioms(){
+        default List<MappingIntent> writeAxioms(){
             try {
                 EntitySet.SynchronisationIntent<OWLDataProperty> to = synchroniseSubDataPropertiesToExpressionAxioms();
                 if ( to == null)
@@ -341,7 +341,7 @@ public interface DataPropertyExpression
     /**
      * The {@link DataProperty.Super} expression for a {@link Descriptor} whose ground is {@link OWLDataProperty}.
      * <p>
-     *     It specifies how to {@link #querySuperDataProperties()} and {@link #writeExpressionAxioms()} for the
+     *     It specifies how to {@link #querySuperDataProperties()} and {@link #writeAxioms()} for the
      *     DataProperties super over by the ground DataProperty (i.e.: {@link OWLDataProperty}).
      * </p>
      *
@@ -405,7 +405,7 @@ public interface DataPropertyExpression
         }
 
         @Override // see super class for documentation
-        default List<MappingIntent> writeExpressionAxioms(){
+        default List<MappingIntent> writeAxioms(){
             try{
                 EntitySet.SynchronisationIntent<OWLDataProperty> to = synchroniseSuperDataPropertiesToExpressionAxioms();
                 if ( to == null)
@@ -426,7 +426,7 @@ public interface DataPropertyExpression
     /**
      * The {@link DataProperty.Domain} expression for a {@link Descriptor} whose ground is {@link OWLDataProperty}.
      * <p>
-     *     It specifies how to {@link #queryDomainRestrictions()} and {@link #writeExpressionAxioms()} for the
+     *     It specifies how to {@link #queryDomainRestrictions()} and {@link #writeAxioms()} for the
      *     domain restriction of the ground DataProperty (i.e.: {@link SemanticRestriction}).
      * </p>
      */
@@ -807,7 +807,7 @@ public interface DataPropertyExpression
         /**
          * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDomainRestrictions()})
          * based on {@link #domainMinObjectRestriction(String, int, String)}.
-         * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
+         * This method should be always synchronised with {@link #writeAxiomsReasonReadAxioms()}
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the name of the restricting object property.
          * @param cardinality the cardinality for the minimal property restriction.
@@ -820,7 +820,7 @@ public interface DataPropertyExpression
         /**
          * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDomainRestrictions()}
          * based on {@link #domainMinObjectRestriction(OWLObjectProperty, int, OWLClass)}.
-         * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
+         * This method should be always synchronised with {@link #writeAxiomsReasonReadAxioms()}
          * to be perfectly aligned with the {@link #queryDomainRestrictions()},
          * to be perfectly aligned with the {@link #queryDomainRestrictions()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
@@ -835,7 +835,7 @@ public interface DataPropertyExpression
         /**
          * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDomainRestrictions()})
          * based on {@link #domainMinObjectRestriction(String, int, String)}.
-         * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
+         * This method should be always synchronised with {@link #writeAxiomsReasonReadAxioms()}
          * to be perfectly aligned with the {@link #queryDomainRestrictions()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the name of the restricting object property.
@@ -849,7 +849,7 @@ public interface DataPropertyExpression
         /**
          * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDomainRestrictions()})
          * based on {@link #domainMinObjectRestriction(OWLObjectProperty, int, OWLClass)}.
-         * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
+         * This method should be always synchronised with {@link #writeAxiomsReasonReadAxioms()}
          * to be perfectly aligned with the {@link #queryDomainRestrictions()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the restricting object property.
@@ -890,7 +890,7 @@ public interface DataPropertyExpression
         /**
          * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDomainRestrictions()})
          * based on {@link #domainMaxObjectRestriction(String, int, String)}.
-         * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
+         * This method should be always synchronised with {@link #writeAxiomsReasonReadAxioms()}
          * to be perfectly aligned with the {@link #queryDomainRestrictions()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the name of the restricting object property.
@@ -904,7 +904,7 @@ public interface DataPropertyExpression
         /**
          * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDomainRestrictions()}
          * based on {@link #domainMaxObjectRestriction(OWLObjectProperty, int, OWLClass)}.
-         * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
+         * This method should be always synchronised with {@link #writeAxiomsReasonReadAxioms()}
          * to be perfectly aligned with the {@link #queryDomainRestrictions()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the restricting object property.
@@ -918,7 +918,7 @@ public interface DataPropertyExpression
         /**
          * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDomainRestrictions()})
          * based on {@link #domainMaxObjectRestriction(String, int, String)}.
-         * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
+         * This method should be always synchronised with {@link #writeAxiomsReasonReadAxioms()}
          * to be perfectly aligned with the {@link #queryDomainRestrictions()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the name of the restricting object property.
@@ -932,7 +932,7 @@ public interface DataPropertyExpression
         /**
          * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDomainRestrictions()})
          * based on {@link #domainMaxObjectRestriction(OWLObjectProperty, int, OWLClass)}.
-         * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
+         * This method should be always synchronised with {@link #writeAxiomsReasonReadAxioms()}
          * to be perfectly aligned with the {@link #queryDomainRestrictions()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the restricting object property.
@@ -973,7 +973,7 @@ public interface DataPropertyExpression
         /**
          * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDomainRestrictions()})
          * based on {@link #domainExactObjectRestriction(String, int, String)}.
-         * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
+         * This method should be always synchronised with {@link #writeAxiomsReasonReadAxioms()}
          * to be perfectly aligned with the {@link #queryDomainRestrictions()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the name of the restricting object property.
@@ -987,7 +987,7 @@ public interface DataPropertyExpression
         /**
          * Adds a new restriction to the described {@link EntitySet} (i.e.: {@link #getDomainRestrictions()}
          * based on {@link #domainExactObjectRestriction(OWLObjectProperty, int, OWLClass)}.
-         * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
+         * This method should be always synchronised with {@link #writeAxiomsReasonReadAxioms()}
          * to be perfectly aligned with the {@link #queryDomainRestrictions()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the restricting object property.
@@ -1001,7 +1001,7 @@ public interface DataPropertyExpression
         /**
          * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDomainRestrictions()})
          * based on {@link #domainExactObjectRestriction(String, int, String)}.
-         * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
+         * This method should be always synchronised with {@link #writeAxiomsReasonReadAxioms()}
          * to be perfectly aligned with the {@link #queryDomainRestrictions()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the name of the restricting object property.
@@ -1015,7 +1015,7 @@ public interface DataPropertyExpression
         /**
          * Removes a restriction to the described {@link EntitySet} (i.e.: {@link #getDomainRestrictions()})
          * based on {@link #domainExactObjectRestriction(OWLObjectProperty, int, OWLClass)}.
-         * This method should be always synchronised with {@link #writeReadExpressionAxioms()}
+         * This method should be always synchronised with {@link #writeAxiomsReasonReadAxioms()}
          * to be perfectly aligned with the {@link #queryDomainRestrictions()},
          * since the reasoner infers also an {@link #domainClassRestriction(OWLClass)}.
          * @param property the restricting object property.
@@ -1250,7 +1250,7 @@ public interface DataPropertyExpression
         }
 
         @Override // see super class for documentation
-        default List<MappingIntent> writeExpressionAxioms(){
+        default List<MappingIntent> writeAxioms(){
             try {
                 EntitySet.SynchronisationIntent<SemanticRestriction> to = synchroniseDomainDataPropertyToExpressionAxioms();
                 List<OWLOntologyChange> changes = new ArrayList<>();
@@ -1275,7 +1275,7 @@ public interface DataPropertyExpression
     /**
      * The {@link DataProperty.Range} expression for a {@link Descriptor} whose ground is {@link OWLDataProperty}.
      * <p>
-     *     It specifies how to {@link #queryRangeRestrictions()} and {@link #writeExpressionAxioms()} for the
+     *     It specifies how to {@link #queryRangeRestrictions()} and {@link #writeAxioms()} for the
      *     range restriction of the ground DataProperty (i.e.: {@link SemanticRestriction}).
      * </p>
      */
@@ -1327,7 +1327,7 @@ public interface DataPropertyExpression
         }
 
         @Override // see super class for documentation
-        default List<MappingIntent> writeExpressionAxioms(){
+        default List<MappingIntent> writeAxioms(){
             try {
                 EntitySet.SynchronisationIntent<SemanticRestriction> to = synchroniseRangeDataPropertyToExpressionAxioms();
                 List<OWLOntologyChange> changes = new ArrayList<>();
