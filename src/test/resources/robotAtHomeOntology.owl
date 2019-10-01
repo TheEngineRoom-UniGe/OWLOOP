@@ -26,10 +26,7 @@
     <!-- http://www.semanticweb.org/emaroLab/robotAtHomeOntology#hasDoor -->
 
 
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/emaroLab/robotAtHomeOntology#hasDoor">
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/emaroLab/robotAtHomeOntology#LOCATION"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/emaroLab/robotAtHomeOntology#DOOR"/>
-    </owl:ObjectProperty>
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/emaroLab/robotAtHomeOntology#hasDoor"/>
     
 
 
@@ -50,6 +47,25 @@
         <rdfs:domain rdf:resource="http://www.semanticweb.org/emaroLab/robotAtHomeOntology#CORRIDOR"/>
         <rdfs:range rdf:resource="http://www.semanticweb.org/emaroLab/robotAtHomeOntology#ROOM"/>
     </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+    
+
+
+    <!-- http://www.semanticweb.org/emaroLab/robotAtHomeOntology#hasTemperature -->
+
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/emaroLab/robotAtHomeOntology#hasTemperature"/>
     
 
 
@@ -180,7 +196,9 @@
     <!-- http://www.semanticweb.org/emaroLab/robotAtHomeOntology#Room1 -->
 
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/emaroLab/robotAtHomeOntology#Room1"/>
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/emaroLab/robotAtHomeOntology#Room1">
+        <hasTemperature rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">25</hasTemperature>
+    </owl:NamedIndividual>
     
 
 
@@ -188,39 +206,6 @@
 
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/emaroLab/robotAtHomeOntology#Room2"/>
-    
-
-
-    <!-- 
-    ///////////////////////////////////////////////////////////////////////////////////////
-    //
-    // General axioms
-    //
-    ///////////////////////////////////////////////////////////////////////////////////////
-     -->
-
-
-    <rdf:Description>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDifferent"/>
-        <owl:distinctMembers rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.semanticweb.org/emaroLab/robotAtHomeOntology#Corridor1"/>
-            <rdf:Description rdf:about="http://www.semanticweb.org/emaroLab/robotAtHomeOntology#Robot1"/>
-        </owl:distinctMembers>
-    </rdf:Description>
-    <rdf:Description>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDifferent"/>
-        <owl:distinctMembers rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.semanticweb.org/emaroLab/robotAtHomeOntology#Corridor1"/>
-            <rdf:Description rdf:about="http://www.semanticweb.org/emaroLab/robotAtHomeOntology#Room1"/>
-        </owl:distinctMembers>
-    </rdf:Description>
-    <rdf:Description>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDifferent"/>
-        <owl:distinctMembers rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.semanticweb.org/emaroLab/robotAtHomeOntology#Corridor1"/>
-            <rdf:Description rdf:about="http://www.semanticweb.org/emaroLab/robotAtHomeOntology#Room2"/>
-        </owl:distinctMembers>
-    </rdf:Description>
 </rdf:RDF>
 
 

@@ -34,11 +34,11 @@ public class LocationClassDesc
     }
 
     // To make the warning go away, add the types explicitly:
-    private void addEquivalentRestriction(SemanticRestriction.ApplyingPropertyRestriction defRestrictions){
-        defRestrictions.setSubject( getGround().getGroundInstance());
-        defRestrictions.setProperty( getOWLObjectProperty( "hasDoor"));
-        defRestrictions.setValue( getOWLClass( "DOOR"));
-        getEquivalentRestrictions().add( defRestrictions);
+    private void addEquivalentRestriction(SemanticRestriction.ApplyingPropertyRestriction ClassRestrictedOnAllObject){
+        ClassRestrictedOnAllObject.setSubject( getGround().getGroundInstance());
+        ClassRestrictedOnAllObject.setProperty( getOWLObjectProperty( "hasDoor"));
+        ClassRestrictedOnAllObject.setValue( getOWLClass( "DOOR"));
+        getEquivalentRestrictions().add( ClassRestrictedOnAllObject);
         writeAxioms();
     }
 

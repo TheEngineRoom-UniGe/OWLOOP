@@ -4,6 +4,7 @@ import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.amor.owlInterface.SemanticRestriction;
 import it.emarolab.owloop.articleExamples.exampleDescriptors.DefSubClassDesc;
 import it.emarolab.owloop.articleExamples.exampleDescriptors.ObjectLinkIndividualDesc;
+import it.emarolab.owloop.descriptor.utility.individualDescriptor.LinkIndividualDesc;
 import it.emarolab.owloop.articleExamples.exampleDescriptors.TypeIndividualDesc;
 import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.Restrictions;
 import it.emarolab.owloop.core.Axiom.Descriptor.*;
@@ -27,6 +28,10 @@ import java.util.Set;
  */
 public class UseDescriptorBuild {
 
+    // TODO: Change everywhere 'concept' to 'class'
+    // TODO: Update the comments properly
+    // TODO: Add alternative to unit-tested code
+
     private OWLReferences ontoRef;
 
     @Before
@@ -49,7 +54,7 @@ public class UseDescriptorBuild {
 
         // Considering that the Robot's position is saved in the ontology after running Example1
 
-        ObjectLinkIndividualDesc d1 = new ObjectLinkIndividualDesc( "Robot1", ontoRef);
+        LinkIndividualDesc d1 = new LinkIndividualDesc( "Robot1", ontoRef);
         d1.addObject( "isIn",true); // to be able to read knowledge (only) specific to the property "isIn"
         d1.readAxioms(); // read all axioms (related to this descriptor) from the ontology
         System.out.println( d1); // printing to check the axioms represented by this descriptor

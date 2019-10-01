@@ -3,6 +3,7 @@ package it.emarolab.owloop.articleExamples.example3;
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.articleExamples.exampleDescriptors.ObjectLinkIndividualDesc;
 import it.emarolab.owloop.core.Axiom.Descriptor.*;
+import it.emarolab.owloop.descriptor.utility.individualDescriptor.LinkIndividualDesc;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,6 +20,10 @@ import org.junit.Test;
  * </small></div>
  */
 public class RemoveAxioms {
+
+    // TODO: Change everywhere 'concept' to 'class'
+    // TODO: Update the comments properly
+    // TODO: Add alternative to unit-tested code
 
     private OWLReferences ontoRef;
 
@@ -40,7 +45,7 @@ public class RemoveAxioms {
     public void removeStuff() {
 
         // robot individual
-        ObjectLinkIndividualDesc robot_Desc1 = new ObjectLinkIndividualDesc( "Robot1", ontoRef);
+        LinkIndividualDesc robot_Desc1 = new LinkIndividualDesc( "Robot1", ontoRef);
 
         // synchronize axioms from the Ontology to the internal state of the Descriptor
         robot_Desc1.readAxioms();
@@ -61,7 +66,7 @@ public class RemoveAxioms {
         robot_Desc1.saveOntology(ontoRef.getFilePath());
 
         // A new Descriptor associated to the same individual as before
-        ObjectLinkIndividualDesc robot_Desc2 = new ObjectLinkIndividualDesc( "Robot1", ontoRef);
+        LinkIndividualDesc robot_Desc2 = new LinkIndividualDesc( "Robot1", ontoRef);
 
         // synchronize axioms from the Ontology to the internal state of the Descriptor
         robot_Desc2.readAxioms();
