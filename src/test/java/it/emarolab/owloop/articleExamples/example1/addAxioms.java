@@ -1,38 +1,44 @@
 package it.emarolab.owloop.articleExamples.example1;
 
-import com.clarkparsia.owlapi.explanation.ExplanationGenerator;
 import it.emarolab.amor.owlInterface.OWLReferences;
-import it.emarolab.amor.owlInterface.ReasonerExplanator;
 import it.emarolab.owloop.articleExamples.exampleDescriptors.CorridorClassDesc;
 import it.emarolab.owloop.articleExamples.exampleDescriptors.LocationClassDesc;
-import it.emarolab.owloop.articleExamples.exampleDescriptors.ObjectLinkIndividualDesc;
 import it.emarolab.owloop.articleExamples.exampleDescriptors.RoomClassDesc;
 import it.emarolab.owloop.core.Axiom.Descriptor.*;
 import it.emarolab.owloop.descriptor.utility.classDescriptor.RestrictionClassDesc;
 import it.emarolab.owloop.descriptor.utility.individualDescriptor.FullIndividualDesc;
 import it.emarolab.owloop.descriptor.utility.individualDescriptor.LinkIndividualDesc;
-import it.emarolab.owloop.descriptor.utility.individualDescriptor.RestrictionIndividualDesc;
 import it.emarolab.owloop.descriptor.utility.objectPropertyDescriptor.DomainRangeObjectPropertyDesc;
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
-import uk.ac.manchester.cs.owl.explanation.ordering.ExplanationTree;
-import uk.ac.manchester.cs.owl.owlapi.OWLLiteralImplInteger;
 
+/**
+ * An example to illustrate how to add axioms to an ontology.
+ *
+ * <p>
+ * <div style="text-align:center;"><small>
+ * <b>File</b>:         it.emarolab.owloop.core.Axiom <br>
+ * <b>Licence</b>:      GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
+ * <b>Authors</b>:      Syed Yusha Kareem (kareem.syed.yusha@dibris.unige.it) <br>
+ * <b>affiliation</b>:  EMAROLab, DIBRIS, University of Genoa. <br>
+ * <b>date</b>:         08/09/19 <br>
+ * </small></div>
+ */
 public class addAxioms {
 
     public static void main(String[] args) {
 
+        // TODO [Aesthetic] Change OWLReferences to OWLReference in AMOR
         OWLReferences ontoRef;
 
         // Disable printing of amor logs
-        OntologyReference.activateAMORlogging( false);
+        OntologyReference.activateAMORlogging(false);
 
-        // Create a new ontology file associated to Pellet reasoner
+        // TODO [Aesthetic] Change newOWLReferences...() to newOWLReference...() in AMOR
+        // Create reference to a new ontology file associated with the Pellet reasoner
         ontoRef = OntologyReference.newOWLReferencesCreatedWithPellet(
-                "robotAtHomeOnto", // ontology reference name.
-                "src/test/resources/robotAtHomeOntology.owl", // file path.
-                "http://www.semanticweb.org/emaroLab/robotAtHomeOntology", // IRI.
-                true // true, synchronizes the reasoner manually. Else, automatic.
+                "robotAtHomeOnto", //ontology reference name.
+                "src/test/resources/robotAtHomeOntology.owl", //file path.
+                "http://www.semanticweb.org/emaroLab/robotAtHomeOntology", //IRI.
+                true //synchronize the reasoner manually.
         );
 
         // Add Class Expression Axioms to the ontology
@@ -47,7 +53,7 @@ public class addAxioms {
         corridorIndividual_Desc.writeAxiomsReasonReadAxioms();
 
         LinkIndividualDesc robotIndividual_Desc = new LinkIndividualDesc( "Robot1", ontoRef);
-        robotIndividual_Desc.addObject("isIn", getRobotPosition());
+        robotIndividual_Desc.addObject("isIn", getRobotLocation());
         robotIndividual_Desc.writeAxiomsReasonReadAxioms();
 
         LinkIndividualDesc roomIndividual_Desc = new LinkIndividualDesc("Room1", ontoRef);
@@ -72,7 +78,7 @@ public class addAxioms {
         robotClass_Desc.addDisjointClass( "DOOR");
         robotClass_Desc.writeAxiomsReasonReadAxioms();
 
-        // saveOntology() works for ontologyReference instantiated with the method newOWLReferencesCreatedWithPellet()
+        // Save the in-memory ontology to a .owl file in file-path provided during instantiation of ontoRef
         ontoRef.saveOntology();
 
         // Check implicit knowledge
@@ -81,10 +87,10 @@ public class addAxioms {
         System.out.println(corridorIndividual_FullDesc);
     }
 
-    private static String getRobotPosition() {
+    private static String getRobotLocation() {
 
         // ... Consider that this method does some computation
-        // ... and returns the position of the robot at home
+        // ... and returns the location of the robot at home
         return "Corridor1";
     }
 }

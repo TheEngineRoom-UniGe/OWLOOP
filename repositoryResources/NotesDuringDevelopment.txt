@@ -58,6 +58,7 @@ SynchronizeReasoner() to be in sync with the latest state of the ontology (else 
 readExpressionAxioms(), when called for the first time, reads all (asserted and inferred) axioms because when the descriptor is initialized, syncOnto() is called.
 With newOWLReferenceFromFileWithPellet(), decriptor.saveOntology(path), IS WORKING
 With newOWLReferenceFromFileWithPellet(), ontoRef.saveOntology(path), IS WORKING
+TODO: [Make developer's life easier] Make ontoRef.saveOntology() work with newOWLReferenceFromFileWithPellet()
 Its nice to (sync and save) after writing something to the ontology.
 */
 
@@ -75,5 +76,10 @@ UNEXPECTED BEHAVIOUR AND THEIR FIXES
 (Then) Try using writeAxiomsReasonReadAxioms()
 
 (If) Descriptor's internal state is not updating properly
-(Then) Make AMORLogging(True) and check is there is an error
+(Then) Make AMORLogging(True) and check is there is an error (because the ontology could be inconsistent)
+
+(If) OWLReferences object 'ontoRef' is instantiated with newOWLReferenceFromFileWithPellet() and ontoRef.saveOntology() is not saving axioms to .owl file
+(Then) Provide file-path, i.e., ontoRef.saveOntology(ontoRef.getFilePath())
 */
+
+TODO [Find out] what is the use of ontoRef.getReasonerExplainer();

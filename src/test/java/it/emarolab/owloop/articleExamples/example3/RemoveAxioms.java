@@ -1,14 +1,13 @@
 package it.emarolab.owloop.articleExamples.example3;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
-import it.emarolab.owloop.articleExamples.exampleDescriptors.ObjectLinkIndividualDesc;
 import it.emarolab.owloop.core.Axiom.Descriptor.*;
 import it.emarolab.owloop.descriptor.utility.individualDescriptor.LinkIndividualDesc;
 import org.junit.Before;
 import org.junit.Test;
 
 /**
- * An example to show how to remove axioms from an ontology.
+ * An example to illustrate how to remove axioms from an ontology.
  *
  * <p>
  * <div style="text-align:center;"><small>
@@ -21,58 +20,29 @@ import org.junit.Test;
  */
 public class RemoveAxioms {
 
-    // TODO: Change everywhere 'concept' to 'class'
-    // TODO: Update the comments properly
-    // TODO: Add alternative to unit-tested code
-
-    private OWLReferences ontoRef;
-
-    @Before
-    public void beforeTest() {
+    public static void main(String[] args) {
+        OWLReferences ontoRef;
 
         // Disables printing of amor logs
-        OntologyReference.activateAMORlogging( false);
+        OntologyReference.activateAMORlogging(false);
 
+        // Create reference to an existing ontology file associated with the Pellet reasoner
         ontoRef = OntologyReference.newOWLReferenceFromFileWithPellet(
-                "robotAtHomeOnto", // ontology reference name
-                "src/test/resources/robotAtHomeOntology.owl", // the ontology file path
-                "http://www.semanticweb.org/emaroLab/robotAtHomeOntology", // the ontology IRI path
-                true // if (true) you must synchronize the reasoner manually. Else, it synchronizes itself.
+                "robotAtHomeOnto", //ontology reference name.
+                "src/test/resources/robotAtHomeOntology.owl", //file path.
+                "http://www.semanticweb.org/emaroLab/robotAtHomeOntology", //IRI.
+                true //synchronize the reasoner manually.
         );
-    }
 
-    @Test
-    public void removeStuff() {
-
-        // robot individual
         LinkIndividualDesc robot_Desc1 = new LinkIndividualDesc( "Robot1", ontoRef);
-
-        // synchronize axioms from the Ontology to the internal state of the Descriptor
         robot_Desc1.readAxioms();
-
-        // print the Descriptor
-        System.out.println(robot_Desc1);
-
-        // remove Object Property associated to the Individual Descriptor (i.e., from Descriptor's internal state)
+        System.out.println(robot_Desc1); // Print
+        // Remove the association between the ground-individual and entity-set-individuals, associated via object-property "isIn". (in the descriptor's internal state)
         robot_Desc1.removeObject("isIn");
-
-        // synchronize axioms from the internal state of the Descriptor and Ontology
-        robot_Desc1.writeAxioms();
-
-        // synchronize reasoner of the ontology, so that its axioms are updated with inferences based on latest assertions
-        ontoRef.synchronizeReasoner();
-
-        // save the current state of the ontology
-        robot_Desc1.saveOntology(ontoRef.getFilePath());
-
-        // A new Descriptor associated to the same individual as before
-        LinkIndividualDesc robot_Desc2 = new LinkIndividualDesc( "Robot1", ontoRef);
-
-        // synchronize axioms from the Ontology to the internal state of the Descriptor
-        robot_Desc2.readAxioms();
-
-        // print the Descriptor
-        System.out.println(robot_Desc2);
+        // Synchronize knowledge between descriptor's internal state and the ontology
+        robot_Desc1.writeAxiomsReasonReadAxioms();
+        System.out.println(robot_Desc1); // Print
+        // Save the in-memory ontology to a .owl file in a specific file-path
+        ontoRef.saveOntology(ontoRef.getFilePath());
     }
-
 }

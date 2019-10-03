@@ -56,5 +56,3 @@ public class drugOrder {
         System.out.println(total_cost[0]);
     }
 }
-
-//TODO: check what ontoRef reasonerexplainer does.

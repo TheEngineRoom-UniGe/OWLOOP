@@ -161,7 +161,7 @@ public class FullClassDescTest {
         assertSemantic();
 
         concept.addSomeObjectRestrcition( "isAboveOf", "Cone");
-        concept.writeAxiomsReasonReadAxioms(false); // TODO: bug when saving on file but fine at runtime
+        concept.writeAxiomsReasonReadAxioms(false); // TODO [Bug] when saving on file but fine at runtime
         assertSemantic();
 
         concept.addClassRestriction( "Parameter");
