@@ -94,3 +94,5 @@ public class addAxioms {
         return "Corridor1";
     }
 }
+
+// TODO [Make developer's life easy] We can find-out whether something is wrong in the program by checking amorLOG for [[!!! ERROR !!!]]
