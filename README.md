@@ -88,5 +88,3 @@ For any information or support, please do not hesitate to contact us through thi
 - [ ] reasoning for data/object range domain not supported in this version: document it.
 - [ ] check compliance copyright with dependencies
 - [ ] simplify use of data and object property for descriptor's users
-- [ ] Create table called 'Unexpected behaviour and their fix'
-- [ ] Modify in aMOR: check TODOs in the code
