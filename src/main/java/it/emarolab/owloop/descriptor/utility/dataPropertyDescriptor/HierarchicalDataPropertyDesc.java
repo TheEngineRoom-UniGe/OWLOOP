@@ -1,28 +1,39 @@
 package it.emarolab.owloop.descriptor.utility.dataPropertyDescriptor;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
+import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DataProperties;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.DataPropertyGround;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.DataPropertyExpression;
-import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import org.semanticweb.owlapi.model.OWLDataProperty;
 
 import java.util.List;
 
 /**
  * This is an example of a 'compound' DataProperty Descriptor which implements 2 {@link DataPropertyExpression} interfaces:
+ *
  * <ul>
  * <li><b>{@link DataPropertyExpression.Sub}</b>:          to describe that a DataProperty is subsumes another DataProperty.</li>
  * <li><b>{@link DataPropertyExpression.Super}</b>:        to describe that a DataProperty is super-sumes another DataProperty.</li>
  * </ul>
+ *
  * See {@link FullDataPropertyDesc} for an example of a 'compound' DataProperty Descriptor that implements all DataPropertyExpressions.
+ *
+ * <p>
+ * <div style="text-align:center;"><small>
+ * <b>File</b>:         it.emarolab.owloop.core.Axiom <br>
+ * <b>Licence</b>:      GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
+ * <b>Authors</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it), Syed Yusha Kareem (kareem.syed.yusha@dibris.unige.it) <br>
+ * <b>affiliation</b>:  EMAROLab, DIBRIS, University of Genoa. <br>
+ * <b>date</b>:         01/05/19 <br>
+ * </small></div>
  */
 public class HierarchicalDataPropertyDesc
         extends DataPropertyGround
         implements DataPropertyExpression.Sub<HierarchicalDataPropertyDesc>,
         DataPropertyExpression.Super<HierarchicalDataPropertyDesc>{
 
-    private DescriptorEntitySet.DataProperties subDataProperties = new DescriptorEntitySet.DataProperties();
-    private DescriptorEntitySet.DataProperties superDataProperties = new DescriptorEntitySet.DataProperties();
+    private DataProperties subDataProperties = new DataProperties();
+    private DataProperties superDataProperties = new DataProperties();
 
     /* Constructors from class: DataPropertyGround */
 
@@ -56,16 +67,16 @@ public class HierarchicalDataPropertyDesc
 
     // To read axioms from an ontology
     @Override
-    public List<MappingIntent> readExpressionAxioms() {
-        List<MappingIntent> r = DataPropertyExpression.Sub.super.readExpressionAxioms();
-        r.addAll( DataPropertyExpression.Super.super.readExpressionAxioms());
+    public List<MappingIntent> readAxioms() {
+        List<MappingIntent> r = DataPropertyExpression.Sub.super.readAxioms();
+        r.addAll( DataPropertyExpression.Super.super.readAxioms());
         return r;
     }
     // To write axioms to an ontology
     @Override
-    public List<MappingIntent> writeExpressionAxioms() {
-        List<MappingIntent> r = DataPropertyExpression.Sub.super.writeExpressionAxioms();
-        r.addAll( DataPropertyExpression.Super.super.writeExpressionAxioms());
+    public List<MappingIntent> writeAxioms() {
+        List<MappingIntent> r = DataPropertyExpression.Sub.super.writeAxioms();
+        r.addAll( DataPropertyExpression.Super.super.writeAxioms());
         return r;
     }
 
@@ -79,7 +90,7 @@ public class HierarchicalDataPropertyDesc
     }
     // It returns subDataProperties from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.DataProperties getSubDataProperties() {
+    public DataProperties getSubDataProperties() {
         return subDataProperties;
     }
 
@@ -90,7 +101,7 @@ public class HierarchicalDataPropertyDesc
     }
     // It returns superDataProperties from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.DataProperties getSuperDataProperties() {
+    public DataProperties getSuperDataProperties() {
         return superDataProperties;
     }
 

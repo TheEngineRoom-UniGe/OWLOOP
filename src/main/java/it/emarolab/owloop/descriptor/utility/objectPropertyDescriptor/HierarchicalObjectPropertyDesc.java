@@ -1,8 +1,8 @@
 package it.emarolab.owloop.descriptor.utility.objectPropertyDescriptor;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
+import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.ObjectProperties;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.ObjectPropertyGround;
-import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.ObjectPropertyExpression;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
 
@@ -10,19 +10,30 @@ import java.util.List;
 
 /**
  * This is an example of a 'compound' ObjectProperty Descriptor which implements 2 {@link ObjectPropertyExpression} interfaces:
+ *
  * <ul>
  * <li><b>{@link ObjectPropertyExpression.Sub}</b>:          to describe that an ObjectProperty subsumes another ObjectProperty.</li>
  * <li><b>{@link ObjectPropertyExpression.Super}</b>:        to describe that an ObjectProperty super-sumes another ObjectProperty.</li>
  * </ul>
+ *
  * See {@link FullObjectPropertyDesc} for an example of a 'compound' Individual Descriptor that implements all ObjectPropertyExpressions.
+ *
+ * <p>
+ * <div style="text-align:center;"><small>
+ * <b>File</b>:         it.emarolab.owloop.core.Axiom <br>
+ * <b>Licence</b>:      GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
+ * <b>Authors</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it), Syed Yusha Kareem (kareem.syed.yusha@dibris.unige.it) <br>
+ * <b>affiliation</b>:  EMAROLab, DIBRIS, University of Genoa. <br>
+ * <b>date</b>:         01/05/19 <br>
+ * </small></div>
  */
 public class HierarchicalObjectPropertyDesc
         extends ObjectPropertyGround
         implements ObjectPropertyExpression.Sub<HierarchicalObjectPropertyDesc>,
         ObjectPropertyExpression.Super<HierarchicalObjectPropertyDesc>{
 
-    private DescriptorEntitySet.ObjectProperties subObjectProperties = new DescriptorEntitySet.ObjectProperties();
-    private DescriptorEntitySet.ObjectProperties superObjectProperties = new DescriptorEntitySet.ObjectProperties();
+    private ObjectProperties subObjectProperties = new ObjectProperties();
+    private ObjectProperties superObjectProperties = new ObjectProperties();
 
     /* Constructors from class: ObjectPropertyGround */
 
@@ -56,16 +67,16 @@ public class HierarchicalObjectPropertyDesc
 
     // To read axioms from an ontology
     @Override
-    public List<MappingIntent> readExpressionAxioms() {
-        List<MappingIntent> r = ObjectPropertyExpression.Sub.super.readExpressionAxioms();
-        r.addAll( ObjectPropertyExpression.Super.super.readExpressionAxioms());
+    public List<MappingIntent> readAxioms() {
+        List<MappingIntent> r = ObjectPropertyExpression.Sub.super.readAxioms();
+        r.addAll( ObjectPropertyExpression.Super.super.readAxioms());
         return r;
     }
     // To write axioms to an ontology
     @Override
-    public List<MappingIntent> writeExpressionAxioms() {
-        List<MappingIntent> r = ObjectPropertyExpression.Sub.super.writeExpressionAxioms();
-        r.addAll( ObjectPropertyExpression.Super.super.writeExpressionAxioms());
+    public List<MappingIntent> writeAxioms() {
+        List<MappingIntent> r = ObjectPropertyExpression.Sub.super.writeAxioms();
+        r.addAll( ObjectPropertyExpression.Super.super.writeAxioms());
         return r;
     }
 
@@ -79,7 +90,7 @@ public class HierarchicalObjectPropertyDesc
     }
     // It returns subObjectProperties from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.ObjectProperties getSubObjectProperties() {
+    public ObjectProperties getSubObjectProperties() {
         return subObjectProperties;
     }
 
@@ -90,7 +101,7 @@ public class HierarchicalObjectPropertyDesc
     }
     // It returns superObjectProperties from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.ObjectProperties getSuperObjectProperties() {
+    public ObjectProperties getSuperObjectProperties() {
         return superObjectProperties;
     }
 

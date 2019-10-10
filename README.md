@@ -3,8 +3,8 @@
 Enabling a developer to use **O**ntology **W**eb **L**anguage (OWL) along with its reasoning capabilities in an **O**bject **O**riented **P**rogramming (OOP) paradigm, by providing an easy to use interface.
 
 Although OWL and OOP paradigms have similar structure, there are some key differences between them; see this [W3C publication](https://www.w3.org/2001/sw/BestPractices/SE/ODSD/) for more details about the differences. Nevertheless, it is possible to use OWL along with its reasoning capabilities within applications developed in an OOP paradigm, by using the classic [OWL-API](https://github.com/owlcs/owlapi).
-But, the usage of classic OWL-API leaves your application filled with lots of boilerplate code. Therefore, the **OWLOOP-API** (built on top of OWL-API), not only reduces boilerplate code but enables interaction with 'OWL entities', i.e, Concept (also known as, Class), Individual, Object property and Data property as objects within the OOP paradigm. These objects are termed as Descriptors (i.e., ConceptDescriptor, IndividualDescriptor, ObjectPropertyDescriptor and DataPropertyDescriptor).  
-Furthermore, with the help of a descriptor, OWLOOP enables synchronization of axioms between the OWL paradigm and the OOP paradigm.
+But, the usage of the classic OWL-API leaves your application code with lots of boilerplate. Therefore, the **OWLOOP-API** (built on top of OWL-API), not only reduces boilerplate code but enables interaction with 'OWL entities', i.e, Concept (also known as, Class), Individual, Object property and Data property as objects within the OOP paradigm. These objects are termed as Descriptors (i.e., ConceptDescriptor, IndividualDescriptor, ObjectPropertyDescriptor and DataPropertyDescriptor).  
+Furthermore, with the help of descriptor/s, OWLOOP enables synchronization of axioms (OWL2-DL axioms) between the OWL paradigm (ontology file/s) and the OOP paradigm (application code).
 
 ## Table of Contents
 1. Reference to the publication
@@ -81,14 +81,10 @@ For any information or support, please do not hesitate to contact us through thi
 
 - [ ] Add the UML in /documentation directory
 - [ ] Finalize a plan for AMOR 2.2 dependency. (*Luca gives green signal for pushing AMOR to Maven Central*)
-- [ ] Add disjoint to the Classes (ROBOT disjoint with DOOR AND LOCATION) and Individuals (all disjoint to each other)
-- [ ] Check doc since `define concept` become `concept restriction`
 - [ ] Add in Readme 
      - known issue read write readWrite(boolean) depends on ontology state (eg, restriction might add super classes)
      - intent feature for inconsistency
      - add test info
-- [ ] reasoning for data/object reange domain not supported in this version: document it.
-- [ ] check compliance copyritght with dependences
+- [ ] reasoning for data/object range domain not supported in this version: document it.
+- [ ] check compliance copyright with dependencies
 - [ ] simplify use of data and object property for descriptor's users
-- [ ] check mismatch name on `build` for functions `getNew...`
-     - Regarding the above functions and much more, major refactoring done by yusha, check latest commit on branch SafePoint2.0

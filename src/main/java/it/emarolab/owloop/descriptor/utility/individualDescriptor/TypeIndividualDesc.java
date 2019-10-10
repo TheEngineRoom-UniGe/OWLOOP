@@ -1,11 +1,10 @@
 package it.emarolab.owloop.descriptor.utility.individualDescriptor;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
+import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.Classes;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.IndividualGround;
-import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.IndividualExpression;
-import it.emarolab.owloop.descriptor.utility.conceptDescriptor.FullConceptDesc;
-import it.emarolab.owloop.descriptor.utility.conceptDescriptor.HierarchicalConceptDesc;
+import it.emarolab.owloop.descriptor.utility.classDescriptor.HierarchicalClassDesc;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 
@@ -14,16 +13,27 @@ import java.util.List;
 
 /**
  * This is an example of a 'simple' Individual Descriptor which implements 1 {@link IndividualExpression} interfaces:
+ *
  * <ul>
  * <li><b>{@link IndividualExpression.Type}</b>: to describe the Type/s (i.e., class/es) of an Individual.</li>
  * </ul>
+ *
  * See {@link FullIndividualDesc} for an example of a 'compound' Individual Descriptor that implements all IndividualExpressions.
+ *
+ * <p>
+ * <div style="text-align:center;"><small>
+ * <b>File</b>:         it.emarolab.owloop.core.Axiom <br>
+ * <b>Licence</b>:      GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007 <br>
+ * <b>Authors</b>:      Buoncompagni Luca (luca.buoncompagni@edu.unige.it), Syed Yusha Kareem (kareem.syed.yusha@dibris.unige.it) <br>
+ * <b>affiliation</b>:  EMAROLab, DIBRIS, University of Genoa. <br>
+ * <b>date</b>:         01/05/19 <br>
+ * </small></div>
  */
 public class TypeIndividualDesc
         extends IndividualGround
-        implements IndividualExpression.Type<HierarchicalConceptDesc>{
+        implements IndividualExpression.Type<HierarchicalClassDesc>{
 
-    private DescriptorEntitySet.Concepts concepts = new DescriptorEntitySet.Concepts();
+    private Classes classes = new Classes();
 
     /* Constructors from class: IndividualGround */
 
@@ -57,13 +67,13 @@ public class TypeIndividualDesc
 
     // To read axioms from an ontology
     @Override
-    public List<MappingIntent> readExpressionAxioms() {
-        return IndividualExpression.Type.super.readExpressionAxioms();
+    public List<MappingIntent> readAxioms() {
+        return IndividualExpression.Type.super.readAxioms();
     }
     // To write axioms to an ontology
     @Override
-    public List<MappingIntent> writeExpressionAxioms() {
-        return IndividualExpression.Type.super.writeExpressionAxioms();
+    public List<MappingIntent> writeAxioms() {
+        return IndividualExpression.Type.super.writeAxioms();
     }
 
     /* Overriding methods in classes: Individual and IndividualExpression */
@@ -71,13 +81,13 @@ public class TypeIndividualDesc
 
     // Is used by the descriptors's build() method. It's possible to change the return type based on need.
     @Override
-    public HierarchicalConceptDesc getNewIndividualType(OWLClass instance, OWLReferences ontology) {
-        return new HierarchicalConceptDesc( instance, ontology);
+    public HierarchicalClassDesc getNewType(OWLClass instance, OWLReferences ontology) {
+        return new HierarchicalClassDesc( instance, ontology);
     }
-    // It returns concepts from the EntitySet (after being read from the ontology)
+    // It returns classes from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.Concepts getIndividualTypes() {
-        return concepts;
+    public Classes getTypes() {
+        return classes;
     }
 
     /* Overriding method in class: Object */
@@ -90,7 +100,7 @@ public class TypeIndividualDesc
                 "\n" +
                 "\t" + getGround() + ":" + "\n" +
                 "\n" +
-                "\t\t∈ " + concepts + "\n" +
+                "\t\t∈ " + classes + "\n" +
                 "}" + "\n";
     }
 }

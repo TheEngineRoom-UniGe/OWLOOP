@@ -2,13 +2,13 @@ package it.emarolab.owloop.descriptor.utility.dataPropertyDescriptor;
 
 
 import it.emarolab.amor.owlInterface.OWLReferences;
+import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DataProperties;
+import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.Restrictions;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.DataPropertyGround;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.DataPropertyExpression;
-import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import org.semanticweb.owlapi.model.OWLDataProperty;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * This is an example of a 'compound' DataProperty Descriptor as it implements more than one {@link DataPropertyExpression} interfaces.
@@ -42,12 +42,12 @@ public class FullDataPropertyDesc
         DataPropertyExpression.Domain,
         DataPropertyExpression.Range{
 
-    private DescriptorEntitySet.DataProperties disjointDataProperties = new DescriptorEntitySet.DataProperties();
-    private DescriptorEntitySet.DataProperties equivalentDataProperties = new DescriptorEntitySet.DataProperties();
-    private DescriptorEntitySet.DataProperties subDataProperties = new DescriptorEntitySet.DataProperties();
-    private DescriptorEntitySet.DataProperties superDataProperties = new DescriptorEntitySet.DataProperties();
-    private DescriptorEntitySet.Restrictions domainConceptRestrictions = new DescriptorEntitySet.Restrictions();
-    private DescriptorEntitySet.Restrictions rangeConceptRestrictions = new DescriptorEntitySet.Restrictions();
+    private DataProperties disjointDataProperties = new DataProperties();
+    private DataProperties equivalentDataProperties = new DataProperties();
+    private DataProperties subDataProperties = new DataProperties();
+    private DataProperties superDataProperties = new DataProperties();
+    private Restrictions domainRestrictions = new Restrictions();
+    private Restrictions rangeRestrictions = new Restrictions();
 
     /* Constructors from class: DataPropertyGround */
 
@@ -81,40 +81,40 @@ public class FullDataPropertyDesc
 
     // To read axioms from an ontology
     @Override
-    public List<MappingIntent> readExpressionAxioms() {
-        List<MappingIntent> r = DataPropertyExpression.Disjoint.super.readExpressionAxioms();
-        r.addAll( DataPropertyExpression.Equivalent.super.readExpressionAxioms());
-        r.addAll( DataPropertyExpression.Range.super.readExpressionAxioms());
-        r.addAll( DataPropertyExpression.Domain.super.readExpressionAxioms());
-        r.addAll( DataPropertyExpression.Sub.super.readExpressionAxioms());
-        r.addAll( DataPropertyExpression.Super.super.readExpressionAxioms());
+    public List<MappingIntent> readAxioms() {
+        List<MappingIntent> r = DataPropertyExpression.Disjoint.super.readAxioms();
+        r.addAll( DataPropertyExpression.Equivalent.super.readAxioms());
+        r.addAll( DataPropertyExpression.Range.super.readAxioms());
+        r.addAll( DataPropertyExpression.Domain.super.readAxioms());
+        r.addAll( DataPropertyExpression.Sub.super.readAxioms());
+        r.addAll( DataPropertyExpression.Super.super.readAxioms());
         return r;
     }
     // To write axioms to an ontology
     @Override
-    public List<MappingIntent> writeExpressionAxioms() {
-        List<MappingIntent> r = DataPropertyExpression.Disjoint.super.writeExpressionAxioms();
-        r.addAll( DataPropertyExpression.Equivalent.super.writeExpressionAxioms());
-        r.addAll( DataPropertyExpression.Range.super.writeExpressionAxioms());
-        r.addAll( DataPropertyExpression.Domain.super.writeExpressionAxioms());
-        r.addAll( DataPropertyExpression.Sub.super.writeExpressionAxioms());
-        r.addAll( DataPropertyExpression.Super.super.writeExpressionAxioms());
+    public List<MappingIntent> writeAxioms() {
+        List<MappingIntent> r = DataPropertyExpression.Disjoint.super.writeAxioms();
+        r.addAll( DataPropertyExpression.Equivalent.super.writeAxioms());
+        r.addAll( DataPropertyExpression.Range.super.writeAxioms());
+        r.addAll( DataPropertyExpression.Domain.super.writeAxioms());
+        r.addAll( DataPropertyExpression.Sub.super.writeAxioms());
+        r.addAll( DataPropertyExpression.Super.super.writeAxioms());
         return r;
     }
 
-    /* Overriding methods in classes: DataProperty and DataPropertyExpression */
+    /* Overriding methods in classes: DataProperty and DataPropertyExpression --*/
 
 
-    // It returns domainConceptRestrictions from the EntitySet (after being read from the ontology)
+    // It returns domainRestrictions from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.Restrictions getDataPropertyDomainConcepts() {
-        return domainConceptRestrictions;
+    public Restrictions getDomainRestrictions() {
+        return domainRestrictions;
     }
 
-    // It returns rangeConceptRestrictions from the EntitySet (after being read from the ontology)
+    // It returns rangeRestrictions from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.Restrictions getDataPropertyRangeConcepts() {
-        return rangeConceptRestrictions;
+    public Restrictions getRangeRestrictions() {
+        return rangeRestrictions;
     }
 
     // Is used by the descriptors's build() method. It's possible to change the return type based on need.
@@ -124,7 +124,7 @@ public class FullDataPropertyDesc
     }
     // It returns disjointDataProperties from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.DataProperties getDisjointDataProperties() {
+    public DataProperties getDisjointDataProperties() {
         return disjointDataProperties;
     }
 
@@ -135,7 +135,7 @@ public class FullDataPropertyDesc
     }
     // It returns equivalentDataProperties from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.DataProperties getEquivalentDataProperties() {
+    public DataProperties getEquivalentDataProperties() {
         return equivalentDataProperties;
     }
 
@@ -146,7 +146,7 @@ public class FullDataPropertyDesc
     }
     // It returns subDataProperties from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.DataProperties getSubDataProperties() {
+    public DataProperties getSubDataProperties() {
         return subDataProperties;
     }
 
@@ -157,7 +157,7 @@ public class FullDataPropertyDesc
     }
     // It returns superDataProperties from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.DataProperties getSuperDataProperties() {
+    public DataProperties getSuperDataProperties() {
         return superDataProperties;
     }
 
@@ -173,8 +173,8 @@ public class FullDataPropertyDesc
                 "\n" +
                 "\t\t≠ " +        disjointDataProperties + "\n" +
                 "\t\t≡ " +        equivalentDataProperties + "\n" +
-                "\t\t[≐,--] " +   domainConceptRestrictions + "\n" +
-                "\t\t[--,≐] " +   rangeConceptRestrictions + "\n" +
+                "\t\t[≐,--] " + domainRestrictions + "\n" +
+                "\t\t[--,≐] " + rangeRestrictions + "\n" +
                 "\t\t⊃ " +        subDataProperties + "\n" +
                 "\t\t⊂ " +        superDataProperties + "\n" +
                 "}" + "\n";

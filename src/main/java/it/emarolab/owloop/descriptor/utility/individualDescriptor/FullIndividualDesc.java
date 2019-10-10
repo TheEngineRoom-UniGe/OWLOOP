@@ -1,10 +1,10 @@
 package it.emarolab.owloop.descriptor.utility.individualDescriptor;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
+import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.*;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.IndividualGround;
-import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.IndividualExpression;
-import it.emarolab.owloop.descriptor.utility.conceptDescriptor.FullConceptDesc;
+import it.emarolab.owloop.descriptor.utility.classDescriptor.FullClassDesc;
 import it.emarolab.owloop.descriptor.utility.dataPropertyDescriptor.FullDataPropertyDesc;
 import it.emarolab.owloop.descriptor.utility.objectPropertyDescriptor.FullObjectPropertyDesc;
 import org.semanticweb.owlapi.model.OWLClass;
@@ -38,15 +38,15 @@ public class FullIndividualDesc
         extends IndividualGround
         implements IndividualExpression.Disjoint<FullIndividualDesc>,
         IndividualExpression.Equivalent<FullIndividualDesc>,
-        IndividualExpression.Type<FullConceptDesc>,
+        IndividualExpression.Type<FullClassDesc>,
         IndividualExpression.ObjectLink<FullObjectPropertyDesc>,
         IndividualExpression.DataLink<FullDataPropertyDesc> {
 
-    private DescriptorEntitySet.Individuals disjointIndividuals = new DescriptorEntitySet.Individuals();
-    private DescriptorEntitySet.Individuals equivalentIndividuals = new DescriptorEntitySet.Individuals();
-    private DescriptorEntitySet.Concepts concepts = new DescriptorEntitySet.Concepts();
-    private DescriptorEntitySet.ObjectLinksSet objectLinks = new DescriptorEntitySet.ObjectLinksSet();
-    private DescriptorEntitySet.DataLinksSet dataLinks = new DescriptorEntitySet.DataLinksSet();
+    private Individuals disjointIndividuals = new Individuals();
+    private Individuals equivalentIndividuals = new Individuals();
+    private Classes classes = new Classes();
+    private ObjectLinkSet objectLinks = new ObjectLinkSet();
+    private DataLinkSet dataLinks = new DataLinkSet();
 
     /* Constructors from class: IndividualGround */
 
@@ -80,22 +80,22 @@ public class FullIndividualDesc
 
     // To read axioms from an ontology
     @Override
-    public List<MappingIntent> readExpressionAxioms() {
-        List<MappingIntent> r = IndividualExpression.Equivalent.super.readExpressionAxioms();
-        r.addAll( IndividualExpression.Disjoint.super.readExpressionAxioms());
-        r.addAll( IndividualExpression.Type.super.readExpressionAxioms());
-        r.addAll( IndividualExpression.ObjectLink.super.readExpressionAxioms());
-        r.addAll( IndividualExpression.DataLink.super.readExpressionAxioms());
+    public List<MappingIntent> readAxioms() {
+        List<MappingIntent> r = IndividualExpression.Equivalent.super.readAxioms();
+        r.addAll( IndividualExpression.Disjoint.super.readAxioms());
+        r.addAll( IndividualExpression.Type.super.readAxioms());
+        r.addAll( IndividualExpression.ObjectLink.super.readAxioms());
+        r.addAll( IndividualExpression.DataLink.super.readAxioms());
         return r;
     }
     // To write axioms to an ontology
     @Override
-    public List<MappingIntent> writeExpressionAxioms() {
-        List<MappingIntent> r = IndividualExpression.Equivalent.super.writeExpressionAxioms();
-        r.addAll( IndividualExpression.Disjoint.super.writeExpressionAxioms());
-        r.addAll( IndividualExpression.Type.super.writeExpressionAxioms());
-        r.addAll( IndividualExpression.ObjectLink.super.writeExpressionAxioms());
-        r.addAll( IndividualExpression.DataLink.super.writeExpressionAxioms());
+    public List<MappingIntent> writeAxioms() {
+        List<MappingIntent> r = IndividualExpression.Equivalent.super.writeAxioms();
+        r.addAll( IndividualExpression.Disjoint.super.writeAxioms());
+        r.addAll( IndividualExpression.Type.super.writeAxioms());
+        r.addAll( IndividualExpression.ObjectLink.super.writeAxioms());
+        r.addAll( IndividualExpression.DataLink.super.writeAxioms());
         return r;
     }
 
@@ -109,7 +109,7 @@ public class FullIndividualDesc
     }
     // It returns disjointIndividuals from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.Individuals getDisjointIndividuals() {
+    public Individuals getDisjointIndividuals() {
         return disjointIndividuals;
     }
 
@@ -120,40 +120,40 @@ public class FullIndividualDesc
     }
     // It returns equivalentIndividuals from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.Individuals getEquivalentIndividuals() {
+    public Individuals getEquivalentIndividuals() {
         return equivalentIndividuals;
     }
 
     // Is used by the descriptors's build() method. It's possible to change the return type based on need.
     @Override
-    public FullConceptDesc getNewIndividualType(OWLClass instance, OWLReferences ontology) {
-        return new FullConceptDesc( instance, ontology);
+    public FullClassDesc getNewType(OWLClass instance, OWLReferences ontology) {
+        return new FullClassDesc( instance, ontology);
     }
-    // It returns concepts from the EntitySet (after being read from the ontology)
+    // It returns classes from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.Concepts getIndividualTypes() {
-        return concepts;
+    public Classes getTypes() {
+        return classes;
     }
 
     // Is used by the descriptors's build() method. It's possible to change the return type based on need.
     @Override
-    public FullObjectPropertyDesc getNewIndividualObjectProperty(DescriptorEntitySet.ObjectLinks instance, OWLReferences ontology) {
+    public FullObjectPropertyDesc getNewObjectProperty(ObjectLinks instance, OWLReferences ontology) {
         return new FullObjectPropertyDesc( instance.getExpression(), ontology);
     }
     // It returns objectLinks from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.ObjectLinksSet getIndividualObjectProperties() {
+    public ObjectLinkSet getObjectProperties() {
         return objectLinks;
     }
 
     // Is used by the descriptors's build() method. It's possible to change the return type based on need.
     @Override
-    public FullDataPropertyDesc getNewIndividualDataProperty(DescriptorEntitySet.DataLinks instance, OWLReferences ontology) {
+    public FullDataPropertyDesc getNewDataProperty(DataLinks instance, OWLReferences ontology) {
         return new FullDataPropertyDesc( instance.getExpression(), ontology);
     }
     // It returns dataLinks from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.DataLinksSet getIndividualDataProperties() {
+    public DataLinkSet getDataProperties() {
         return dataLinks;
     }
 
@@ -169,7 +169,7 @@ public class FullIndividualDesc
                 "\n" +
                 "\t\t≠ " + disjointIndividuals + "\n" +
                 "\t\t≡ " + equivalentIndividuals + "\n" +
-                "\t\t∈ " + concepts + "\n" +
+                "\t\t∈ " + classes + "\n" +
                 "\t\t⊨ " + objectLinks + "\n" +
                 "\t\t⊢ " + dataLinks + "\n" +
                 "}" + "\n";

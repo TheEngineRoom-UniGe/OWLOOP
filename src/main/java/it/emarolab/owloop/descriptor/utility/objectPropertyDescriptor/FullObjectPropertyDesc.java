@@ -2,8 +2,9 @@ package it.emarolab.owloop.descriptor.utility.objectPropertyDescriptor;
 
 
 import it.emarolab.amor.owlInterface.OWLReferences;
+import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.ObjectProperties;
+import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.Restrictions;
 import it.emarolab.owloop.descriptor.construction.descriptorGround.ObjectPropertyGround;
-import it.emarolab.owloop.descriptor.construction.descriptorEntitySet.DescriptorEntitySet;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.ObjectPropertyExpression;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
 
@@ -43,13 +44,13 @@ public class FullObjectPropertyDesc
         ObjectPropertyExpression.Domain,
         ObjectPropertyExpression.Range{
 
-    private DescriptorEntitySet.ObjectProperties disjointObjectProperties = new DescriptorEntitySet.ObjectProperties();
-    private DescriptorEntitySet.ObjectProperties equivalentObjectProperties = new DescriptorEntitySet.ObjectProperties();
-    private DescriptorEntitySet.ObjectProperties inverseObjectProperties = new DescriptorEntitySet.ObjectProperties();
-    private DescriptorEntitySet.ObjectProperties subObjectProperties = new DescriptorEntitySet.ObjectProperties();
-    private DescriptorEntitySet.ObjectProperties superObjectProperties = new DescriptorEntitySet.ObjectProperties();
-    private DescriptorEntitySet.Restrictions domainConceptRestrictions = new DescriptorEntitySet.Restrictions();
-    private DescriptorEntitySet.Restrictions rangeConceptRestrictions = new DescriptorEntitySet.Restrictions();
+    private ObjectProperties disjointObjectProperties = new ObjectProperties();
+    private ObjectProperties equivalentObjectProperties = new ObjectProperties();
+    private ObjectProperties inverseObjectProperties = new ObjectProperties();
+    private ObjectProperties subObjectProperties = new ObjectProperties();
+    private ObjectProperties superObjectProperties = new ObjectProperties();
+    private Restrictions domainRestrictions = new Restrictions();
+    private Restrictions rangeRestrictions = new Restrictions();
 
     /* Constructors from class: ObjectPropertyGround */
 
@@ -83,42 +84,42 @@ public class FullObjectPropertyDesc
 
     // To read axioms from an ontology
     @Override
-    public List<MappingIntent> readExpressionAxioms() {
-        List<MappingIntent> r = ObjectPropertyExpression.Disjoint.super.readExpressionAxioms();
-        r.addAll( ObjectPropertyExpression.Equivalent.super.readExpressionAxioms());
-        r.addAll( ObjectPropertyExpression.Range.super.readExpressionAxioms());
-        r.addAll( ObjectPropertyExpression.Domain.super.readExpressionAxioms());
-        r.addAll( ObjectPropertyExpression.Sub.super.readExpressionAxioms());
-        r.addAll( ObjectPropertyExpression.Super.super.readExpressionAxioms());
-        r.addAll( ObjectPropertyExpression.Inverse.super.readExpressionAxioms());
+    public List<MappingIntent> readAxioms() {
+        List<MappingIntent> r = ObjectPropertyExpression.Disjoint.super.readAxioms();
+        r.addAll( ObjectPropertyExpression.Equivalent.super.readAxioms());
+        r.addAll( ObjectPropertyExpression.Range.super.readAxioms());
+        r.addAll( ObjectPropertyExpression.Domain.super.readAxioms());
+        r.addAll( ObjectPropertyExpression.Sub.super.readAxioms());
+        r.addAll( ObjectPropertyExpression.Super.super.readAxioms());
+        r.addAll( ObjectPropertyExpression.Inverse.super.readAxioms());
         return r;
     }
     // To write axioms to an ontology
     @Override
-    public List<MappingIntent> writeExpressionAxioms() {
-        List<MappingIntent> r = ObjectPropertyExpression.Disjoint.super.writeExpressionAxioms();
-        r.addAll( ObjectPropertyExpression.Equivalent.super.writeExpressionAxioms());
-        r.addAll( ObjectPropertyExpression.Range.super.writeExpressionAxioms());
-        r.addAll( ObjectPropertyExpression.Domain.super.writeExpressionAxioms());
-        r.addAll( ObjectPropertyExpression.Sub.super.writeExpressionAxioms());
-        r.addAll( ObjectPropertyExpression.Super.super.writeExpressionAxioms());
-        r.addAll( ObjectPropertyExpression.Inverse.super.writeExpressionAxioms());
+    public List<MappingIntent> writeAxioms() {
+        List<MappingIntent> r = ObjectPropertyExpression.Disjoint.super.writeAxioms();
+        r.addAll( ObjectPropertyExpression.Equivalent.super.writeAxioms());
+        r.addAll( ObjectPropertyExpression.Range.super.writeAxioms());
+        r.addAll( ObjectPropertyExpression.Domain.super.writeAxioms());
+        r.addAll( ObjectPropertyExpression.Sub.super.writeAxioms());
+        r.addAll( ObjectPropertyExpression.Super.super.writeAxioms());
+        r.addAll( ObjectPropertyExpression.Inverse.super.writeAxioms());
         return r;
     }
 
     /* Overriding methods in classes: ObjectProperty and ObjectPropertyExpression */
 
 
-    // It returns domainConceptRestrictions from the EntitySet (after being read from the ontology)
+    // It returns domainRestrictions from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.Restrictions getObjectPropertyDomainConcepts() {
-        return domainConceptRestrictions;
+    public Restrictions getDomainRestrictions() {
+        return domainRestrictions;
     }
 
-    // It returns rangeConceptRestrictions from the EntitySet (after being read from the ontology)
+    // It returns rangeRestrictions from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.Restrictions getObjectPropertyRangeConcepts() {
-        return rangeConceptRestrictions;
+    public Restrictions getRangeRestrictions() {
+        return rangeRestrictions;
     }
 
     // Is used by the descriptors's build() method. It's possible to change the return type based on need.
@@ -128,7 +129,7 @@ public class FullObjectPropertyDesc
     }
     // It returns disjointObjectProperties from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.ObjectProperties getDisjointObjectProperties() {
+    public ObjectProperties getDisjointObjectProperties() {
         return disjointObjectProperties;
     }
 
@@ -139,7 +140,7 @@ public class FullObjectPropertyDesc
     }
     // It returns equivalentObjectProperties from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.ObjectProperties getEquivalentObjectProperties() {
+    public ObjectProperties getEquivalentObjectProperties() {
         return equivalentObjectProperties;
     }
 
@@ -150,7 +151,7 @@ public class FullObjectPropertyDesc
     }
     // It returns subObjectProperties from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.ObjectProperties getSubObjectProperties() {
+    public ObjectProperties getSubObjectProperties() {
         return subObjectProperties;
     }
 
@@ -161,7 +162,7 @@ public class FullObjectPropertyDesc
     }
     // It returns superObjectProperties from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.ObjectProperties getSuperObjectProperties() {
+    public ObjectProperties getSuperObjectProperties() {
         return superObjectProperties;
     }
 
@@ -172,7 +173,7 @@ public class FullObjectPropertyDesc
     }
     // It returns inverseObjectProperties from the EntitySet (after being read from the ontology)
     @Override
-    public DescriptorEntitySet.ObjectProperties getInverseObjectProperties() {
+    public ObjectProperties getInverseObjectProperties() {
         return inverseObjectProperties;
     }
 
@@ -188,8 +189,8 @@ public class FullObjectPropertyDesc
                 "\n" +
                 "\t\t≠ " +      disjointObjectProperties + "\n" +
                 "\t\t≡ " +      equivalentObjectProperties + "\n" +
-                "\t\t[≐,--] " + domainConceptRestrictions + "\n" +
-                "\t\t[--,≐] " + rangeConceptRestrictions + "\n" +
+                "\t\t[≐,--] " + domainRestrictions + "\n" +
+                "\t\t[--,≐] " + rangeRestrictions + "\n" +
                 "\t\t⊃ " +      subObjectProperties + "\n" +
                 "\t\t⊂ " +      superObjectProperties + "\n" +
                 "\t\t↔ " +      inverseObjectProperties + "\n" +

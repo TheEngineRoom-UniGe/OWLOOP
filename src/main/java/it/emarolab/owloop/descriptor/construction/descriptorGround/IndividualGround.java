@@ -1,7 +1,6 @@
 package it.emarolab.owloop.descriptor.construction.descriptorGround;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
-import it.emarolab.owloop.descriptor.construction.descriptorExpression.ConceptExpression;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.IndividualExpression;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 

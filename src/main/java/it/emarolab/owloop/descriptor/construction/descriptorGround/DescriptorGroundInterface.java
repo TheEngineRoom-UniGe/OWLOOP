@@ -2,7 +2,7 @@ package it.emarolab.owloop.descriptor.construction.descriptorGround;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
 import it.emarolab.owloop.core.Axiom;
-import it.emarolab.owloop.descriptor.construction.descriptorExpression.ConceptExpression;
+import it.emarolab.owloop.descriptor.construction.descriptorExpression.ClassExpression;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.DataPropertyExpression;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.IndividualExpression;
 import it.emarolab.owloop.descriptor.construction.descriptorExpression.ObjectPropertyExpression;
@@ -13,14 +13,14 @@ import java.util.Set;
 
 /**
  * This interface implements {@link Axiom.Ground} and allows grounding of Descriptors of the type
- * {@link ConceptExpression}, {@link IndividualExpression}, {@link DataPropertyExpression} and
+ * {@link ClassExpression}, {@link IndividualExpression}, {@link DataPropertyExpression} and
  * {@link ObjectPropertyExpression}).
  * A Ground associates to an Ontology using {@link OWLReferences}.
  * The following classes implement {@link DescriptorGroundInterface}:
  *     <ul>
  *     <li><b>{@link GroundInstance}</b>:       an abstract class of all the classes below.</li>
  *     <li><b>{@link IndividualGroundInstance}</b>:   class to ground axioms of type {@link IndividualExpression}.</li>
- *     <li><b>{@link ConceptGroundInstance}</b>:      class to ground axioms of type {@link ConceptExpression}.</li>
+ *     <li><b>{@link ConceptGroundInstance}</b>:      class to ground axioms of type {@link ClassExpression}.</li>
  *     <li><b>{@link DataGroundInstance}</b>:         class to ground axioms of type {@link DataPropertyExpression}.</li>
  *     <li><b>{@link ObjectGroundInstance}</b>:       class to ground axioms of type {@link ObjectPropertyExpression}.</li>
  *     </ul>
@@ -172,7 +172,7 @@ public interface DescriptorGroundInterface<J extends OWLObject>
     }
 
     /**
-     * The {@link Axiom.Ground} for a {@link ConceptExpression}.
+     * The {@link Axiom.Ground} for a {@link ClassExpression}.
      * It sets the entity parameter of {@link DescriptorGroundInterface} to be an {@link OWLClass}.
      */
     class ConceptGroundInstance
@@ -347,11 +347,11 @@ public interface DescriptorGroundInterface<J extends OWLObject>
      * Given an ontological literal within the {@link #getOWLOntology()} IRI.
      * The supported type of the input values are: {@link String}, {@link Integer},
      * {@link Float}, {@link Double} and {@link Long}.
-     * @param value the data value and type of the {@link OWLLiteral}.
+     * @param instance the data value and type of the {@link OWLLiteral}.
      * @return a new OWL data literal with the specified value and type, in the grounded ontology.
      */
-    default OWLLiteral getOWLLiteral( Object value){
-        return getGroundOntology().getOWLLiteral( value);
+    default OWLLiteral getOWLLiteral( Object instance){
+        return getGroundOntology().getOWLLiteral( instance);
     }
 
     /**
@@ -384,7 +384,8 @@ public interface DescriptorGroundInterface<J extends OWLObject>
      * loading. It is generically used to query inferred entities in the ontology.
      * @return the reasoner of the {@link #getGroundInstance()}.
      */
-    default OWLReasoner getReasoner(){
+    @Deprecated
+    default OWLReasoner getOWLReasoner(){
         return getGroundOntology().getOWLReasoner();
     }
     /**
@@ -392,6 +393,7 @@ public interface DescriptorGroundInterface<J extends OWLObject>
      * loading. It is generically used to access asserted entities.
      * @return the base ontology (i.e.: OWL API) interface of {@link #getGroundInstance()}.
      */
+    @Deprecated
     default OWLOntology getOWLOntology(){
         return getGroundOntology().getOWLOntology();
     }
@@ -401,6 +403,7 @@ public interface DescriptorGroundInterface<J extends OWLObject>
      * in the ontology.
      * @return the base data factory (i.e.: OWL API) interface of {@link #getGroundInstance()}.
      */
+    @Deprecated
     default OWLDataFactory getOWLDataFactory(){
         return getGroundOntology().getOWLFactory();
     }
@@ -467,29 +470,20 @@ public interface DescriptorGroundInterface<J extends OWLObject>
     }
 
     /**
-     * This method calls: {@link it.emarolab.amor.owlDebugger.Logger#setPrintOnConsole(Boolean)}
-     * with a given flag parameter.
-     * @param enable the flag for enable/disable aMOR logging.
-     */
-    default void aMORlogging( boolean enable){
-        it.emarolab.amor.owlDebugger.Logger.setPrintOnConsole( enable);
-    }
-
-    /**
      * Return a compact name of an {@link OWLObject}, by removing IRI for instance.
-     * @param obj the object to describe with a short name
+     * @param instance the object to describe with a short name
      * @return the short name of the given object.
      */
-    default String getOWLName( OWLObject obj){
-        return getGroundOntology().getOWLObjectName( obj);
+    default String getOWLName( OWLObject instance){
+        return getGroundOntology().getOWLObjectName( instance);
     }
     /**
      * Return a compact name of a {@code Set<{@link OWLObject}>}, by removing IRI for instance.
-     * @param set the set of objects to describe with related short names
+     * @param instance the set of objects to describe with related short names
      * @return the set short names of the given object set.
      */
-    default Set<String> getOWLName( Set<?> set){
-        return getGroundOntology().getOWLObjectName( set);
+    default Set<String> getOWLName( Set<?> instance){
+        return getGroundOntology().getOWLObjectName( instance);
     }
 
     /**
