@@ -13,7 +13,7 @@ Furthermore, with the help of descriptor/s, OWLOOP enables synchronization of ax
 4. License
 5. Dependencies
 6. Known Issues to be Resolved
-7. Author's message
+7. Developers' message
 
 #
 
@@ -68,12 +68,11 @@ OWLOOP is under the license: [GNU General Public License v3.0](owloop/LICENSE)
 We are currently working on a known issue, i.e., during manipulation of a class definition, especially while removing restrictions, due to an unknown (for now) reason, the restrictions do not get removed. 
 To circumvent the problem (for now), we clear the class hierarchy and regenerate it from scratch, instead of updating it. 
 
-## 7. Author's message
+## 7. Developers' message
 Feel free to contribute to OWLOOP by sharing your thoughts and ideas, raising issues (if found) and providing bug-fixes. 
 For any information or support, please do not hesitate to contact us through this Github repository or by email.
 
-[luca.buoncompagni@edu.unige.it](mailto:luca.buoncompagni@edu.unige.it),
-[kareem.syed.yusha@dibris.unige.it](mailto:kareem.syed.yusha@dibris.unige.it).
+Developed by [luca.buoncompagni@edu.unige.it](mailto:luca.buoncompagni@edu.unige.it) and [kareem.syed.yusha@dibris.unige.it](mailto:kareem.syed.yusha@dibris.unige.it) under the supervision of [fulvio.mastrogiovanni@unige.it](mailto:fulvio.mastrogiovanni@unige.it).
 
 # Notes to self:
 
