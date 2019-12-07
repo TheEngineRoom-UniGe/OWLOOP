@@ -9,11 +9,12 @@ Furthermore, with the help of descriptor/s, OWLOOP enables synchronization of ax
 ## Table of Contents
 1. Reference to the publication
 2. Installation
-3. Usage
-4. License
-5. Dependencies
-6. Known Issues to be Resolved
-7. Developers' message
+3. Quick overview
+4. Usage
+5. License
+6. Dependencies
+7. Known issues to be resolved
+8. Developers' message
 
 #
 
@@ -33,7 +34,16 @@ This repository has been published in the journal ... (**todo**: add the link he
 compile group: 'com.github.owloop', name: 'owloop-api', version: '1.0'
 ```
 
-## 3. Usage
+## 4. Quick overview
+
+OWLOOP API enables a developer to construct and/or utilize descriptors for the purpose of creating and/or manipulating 
+ontologies with reduced boilerplate code. Thus, the API intends to ease the integration of ontologies within 
+software applications in varied domains, i.e., biomedical, information retrieval, robotics etc.
+
+Consider that a descriptor **D** has a structure composed of three parts, i.e., the ground **G**, the expression(s) **E** and 
+the entity-set **E-S**. <img src="https://github.com/EmaroLab/owloop/blob/master/gitRepoResources/images/owloopLogo.png" width="150">
+
+## 4. Usage
 
 To explain the usage of OWLOOP, we present in this repository's [wiki](https://github.com/EmaroLab/owloop/wiki):
 
@@ -49,12 +59,12 @@ To explain the usage of OWLOOP, we present in this repository's [wiki](https://g
 
 - An [example](https://github.com/EmaroLab/owloop/wiki/6.-Example:-Removing-Axioms-from-an-Ontology) that shows how to remove axioms from an ontology, using descriptors.
 
-## 4. License
+## 5. License
 
 OWLOOP is under the license: [GNU General Public License v3.0](owloop/LICENSE)
 
 
-## 5. Dependencies
+## 6. Dependencies
 
 [Gradle](https://gradle.org/) is used for building OWLOOP and it has the following dependencies; can be found in `owloop/build.gradle`:
 
@@ -63,12 +73,12 @@ OWLOOP is under the license: [GNU General Public License v3.0](owloop/LICENSE)
 - [Pellet](https://github.com/stardog-union/pellet): an open source OWL 2 DL reasoner.
 - [JUnit](https://github.com/junit-team): a programmer-oriented testing framework for Java.
 
-## 6. Issues to be Resolved
+## 7. Issues to be Resolved
 
 We are currently working on a known issue, i.e., during manipulation of a class definition, especially while removing restrictions, due to an unknown (for now) reason, the restrictions do not get removed. 
 To circumvent the problem (for now), we clear the class hierarchy and regenerate it from scratch, instead of updating it. 
 
-## 7. Developers' message
+## 8. Developers' message
 Feel free to contribute to OWLOOP by sharing your thoughts and ideas, raising issues (if found) and providing bug-fixes. 
 For any information or support, please do not hesitate to contact us through this Github repository or by email.
 
@@ -76,7 +86,7 @@ Developed by [luca.buoncompagni@edu.unige.it](mailto:luca.buoncompagni@edu.unige
 
 # Notes to self:
 
-## 8. Check List Before Publishing Repo on Maven Central
+## Check List Before Packaging the repo to Maven Central
 
 - [ ] Add the UML in /documentation directory
 - [ ] Finalize a plan for AMOR 2.2 dependency. (*Luca gives green signal for pushing AMOR to Maven Central*)
