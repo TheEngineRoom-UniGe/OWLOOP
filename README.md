@@ -41,7 +41,7 @@ ontologies with reduced boilerplate code. Thus, the API intends to ease the inte
 software applications in varied domains, i.e., biomedical, information retrieval, robotics etc.
 
 Consider that a descriptor **D** has a structure composed of three parts, i.e., the ground **G**, the expression(s) **E** and 
-the entity-set **E-S**. Conceptually, **D** has an internal structure which looks like as follows: <img src="https://github.com/EmaroLab/owloop/blob/master/gitRepoResources/images/gees.png" width="80">
+the entity-set **E-S**. Conceptually, **D** has an internal structure which looks like as follows: <img src="https://github.com/EmaroLab/owloop/blob/master/gitRepoResources/images/gees.png" width="90">
 
 ## 4. Usage
 
