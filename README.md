@@ -13,9 +13,9 @@ Furthermore, with the help of descriptor/s, OWLOOP enables synchronization of ax
 2. Installation
 3. Quick overview
 4. Wiki documentation
-5. License
-6. Dependencies
-7. Developers' message
+5. Dependencies
+6. Developers' message
+7. License
 
 ## 1. Reference to the Publication
 
@@ -87,11 +87,7 @@ OWLOOP API project.
     - [Remove](https://github.com/EmaroLab/owloop/wiki/6.-Example:-Removing-Axioms-from-an-Ontology) axioms from an 
     ontology.
 
-## 5. License
-
-OWLOOP is under the license: [GNU General Public License v3.0](owloop/LICENSE)
-
-## 6. Dependencies
+## 5. Dependencies
 
 [Gradle](https://github.com/EmaroLab/owloop/blob/master/build.gradle) is used for building OWLOOP and it has the following dependencies in it:
 
@@ -101,10 +97,14 @@ OWLOOP is under the license: [GNU General Public License v3.0](owloop/LICENSE)
 - [Pellet](https://github.com/stardog-union/pellet): an open source OWL 2 DL reasoner.
 - [JUnit](https://github.com/junit-team): a programmer-oriented testing framework for Java.
 
-## 7. Developers' message
+## 6. Developers' message
 Feel free to contribute to OWLOOP by sharing your thoughts and ideas, raising issues (if found) and providing bug-fixes. 
 For any information or support, please do not hesitate to contact us through this Github repository or by email.
 
 Developed by [luca.buoncompagni@edu.unige.it](mailto:luca.buoncompagni@edu.unige.it) and 
 [kareem.syed.yusha@dibris.unige.it](mailto:kareem.syed.yusha@dibris.unige.it) under the supervision of 
 [fulvio.mastrogiovanni@unige.it](mailto:fulvio.mastrogiovanni@unige.it).
+
+## 7. License
+
+OWLOOP is under the license: [GNU General Public License v3.0](owloop/LICENSE)
