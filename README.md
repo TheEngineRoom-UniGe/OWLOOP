@@ -49,15 +49,15 @@ and then is loaded into the program memory.
 The descriptor object **D** provides methods that allow manipulation of an ontology **O**. Which ontology (or 
 ontologies) get manipulated by **D** depends upon the `OntologyReference` object associated to **D**.
 
-The following diagram shows the methods available from a descriptor object. Each method is described in the wiki 
+The following diagram shows the methods of a descriptor object. Each method is described in the wiki 
 documentation.
 
 <p align="center">
   <img src="https://github.com/EmaroLab/owloop/blob/master/gitRepoResources/images/d_methods.png" width="400">
 </p>
 
-Note that the method `load()` is available from an object of `OntologyReference` and `save()` is available from both 
-an object of `OntologyReference` and an object of a descriptor.
+**Note that** `load()` is a method of an `OntologyReference` object and `save()` is a method of both, an 
+`OntologyReference` object and a descriptor object.
 
 ## 4. Usage
 
