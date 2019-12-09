@@ -41,7 +41,7 @@ for the purpose of creating and/or manipulating ontologies with reduced boilerpl
 software applications in varied domains, i.e., biomedical, information retrieval, robotics etc.
 
 Consider that a descriptor **D** has a structure composed of three parts, i.e., the ground **G**, the expression(s) **E** and 
-the entity-set **E-S**. Conceptually, **D** has an internal structure which looks like as follows: <img src="https://github.com/EmaroLab/owloop/blob/master/gitRepoResources/images/gees.png" width="90">. 
+the entity-set **E-S**. Conceptually, **D** has an internal structure which looks like as follows: <img src="https://github.com/EmaroLab/owloop/blob/master/gitRepoResources/images/g_e_es.png" width="90">. 
 Consider that some methods provided by **D** allow the developer to create and/or manipulate an ontology **O** with 
 which **D** is associated during it's instantiation. 
 
