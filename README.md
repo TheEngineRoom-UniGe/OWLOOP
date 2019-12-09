@@ -49,10 +49,12 @@ and then is loaded into the program memory.
 The descriptor object **D** provides methods that allow manipulation of an ontology **O**. Which ontology (or ontologies) get manipulated by 
 **D** depends upon the `OntologyReference` object associated to **D**.
 
-<img src="https://github.com/EmaroLab/owloop/blob/master/gitRepoResources/images/d_methods.png" width="300">
+<p align="center">
+  <img src="https://github.com/EmaroLab/owloop/blob/master/gitRepoResources/images/d_methods.png" width="400">
+</p>
 
-Note that the method `load()` is available from a Java-class called OntologyReference and `save()` is available from 
-OntologyReference and a descriptor Java-classes.
+Note that the method `load()` is available from an object of `OntologyReference` and `save()` is available from both 
+an object of `OntologyReference` and an object of a descriptor.
 
 ## 4. Usage
 
