@@ -1,5 +1,5 @@
-<img src="https://github.com/EmaroLab/owloop/blob/master/gitRepoResources/images/owloopLogo.png" width="310"> 
-
+<img src="https://github.com/EmaroLab/owloop/blob/master/gitRepoResources/images/owloopLogo.png" width="310">
+ 
 #
 
 Enabling a developer to use **O**ntology **W**eb **L**anguage (OWL) along with its reasoning capabilities in an **O**bject **O**riented **P**rogramming (OOP) paradigm, by providing an easy to use interface.
@@ -12,12 +12,10 @@ Furthermore, with the help of descriptor/s, OWLOOP enables synchronization of ax
 1. Reference to the publication
 2. Installation
 3. Quick overview
-4. Usage
+4. Wiki documentation
 5. License
 6. Dependencies
 7. Developers' message
-
-#
 
 ## 1. Reference to the Publication
 
@@ -60,21 +58,34 @@ documentation.
 **Note that** `load()` is a method of an `OntologyReference` object and `save()` is a method of both, an 
 `OntologyReference` object and a descriptor object.
 
-## 4. Usage
+## 4. Wiki documentation
 
-To explain the usage of OWLOOP, we present in this repository's [wiki](https://github.com/EmaroLab/owloop/wiki):
+The OWLOOP API's core aspects are described in this repository's [wiki](https://github.com/EmaroLab/owloop/wiki):
 
-- The overall [structure of the OWLOOP project](https://github.com/EmaroLab/owloop/wiki/1.-OWLOOP:-Project-Structure-&-JavaDoc#project-structure) and its [JavaDoc](https://emarolab.github.io/owloop/).
+- [Structure](https://github.com/EmaroLab/owloop/wiki/1.-OWLOOP:-Project-Structure-&-JavaDoc#project-structure) of the 
+OWLOOP API project.
 
-- The [Descriptor](https://github.com/EmaroLab/owloop/wiki/2.-The-OWLOOP-Descriptor#what-is-a-descriptor), its [types](https://github.com/EmaroLab/owloop/wiki/2.-The-OWLOOP-Descriptor#what-are-the-types-of-descriptors), the possible [expressions](https://github.com/EmaroLab/owloop/wiki/2.-The-OWLOOP-Descriptor#descriptor-expressions) that each type can implement and the useful [methods](https://github.com/EmaroLab/owloop/wiki/2.-The-OWLOOP-Descriptor#descriptor-methods) it provides.
+- [JavaDoc](https://emarolab.github.io/owloop/) of the OWLOOP API project.
 
-- [Examples](https://github.com/EmaroLab/owloop/wiki/3.-Example:-Creating-a-Simple-or-a-Compound-Descriptor) that show construction of a [simple descriptor](https://github.com/EmaroLab/owloop/wiki/3.-Example:-Creating-a-Simple-or-a-Compound-Descriptor#a-simple-concept-descriptor) vs a [compound descriptor](https://github.com/EmaroLab/owloop/wiki/3.-Example:-Creating-a-Simple-or-a-Compound-Descriptor#a-compound-concept-descriptor).
+- What is a [Descriptor](https://github.com/EmaroLab/owloop/wiki/2.-The-OWLOOP-Descriptor#what-is-a-descriptor) in OWLOOP?
+    - [Types](https://github.com/EmaroLab/owloop/wiki/2.-The-OWLOOP-Descriptor#what-are-the-types-of-descriptors) of 
+    descriptors.
+    - [Expressions](https://github.com/EmaroLab/owloop/wiki/2.-The-OWLOOP-Descriptor#descriptor-expressions) that can 
+    be implemented by each type of descriptor. 
+    - [Methods](https://github.com/EmaroLab/owloop/wiki/2.-The-OWLOOP-Descriptor#descriptor-methods) of a descriptor.
 
-- An [example](https://github.com/EmaroLab/owloop/wiki/4.-Example:-Adding-Axioms-to-an-Ontology) that shows how to add axioms to an ontology, using descriptors.
+- Code examples that show how to: 
 
-- An [example](https://github.com/EmaroLab/owloop/wiki/5.-Example:-Inferring-Axioms-from-an-Ontology) that shows how to infer some knowledge (i.e., axioms) from axioms already present in an ontology, and the particular usefulness of the [descriptor build method](https://github.com/EmaroLab/owloop/wiki/5.-Example:-Inferring-Axioms-from-an-Ontology#descriptor-build-method).
+    - [Construct](https://github.com/EmaroLab/owloop/wiki/3.-Example:-Constructing-a-Descriptor) a descriptor.
 
-- An [example](https://github.com/EmaroLab/owloop/wiki/6.-Example:-Removing-Axioms-from-an-Ontology) that shows how to remove axioms from an ontology, using descriptors.
+    - [Add](https://github.com/EmaroLab/owloop/wiki/4.-Example:-Adding-Axioms-to-an-Ontology) axioms to an ontology.
+
+    - [Infer](https://github.com/EmaroLab/owloop/wiki/5.-Example:-Inferring-Axioms-from-an-Ontology) some knowledge 
+    (i.e., axioms) from the axioms already present within an ontology. This example also highlights the use of the 
+    `build()` method.
+
+    - [Remove](https://github.com/EmaroLab/owloop/wiki/6.-Example:-Removing-Axioms-from-an-Ontology) axioms from an 
+    ontology.
 
 ## 5. License
 
