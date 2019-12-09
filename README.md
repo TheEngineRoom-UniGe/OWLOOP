@@ -37,17 +37,20 @@ compile group: 'com.github.owloop', name: 'owloop-api', version: '1.0'
 ## 4. Quick overview
 
 OWLOOP API enables a developer to construct and/or utilize descriptors (that are Java-classes with helpful methods) 
-for manipulating ontologies with reduced boilerplate code. Thus, the API intends to ease the integration of ontologies within 
-software applications in varied domains, i.e., biomedical, information retrieval, robotics etc.
+for manipulating ontologies with reduced boilerplate code. Thus, the API intends to ease the integration of ontologies 
+within software applications in varied domains, i.e., biomedical, information retrieval, robotics etc.
 
-Consider an object **D** of a descriptor (i.e., a Java-class). It has an internal structure composed of three parts, i.e.,
-the ground **G**, the expression(s) **E** and the entity-set **E-S**, which conceptually looks like as follows: 
+Consider an object **D** of a descriptor (i.e., a Java-class). It has an internal structure composed of three parts, 
+i.e., the ground **G**, the expression(s) **E** and the entity-set **E-S**, which conceptually looks like as follows: 
 <img src="https://github.com/EmaroLab/owloop/blob/master/gitRepoResources/images/g_e_es.png" width="90">. 
 An ontology **O** can be instantiated using the `OntologyReference` (i.e., a Java-class). If an ontology file (.owl) 
 already exists then it gets loaded into the program memory, else if an ontology file does not exist then it gets created 
 and then is loaded into the program memory.
-The descriptor object **D** provides methods that allow manipulation of an ontology **O**. Which ontology (or ontologies) get manipulated by 
-**D** depends upon the `OntologyReference` object associated to **D**.
+The descriptor object **D** provides methods that allow manipulation of an ontology **O**. Which ontology (or 
+ontologies) get manipulated by **D** depends upon the `OntologyReference` object associated to **D**.
+
+The following diagram shows the methods available from a descriptor object. Each method is described in the wiki 
+documentation.
 
 <p align="center">
   <img src="https://github.com/EmaroLab/owloop/blob/master/gitRepoResources/images/d_methods.png" width="400">
