@@ -43,9 +43,9 @@ Consider an object **D** of a descriptor (i.e., a Java-class). It has an interna
 i.e., the ground **G**, the expression(s) **E** and the entity-set **E-S**, which conceptually looks like as follows: 
 <img src="https://github.com/EmaroLab/owloop/blob/master/gitRepoResources/images/g_e_es.png" width="90">. 
 An ontology **O** can be instantiated using the `OntologyReference` (i.e., a Java-class). If an ontology file (.owl) 
-already exists then it gets loaded into the program memory, else if an ontology file does not exist then it gets created 
-and then is loaded into the program memory.
-The descriptor object **D** provides methods that allow manipulation of an ontology **O**. Which ontology (or 
+already exists then it gets loaded into the *program memory*, else if an ontology file does not exist then it gets created 
+and then is loaded into the *program memory*.
+The descriptor object **D** provides methods that allow manipulation of an *in-memory* ontology **O**. Which ontology (or 
 ontologies) get manipulated by **D** depends upon the `OntologyReference` object associated to **D**.
 
 The following diagram shows the methods of a descriptor object. Each method is described in the wiki 
@@ -78,14 +78,15 @@ OWLOOP API project.
 
     - [Construct](https://github.com/EmaroLab/owloop/wiki/3.-Example:-Constructing-a-Descriptor) a descriptor.
 
-    - [Add](https://github.com/EmaroLab/owloop/wiki/4.-Example:-Adding-Axioms-to-an-Ontology) axioms to an ontology.
+    - [Add](https://github.com/EmaroLab/owloop/wiki/4.-Example:-Adding-Axioms-to-an-Ontology) axioms to an ontology by 
+    using descriptors.
 
     - [Infer](https://github.com/EmaroLab/owloop/wiki/5.-Example:-Inferring-Axioms-from-an-Ontology) some knowledge 
-    (i.e., axioms) from the axioms already present within an ontology. This example also highlights the use of the 
-    `build()` method.
+    (i.e., axioms) from the axioms already present within an ontology by using descriptors. 
+    This example also highlights the use of the `build()` method.
 
     - [Remove](https://github.com/EmaroLab/owloop/wiki/6.-Example:-Removing-Axioms-from-an-Ontology) axioms from an 
-    ontology.
+    ontology by using descriptors.
 
 ## 5. Dependencies
 
