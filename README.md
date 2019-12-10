@@ -110,4 +110,4 @@ Developed by [luca.buoncompagni@edu.unige.it](mailto:luca.buoncompagni@edu.unige
 
 ## 7. License
 
-OWLOOP is under the license: [GNU General Public License v3.0](owloop/LICENSE)
+OWLOOP is under the license: [GNU General Public License v3.0](https://github.com/EmaroLab/owloop/blob/master/LICENSE)
