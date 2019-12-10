@@ -78,7 +78,7 @@ OWLOOP API project.
 
 - Code examples that show how to: 
 
-    - [Construct](https://github.com/EmaroLab/owloop/wiki/3.-Example:-Constructing-a-Descriptor) a descriptor.
+    - [Construct](https://github.com/EmaroLab/owloop/wiki/3.-Example:-Constructing-a-Descriptor) a type of descriptor.
 
     - [Add](https://github.com/EmaroLab/owloop/wiki/4.-Example:-Adding-Axioms-to-an-Ontology) axioms to an ontology by 
     using descriptors.
