@@ -62,17 +62,19 @@ documentation.
 
 The OWLOOP API's core aspects are described in this repository's [wiki](https://github.com/EmaroLab/owloop/wiki):
 
-- [Structure](https://github.com/EmaroLab/owloop/wiki/1.-OWLOOP:-Project-Structure-&-JavaDoc#project-structure) of the 
+- [Structure](https://github.com/EmaroLab/owloop/wiki/1.-Project-Structure-&-JavaDoc#project-structure) of the 
 OWLOOP API project.
 
-- [JavaDoc](https://emarolab.github.io/owloop/) of the OWLOOP API project.
+- [JavaDoc](https://github.com/EmaroLab/owloop/wiki/1.-Project-Structure-&-JavaDoc#javadoc) of the OWLOOP API project.
 
-- What is a [Descriptor](https://github.com/EmaroLab/owloop/wiki/2.-The-OWLOOP-Descriptor#what-is-a-descriptor) in OWLOOP?
-    - [Types](https://github.com/EmaroLab/owloop/wiki/2.-The-OWLOOP-Descriptor#what-are-the-types-of-descriptors) of 
+- What is a [Descriptor](https://github.com/EmaroLab/owloop/wiki/2.-What-is-a-Descriptor%3F) in OWLOOP?
+    - [Types](https://github.com/EmaroLab/owloop/wiki/2.1.-Types-of-Descriptors) of 
     descriptors.
-    - [Expressions](https://github.com/EmaroLab/owloop/wiki/2.-The-OWLOOP-Descriptor#descriptor-expressions) that can 
-    be implemented by each type of descriptor. 
-    - [Methods](https://github.com/EmaroLab/owloop/wiki/2.-The-OWLOOP-Descriptor#descriptor-methods) of a descriptor.
+    - [Expressions](https://github.com/EmaroLab/owloop/wiki/2.2.-Possible-Expressions-for-each-Type-of-Descriptor) that can 
+    be implemented for each type of descriptor. 
+    - [Methods](https://github.com/EmaroLab/owloop/wiki/2.3.-Methods-of-a-Descriptor-object) of a descriptor.
+    - [Preconstructed Descriptors](https://github.com/EmaroLab/owloop/wiki/2.4.-Preconstructed-Descriptors) provided by 
+    OWLOOP.
 
 - Code examples that show how to: 
 
