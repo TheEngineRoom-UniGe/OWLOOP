@@ -95,7 +95,7 @@ OWLOOP API project.
 [Gradle](https://github.com/EmaroLab/owloop/blob/master/build.gradle) is used for building OWLOOP and it has the following dependencies in it:
 
 - [aMOR](https://github.com/EmaroLab/multi_ontology_reference): **a** **M**ulti-**O**ntology **R**eference library 
-(based on OWL-API) that provides helper functions to OWLOOP.https://gradle.org/
+(based on OWL-API) that provides helper functions to OWLOOP.
 - [OWL-API](https://github.com/owlcs/owlapi): a Java API for creating, manipulating and serialising OWL Ontologies.
 - [Pellet](https://github.com/stardog-union/pellet): an open source OWL 2 DL reasoner.
 - [JUnit](https://github.com/junit-team): a programmer-oriented testing framework for Java.
