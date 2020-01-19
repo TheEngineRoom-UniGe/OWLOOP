@@ -4,7 +4,6 @@ import com.google.common.base.Objects;
 import it.emarolab.owloop.core.Axiom;
 import org.semanticweb.owlapi.model.OWLDataProperty;
 import org.semanticweb.owlapi.model.OWLLiteral;
-
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -142,6 +141,7 @@ public class DataLinks
 
     @Override // see super class for documentation
     public String toString() {
+
         return semantic.getIRI().getRemainder().get() + "." + getValues();
     }
 }

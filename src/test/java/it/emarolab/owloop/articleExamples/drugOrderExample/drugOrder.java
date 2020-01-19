@@ -1,7 +1,7 @@
 package it.emarolab.owloop.articleExamples.drugOrderExample;
 
 import it.emarolab.amor.owlInterface.OWLReferences;
-import it.emarolab.owloop.core.Axiom.Descriptor.*;
+import it.emarolab.owloop.core.Axiom.Descriptor.OntologyReference;
 import it.emarolab.owloop.descriptor.utility.individualDescriptor.FullIndividualDesc;
 import org.junit.Before;
 import org.junit.Test;

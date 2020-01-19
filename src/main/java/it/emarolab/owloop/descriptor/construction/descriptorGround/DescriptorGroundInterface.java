@@ -9,6 +9,7 @@ import it.emarolab.owloop.descriptor.construction.descriptorExpression.ObjectPro
 import org.semanticweb.owlapi.model.*;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
 import org.semanticweb.owlapi.vocab.OWL2Datatype;
+
 import java.util.Set;
 
 /**
