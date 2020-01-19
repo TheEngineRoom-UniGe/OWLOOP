@@ -25,9 +25,10 @@ This repository has been published in the journal ... *will be updated soon* ...
 
 Given that you have a Java project with Gradle as your build tool.
 
-* *Step 1*: Create a directory called `lib` in your project's main directory wherein `build.gradle` file is also located.
-* *Step 2*: Download the files [owloop-2.1.jar](https://github.com/EmaroLab/owloop/releases/tag/2.1) and [amor-2.2.jar](https://github.com/EmaroLab/multi_ontology_reference/releases/tag/v2.2), and place them in the `lib` directory created in Step 1.
-* *Step 3*: In your project's `build.gradle` file,
+* **Step 1**: Create a directory called `lib` in your project's main directory wherein `build.gradle` file is also located.
+* **Step 2**: Download the files [owloop-2.1.jar](https://github.com/EmaroLab/owloop/releases/tag/2.1) and [amor-2.2.jar](https://github.com/EmaroLab/multi_ontology_reference/releases/tag/v2.2), and place them in the `lib` directory created in Step 1.
+* **Step 3**: In your project's `build.gradle` file,
+
   * add `flatDir { dirs 'lib' }` within the `repositories{}` section, as shown below:
   ```gradle
   repositories {
