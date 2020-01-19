@@ -19,7 +19,7 @@ Furthermore, with the help of descriptor/s, OWLOOP enables synchronization of ax
 
 ## 1. Reference to the Publication
 
-This repository has been published in the journal ... *will be updated soon* ...
+... *will be updated soon* ...
 
 ## 2. Installation
 
@@ -112,7 +112,7 @@ OWLOOP API project.
 ## 5. Dependencies
 
 [Gradle](https://github.com/EmaroLab/owloop/blob/master/build.gradle) is used for building OWLOOP. The following are 
-the minimum dependencies that your build.gradle file should include in order to use OWLOOP features:
+the minimum dependencies that your `build.gradle` file should include in order to use OWLOOP features:
 
 * [aMOR](https://github.com/EmaroLab/multi_ontology_reference) (latest release is **amor-2.1**): **a** 
 **M**ulti-**O**ntology **R**eference library is based on OWL-API and it provides helper functions to OWLOOP.
