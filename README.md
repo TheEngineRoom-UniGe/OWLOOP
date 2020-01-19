@@ -26,7 +26,7 @@ This repository has been published in the journal ... *will be updated soon* ...
 Given that you have a Java project with Gradle as your build tool.
 
 * **Step 1**: Create a directory called `lib` in your project's main directory wherein `build.gradle` file is also located.
-* **Step 2**: Download the files [owloop-2.1.jar](https://github.com/EmaroLab/owloop/releases/tag/2.1) and [amor-2.2.jar](https://github.com/EmaroLab/multi_ontology_reference/releases/tag/v2.2), and place them in the `lib` directory created in Step 1.
+* **Step 2**: Download the files [owloop-2.1.jar](https://github.com/EmaroLab/owloop/releases/tag/2.1) and [amor-2.2.jar](https://github.com/EmaroLab/multi_ontology_reference/releases/tag/v2.2), and place them within the `lib` directory created in Step 1.
 * **Step 3**: In your project's `build.gradle` file,
 
   * add `flatDir { dirs 'lib' }` within the `repositories{}` section, as shown below:
@@ -111,13 +111,17 @@ OWLOOP API project.
 
 ## 5. Dependencies
 
-[Gradle](https://github.com/EmaroLab/owloop/blob/master/build.gradle) is used for building OWLOOP and it has the following dependencies in it:
+[Gradle](https://github.com/EmaroLab/owloop/blob/master/build.gradle) is used for building OWLOOP. The following are 
+the minimum dependencies that your build.gradle file should include in order to use OWLOOP features:
 
-- [aMOR](https://github.com/EmaroLab/multi_ontology_reference): **a** **M**ulti-**O**ntology **R**eference library 
-(based on OWL-API) that provides helper functions to OWLOOP.
-- [OWL-API](https://github.com/owlcs/owlapi): a Java API for creating, manipulating and serialising OWL Ontologies.
-- [Pellet](https://github.com/stardog-union/pellet): an open source OWL 2 DL reasoner.
-- [JUnit](https://github.com/junit-team): a programmer-oriented testing framework for Java.
+* [aMOR](https://github.com/EmaroLab/multi_ontology_reference) (latest release is **amor-2.1**): **a** 
+**M**ulti-**O**ntology **R**eference library is based on OWL-API and it provides helper functions to OWLOOP.
+  * [OWL-API](https://github.com/owlcs/owlapi): a Java API for creating, manipulating and serialising OWL Ontologies. We 
+  have included **owlapi-distribution-5.0.5** within **amor-2.1**.
+* [OWLOOP](https://github.com/EmaroLab/owloop) (latest release is **owloop-2.2**): an API that enables easy manipulation 
+of OWL (Ontology Web Language) ontologies from within an OOP (Object Oriented Programming) paradigm. 
+  * [Pellet](https://github.com/stardog-union/pellet): an open source OWL 2 DL reasoner. We have included 
+  **openllet-owlapi-2.5.1** within **owloop-2.2**.
 
 ## 6. Developers' message
 Feel free to contribute to OWLOOP by sharing your thoughts and ideas, raising issues (if found) and providing bug-fixes. 
