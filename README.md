@@ -23,15 +23,29 @@ This repository has been published in the journal ... *will be updated soon* ...
 
 ## 2. Installation
 
-- Clone or download the repository.
-- Open the project by opening the file `owloop/build.gradle` in IntelliJ, with the following parameters ... (**todo**: show screen shot of the correct parameters)
+Given that you have a Java project with Gradle as your build tool.
 
-    **OR**
-
-- Add the following dependency in your project's `build.gradle` file ... (**todo**: the developer should be able to add a single line and thus have acess to the OWLOOP API)
-```gradle
-compile group: 'com.github.owloop', name: 'owloop-api', version: '1.0'
-```
+* *Step 1*: Create a directory called `lib` in your project's main directory wherein `build.gradle` file is also located.
+* *Step 2*: Download the files [owloop-2.1.jar](https://github.com/EmaroLab/owloop/releases/tag/2.1) and [amor-2.2.jar](https://github.com/EmaroLab/multi_ontology_reference/releases/tag/v2.2), and place them in the `lib` directory created in Step 1.
+* *Step 3*: In your project's `build.gradle` file,
+  * add `flatDir { dirs 'lib' }` within the `repositories{}` section, as shown below:
+  ```gradle
+  repositories {
+      mavenCentral()
+  
+      flatDir {
+          dirs 'lib'
+      }
+  }
+  ```
+  * add amor-2.1 and owloop-2.2 as your project's dependencies by including them within the `dependencies{}` section, as shown below:
+  ```gradle
+  dependencies {
+      compile 'it.emarolab.amor:amor:2.2'
+      compile 'it.emarolab.owloop:owloop:2.1'
+  }
+  ```
+OWLOOP features should now be accessible to you within your code.
 
 ## 3. Quick overview
 
