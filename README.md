@@ -41,7 +41,7 @@ Given that you have a Java project with Gradle as your build tool.
   }
   ```
   
-  * add amor-2.1 and owloop-2.2 as your project's dependencies by including them within the `dependencies{}` section, as shown below:
+  * add **amor-2.1** and **owloop-2.2** as your project's dependencies by including them within the `dependencies{}` section, as shown below:
   
   ```gradle
   dependencies {
