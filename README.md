@@ -30,6 +30,7 @@ Given that you have a Java project with Gradle as your build tool.
 * **Step 3**: In your project's `build.gradle` file,
 
   * add `flatDir { dirs 'lib' }` within the `repositories{}` section, as shown below:
+  
   ```gradle
   repositories {
       mavenCentral()
@@ -39,13 +40,16 @@ Given that you have a Java project with Gradle as your build tool.
       }
   }
   ```
+  
   * add amor-2.1 and owloop-2.2 as your project's dependencies by including them within the `dependencies{}` section, as shown below:
+  
   ```gradle
   dependencies {
       compile 'it.emarolab.amor:amor:2.2'
       compile 'it.emarolab.owloop:owloop:2.1'
   }
   ```
+  
 OWLOOP features should now be accessible to you within your code.
 
 ## 3. Quick overview
