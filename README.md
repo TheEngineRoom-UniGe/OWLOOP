@@ -5,8 +5,7 @@
 Enabling a developer to use **O**ntology **W**eb **L**anguage (OWL) along with its reasoning capabilities in an **O**bject **O**riented **P**rogramming (OOP) paradigm, by providing an easy to use API.
 
 Although OWL and OOP paradigms have similar structure, there are some key differences between them; see this [W3C publication](https://www.w3.org/2001/sw/BestPractices/SE/ODSD/) for more details about the differences. Nevertheless, it is possible to use OWL along with its reasoning capabilities within applications developed in an OOP paradigm, by using the classic [OWL-API](https://github.com/owlcs/owlapi).
-But, the usage of the classic OWL-API leaves your project with lots of boilerplate code. Therefore, the **OWLOOP-API** (built on top of OWL-API), reduces boilerplate code by enabling interaction with 'OWL entities', i.e, Concept (also known as, Class), Individual, Object property and Data property as objects within the OOP paradigm. These objects are termed as Descriptors (i.e., ClassDescriptor, IndividualDescriptor, ObjectPropertyDescriptor and DataPropertyDescriptor).  
-With the help of descriptor(s), OWLOOP synchronizes axioms (OWL2-DL axioms) between the OOP paradigm (your application's code) and the OWL paradigm (OWL ontology XML/RDF file(s)).
+But, the usage of the classic OWL-API leaves your project with lots of boilerplate code. Therefore, the **OWLOOP-API** (built on top of OWL-API), reduces boilerplate code by enabling interaction with 'OWL entities', i.e, Concept (also known as, Class), Individual, Object property and Data property, as objects within the OOP paradigm. These objects are termed as Descriptors (i.e., ClassDescriptor, IndividualDescriptor, ObjectPropertyDescriptor and DataPropertyDescriptor). By using descriptor(s), OWLOOP synchronizes axioms (OWL2-DL axioms) between the OOP paradigm (your application's code) and the OWL paradigm (OWL ontology XML/RDF file(s)).
 
 ## Table of Contents
 1. Reference to the publication
@@ -54,20 +53,18 @@ OWLOOP features should now be accessible to you within your code.
 
 ## 3. Quick overview
 
-OWLOOP API enables a developer to construct and/or utilize descriptors (that are Java-classes with helpful methods) 
+OWLOOP API enables a developer to construct and/or utilize preconstructed descriptors (that are Java-classes with helpful methods) 
 for manipulating ontologies with reduced boilerplate code. Thus, the API intends to ease the integration of ontologies 
 within software applications in varied domains, i.e., biomedical, information retrieval, robotics etc.
 
 Consider an object **D** of a descriptor (i.e., a Java-class). It has an internal structure composed of three parts, 
 i.e., the ground **G**, the expression(s) **E** and the entity-set **E-S**, which conceptually looks like as follows: 
 <img src="https://github.com/EmaroLab/owloop/blob/master/gitRepoResources/images/g_e_es.png" width="90">. 
-An ontology **O** can be instantiated using the `OntologyReference` (i.e., a Java-class). If an ontology file (.owl) 
-already exists then it gets loaded into the *program memory*, else if an ontology file does not exist then it gets created 
-and then is loaded into the *program memory*.
-The descriptor object **D** provides methods that allow manipulation of an *in-memory* ontology **O**. Which ontology (or 
-ontologies) get manipulated by **D** depends upon the `OntologyReference` object associated to **D**.
+Consider an ontology **O** that can be instantiated in association to a (.owl) ontology file. This instantiation is enabled by the use of the Java-class `OntologyReference`. If the ontology file already exists then it gets loaded into the *program memory* and if it does not exist then it first gets created and then is loaded into the *program memory*.
+A descriptor object **D** provides methods that allow manipulation of an *in-memory* ontology **O**. The ontology (or 
+ontologies) that can be manipulated by **D** depend upon the `OntologyReference` object that is associated to **D** during its instantiation.
 
-The following diagram shows the methods of a descriptor object. Each method is described in the wiki 
+The following diagram shows the methods of a descriptor object **D**. Each method is described in the wiki 
 documentation.
 
 <p align="center">
@@ -75,7 +72,7 @@ documentation.
 </p>
 
 **Note that** `load()` is a method of an `OntologyReference` object and `save()` is a method of both, an 
-`OntologyReference` object and a descriptor object.
+`OntologyReference` object and a descriptor object **D**.
 
 ## 4. Wiki documentation
 
