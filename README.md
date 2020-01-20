@@ -2,7 +2,7 @@
  
 #
 [![Generic badge](https://img.shields.io/badge/Code-Java-<COLOR>.svg)](https://en.wikipedia.org/wiki/Java_(programming_language))
-[![Generic badge](https://img.shields.io/badge/License-GNU General Public License v3.0-red.svg)](https://github.com/EmaroLab/owloop/blob/master/LICENSE)
+[![Generic badge](https://img.shields.io/badge/License-GNUv3.0-red.svg)](https://github.com/EmaroLab/owloop/blob/master/LICENSE)
 
 
 Enabling a developer to use **O**ntology **W**eb **L**anguage (OWL) along with its reasoning capabilities in an **O**bject **O**riented **P**rogramming (OOP) paradigm, by providing an easy to use API.
