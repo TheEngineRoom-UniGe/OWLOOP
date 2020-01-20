@@ -1,11 +1,12 @@
 <img src="https://github.com/EmaroLab/owloop/blob/master/gitRepoResources/images/owloopLogo.png" width="310">
  
 #
+[![Generic badge](https://img.shields.io/badge/Code-Java-<COLOR>.svg)](https://shields.io/)
 
 Enabling a developer to use **O**ntology **W**eb **L**anguage (OWL) along with its reasoning capabilities in an **O**bject **O**riented **P**rogramming (OOP) paradigm, by providing an easy to use API.
 
 Although OWL and OOP paradigms have similar structure, there are some key differences between them; see this [W3C publication](https://www.w3.org/2001/sw/BestPractices/SE/ODSD/) for more details about the differences. Nonetheless, it is possible to use OWL along with its reasoning capabilities within applications developed in an OOP paradigm, by using the classic [OWL-API](https://github.com/owlcs/owlapi).
-But, the usage of the classic OWL-API leaves your project with lots of boilerplate code. Therefore, the **OWLOOP-API** (built on top of OWL-API), reduces boilerplate code by enabling interaction with 'OWL entities', i.e, Concept (also known as, Class), Individual, Object property and Data property, as objects within the OOP paradigm. These objects are termed as Descriptors (i.e., ClassDescriptor, IndividualDescriptor, ObjectPropertyDescriptor and DataPropertyDescriptor). By using descriptor(s), OWLOOP synchronizes axioms (OWL2-DL axioms) between the OOP paradigm (your application's code) and the OWL paradigm (OWL ontology XML/RDF file(s)).
+But, the usage of the classic OWL-API leaves your project with lots of boilerplate code. Therefore, the **OWLOOP-API** (built on top of OWL-API), reduces boilerplate code by enabling interaction with 'OWL entities' (i.e, Concept (also known as Class), Individual, Object property and Data property) as objects within the OOP paradigm. These objects are termed as Descriptors (i.e., ClassDescriptor, IndividualDescriptor, ObjectPropertyDescriptor and DataPropertyDescriptor). By using descriptor(s), OWLOOP synchronizes axioms (OWL2-DL axioms) between the OOP paradigm (your application's code) and the OWL paradigm (OWL ontology XML/RDF file(s)).
 
 ## Table of Contents
 1. Reference to the publication
