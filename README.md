@@ -1,8 +1,10 @@
 <img src="https://github.com/EmaroLab/owloop/blob/master/gitRepoResources/images/owloopLogo.png" width="310">
  
 #
-[![Generic badge](https://img.shields.io/badge/Code-Java-<COLOR>.svg)](https://en.wikipedia.org/wiki/Java_(programming_language))
-[![Generic badge](https://img.shields.io/badge/License-GNUv3.0-red.svg)](https://github.com/EmaroLab/owloop/blob/master/LICENSE)
+[![code](https://img.shields.io/badge/code-Java-<COLOR>.svg)](https://en.wikipedia.org/wiki/Java_(programming_language))
+[![GPLv3 license](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://github.com/EmaroLab/owloop/blob/master/LICENSE)
+[![release](https://img.shields.io/badge/release-v2.1-red.svg)](https://github.com/EmaroLab/owloop/releases/tag/2.1)
+
 
 
 Enabling a developer to use **O**ntology **W**eb **L**anguage (OWL) along with its reasoning capabilities in an **O**bject **O**riented **P**rogramming (OOP) paradigm, by providing an easy to use API.
