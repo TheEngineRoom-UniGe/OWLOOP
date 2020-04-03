@@ -1,5 +1,4 @@
 <img src="https://github.com/EmaroLab/owloop/blob/master/gitRepoResources/images/owloopLogo.png" width="310">
-Knowledge management from code is now easier!
  
 #
 [![code](https://img.shields.io/badge/code-Java-<COLOR>.svg)](https://en.wikipedia.org/wiki/Java_(programming_language))
