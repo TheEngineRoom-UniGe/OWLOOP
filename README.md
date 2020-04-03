@@ -1,5 +1,4 @@
 <img src="https://github.com/EmaroLab/owloop/blob/master/gitRepoResources/images/owloopLogo.png" width="310">
- 
 #
 [![code](https://img.shields.io/badge/code-Java-<COLOR>.svg)](https://en.wikipedia.org/wiki/Java_(programming_language))
 [![GPLv3 license](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://github.com/EmaroLab/owloop/blob/master/LICENSE)
