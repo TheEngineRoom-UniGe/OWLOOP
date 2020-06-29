@@ -17,7 +17,7 @@ But, the usage of the classic OWL-API leaves your project with lots of boilerpla
    * 1.1. [Prerequisites for your Operating System](https://github.com/TheEngineRoom-UniGe/OWLOOP#11-prerequisites-for-your-operating-system)
    * 1.2. [Add OWLOOP dependencies to your project](https://github.com/TheEngineRoom-UniGe/OWLOOP#12-add-owloop-dependencies-to-your-project)
    * 1.3. [Use OWLOOP in your project](https://github.com/TheEngineRoom-UniGe/OWLOOP#13-use-owloop-in-your-project) 
-2. An Overview of important Java-classes in OWLOOP and the methods they provide
+2. Overview of important Java-classes in OWLOOP and their methods
 3. Wiki documentation
 4. Dependencies
 5. Developers' message
@@ -136,7 +136,7 @@ public class someClassInMyProject {
 
 ![Add Axioms Gif and View in Protege](https://github.com/TheEngineRoom-UniGe/OWLOOP/blob/master/gitRepoResources/images/add_axioms_and_view_in_protege.gif)
 
-## 2. An Overview of important Java-classes in OWLOOP and the methods they provide
+## 2. Overview of important Java-classes in OWLOOP and their methods
 
 [Todo] Make a table
 OWLOOP API enables a developer to construct and/or utilize preconstructed descriptors (that are Java-classes with helpful methods) 
