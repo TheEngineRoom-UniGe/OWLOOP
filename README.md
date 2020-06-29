@@ -27,18 +27,20 @@ But, the usage of the classic OWL-API leaves your project with lots of boilerpla
 
 ## 2. Getting Started with OWLOOP
 
-### Prerequisites for your Operating System
+### Prerequisites for your Operating System.
 
 * Install an IDE, for example [IntelliJ IDEA](https://www.jetbrains.com/idea/download/).
 * Install [Java JRE](https://www.oracle.com/java/technologies/javase-jre8-downloads.html) and [Java JDK](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html).
 
-### Prerequisites for using OWLOOP in your project
+### Prerequisites for using OWLOOP in your project.
 
 * Download OWLOOP related jar files.
   * [owloop-2.1.jar](https://github.com/EmaroLab/owloop/releases/tag/2.1)
   * [amor-2.2.jar](https://github.com/EmaroLab/multi_ontology_reference/releases/tag/v2.2)
   
-### Using OWLOOP in your project
+### Using OWLOOP in your project.
+
+[Add video]
 
 * **Step 1**: Create a new project with `Java` as the programming language and `Gradle` as the build tool.
 * **Step 2**: Create a directory called `lib` and place the OWLOOP related jar files in it.
@@ -69,6 +71,10 @@ But, the usage of the classic OWL-API leaves your project with lots of boilerpla
   ```
   
 * **You are now ready to create/use OWL ontologies in your project/application** :fire: by using OWLOOP descriptors in your code. 
+
+### Create an OWL ontology from code using OWLOOP descriptors.
+
+[Add video]
 
 ## 3. Quick overview
 
