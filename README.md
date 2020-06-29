@@ -13,11 +13,11 @@ Although OWL and OOP paradigms have similar structure, there are some key differ
 But, the usage of the classic OWL-API leaves your project with lots of boilerplate code. Therefore, the **OWLOOP-API** (built on top of OWL-API), reduces boilerplate code by enabling interaction with 'OWL entities' (i.e, Concept (also known as Class), Individual, Object property and Data property) as objects within the OOP paradigm. These objects are termed as Descriptors (i.e., ClassDescriptor, IndividualDescriptor, ObjectPropertyDescriptor and DataPropertyDescriptor). By using descriptor(s), OWLOOP synchronizes axioms (OWL2-DL axioms) between the OOP paradigm (your application's code) and the OWL paradigm (OWL ontology XML/RDF file(s)).
 
 ## Table of Contents
-1. Getting Started with OWLOOP
-   * 1.1. Prerequisites for your Operating System
-   * 1.2. Add OWLOOP dependencies to your project
-   * 1.3. Use OWLOOP in your project 
-2. Quick overview
+1. [Getting Started with OWLOOP](https://github.com/TheEngineRoom-UniGe/OWLOOP#1-getting-started-with-owloop)
+   * 1.1. [Prerequisites for your Operating System](https://github.com/TheEngineRoom-UniGe/OWLOOP#11-prerequisites-for-your-operating-system)
+   * 1.2. [Add OWLOOP dependencies to your project](https://github.com/TheEngineRoom-UniGe/OWLOOP#12-add-owloop-dependencies-to-your-project)
+   * 1.3. [Use OWLOOP in your project](https://github.com/TheEngineRoom-UniGe/OWLOOP#13-use-owloop-in-your-project) 
+2. An Overview of important Java-classes in OWLOOP and the methods they provide
 3. Wiki documentation
 4. Dependencies
 5. Developers' message
@@ -136,8 +136,9 @@ public class someClassInMyProject {
 
 ![Add Axioms Gif and View in Protege](https://github.com/TheEngineRoom-UniGe/OWLOOP/blob/master/gitRepoResources/images/add_axioms_and_view_in_protege.gif)
 
-## 2. Quick overview
+## 2. An Overview of important Java-classes in OWLOOP and the methods they provide
 
+[Todo] Make a table
 OWLOOP API enables a developer to construct and/or utilize preconstructed descriptors (that are Java-classes with helpful methods) 
 for manipulating ontologies with reduced boilerplate code. Thus, the API intends to ease the integration of ontologies 
 within software applications in varied domains, i.e., biomedical, information retrieval, robotics etc.
@@ -191,7 +192,7 @@ OWLOOP API project.
     - [Remove](https://github.com/EmaroLab/owloop/wiki/6.-Example:-Removing-Axioms-from-an-Ontology) axioms from an 
     ontology by using descriptors.
 
-## 4. Dependencies
+## 4. Some details about the OWLOOP dependencies
 
 [Gradle](https://github.com/EmaroLab/owloop/blob/master/build.gradle) is used for building OWLOOP. The following are 
 the minimum dependencies that your `build.gradle` file should include in order to use OWLOOP features:
@@ -199,7 +200,7 @@ the minimum dependencies that your `build.gradle` file should include in order t
 * [aMOR](https://github.com/EmaroLab/multi_ontology_reference) (latest release is **amor-2.1**): **a** 
 **M**ulti-**O**ntology **R**eference library is based on OWL-API and it provides helper functions to OWLOOP.
   * [OWL-API](https://github.com/owlcs/owlapi): a Java API for creating, manipulating and serialising OWL Ontologies. We 
-  have included **owlapi-distribution-5.0.5** within **amor-2.1**.
+  have included **owlapi-distribution-5.0.5** within **amor-2.2**.
 * [OWLOOP](https://github.com/EmaroLab/owloop) (latest release is **owloop-2.2**): an API that enables easy manipulation 
 of OWL (Ontology Web Language) ontologies from within an OOP (Object Oriented Programming) paradigm. 
   * [Pellet](https://github.com/stardog-union/pellet): an open source OWL 2 DL reasoner. We have included 
