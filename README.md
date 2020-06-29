@@ -17,12 +17,12 @@ But, the usage of the classic OWL-API leaves your project with lots of boilerpla
    * 1.1. [Prerequisites for your Operating System](https://github.com/TheEngineRoom-UniGe/OWLOOP#11-prerequisites-for-your-operating-system)
    * 1.2. [Add OWLOOP dependencies to your project](https://github.com/TheEngineRoom-UniGe/OWLOOP#12-add-owloop-dependencies-to-your-project)
    * 1.3. [Use OWLOOP in your project](https://github.com/TheEngineRoom-UniGe/OWLOOP#13-use-owloop-in-your-project) 
-2. Overview of important Java-classes in OWLOOP and their methods
-3. Wiki documentation
-4. Dependencies
-5. Developers' message
-6. License
-7. Reference to the publication
+2. [Overview of important Java-classes in OWLOOP and their methods](https://github.com/TheEngineRoom-UniGe/OWLOOP#2-overview-of-important-java-classes-in-owloop-and-their-methods)
+3. [Wiki documentation](https://github.com/TheEngineRoom-UniGe/OWLOOP#3-wiki-documentation)
+4. [Some details about OWLOOP dependencies](https://github.com/TheEngineRoom-UniGe/OWLOOP#4-some-details-about-owloop-dependencies)
+5. [Developers' message](https://github.com/TheEngineRoom-UniGe/OWLOOP#5-developers-message)
+6. [License](https://github.com/TheEngineRoom-UniGe/OWLOOP#6-license)
+7. [Reference to the publication](https://github.com/TheEngineRoom-UniGe/OWLOOP#7-reference-to-the-publication)
 
 ## 1. Getting Started with OWLOOP
 
@@ -192,7 +192,7 @@ OWLOOP API project.
     - [Remove](https://github.com/EmaroLab/owloop/wiki/6.-Example:-Removing-Axioms-from-an-Ontology) axioms from an 
     ontology by using descriptors.
 
-## 4. Some details about the OWLOOP dependencies
+## 4. Some details about OWLOOP dependencies
 
 [Gradle](https://github.com/EmaroLab/owloop/blob/master/build.gradle) is used for building OWLOOP. The following are 
 the minimum dependencies that your `build.gradle` file should include in order to use OWLOOP features:
