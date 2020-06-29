@@ -126,7 +126,8 @@ public class someClassInMyProject {
         FullIndividualDesc robot1 = new FullIndividualDesc("Robot1", ontoRef);
         robot1.addObject("isIn", "Room1");
         robot1.writeAxioms();
-
+        
+        // Saving axioms from in-memory ontology to the the OWL file located in 'src/main/resources'
         ontoRef.saveOntology();
     }
 }
