@@ -32,13 +32,13 @@ But, the usage of the classic OWL-API leaves your project with lots of boilerpla
 * Install an IDE, for example [IntelliJ IDEA](https://www.jetbrains.com/idea/download/).
 * Install [Java JRE](https://www.oracle.com/java/technologies/javase-jre8-downloads.html) and [Java JDK](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html).
 
-### Prerequisites for using OWLOOP in your project.
+### Using OWLOOP in your project.
 
 * Download OWLOOP related jar files.
   * [owloop-2.1.jar](https://github.com/EmaroLab/owloop/releases/tag/2.1)
   * [amor-2.2.jar](https://github.com/EmaroLab/multi_ontology_reference/releases/tag/v2.2)
   
-### Using OWLOOP in your project.
+* Adding OWLOOP related jar files to your project: 
 
 ![OWLOOP Setup Gif](https://github.com/TheEngineRoom-UniGe/OWLOOP/blob/master/gitRepoResources/images/owloop_setup.gif)
 
