@@ -14,7 +14,7 @@ But, the usage of the classic OWL-API leaves your project with lots of boilerpla
 
 ## Table of Contents
 1. Reference to the publication
-2. Installation
+2. Getting Started with OWLOOP
 3. Quick overview
 4. Wiki documentation
 5. Dependencies
