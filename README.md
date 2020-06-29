@@ -38,15 +38,15 @@ But, the usage of the classic OWL-API leaves your project with lots of boilerpla
   * [owloop-2.1.jar](https://github.com/EmaroLab/owloop/releases/tag/2.1)
   * [amor-2.2.jar](https://github.com/EmaroLab/multi_ontology_reference/releases/tag/v2.2)
   
-* Adding OWLOOP related jar files to your project: 
+* Add OWLOOP related jar files to your project: 
 
 ![OWLOOP Setup Gif](https://github.com/TheEngineRoom-UniGe/OWLOOP/blob/master/gitRepoResources/images/owloop_setup.gif)
 
-* **Step 1**: Create a new project with `Java` as the programming language and `Gradle` as the build tool.
-* **Step 2**: Create a directory called `lib` and place the OWLOOP related jar files in it.
-* **Step 3**: Modify your `build.gradle` file, as follows:
+  * **Step 1**: Create a new project with `Java` as the programming language and `Gradle` as the build tool.
+  * **Step 2**: Create a directory called `lib` and place the OWLOOP related jar files in it.
+  * **Step 3**: Modify your `build.gradle` file, as follows:
 
-  * Add `flatDir { dirs 'lib' }` within the `repositories{}` section, as shown below:
+    * Add `flatDir { dirs 'lib' }` within the `repositories{}` section, as shown below:
   
   ```gradle
   repositories {
@@ -58,7 +58,7 @@ But, the usage of the classic OWL-API leaves your project with lots of boilerpla
   }
   ```
   
-  * Add the required dependencies (i.e., owloop, amor and pellet), as shown below :point_down:
+    * Add the required dependencies (i.e., owloop, amor and pellet), as shown below :point_down:
   
   ```gradle
   dependencies {
@@ -70,7 +70,7 @@ But, the usage of the classic OWL-API leaves your project with lots of boilerpla
   }
   ```
   
-* **You are now ready to create/use OWL ontologies in your project/application** :fire: by using OWLOOP descriptors in your code. 
+  * **You are now ready to create/use OWL ontologies in your project/application** :fire: by using OWLOOP descriptors in your code. 
 
 ### Create an OWL ontology from code using OWLOOP descriptors.
 
