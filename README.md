@@ -40,7 +40,7 @@ But, the usage of the classic OWL-API leaves your project with lots of boilerpla
   
 ### Using OWLOOP in your project.
 
-![Alt Text](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)
+![Alt Text](https://media.giphy.com/media/ZdT2zDh3Bvnkk/giphy.gif)
 
 * **Step 1**: Create a new project with `Java` as the programming language and `Gradle` as the build tool.
 * **Step 2**: Create a directory called `lib` and place the OWLOOP related jar files in it.
