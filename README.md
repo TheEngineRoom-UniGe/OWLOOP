@@ -32,7 +32,7 @@ But, the usage of the classic OWL-API leaves your project with lots of boilerpla
 * Install an IDE, for example [IntelliJ IDEA](https://www.jetbrains.com/idea/download/).
 * Install [Java JRE](https://www.oracle.com/java/technologies/javase-jre8-downloads.html) and [Java JDK](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html).
 
-### Using OWLOOP in your project.
+### Add OWLOOP dependencies to your project.
 
 * Download OWLOOP related jar files.
   * [owloop-2.1.jar](https://github.com/EmaroLab/owloop/releases/tag/2.1)
@@ -42,9 +42,9 @@ But, the usage of the classic OWL-API leaves your project with lots of boilerpla
 
 ![OWLOOP Setup Gif](https://github.com/TheEngineRoom-UniGe/OWLOOP/blob/master/gitRepoResources/images/owloop_setup.gif)
 
-* **Step 1**: Create a new project with `Java` as the programming language and `Gradle` as the build tool.
-* **Step 2**: Create a directory called `lib` and place the OWLOOP related jar files in it.
-* **Step 3**: Modify your `build.gradle` file, as follows:
+**Step 1**: Create a new project with `Java` as the programming language and `Gradle` as the build tool.
+**Step 2**: Create a directory called `lib` and place the OWLOOP related jar files in it.
+**Step 3**: Modify your `build.gradle` file, as follows:
 
   * Add `flatDir { dirs 'lib' }` within the `repositories{}` section, as shown below:
   
@@ -70,11 +70,68 @@ But, the usage of the classic OWL-API leaves your project with lots of boilerpla
   }
   ```
   
-* **You are now ready to create/use OWL ontologies in your project/application** :fire: by using OWLOOP descriptors in your code. 
+**You are now ready to create/use OWL ontologies in your project/application** :fire: by using OWLOOP descriptors in your code. 
 
-### Create an OWL ontology from code using OWLOOP descriptors.
+### Use OWLOOP in your project.
 
-[Add video]
+* This is an example that shows how to create an OWL file and add axioms to it.
+
+```java
+import it.emarolab.amor.owlInterface.OWLReferences;
+import it.emarolab.owloop.core.Axiom;
+import it.emarolab.owloop.descriptor.utility.classDescriptor.FullClassDesc;
+import it.emarolab.owloop.descriptor.utility.individualDescriptor.FullIndividualDesc;
+import it.emarolab.owloop.descriptor.utility.objectPropertyDescriptor.FullObjectPropertyDesc;
+
+public class someClassInMyProject {
+
+    public static void main(String[] args) {
+
+        // Lets disable 'internal logs' (so that our console is clean)
+        Axiom.Descriptor.OntologyReference.activateAMORlogging(false);
+
+        // Lets create an object that is 'a reference to an ontology'
+        OWLReferences ontoRef = Axiom.Descriptor.OntologyReference.newOWLReferencesCreatedWithPellet(
+                "robotAtHomeOntology",
+                "src/main/resources/robotAtHomeOntology.owl",
+                "http://www.semanticweb.org/robotAtHomeOntology",
+                true
+        );
+
+        // Lets create some 'classes in the ontology'
+        FullClassDesc location = new FullClassDesc("LOCATION", ontoRef);
+        location.addSubClass("CORRIDOR");
+        location.addSubClass("ROOM");
+        location.writeAxioms();
+        FullClassDesc robot = new FullClassDesc("ROBOT", ontoRef);
+        robot.addDisjointClass("LOCATION");
+        robot.writeAxioms();
+
+        // Lets create some 'object properties in the ontology'
+        FullObjectPropertyDesc isIn = new FullObjectPropertyDesc("isIn", ontoRef);
+        isIn.addDomainClassRestriction("ROBOT");
+        isIn.addRangeClassRestriction("LOCATION");
+        isIn.writeAxioms();
+        FullObjectPropertyDesc isLinkedTo = new FullObjectPropertyDesc("isLinkedTo", ontoRef);
+        isLinkedTo.addDomainClassRestriction("CORRIDOR");
+        isLinkedTo.addRangeClassRestriction("ROOM");
+        isLinkedTo.writeAxioms();
+
+        // Lets create some 'individuals in the ontology'
+        FullIndividualDesc corridor1 = new FullIndividualDesc("Corridor1", ontoRef);
+        corridor1.addObject("isLinkedTo", "Room1");
+        corridor1.addObject("isLinkedTo", "Room2");
+        corridor1.writeAxioms();
+        FullIndividualDesc robot1 = new FullIndividualDesc("Robot1", ontoRef);
+        robot1.addObject("isIn", "Room1");
+        robot1.writeAxioms();
+
+        ontoRef.saveOntology();
+    }
+}
+```
+
+* Open the OWL file in Protege to view the `robotAtHomeOntology`.
 
 ## 3. Quick overview
 
