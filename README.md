@@ -38,9 +38,11 @@ But, the usage of the classic OWL-API leaves your project with lots of boilerpla
 
 ![OWLOOP Setup Gif](https://github.com/TheEngineRoom-UniGe/OWLOOP/blob/master/gitRepoResources/images/owloop_setup.gif)
 
-**Step 1**: Create a new project with `Java` as the programming language and `Gradle` as the build tool.
-**Step 2**: Create a directory called `lib` and place the OWLOOP related jar files in it.
-**Step 3**: Modify your `build.gradle` file, as follows:
+**First Step**: Create a new project with `Java` as the programming language and `Gradle` as the build tool.
+
+**Second Step**: Create a directory called `lib` and place the OWLOOP related jar files in it.
+
+**Third Step**: Modify your `build.gradle` file, as follows:
 
   * Add `flatDir { dirs 'lib' }` within the `repositories{}` section, as shown below:
   
@@ -66,7 +68,7 @@ But, the usage of the classic OWL-API leaves your project with lots of boilerpla
   }
   ```
   
-**You are now ready to create/use OWL ontologies in your project/application** :fire: by using OWLOOP descriptors in your code. 
+**Final Step**: You are now ready to create/use OWL ontologies in your project/application :fire:, by using OWLOOP descriptors in your code!. 
 
 ### Use OWLOOP in your project.
 
