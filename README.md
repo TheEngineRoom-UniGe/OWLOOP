@@ -83,10 +83,10 @@ public class someClassInMyProject {
 
     public static void main(String[] args) {
 
-        // Lets disable 'internal logs' (so that our console is clean)
+        // Disabling 'internal logs' (so that our console is clean)
         Axiom.Descriptor.OntologyReference.activateAMORlogging(false);
 
-        // Lets create an object that is 'a reference to an ontology'
+        // Creating an object that is 'a reference to an ontology'
         OWLReferences ontoRef = Axiom.Descriptor.OntologyReference.newOWLReferencesCreatedWithPellet(
                 "robotAtHomeOntology",
                 "src/main/resources/robotAtHomeOntology.owl",
@@ -94,7 +94,7 @@ public class someClassInMyProject {
                 true
         );
 
-        // Lets create some 'classes in the ontology'
+        // Creating some 'classes in the ontology'
         FullClassDesc location = new FullClassDesc("LOCATION", ontoRef);
         location.addSubClass("CORRIDOR");
         location.addSubClass("ROOM");
@@ -103,7 +103,7 @@ public class someClassInMyProject {
         robot.addDisjointClass("LOCATION");
         robot.writeAxioms();
 
-        // Lets create some 'object properties in the ontology'
+        // Creating some 'object properties in the ontology'
         FullObjectPropertyDesc isIn = new FullObjectPropertyDesc("isIn", ontoRef);
         isIn.addDomainClassRestriction("ROBOT");
         isIn.addRangeClassRestriction("LOCATION");
@@ -113,7 +113,7 @@ public class someClassInMyProject {
         isLinkedTo.addRangeClassRestriction("ROOM");
         isLinkedTo.writeAxioms();
 
-        // Lets create some 'individuals in the ontology'
+        // Creating some 'individuals in the ontology'
         FullIndividualDesc corridor1 = new FullIndividualDesc("Corridor1", ontoRef);
         corridor1.addObject("isLinkedTo", "Room1");
         corridor1.addObject("isLinkedTo", "Room2");
