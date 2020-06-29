@@ -70,7 +70,7 @@ But, the usage of the classic OWL-API leaves your project with lots of boilerpla
 
 ### Use OWLOOP in your project.
 
-* This is an example that shows how to create an OWL file and add axioms to it.
+* This is an example code that shows how to create an OWL file and add axioms to it.
 
 ```java
 import it.emarolab.amor.owlInterface.OWLReferences;
@@ -127,7 +127,9 @@ public class someClassInMyProject {
 }
 ```
 
-* Open the OWL file in [Protege](https://protege.stanford.edu/) to view the `robotAtHomeOntology`.
+* After running the above code, the OWL file `robotAtHomeOntology` gets saved in `src/main/resources`. We can open the OWL file in [Protege](https://protege.stanford.edu/) and view the ontology.
+
+![Add Axioms Gif and View in Protege](https://github.com/TheEngineRoom-UniGe/OWLOOP/blob/master/gitRepoResources/images/add_axioms_and_view_in_protege.gif)
 
 ## 2. Quick overview
 
