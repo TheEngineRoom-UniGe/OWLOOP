@@ -40,13 +40,11 @@ But, the usage of the classic OWL-API leaves your project with lots of boilerpla
   
 ### Using OWLOOP in your project
 
-Given that you have a Java project with Gradle as your build tool.
+* **Step 1**: Create a new project with `Java` as the programming language and `Gradle` as the build tool.
+* **Step 2**: Create a directory called `lib` and place the OWLOOP related jar files in it.
+* **Step 3**: Modify your `build.gradle` file.
 
-* **Step 1**: Create a directory called `lib` in your project's main directory wherein `build.gradle` file is also located.
-* **Step 2**: Download the files [owloop-2.1.jar](https://github.com/EmaroLab/owloop/releases/tag/2.1) and [amor-2.2.jar](https://github.com/EmaroLab/multi_ontology_reference/releases/tag/v2.2), and place them within the `lib` directory created in Step 1.
-* **Step 3**: In your project's `build.gradle` file,
-
-  * add `flatDir { dirs 'lib' }` within the `repositories{}` section, as shown below:
+  * (In `build.gradle` file) Add `flatDir { dirs 'lib' }` within the `repositories{}` section, as shown below:
   
   ```gradle
   repositories {
@@ -58,16 +56,19 @@ Given that you have a Java project with Gradle as your build tool.
   }
   ```
   
-  * add **amor-2.1** and **owloop-2.2** as your project's dependencies by including them within the `dependencies{}` section, as shown below:
+  * (In `build.gradle` file) Add the required dependencies (i.e., owloop, amor and pellet), as shown below :point_down:
   
   ```gradle
   dependencies {
+      testCompile group: 'junit', name: 'junit', version: '4.12'
+  
       compile 'it.emarolab.amor:amor:2.2'
       compile 'it.emarolab.owloop:owloop:2.1'
+      compile group: 'com.github.galigator.openllet', name: 'openllet-owlapi', version: '2.5.1'
   }
   ```
   
-OWLOOP features should now be accessible to you within your code.
+* **You are now ready to create/use OWL ontologies in your project/application** :fire: by using OWLOOP descriptors in your code. 
 
 ## 3. Quick overview
 
