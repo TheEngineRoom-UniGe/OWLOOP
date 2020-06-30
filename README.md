@@ -155,7 +155,7 @@ The following diagram shows the methods of a descriptor object **D**. Each metho
 documentation.
 
 <p align="center">
-  <img src="https://github.com/EmaroLab/owloop/blob/master/gitRepoResources/images/d_methods.png" width="400">
+  <img src="https://github.com/TheEngineRoom-UniGe/OWLOOP/blob/master/gitRepoResources/images/descriptor_methods.png" width="400">
 </p>
 
 **Note that** `load()` is a method of an `OntologyReference` object and `save()` is a method of both, an 
