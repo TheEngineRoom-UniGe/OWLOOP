@@ -192,10 +192,9 @@ OWLOOP API project.
 
 ## 4. Some details about OWLOOP dependencies
 
-[Gradle](https://github.com/EmaroLab/owloop/blob/master/build.gradle) is used for building OWLOOP. The following are 
-the minimum dependencies that your `build.gradle` file should include in order to use OWLOOP features:
+Please use [Gradle](https://github.com/EmaroLab/owloop/blob/master/build.gradle) as the build tool for your project, and include the following dependencies in your project's `build.gradle` file:
 
-* [aMOR](https://github.com/EmaroLab/multi_ontology_reference) (latest release is **amor-2.1**): **a** 
+* [aMOR](https://github.com/EmaroLab/multi_ontology_reference) (latest release is **amor-2.2**): **a** 
 **M**ulti-**O**ntology **R**eference library is based on OWL-API and it provides helper functions to OWLOOP.
   * [OWL-API](https://github.com/owlcs/owlapi): a Java API for creating, manipulating and serialising OWL Ontologies. We 
   have included **owlapi-distribution-5.0.5** within **amor-2.2**.
