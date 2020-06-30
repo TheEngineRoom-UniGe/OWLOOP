@@ -1,4 +1,6 @@
-<img src="https://github.com/EmaroLab/owloop/blob/master/gitRepoResources/images/owloopLogo.png" width="310">
+<p align="center">
+  <img src="https://github.com/EmaroLab/owloop/blob/master/gitRepoResources/images/owloopLogo.png" width="310">
+</p>
 
 #
 [![code](https://img.shields.io/badge/code-Java-<COLOR>.svg)](https://en.wikipedia.org/wiki/Java_(programming_language))
@@ -39,7 +41,9 @@ But, the usage of the classic OWL-API leaves your project with lots of boilerpla
   
 * Add OWLOOP related jar files to your project: 
 
-![OWLOOP Setup Gif](https://github.com/TheEngineRoom-UniGe/OWLOOP/blob/master/gitRepoResources/images/owloop_setup.gif)
+<p align="center">
+  <img src="https://github.com/TheEngineRoom-UniGe/OWLOOP/blob/master/gitRepoResources/images/owloop_setup.gif">
+</p>
 
 **First Step**: Create a new project with `Java` as the programming language and `Gradle` as the build tool.
 
@@ -135,7 +139,9 @@ public class someClassInMyProject {
 
 * After running the above code, the OWL file `robotAtHomeOntology` gets saved in `src/main/resources`. We can open the OWL file in [Protege](https://protege.stanford.edu/) and view the ontology.
 
-![Add Axioms Gif and View in Protege](https://github.com/TheEngineRoom-UniGe/OWLOOP/blob/master/gitRepoResources/images/add_axioms_and_view_in_protege.gif)
+<p align="center">
+  <img src="https://github.com/TheEngineRoom-UniGe/OWLOOP/blob/master/gitRepoResources/images/add_axioms_and_view_in_protege.gif">
+</p>
 
 ## 2. Overview of important Java-classes (in OWLOOP) and their methods
 
