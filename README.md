@@ -145,27 +145,18 @@ public class someClassInMyProject {
 
 ## 2. Overview of important Java-classes (in OWLOOP) and their methods
 
-[Todo] Make a table
-OWLOOP API enables a developer to construct and/or utilize preconstructed descriptors (that are Java-classes with helpful methods) 
-for manipulating ontologies with reduced boilerplate code. Thus, the API intends to ease the integration of ontologies 
-within software applications in varied domains, i.e., biomedical, information retrieval, robotics etc.
-
-Consider an object **D** of a descriptor (i.e., a Java-class). It has an internal structure composed of three parts, 
-i.e., the ground **G**, the expression(s) **E** and the entity-set **E-S**, which conceptually looks like as follows: 
-<img src="https://github.com/EmaroLab/owloop/blob/master/gitRepoResources/images/g_e_es.png" width="90">. 
-Consider an ontology **O** that can be instantiated in association to a (.owl) ontology file. This instantiation is enabled by the use of the Java-class `OntologyReference`. If the ontology file already exists then it gets loaded into the *program memory* and if it does not exist then it first gets created and then is loaded into the *program memory*.
-A descriptor object **D** provides methods that allow manipulation of an *in-memory* ontology **O**. The ontology (or 
-ontologies) that can be manipulated by **D** depend upon the `OntologyReference` object that is associated to **D** during its instantiation.
-
-The following diagram shows the methods of a descriptor object **D**. Each method is described in the wiki 
-documentation.
-
 <p align="center">
   <img src="https://github.com/TheEngineRoom-UniGe/OWLOOP/blob/master/gitRepoResources/images/descriptor_methods.png" width="400">
 </p>
 
-**Note that** `load()` is a method of an `OntologyReference` object and `save()` is a method of both, an 
-`OntologyReference` object and a descriptor object **D**.
+| Java-classes                                                                                                                                                                                                                                                                                             | methods                                                                                                                                                                                                             |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Path**: OWLOOP/src/.../owloop/core/<br><br>This path contains, all core Java-classes. Among them, one in particular is immediately useful, i.e., `OntologyReference`. It allows to create/load/save an OWL ontology file.                                                                                  |                                                                                                                                                                                                                     |
+|                                                                                                                                                                                                                                                                                                          | The following method allows to enable/disable display of internal logging:<br><br>`activateAMORlogging()`                                                                                                               |
+|                                                                                                                                                                                                                                                                                                          | The following methods allow to instantiate an object of the Java-class `OWLReferences`:<br><br>`newOWLReferencesCreatedWithPellet()`<br>`newOWLReferencesFromFileWithPellet()`<br>`newOWLReferencesFromWebWithPellet()` |
+|                                                                                                                                                                                                                                                                                                          | The object of Java-class `OWLReferences`, offers the following methods:<br><br>`saveOntology()`<br>`synchronizeReasoner()`<br>`load()` // is hidden and used internally                                                 |
+| **Path**: OWLOOP/src/.../owloop/descriptor/utility/<br><br>This path contains the directories that contain all Java-classes that are (as we call them) descriptors. The directories are the following:<br>/classDescriptor<br>/dataPropertyDescriptor<br>/objectPropertyDescriptor<br>/individualDescriptor. |                                                                                                                                                                                                                     |
+|                                                                                                                                                                                                                                                                                                          | The object of a Descriptor, offers the following methods:<br><br>`add...()`<br>`remove...()`<br>`build...()`<br>`get...()`<br>`query...()`<br>`writeAxioms()`<br>`readAxioms()`<br>`reason()`<br>`saveOntology()`       |
 
 ## 3. Wiki documentation
 
