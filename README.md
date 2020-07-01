@@ -218,3 +218,9 @@ OWLOOP is under the license: [GNU General Public License v3.0](https://github.co
 ## 7. Reference to the Publication
 
 ... *will be updated soon* ...
+
+##
+
+<p align="center">
+  <img src="https://github.com/TheEngineRoom-UniGe/OWLOOP/blob/master/gitRepoResources/images/unige_ter_logo.png" width="400">
+</p>
