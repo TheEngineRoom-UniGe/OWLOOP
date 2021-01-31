@@ -14,6 +14,10 @@ Enabling a developer to use **O**ntology **W**eb **L**anguage (OWL) along with i
 Although OWL and OOP paradigms have similar structure, there are some key differences between them; see this [W3C publication](https://www.w3.org/2001/sw/BestPractices/SE/ODSD/) for more details about the differences. Nonetheless, it is possible to use OWL along with its reasoning capabilities within applications developed in an OOP paradigm, by using the classic [OWL-API](https://github.com/owlcs/owlapi).
 But, the usage of the classic OWL-API leaves your project with lots of boilerplate code. Therefore, the **OWLOOP-API** (built on top of OWL-API), reduces boilerplate code by enabling interaction with 'OWL entities' (i.e, Concept (also known as Class), Individual, Object property and Data property) as objects within the OOP paradigm. These objects are termed as Descriptors (i.e., ClassDescriptor, IndividualDescriptor, ObjectPropertyDescriptor and DataPropertyDescriptor). By using descriptor(s), OWLOOP synchronizes axioms (OWL2-DL axioms) between the OOP paradigm (your application's code) and the OWL paradigm (OWL ontology XML/RDF file(s)).
 
+#### Usage of OWLOOP API:
+
+This video [(link)](https://youtu.be/SEEqSawrQNo) shows a smart home system recognising human activities. The system uses a network of multiple ontologies to recognise specific activities. The network of multiple ontologies was developed using OWLOOP API.  
+
 ## Table of Contents
 1. [Getting Started with OWLOOP](https://github.com/TheEngineRoom-UniGe/OWLOOP#1-getting-started-with-owloop)
    * 1.1. [Prerequisites for your Operating System](https://github.com/TheEngineRoom-UniGe/OWLOOP#11-prerequisites-for-your-operating-system)
