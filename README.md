@@ -71,11 +71,11 @@ This video [(link)](https://youtu.be/SEEqSawrQNo) shows a smart home system reco
   
   ```gradle
   dependencies {
-      testCompile group: 'junit', name: 'junit', version: '4.12'
+      // testCompile group: 'junit', name: 'junit', version: '4.12'
   
-      compile 'it.emarolab.amor:amor:2.2'
-      compile 'it.emarolab.owloop:owloop:2.1'
-      compile group: 'com.github.galigator.openllet', name: 'openllet-owlapi', version: '2.5.1'
+      implementation 'it.emarolab.amor:amor:2.2'
+      implementation 'it.emarolab.owloop:owloop:2.1'
+      implementation group: 'com.github.galigator.openllet', name: 'openllet-owlapi', version: '2.5.1'
   }
   ```
   
