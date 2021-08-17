@@ -78,6 +78,7 @@ This video [(link)](https://youtu.be/SEEqSawrQNo) shows a smart home system reco
       implementation group: 'com.github.galigator.openllet', name: 'openllet-owlapi', version: '2.5.1'
   }
   ```
+  It is normal that a warning like `SLF4J: Class path contains multiple SLF4J bindings` occurs.
   
 **Final Step**: You are now ready to create/use OWL ontologies in your project/application :fire:, by using OWLOOP descriptors in your code!. 
 
