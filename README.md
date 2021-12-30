@@ -19,16 +19,16 @@ But, the usage of the classic OWL-API leaves your project with lots of boilerpla
 This video [(link)](https://youtu.be/SEEqSawrQNo) shows a smart home system recognising human activities. The system uses a network of multiple ontologies to recognise specific activities. The network of multiple ontologies was developed using OWLOOP API.  
 
 ## Table of Contents
-1. [Reference to the publication](https://github.com/TheEngineRoom-UniGe/OWLOOP#7-reference-to-the-publication)
-2. [Getting Started with OWLOOP](https://github.com/TheEngineRoom-UniGe/OWLOOP#1-getting-started-with-owloop)
-   * 2.1. [Prerequisites for your Operating System](https://github.com/TheEngineRoom-UniGe/OWLOOP#11-prerequisites-for-your-operating-system)
-   * 2.2. [Add OWLOOP dependencies to your project](https://github.com/TheEngineRoom-UniGe/OWLOOP#12-add-owloop-dependencies-to-your-project)
-   * 2.3. [Use OWLOOP in your project](https://github.com/TheEngineRoom-UniGe/OWLOOP#13-use-owloop-in-your-project) 
-3. [Overview of important Java-classes (in OWLOOP) and their methods](https://github.com/TheEngineRoom-UniGe/OWLOOP#2-overview-of-important-java-classes-in-owloop-and-their-methods)
-4. [Wiki documentation](https://github.com/TheEngineRoom-UniGe/OWLOOP#3-wiki-documentation)
-5. [Some details about OWLOOP dependencies](https://github.com/TheEngineRoom-UniGe/OWLOOP#4-some-details-about-owloop-dependencies)
-6. [Developers' message](https://github.com/TheEngineRoom-UniGe/OWLOOP#5-developers-message)
-7. [License](https://github.com/TheEngineRoom-UniGe/OWLOOP#6-license)
+1. [Reference to the publication](https://github.com/TheEngineRoom-UniGe/OWLOOP#1-reference-to-the-publication)
+2. [Getting Started with OWLOOP](https://github.com/TheEngineRoom-UniGe/OWLOOP#2-getting-started-with-owloop)
+   * 2.1. [Prerequisites for your Operating System](https://github.com/TheEngineRoom-UniGe/OWLOOP#21-prerequisites-for-your-operating-system)
+   * 2.2. [Add OWLOOP dependencies to your project](https://github.com/TheEngineRoom-UniGe/OWLOOP#22-add-owloop-dependencies-to-your-project)
+   * 2.3. [Use OWLOOP in your project](https://github.com/TheEngineRoom-UniGe/OWLOOP#23-use-owloop-in-your-project) 
+3. [Overview of important Java-classes (in OWLOOP) and their methods](https://github.com/TheEngineRoom-UniGe/OWLOOP#3-overview-of-important-java-classes-in-owloop-and-their-methods)
+4. [Wiki documentation](https://github.com/TheEngineRoom-UniGe/OWLOOP#4-wiki-documentation)
+5. [Some details about OWLOOP dependencies](https://github.com/TheEngineRoom-UniGe/OWLOOP#5-some-details-about-owloop-dependencies)
+6. [Developers' message](https://github.com/TheEngineRoom-UniGe/OWLOOP#6-developers-message)
+7. [License](https://github.com/TheEngineRoom-UniGe/OWLOOP#7-license)
 
 ## 1. Reference to the Publication
 
