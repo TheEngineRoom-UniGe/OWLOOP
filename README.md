@@ -19,25 +19,30 @@ But, the usage of the classic OWL-API leaves your project with lots of boilerpla
 This video [(link)](https://youtu.be/SEEqSawrQNo) shows a smart home system recognising human activities. The system uses a network of multiple ontologies to recognise specific activities. The network of multiple ontologies was developed using OWLOOP API.  
 
 ## Table of Contents
-1. [Getting Started with OWLOOP](https://github.com/TheEngineRoom-UniGe/OWLOOP#1-getting-started-with-owloop)
-   * 1.1. [Prerequisites for your Operating System](https://github.com/TheEngineRoom-UniGe/OWLOOP#11-prerequisites-for-your-operating-system)
-   * 1.2. [Add OWLOOP dependencies to your project](https://github.com/TheEngineRoom-UniGe/OWLOOP#12-add-owloop-dependencies-to-your-project)
-   * 1.3. [Use OWLOOP in your project](https://github.com/TheEngineRoom-UniGe/OWLOOP#13-use-owloop-in-your-project) 
-2. [Overview of important Java-classes (in OWLOOP) and their methods](https://github.com/TheEngineRoom-UniGe/OWLOOP#2-overview-of-important-java-classes-in-owloop-and-their-methods)
-3. [Wiki documentation](https://github.com/TheEngineRoom-UniGe/OWLOOP#3-wiki-documentation)
-4. [Some details about OWLOOP dependencies](https://github.com/TheEngineRoom-UniGe/OWLOOP#4-some-details-about-owloop-dependencies)
-5. [Developers' message](https://github.com/TheEngineRoom-UniGe/OWLOOP#5-developers-message)
-6. [License](https://github.com/TheEngineRoom-UniGe/OWLOOP#6-license)
-7. [Reference to the publication](https://github.com/TheEngineRoom-UniGe/OWLOOP#7-reference-to-the-publication)
+1. [Reference to the publication](https://github.com/TheEngineRoom-UniGe/OWLOOP#7-reference-to-the-publication)
+2. [Getting Started with OWLOOP](https://github.com/TheEngineRoom-UniGe/OWLOOP#1-getting-started-with-owloop)
+   * 2.1. [Prerequisites for your Operating System](https://github.com/TheEngineRoom-UniGe/OWLOOP#11-prerequisites-for-your-operating-system)
+   * 2.2. [Add OWLOOP dependencies to your project](https://github.com/TheEngineRoom-UniGe/OWLOOP#12-add-owloop-dependencies-to-your-project)
+   * 2.3. [Use OWLOOP in your project](https://github.com/TheEngineRoom-UniGe/OWLOOP#13-use-owloop-in-your-project) 
+3. [Overview of important Java-classes (in OWLOOP) and their methods](https://github.com/TheEngineRoom-UniGe/OWLOOP#2-overview-of-important-java-classes-in-owloop-and-their-methods)
+4. [Wiki documentation](https://github.com/TheEngineRoom-UniGe/OWLOOP#3-wiki-documentation)
+5. [Some details about OWLOOP dependencies](https://github.com/TheEngineRoom-UniGe/OWLOOP#4-some-details-about-owloop-dependencies)
+6. [Developers' message](https://github.com/TheEngineRoom-UniGe/OWLOOP#5-developers-message)
+7. [License](https://github.com/TheEngineRoom-UniGe/OWLOOP#6-license)
 
-## 1. Getting Started with OWLOOP
+## 1. Reference to the Publication
 
-### 1.1. Prerequisites for your Operating System
+OWLOOP API is a peer reviewed software. It has been [published by Elsevier in its journal SoftwareX](https://doi.org/10.1016/j.softx.2021.100952).
+The publication presents in detail the motivation for developing OWLOOP. Furthermore, it describes the design of the API and presents the API's usage with illustrative examples. 
+
+## 2. Getting Started with OWLOOP
+
+### 2.1. Prerequisites for your Operating System
 
 * Install an IDE, for example [IntelliJ IDEA](https://www.jetbrains.com/idea/download/).
 * Install [Java JRE](https://www.oracle.com/java/technologies/javase-jre8-downloads.html) and [Java JDK](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html).
 
-### 1.2. Add OWLOOP dependencies to your project
+### 2.2. Add OWLOOP dependencies to your project
 
 * Download OWLOOP related jar files.
   * [owloop-2.1.jar](https://github.com/EmaroLab/owloop/releases/tag/2.1)
@@ -82,7 +87,7 @@ This video [(link)](https://youtu.be/SEEqSawrQNo) shows a smart home system reco
   
 **Final Step**: You are now ready to create/use OWL ontologies in your project/application :fire:, by using OWLOOP descriptors in your code!. 
 
-### 1.3. Use OWLOOP in your project
+### 2.3. Use OWLOOP in your project
 
 * This is an example code that shows how to create an OWL file and add axioms to it.
 
@@ -148,7 +153,7 @@ public class someClassInMyProject {
   <img src="https://github.com/TheEngineRoom-UniGe/OWLOOP/blob/master/gitRepoResources/images/add_axioms_and_view_in_protege.gif">
 </p>
 
-## 2. Overview of important Java-classes (in OWLOOP) and their methods
+## 3. Overview of important Java-classes (in OWLOOP) and their methods
 
 <p align="center">
   <img src="https://github.com/TheEngineRoom-UniGe/OWLOOP/blob/master/gitRepoResources/images/descriptor_methods.png" width="400">
@@ -163,7 +168,7 @@ public class someClassInMyProject {
 | **Path**: OWLOOP/src/.../owloop/descriptor/utility/<br><br>This path contains the directories that contain all Java-classes that are (as we call them) descriptors. The directories are the following:<br>/classDescriptor<br>/dataPropertyDescriptor<br>/objectPropertyDescriptor<br>/individualDescriptor. |                                                                                                                                                                                                                     |
 |                                                                                                                                                                                                                                                                                                          | The object of a Descriptor, offers the following methods:<br><br>![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+)`add...()`<br>![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+)`remove...()`<br>![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+)`build...()`<br>![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+)`get...()`<br>![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+)`query...()`<br>![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+)`writeAxioms()`<br>![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+)`readAxioms()`<br>![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+)`reason()`<br>![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+)`saveOntology()`       |
 
-## 3. Wiki documentation
+## 4. Wiki documentation
 
 The OWLOOP API's core aspects are described in this repository's [wiki](https://github.com/EmaroLab/owloop/wiki):
 
@@ -195,7 +200,7 @@ OWLOOP API project.
     - [Remove](https://github.com/EmaroLab/owloop/wiki/6.-Example:-Removing-Axioms-from-an-Ontology) axioms from an 
     ontology by using descriptors.
 
-## 4. Some details about OWLOOP dependencies
+## 5. Some details about OWLOOP dependencies
 
 Please use [Gradle](https://github.com/EmaroLab/owloop/blob/master/build.gradle) as the build tool for your project, and include the following dependencies in your project's `build.gradle` file:
 
@@ -208,7 +213,7 @@ of OWL (Ontology Web Language) ontologies from within an OOP (Object Oriented Pr
   * [Pellet](https://github.com/stardog-union/pellet): an open source OWL 2 DL reasoner. We have included 
   **openllet-owlapi-2.5.1** within **owloop-2.2**.
 
-## 5. Developers' message
+## 6. Developers' message
 Feel free to contribute to OWLOOP by sharing your thoughts and ideas, raising issues (if found) and providing bug-fixes. 
 For any information or support, please do not hesitate to contact us through this Github repository or by email.
 
@@ -216,13 +221,9 @@ Developed by [luca.buoncompagni@edu.unige.it](mailto:luca.buoncompagni@edu.unige
 [kareem.syed.yusha@dibris.unige.it](mailto:kareem.syed.yusha@dibris.unige.it) under the supervision of 
 [fulvio.mastrogiovanni@unige.it](mailto:fulvio.mastrogiovanni@unige.it).
 
-## 6. License
+## 7. License
 
-OWLOOP is under the license: [GNU General Public License v3.0](https://github.com/EmaroLab/owloop/blob/master/LICENSE)
-
-## 7. Reference to the Publication
-
-... *will be updated soon* ...
+OWLOOP is under the license: [GNU General Public License v3.0](https://github.com/EmaroLab/owloop/blob/master/LICENSE) 
 
 ##
 
