@@ -33,7 +33,22 @@ This video [(link)](https://youtu.be/SEEqSawrQNo) shows a smart home system reco
 ## 1. Reference to the Publication
 
 OWLOOP API is a peer reviewed software [published by Elsevier in its journal SoftwareX](https://doi.org/10.1016/j.softx.2021.100952).
-The publication presents in detail the motivation for developing OWLOOP. Furthermore, it describes the design of the API and presents the API's usage with illustrative examples. 
+The publication presents in detail the motivation for developing OWLOOP. Furthermore, it describes the design of the API and presents the API's usage with illustrative examples.
+
+Please, cite this work as:
+```
+@article{OWLOOP-2021,
+  title = {{OWLOOP}: {A} Modular {API} to Describe {OWL} Axioms in {OOP} Objects Hierarchies},
+  author = {Luca Buoncompagni and Syed Yusha Kareem and Fulvio Mastrogiovanni},
+  journal = {SoftwareX},
+  volume = {17},
+  pages = {100952},
+  year = {2022},
+  issn = {2352-7110},
+  doi = {https://doi.org/10.1016/j.softx.2021.100952},
+  url = {https://www.sciencedirect.com/science/article/pii/S2352711021001801}
+}
+```
 
 ## 2. Getting Started with OWLOOP
 
